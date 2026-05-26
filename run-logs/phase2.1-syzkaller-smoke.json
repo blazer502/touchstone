@@ -1,0 +1,15 @@
+{
+  "unit": "syzkaller-version-stamp",
+  "engine": "syzkaller_fuzz",
+  "sanitizer": "KASAN",
+  "verdict": "inconclusive",
+  "wall_ms": 41,
+  "crash_class": null,
+  "location": null,
+  "pov_path": null,
+  "evidence_excerpt": "docker image veri-agent/syzkaller:master not present. Build with: docker build -f docker/syzkaller.Dockerfile -t veri-agent/syzkaller:master docker/",
+  "soundness_note": "Syzkaller-as-fuzzer is Phase 4.2; in 2.1 we only require the path be wired. Falls through to KASAN-replay for the 2.1 acceptance row.",
+  "assumed": [
+    "image not built"
+  ]
+}

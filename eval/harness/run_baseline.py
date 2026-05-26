@@ -26,6 +26,7 @@ from eval.harness.adapters import (  # noqa: E402
     llm_serving,
     magma,
     svcomp,
+    tier1_oracle,
 )
 from eval.harness.metrics import MetricWriter, REPO_ROOT  # noqa: E402
 
@@ -37,6 +38,7 @@ ADAPTERS = [
     ("magma", magma.baseline_rows),
     ("juliet", juliet.baseline_rows),
     ("live-lib", live_lib.baseline_rows),
+    ("tier1-oracle", tier1_oracle.baseline_rows),
 ]
 
 

@@ -4,10 +4,20 @@ run-logs/iter-*.jsonl
 run-logs/llm-gateway.jsonl
 
 # CyberGym workspace
-eval/cybergym/repo/            # depth-1 upstream clone; re-fetch with `git clone --depth 1 https://github.com/sunblaze-ucb/cybergym.git eval/cybergym/repo`
-eval/cybergym/venv/            # python3.12 venv with cybergym[dev,server] (~270 MB)
-eval/cybergym/tmp_task/        # gen_task scratch (regenerated each run)
-eval/cybergym/server_state/    # runtime SQLite DB + per-PoC logs
+# (Note: .gitignore does NOT support trailing inline comments — each pattern
+#  is the entire rest of the line, including the comment. Keep comments on
+#  their own lines.)
+# repo/ is a depth-1 upstream clone; re-fetch with:
+#   git clone --depth 1 https://github.com/sunblaze-ucb/cybergym.git eval/cybergym/repo
+eval/cybergym/repo/
+# python3.12 venv with cybergym[dev,server] (~270 MB)
+eval/cybergym/venv/
+# gen_task scratch (regenerated each run)
+eval/cybergym/tmp_task/
+# runtime SQLite DB + per-PoC logs
+eval/cybergym/server_state/
+# Per-task HuggingFace data (PoCs, repo tarballs); fetched on demand.
+eval/cybergym/data/
 
 # Proof cache contents are runtime state (rebuilt on demand). Keep dir, drop rows.
 surface/proofcache/*/
@@ -18,3 +28,9 @@ surface/proofcache/*/
 #   unzip eval/juliet/raw/juliet-c-cpp-v1.3.zip -d eval/juliet/extracted/
 eval/juliet/raw/
 eval/juliet/extracted/
+
+# kernelCTF heavy artifacts (sources + initramfs + bzImage rebuilt on demand)
+eval/kernelctf/linux/
+eval/kernelctf/rootfs/
+eval/kernelctf/artifacts/bzImage
+eval/kernelctf/artifacts/initramfs.cpio.gz
