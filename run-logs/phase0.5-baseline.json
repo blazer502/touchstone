@@ -1,18 +1,20 @@
 {
   "phase": "0.5",
-  "rows": 43,
+  "rows": 49,
   "by_status": {
-    "success": 35,
+    "success": 41,
     "not_setup": 8
   },
   "out_jsonl": "run-logs/phase0.5-baseline.jsonl",
   "adapters": [
+    "contract-synth",
     "cybergym",
     "juliet",
     "kernelctf",
     "live-lib",
     "llm-serving",
     "magma",
+    "oracle-synth",
     "precision",
     "router",
     "sv-comp",

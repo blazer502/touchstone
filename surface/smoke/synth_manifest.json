@@ -1,0 +1,19 @@
+{
+  "target": "stage_b-phase3.1-synth-smoke",
+  "build_flags": {
+    "sanitizer": "none",
+    "arch": "x86_64",
+    "machdep": "x86_64"
+  },
+  "units": [
+    {
+      "source": "needs_contract.c",
+      "function": "main",
+      "property": "no-oob",
+      "engines": ["cbmc"],
+      "unwind": 4,
+      "expected": "safe",
+      "assumed_contracts": []
+    }
+  ]
+}

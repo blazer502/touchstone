@@ -1,0 +1,67 @@
+{
+  "phase": "3.2",
+  "counts": {
+    "success": 3,
+    "total": 3
+  },
+  "synth_sources": [
+    "llm",
+    "rule"
+  ],
+  "synth_tokens_total": 1671,
+  "work_dir": "/home/chanyoung/veri-agent/run-logs/phase3.2/smoke",
+  "runs": [
+    {
+      "tier": "tier1_fuzz",
+      "synth_source": "llm",
+      "synth_tokens": 645,
+      "synth_latency_ms": 2089,
+      "synth_total_ms": 2093,
+      "rejected_reason": null,
+      "error": null,
+      "harness_path": "/home/chanyoung/veri-agent/run-logs/phase3.2/smoke/tier1/tier1_oob_write.c",
+      "expected_verdict": "crash",
+      "verdict": "crash",
+      "crash_class": "heap-buffer-overflow",
+      "location": "/home/chanyoung/veri-agent/run-logs/phase3.2/smoke/tier1/tier1_oob_write.c:11",
+      "wall_ms": 192,
+      "success": true
+    },
+    {
+      "tier": "tier2_symbolic",
+      "synth_source": "rule",
+      "synth_tokens": 567,
+      "synth_latency_ms": 1128,
+      "synth_total_ms": 1135,
+      "rejected_reason": "klee_assume mentions must-not-assume symbol 'd': 'd != 0'",
+      "error": null,
+      "driver_path": "/home/chanyoung/veri-agent/run-logs/phase3.2/smoke/tier2/tier2_divide.c",
+      "expected_verdict": "sat",
+      "verdict": "sat",
+      "target_location": "run-logs/phase3.2/smoke/tier2/tier2_divide.c:5",
+      "wall_ms": 42,
+      "pov_path": "/home/chanyoung/veri-agent/run-logs/phase3.2/smoke/tier2/klee-out/klee-out/test000002.ktest",
+      "success": true
+    },
+    {
+      "tier": "tier3_bmc",
+      "synth_source": "llm",
+      "synth_tokens": 459,
+      "synth_latency_ms": 298,
+      "synth_total_ms": 307,
+      "rejected_reason": null,
+      "error": null,
+      "expected_verdict": "unsafe",
+      "harness_path": "/home/chanyoung/veri-agent/run-logs/phase3.2/smoke/tier3/tier3_off_by_one.c",
+      "verdict": "unsafe",
+      "target_location": "line 21 [main.assertion.1]",
+      "wall_ms": 586,
+      "pov_path": "/home/chanyoung/veri-agent/run-logs/phase3.2/smoke/tier3/tier3_off_by_one.cbmc-pov.json",
+      "preconditions": [
+        "i <= N"
+      ],
+      "assertion": "i < N",
+      "success": true
+    }
+  ]
+}

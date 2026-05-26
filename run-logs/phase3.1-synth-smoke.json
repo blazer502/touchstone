@@ -1,0 +1,59 @@
+{
+  "target": "stage_b-phase3.1-synth-smoke",
+  "generated_at": 1779814000,
+  "manifest": "surface/smoke/synth_manifest.json",
+  "phase": "3.1-refinement",
+  "max_iters": 3,
+  "counts": {
+    "safe": 1,
+    "unsafe": 0,
+    "inconclusive": 0
+  },
+  "improved_units": 1,
+  "synth_tokens_total": 1374,
+  "soundness_failures": [],
+  "results": [
+    {
+      "unit": "needs_contract.c::main",
+      "property": "no-oob",
+      "engine": "cbmc",
+      "verdict": "safe",
+      "unwind": 4,
+      "time_ms": 575,
+      "evidence": "Running propositional reduction\nSAT checker: instance is UNSATISFIABLE\n** Results:\nneeds_contract.c function write_at\n[write_at.pointer_dereference.1] line 11 dereference failure: pointer NULL in buf[(signed long int)i]: SUCCESS\n[write_at.pointer_dereference.2] line 11 dereference failure: pointer invalid in buf[(signed long int)i]: SUCCESS\n[write_at.pointer_dereference.3] line 11 dereference failure: deallocated dynamic object in buf[(signed long int)i]: SUCCESS\n[write_at.pointer_dereference.4] line 11 dereference failure: dead object in buf[(signed long int)i]: SUCCESS\n[write_at.pointer_dereference.5] line 11 dereference failure: pointer outside object bounds in buf[(signed long int)i]: SUCCESS\n[write_at.pointer_dereference.6] line 11 dereference failure: invalid integer address in buf[(signed long int)i]: SUCCESS\n** 0 of 6 failed (1 iterations)\nVERIFICATION SUCCESSFUL",
+      "soundness_note": "Bounded-sound up to --unwind=4. Without a verified loop invariant this is NOT an unbounded-safety claim (docs/soundness-assumptions.md Stage B / CBMC bounded loops).",
+      "assumed_contracts": [
+        "__CPROVER_assume(i <= CAP - 1);"
+      ],
+      "refinement_history": [
+        {
+          "iteration": 0,
+          "contracts_added": [],
+          "verdict": "unsafe",
+          "time_ms": 546,
+          "synth_source": "none",
+          "synth_tokens": 0,
+          "synth_error": null,
+          "evidence": "v=0 (00000000)\nViolated property:\n  file needs_contract.c function write_at line 11 thread 0\n  dereference failure: pointer outside object bounds in buf[(signed long int)i]\n  (unsigned __CPROVER_bitvector[65])__CPROVER_OBJECT_SIZE(buf) >= (unsigned __CPROVER_bitvector[65])(__CPROVER_POINTER_OFFSET(buf) + (unsigned long int)(signed long int)i) + 1\n** 1 of 6 failed (2 iterations)\nVERIFICATION FAILED"
+        },
+        {
+          "iteration": 1,
+          "contracts_added": [
+            "__CPROVER_assume(i <= CAP - 1);"
+          ],
+          "verdict": "safe",
+          "time_ms": 575,
+          "synth_source": "llm",
+          "synth_tokens": 1374,
+          "synth_error": null,
+          "evidence": "er_dereference.4] line 11 dereference failure: dead object in buf[(signed long int)i]: SUCCESS\n[write_at.pointer_dereference.5] line 11 dereference failure: pointer outside object bounds in buf[(signed long int)i]: SUCCESS\n[write_at.pointer_dereference.6] line 11 dereference failure: invalid integer address in buf[(signed long int)i]: SUCCESS\n** 0 of 6 failed (1 iterations)\nVERIFICATION SUCCESSFUL"
+        }
+      ],
+      "accumulated_contracts": [
+        "__CPROVER_assume(i <= CAP - 1);"
+      ],
+      "baseline_verdict": "unsafe",
+      "synth_tokens": 1374
+    }
+  ]
+}

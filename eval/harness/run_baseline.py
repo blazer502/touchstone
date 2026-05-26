@@ -19,12 +19,14 @@ _HERE = pathlib.Path(__file__).resolve()
 sys.path.insert(0, str(_HERE.parents[2]))
 
 from eval.harness.adapters import (  # noqa: E402
+    contract_synth,
     cybergym,
     juliet,
     kernelctf,
     live_lib,
     llm_serving,
     magma,
+    oracle_synth,
     precision,
     router as router_adapter,
     svcomp,
@@ -47,6 +49,8 @@ ADAPTERS = [
     ("tier3-oracle", tier3_oracle.baseline_rows),
     ("router", router_adapter.baseline_rows),
     ("precision", precision.baseline_rows),
+    ("contract-synth", contract_synth.baseline_rows),
+    ("oracle-synth", oracle_synth.baseline_rows),
 ]
 
 

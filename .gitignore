@@ -2,6 +2,11 @@ __pycache__/
 *.pyc
 run-logs/iter-*.jsonl
 run-logs/llm-gateway.jsonl
+run-logs/llm-gateway-*.log
+# Per-phase scratch workdirs (synthesized harnesses, klee-out, cbmc PoVs).
+# Keep the verdict summary JSONs at run-logs/phase*-*.json; drop intermediates.
+run-logs/phase*/
+run-logs/**/klee-out/
 
 # CyberGym workspace
 # (Note: .gitignore does NOT support trailing inline comments — each pattern

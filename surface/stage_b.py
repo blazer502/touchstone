@@ -39,6 +39,7 @@ from pathlib import Path
 from typing import Optional
 
 from surface import proof_cache
+from surface import contract_synth
 
 REPO = Path(__file__).resolve().parent.parent
 TOOLCHAIN_LOCK = REPO / "docs" / "toolchain.lock"
@@ -290,6 +291,315 @@ def _cache_key_for(
         assumed_contracts=contracts,
         build_flags=build_flags,
     )
+
+
+# ---------------------------------------------------------------------------
+# Phase 3.1 — LLM-synthesized contract refinement loop
+# ---------------------------------------------------------------------------
+
+
+def _run_cbmc_with_trace(
+    source: Path,
+    function: str,
+    *,
+    property: str = "memory-safety",
+    unwind: int = 16,
+    timeout_s: int = 120,
+) -> tuple[Verdict, str]:
+    """Like `run_cbmc` but also passes `--trace` and returns the full text.
+
+    The Verdict's `evidence` is still the truncated tail; the second tuple
+    element is the complete CBMC output (capped at 32 KB) for the synthesizer.
+    """
+    flag_map = {
+        "memory-safety": [
+            "--bounds-check", "--pointer-check", "--pointer-overflow-check",
+            "--memory-leak-check", "--memory-cleanup-check",
+        ],
+        "no-overflow": [
+            "--signed-overflow-check", "--unsigned-overflow-check",
+            "--conversion-check",
+        ],
+        "no-oob": ["--bounds-check"],
+        "no-uaf": ["--pointer-check"],
+    }
+    flags = flag_map.get(property, flag_map["memory-safety"])
+    src_abs = source.resolve()
+    cmd = (
+        shlex.split(DOCKER)
+        + ["run", "--rm", "-v", f"{src_abs.parent}:/work:ro", "-w", "/work",
+           CBMC_IMG, "cbmc", src_abs.name, "--function", function,
+           "--unwind", str(unwind), "--unwinding-assertions",
+           "--trace", "-DCBMC_HARNESS=1"]
+        + flags
+    )
+    t0 = time.time()
+    try:
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout_s)
+    except subprocess.TimeoutExpired:
+        v = Verdict(
+            unit=f"{source.name}::{function}", property=property, engine="cbmc",
+            verdict="inconclusive", unwind=unwind,
+            time_ms=int((time.time() - t0) * 1000),
+            evidence="timeout",
+            soundness_note="CBMC bounded-soundness only up to unwind; timeout extends nothing.",
+        )
+        return v, "timeout"
+    dt_ms = int((time.time() - t0) * 1000)
+    out = (r.stdout or "") + (r.stderr or "")
+    if _CBMC_OK.search(out):
+        verdict = "safe"
+    elif _CBMC_UNWIND_FAIL.search(out):
+        verdict = "inconclusive"
+    elif _CBMC_VIOLATED.search(out):
+        verdict = "unsafe"
+    else:
+        verdict = "inconclusive"
+    tail = [ln for ln in out.splitlines() if ln.strip()][-12:]
+    evidence = "\n".join(tail)[-2000:]
+    note = (
+        f"Bounded-sound up to --unwind={unwind}. Without a verified loop "
+        "invariant this is NOT an unbounded-safety claim "
+        "(docs/soundness-assumptions.md Stage B / CBMC bounded loops)."
+    )
+    v = Verdict(
+        unit=f"{source.name}::{function}", property=property, engine="cbmc",
+        verdict=verdict, unwind=unwind, time_ms=dt_ms, evidence=evidence,
+        soundness_note=note,
+    )
+    return v, out[-32_000:]
+
+# Conventional marker: harness authors place `/* @CONTRACTS */` after variable
+# declarations and before the first non-declaration statement. The refinement
+# loop replaces this marker with the synthesized `__CPROVER_assume(...);` lines.
+# When no marker is present we fall back to injecting just before the `return`
+# of `main` — variables are then already in scope and the assumption still
+# constrains the symbolic values CBMC has been carrying through.
+_CONTRACT_MARKER = re.compile(r"/\*\s*@CONTRACTS\s*\*/")
+_MAIN_RETURN = re.compile(
+    r"(?P<indent>[ \t]*)return\s+0\s*;[ \t]*\n(?=\s*\})", re.MULTILINE,
+)
+
+
+def _inject_assumptions(source_text: str, contracts: list[str]) -> Optional[str]:
+    """Inject `__CPROVER_assume(...);` lines so they constrain `main`'s vars.
+
+    Order of preference:
+      1. Replace `/* @CONTRACTS */` marker if present.
+      2. Insert right before `return 0;` in `main` (post-declaration scope).
+
+    Returns None when neither anchor is found.
+    """
+    block_lines = ["/* Phase 3.1: synthesized contracts */"] + list(contracts)
+    if _CONTRACT_MARKER.search(source_text):
+        replacement = "\n    ".join(block_lines)
+        return _CONTRACT_MARKER.sub(replacement, source_text, count=1)
+    m = _MAIN_RETURN.search(source_text)
+    if m is None:
+        return None
+    indent = m.group("indent") or "    "
+    block = "".join(f"{indent}{ln}\n" for ln in block_lines)
+    return source_text[:m.start()] + block + source_text[m.start():]
+
+
+@dataclass
+class RefinementStep:
+    iteration: int
+    contracts_added: list[str]
+    verdict: str
+    time_ms: int
+    synth_source: str             # "llm" | "rule" | "none"
+    synth_tokens: int = 0
+    synth_error: Optional[str] = None
+    evidence: str = ""
+
+
+@dataclass
+class RefinedVerdict:
+    final: Verdict
+    accumulated_contracts: list[str]
+    history: list[RefinementStep]
+    total_tokens: int
+
+
+def refine_unit(
+    source: Path,
+    function: str,
+    property: str,
+    *,
+    unwind: int = 16,
+    max_iters: int = 3,
+    seed_contracts: Optional[list[str]] = None,
+    client=None,
+    allow_rule_fallback: bool = True,
+) -> RefinedVerdict:
+    """Refinement loop: CBMC ↔ LLM synthesizer.
+
+    1. Run CBMC under `seed_contracts` (Phase 1.3 fixed contracts, may be []).
+    2. If verdict == safe, stop.
+    3. Otherwise, hand the source + trace to `contract_synth.synthesize`,
+       collect the proposed assumption, re-run CBMC under the new contract.
+    4. Repeat until safe, or no new contract is produced, or `max_iters` hit.
+
+    The verdict returned is always the *engine's* verdict — the LLM never
+    flips a safe/unsafe decision (PLAN §8). `accumulated_contracts` is what
+    the final verdict is conditioned on, and feeds the Phase 1.4 cache key
+    so a hit on this verdict is invalid if those contracts no longer hold.
+    """
+    src_text = source.read_text()
+    contracts = list(seed_contracts or [])
+    history: list[RefinementStep] = []
+    total_tokens = 0
+
+    # Build a working copy under a temp dir so we never mutate the input source.
+    import tempfile
+    work_root = Path(tempfile.mkdtemp(prefix="stageb-refine-"))
+    work_src = work_root / source.name
+
+    # The refinement loop captures the full CBMC text (with --trace) so the
+    # synthesizer sees variable assignments — not just the last 12 evidence
+    # lines that run_cbmc stores. We keep two outputs side by side: the
+    # truncated `Verdict.evidence` for downstream metrics/cache, and a local
+    # `full_trace` used only by the synth call this iteration.
+    last_trace: str = ""
+
+    def _run(text: str) -> Verdict:
+        nonlocal last_trace
+        work_src.write_text(text)
+        v, full = _run_cbmc_with_trace(
+            work_src, function, property=property, unwind=unwind,
+        )
+        last_trace = full
+        return v
+
+    # Iteration 0 — baseline (seed contracts only).
+    current_text = src_text if not contracts else (
+        _inject_assumptions(src_text, contracts) or src_text
+    )
+    v = _run(current_text)
+    history.append(RefinementStep(
+        iteration=0, contracts_added=[], verdict=v.verdict,
+        time_ms=v.time_ms, synth_source="none", evidence=v.evidence[-400:],
+    ))
+
+    iteration = 0
+    while v.verdict != "safe" and iteration < max_iters:
+        iteration += 1
+        synth = contract_synth.synthesize(
+            source_text=current_text,
+            function=function,
+            property=property,
+            counterexample=last_trace or v.evidence,
+            prior_contracts=contracts,
+            iter_index=iteration,
+            client=client,
+            allow_rule_fallback=allow_rule_fallback,
+        )
+        total_tokens += synth.tokens_used
+        if not synth.contracts:
+            history.append(RefinementStep(
+                iteration=iteration, contracts_added=[], verdict=v.verdict,
+                time_ms=0, synth_source=synth.source,
+                synth_tokens=synth.tokens_used, synth_error=synth.error,
+                evidence=f"no contract proposed: {synth.raw_response[-200:]}",
+            ))
+            break
+        contracts.extend(synth.contracts)
+        patched = _inject_assumptions(src_text, contracts)
+        if patched is None:
+            history.append(RefinementStep(
+                iteration=iteration, contracts_added=synth.contracts,
+                verdict=v.verdict, time_ms=0, synth_source=synth.source,
+                synth_tokens=synth.tokens_used,
+                synth_error="no main() to inject into",
+                evidence="",
+            ))
+            break
+        current_text = patched
+        v = _run(current_text)
+        history.append(RefinementStep(
+            iteration=iteration, contracts_added=synth.contracts,
+            verdict=v.verdict, time_ms=v.time_ms, synth_source=synth.source,
+            synth_tokens=synth.tokens_used, synth_error=synth.error,
+            evidence=v.evidence[-400:],
+        ))
+
+    v.assumed_contracts = list(contracts)
+    return RefinedVerdict(
+        final=v, accumulated_contracts=contracts,
+        history=history, total_tokens=total_tokens,
+    )
+
+
+def refine_manifest(
+    manifest_path: Path,
+    out_path: Path,
+    *,
+    max_iters: int = 3,
+    client=None,
+    allow_rule_fallback: bool = True,
+) -> dict:
+    """Run `refine_unit` over every unit in a manifest, emit a summary JSON.
+
+    Manifest schema is the same as `run_manifest`'s. The result file records
+    per-unit history (each refinement step's verdict + which contract was
+    added), the final verdict, and any soundness failures.
+    """
+    manifest = json.loads(manifest_path.read_text())
+    base = manifest_path.parent
+    results: list[dict] = []
+    counts = {"safe": 0, "unsafe": 0, "inconclusive": 0}
+    soundness_failures: list[dict] = []
+    total_tokens = 0
+    improved = 0  # baseline verdict != final verdict
+
+    for u in manifest["units"]:
+        src = (base / u["source"]).resolve()
+        prop = u.get("property", "memory-safety")
+        unwind = u.get("unwind", 16)
+        expected = u.get("expected")
+        seed = list(u.get("assumed_contracts", []))
+        # Only CBMC is wired in the refinement loop (Phase 3.1).
+        engines = u.get("engines", ["cbmc"])
+        if "cbmc" not in engines:
+            continue
+        rv = refine_unit(
+            src, u["function"], prop,
+            unwind=unwind, max_iters=max_iters, seed_contracts=seed,
+            client=client, allow_rule_fallback=allow_rule_fallback,
+        )
+        baseline_verdict = rv.history[0].verdict if rv.history else rv.final.verdict
+        if baseline_verdict != rv.final.verdict:
+            improved += 1
+        v_dict = asdict(rv.final)
+        v_dict["refinement_history"] = [asdict(h) for h in rv.history]
+        v_dict["accumulated_contracts"] = rv.accumulated_contracts
+        v_dict["baseline_verdict"] = baseline_verdict
+        v_dict["synth_tokens"] = rv.total_tokens
+        results.append(v_dict)
+        counts[rv.final.verdict] = counts.get(rv.final.verdict, 0) + 1
+        total_tokens += rv.total_tokens
+        if expected and rv.final.verdict != expected and rv.final.verdict != "inconclusive":
+            soundness_failures.append({
+                "unit": rv.final.unit, "engine": rv.final.engine,
+                "expected": expected, "got": rv.final.verdict,
+            })
+
+    summary = {
+        "target": manifest["target"],
+        "generated_at": int(time.time()),
+        "manifest": str(manifest_path),
+        "phase": "3.1-refinement",
+        "max_iters": max_iters,
+        "counts": counts,
+        "improved_units": improved,
+        "synth_tokens_total": total_tokens,
+        "soundness_failures": soundness_failures,
+        "results": results,
+    }
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(summary, indent=2))
+    return summary
 
 
 def run_manifest(manifest_path: Path, out_path: Path, *, use_cache: bool = True) -> dict:
