@@ -1,0 +1,18 @@
+{
+  "phase": "0.5",
+  "rows": 9,
+  "by_status": {
+    "success": 5,
+    "not_setup": 4
+  },
+  "out_jsonl": "run-logs/phase0.5-baseline.jsonl",
+  "adapters": [
+    "cybergym",
+    "juliet",
+    "kernelctf",
+    "live-lib",
+    "llm-serving",
+    "magma",
+    "sv-comp"
+  ]
+}
