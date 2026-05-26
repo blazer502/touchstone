@@ -1,0 +1,8 @@
+{"arm": "accelerated", "unit_tag": "accelerated-bank-000", "bytes_hex": "255044462d312e300a25e2e3cfd30a", "crashed": false, "vul_verdict": "no_crash", "crash_class": null, "location": null, "wall_ms": 333}
+{"arm": "accelerated", "unit_tag": "accelerated-bank-001", "bytes_hex": "89504e470d0a1a0a", "crashed": false, "vul_verdict": "no_crash", "crash_class": null, "location": null, "wall_ms": 326}
+{"arm": "accelerated", "unit_tag": "accelerated-bank-002", "bytes_hex": "47494638396101000100", "crashed": false, "vul_verdict": "no_crash", "crash_class": null, "location": null, "wall_ms": 339}
+{"arm": "accelerated", "unit_tag": "accelerated-bank-003", "bytes_hex": "504b0304140000000800", "crashed": false, "vul_verdict": "no_crash", "crash_class": null, "location": null, "wall_ms": 324}
+{"arm": "accelerated", "unit_tag": "accelerated-bank-004", "bytes_hex": "7f454c46020101", "crashed": false, "vul_verdict": "no_crash", "crash_class": null, "location": null, "wall_ms": 318}
+{"arm": "accelerated", "unit_tag": "accelerated-bank-005", "bytes_hex": "424d36000000", "crashed": false, "vul_verdict": "no_crash", "crash_class": null, "location": null, "wall_ms": 344}
+{"arm": "accelerated", "unit_tag": "accelerated-bank-006", "bytes_hex": "ffd8ffe000104a464946", "crashed": false, "vul_verdict": "no_crash", "crash_class": null, "location": null, "wall_ms": 336}
+{"arm": "accelerated", "unit_tag": "accelerated-bank-007", "bytes_hex": "3c3f786d6c2076657273696f6e3d22312e30223f3e", "crashed": true, "vul_verdict": "crash", "crash_class": "use-of-uninitialized-value", "location": "/src/file/src/funcs.c:478", "wall_ms": 352}

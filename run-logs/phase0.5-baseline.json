@@ -1,14 +1,15 @@
 {
   "phase": "0.5",
-  "rows": 53,
+  "rows": 55,
   "by_status": {
-    "success": 45,
+    "success": 47,
     "not_setup": 8
   },
   "out_jsonl": "run-logs/phase0.5-baseline.jsonl",
   "adapters": [
     "contract-synth",
     "cybergym",
+    "cybergym-ablation",
     "juliet",
     "kernelctf",
     "live-lib",

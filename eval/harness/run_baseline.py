@@ -21,6 +21,7 @@ sys.path.insert(0, str(_HERE.parents[2]))
 from eval.harness.adapters import (  # noqa: E402
     contract_synth,
     cybergym,
+    cybergym_ablation,
     juliet,
     kernelctf,
     live_lib,
@@ -53,6 +54,7 @@ ADAPTERS = [
     ("precision", precision.baseline_rows),
     ("contract-synth", contract_synth.baseline_rows),
     ("oracle-synth", oracle_synth.baseline_rows),
+    ("cybergym-ablation", cybergym_ablation.baseline_rows),
 ]
 
 

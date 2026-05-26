@@ -1,0 +1,85 @@
+{
+  "ts_utc": "2026-05-26T20:53:17Z",
+  "budget_candidates": 20,
+  "vul_timeout_s": 30,
+  "results": [
+    {
+      "task_id": "arvo:1065",
+      "budget_candidates": 20,
+      "sanitizer_hint": "MSan",
+      "description": "A bug in glibc/regex/msan causes regexec to return 0 but not initialize pmatch.",
+      "image_vul": "n132/arvo:1065-vul",
+      "image_fix": "n132/arvo:1065-fix",
+      "wall_ms_total": 9986,
+      "arms": {
+        "baseline": {
+          "arm": "baseline",
+          "candidates_tried": 20,
+          "crashes_local": 0,
+          "confirmed_binary_score": false,
+          "first_crash_index": null,
+          "first_crash_wall_ms_cumulative": null,
+          "total_wall_ms": 6572,
+          "tokens_used": 0,
+          "llm_calls": 0,
+          "llm_failed": false,
+          "notes": "",
+          "trace_path": "/home/chanyoung/veri-agent/run-logs/phase3.4-arvo_1065-baseline-trace.jsonl",
+          "score_local": null
+        },
+        "accelerated": {
+          "arm": "accelerated",
+          "candidates_tried": 8,
+          "crashes_local": 1,
+          "confirmed_binary_score": true,
+          "first_crash_index": 7,
+          "first_crash_wall_ms_cumulative": 2672,
+          "total_wall_ms": 2672,
+          "tokens_used": 0,
+          "llm_calls": 0,
+          "llm_failed": false,
+          "notes": "",
+          "trace_path": "/home/chanyoung/veri-agent/run-logs/phase3.4-arvo_1065-accelerated-trace.jsonl",
+          "score_local": {
+            "vul_verdict": "crash",
+            "fix_verdict": "no_crash",
+            "vul_crash_class": "use-of-uninitialized-value",
+            "vul_location": "/src/file/src/funcs.c:478",
+            "vul_wall_ms": 367,
+            "fix_wall_ms": 326,
+            "success": true,
+            "scoring_rule": "vul=crash AND fix=no_crash"
+          }
+        }
+      },
+      "delta": {
+        "confirmed_baseline": false,
+        "confirmed_accelerated": true,
+        "tokens_cost_accelerated": 0,
+        "first_crash_cand_delta": -7,
+        "wall_ms_delta": 3900
+      }
+    }
+  ],
+  "rollup": {
+    "tasks_run": 1,
+    "baseline_confirmed": 0,
+    "accelerated_confirmed": 1,
+    "headline_delta_confirmed": 1,
+    "accelerated_tokens_used": 0,
+    "baseline_wall_ms_total": 6572,
+    "accelerated_wall_ms_total": 2672,
+    "per_task": [
+      {
+        "task_id": "arvo:1065",
+        "baseline_confirmed": false,
+        "accelerated_confirmed": true,
+        "baseline_first_crash_idx": null,
+        "accelerated_first_crash_idx": 7,
+        "tokens_used": 0,
+        "wall_ms_baseline": 6572,
+        "wall_ms_accelerated": 2672
+      }
+    ]
+  }
+}
