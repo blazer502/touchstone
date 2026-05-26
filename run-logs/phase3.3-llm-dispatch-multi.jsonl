@@ -1,0 +1,3 @@
+{"hid": "multi-bounded-with-fuzz", "used_llm": true, "proposal": ["tier1_fuzz", "tier3_bmc"], "reason": "An exploitable runtime crash is plausible due to the off-by-one assertion bug.", "tokens": 445, "latency_s": 0.564, "error": null}
+{"hid": "multi-feasibility-with-fuzz", "used_llm": true, "proposal": ["tier1_fuzz", "tier2_symbolic"], "reason": "An exploitable runtime crash is plausible due to the presence of a clean fuzz harness.", "tokens": 432, "latency_s": 0.492, "error": null}
+{"hid": "multi-crash-with-bmc", "used_llm": true, "proposal": ["tier1_fuzz", "tier3_bmc"], "reason": "Heap OOB runtime crash is plausible, so Tier-1 fuzzing should be tried first.", "tokens": 454, "latency_s": 0.522, "error": null}

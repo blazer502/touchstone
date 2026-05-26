@@ -69,10 +69,20 @@ def _percentile(xs: list[int], p: float) -> float:
     return xs[f] + (xs[c] - xs[f]) * (k - f)
 
 
-def run_corpus(corpus_path: Path, traces_path: Path, summary_path: Path) -> dict:
+def run_corpus(
+    corpus_path: Path,
+    traces_path: Path,
+    summary_path: Path,
+    *,
+    dispatcher_name: str = "heuristic",
+) -> dict:
     data = json.loads(corpus_path.read_text())
     items = data["hypotheses"]
     budget = Budget.load()
+    dispatcher = None
+    if dispatcher_name == "llm":
+        from agent.router_llm import LLMDispatcher  # noqa: E402
+        dispatcher = LLMDispatcher()
 
     traces_path.parent.mkdir(parents=True, exist_ok=True)
     summary_path.parent.mkdir(parents=True, exist_ok=True)
@@ -86,7 +96,7 @@ def run_corpus(corpus_path: Path, traces_path: Path, summary_path: Path) -> dict
             hyp = _hyp_from_json(item)
             t0 = time.monotonic()
             try:
-                tr: RouteTrace = route(hyp, budget=budget)
+                tr: RouteTrace = route(hyp, budget=budget, dispatcher=dispatcher)
                 error = None
             except Exception as e:
                 tr = None
@@ -191,7 +201,7 @@ def run_corpus(corpus_path: Path, traces_path: Path, summary_path: Path) -> dict
 
     summary = {
         "phase": "2.5",
-        "corpus": str(corpus_path.relative_to(REPO)),
+        "corpus": str(corpus_path.resolve().relative_to(REPO)),
         "n_hypotheses": len(rows),
         "matches": sum(1 for r in rows if r["match"]),
         "mismatches": sum(1 for r in rows if not r["match"]),
@@ -220,7 +230,7 @@ def run_corpus(corpus_path: Path, traces_path: Path, summary_path: Path) -> dict
             ],
             "no_dispatch": no_dispatch,
         },
-        "traces": str(traces_path.relative_to(REPO)),
+        "traces": str(traces_path.resolve().relative_to(REPO)),
     }
     summary_path.write_text(json.dumps(summary, indent=2) + "\n")
     return summary
@@ -231,8 +241,11 @@ def main() -> int:
     ap.add_argument("--corpus", type=Path, default=DEFAULT_CORPUS)
     ap.add_argument("--traces", type=Path, default=DEFAULT_TRACES)
     ap.add_argument("--summary", type=Path, default=DEFAULT_SUMMARY)
+    ap.add_argument("--dispatcher", default="heuristic", choices=("heuristic", "llm"),
+                    help="Tier-ordering policy. 'llm' uses the Phase-3.3 router.")
     args = ap.parse_args()
-    s = run_corpus(args.corpus, args.traces, args.summary)
+    s = run_corpus(args.corpus, args.traces, args.summary,
+                   dispatcher_name=args.dispatcher)
     # Print headline numbers
     print()
     print(f"  matches              : {s['matches']}/{s['n_hypotheses']}")

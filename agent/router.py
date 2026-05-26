@@ -235,6 +235,19 @@ def _run_tier3(hyp: Hypothesis, budget: Budget) -> Optional[tuple[str, Tier3Verd
     return None
 
 
+# --- Populated-tier inventory -------------------------------------------------
+def _populated_tiers(hyp: Hypothesis) -> list[str]:
+    have_t1 = (hyp.tier1_replay is not None or hyp.tier1_kasan is not None
+               or hyp.tier1_fuzz is not None)
+    have_t2 = hyp.tier2_klee is not None or hyp.tier2_angr is not None
+    have_t3 = hyp.tier3_cbmc is not None
+    out = []
+    if have_t1: out.append("tier1_fuzz")
+    if have_t2: out.append("tier2_symbolic")
+    if have_t3: out.append("tier3_bmc")
+    return out
+
+
 # --- Heuristic dispatch order -------------------------------------------------
 def _dispatch_order(hyp: Hypothesis) -> list[str]:
     """Pick the order of tiers to try based on class_hint + populated specs.
@@ -243,12 +256,14 @@ def _dispatch_order(hyp: Hypothesis) -> list[str]:
     re-orders within ties (e.g. "bounded" puts Tier-3 first if both Tier-2
     and Tier-3 are populated).
     """
-    have_t1 = (hyp.tier1_replay is not None or hyp.tier1_kasan is not None
-               or hyp.tier1_fuzz is not None)
-    have_t2 = hyp.tier2_klee is not None or hyp.tier2_angr is not None
-    have_t3 = hyp.tier3_cbmc is not None
+    available = _populated_tiers(hyp)
+    if not available:
+        return []
+    have_t1 = "tier1_fuzz" in available
+    have_t2 = "tier2_symbolic" in available
+    have_t3 = "tier3_bmc" in available
 
-    order = []
+    order: list[str] = []
     if hyp.class_hint == "bounded" and have_t3:
         # Caller said "small bounded property" — Tier-3 first is cheaper than
         # waking a fuzzer that won't converge.
@@ -268,19 +283,72 @@ def _dispatch_order(hyp: Hypothesis) -> list[str]:
     return order
 
 
+def _sanitize_order(
+    proposal: Any,
+    available: list[str],
+    *,
+    fallback: list[str],
+) -> list[str]:
+    """Filter a dispatcher proposal to the set of populated tiers.
+
+    - Non-list / empty / all-foreign proposals fall back to the heuristic order.
+    - Foreign tiers (not in ``available``) are dropped silently.
+    - Duplicates are removed preserving first occurrence.
+    - Any populated tier omitted by the proposer is appended after, so a buggy
+      LLM cannot accidentally *exclude* a populated tier (that would lose
+      precision: an unfired Tier-3 cex would never surface).
+    """
+    if not isinstance(proposal, list) or not proposal:
+        return fallback
+    seen: set[str] = set()
+    out: list[str] = []
+    for t in proposal:
+        if not isinstance(t, str):
+            continue
+        if t not in available or t in seen:
+            continue
+        seen.add(t)
+        out.append(t)
+    if not out:
+        return fallback
+    for t in available:
+        if t not in seen:
+            out.append(t)
+    return out
+
+
 # --- Public entrypoint --------------------------------------------------------
-def route(hyp: Hypothesis, budget: Optional[Budget] = None) -> RouteTrace:
-    """Run the heuristic router on one hypothesis.
+def route(
+    hyp: Hypothesis,
+    budget: Optional[Budget] = None,
+    *,
+    dispatcher: Optional[Any] = None,
+) -> RouteTrace:
+    """Run the router on one hypothesis.
 
     The router executes tiers in order until one produces a *decisive* verdict
     (Tier-1 crash, Tier-2 sat/unsat, Tier-3 safe/unsafe). On Tier-2 SAT a
     Tier-1 replay reconfirmation is attempted iff the hypothesis supplied a
     replay spec — symbolic SAT alone is `candidate`, not `confirmed` (PLAN §8).
+
+    ``dispatcher`` is a callable ``(Hypothesis, list[str] available) -> list[str]``
+    returning the tier execution order. Defaults to the hand-coded heuristic
+    (Phase 2.4). Pass ``LLMDispatcher()`` to use the Phase-3.3 LLM router.
+    The router *always* re-validates the returned order against the populated-
+    tier set (filters out fabrications, dedupes) — no dispatcher decision can
+    weaken soundness because the engines themselves still hold verdict authority.
     """
     budget = budget or Budget.load()
     tr = RouteTrace(hypothesis_id=hyp.hid, final_verdict=R_NO_DISPATCH,
                     decision_reason="no specs attached")
-    order = _dispatch_order(hyp)
+    available = _populated_tiers(hyp)
+    if not available:
+        return tr
+    if dispatcher is None:
+        order = _dispatch_order(hyp)
+    else:
+        proposal = dispatcher(hyp, list(available))
+        order = _sanitize_order(proposal, available, fallback=_dispatch_order(hyp))
     if not order:
         return tr
 
@@ -439,6 +507,10 @@ def _cli() -> int:
     ap.add_argument("--hypotheses", required=True,
                     help="Path to a JSON file: either a single Hypothesis dict or a list of them.")
     ap.add_argument("--out", required=True, help="Write JSONL trace here (one row per hypothesis).")
+    ap.add_argument("--dispatcher", default="heuristic", choices=("heuristic", "llm"),
+                    help="Tier-ordering policy. 'llm' uses the Phase-3.3 router model.")
+    ap.add_argument("--dispatch-trace", default=None,
+                    help="If --dispatcher=llm, write per-hypothesis LLM dispatch trace JSONL here.")
     args = ap.parse_args()
 
     data = json.loads(Path(args.hypotheses).read_text())
@@ -446,16 +518,40 @@ def _cli() -> int:
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     budget = Budget.load()
+
+    dispatcher = None
+    llm_traces = None
+    if args.dispatcher == "llm":
+        from agent.router_llm import LLMDispatcher
+        d = LLMDispatcher()
+        dispatcher = d
+        llm_traces = d.traces
+
     rows = []
     with out.open("w") as fh:
         for h in hyps:
-            tr = route(_hyp_from_json(h), budget=budget)
+            tr = route(_hyp_from_json(h), budget=budget, dispatcher=dispatcher)
             row = tr.to_dict()
             fh.write(json.dumps(row) + "\n")
             rows.append(row)
             print(f"{tr.hypothesis_id}: {tr.final_verdict} — {tr.decision_reason} "
                   f"(cost={tr.total_cost}, wall_ms={tr.total_wall_ms})")
     print(f"\nWrote {len(rows)} trace(s) to {out}")
+    if args.dispatch_trace and llm_traces is not None:
+        dt_path = Path(args.dispatch_trace)
+        dt_path.parent.mkdir(parents=True, exist_ok=True)
+        with dt_path.open("w") as fh:
+            for hyp_dict, tr in zip(hyps, llm_traces):
+                fh.write(json.dumps({
+                    "hid": hyp_dict.get("hid"),
+                    "used_llm": tr.used_llm,
+                    "proposal": tr.proposal,
+                    "reason": tr.reason,
+                    "tokens": tr.tokens,
+                    "latency_s": tr.latency_s,
+                    "error": tr.error,
+                }) + "\n")
+        print(f"Wrote {len(llm_traces)} dispatch trace(s) to {dt_path}")
     return 0
 
 

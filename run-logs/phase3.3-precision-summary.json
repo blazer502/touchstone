@@ -1,0 +1,96 @@
+{
+  "phase": "2.5",
+  "corpus": "eval/precision/corpus.json",
+  "n_hypotheses": 11,
+  "matches": 11,
+  "mismatches": 0,
+  "corpus_wall_s": 16.07,
+  "confusion": [
+    {
+      "expected": "bmc_unsafe",
+      "actual": "bmc_unsafe",
+      "count": 1
+    },
+    {
+      "expected": "candidate",
+      "actual": "candidate",
+      "count": 2
+    },
+    {
+      "expected": "confirmed",
+      "actual": "confirmed",
+      "count": 3
+    },
+    {
+      "expected": "inconclusive",
+      "actual": "inconclusive",
+      "count": 2
+    },
+    {
+      "expected": "proved_safe",
+      "actual": "proved_safe",
+      "count": 1
+    },
+    {
+      "expected": "refuted",
+      "actual": "refuted",
+      "count": 2
+    }
+  ],
+  "precision_of_confirmation": 1.0,
+  "recall_of_confirmation": 1.0,
+  "true_positives": 4,
+  "false_positives": 0,
+  "false_confirmations": 0,
+  "determinism": {
+    "buggy_total": 6,
+    "buggy_confirmed_or_bmc_unsafe": 4,
+    "buggy_candidate": 2,
+    "buggy_missed": 0
+  },
+  "soundness_violations": [],
+  "per_tier_latency": {
+    "tier1_fuzz": {
+      "n": 4,
+      "mean_ms": 3032,
+      "p50_ms": 420.5,
+      "p95_ms": 9691.299999999996,
+      "max_ms": 11287
+    },
+    "tier2_symbolic": {
+      "n": 4,
+      "mean_ms": 191,
+      "p50_ms": 133.0,
+      "p95_ms": 418.7999999999999,
+      "max_ms": 459
+    },
+    "tier3_bmc": {
+      "n": 3,
+      "mean_ms": 593.3333333333334,
+      "p50_ms": 606.0,
+      "p95_ms": 618.6,
+      "max_ms": 620
+    }
+  },
+  "escalation": {
+    "n_with_attempts": 11,
+    "n_escalated": 0,
+    "escalation_rate": 0.0,
+    "paths": [
+      {
+        "path": "tier1_fuzz",
+        "count": 4
+      },
+      {
+        "path": "tier2_symbolic",
+        "count": 4
+      },
+      {
+        "path": "tier3_bmc",
+        "count": 3
+      }
+    ],
+    "no_dispatch": 0
+  },
+  "traces": "run-logs/phase3.3-precision-traces.jsonl"
+}

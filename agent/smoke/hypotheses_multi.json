@@ -1,0 +1,56 @@
+[
+  {
+    "hid": "multi-bounded-with-fuzz",
+    "description": "Off-by-one assertion bug. Small bounded property; also a libFuzzer harness is available so a runtime crash is plausible too.",
+    "class_hint": "bounded",
+    "tier1_fuzz": {
+      "harness_src": "oracle/tier1_fuzz/harnesses/synthetic_heap_oob.c",
+      "sanitizer": "ASan",
+      "wall_seconds": 5,
+      "unit": "multi-bounded-tier1"
+    },
+    "tier3_cbmc": {
+      "source": "oracle/tier3_bmc/smoke/unsafe_assert.c",
+      "function": "main",
+      "property": "assertion",
+      "unwind": 16,
+      "timeout_s": 120,
+      "unit": "multi-bounded-tier3"
+    }
+  },
+  {
+    "hid": "multi-feasibility-with-fuzz",
+    "description": "Path-reachability question: is there an input that drives the function into the buggy branch? KLEE feasibility plus a clean fuzz harness is wired.",
+    "class_hint": "feasibility",
+    "tier1_fuzz": {
+      "harness_src": "eval/precision/cases/clean_input_handler.c",
+      "sanitizer": "ASan",
+      "wall_seconds": 4,
+      "unit": "multi-feasibility-tier1"
+    },
+    "tier2_klee": {
+      "source": "oracle/tier2_symbolic/smoke/klee_unsat_clamped.c",
+      "wall_seconds": 30,
+      "unit": "multi-feasibility-tier2"
+    }
+  },
+  {
+    "hid": "multi-crash-with-bmc",
+    "description": "Heap-OOB runtime crash plausible from the libFuzzer harness; a CBMC bounded check is also available as a tier-3 backup.",
+    "class_hint": "crash",
+    "tier1_fuzz": {
+      "harness_src": "oracle/tier1_fuzz/harnesses/synthetic_heap_oob.c",
+      "sanitizer": "ASan",
+      "wall_seconds": 20,
+      "unit": "multi-crash-tier1"
+    },
+    "tier3_cbmc": {
+      "source": "oracle/tier3_bmc/smoke/safe_bounded.c",
+      "function": "main",
+      "property": "memory-safety",
+      "unwind": 16,
+      "timeout_s": 120,
+      "unit": "multi-crash-tier3"
+    }
+  }
+]

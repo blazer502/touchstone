@@ -1,0 +1,6 @@
+{"hid": "t1-synthetic-heap-oob", "used_llm": false, "proposal": ["tier1_fuzz"], "reason": "single-tier hypothesis", "tokens": 0, "latency_s": 0.0, "error": null}
+{"hid": "t1-kasan-cve-2024-1086", "used_llm": false, "proposal": ["tier1_fuzz"], "reason": "single-tier hypothesis", "tokens": 0, "latency_s": 0.0, "error": null}
+{"hid": "t2-klee-sat-div-by-zero", "used_llm": false, "proposal": ["tier2_symbolic"], "reason": "single-tier hypothesis", "tokens": 0, "latency_s": 0.0, "error": null}
+{"hid": "t2-klee-unsat-clamped", "used_llm": false, "proposal": ["tier2_symbolic"], "reason": "single-tier hypothesis", "tokens": 0, "latency_s": 0.0, "error": null}
+{"hid": "t3-cbmc-safe-bounded", "used_llm": false, "proposal": ["tier3_bmc"], "reason": "single-tier hypothesis", "tokens": 0, "latency_s": 0.0, "error": null}
+{"hid": "t3-cbmc-unsafe-off-by-one", "used_llm": false, "proposal": ["tier3_bmc"], "reason": "single-tier hypothesis", "tokens": 0, "latency_s": 0.0, "error": null}

@@ -1,0 +1,3 @@
+{"hid": "multi-bounded-with-fuzz", "used_llm": false, "proposal": [], "reason": "", "tokens": 0, "latency_s": 0.0, "error": "gateway: chat call failed: <urlopen error [Errno 111] Connection refused>"}
+{"hid": "multi-feasibility-with-fuzz", "used_llm": false, "proposal": [], "reason": "", "tokens": 0, "latency_s": 0.0, "error": "gateway: chat call failed: <urlopen error [Errno 111] Connection refused>"}
+{"hid": "multi-crash-with-bmc", "used_llm": false, "proposal": [], "reason": "", "tokens": 0, "latency_s": 0.0, "error": "gateway: chat call failed: <urlopen error [Errno 111] Connection refused>"}
