@@ -1,0 +1,77 @@
+{
+  "cluster": "nft_reject",
+  "scope": "net/netfilter",
+  "sources": [
+    {
+      "path": "net/netfilter/nft_reject_inet.c",
+      "loc": 112,
+      "patterns": {
+        "ops_vtable": 1,
+        "container_of": 0,
+        "refcount": 0,
+        "rcu": 0,
+        "allocator": 0,
+        "parser_sm": 0
+      }
+    },
+    {
+      "path": "net/netfilter/nft_reject_netdev.c",
+      "loc": 192,
+      "patterns": {
+        "ops_vtable": 1,
+        "container_of": 0,
+        "refcount": 0,
+        "rcu": 0,
+        "allocator": 0,
+        "parser_sm": 0
+      }
+    }
+  ],
+  "loc": 304,
+  "pattern_totals": {
+    "ops_vtable": 2,
+    "container_of": 0,
+    "refcount": 0,
+    "rcu": 0,
+    "allocator": 0,
+    "parser_sm": 0
+  },
+  "exports": [
+    "nft_reject_inet_eval",
+    "nft_reject_inet_module_exit",
+    "nft_reject_inet_module_init",
+    "nft_reject_inet_validate",
+    "nft_reject_netdev_eval",
+    "nft_reject_netdev_module_exit",
+    "nft_reject_netdev_module_init",
+    "nft_reject_netdev_send_v4_tcp_reset",
+    "nft_reject_netdev_send_v4_unreach",
+    "nft_reject_netdev_send_v6_tcp_reset",
+    "nft_reject_netdev_send_v6_unreach",
+    "nft_reject_netdev_validate",
+    "nft_reject_queue_xmit"
+  ],
+  "callees_internal": [
+    "nft_reject_inet_eval",
+    "nft_reject_inet_module_exit",
+    "nft_reject_inet_module_init",
+    "nft_reject_inet_validate",
+    "nft_reject_netdev_eval",
+    "nft_reject_netdev_module_exit",
+    "nft_reject_netdev_module_init",
+    "nft_reject_netdev_send_v4_tcp_reset",
+    "nft_reject_netdev_send_v4_unreach",
+    "nft_reject_netdev_send_v6_tcp_reset",
+    "nft_reject_netdev_send_v6_unreach",
+    "nft_reject_netdev_validate",
+    "nft_reject_queue_xmit"
+  ],
+  "callees_external": {
+    "nf_tables": 6,
+    "nft": 4
+  },
+  "export_count": 13,
+  "dominant_patterns": [
+    "ops_vtable"
+  ]
+}

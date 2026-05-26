@@ -1,0 +1,40 @@
+{
+  "cluster": "nf_hooks",
+  "scope": "net/netfilter",
+  "sources": [
+    {
+      "path": "net/netfilter/nf_hooks_lwtunnel.c",
+      "loc": 54,
+      "patterns": {
+        "ops_vtable": 0,
+        "container_of": 0,
+        "refcount": 0,
+        "rcu": 0,
+        "allocator": 0,
+        "parser_sm": 0
+      }
+    }
+  ],
+  "loc": 54,
+  "pattern_totals": {
+    "ops_vtable": 0,
+    "container_of": 0,
+    "refcount": 0,
+    "rcu": 0,
+    "allocator": 0,
+    "parser_sm": 0
+  },
+  "exports": [
+    "nf_hooks_lwtunnel_get",
+    "nf_hooks_lwtunnel_set",
+    "nf_hooks_lwtunnel_sysctl_handler"
+  ],
+  "callees_internal": [
+    "nf_hooks_lwtunnel_get",
+    "nf_hooks_lwtunnel_set",
+    "nf_hooks_lwtunnel_sysctl_handler"
+  ],
+  "callees_external": {},
+  "export_count": 3,
+  "dominant_patterns": []
+}

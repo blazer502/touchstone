@@ -1,0 +1,62 @@
+{
+  "cluster": "nft_fib",
+  "scope": "net/netfilter",
+  "sources": [
+    {
+      "path": "net/netfilter/nft_fib_inet.c",
+      "loc": 81,
+      "patterns": {
+        "ops_vtable": 1,
+        "container_of": 0,
+        "refcount": 0,
+        "rcu": 0,
+        "allocator": 0,
+        "parser_sm": 0
+      }
+    },
+    {
+      "path": "net/netfilter/nft_fib_netdev.c",
+      "loc": 90,
+      "patterns": {
+        "ops_vtable": 1,
+        "container_of": 0,
+        "refcount": 0,
+        "rcu": 0,
+        "allocator": 0,
+        "parser_sm": 0
+      }
+    }
+  ],
+  "loc": 171,
+  "pattern_totals": {
+    "ops_vtable": 2,
+    "container_of": 0,
+    "refcount": 0,
+    "rcu": 0,
+    "allocator": 0,
+    "parser_sm": 0
+  },
+  "exports": [
+    "nft_fib_inet_eval",
+    "nft_fib_inet_module_exit",
+    "nft_fib_inet_module_init",
+    "nft_fib_netdev_eval",
+    "nft_fib_netdev_module_exit",
+    "nft_fib_netdev_module_init"
+  ],
+  "callees_internal": [
+    "nft_fib_inet_eval",
+    "nft_fib_inet_module_exit",
+    "nft_fib_inet_module_init",
+    "nft_fib_netdev_eval",
+    "nft_fib_netdev_module_exit",
+    "nft_fib_netdev_module_init"
+  ],
+  "callees_external": {
+    "nf_tables": 4
+  },
+  "export_count": 6,
+  "dominant_patterns": [
+    "ops_vtable"
+  ]
+}

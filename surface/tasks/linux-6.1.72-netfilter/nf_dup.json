@@ -1,0 +1,44 @@
+{
+  "cluster": "nf_dup",
+  "scope": "net/netfilter",
+  "sources": [
+    {
+      "path": "net/netfilter/nf_dup_netdev.c",
+      "loc": 95,
+      "patterns": {
+        "ops_vtable": 0,
+        "container_of": 0,
+        "refcount": 0,
+        "rcu": 0,
+        "allocator": 0,
+        "parser_sm": 0
+      }
+    }
+  ],
+  "loc": 95,
+  "pattern_totals": {
+    "ops_vtable": 0,
+    "container_of": 0,
+    "refcount": 0,
+    "rcu": 0,
+    "allocator": 0,
+    "parser_sm": 0
+  },
+  "exports": [
+    "nf_do_netdev_egress",
+    "nf_dup_netdev_egress",
+    "nf_fwd_netdev_egress",
+    "nft_fwd_dup_netdev_offload"
+  ],
+  "callees_internal": [
+    "nf_do_netdev_egress",
+    "nf_dup_netdev_egress",
+    "nf_fwd_netdev_egress",
+    "nft_fwd_dup_netdev_offload"
+  ],
+  "callees_external": {
+    "nf_tables": 1
+  },
+  "export_count": 4,
+  "dominant_patterns": []
+}

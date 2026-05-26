@@ -1,0 +1,102 @@
+{
+  "cluster": "core",
+  "scope": "net/netfilter",
+  "sources": [
+    {
+      "path": "net/netfilter/core.c",
+      "loc": 794,
+      "patterns": {
+        "ops_vtable": 2,
+        "container_of": 1,
+        "refcount": 0,
+        "rcu": 15,
+        "allocator": 0,
+        "parser_sm": 0
+      }
+    }
+  ],
+  "loc": 794,
+  "pattern_totals": {
+    "ops_vtable": 2,
+    "container_of": 1,
+    "refcount": 0,
+    "rcu": 15,
+    "allocator": 0,
+    "parser_sm": 0
+  },
+  "exports": [
+    "__netfilter_net_init",
+    "__nf_hook_entries_free",
+    "__nf_hook_entries_try_shrink",
+    "__nf_register_net_hook",
+    "__nf_unregister_net_hook",
+    "accept_all",
+    "allocate_hook_entries_size",
+    "hooks_validate",
+    "netfilter_init",
+    "netfilter_net_exit",
+    "netfilter_net_init",
+    "nf_conntrack_destroy",
+    "nf_ct_attach",
+    "nf_ct_get_tuple_skb",
+    "nf_egress_hook",
+    "nf_hook_entries_delete_raw",
+    "nf_hook_entries_free",
+    "nf_hook_entries_grow",
+    "nf_hook_entries_insert_raw",
+    "nf_hook_entry_head",
+    "nf_hook_slow",
+    "nf_hook_slow_list",
+    "nf_ingress_check",
+    "nf_ingress_hook",
+    "nf_register_net_hook",
+    "nf_register_net_hooks",
+    "nf_remove_net_hook",
+    "nf_static_key_dec",
+    "nf_static_key_inc",
+    "nf_unregister_net_hook",
+    "nf_unregister_net_hooks"
+  ],
+  "callees_internal": [
+    "__netfilter_net_init",
+    "__nf_hook_entries_free",
+    "__nf_hook_entries_try_shrink",
+    "__nf_register_net_hook",
+    "__nf_unregister_net_hook",
+    "accept_all",
+    "allocate_hook_entries_size",
+    "hooks_validate",
+    "netfilter_init",
+    "netfilter_net_exit",
+    "netfilter_net_init",
+    "nf_conntrack_destroy",
+    "nf_ct_attach",
+    "nf_ct_get_tuple_skb",
+    "nf_egress_hook",
+    "nf_hook_entries_delete_raw",
+    "nf_hook_entries_free",
+    "nf_hook_entries_grow",
+    "nf_hook_entries_insert_raw",
+    "nf_hook_entry_head",
+    "nf_hook_slow",
+    "nf_hook_slow_list",
+    "nf_ingress_check",
+    "nf_ingress_hook",
+    "nf_register_net_hook",
+    "nf_register_net_hooks",
+    "nf_remove_net_hook",
+    "nf_static_key_dec",
+    "nf_static_key_inc",
+    "nf_unregister_net_hook",
+    "nf_unregister_net_hooks"
+  ],
+  "callees_external": {
+    "nf": 3
+  },
+  "export_count": 31,
+  "dominant_patterns": [
+    "rcu",
+    "ops_vtable",
+    "container_of"
+  ]
+}
