@@ -28,6 +28,7 @@ from eval.harness.adapters import (  # noqa: E402
     svcomp,
     tier1_oracle,
     tier2_oracle,
+    tier3_oracle,
 )
 from eval.harness.metrics import MetricWriter, REPO_ROOT  # noqa: E402
 
@@ -41,6 +42,7 @@ ADAPTERS = [
     ("live-lib", live_lib.baseline_rows),
     ("tier1-oracle", tier1_oracle.baseline_rows),
     ("tier2-oracle", tier2_oracle.baseline_rows),
+    ("tier3-oracle", tier3_oracle.baseline_rows),
 ]
 
 

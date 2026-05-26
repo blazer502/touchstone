@@ -1,0 +1,13 @@
+{
+  "unit": "safe_bounded",
+  "engine": "cbmc",
+  "property": "no-oob",
+  "verdict": "safe",
+  "unwind": 4,
+  "wall_ms": 585,
+  "pov_path": null,
+  "target_location": null,
+  "evidence_excerpt": "CBMC version 6.4.0 (cbmc-6.4.0) 64-bit x86_64 linux\nType-checking safe_bounded\nGenerating GOTO Program\nAdding CPROVER library (x86_64)\nRemoval of function pointers and virtual functions\nGeneric Property Instrumentation\nStarting Bounded Model Checking\nPassing problem to propositional reduction\nconverting SSA\nRunning propositional reduction\nSAT checker: instance is UNSATISFIABLE\n** Results:\nsafe_bounded.c function clamp_write\n[clamp_write.pointer_dereference.1] line 15 dereference failure: pointer NULL in a[(signed long int)i]: SUCCESS\n[clamp_write.pointer_dereference.2] line 15 dereference failure: pointer invalid in a[(signed long int)i]: SUCCESS\n[clamp_write.pointer_dereference.3] line 15 dereference failure: deallocated dynamic object in a[(signed long int)i]: SUCCESS\n[clamp_write.pointer_dereference.4] line 15 dereference failure: dead object in a[(signed long int)i]: SUCCESS\n[clamp_write.pointer_dereference.5] line 15 dereference failure: pointer outside object bounds in a[(signed long int)i]: SUCCESS\n[clamp_write.pointer_dereference.6] line 15 dereference failure: invalid integer address in a[(signed long int)i]: SUCCESS\n** 0 of 6 failed (1 iterations)\nVERIFICATION SUCCESSFUL",
+  "soundness_note": "Bounded-sound up to --unwind=4 with --unwinding-assertions ON. Without a verified loop invariant this is NOT an unbounded-safety claim.",
+  "assumed_contracts": []
+}

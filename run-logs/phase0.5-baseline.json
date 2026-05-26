@@ -1,9 +1,9 @@
 {
   "phase": "0.5",
-  "rows": 10,
+  "rows": 24,
   "by_status": {
-    "success": 7,
-    "not_setup": 3
+    "success": 17,
+    "not_setup": 7
   },
   "out_jsonl": "run-logs/phase0.5-baseline.jsonl",
   "adapters": [
@@ -13,6 +13,9 @@
     "live-lib",
     "llm-serving",
     "magma",
-    "sv-comp"
+    "sv-comp",
+    "tier1_oracle",
+    "tier2_oracle",
+    "tier3_oracle"
   ]
 }

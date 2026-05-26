@@ -1,0 +1,21 @@
+{
+  "engine": "cbmc",
+  "source": "/home/chanyoung/veri-agent/run-logs/phase2.3/synth_oob.c",
+  "function": "main",
+  "property": "assertion",
+  "unwind": 4,
+  "target_location": "line 12 [main.assertion.1]",
+  "assignment": {
+    "buf[0l]": "0",
+    "buf[1l]": "0",
+    "buf[2l]": "0",
+    "buf[3l]": "0",
+    "buf[4l]": "0",
+    "buf[5l]": "0",
+    "buf[6l]": "0",
+    "buf[7l]": "0",
+    "i": "8u",
+    "v": "0",
+    "buf[8l]": "{ 0, 0, 0, 0, 0, 0, 0, 0 }[8l]"
+  }
+}

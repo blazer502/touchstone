@@ -1,0 +1,13 @@
+{
+  "unit": "safe_bounded.c::main",
+  "engine": "esbmc",
+  "property": "memory-safety",
+  "verdict": "inconclusive",
+  "unwind": 16,
+  "wall_ms": 49,
+  "pov_path": null,
+  "target_location": null,
+  "evidence_excerpt": "image-missing:veri-agent/esbmc:v7.6.1",
+  "soundness_note": "ESBMC container not built \u2014 Phase 2.3 ships ESBMC as a dispatch-uniform stub. CBMC covers all Phase 2.3 obligations; ESBMC activates when CBMC's encoding is too slow on a Magma case in Phase 2.5.",
+  "assumed_contracts": []
+}
