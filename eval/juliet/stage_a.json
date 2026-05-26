@@ -1,0 +1,26 @@
+{
+  "phase": "1.5",
+  "stage": "A",
+  "generated_at": 1779809907,
+  "scope": [
+    "CWE476_NULL_Pointer_Dereference",
+    "CWE415_Double_Free/s01",
+    "CWE416_Use_After_Free",
+    "CWE121_Stack_Based_Buffer_Overflow/s01"
+  ],
+  "stats": {
+    "c_files": 1486,
+    "defined_functions": 3368,
+    "entry_functions": 2917,
+    "labeled_bug_functions": 1074,
+    "indirect_call_funcs_in_direct": 48,
+    "address_taken_total": 0,
+    "keep_set": 3345,
+    "pruned": 23,
+    "reduction": 0.0068,
+    "soundness_overapprox_applied": true,
+    "missed_bug_count": 0,
+    "elapsed_ms": 799
+  },
+  "missed_bugs": []
+}

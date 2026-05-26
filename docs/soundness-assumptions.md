@@ -23,6 +23,12 @@ Format: one row per assumption.
 - [static-hints]     non-soundness role        Smatch / Coccinelle / Sparse / CodeQL findings ingested via `surface/static_hints.py` are **priority signals only**, never pruning evidence. A missing hint never causes a function to be pruned; an extra hint never declares a function exploitable.
 - [all]              inline asm                Inline assembly is opaque to all C front-ends; bodies containing `__asm__` are treated as worst-case (read/write any memory). Always reachable, never pruned.
 
+## Labeled-corpus soundness gate (Juliet, Phase 1.5)
+
+- [juliet/stageA]    entry-point heuristic     `eval/juliet/run_stage_a.py` treats every non-`static` function whose name matches `CWE\d+_..._(bad|good*|bad_sink|good*_sink|bad_source|good*_source)` as an entry. Juliet builds a single binary where `main_linux.cpp` dispatches by string lookup into the testcase API, so every such extern function is genuinely externally invokable. A missed naming pattern shrinks the entry set → labeled `_bad` could be pruned → soundness-gate failure surfaces in `missed_bug_count`. Re-running `run_stage_a.py` after adding a CWE keeps the gate honest.
+- [juliet/stageB]    helper stubs              `eval/juliet/stubs.c` provides no-op definitions of testcasesupport helpers (printLine, printIntLine, …). `printLine`/`printWLine` deliberately dereference their argument (`volatile char c = line[0]`) because Juliet's UAF testcases pass the freed pointer to `printLine` as the sink — a true no-op would mask the deref and CBMC would falsely report `safe`. Any new sink-helper added to the stub must either deref its argument the same way or be replaced by a real Juliet helper if it is the bug-witnessing call. Confirmed by Phase 1.5 run-log: with deref'ing stubs, 12/12 labeled `_bad` reach `unsafe`; without, 1 falsely reached `safe`.
+- [juliet/stageB]    unwind bound choice       Phase 1.5 runs CBMC at `--unwind=128`. Two CWE416 testcases contain `for(i=0;i<100;i++)` — `--unwind=32` left them `inconclusive` (not unsafe per the gate's strict reading, but defeats the verification claim). The unwind bound is a *quality* lever, not a soundness one: `inconclusive` is never recorded as a soundness failure, only `safe` on a `_bad` is.
+
 ## Stage B — sound proof
 
 - [Frama-C/EVA]      abstract domain           EVA is sound under its chosen domain (interval, congruence, gauges). Pre-/post-conditions assumed at function boundaries MUST themselves be verified or come from the proof cache with matching keys.

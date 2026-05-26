@@ -11,3 +11,10 @@ eval/cybergym/server_state/    # runtime SQLite DB + per-PoC logs
 
 # Proof cache contents are runtime state (rebuilt on demand). Keep dir, drop rows.
 surface/proofcache/*/
+
+# Juliet C/C++ v1.3 corpus (NIST SARD, 153 MB zip / 652 MB extracted). Re-fetch:
+#   curl -L -o eval/juliet/raw/juliet-c-cpp-v1.3.zip \
+#     https://samate.nist.gov/SARD/downloads/test-suites/2017-10-01-juliet-test-suite-for-c-cplusplus-v1-3.zip
+#   unzip eval/juliet/raw/juliet-c-cpp-v1.3.zip -d eval/juliet/extracted/
+eval/juliet/raw/
+eval/juliet/extracted/
