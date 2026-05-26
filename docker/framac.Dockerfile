@@ -10,11 +10,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates curl git build-essential m4 unzip rsync \
         opam pkg-config libgmp-dev libgtk-3-dev libcairo2-dev \
         libgtksourceview-3.0-dev autoconf time \
+        graphviz libgraphviz-dev \
     && opam init --bare --disable-sandboxing \
     && opam switch create 4.14.1 \
     && eval "$(opam env)" \
     && opam option depext-run-installs=true \
-    && opam install -y --assume-depexts "frama-c.${FRAMAC_VERSION}" \
+    && (opam install -y --assume-depexts "frama-c.${FRAMAC_VERSION}" \
+        || opam install -y --assume-depexts "frama-c.${FRAMAC_VERSION}") \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PATH=/root/.opam/4.14.1/bin:$PATH

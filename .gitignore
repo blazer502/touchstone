@@ -8,3 +8,6 @@ eval/cybergym/repo/            # depth-1 upstream clone; re-fetch with `git clon
 eval/cybergym/venv/            # python3.12 venv with cybergym[dev,server] (~270 MB)
 eval/cybergym/tmp_task/        # gen_task scratch (regenerated each run)
 eval/cybergym/server_state/    # runtime SQLite DB + per-PoC logs
+
+# Proof cache contents are runtime state (rebuilt on demand). Keep dir, drop rows.
+surface/proofcache/*/

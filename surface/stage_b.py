@@ -38,6 +38,8 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Optional
 
+from surface import proof_cache
+
 REPO = Path(__file__).resolve().parent.parent
 TOOLCHAIN_LOCK = REPO / "docs" / "toolchain.lock"
 
@@ -269,39 +271,91 @@ def run_framac_eva(
 # Manifest-driven batch runner
 # ---------------------------------------------------------------------------
 
-def run_manifest(manifest_path: Path, out_path: Path) -> dict:
+ENGINE_VERSION = {
+    "cbmc": LOCK.get("CBMC_VERSION", "6.4.0"),
+    "framac-eva": LOCK.get("FRAMAC_VERSION", "29.0"),
+}
+
+
+def _cache_key_for(
+    source: Path, engine: str, property: str, unwind: Optional[int],
+    contracts: list[str], build_flags: dict,
+) -> proof_cache.CacheKey:
+    return proof_cache.make_key(
+        body_text=source.read_text(),
+        property=property,
+        engine=engine,
+        engine_version=ENGINE_VERSION.get(engine, "unknown"),
+        unwind=unwind,
+        assumed_contracts=contracts,
+        build_flags=build_flags,
+    )
+
+
+def run_manifest(manifest_path: Path, out_path: Path, *, use_cache: bool = True) -> dict:
     """Run Stage B on every unit listed in a JSON manifest.
 
     Manifest schema:
-      {"target": "...", "units": [
+      {"target": "...", "build_flags": {"sanitizer": "asan", ...},
+       "units": [
         {"source": "rel/path.c", "function": "fn", "property": "memory-safety",
-         "engines": ["cbmc"], "unwind": 16, "expected": "safe"|"unsafe"|null}
-      ]}
+         "engines": ["cbmc"], "unwind": 16, "expected": "safe"|"unsafe"|null,
+         "assumed_contracts": ["len <= CAP", ...]}
+       ]}
     """
     manifest = json.loads(manifest_path.read_text())
     base = manifest_path.parent
+    build_flags = manifest.get("build_flags", {})
     results = []
     counts = {"safe": 0, "unsafe": 0, "inconclusive": 0}
-    soundness_failures = []  # expected=safe but we got unsafe (would be a real
-                             # bug pruned), or expected=unsafe but we got safe.
+    soundness_failures = []  # expected=safe but we got unsafe (real bug pruned),
+                             # or expected=unsafe but we got safe.
+    cache_hits = 0
+    cache_misses = 0
     for u in manifest["units"]:
         src = (base / u["source"]).resolve()
         prop = u.get("property", "memory-safety")
         unwind = u.get("unwind", 16)
         expected = u.get("expected")
+        contracts = list(u.get("assumed_contracts", []))
         for eng in u.get("engines", ["cbmc"]):
+            v = None
+            key = _cache_key_for(src, eng, prop, unwind if eng == "cbmc" else None,
+                                 contracts, build_flags)
+            if use_cache:
+                hit = proof_cache.lookup(key, current_contracts=contracts)
+                if hit is not None:
+                    v_dict = dict(hit.verdict)
+                    v_dict["evidence"] = "[cache-hit] " + v_dict.get("evidence", "")
+                    results.append(v_dict)
+                    counts[v_dict["verdict"]] = counts.get(v_dict["verdict"], 0) + 1
+                    cache_hits += 1
+                    if expected and v_dict["verdict"] != expected and v_dict["verdict"] != "inconclusive":
+                        soundness_failures.append({
+                            "unit": v_dict["unit"], "engine": v_dict["engine"],
+                            "expected": expected, "got": v_dict["verdict"],
+                            "from_cache": True,
+                        })
+                    continue
             if eng == "cbmc":
                 v = run_cbmc(src, u["function"], prop, unwind=unwind)
             elif eng == "framac-eva":
                 v = run_framac_eva(src, u["function"], prop)
             else:
                 continue
+            v.assumed_contracts = contracts
             results.append(asdict(v))
             counts[v.verdict] = counts.get(v.verdict, 0) + 1
+            cache_misses += 1
+            # Only cache safe/unsafe verdicts; inconclusive shouldn't be sticky
+            # (next run might try a higher unwind / better contracts).
+            if use_cache and v.verdict in ("safe", "unsafe"):
+                proof_cache.store(key, asdict(v), contracts, build_flags)
             if expected and v.verdict != expected and v.verdict != "inconclusive":
                 soundness_failures.append({
                     "unit": v.unit, "engine": v.engine,
                     "expected": expected, "got": v.verdict,
+                    "from_cache": False,
                 })
 
     summary = {
@@ -309,6 +363,7 @@ def run_manifest(manifest_path: Path, out_path: Path) -> dict:
         "generated_at": int(time.time()),
         "manifest": str(manifest_path),
         "counts": counts,
+        "cache": {"hits": cache_hits, "misses": cache_misses},
         "soundness_failures": soundness_failures,
         "results": results,
     }
@@ -321,12 +376,16 @@ def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("--manifest", required=True, type=Path)
     p.add_argument("--out", required=True, type=Path)
+    p.add_argument("--no-cache", action="store_true",
+                   help="bypass proof cache (Phase 1.4) — every unit runs fresh")
     args = p.parse_args()
-    s = run_manifest(args.manifest, args.out)
+    s = run_manifest(args.manifest, args.out, use_cache=not args.no_cache)
     c = s["counts"]
+    cache = s.get("cache", {})
     print(
         f"stage_b: safe={c.get('safe',0)} unsafe={c.get('unsafe',0)} "
         f"inconclusive={c.get('inconclusive',0)} "
+        f"cache_hits={cache.get('hits',0)} cache_misses={cache.get('misses',0)} "
         f"soundness_failures={len(s['soundness_failures'])}"
     )
     return 1 if s["soundness_failures"] else 0
