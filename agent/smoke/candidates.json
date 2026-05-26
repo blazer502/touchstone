@@ -1,0 +1,80 @@
+[
+  {
+    "cid": "c1-tier1-synthetic-heap-oob",
+    "description": "Tier-1 fuzz: libFuzzer + ASan on the synthetic heap-OOB harness. Expect 'confirmed'.",
+    "class_hint": "crash",
+    "tier1_fuzz": {
+      "harness_src": "oracle/tier1_fuzz/harnesses/synthetic_heap_oob.c",
+      "sanitizer": "ASan",
+      "wall_seconds": 20,
+      "unit": "synthetic_heap_oob"
+    }
+  },
+  {
+    "cid": "c2-tier2-klee-unsat",
+    "description": "Tier-2 KLEE: UNSAT on clamped-input smoke. Expect 'pruned' (refuted).",
+    "class_hint": "feasibility",
+    "tier2_klee": {
+      "source": "oracle/tier2_symbolic/smoke/klee_unsat_clamped.c",
+      "wall_seconds": 30,
+      "unit": "klee_unsat_clamped"
+    }
+  },
+  {
+    "cid": "c3-tier2-klee-sat-candidate",
+    "description": "Tier-2 KLEE: SAT on div-by-zero with no Tier-1 reconfirm. Expect 'candidate'.",
+    "class_hint": "feasibility",
+    "tier2_klee": {
+      "source": "oracle/tier2_symbolic/smoke/klee_sat_div_by_zero.c",
+      "wall_seconds": 30,
+      "unit": "klee_sat_div_by_zero"
+    }
+  },
+  {
+    "cid": "c4-tier3-safe",
+    "description": "Tier-3 CBMC: safe-bounded smoke. Expect 'pruned' (proved_safe).",
+    "class_hint": "bounded",
+    "tier3_cbmc": {
+      "source": "oracle/tier3_bmc/smoke/safe_bounded.c",
+      "function": "main",
+      "property": "memory-safety",
+      "unwind": 16,
+      "timeout_s": 120,
+      "unit": "cbmc:safe:bounded"
+    }
+  },
+  {
+    "cid": "c5-tier3-unsafe-witness",
+    "description": "Tier-3 CBMC: off-by-one with PoV. Expect 'candidate' (bmc_unsafe witness, no Tier-1 wrap).",
+    "class_hint": "bounded",
+    "tier3_cbmc": {
+      "source": "oracle/tier3_bmc/smoke/unsafe_assert.c",
+      "function": "main",
+      "property": "assertion",
+      "unwind": 16,
+      "timeout_s": 120,
+      "unit": "cbmc:unsafe:off_by_one"
+    }
+  },
+  {
+    "cid": "c6-tier3-needs-contract-refine",
+    "description": "Tier-3 CBMC under harness ifdef. Baseline unsafe; refinement should synthesize `i <= CAP-1` and flip to safe. Expect 'pruned' via Stage-B refinement.",
+    "class_hint": "bounded",
+    "tier3_cbmc": {
+      "source": "surface/smoke/needs_contract.c",
+      "function": "main",
+      "property": "memory-safety",
+      "unwind": 16,
+      "timeout_s": 120,
+      "unit": "needs_contract:no_precondition"
+    },
+    "refine": {
+      "source": "surface/smoke/needs_contract.c",
+      "function": "main",
+      "property": "memory-safety",
+      "unwind": 16,
+      "max_iters": 3,
+      "apply_on": ["bmc_unsafe", "inconclusive"]
+    }
+  }
+]

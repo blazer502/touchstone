@@ -19,6 +19,7 @@ _HERE = pathlib.Path(__file__).resolve()
 sys.path.insert(0, str(_HERE.parents[2]))
 
 from eval.harness.adapters import (  # noqa: E402
+    agent_loop,
     contract_synth,
     cybergym,
     cybergym_ablation,
@@ -55,6 +56,7 @@ ADAPTERS = [
     ("contract-synth", contract_synth.baseline_rows),
     ("oracle-synth", oracle_synth.baseline_rows),
     ("cybergym-ablation", cybergym_ablation.baseline_rows),
+    ("agent-loop", agent_loop.baseline_rows),
 ]
 
 

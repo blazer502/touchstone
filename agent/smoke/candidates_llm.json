@@ -1,0 +1,23 @@
+[
+  {
+    "cid": "c6-tier3-needs-contract-refine-LLM",
+    "description": "Same as c6 but with the gateway up — exercises live LLM contract synthesis.",
+    "class_hint": "bounded",
+    "tier3_cbmc": {
+      "source": "surface/smoke/needs_contract.c",
+      "function": "main",
+      "property": "memory-safety",
+      "unwind": 16,
+      "timeout_s": 120,
+      "unit": "needs_contract:no_precondition"
+    },
+    "refine": {
+      "source": "surface/smoke/needs_contract.c",
+      "function": "main",
+      "property": "memory-safety",
+      "unwind": 16,
+      "max_iters": 3,
+      "apply_on": ["bmc_unsafe", "inconclusive"]
+    }
+  }
+]
