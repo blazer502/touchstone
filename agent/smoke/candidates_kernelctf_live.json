@@ -1,0 +1,20 @@
+[
+  {
+    "cid": "k1-live-lts-cos-cve-2024-1086-negative",
+    "description": "Live LTS+COS+restrictions (NF_TABLES=n, IO_URING=n, USER_NS_UNPRIVILEGED=n). Replay the historical CVE-2024-1086 trigger and check the captured dmesg for a KASAN report. Expected: 'inconclusive' (no_crash ≠ safe; restrictions removed the bug's surface and the trigger could not fire).",
+    "class_hint": "kernel_uaf",
+    "tier1_kasan": {
+      "dmesg_path": "eval/kernelctf/artifacts/dmesg-live-lts-cos.log",
+      "unit": "kernelctf-live-lts-cos:cve-2024-1086-replay"
+    }
+  },
+  {
+    "cid": "k2-historical-cve-2024-1086-positive-control",
+    "description": "Positive control: same hypothesis routed against the Phase-0.4 historical kernel dmesg (NF_TABLES=y, exploit fires). Expected: 'confirmed' — proves the loop dispatches identically against the live and historical kernels and only the surface differs.",
+    "class_hint": "kernel_uaf",
+    "tier1_kasan": {
+      "dmesg_path": "eval/kernelctf/artifacts/dmesg-cve-2024-1086.log",
+      "unit": "kernelctf-historical:cve-2024-1086-replay"
+    }
+  }
+]

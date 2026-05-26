@@ -1,8 +1,8 @@
 {
   "phase": "0.5",
-  "rows": 62,
+  "rows": 66,
   "by_status": {
-    "success": 54,
+    "success": 58,
     "not_setup": 8
   },
   "out_jsonl": "run-logs/phase0.5-baseline.jsonl",
@@ -13,6 +13,7 @@
     "cybergym-ablation",
     "juliet",
     "kernelctf",
+    "kernelctf-live",
     "live-lib",
     "llm-serving",
     "magma",

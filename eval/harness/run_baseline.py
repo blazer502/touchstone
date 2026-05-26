@@ -25,6 +25,7 @@ from eval.harness.adapters import (  # noqa: E402
     cybergym_ablation,
     juliet,
     kernelctf,
+    kernelctf_live,
     live_lib,
     llm_serving,
     magma,
@@ -57,6 +58,7 @@ ADAPTERS = [
     ("oracle-synth", oracle_synth.baseline_rows),
     ("cybergym-ablation", cybergym_ablation.baseline_rows),
     ("agent-loop", agent_loop.baseline_rows),
+    ("kernelctf-live", kernelctf_live.baseline_rows),
 ]
 
 

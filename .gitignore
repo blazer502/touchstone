@@ -39,3 +39,7 @@ eval/kernelctf/linux/
 eval/kernelctf/rootfs/
 eval/kernelctf/artifacts/bzImage
 eval/kernelctf/artifacts/initramfs.cpio.gz
+eval/kernelctf/artifacts/bzImage-live
+eval/kernelctf/artifacts/initramfs-live.cpio.gz
+eval/kernelctf/artifacts/build-live-stderr.log
+eval/kernelctf/artifacts/build-live-stdout.log

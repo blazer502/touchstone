@@ -1,0 +1,56 @@
+{
+  "phase": "4.2",
+  "title": "kernelCTF live LTS instance (latest LTS + COS config + restrictions)",
+  "target": {
+    "kernel": "Linux 6.1.72 LTS",
+    "config": "eval/kernelctf/configs/config-6.1.72-live-lts-cos.txt",
+    "detectors": ["KASAN", "KCOV", "UBSAN", "SLUB_DEBUG_ON", "LOCKDEP"],
+    "cos_style_restrictions": {
+      "USER_NS_UNPRIVILEGED": "n",
+      "IO_URING": "n",
+      "NF_TABLES": "n",
+      "BLK_DEV_UBLK": "n"
+    },
+    "kept_surface": ["NF_CONNTRACK", "NF_NAT", "NETFILTER_NETLINK", "NETFILTER (xt)"]
+  },
+  "boot_smoke": {
+    "kernel_bzImage": "eval/kernelctf/artifacts/bzImage-live",
+    "initramfs": "eval/kernelctf/artifacts/initramfs-live.cpio.gz",
+    "serial_log": "eval/kernelctf/artifacts/dmesg-live-lts-cos.log",
+    "negative_control_exploit": "eval/kernelctf/exploits/CVE-2024-1086/exploit",
+    "verdict": "no-kasan",
+    "exploit_exit_code": 143,
+    "interpretation": "historical CVE-2024-1086 exploit failed to trigger KASAN — nftables surface removed",
+    "surface_inventory": {
+      "io_uring_proc": "absent",
+      "userns_unprivileged_sysctl": "absent (CONFIG_USER_NS_UNPRIVILEGED=n)",
+      "nftables_in_protocols": "absent"
+    }
+  },
+  "closed_loop": {
+    "candidates": "agent/smoke/candidates_kernelctf_live.json",
+    "trace": "run-logs/phase4.2-kernelctf-live-loop.jsonl",
+    "k1_live": {
+      "expected": "inconclusive",
+      "actual": "inconclusive",
+      "rationale": "tier1_kasan over live dmesg → no_crash → router maps to inconclusive (no_crash ≠ safe)"
+    },
+    "k2_historical_positive_control": {
+      "expected": "confirmed",
+      "actual": "confirmed",
+      "rationale": "tier1_kasan over Phase-0.4 historical dmesg → KASAN UAF at ip_rcv+0x6b1 → confirmed"
+    }
+  },
+  "metrics_adapter": "eval/harness/adapters/kernelctf_live.py",
+  "harness_row_total": 66,
+  "harness_row_breakdown": "+4 vs Phase 4.1 (boot smoke + 2 candidates + rollup)",
+  "phase1_regression_check": {
+    "juliet_stage_a": "0 missed_bug (unchanged)",
+    "juliet_stage_b": "12 unsafe / 0 false safe (unchanged)"
+  },
+  "deferred_to_4.3_or_4.4": [
+    "syz-manager fuzz pass against the live kernel using oracle/tier1_fuzz/syzlang/nf_tables_cve_2024_1086.txt (now mostly moot — nftables is off; the descriptor will be repointed at a kept-surface subsystem in 4.4)",
+    "actual novel-bug hunt (open-ended; Phase 4 Done-when says one PoV on a real target — that can equally come from 4.3 live-lib)",
+    "latest LTS upgrade beyond 6.1.x — 6.1.72 is still a current LTS (EOL Dec 2026); moving to 6.6.x or 6.12.x would re-download ~1.4 GB of source and re-build ~6 GB, deferred until 4.4 cost/coverage metrics need a fresh tree"
+  ]
+}
