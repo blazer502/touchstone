@@ -80,8 +80,13 @@ def build_libfuzzer(source: Path, out_bin: Path, sanitizer: str, extra_cflags: O
 
 def fuzz(harness_src: Path, sanitizer: str = "ASan", wall_seconds: int = 60,
          corpus: Optional[Path] = None, max_len: int = 4096, unit: Optional[str] = None,
-         out_dir: Optional[Path] = None) -> Tier1Verdict:
-    """Build harness with sanitizer+libFuzzer and fuzz for ``wall_seconds``."""
+         out_dir: Optional[Path] = None,
+         extra_cflags: Optional[list[str]] = None) -> Tier1Verdict:
+    """Build harness with sanitizer+libFuzzer and fuzz for ``wall_seconds``.
+
+    ``extra_cflags`` is forwarded to the build step — used by live-library
+    harnesses that need ``-lsqlite3`` / ``-lssl -lcrypto`` / ``-lxml2`` etc.
+    """
     unit = unit or harness_src.stem
     out_dir = out_dir or Path(tempfile.mkdtemp(prefix="tier1-"))
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -91,7 +96,7 @@ def fuzz(harness_src: Path, sanitizer: str = "ASan", wall_seconds: int = 60,
     corpus_dir = corpus or (out_dir / "corpus")
     corpus_dir.mkdir(exist_ok=True)
 
-    build_libfuzzer(harness_src, bin_path, sanitizer)
+    build_libfuzzer(harness_src, bin_path, sanitizer, extra_cflags=extra_cflags)
 
     argv = [str(bin_path),
             f"-max_total_time={wall_seconds}",

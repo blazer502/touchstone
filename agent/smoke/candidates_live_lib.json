@@ -1,0 +1,26 @@
+[
+  {
+    "cid": "L2-sqlite3-synth-oob-positive-control",
+    "description": "Positive control for Phase 4.3: hand-written harness linked against host libsqlite3 (exercising the live build path) with a deterministic stack-OOB triggered by inputs starting with 'OOB!'. Expected: 'confirmed' — proves the live-target toolchain (clang-14 + ASan + -lsqlite3) is fully wired through the closed loop.",
+    "class_hint": "crash",
+    "tier1_fuzz": {
+      "harness_src": "eval/live-lib/harnesses/sqlite3_synth_oob.c",
+      "sanitizer": "ASan",
+      "wall_seconds": 5,
+      "unit": "sqlite3-synth-oob",
+      "extra_cflags": ["-lsqlite3"]
+    }
+  },
+  {
+    "cid": "L1-sqlite3-live-3.37.2-hunt",
+    "description": "Live SQLite 3.37.2 hunt: in-memory DB driven by sqlite3_exec on fuzzer input. Expected: 'inconclusive' under a short wall budget (sqlite3 is one of the most heavily fuzzed C libraries in existence; a no_crash result here is the realistic field-target outcome, NOT a safety proof — only Stage B / Tier-3 may emit 'pruned'). A 'confirmed' from this candidate would be a novel finding worth reporting; the PoC bytes ride on the route trace.",
+    "class_hint": "crash",
+    "tier1_fuzz": {
+      "harness_src": "eval/live-lib/harnesses/sqlite3_ossfuzz.c",
+      "sanitizer": "ASan",
+      "wall_seconds": 15,
+      "unit": "sqlite3-live-3.37.2",
+      "extra_cflags": ["-lsqlite3"]
+    }
+  }
+]

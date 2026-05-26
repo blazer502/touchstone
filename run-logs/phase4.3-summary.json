@@ -1,0 +1,14 @@
+{
+  "target": "sqlite3-live-3.37.2",
+  "wall_live_seconds": 15,
+  "wall_control_seconds": 5,
+  "control_verdict": "crash",
+  "control_class": "stack-buffer-overflow",
+  "control_location": "/home/chanyoung/veri-agent/eval/live-lib/harnesses/sqlite3_synth_oob.c:23",
+  "live_verdict": "inconclusive",
+  "live_class": null,
+  "live_pov_path": null,
+  "gate": "pass",
+  "novel_pov": false,
+  "out": "run-logs/phase4.3-live-lib.jsonl"
+}

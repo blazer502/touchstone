@@ -58,6 +58,7 @@ class Tier1FuzzSpec:
     sanitizer: str = "ASan"
     wall_seconds: Optional[int] = None
     unit: Optional[str] = None
+    extra_cflags: Optional[list[str]] = None   # e.g. ["-lsqlite3"] for live-lib harnesses
 
 
 @dataclass
@@ -199,6 +200,7 @@ def _run_tier1(hyp: Hypothesis, budget: Budget) -> Optional[tuple[str, Tier1Verd
         v = t1_userspace.fuzz(
             Path(s.harness_src), sanitizer=s.sanitizer,
             wall_seconds=wall, unit=s.unit,
+            extra_cflags=s.extra_cflags,
         )
         return "libfuzzer", v
     return None

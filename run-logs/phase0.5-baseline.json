@@ -1,9 +1,9 @@
 {
   "phase": "0.5",
-  "rows": 66,
+  "rows": 71,
   "by_status": {
-    "success": 58,
-    "not_setup": 8
+    "success": 64,
+    "not_setup": 7
   },
   "out_jsonl": "run-logs/phase0.5-baseline.jsonl",
   "adapters": [

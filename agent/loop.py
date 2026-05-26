@@ -291,7 +291,7 @@ def _candidate_from_json(d: dict) -> Candidate:
         cid=d["cid"],
         description=d.get("description", ""),
         class_hint=d.get("class_hint", "crash"),
-        tier1_fuzz=d.get("tier1_fuzz"),
+        tier1_fuzz=d.get("tier1_fuzz"),  # may carry extra_cflags for live-lib link
         tier1_replay=d.get("tier1_replay"),
         tier1_kasan=d.get("tier1_kasan"),
         tier2_klee=d.get("tier2_klee"),
