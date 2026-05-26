@@ -58,6 +58,14 @@ Format: one row per assumption.
 - [Tier-3 ESBMC]     image-missing dispatch    Until `veri-agent/esbmc:<ver>` is built, `oracle/tier3_bmc/esbmc_driver.py` returns `inconclusive` with `image-missing:<tag>` evidence. CBMC covers all Phase 2.3 obligations; ESBMC is held until Phase 2.5 demands the alternate engine for a CBMC-slow case. The future ESBMC verdict MUST also use `--unwinding-assertions` to keep the soundness rule above.
 - [Tier-3 harness]   nondet idiom              `oracle/tier3_bmc/assertions.synthesize()` emits uninitialized locals (which CBMC treats as nondet) rather than `__CPROVER_nondet_*()`. Reason: CBMC requires extern declarations for the nondet builtins and the supported suffix set is not stable across versions; the uninitialized-locals idiom is equivalent and version-stable.
 
+## Router (Phase 2.4 heuristic dispatcher)
+
+- [router]           cheapest-decisive tier    `agent/router.py` dispatches in cost order from `config/budget.yaml` (tier1=1, tier2=25, tier3=50) and stops as soon as a tier returns a *decisive* verdict (Tier-1 crash, Tier-2 sat/unsat, Tier-3 safe/unsafe). Inconclusive verdicts ALWAYS escalate to the next tier — they are never treated as `safe`. This rule is the funnel economics of PLAN §7 and the never-prune-on-inconclusive rule of PLAN §3.
+- [router]           Tier-2 SAT promotion      A Tier-2 `sat` produces only `candidate`. It becomes `confirmed` ONLY when the router's Tier-1 reconfirmation (the hypothesis's `tier1_replay` spec wrapping the symbolic PoV bytes) returns `crash`. Symbolic SAT alone, under KLEE/angr's environment models, can be spurious — PLAN §8 says the LLM/symbolic engine never replaces the sound runtime checker.
+- [router]           Tier-2 UNSAT → refuted    `unsat` from Tier-2 is reported as `refuted` and is the router's "prune" verdict. It inherits the engine's own soundness caveats: KLEE only emits `unsat` when `completed > 0 ∧ partial == 0 ∧ no klee_warning external`, and angr only when no `stub` jumpkind states remain. The router does NOT relax either — `refuted` is exactly as sound as the underlying engine's `unsat`.
+- [router]           Tier-3 unsafe scope       `bmc_unsafe` is the router's terminal verdict for a Tier-3 cex when no Tier-1 runtime harness is supplied. The cex is a sound BMC witness *for the harness as specified*; promotion to `confirmed` requires Tier-1 replay (same rule as the Tier-3 driver's own soundness note). The router never promotes a Tier-3 cex to a runtime PoV without that wrap.
+- [router]           no-dispatch ≠ safe        A hypothesis with no executable specs returns `no_dispatch`. The harness treats this as `not_setup`, NEVER as `proved_safe` — absence of an analysis path is not evidence of safety.
+
 ## Build environment
 
 - [kernel CONFIG_*]  every cached proof's key embeds the `CONFIG_*` set, arch, and compiler/sanitizer mode. Any drift = cache miss = re-verify.

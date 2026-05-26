@@ -1,0 +1,73 @@
+[
+  {
+    "hid": "t1-synthetic-heap-oob",
+    "description": "Tier-1 fuzz: libFuzzer + ASan on the synthetic heap-OOB harness (expect crash within seconds).",
+    "class_hint": "crash",
+    "tier1_fuzz": {
+      "harness_src": "oracle/tier1_fuzz/harnesses/synthetic_heap_oob.c",
+      "sanitizer": "ASan",
+      "wall_seconds": 20,
+      "unit": "synthetic_heap_oob"
+    }
+  },
+  {
+    "hid": "t1-kasan-cve-2024-1086",
+    "description": "Tier-1 KASAN replay on the captured CVE-2024-1086 dmesg (no QEMU reboot).",
+    "class_hint": "kernel_uaf",
+    "tier1_kasan": {
+      "dmesg_path": "eval/kernelctf/artifacts/dmesg-cve-2024-1086.log",
+      "unit": "cve-2024-1086-kasan-replay"
+    }
+  },
+  {
+    "hid": "t2-klee-sat-div-by-zero",
+    "description": "Tier-2 KLEE: SAT on div-by-zero smoke (no Tier-1 reconfirm path — expect 'candidate').",
+    "class_hint": "feasibility",
+    "tier2_klee": {
+      "source": "oracle/tier2_symbolic/smoke/klee_sat_div_by_zero.c",
+      "wall_seconds": 30,
+      "unit": "klee_sat_div_by_zero"
+    }
+  },
+  {
+    "hid": "t2-klee-unsat-clamped",
+    "description": "Tier-2 KLEE: UNSAT on clamped-input smoke (expect 'refuted').",
+    "class_hint": "feasibility",
+    "tier2_klee": {
+      "source": "oracle/tier2_symbolic/smoke/klee_unsat_clamped.c",
+      "wall_seconds": 30,
+      "unit": "klee_unsat_clamped"
+    }
+  },
+  {
+    "hid": "t3-cbmc-safe-bounded",
+    "description": "Tier-3 CBMC: safe-bounded smoke (expect 'proved_safe').",
+    "class_hint": "bounded",
+    "tier3_cbmc": {
+      "source": "oracle/tier3_bmc/smoke/safe_bounded.c",
+      "function": "main",
+      "property": "memory-safety",
+      "unwind": 16,
+      "timeout_s": 120,
+      "unit": "cbmc:safe:bounded"
+    }
+  },
+  {
+    "hid": "t3-cbmc-unsafe-off-by-one",
+    "description": "Tier-3 CBMC: off-by-one smoke (expect 'bmc_unsafe' with PoV).",
+    "class_hint": "bounded",
+    "tier3_cbmc": {
+      "source": "oracle/tier3_bmc/smoke/unsafe_assert.c",
+      "function": "main",
+      "property": "assertion",
+      "unwind": 16,
+      "timeout_s": 120,
+      "unit": "cbmc:unsafe:off_by_one"
+    }
+  },
+  {
+    "hid": "noop",
+    "description": "No tier specs — expect 'no_dispatch'.",
+    "class_hint": "crash"
+  }
+]
