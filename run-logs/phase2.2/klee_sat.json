@@ -1,0 +1,19 @@
+{
+  "unit": "klee_sat_div_by_zero",
+  "engine": "klee",
+  "verdict": "sat",
+  "wall_ms": 44,
+  "property": "klee-encoded-assertions",
+  "paths_explored": 2,
+  "paths_completed": 1,
+  "pov_path": "run-logs/phase2.2/klee_sat/klee-out/test000002.ktest",
+  "target_location": "oracle/tier2_symbolic/smoke/klee_sat_div_by_zero.c:10",
+  "evidence_excerpt": "\nKLEE: output directory is \"/home/chanyoung/veri-agent/run-logs/phase2.2/klee_sat/klee-out\"\nKLEE: Using STP solver backend\nKLEE: SAT solver: MiniSat\nKLEE: Deterministic allocator: Using quarantine queue size 8\nKLEE: Deterministic allocator: globals (start-address=0x7f6329918000 size=10 GiB)\nKLEE: Deterministic allocator: constants (start-address=0x7f60a9918000 size=10 GiB)\nKLEE: Deterministic allocator: heap (start-address=0x7e60a9918000 size=1024 GiB)\nKLEE: Deterministic allocator: stack (start-address=0x7e40a9918000 size=128 GiB)\nKLEE: ERROR: oracle/tier2_symbolic/smoke/klee_sat_div_by_zero.c:10: divide by zero\nKLEE: NOTE: now ignoring this error at this location\n\nKLEE: done: total instructions = 33\nKLEE: done: completed paths = 1\nKLEE: done: partially completed paths = 1\nKLEE: done: generated tests = 2\n",
+  "soundness_note": "KLEE produced an error-ktest; candidate PoV. Re-confirm with Tier-1 before declaring an exploit. Symbolic SAT alone is not a final verdict.",
+  "assumed": [
+    "wall_seconds=30",
+    "max_memory_mb=2048",
+    "max_forks=4096",
+    "klee-uclibc + POSIX environment model"
+  ]
+}

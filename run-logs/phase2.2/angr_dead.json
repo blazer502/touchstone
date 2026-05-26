@@ -1,0 +1,20 @@
+{
+  "unit": "angr_dead",
+  "engine": "angr",
+  "verdict": "unsat",
+  "wall_ms": 193,
+  "property": "reach('dead_target')",
+  "paths_explored": 1,
+  "paths_completed": 1,
+  "pov_path": null,
+  "target_location": null,
+  "evidence_excerpt": "\nstashes: active=0 deadended=1 found=0 avoid=0 unconstrained=0",
+  "soundness_note": "angr exhausted all paths to deadended without reaching the target; unsat is sound only under the SimProcedure set in use.",
+  "assumed": [
+    "stdin_size=4",
+    "step_budget=200",
+    "wall_seconds=60",
+    "auto_load_libs=False",
+    "default SimProcedure set"
+  ]
+}

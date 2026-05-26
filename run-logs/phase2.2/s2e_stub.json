@@ -1,0 +1,17 @@
+{
+  "unit": "s2e",
+  "engine": "s2e",
+  "verdict": "inconclusive",
+  "wall_ms": 39,
+  "property": "kernel-path-reach",
+  "paths_explored": 0,
+  "paths_completed": 0,
+  "pov_path": null,
+  "target_location": null,
+  "evidence_excerpt": "image-missing: veri-agent/s2e:2.0.0",
+  "soundness_note": "S2E image not built on this host; engine wired but inactive.",
+  "assumed": [
+    "image=veri-agent/s2e:2.0.0",
+    "image-missing path"
+  ]
+}

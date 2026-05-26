@@ -21,13 +21,20 @@ FRAMAC_CODENAME=Copper
 
 # --- Tier 2 symbolic ---
 # KLEE: matches the chosen LLVM_VERSION.
+# Container image pin (`klee/klee:3.1`) is the reproducible pin; host install
+# on this dev box is 3.2-pre (LLVM 14, build 4928009). Phase 2.2 used the
+# host install since it matches LLVM_VERSION=14 and is the same back-end
+# (STP + MiniSat); CI / fresh-host runs use the container.
 KLEE_VERSION=3.1
-# S2E: pin the upstream release we test against.
+KLEE_HOST_VERSION=3.2-pre
+# S2E: pin the upstream release we test against (stub-only in Phase 2.2).
 S2E_VERSION=2.0.0
 # SymCC: tracks LLVM_VERSION; latest main is the only reliable pin (no semver).
+# Stub-only in Phase 2.2.
 SYMCC_COMMIT=cb2f70b
-# angr: PyPI version pin.
-ANGR_VERSION=9.2.105
+# angr: PyPI version pin. Phase 2.2 picked up 9.2.213 on first install;
+# upgrade is backwards-compatible for our API surface (Project + SimulationManager).
+ANGR_VERSION=9.2.213
 
 # --- Tier 1 fuzzing ---
 AFLPP_VERSION=4.21c

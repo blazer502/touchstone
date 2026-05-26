@@ -43,9 +43,12 @@ Format: one row per assumption.
 
 ## Oracle Tier 2 — symbolic
 
-- [KLEE]             environment modeling      KLEE relies on `klee-uclibc` and POSIX models; calls outside the model become `__klee_warning` and are unmodeled (must be treated as "could do anything").
-- [S2E]              selective concretization  Concretized arguments mask paths gated on those args; record which arguments stayed symbolic in each S2E task.
-- [angr]             SimProcedure coverage     SimProcedures replace library calls with abstract models; unmodeled calls drop precision.
+- [KLEE]             environment modeling      KLEE relies on `klee-uclibc` and POSIX models; calls outside the model become `__klee_warning` and are unmodeled (must be treated as "could do anything"). `oracle/tier2_symbolic/klee_driver.py` detects "calling external" warnings and downgrades any otherwise-`unsat` verdict to `inconclusive` so a model gap cannot cause an unsound prune.
+- [KLEE]             partial-completed paths   The driver only emits `unsat` when `completed paths > 0 AND partially completed paths == 0`. A partial path = a fork that hit the wall/memory/fork budget mid-exploration, so its property obligation is unresolved. Treating partials as decided is the soundness lever for KLEE pruning.
+- [KLEE]             SAT verdict scope         A `.ktest` produced for a `*.err` site is reported as `sat` but is *only* a candidate PoV — it must be re-confirmed by the Tier-1 oracle (`replay`/`replay-docker`) before it counts as an exploit. Symbolic SAT under an under-approximated environment is not a final verdict.
+- [S2E]              selective concretization  Concretized arguments mask paths gated on those args; record which arguments stayed symbolic in each S2E task. The Phase-2.2 driver is the image-missing stub; the soundness obligation lands when the engine is actually run (Phase 4.2).
+- [angr]             SimProcedure coverage     `angr.Project(..., auto_load_libs=False)` runs with the default SimProcedure set; library calls that fall outside that set use stub jumpkinds. `oracle/tier2_symbolic/angr_driver.py` counts states whose history reaches a "stub" jumpkind and downgrades the verdict to `inconclusive` if any are present, so an `unsat` is only emitted under a fully-modeled exploration. The set of activated SimProcedures is part of the (future) cache key.
+- [angr]             SAT verdict scope         As with KLEE, an angr "found state" produces a concrete reproducing input but is a candidate, not a confirmed exploit; re-run it through the actual binary (Tier-1 replay) for confirmation. The Phase-2.2 smoke confirms `/tmp/angr-pov-…` round-trips through the real binary to `_exit(0)`.
 
 ## Oracle Tier 3 — BMC
 

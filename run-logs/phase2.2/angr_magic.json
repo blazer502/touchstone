@@ -1,0 +1,20 @@
+{
+  "unit": "angr_magic",
+  "engine": "angr",
+  "verdict": "sat",
+  "wall_ms": 340,
+  "property": "reach('win')",
+  "paths_explored": 5,
+  "paths_completed": 5,
+  "pov_path": "/tmp/angr-pov-angr_magic-v_6uda6j.bin",
+  "target_location": "win",
+  "evidence_excerpt": "\nstashes: active=0 deadended=0 found=1 avoid=4 unconstrained=0",
+  "soundness_note": "angr reached the target under symbolic stdin; concrete input written. Re-confirm in Tier-1 (binary may use SimProcedures that diverge from libc).",
+  "assumed": [
+    "stdin_size=4",
+    "step_budget=500",
+    "wall_seconds=120",
+    "auto_load_libs=False",
+    "default SimProcedure set"
+  ]
+}

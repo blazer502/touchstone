@@ -1,0 +1,19 @@
+{
+  "unit": "klee_unsat_clamped",
+  "engine": "klee",
+  "verdict": "unsat",
+  "wall_ms": 81,
+  "property": "klee-encoded-assertions",
+  "paths_explored": 3,
+  "paths_completed": 3,
+  "pov_path": null,
+  "target_location": null,
+  "evidence_excerpt": "\nKLEE: output directory is \"/home/chanyoung/veri-agent/run-logs/phase2.2/klee_unsat/klee-out\"\nKLEE: Using STP solver backend\nKLEE: SAT solver: MiniSat\nKLEE: Deterministic allocator: Using quarantine queue size 8\nKLEE: Deterministic allocator: globals (start-address=0x7fe6c0aef000 size=10 GiB)\nKLEE: Deterministic allocator: constants (start-address=0x7fe440aef000 size=10 GiB)\nKLEE: Deterministic allocator: heap (start-address=0x7ee440aef000 size=1024 GiB)\nKLEE: Deterministic allocator: stack (start-address=0x7ec440aef000 size=128 GiB)\n\nKLEE: done: total instructions = 584\nKLEE: done: completed paths = 3\nKLEE: done: partially completed paths = 0\nKLEE: done: generated tests = 3\n",
+  "soundness_note": "All explored paths completed without hitting the encoded property; unsat is sound only under the klee-uclibc + POSIX environment model.",
+  "assumed": [
+    "wall_seconds=30",
+    "max_memory_mb=2048",
+    "max_forks=4096",
+    "klee-uclibc + POSIX environment model"
+  ]
+}

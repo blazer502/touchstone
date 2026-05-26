@@ -1,0 +1,17 @@
+{
+  "unit": "klee_sat_div_by_zero",
+  "engine": "symcc",
+  "verdict": "inconclusive",
+  "wall_ms": 39,
+  "property": "klee-style-assert",
+  "paths_explored": 0,
+  "paths_completed": 0,
+  "pov_path": null,
+  "target_location": null,
+  "evidence_excerpt": "image-missing: veri-agent/symcc:14",
+  "soundness_note": "SymCC image not built on this host; engine wired but inactive.",
+  "assumed": [
+    "image=veri-agent/symcc:14",
+    "image-missing path"
+  ]
+}
