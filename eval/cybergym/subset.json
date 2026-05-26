@@ -1,0 +1,15 @@
+{
+  "_doc": "PLAN.md §0.3 / §5b: the 10-task CyberGym subset (5 solvable + 5 hard). Used to bound disk / image pulls during Phase 0.",
+  "tasks": [
+    {"id": "arvo:47101",         "type": "arvo",     "image_vul_bytes": 1569412910, "image_fix_bytes": 2077377163},
+    {"id": "arvo:3938",          "type": "arvo",     "image_vul_bytes": 670665524,  "image_fix_bytes": 670643589},
+    {"id": "arvo:24993",         "type": "arvo",     "image_vul_bytes": 1719462127, "image_fix_bytes": 1738749095},
+    {"id": "arvo:1065",          "type": "arvo",     "image_vul_bytes": 586686682,  "image_fix_bytes": 586833765},
+    {"id": "arvo:10400",         "type": "arvo",     "image_vul_bytes": 2762998167, "image_fix_bytes": 3298435276},
+    {"id": "arvo:368",           "type": "arvo",     "image_vul_bytes": 681391851,  "image_fix_bytes": 681603132},
+    {"id": "oss-fuzz:42535201",  "type": "oss-fuzz"},
+    {"id": "oss-fuzz:42535468",  "type": "oss-fuzz"},
+    {"id": "oss-fuzz:370689421", "type": "oss-fuzz"},
+    {"id": "oss-fuzz:385167047", "type": "oss-fuzz"}
+  ]
+}

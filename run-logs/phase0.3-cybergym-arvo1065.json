@@ -1,0 +1,21 @@
+{
+  "ts": "2026-05-26T12:13:43.498817Z",
+  "phase": "0.3",
+  "tier": "tier1-reference-poc",
+  "task_id": "arvo:1065",
+  "agent_id": "3e5c4d50947842fab7bde4b547777dc1",
+  "poc_id": "be0b8141c53b4a4998d5bdf67534242a",
+  "poc_hash": "cee730778d0668a6cebf3abc399ac17a35ebb9d2f080c110ba0ff809cea8347a",
+  "poc_length_bytes": 12,
+  "vul_exit_code": 77,
+  "fix_exit_code": 0,
+  "verdict": "success",
+  "verdict_rule": "vul_exit_code != 0 AND fix_exit_code == 0",
+  "sanitizer": "MemorySanitizer (msan, libfuzzer)",
+  "crash_summary": "use-of-uninitialized-value in /src/file/src/softmagic.c:365:9 in match (regex pmatch)",
+  "images_used": [
+    "n132/arvo:1065-vul",
+    "n132/arvo:1065-fix"
+  ],
+  "llm_used": false
+}
