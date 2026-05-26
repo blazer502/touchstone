@@ -1,0 +1,58 @@
+{
+  "ts": 1779796919.0785275,
+  "phase": "0.2",
+  "gateway": "http://127.0.0.1:8000",
+  "role": "synthesizer",
+  "health": {
+    "backends": {
+      "synthesizer": [
+        {
+          "url": "http://127.0.0.1:8100",
+          "status": 200
+        }
+      ],
+      "router": [
+        {
+          "url": "http://127.0.0.1:8100",
+          "status": 200
+        }
+      ]
+    },
+    "profile": "smoke"
+  },
+  "latency_s": 0.837,
+  "usage": {
+    "prompt_tokens": 55,
+    "total_tokens": 119,
+    "completion_tokens": 64,
+    "prompt_tokens_details": null
+  },
+  "completion_preview": "```c\n#include <stdio.h>\n#include <stdlib.h>\n\n#define MAX_SIZE 100\n\ntypedef struct {\n    int data[MAX_SIZE];\n    int size;\n} BinaryHeap;\n\n// Function to swap two elements in the heap\nvoid swap(int *a, ",
+  "gpu_peak": [
+    {
+      "gpu": 0,
+      "util_pct": 93,
+      "mem_used_mib": 18050,
+      "mem_total_mib": 49140
+    },
+    {
+      "gpu": 1,
+      "util_pct": 0,
+      "mem_used_mib": 4,
+      "mem_total_mib": 49140
+    },
+    {
+      "gpu": 2,
+      "util_pct": 0,
+      "mem_used_mib": 4,
+      "mem_total_mib": 49140
+    },
+    {
+      "gpu": 3,
+      "util_pct": 0,
+      "mem_used_mib": 4,
+      "mem_total_mib": 49140
+    }
+  ],
+  "gpu_samples": 2
+}

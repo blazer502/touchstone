@@ -52,10 +52,16 @@ KERNEL_UBSAN=y
 KERNEL_KCOV=y
 
 # --- LLM serving ---
-VLLM_VERSION=0.6.4
+# We use the official upstream `vllm/vllm-openai` image (OpenAI-compatible server).
+# v0.11.1 is what is locally available and stable for the Qwen2.5 family.
+VLLM_VERSION=0.11.1
+VLLM_IMAGE=vllm/vllm-openai:v0.11.1
 SGLANG_VERSION=0.3.6
 SYNTHESIZER_MODEL=Qwen/Qwen2.5-Coder-32B-Instruct
 ROUTER_MODEL=Qwen/Qwen2.5-Coder-7B-Instruct
+# Smoke-test model — chosen because it is already in the HF cache on this host,
+# so Phase 0.2 verifies the serving + gateway path without downloading weights.
+SMOKE_MODEL=Qwen/Qwen2.5-3B-Instruct
 
 # --- Base ---
 BASE_IMAGE=ubuntu:22.04

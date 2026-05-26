@@ -8,9 +8,24 @@
 
 serving:
   backend: vllm           # vllm | sglang
+  image: vllm/vllm-openai:v0.11.1   # mirrors docs/toolchain.lock VLLM_IMAGE
   gateway_port: 8000
   prefix_caching: true
   continuous_batching: true
+  # Profile selector. `production` brings up the role layout below; `smoke` brings
+  # up a single small cached model on one GPU — used by Phase 0.2 to verify the
+  # serving + gateway path without downloading 32B weights.
+  profile: production
+
+# Smoke profile — single small cached model + single replica. Used only when
+# `serving.profile: smoke` or `llm/serve.sh smoke` is invoked.
+smoke:
+  model: Qwen/Qwen2.5-3B-Instruct
+  port: 8100
+  gpus: [0]
+  tensor_parallel: 1
+  max_model_len: 4096
+  gpu_memory_utilization: 0.35
 
 roles:
   synthesizer:
