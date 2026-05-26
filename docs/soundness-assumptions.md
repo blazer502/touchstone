@@ -66,6 +66,11 @@ Format: one row per assumption.
 - [router]           Tier-3 unsafe scope       `bmc_unsafe` is the router's terminal verdict for a Tier-3 cex when no Tier-1 runtime harness is supplied. The cex is a sound BMC witness *for the harness as specified*; promotion to `confirmed` requires Tier-1 replay (same rule as the Tier-3 driver's own soundness note). The router never promotes a Tier-3 cex to a runtime PoV without that wrap.
 - [router]           no-dispatch ≠ safe        A hypothesis with no executable specs returns `no_dispatch`. The harness treats this as `not_setup`, NEVER as `proved_safe` — absence of an analysis path is not evidence of safety.
 
+## Precision corpus (Phase 2.5)
+
+- [precision]        confirmation set scope    `eval/precision/run.py` computes "precision of confirmation" over verdicts ∈ `{confirmed, bmc_unsafe}` ONLY. `candidate` (Tier-2 SAT pending Tier-1 reconfirm) is intentionally excluded — it is the explicit "needs runtime reconfirm" verdict and counting it as a confirmation would inflate apparent precision and recall. A false confirmation = a `clean`-labeled hypothesis whose router verdict is in this set; the Phase 2 Done-when number is `false_confirmations == 0`.
+- [precision]        soundness violation       Defined as a `buggy`-labeled hypothesis where the router emitted `proved_safe`. This is the offensive-search false-negative we cannot tolerate; the gate fails on any non-empty list, regardless of `precision`/`recall` headline numbers.
+
 ## Build environment
 
 - [kernel CONFIG_*]  every cached proof's key embeds the `CONFIG_*` set, arch, and compiler/sanitizer mode. Any drift = cache miss = re-verify.

@@ -1,8 +1,8 @@
 {
   "phase": "0.5",
-  "rows": 31,
+  "rows": 43,
   "by_status": {
-    "success": 23,
+    "success": 35,
     "not_setup": 8
   },
   "out_jsonl": "run-logs/phase0.5-baseline.jsonl",
@@ -13,6 +13,7 @@
     "live-lib",
     "llm-serving",
     "magma",
+    "precision",
     "router",
     "sv-comp",
     "tier1_oracle",

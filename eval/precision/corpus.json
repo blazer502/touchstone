@@ -1,0 +1,145 @@
+{
+  "_comment": "Phase 2.5 precision corpus. Each item = router Hypothesis + a 'label' carrying the ground truth so analyze.py can compute precision / false-confirmation. A 'positive' is a case where a real bug exists at the hypothesis target; a 'negative' is a case where no exploitable bug is present and the router must NOT emit {confirmed, bmc_unsafe}. Tier-2 SAT mapped to 'candidate' is correct (not a false confirmation) — it is the explicit 'needs Tier-1 reconfirm' verdict.",
+  "hypotheses": [
+    {
+      "hid": "pos-t1-arvo-1065-replay",
+      "description": "Tier-1 docker replay against the CyberGym reference PoC for arvo:1065 (MSan UoUV in softmagic).",
+      "class_hint": "crash",
+      "tier1_replay": {
+        "poc_path": "/tmp/arvo1065-poc",
+        "docker_image": "n132/arvo:1065-vul",
+        "docker_harness_path": "/out/magic_fuzzer",
+        "sanitizer": "MSan",
+        "timeout_seconds": 60,
+        "unit": "arvo:1065"
+      },
+      "label": {"ground_truth": "buggy", "expected": "confirmed", "tier_decisive": "tier1_fuzz"}
+    },
+    {
+      "hid": "pos-t1-kasan-cve-2024-1086",
+      "description": "Tier-1 KASAN replay against the captured CVE-2024-1086 dmesg log (kernel UAF).",
+      "class_hint": "kernel_uaf",
+      "tier1_kasan": {
+        "dmesg_path": "eval/kernelctf/artifacts/dmesg-cve-2024-1086.log",
+        "unit": "cve-2024-1086-kasan-replay"
+      },
+      "label": {"ground_truth": "buggy", "expected": "confirmed", "tier_decisive": "tier1_fuzz"}
+    },
+    {
+      "hid": "pos-t1-synthetic-heap-oob",
+      "description": "Tier-1 libFuzzer+ASan on the synthetic heap-OOB harness (expect crash within seconds).",
+      "class_hint": "crash",
+      "tier1_fuzz": {
+        "harness_src": "oracle/tier1_fuzz/harnesses/synthetic_heap_oob.c",
+        "sanitizer": "ASan",
+        "wall_seconds": 20,
+        "unit": "synthetic_heap_oob"
+      },
+      "label": {"ground_truth": "buggy", "expected": "confirmed", "tier_decisive": "tier1_fuzz"}
+    },
+    {
+      "hid": "neg-t1-clean-input-handler",
+      "description": "Tier-1 libFuzzer+ASan on a clean bounded harness — must NOT crash; expect 'inconclusive' after time budget.",
+      "class_hint": "crash",
+      "tier1_fuzz": {
+        "harness_src": "eval/precision/cases/clean_input_handler.c",
+        "sanitizer": "ASan",
+        "wall_seconds": 10,
+        "unit": "clean_input_handler"
+      },
+      "label": {"ground_truth": "clean", "expected": "inconclusive", "tier_decisive": "tier1_fuzz"}
+    },
+    {
+      "hid": "pos-t2-klee-sat-div-by-zero",
+      "description": "Tier-2 KLEE: SAT on a div-by-zero; no Tier-1 reconfirm path supplied so router must hold at 'candidate'.",
+      "class_hint": "feasibility",
+      "tier2_klee": {
+        "source": "oracle/tier2_symbolic/smoke/klee_sat_div_by_zero.c",
+        "wall_seconds": 30,
+        "unit": "klee_sat_div_by_zero"
+      },
+      "label": {"ground_truth": "buggy", "expected": "candidate", "tier_decisive": "tier2_symbolic"}
+    },
+    {
+      "hid": "neg-t2-klee-unsat-clamped",
+      "description": "Tier-2 KLEE: UNSAT under modeled environment — expect 'refuted'.",
+      "class_hint": "feasibility",
+      "tier2_klee": {
+        "source": "oracle/tier2_symbolic/smoke/klee_unsat_clamped.c",
+        "wall_seconds": 30,
+        "unit": "klee_unsat_clamped"
+      },
+      "label": {"ground_truth": "clean", "expected": "refuted", "tier_decisive": "tier2_symbolic"}
+    },
+    {
+      "hid": "pos-t2-angr-sat-magic",
+      "description": "Tier-2 angr: SAT (reach('win')) — symbolic candidate, no Tier-1 reconfirm spec → 'candidate'.",
+      "class_hint": "feasibility",
+      "tier2_angr": {
+        "binary": "run-logs/phase2.2/angr_magic",
+        "target": "win",
+        "stdin_size": 4,
+        "step_budget": 500,
+        "wall_seconds": 60,
+        "unit": "angr_magic"
+      },
+      "label": {"ground_truth": "buggy", "expected": "candidate", "tier_decisive": "tier2_symbolic"}
+    },
+    {
+      "hid": "neg-t2-angr-unsat-dead-code",
+      "description": "Tier-2 angr: UNSAT (dead code target unreachable) — expect 'refuted'.",
+      "class_hint": "feasibility",
+      "tier2_angr": {
+        "binary": "run-logs/phase2.2/angr_dead",
+        "target": "dead_target",
+        "stdin_size": 4,
+        "step_budget": 500,
+        "wall_seconds": 60,
+        "unit": "angr_dead_code"
+      },
+      "label": {"ground_truth": "clean", "expected": "refuted", "tier_decisive": "tier2_symbolic"}
+    },
+    {
+      "hid": "pos-t3-cbmc-unsafe-off-by-one",
+      "description": "Tier-3 CBMC: off-by-one cex (assertion violation) — expect 'bmc_unsafe' with PoV.",
+      "class_hint": "bounded",
+      "tier3_cbmc": {
+        "source": "oracle/tier3_bmc/smoke/unsafe_assert.c",
+        "function": "main",
+        "property": "assertion",
+        "unwind": 16,
+        "timeout_s": 120,
+        "unit": "cbmc:unsafe:off_by_one"
+      },
+      "label": {"ground_truth": "buggy", "expected": "bmc_unsafe", "tier_decisive": "tier3_bmc"}
+    },
+    {
+      "hid": "neg-t3-cbmc-safe-bounded",
+      "description": "Tier-3 CBMC: clamp-bounded write inside [0,N) — expect 'proved_safe'.",
+      "class_hint": "bounded",
+      "tier3_cbmc": {
+        "source": "oracle/tier3_bmc/smoke/safe_bounded.c",
+        "function": "main",
+        "property": "memory-safety",
+        "unwind": 16,
+        "timeout_s": 120,
+        "unit": "cbmc:safe:bounded"
+      },
+      "label": {"ground_truth": "clean", "expected": "proved_safe", "tier_decisive": "tier3_bmc"}
+    },
+    {
+      "hid": "neg-t3-cbmc-inconclusive-unwind",
+      "description": "Tier-3 CBMC: loop body > unwind budget; --unwinding-assertions ON → must NOT report 'safe'. Expect 'inconclusive'.",
+      "class_hint": "bounded",
+      "tier3_cbmc": {
+        "source": "oracle/tier3_bmc/smoke/inconclusive_unwind.c",
+        "function": "main",
+        "property": "assertion",
+        "unwind": 4,
+        "timeout_s": 60,
+        "unit": "cbmc:inconclusive:unwind"
+      },
+      "label": {"ground_truth": "clean", "expected": "inconclusive", "tier_decisive": "tier3_bmc"}
+    }
+  ]
+}

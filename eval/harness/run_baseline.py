@@ -25,6 +25,7 @@ from eval.harness.adapters import (  # noqa: E402
     live_lib,
     llm_serving,
     magma,
+    precision,
     router as router_adapter,
     svcomp,
     tier1_oracle,
@@ -45,6 +46,7 @@ ADAPTERS = [
     ("tier2-oracle", tier2_oracle.baseline_rows),
     ("tier3-oracle", tier3_oracle.baseline_rows),
     ("router", router_adapter.baseline_rows),
+    ("precision", precision.baseline_rows),
 ]
 
 
