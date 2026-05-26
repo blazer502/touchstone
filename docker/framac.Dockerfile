@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && opam init --bare --disable-sandboxing \
     && opam switch create 4.14.1 \
     && eval "$(opam env)" \
-    && opam install -y "frama-c.${FRAMAC_VERSION}" \
+    && opam option depext-run-installs=true \
+    && opam install -y --assume-depexts "frama-c.${FRAMAC_VERSION}" \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PATH=/root/.opam/4.14.1/bin:$PATH

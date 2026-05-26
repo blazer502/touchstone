@@ -1,0 +1,57 @@
+{
+  "target": "stage_b-smoke",
+  "generated_at": 1779800102,
+  "manifest": "surface/smoke/manifest.json",
+  "counts": {
+    "safe": 2,
+    "unsafe": 1,
+    "inconclusive": 1
+  },
+  "soundness_failures": [],
+  "results": [
+    {
+      "unit": "safe_clamp.c::main",
+      "property": "memory-safety",
+      "engine": "cbmc",
+      "verdict": "safe",
+      "unwind": 4,
+      "time_ms": 753,
+      "evidence": "[clamp_write.pointer_arithmetic.3] line 8 pointer arithmetic: deallocated dynamic object in a + (signed long int)i: SUCCESS\n[clamp_write.pointer_arithmetic.4] line 8 pointer arithmetic: dead object in a + (signed long int)i: SUCCESS\n[clamp_write.pointer_arithmetic.5] line 8 pointer arithmetic: pointer outside object bounds in a + (signed long int)i: SUCCESS\n[clamp_write.pointer_arithmetic.6] line 8 pointer arithmetic: invalid integer address in a + (signed long int)i: SUCCESS\n[clamp_write.pointer_dereference.1] line 8 dereference failure: pointer NULL in a[(signed long int)i]: SUCCESS\n[clamp_write.pointer_dereference.2] line 8 dereference failure: pointer invalid in a[(signed long int)i]: SUCCESS\n[clamp_write.pointer_dereference.3] line 8 dereference failure: deallocated dynamic object in a[(signed long int)i]: SUCCESS\n[clamp_write.pointer_dereference.4] line 8 dereference failure: dead object in a[(signed long int)i]: SUCCESS\n[clamp_write.pointer_dereference.5] line 8 dereference failure: pointer outside object bounds in a[(signed long int)i]: SUCCESS\n[clamp_write.pointer_dereference.6] line 8 dereference failure: invalid integer address in a[(signed long int)i]: SUCCESS\n** 0 of 14 failed (1 iterations)\nVERIFICATION SUCCESSFUL",
+      "soundness_note": "Bounded-sound up to --unwind=4. Without a verified loop invariant this is NOT an unbounded-safety claim (docs/soundness-assumptions.md Stage B / CBMC bounded loops).",
+      "assumed_contracts": []
+    },
+    {
+      "unit": "unsafe_oob.c::main",
+      "property": "no-oob",
+      "engine": "cbmc",
+      "verdict": "unsafe",
+      "unwind": 4,
+      "time_ms": 598,
+      "evidence": "Running propositional reduction\nSAT checker: instance is SATISFIABLE\n** Results:\nunsafe_oob.c function off_by_one\n[off_by_one.pointer_dereference.1] line 9 dereference failure: pointer NULL in a[(signed long int)i]: SUCCESS\n[off_by_one.pointer_dereference.2] line 9 dereference failure: pointer invalid in a[(signed long int)i]: SUCCESS\n[off_by_one.pointer_dereference.3] line 9 dereference failure: deallocated dynamic object in a[(signed long int)i]: SUCCESS\n[off_by_one.pointer_dereference.4] line 9 dereference failure: dead object in a[(signed long int)i]: SUCCESS\n[off_by_one.pointer_dereference.5] line 9 dereference failure: pointer outside object bounds in a[(signed long int)i]: FAILURE\n[off_by_one.pointer_dereference.6] line 9 dereference failure: invalid integer address in a[(signed long int)i]: UNKNOWN\n** 1 of 6 failed (2 iterations)\nVERIFICATION FAILED",
+      "soundness_note": "Bounded-sound up to --unwind=4. Without a verified loop invariant this is NOT an unbounded-safety claim (docs/soundness-assumptions.md Stage B / CBMC bounded loops).",
+      "assumed_contracts": []
+    },
+    {
+      "unit": "unbounded_loop.c::main",
+      "property": "no-overflow",
+      "engine": "cbmc",
+      "verdict": "inconclusive",
+      "unwind": 4,
+      "time_ms": 592,
+      "evidence": "Starting Bounded Model Checking\nPassing problem to propositional reduction\nconverting SSA\nRunning propositional reduction\nSAT checker: instance is SATISFIABLE\n** Results:\nunbounded_loop.c function sum_to\n[sum_to.overflow.2] line 8 arithmetic overflow on unsigned + in i + 1u: SUCCESS\n[sum_to.unwind.0] line 8 unwinding assertion loop 0: FAILURE\n[sum_to.overflow.1] line 9 arithmetic overflow on unsigned + in s + i: SUCCESS\n** 1 of 3 failed (2 iterations)\nVERIFICATION FAILED",
+      "soundness_note": "Bounded-sound up to --unwind=4. Without a verified loop invariant this is NOT an unbounded-safety claim (docs/soundness-assumptions.md Stage B / CBMC bounded loops).",
+      "assumed_contracts": []
+    },
+    {
+      "unit": "contracted_copy.c::main",
+      "property": "memory-safety",
+      "engine": "cbmc",
+      "verdict": "safe",
+      "unwind": 36,
+      "time_ms": 670,
+      "evidence": "[bounded_copy.pointer_dereference.3] line 13 dereference failure: deallocated dynamic object in dst[(signed long int)i]: SUCCESS\n[bounded_copy.pointer_dereference.4] line 13 dereference failure: dead object in dst[(signed long int)i]: SUCCESS\n[bounded_copy.pointer_dereference.5] line 13 dereference failure: pointer outside object bounds in dst[(signed long int)i]: SUCCESS\n[bounded_copy.pointer_dereference.6] line 13 dereference failure: invalid integer address in dst[(signed long int)i]: SUCCESS\n[bounded_copy.pointer_dereference.7] line 13 dereference failure: pointer NULL in src[(signed long int)i]: SUCCESS\n[bounded_copy.pointer_dereference.8] line 13 dereference failure: pointer invalid in src[(signed long int)i]: SUCCESS\n[bounded_copy.pointer_dereference.9] line 13 dereference failure: deallocated dynamic object in src[(signed long int)i]: SUCCESS\n[bounded_copy.pointer_dereference.10] line 13 dereference failure: dead object in src[(signed long int)i]: SUCCESS\n[bounded_copy.pointer_dereference.11] line 13 dereference failure: pointer outside object bounds in src[(signed long int)i]: SUCCESS\n[bounded_copy.pointer_dereference.12] line 13 dereference failure: invalid integer address in src[(signed long int)i]: SUCCESS\n** 0 of 26 failed (1 iterations)\nVERIFICATION SUCCESSFUL",
+      "soundness_note": "Bounded-sound up to --unwind=36. Without a verified loop invariant this is NOT an unbounded-safety claim (docs/soundness-assumptions.md Stage B / CBMC bounded loops).",
+      "assumed_contracts": []
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "target": "stage_b-smoke",
+  "units": [
+    {
+      "source": "safe_clamp.c",
+      "function": "main",
+      "property": "memory-safety",
+      "engines": ["cbmc"],
+      "unwind": 4,
+      "expected": "safe",
+      "contract": "i is clamped to [0,N) before write; fixed precondition"
+    },
+    {
+      "source": "unsafe_oob.c",
+      "function": "main",
+      "property": "no-oob",
+      "engines": ["cbmc"],
+      "unwind": 4,
+      "expected": "unsafe",
+      "contract": "off-by-one allows i == N; CBMC must produce CEX"
+    },
+    {
+      "source": "unbounded_loop.c",
+      "function": "main",
+      "property": "no-overflow",
+      "engines": ["cbmc"],
+      "unwind": 4,
+      "expected": "inconclusive",
+      "contract": "loop runs n times — without LLM-synthesized invariant the verdict is bounded-safe only"
+    },
+    {
+      "source": "contracted_copy.c",
+      "function": "main",
+      "property": "memory-safety",
+      "engines": ["cbmc"],
+      "unwind": 36,
+      "expected": "safe",
+      "contract": "__CPROVER_assume(len <= CAP); Phase-3.1 LLM will synthesize this as ACSL"
+    }
+  ]
+}
