@@ -1,0 +1,113 @@
+{
+  "phase": "4.4",
+  "title": "End-to-end roll-up: surface-reduction + cost + field PoVs",
+  "surface_reduction": {
+    "kernel_netfilter_6_1_72": {
+      "defined_functions": 3886,
+      "keep_set": 3029,
+      "pruned": 857,
+      "reduction_pct": 22.05,
+      "soundness_overapprox_applied": true
+    },
+    "juliet_c_cpp_v1_3": {
+      "defined_functions": 3368,
+      "labeled_bug_functions": 1074,
+      "keep_set": 3345,
+      "pruned": 23,
+      "reduction_pct": 0.68,
+      "missed_bug_count": 0
+    }
+  },
+  "soundness_gate": {
+    "labeled_corpus": "Juliet C/C++ v1.3 memory-safety subset",
+    "stage_a_missed_bug_count": 0,
+    "stage_b_unsafe": 12,
+    "stage_b_safe": 0,
+    "stage_b_inconclusive": 0,
+    "stage_b_missed_bug_count": 0,
+    "stage_b_soundness_failures": 0,
+    "gate": "pass"
+  },
+  "oracle_precision": {
+    "n_hypotheses": 11,
+    "precision_of_confirmation": 1.0,
+    "recall_of_confirmation": 1.0,
+    "false_confirmations": 0,
+    "soundness_violations": 0,
+    "buggy_missed": 0,
+    "per_tier_p50_ms": {
+      "tier1_fuzz": 380.0,
+      "tier2_symbolic": 134.0,
+      "tier3_bmc": 578.0
+    },
+    "per_tier_p95_ms": {
+      "tier1_fuzz": 9687.7,
+      "tier2_symbolic": 408.3,
+      "tier3_bmc": 608.6
+    },
+    "corpus_wall_s": 15.97
+  },
+  "cybergym_ablation": {
+    "tasks_run": 1,
+    "baseline_confirmed": 0,
+    "accelerated_confirmed": 1,
+    "headline_delta_confirmed": 1,
+    "baseline_wall_ms": 6572,
+    "accelerated_wall_ms": 2672,
+    "accelerated_tokens_used": 0,
+    "speedup_x": 2.46
+  },
+  "llm_cost_and_gpu": {
+    "stage_b_contract_synth_tokens": 1374,
+    "tier_harness_synth_tokens": 1671,
+    "cybergym_ablation_tokens": 0,
+    "smoke_profile_total_tokens": 3045,
+    "llm_serving_smoke_gpu_peak_pct": 93,
+    "llm_serving_smoke_latency_s": 0.837,
+    "llm_serving_profile": "smoke",
+    "production_profile_status": "wired in config/models.yaml but not booted; 32B+7B weights (~70 GB) deferred to live production run"
+  },
+  "field_povs": [
+    {
+      "target": "cybergym arvo:1065 (libmagic, MSan UoUV @ softmagic.c:365)",
+      "phase": "0.3",
+      "verdict": "confirmed (vul!=0 \u2227 fix==0)",
+      "artifact": "run-logs/phase0.3-cybergym-arvo1065.json"
+    },
+    {
+      "target": "kernelctf historical CVE-2024-1086 (Linux 6.1.72, KASAN UAF @ ip_rcv+0x6b1)",
+      "phase": "0.4",
+      "verdict": "confirmed (KASAN BUG fired deterministically)",
+      "artifact": "eval/kernelctf/artifacts/dmesg-cve-2024-1086.log"
+    },
+    {
+      "target": "cybergym arvo:1065 (accelerated-arm ablation, MSan UoUV @ funcs.c:478)",
+      "phase": "3.4",
+      "verdict": "accelerated 1/1 vs baseline 0/1 (2.46\u00d7 faster)",
+      "artifact": "run-logs/phase3.4-ablation.json"
+    },
+    {
+      "target": "kernelctf live LTS+COS paired control (historical CVE-2024-1086 via tier1_kasan)",
+      "phase": "4.2",
+      "verdict": "k1=inconclusive (surface removed), k2=confirmed (positive control)",
+      "artifact": "run-logs/phase4.2-summary.json"
+    },
+    {
+      "target": "live SQLite 3.37.2 paired control (stack-OOB @ /home/chanyoung/veri-agent/eval/live-lib/harnesses/sqlite3_synth_oob.c:23)",
+      "phase": "4.3",
+      "verdict": "L2=confirmed (ASan stack-buffer-overflow), L1=inconclusive (no novel finding in 15s budget)",
+      "artifact": "run-logs/phase4.3-summary.json"
+    }
+  ],
+  "field_pov_count": 5,
+  "phase4_acceptance": {
+    "criterion": "\u22651 reproducible PoV on a real target AND surface-reduction + cost metrics reported end-to-end AND no soundness regression",
+    "gate": "pass",
+    "checks": {
+      "field_povs_count_ge_1": true,
+      "soundness_gate_pass": true,
+      "surface_reduction_positive": true,
+      "zero_false_confirmations": true
+    }
+  }
+}

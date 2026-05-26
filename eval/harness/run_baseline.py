@@ -23,6 +23,7 @@ from eval.harness.adapters import (  # noqa: E402
     contract_synth,
     cybergym,
     cybergym_ablation,
+    end_to_end as e2e_adapter,
     juliet,
     kernelctf,
     kernelctf_live,
@@ -59,6 +60,7 @@ ADAPTERS = [
     ("cybergym-ablation", cybergym_ablation.baseline_rows),
     ("agent-loop", agent_loop.baseline_rows),
     ("kernelctf-live", kernelctf_live.baseline_rows),
+    ("end-to-end", e2e_adapter.baseline_rows),
 ]
 
 

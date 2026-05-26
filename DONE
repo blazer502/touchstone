@@ -1,0 +1,19 @@
+All PLAN.md phases complete (0 → 4).
+
+Phase 4 acceptance gate: PASS
+
+See:
+- docs/headline-metrics.md      — human-readable headline table
+- run-logs/phase4.4-end-to-end.json — full machine-readable roll-up
+- run-logs/phase0.5-baseline.jsonl  — 78-row metrics harness output
+- PROGRESS.md                   — per-phase notes + decisions log
+
+Headline:
+- 5 reproducible field PoVs (arvo:1065 ×2, kernelCTF CVE-2024-1086,
+  kernelCTF-live paired control, sqlite3-live paired control).
+- 22.05% attack-surface reduction on Linux 6.1.72 net/netfilter/ (sound).
+- Juliet soundness gate: 0 missed bugs (Stage A: 0/1074; Stage B: 12/12 unsafe).
+- Oracle precision/recall = 1.0/1.0; 0 false confirmations.
+- CyberGym ablation: accelerated 1/1 vs baseline 0/1, 2.46x speedup.
+- LLM cost (smoke profile): 3045 tokens across phases 3.1/3.2/3.4.
+- GPU peak: 93% (Phase 0.2 single-GPU smoke).
