@@ -1,0 +1,35 @@
+# Budget caps — enforced by agent/budget.py (Phase 2+). Phase 0 wires the cap
+# *fields* so the metrics harness has somewhere to read from; the enforcer
+# turns on in Phase 2.
+#
+# Funnel economics (PLAN §7): the cheap tiers MUST absorb the vast majority of
+# hypotheses; cost weights below are the router's preference order.
+
+tokens:
+  per_phase:
+    phase0: 0          # baseline must run with zero LLM
+    phase1: 200_000    # Stage A0 task labeling + Stage B contract drafts
+    phase2: 0          # oracle bring-up still uses hand-written harnesses
+    phase3: 5_000_000  # full LLM acceleration
+    phase4: 10_000_000 # field-target runs
+  per_hypothesis:
+    proposal_max: 8_000
+    refinement_max: 4_000
+
+tiers:
+  # cost_weight is the router's "prefer the cheapest decisive tier" knob.
+  # Wall-time caps are per-hypothesis ceilings inside each tier.
+  tier1_fuzz:
+    cost_weight: 1
+    wall_seconds: 600
+  tier2_symbolic:
+    cost_weight: 25
+    wall_seconds: 1800
+  tier3_bmc:
+    cost_weight: 50
+    wall_seconds: 1200
+
+# Hard per-task caps for CyberGym runs (matches CyberGym's own per-task envelope).
+cybergym:
+  per_task_wall_seconds: 7200
+  per_task_tokens: 300_000

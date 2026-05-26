@@ -1,0 +1,39 @@
+# Model serving config (PLAN §1). Phase 0.2 brings this up; downstream phases
+# read role -> endpoint mappings from here.
+#
+# 4 GPUs total (RTX A6000 49GB each on this host). Default layout:
+#   GPUs 0-1 -> synthesizer replica A (TP=2)
+#   GPUs 2-3 -> synthesizer replica B (TP=2)
+#   router co-located, quantized.
+
+serving:
+  backend: vllm           # vllm | sglang
+  gateway_port: 8000
+  prefix_caching: true
+  continuous_batching: true
+
+roles:
+  synthesizer:
+    model: Qwen/Qwen2.5-Coder-32B-Instruct
+    tensor_parallel: 2
+    replicas:
+      - gpus: [0, 1]
+        port: 8101
+      - gpus: [2, 3]
+        port: 8102
+    quantization: none
+    max_model_len: 32768
+  router:
+    model: Qwen/Qwen2.5-Coder-7B-Instruct
+    tensor_parallel: 1
+    replicas:
+      - gpus: [0]     # co-located; Phase 0.2 verifies VRAM fit before promoting
+        port: 8201
+    quantization: fp8
+    max_model_len: 16384
+
+# Optional embedding/reranker over the target repo to use spare GPU capacity.
+embeddings:
+  enabled: false
+  model: BAAI/bge-large-en-v1.5
+  port: 8301

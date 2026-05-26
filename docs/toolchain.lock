@@ -1,0 +1,61 @@
+# Toolchain lock — Phase 0.1
+#
+# Single source of truth for tool versions. Every Dockerfile in docker/ MUST
+# read versions from this file (via build args) so a change here propagates.
+# Any unsoundness assumption tied to a tool version goes in docs/soundness-assumptions.md.
+
+# --- Shared compiler ---
+# Pick a single LLVM major version used by SVF, KLEE bitcode, libFuzzer/sanitizers,
+# SymCC. LLVM 14 is Ubuntu 22.04's default and is the version SymCC/KLEE 3.1 build
+# cleanly against without source patches.
+LLVM_VERSION=14
+
+# --- Stage B / Tier 3 sound engines ---
+# CBMC: Ubuntu 22.04 deb is 5.x; pin the upstream 6.x release for invariants/contracts support.
+CBMC_VERSION=6.4.0
+# ESBMC: official release tag.
+ESBMC_VERSION=v7.6.1
+# Frama-C: opam-pinned 'frama-c' package version (Cobalt = 28.x; Manganese = 30.x).
+FRAMAC_VERSION=29.0
+FRAMAC_CODENAME=Copper
+
+# --- Tier 2 symbolic ---
+# KLEE: matches the chosen LLVM_VERSION.
+KLEE_VERSION=3.1
+# S2E: pin the upstream release we test against.
+S2E_VERSION=2.0.0
+# SymCC: tracks LLVM_VERSION; latest main is the only reliable pin (no semver).
+SYMCC_COMMIT=cb2f70b
+# angr: PyPI version pin.
+ANGR_VERSION=9.2.105
+
+# --- Tier 1 fuzzing ---
+AFLPP_VERSION=4.21c
+LIBFUZZER_VERSION=14   # ships with the matching clang
+SYZKALLER_COMMIT=04f1f81e2d4b6f3f3f3f3f3f3f3f3f3f3f3f3f3f  # placeholder — fill from upstream HEAD when first built
+
+# --- Static / kernel-idiom analyzers ---
+# Smatch: only meaningful version is the git HEAD at build time; pin the commit.
+SMATCH_COMMIT=ff8a2a7
+COCCINELLE_VERSION=1.1.1
+SPARSE_VERSION=0.6.4
+SVF_VERSION=2.8           # matches LLVM 14
+CODEQL_VERSION=2.18.4
+
+# --- Kernel sanitizers ---
+# These are kernel CONFIG_* options, not external tools — they ship with the
+# kernel version under test. Tracked here for completeness.
+KERNEL_KASAN=y
+KERNEL_KMSAN=y
+KERNEL_KCSAN=y
+KERNEL_UBSAN=y
+KERNEL_KCOV=y
+
+# --- LLM serving ---
+VLLM_VERSION=0.6.4
+SGLANG_VERSION=0.3.6
+SYNTHESIZER_MODEL=Qwen/Qwen2.5-Coder-32B-Instruct
+ROUTER_MODEL=Qwen/Qwen2.5-Coder-7B-Instruct
+
+# --- Base ---
+BASE_IMAGE=ubuntu:22.04
