@@ -27,6 +27,7 @@ Format: one row per assumption.
 
 - [sanitizers]       coverage of properties    ASan covers heap/stack/global OOB and UAF; MSan covers uninit reads; UBSan covers UB classes. A "no crash" verdict from Tier 1 is NOT a safety claim — it only means the fuzzer didn't reach the bug within the budget. Always escalate inconclusive Tier-1 to Tier 2/3 before pruning.
 - [syzkaller]        syscall surface           syzlang descriptions enumerate the surface explicitly; bugs reachable only via unmodeled syscalls / ioctls are unreachable to syzkaller. Track unmodeled surface in `surface/tasks/*.json`.
+- [KASAN]            instrumentation gaps      KASAN reports use-after-free / OOB on slab + buddy allocations covered by the shadow map; non-shadowed memory (early-boot, percpu, vmemmap before init, EFI) is invisible. For the kernelCTF sanity boot, KASAN_INLINE + SLUB_DEBUG_ON are enabled (see `eval/kernelctf/configs/config-6.1.72-kasan.txt`).
 
 ## Oracle Tier 2 — symbolic
 

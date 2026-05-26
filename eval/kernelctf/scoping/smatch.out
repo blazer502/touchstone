@@ -1,0 +1,1109 @@
+# smatch v0.5.0-9185-gbcc58b9c-dirty
+  CHECK   scripts/mod/empty.c
+  CALL    scripts/checksyscalls.sh
+  DESCEND objtool
+  CHECK   net/netfilter/core.c
+net/netfilter/core.c:177 hooks_validate() warn: if statement not indented
+net/netfilter/core.c:191 nf_hook_entries_insert_raw() warn: if statement not indented
+net/netfilter/core.c:198 nf_hook_entries_insert_raw() warn: if statement not indented
+net/netfilter/core.c:198 nf_hook_entries_insert_raw() warn: if statement not indented
+net/netfilter/core.c:198 nf_hook_entries_insert_raw() warn: if statement not indented
+net/netfilter/core.c:200 nf_hook_entries_insert_raw() warn: if statement not indented
+net/netfilter/core.c:230 __nf_hook_entries_try_shrink() warn: if statement not indented
+net/netfilter/core.c:262 __nf_hook_entries_try_shrink() warn: if statement not indented
+net/netfilter/core.c:262 __nf_hook_entries_try_shrink() warn: if statement not indented
+net/netfilter/core.c:262 __nf_hook_entries_try_shrink() warn: if statement not indented
+net/netfilter/core.c:287 nf_hook_entry_head() warn: if statement not indented
+net/netfilter/core.c:290 nf_hook_entry_head() warn: if statement not indented
+net/netfilter/core.c:296 nf_hook_entry_head() warn: if statement not indented
+net/netfilter/core.c:300 nf_hook_entry_head() warn: if statement not indented
+net/netfilter/core.c:304 nf_hook_entry_head() warn: if statement not indented
+net/netfilter/core.c:320 nf_hook_entry_head() warn: if statement not indented
+net/netfilter/core.c:427 __nf_register_net_hook() warn: if statement not indented
+net/netfilter/core.c:427 __nf_register_net_hook() warn: if statement not indented
+net/netfilter/core.c:427 __nf_register_net_hook() warn: if statement not indented
+net/netfilter/core.c:444 __nf_register_net_hook() warn: if statement not indented
+net/netfilter/core.c:468 nf_remove_net_hook() warn: if statement not indented
+net/netfilter/core.c:469 nf_remove_net_hook() warn: if statement not indented
+net/netfilter/core.c:489 __nf_unregister_net_hook() warn: if statement not indented
+net/netfilter/core.c:505 __nf_unregister_net_hook() warn: if statement not indented
+net/netfilter/core.c:505 __nf_unregister_net_hook() warn: if statement not indented
+net/netfilter/core.c:537 nf_hook_entries_delete_raw() warn: if statement not indented
+./include/linux/list.h:37 INIT_LIST_HEAD() warn: if statement not indented
+./include/linux/list.h:38 INIT_LIST_HEAD() warn: if statement not indented
+./include/linux/list.h:75 __list_add() warn: if statement not indented
+./include/linux/list.h:292 list_empty() warn: if statement not indented
+./include/linux/list.h:115 __list_del() warn: if statement not indented
+net/netfilter/core.c:688 nf_ct_attach() warn: if statement not indented
+net/netfilter/core.c:701 nf_conntrack_destroy() warn: if statement not indented
+net/netfilter/core.c:706 nf_conntrack_destroy() warn: if statement not indented
+net/netfilter/core.c:717 nf_ct_get_tuple_skb() warn: if statement not indented
+net/netfilter/core.c:739 __netfilter_net_init() warn: if statement not indented
+  CHECK   net/netfilter/nf_log.c
+net/netfilter/nf_log.c:55 nf_log_set() warn: if statement not indented
+net/netfilter/nf_log.c:55 nf_log_set() warn: if statement not indented
+net/netfilter/nf_log.c:55 nf_log_set() warn: if statement not indented
+net/netfilter/nf_log.c:72 nf_log_unset() warn: if statement not indented
+net/netfilter/nf_log.c:91 nf_log_register() warn: if statement not indented
+net/netfilter/nf_log.c:97 nf_log_register() warn: if statement not indented
+net/netfilter/nf_log.c:97 nf_log_register() warn: if statement not indented
+net/netfilter/nf_log.c:97 nf_log_register() warn: if statement not indented
+net/netfilter/nf_log.c:99 nf_log_register() warn: if statement not indented
+net/netfilter/nf_log.c:103 nf_log_register() warn: if statement not indented
+net/netfilter/nf_log.c:103 nf_log_register() warn: if statement not indented
+net/netfilter/nf_log.c:103 nf_log_register() warn: if statement not indented
+net/netfilter/nf_log.c:121 nf_log_unregister() warn: if statement not indented
+net/netfilter/nf_log.c:138 nf_log_bind_pf() warn: if statement not indented
+net/netfilter/nf_log.c:138 nf_log_bind_pf() warn: if statement not indented
+net/netfilter/nf_log.c:138 nf_log_bind_pf() warn: if statement not indented
+net/netfilter/nf_log.c:149 nf_log_unbind_pf() warn: if statement not indented
+net/netfilter/nf_log.c:174 nf_logger_find_get() warn: if statement not indented
+net/netfilter/nf_log.c:196 nf_logger_put() warn: if statement not indented
+net/netfilter/nf_log.c:199 nf_logger_put() warn: if statement not indented
+net/netfilter/nf_log.c:220 nf_log_packet() warn: if statement not indented
+net/netfilter/nf_log.c:222 nf_log_packet() warn: if statement not indented
+net/netfilter/nf_log.c:247 nf_log_trace() warn: if statement not indented
+net/netfilter/nf_log.c:281 nf_log_buf_add() warn: if statement not indented
+net/netfilter/nf_log.c:437 nf_log_proc_dostring() warn: if statement not indented
+net/netfilter/nf_log.c:437 nf_log_proc_dostring() warn: if statement not indented
+net/netfilter/nf_log.c:437 nf_log_proc_dostring() warn: if statement not indented
+  CHECK   net/netfilter/nf_queue.c
+net/netfilter/nf_queue.c:37 nf_register_queue_handler() warn: if statement not indented
+net/netfilter/nf_queue.c:37 nf_register_queue_handler() warn: if statement not indented
+net/netfilter/nf_queue.c:38 nf_register_queue_handler() warn: if statement not indented
+net/netfilter/nf_queue.c:38 nf_register_queue_handler() warn: if statement not indented
+net/netfilter/nf_queue.c:38 nf_register_queue_handler() warn: if statement not indented
+net/netfilter/nf_queue.c:45 nf_unregister_queue_handler() warn: if statement not indented
+./include/linux/netdevice.h:3985 __dev_put() warn: if statement not indented
+./include/linux/netdevice.h:3985 __dev_put() warn: if statement not indented
+./include/linux/netdevice.h:3996 __dev_hold() warn: if statement not indented
+./arch/x86/include/asm/atomic.h:202 arch_atomic_try_cmpxchg() warn: if statement not indented
+net/netfilter/nf_queue.c:122 nf_queue_nf_hook_drop() warn: if statement not indented
+net/netfilter/nf_queue.c:167 __nf_queue() warn: if statement not indented
+./include/linux/skbuff.h:1121 skb_dst() warn: if statement not indented
+./include/net/dst.h:310 skb_dst_force() warn: if statement not indented
+net/netfilter/nf_queue.c:287 nf_hook_entries_head() warn: if statement not indented
+net/netfilter/nf_queue.c:289 nf_hook_entries_head() warn: if statement not indented
+net/netfilter/nf_queue.c:291 nf_hook_entries_head() warn: if statement not indented
+net/netfilter/nf_queue.c:315 nf_reinject() warn: if statement not indented
+  CHECK   net/netfilter/nf_sockopt.c
+net/netfilter/nf_sockopt.c:37 nf_register_sockopt() warn: if statement not indented
+./include/linux/list.h:75 __list_add() warn: if statement not indented
+./include/linux/list.h:115 __list_del() warn: if statement not indented
+  CHECK   net/netfilter/utils.c
+net/netfilter/utils.c:211 nf_reroute() warn: if statement not indented
+  CHECK   net/netfilter/nfnetlink.c
+./include/net/netns/generic.h:46 net_generic() warn: if statement not indented
+net/netfilter/nfnetlink.c:122 nfnetlink_subsys_register() warn: if statement not indented
+net/netfilter/nfnetlink.c:130 nfnetlink_subsys_register() warn: if statement not indented
+net/netfilter/nfnetlink.c:130 nfnetlink_subsys_register() warn: if statement not indented
+net/netfilter/nfnetlink.c:130 nfnetlink_subsys_register() warn: if statement not indented
+net/netfilter/nfnetlink.c:154 nfnetlink_get_subsys() warn: if statement not indented
+./include/linux/list.h:75 __list_add() warn: if statement not indented
+./include/linux/list.h:115 __list_del() warn: if statement not indented
+net/netfilter/nfnetlink.c:798 nfnetlink_init() warn: if statement not indented
+  CHECK   net/netfilter/nfnetlink_log.c
+net/netfilter/nfnetlink_log.c:112:9: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nfnetlink_log.c:112:9: error: static assertion failed: "pointer type mismatch in container_of()"
+./include/net/netns/generic.h:46 net_generic() warn: if statement not indented
+net/netfilter/nfnetlink_log.c:112 __instance_lookup() warn: if statement not indented
+net/netfilter/nfnetlink_log.c:112 __instance_lookup() warn: if statement not indented
+./arch/x86/include/asm/atomic.h:202 arch_atomic_try_cmpxchg() warn: if statement not indented
+./include/linux/rculist.h:590 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:593 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:514 hlist_del_rcu() warn: if statement not indented
+./include/linux/list.h:884 __hlist_del() warn: if statement not indented
+./include/linux/list.h:886 __hlist_del() warn: if statement not indented
+net/netfilter/nfnetlink_log.c:358 __nfulnl_send() warn: if statement not indented
+net/netfilter/nfnetlink_log.c:358 __nfulnl_send() warn: if statement not indented
+net/netfilter/nfnetlink_log.c:741 nfulnl_log_packet() warn: if statement not indented
+net/netfilter/nfnetlink_log.c:576 __build_packet_message() error: we previously assumed 'skb->dev' could be null (see line 560)
+net/netfilter/nfnetlink_log.c:659 __build_packet_message() warn: if statement not indented
+./include/linux/list.h:867 hlist_unhashed_lockless() warn: if statement not indented
+./include/linux/skbuff.h:4174 skb_tstamp_cond() warn: if statement not indented
+net/netfilter/nfnetlink_log.c:911 nfulnl_recv_config() warn: if statement not indented
+net/netfilter/nfnetlink_log.c:916 nfulnl_recv_config() warn: if statement not indented
+net/netfilter/nfnetlink_log.c:1033 get_first() warn: if statement not indented
+./include/linux/list.h:876 hlist_empty() warn: if statement not indented
+net/netfilter/nfnetlink_log.c:1041 get_next() warn: if statement not indented
+net/netfilter/nfnetlink_log.c:1051 get_next() warn: if statement not indented
+net/netfilter/nfnetlink_log.c:1146 nfnl_log_net_exit() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_core.c
+net/netfilter/nf_conntrack_core.c:112 nf_conntrack_lock() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:112 nf_conntrack_lock() warn: if statement not indented
+./include/linux/seqlock.h:429 do___read_seqcount_retry() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:176 nf_conntrack_all_lock() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:198 nf_conntrack_all_unlock() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:198 nf_conntrack_all_unlock() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:223 hash_conntrack_raw() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:376 ipv4_get_l4proto() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:394 ipv6_get_l4proto() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:403 ipv6_get_l4proto() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:502 nf_ct_get_id() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:521 clean_from_lists() warn: if statement not indented
+./include/linux/rculist_nulls.h:77 hlist_nulls_del_rcu() warn: if statement not indented
+./include/linux/list_nulls.h:108 __hlist_nulls_del() warn: if statement not indented
+./include/linux/list_nulls.h:110 __hlist_nulls_del() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:589 nf_ct_destroy() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:590 nf_ct_destroy() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:610 nf_ct_destroy() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:622 __nf_ct_delete_from_lists() warn: for statement not indented
+./include/linux/seqlock.h:101 seqcount_lockdep_reader_access() warn: if statement not indented
+./include/linux/seqlock.h:104 seqcount_lockdep_reader_access() warn: if statement not indented
+./include/linux/seqlock.h:274 __seqprop_raw_spinlock_sequence() warn: if statement not indented
+./include/linux/seqlock.h:274 __seqprop_raw_spinlock_sequence() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:667 nf_ct_delete() warn: if statement not indented
+./include/net/netfilter/nf_conntrack.h:295 nf_ct_is_expired() warn: if statement not indented
+./arch/x86/include/asm/atomic.h:202 arch_atomic_try_cmpxchg() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:760 ____nf_conntrack_find() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:760 ____nf_conntrack_find() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:778 ____nf_conntrack_find() warn: if statement not indented
+./include/net/netfilter/nf_conntrack.h:335 nf_conntrack_get_ht() warn: for statement not indented
+./include/linux/rculist_nulls.h:105 hlist_nulls_add_head_rcu() warn: if statement not indented
+./include/linux/rculist_nulls.h:106 hlist_nulls_add_head_rcu() warn: if statement not indented
+./include/linux/rculist_nulls.h:106 hlist_nulls_add_head_rcu() warn: if statement not indented
+./include/linux/rculist_nulls.h:106 hlist_nulls_add_head_rcu() warn: if statement not indented
+./include/linux/rculist_nulls.h:108 hlist_nulls_add_head_rcu() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:874 nf_ct_ext_valid_post() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:898 nf_conntrack_hash_check_insert() warn: for statement not indented
+net/netfilter/nf_conntrack_core.c:946 nf_conntrack_hash_check_insert() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:951 nf_conntrack_hash_check_insert() warn: if statement not indented
+./include/linux/random.h:74 get_random_u32_below() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1027 __nf_ct_resolve_clash() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1071 nf_ct_resolve_clash_harder() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1091 nf_ct_resolve_clash_harder() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1156 nf_ct_resolve_clash() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1157 nf_ct_resolve_clash() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1190 __nf_conntrack_confirm() warn: for statement not indented
+net/netfilter/nf_conntrack_core.c:1210 __nf_conntrack_confirm() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1217 __nf_conntrack_confirm() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1221 __nf_conntrack_confirm() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1230 __nf_conntrack_confirm() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1253 __nf_conntrack_confirm() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1254 __nf_conntrack_confirm() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1282 __nf_conntrack_confirm() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1324 nf_conntrack_tuple_taken() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1353 nf_conntrack_tuple_taken() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1324 nf_conntrack_tuple_taken() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1360 nf_conntrack_tuple_taken() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1382 early_drop_list() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1382 early_drop_list() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1441 early_drop() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1441 early_drop() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1509 gc_worker() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1509 gc_worker() warn: if statement not indented
+./include/net/netfilter/nf_conntrack.h:314 nf_ct_offload_timeout() warn: if statement not indented
+./include/net/netfilter/nf_conntrack.h:288 nf_ct_expires() warn: if statement not indented
+./include/net/netns/generic.h:46 net_generic() warn: if statement not indented
+./include/linux/list.h:37 INIT_LIST_HEAD() warn: if statement not indented
+./include/linux/list.h:38 INIT_LIST_HEAD() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1636 __nf_conntrack_alloc() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1656 __nf_conntrack_alloc() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1690 nf_conntrack_free() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1696 nf_conntrack_free() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1733 init_conntrack() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1751 init_conntrack() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1775 init_conntrack() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1784 init_conntrack() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1784 init_conntrack() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1784 init_conntrack() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1793 init_conntrack() warn: if statement not indented
+./include/net/netfilter/nf_conntrack_acct.h:41 nf_ct_acct_ext_add() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1841 resolve_normal_ct() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1877 resolve_normal_ct() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1880 resolve_normal_ct() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1883 resolve_normal_ct() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1917 nf_conntrack_handle_icmp() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:1999 nf_conntrack_in() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2000 nf_conntrack_in() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2021 nf_conntrack_in() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2029 nf_conntrack_in() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2038 nf_conntrack_in() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2048 nf_conntrack_in() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2050 nf_conntrack_in() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2075 nf_conntrack_alter_reply() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2077 nf_conntrack_alter_reply() warn: if statement not indented
+./include/linux/list.h:876 hlist_empty() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2101 __nf_ct_refresh_acct() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2102 __nf_ct_refresh_acct() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2248 __nf_conntrack_update() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2279 nf_confirm_cthelper() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2310 nf_confirm_cthelper() warn: if statement not indented
+./include/linux/list_nulls.h:88 hlist_nulls_empty() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2532 nf_conntrack_cleanup_end() warn: if statement not indented
+./include/linux/list.h:75 __list_add() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2597 nf_ct_alloc_hashtable() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2635 nf_conntrack_hash_resize() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2663 nf_conntrack_hash_resize() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2663 nf_conntrack_hash_resize() warn: if statement not indented
+./include/linux/seqlock.h:274 __seqprop_raw_spinlock_assert() warn: if statement not indented
+./include/linux/seqlock.h:274 __seqprop_raw_spinlock_preemptible() warn: if statement not indented
+./arch/x86/include/asm/preempt.h:80 __preempt_count_add() warn: if statement not indented
+./arch/x86/include/asm/preempt.h:80 __preempt_count_add() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2784 nf_conntrack_init_end() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2797 nf_conntrack_init_net() warn: if statement not indented
+net/netfilter/nf_conntrack_core.c:2798 nf_conntrack_init_net() warn: if statement not indented
+./include/net/netfilter/nf_conntrack_core.h:95 __nf_ct_set_timeout() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_standalone.c
+./include/net/netns/generic.h:46 net_generic() warn: if statement not indented
+net/netfilter/nf_conntrack_standalone.c:1075 nf_conntrack_standalone_init_sysctl() warn: if statement not indented
+net/netfilter/nf_conntrack_standalone.c:1211 nf_conntrack_standalone_init() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_expect.c
+net/netfilter/nf_conntrack_expect.c:143:9: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nf_conntrack_expect.c:143:9: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nf_conntrack_expect.c:54 nf_ct_unlink_expect_report() warn: if statement not indented
+net/netfilter/nf_conntrack_expect.c:55 nf_ct_unlink_expect_report() warn: if statement not indented
+net/netfilter/nf_conntrack_expect.c:63 nf_ct_unlink_expect_report() error: we previously assumed 'master_help' could be null (see line 54)
+net/netfilter/nf_conntrack_expect.c:68 nf_ct_unlink_expect_report() warn: if statement not indented
+./include/linux/list.h:867 hlist_unhashed_lockless() warn: if statement not indented
+./include/linux/rculist.h:514 hlist_del_rcu() warn: if statement not indented
+./include/linux/list.h:884 __hlist_del() warn: if statement not indented
+./include/linux/list.h:886 __hlist_del() warn: if statement not indented
+./include/net/netns/generic.h:46 net_generic() warn: if statement not indented
+net/netfilter/nf_conntrack_expect.c:93 nf_ct_expect_dst_hash() warn: if statement not indented
+net/netfilter/nf_conntrack_expect.c:143 __nf_ct_expect_find() warn: if statement not indented
+net/netfilter/nf_conntrack_expect.c:143 __nf_ct_expect_find() warn: if statement not indented
+./arch/x86/include/asm/atomic.h:202 arch_atomic_try_cmpxchg() warn: if statement not indented
+net/netfilter/nf_conntrack_expect.c:412 nf_ct_expect_insert() warn: if statement not indented
+./include/linux/rculist.h:590 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:593 hlist_add_head_rcu() warn: if statement not indented
+net/netfilter/nf_conntrack_expect.c:482 __nf_ct_expect_check() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_helper.c
+net/netfilter/nf_conntrack_helper.c:56:17: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nf_conntrack_helper.c:56:17: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nf_conntrack_helper.c:56 __nf_conntrack_helper_find() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:56 __nf_conntrack_helper_find() warn: if statement not indented
+./arch/x86/include/asm/atomic.h:202 arch_atomic_try_cmpxchg() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:117 nf_conntrack_nat_helper_find() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:117 nf_conntrack_nat_helper_find() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:168 nf_nat_helper_put() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:184 nf_ct_helper_ext_add() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:204 __nf_ct_try_assign_helper() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:209 __nf_ct_try_assign_helper() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:217 __nf_ct_try_assign_helper() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:229 __nf_ct_try_assign_helper() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:232 __nf_ct_try_assign_helper() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:237 __nf_ct_try_assign_helper() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:237 __nf_ct_try_assign_helper() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:237 __nf_ct_try_assign_helper() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:248 unhelp() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:250 unhelp() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:264 nf_ct_helper_destroy() warn: if statement not indented
+./include/linux/rculist.h:84 __list_add_rcu() warn: if statement not indented
+./include/linux/rculist.h:84 __list_add_rcu() warn: if statement not indented
+./include/linux/rculist.h:84 __list_add_rcu() warn: if statement not indented
+./include/linux/list.h:115 __list_del() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:296 nf_ct_helper_expectfn_find_by_name() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:296 nf_ct_helper_expectfn_find_by_name() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:313 nf_ct_helper_expectfn_find_by_symbol() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:313 nf_ct_helper_expectfn_find_by_symbol() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:341 nf_ct_helper_log() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:357 nf_conntrack_helper_register() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:358 nf_conntrack_helper_register() warn: if statement not indented
+net/netfilter/nf_conntrack_helper.c:359 nf_conntrack_helper_register() warn: if statement not indented
+./include/linux/rculist.h:590 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:593 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:514 hlist_del_rcu() warn: if statement not indented
+./include/linux/list.h:884 __hlist_del() warn: if statement not indented
+./include/linux/list.h:886 __hlist_del() warn: if statement not indented
+./include/linux/list.h:37 INIT_LIST_HEAD() warn: if statement not indented
+./include/linux/list.h:38 INIT_LIST_HEAD() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_proto.c
+net/netfilter/nf_conntrack_proto.c:135 nf_confirm() warn: if statement not indented
+net/netfilter/nf_conntrack_proto.c:148 nf_confirm() warn: if statement not indented
+net/netfilter/nf_conntrack_proto.c:272 getorigdst() warn: if statement not indented
+net/netfilter/nf_conntrack_proto.c:277 getorigdst() warn: if statement not indented
+net/netfilter/nf_conntrack_proto.c:294 getorigdst() warn: if statement not indented
+net/netfilter/nf_conntrack_proto.c:302 getorigdst() warn: if statement not indented
+./include/linux/thread_info.h:233 check_copy_size() warn: if statement not indented
+net/netfilter/nf_conntrack_proto.c:348 ipv6_getorigdst() warn: if statement not indented
+net/netfilter/nf_conntrack_proto.c:396 ipv6_confirm() warn: if statement not indented
+./include/net/netns/generic.h:46 net_generic() warn: if statement not indented
+net/netfilter/nf_conntrack_proto.c:653 nf_ct_bridge_register() warn: if statement not indented
+net/netfilter/nf_conntrack_proto.c:662 nf_ct_bridge_unregister() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_proto_generic.c
+  CHECK   net/netfilter/nf_conntrack_proto_tcp.c
+net/netfilter/nf_conntrack_proto_tcp.c:763 nf_tcp_handle_invalid() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_tcp.c:769 nf_tcp_handle_invalid() warn: if statement not indented
+./include/net/netfilter/nf_conntrack.h:288 nf_ct_expires() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_tcp.c:849 tcp_new() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_tcp.c:1095 nf_conntrack_tcp_packet() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_tcp.c:1235 nf_conntrack_tcp_packet() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_tcp.c:1237 nf_conntrack_tcp_packet() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_proto_udp.c
+  CHECK   net/netfilter/nf_conntrack_proto_icmp.c
+net/netfilter/nf_conntrack_proto_icmp.c:92 nf_conntrack_icmp_packet() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_icmp.c:120 nf_conntrack_inet_error() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_extend.c
+net/netfilter/nf_conntrack_extend.c:98 nf_ct_ext_add() warn: if statement not indented
+net/netfilter/nf_conntrack_extend.c:101 nf_ct_ext_add() warn: if statement not indented
+net/netfilter/nf_conntrack_extend.c:62 total_extension_size() warn: if statement not indented
+net/netfilter/nf_conntrack_extend.c:139 __nf_ct_ext_find() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_acct.c
+  CHECK   net/netfilter/nf_conntrack_seqadj.c
+net/netfilter/nf_conntrack_seqadj.c:41 nf_ct_seqadj_set() warn: if statement not indented
+net/netfilter/nf_conntrack_seqadj.c:41 nf_ct_seqadj_set() warn: if statement not indented
+net/netfilter/nf_conntrack_seqadj.c:102 nf_ct_sack_block_adjust() warn: if statement not indented
+net/netfilter/nf_conntrack_seqadj.c:191 nf_ct_seq_adjust() warn: if statement not indented
+net/netfilter/nf_conntrack_seqadj.c:207 nf_ct_seq_adjust() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_proto_icmpv6.c
+net/netfilter/nf_conntrack_proto_icmpv6.c:106 nf_conntrack_icmpv6_packet() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_proto_dccp.c
+net/netfilter/nf_conntrack_proto_dccp.c:447 dccp_error() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_proto_sctp.c
+net/netfilter/nf_conntrack_proto_sctp.c: note: in included file (through include/net/sctp/sctp.h, include/net/sctp/checksum.h):
+./include/net/sctp/structs.h:335:41: warning: array of flexible structures
+net/netfilter/nf_conntrack_proto_sctp.c:164 do_basic_checks() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:180 do_basic_checks() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:188 do_basic_checks() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:198 sctp_new_state() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:202 sctp_new_state() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:206 sctp_new_state() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:210 sctp_new_state() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:214 sctp_new_state() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:218 sctp_new_state() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:222 sctp_new_state() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:226 sctp_new_state() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:230 sctp_new_state() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:234 sctp_new_state() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:238 sctp_new_state() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:242 sctp_new_state() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:247 sctp_new_state() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:252 sctp_new_state() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:278 sctp_new() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:294 sctp_new() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:299 sctp_new() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:305 sctp_new() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:395 nf_conntrack_sctp_packet() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:434 nf_conntrack_sctp_packet() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:449 nf_conntrack_sctp_packet() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:473 nf_conntrack_sctp_packet() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:491 nf_conntrack_sctp_packet() warn: if statement not indented
+net/netfilter/nf_conntrack_proto_sctp.c:518 nf_conntrack_sctp_packet() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_netlink.c
+net/netfilter/nf_conntrack_netlink.c:3167:17: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nf_conntrack_netlink.c:3167:17: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nf_conntrack_netlink.c:3219:9: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nf_conntrack_netlink.c:3219:9: error: static assertion failed: "pointer type mismatch in container_of()"
+./include/net/netfilter/nf_conntrack.h:288 nf_ct_expires() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:233 ctnetlink_dump_helpinfo() warn: if statement not indented
+./include/net/netlink.h:1029 nlmsg_trim() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:965 ctnetlink_filter_parse_status() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:1170 ctnetlink_filter_match() warn: if statement not indented
+./include/net/netfilter/nf_conntrack.h:295 nf_ct_is_expired() warn: if statement not indented
+./arch/x86/include/asm/atomic.h:202 arch_atomic_try_cmpxchg() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:1857 ctnetlink_parse_nat_setup() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:1869 ctnetlink_parse_nat_setup() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:1947 ctnetlink_change_helper() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:1960 ctnetlink_change_helper() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:1975 ctnetlink_change_helper() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:2298 ctnetlink_create_conntrack() warn: if statement not indented
+./include/net/netfilter/nf_conntrack_acct.h:41 nf_ct_acct_ext_add() warn: if statement not indented
+./include/net/netfilter/nf_conntrack_core.h:95 __nf_ct_set_timeout() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:2988 nf_expect_get_id() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:3057 ctnetlink_exp_dump_expect() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:3167 ctnetlink_exp_dump_table() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:3167 ctnetlink_exp_dump_table() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:3219 ctnetlink_exp_ct_dump_table() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:3219 ctnetlink_exp_ct_dump_table() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:3378 expect_iter_name() warn: if statement not indented
+net/netfilter/nf_conntrack_netlink.c:3873 ctnetlink_init() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_ftp.c
+net/netfilter/nf_conntrack_ftp.c:139 try_number() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:144 try_number() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:207 get_port() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:213 get_port() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:230 try_eprt() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:235 try_eprt() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:241 try_eprt() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:245 try_eprt() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:263 try_eprt() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:298 find_pattern() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:310 find_pattern() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:321 find_pattern() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:328 find_pattern() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:393 help() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:407 help() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:429 help() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:470 help() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:495 help() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:499 help() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:521 help() warn: if statement not indented
+net/netfilter/nf_conntrack_ftp.c:576 nf_conntrack_ftp_init() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_irc.c
+net/netfilter/nf_conntrack_irc.c:193 help() warn: if statement not indented
+net/netfilter/nf_conntrack_irc.c:203 help() warn: if statement not indented
+net/netfilter/nf_conntrack_irc.c:210 help() warn: if statement not indented
+net/netfilter/nf_conntrack_irc.c:214 help() warn: if statement not indented
+net/netfilter/nf_conntrack_irc.c:222 help() warn: if statement not indented
+net/netfilter/nf_conntrack_irc.c:242 help() warn: if statement not indented
+  CHECK   net/netfilter/nf_conntrack_sip.c
+net/netfilter/nf_conntrack_sip.c:192 epaddr_len() warn: if statement not indented
+net/netfilter/nf_conntrack_sip.c:517 ct_sip_parse_header_uri() warn: if statement not indented
+net/netfilter/nf_conntrack_sip.c:680 sdp_addr_len() warn: if statement not indented
+net/netfilter/nf_conntrack_sip.c:949 set_expected_rtp_rtcp() warn: if statement not indented
+net/netfilter/nf_conntrack_sip.c:971 set_expected_rtp_rtcp() warn: if statement not indented
+./include/linux/skbuff.h:1121 skb_dst() warn: if statement not indented
+net/netfilter/nf_conntrack_sip.c:1044 process_sdp() warn: if statement not indented
+net/netfilter/nf_conntrack_sip.c:1127 process_sdp() warn: if statement not indented
+net/netfilter/nf_conntrack_sip.c:1293 process_register_request() warn: if statement not indented
+net/netfilter/nf_conntrack_sip.c:1303 process_register_request() warn: if statement not indented
+net/netfilter/nf_conntrack_sip.c:1521 process_sip_msg() warn: if statement not indented
+net/netfilter/nf_conntrack_sip.c:1608 sip_help_tcp() warn: if statement not indented
+net/netfilter/nf_conntrack_sip.c:1674 nf_conntrack_sip_init() warn: if statement not indented
+  CHECK   net/netfilter/nf_nat_core.c
+net/netfilter/nf_nat_core.c:285:9: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nf_nat_core.c:285:9: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nf_nat_core.c:165 hash_by_src() warn: if statement not indented
+net/netfilter/nf_nat_core.c:285 find_appropriate_src() warn: if statement not indented
+net/netfilter/nf_nat_core.c:285 find_appropriate_src() warn: if statement not indented
+net/netfilter/nf_nat_core.c:533 get_unique_tuple() warn: if statement not indented
+net/netfilter/nf_nat_core.c:591 nf_nat_setup_info() warn: if statement not indented
+net/netfilter/nf_nat_core.c:594 nf_nat_setup_info() warn: if statement not indented
+./include/linux/rculist.h:590 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:593 hlist_add_head_rcu() warn: if statement not indented
+net/netfilter/nf_nat_core.c:743 nf_nat_inet_fn() warn: if statement not indented
+net/netfilter/nf_nat_core.c:763 nf_nat_inet_fn() warn: if statement not indented
+net/netfilter/nf_nat_core.c:773 nf_nat_inet_fn() warn: if statement not indented
+./include/linux/rculist.h:514 hlist_del_rcu() warn: if statement not indented
+./include/linux/list.h:884 __hlist_del() warn: if statement not indented
+./include/linux/list.h:886 __hlist_del() warn: if statement not indented
+net/netfilter/nf_nat_core.c:963 nfnetlink_parse_nat_setup() warn: if statement not indented
+net/netfilter/nf_nat_core.c:1001 nf_nat_register_fn() warn: if statement not indented
+net/netfilter/nf_nat_core.c:1013 nf_nat_register_fn() warn: if statement not indented
+net/netfilter/nf_nat_core.c:1018 nf_nat_register_fn() warn: if statement not indented
+net/netfilter/nf_nat_core.c:1053 nf_nat_register_fn() warn: if statement not indented
+./include/net/netns/generic.h:46 net_generic() warn: if statement not indented
+net/netfilter/nf_nat_core.c:1082 nf_nat_unregister_fn() warn: if statement not indented
+net/netfilter/nf_nat_core.c:1094 nf_nat_unregister_fn() warn: if statement not indented
+net/netfilter/nf_nat_core.c:1104 nf_nat_unregister_fn() warn: if statement not indented
+net/netfilter/nf_nat_core.c:1152 nf_nat_init() warn: if statement not indented
+net/netfilter/nf_nat_core.c:1153 nf_nat_init() warn: if statement not indented
+net/netfilter/nf_nat_core.c:1157 nf_nat_init() warn: if statement not indented
+net/netfilter/nf_nat_core.c:1174 nf_nat_cleanup() warn: if statement not indented
+  CHECK   net/netfilter/nf_nat_proto.c
+net/netfilter/nf_nat_proto.c: note: in included file (through include/net/sctp/sctp.h, include/net/sctp/checksum.h):
+./include/net/sctp/structs.h:335:41: warning: array of flexible structures
+net/netfilter/nf_nat_proto.c:438 nf_nat_manip_pkt() warn: if statement not indented
+net/netfilter/nf_nat_proto.c:556 nf_nat_csum_recalc() warn: if statement not indented
+net/netfilter/nf_nat_proto.c:574 nf_nat_icmp_reply_translation() warn: if statement not indented
+./include/linux/skbuff.h:1121 skb_dst() warn: if statement not indented
+./arch/x86/include/asm/atomic.h:202 arch_atomic_try_cmpxchg() warn: if statement not indented
+./include/linux/skbuff.h:3086 skb_orphan() warn: if statement not indented
+net/netfilter/nf_nat_proto.c:851 nf_nat_icmpv6_reply_translation() warn: if statement not indented
+net/netfilter/nf_nat_proto.c:1080 nf_nat_inet_register_fn() warn: if statement not indented
+  CHECK   net/netfilter/nf_nat_helper.c
+net/netfilter/nf_nat_helper.c:34 mangle_contents() warn: if statement not indented
+net/netfilter/nf_nat_helper.c:48 mangle_contents() warn: if statement not indented
+net/netfilter/nf_nat_helper.c:52 mangle_contents() warn: if statement not indented
+./include/linux/skbuff.h:3016 __skb_set_length() warn: if statement not indented
+net/netfilter/nf_nat_helper.c:185 nf_nat_follow_master() warn: if statement not indented
+./include/linux/random.h:74 get_random_u32_below() warn: if statement not indented
+  CHECK   net/netfilter/nf_nat_masquerade.c
+net/netfilter/nf_nat_masquerade.c:39 nf_nat_masquerade_ipv4() warn: if statement not indented
+net/netfilter/nf_nat_masquerade.c:43 nf_nat_masquerade_ipv4() warn: if statement not indented
+net/netfilter/nf_nat_masquerade.c:49 nf_nat_masquerade_ipv4() error: we previously assumed 'ct' could be null (see line 43)
+./include/linux/skbuff.h:1121 skb_dst() warn: if statement not indented
+./include/linux/list.h:37 INIT_LIST_HEAD() warn: if statement not indented
+./include/linux/list.h:38 INIT_LIST_HEAD() warn: if statement not indented
+./arch/x86/include/asm/atomic.h:202 arch_atomic_try_cmpxchg() warn: if statement not indented
+net/netfilter/nf_nat_masquerade.c:251 nf_nat_masquerade_ipv6() warn: if statement not indented
+net/netfilter/nf_nat_masquerade.c:317 nf_nat_masquerade_inet_register_notifiers() warn: if statement not indented
+  CHECK   net/netfilter/nf_nat_ftp.c
+net/netfilter/nf_nat_ftp.c:78 nf_nat_ftp() warn: if statement not indented
+net/netfilter/nf_nat_ftp.c:100 nf_nat_ftp() warn: if statement not indented
+net/netfilter/nf_nat_ftp.c:117 nf_nat_ftp_fini() warn: if statement not indented
+net/netfilter/nf_nat_ftp.c:123 nf_nat_ftp_init() warn: if statement not indented
+net/netfilter/nf_nat_ftp.c:125 nf_nat_ftp_init() warn: if statement not indented
+  CHECK   net/netfilter/nf_nat_irc.c
+net/netfilter/nf_nat_irc.c:73 help() warn: if statement not indented
+net/netfilter/nf_nat_irc.c:89 nf_nat_irc_fini() warn: if statement not indented
+net/netfilter/nf_nat_irc.c:95 nf_nat_irc_init() warn: if statement not indented
+net/netfilter/nf_nat_irc.c:97 nf_nat_irc_init() warn: if statement not indented
+  CHECK   net/netfilter/nf_nat_sip.c
+net/netfilter/nf_nat_sip.c:327 nf_nat_sip_expected() warn: if statement not indented
+net/netfilter/nf_nat_sip.c:651 nf_nat_sip_fini() warn: if statement not indented
+net/netfilter/nf_nat_sip.c:668 nf_nat_sip_init() warn: if statement not indented
+net/netfilter/nf_nat_sip.c:670 nf_nat_sip_init() warn: if statement not indented
+  CHECK   net/netfilter/nf_tables_core.c
+net/netfilter/nf_tables_core.c:173 nft_update_chain_stats() warn: if statement not indented
+net/netfilter/nf_tables_core.c:201 expr_call_ops_eval() warn: if statement not indented
+net/netfilter/nf_tables_core.c:202 expr_call_ops_eval() warn: if statement not indented
+net/netfilter/nf_tables_core.c:203 expr_call_ops_eval() warn: if statement not indented
+net/netfilter/nf_tables_core.c:204 expr_call_ops_eval() warn: if statement not indented
+net/netfilter/nf_tables_core.c:205 expr_call_ops_eval() warn: if statement not indented
+net/netfilter/nf_tables_core.c:206 expr_call_ops_eval() warn: if statement not indented
+net/netfilter/nf_tables_core.c:207 expr_call_ops_eval() warn: if statement not indented
+net/netfilter/nf_tables_core.c:208 expr_call_ops_eval() warn: if statement not indented
+net/netfilter/nf_tables_core.c:209 expr_call_ops_eval() warn: if statement not indented
+net/netfilter/nf_tables_core.c:210 expr_call_ops_eval() warn: if statement not indented
+net/netfilter/nf_tables_core.c:211 expr_call_ops_eval() warn: if statement not indented
+net/netfilter/nf_tables_core.c:237 nft_do_chain() warn: if statement not indented
+net/netfilter/nf_tables_core.c:242 nft_do_chain() warn: if statement not indented
+net/netfilter/nf_tables_core.c:246 nft_do_chain() warn: if statement not indented
+net/netfilter/nf_tables_core.c:248 nft_do_chain() warn: if statement not indented
+net/netfilter/nf_tables_core.c:295 nft_do_chain() warn: if statement not indented
+net/netfilter/nf_tables_core.c:309 nft_do_chain() warn: if statement not indented
+net/netfilter/nf_tables_core.c:322 nft_do_chain() warn: if statement not indented
+net/netfilter/nf_tables_core.c:53 nft_trace_copy_nftrace() warn: if statement not indented
+net/netfilter/nf_tables_core.c:43 nft_trace_packet() warn: if statement not indented
+net/netfilter/nf_tables_core.c:124 nft_trace_verdict() warn: if statement not indented
+  CHECK   net/netfilter/nf_tables_api.c
+net/netfilter/nf_tables_api.c:113 nft_validate_state_update() warn: if statement not indented
+./include/net/netns/generic.h:46 net_generic() warn: if statement not indented
+./include/linux/list.h:37 INIT_LIST_HEAD() warn: if statement not indented
+./include/linux/list.h:38 INIT_LIST_HEAD() warn: if statement not indented
+./include/linux/list.h:115 __list_del() warn: if statement not indented
+net/netfilter/nf_tables_api.c:313 nft_netdev_unregister_hooks() warn: if statement not indented
+./include/linux/list.h:75 __list_add() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:1447 nft_genmask_cur() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:1159 nft_use_dec() warn: if statement not indented
+net/netfilter/nf_tables_api.c:634 nft_map_deactivate() warn: if statement not indented
+net/netfilter/nf_tables_api.c:790 nft_table_lookup() warn: if statement not indented
+net/netfilter/nf_tables_api.c:790 nft_table_lookup() warn: if statement not indented
+net/netfilter/nf_tables_api.c:912 lockdep_nfnl_nft_mutex_not_held() warn: if statement not indented
+./include/net/netlink.h:1029 nlmsg_trim() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1046 nf_tables_dump_tables() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1048 nf_tables_dump_tables() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1048 nf_tables_dump_tables() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1343 nf_tables_newtable() warn: if statement not indented
+./include/linux/rculist.h:84 __list_add_rcu() warn: if statement not indented
+./include/linux/rculist.h:84 __list_add_rcu() warn: if statement not indented
+./include/linux/rculist.h:84 __list_add_rcu() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1566 nf_tables_table_destroy() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1578 nft_register_chain_type() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1637 nft_chain_lookup() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1646 nft_chain_lookup() warn: if statement not indented
+./include/linux/rhashtable.h:594 __rhashtable_lookup() warn: if statement not indented
+./include/linux/rhashtable.h:599 __rhashtable_lookup() warn: if statement not indented
+./include/linux/rhashtable.h:614 __rhashtable_lookup() warn: if statement not indented
+./include/linux/rhashtable.h:369 rht_ptr_rcu() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1794 nf_tables_fill_chain_info() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1865 nf_tables_dump_chains() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1867 nf_tables_dump_chains() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1871 nf_tables_dump_chains() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1871 nf_tables_dump_chains() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1867 nf_tables_dump_chains() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1981 nft_stats_alloc() warn: if statement not indented
+./arch/x86/include/asm/preempt.h:80 __preempt_count_add() warn: if statement not indented
+./arch/x86/include/asm/preempt.h:80 __preempt_count_add() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1994 nft_chain_stats_replace() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1994 nft_chain_stats_replace() warn: if statement not indented
+net/netfilter/nf_tables_api.c:1994 nft_chain_stats_replace() warn: if statement not indented
+net/netfilter/nf_tables_api.c:2003 nf_tables_chain_free_chain_rules() warn: if statement not indented
+net/netfilter/nf_tables_api.c:2004 nf_tables_chain_free_chain_rules() warn: if statement not indented
+net/netfilter/nf_tables_api.c:2011 nf_tables_chain_free_chain_rules() warn: if statement not indented
+net/netfilter/nf_tables_api.c:2020 nf_tables_chain_destroy() warn: if statement not indented
+net/netfilter/nf_tables_api.c:2033 nf_tables_chain_destroy() warn: if statement not indented
+net/netfilter/nf_tables_api.c:2037 nf_tables_chain_destroy() warn: if statement not indented
+net/netfilter/nf_tables_api.c:2039 nf_tables_chain_destroy() warn: if statement not indented
+./include/linux/list.h:292 list_empty() warn: if statement not indented
+net/netfilter/nf_tables_api.c:2186 nft_chain_parse_hook() warn: if statement not indented
+./include/linux/rhashtable.h:715 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:725 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:754 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:756 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:758 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:758 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:758 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:779 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:784 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/bit_spinlock.h:28 bit_spin_lock() warn: if statement not indented
+./include/linux/bit_spinlock.h:60 bit_spin_unlock() warn: if statement not indented
+./include/linux/bit_spinlock.h:65 bit_spin_unlock() warn: if statement not indented
+./include/linux/rhashtable.h:401 rht_assign_unlock() warn: if statement not indented
+./include/linux/rhashtable.h:401 rht_assign_unlock() warn: if statement not indented
+./include/linux/rhashtable.h:401 rht_assign_unlock() warn: if statement not indented
+./include/linux/rhashtable.h:402 rht_assign_unlock() warn: if statement not indented
+net/netfilter/nf_tables_api.c:2394 nf_tables_addchain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:2394 nf_tables_addchain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:2394 nf_tables_addchain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:2457 nf_tables_addchain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:2458 nf_tables_addchain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:2675 nf_tables_newchain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:3127 __nft_rule_lookup() warn: if statement not indented
+net/netfilter/nf_tables_api.c:3127 __nft_rule_lookup() warn: if statement not indented
+net/netfilter/nf_tables_api.c:3278 __nf_tables_dump_rules() warn: if statement not indented
+net/netfilter/nf_tables_api.c:3278 __nf_tables_dump_rules() warn: if statement not indented
+net/netfilter/nf_tables_api.c:3319 nf_tables_dump_rules() warn: if statement not indented
+net/netfilter/nf_tables_api.c:3321 nf_tables_dump_rules() warn: if statement not indented
+net/netfilter/nf_tables_api.c:3336 nf_tables_dump_rules() warn: if statement not indented
+net/netfilter/nf_tables_api.c:3346 nf_tables_dump_rules() warn: if statement not indented
+net/netfilter/nf_tables_api.c:3346 nf_tables_dump_rules() warn: if statement not indented
+net/netfilter/nf_tables_api.c:3321 nf_tables_dump_rules() warn: if statement not indented
+net/netfilter/nf_tables_api.c:3580 nft_set_catchall_validate() warn: if statement not indented
+net/netfilter/nf_tables_api.c:3580 nft_set_catchall_validate() warn: if statement not indented
+net/netfilter/nf_tables_api.c:3622 nf_tables_newrule() warn: if statement not indented
+net/netfilter/nf_tables_api.c:3966 nft_select_set_ops() warn: if statement not indented
+net/netfilter/nf_tables_api.c:4055 nft_set_lookup() warn: if statement not indented
+net/netfilter/nf_tables_api.c:4055 nft_set_lookup() warn: if statement not indented
+net/netfilter/nf_tables_api.c:4221 nf_tables_fill_set() warn: if statement not indented
+net/netfilter/nf_tables_api.c:4222 nf_tables_fill_set() warn: if statement not indented
+net/netfilter/nf_tables_api.c:4365 nf_tables_dump_sets() warn: if statement not indented
+net/netfilter/nf_tables_api.c:4367 nf_tables_dump_sets() warn: if statement not indented
+net/netfilter/nf_tables_api.c:4382 nf_tables_dump_sets() warn: if statement not indented
+net/netfilter/nf_tables_api.c:4382 nf_tables_dump_sets() warn: if statement not indented
+net/netfilter/nf_tables_api.c:4367 nf_tables_dump_sets() warn: if statement not indented
+net/netfilter/nf_tables_api.c:4930 nft_set_catchall_destroy() warn: if statement not indented
+net/netfilter/nf_tables_api.c:4946 nft_set_destroy() warn: if statement not indented
+net/netfilter/nf_tables_api.c:5040 nft_set_catchall_bind_check() warn: if statement not indented
+net/netfilter/nf_tables_api.c:5040 nft_set_catchall_bind_check() warn: if statement not indented
+net/netfilter/nf_tables_api.c:5152 nft_map_activate() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:1165 nft_use_inc_restore() warn: if statement not indented
+net/netfilter/nf_tables_api.c:5430 nft_set_catchall_dump() warn: if statement not indented
+net/netfilter/nf_tables_api.c:5430 nft_set_catchall_dump() warn: if statement not indented
+net/netfilter/nf_tables_api.c:5460 nf_tables_dump_set() warn: if statement not indented
+net/netfilter/nf_tables_api.c:5462 nf_tables_dump_set() warn: if statement not indented
+net/netfilter/nf_tables_api.c:5470 nf_tables_dump_set() warn: if statement not indented
+net/netfilter/nf_tables_api.c:5470 nf_tables_dump_set() warn: if statement not indented
+net/netfilter/nf_tables_api.c:5462 nf_tables_dump_set() warn: if statement not indented
+net/netfilter/nf_tables_api.c:5644 nft_setelem_catchall_get() warn: if statement not indented
+net/netfilter/nf_tables_api.c:5644 nft_setelem_catchall_get() warn: if statement not indented
+net/netfilter/nf_tables_api.c:6068 nft_set_catchall_lookup() warn: if statement not indented
+net/netfilter/nf_tables_api.c:6068 nft_set_catchall_lookup() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:1519 nft_set_elem_is_dead() warn: if statement not indented
+net/netfilter/nf_tables_api.c:6201 nft_setelem_catchall_destroy() warn: if statement not indented
+net/netfilter/nf_tables_api.c:6331 nft_add_set_elem() warn: if statement not indented
+net/netfilter/nf_tables_api.c:6432 nft_add_set_elem() warn: if statement not indented
+./arch/x86/include/asm/atomic.h:202 arch_atomic_try_cmpxchg() warn: if statement not indented
+net/netfilter/nf_tables_api.c:6869 nft_set_catchall_flush() warn: if statement not indented
+net/netfilter/nf_tables_api.c:6869 nft_set_catchall_flush() warn: if statement not indented
+net/netfilter/nf_tables_api.c:6994 nft_obj_lookup() warn: if statement not indented
+net/netfilter/nf_tables_api.c:7002 nft_obj_lookup() warn: if statement not indented
+net/netfilter/nf_tables_api.c:7222 nf_tables_newobj() warn: if statement not indented
+net/netfilter/nf_tables_api.c:7363 nf_tables_dump_obj() warn: if statement not indented
+net/netfilter/nf_tables_api.c:7365 nf_tables_dump_obj() warn: if statement not indented
+net/netfilter/nf_tables_api.c:7370 nf_tables_dump_obj() warn: if statement not indented
+net/netfilter/nf_tables_api.c:7370 nf_tables_dump_obj() warn: if statement not indented
+net/netfilter/nf_tables_api.c:7365 nf_tables_dump_obj() warn: if statement not indented
+net/netfilter/nf_tables_api.c:7682 nft_flowtable_lookup() warn: if statement not indented
+net/netfilter/nf_tables_api.c:7682 nft_flowtable_lookup() warn: if statement not indented
+net/netfilter/nf_tables_api.c:7850 __nft_unregister_flowtable_net_hooks() warn: if statement not indented
+net/netfilter/nf_tables_api.c:7910 nft_register_flowtable_net_hooks() warn: if statement not indented
+net/netfilter/nf_tables_api.c:7922 nft_flowtable_hooks_destroy() warn: if statement not indented
+net/netfilter/nf_tables_api.c:7992 nft_flowtable_update() warn: if statement not indented
+net/netfilter/nf_tables_api.c:8116 nf_tables_newflowtable() warn: if statement not indented
+net/netfilter/nf_tables_api.c:8276 nf_tables_fill_flowtable_info() warn: if statement not indented
+net/netfilter/nf_tables_api.c:8276 nf_tables_fill_flowtable_info() warn: if statement not indented
+net/netfilter/nf_tables_api.c:8309 nf_tables_dump_flowtable() warn: if statement not indented
+net/netfilter/nf_tables_api.c:8311 nf_tables_dump_flowtable() warn: if statement not indented
+net/netfilter/nf_tables_api.c:8315 nf_tables_dump_flowtable() warn: if statement not indented
+net/netfilter/nf_tables_api.c:8315 nf_tables_dump_flowtable() warn: if statement not indented
+net/netfilter/nf_tables_api.c:8311 nf_tables_dump_flowtable() warn: if statement not indented
+net/netfilter/nf_tables_api.c:8505 nf_tables_fill_gen_info() warn: if statement not indented
+net/netfilter/nf_tables_api.c:8528 nft_flowtable_event() warn: if statement not indented
+./include/linux/rhashtable.h:1076 __rhashtable_remove_fast() warn: if statement not indented
+./include/linux/rhashtable.h:1085 __rhashtable_remove_fast() warn: if statement not indented
+./include/linux/rhashtable.h:1085 __rhashtable_remove_fast() warn: if statement not indented
+./include/linux/rhashtable.h:1027 __rhashtable_remove_fast_one() warn: if statement not indented
+./include/linux/rhashtable.h:1038 __rhashtable_remove_fast_one() warn: if statement not indented
+./include/linux/rhashtable.h:1045 __rhashtable_remove_fast_one() warn: if statement not indented
+./include/linux/rhashtable.h:1045 __rhashtable_remove_fast_one() warn: if statement not indented
+./include/linux/rhashtable.h:1045 __rhashtable_remove_fast_one() warn: if statement not indented
+net/netfilter/nf_tables_api.c:8952 nf_tables_commit_chain_prepare() warn: if statement not indented
+net/netfilter/nf_tables_api.c:8965 nf_tables_commit_chain_prepare() warn: if statement not indented
+net/netfilter/nf_tables_api.c:8971 nf_tables_commit_chain_prepare() warn: if statement not indented
+net/netfilter/nf_tables_api.c:8985 nf_tables_commit_chain_prepare() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9049 nf_tables_commit_chain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9049 nf_tables_commit_chain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9049 nf_tables_commit_chain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9052 nf_tables_commit_chain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9052 nf_tables_commit_chain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9052 nf_tables_commit_chain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9060 nf_tables_commit_chain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9060 nf_tables_commit_chain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9060 nf_tables_commit_chain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9062 nf_tables_commit_chain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9062 nf_tables_commit_chain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9062 nf_tables_commit_chain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9085 nft_chain_del() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9148 nft_trans_gc_work_done() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9251 nft_trans_gc_queue_sync() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9265 nft_trans_gc_queue_sync_done() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9282 nft_trans_gc_catchall_async() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9282 nft_trans_gc_catchall_async() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:1511 nft_set_elem_dead() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9309 nft_trans_gc_catchall_sync() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9337 nf_tables_module_autoload_cleanup() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9339 nf_tables_module_autoload_cleanup() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9366 nf_tables_commit_release() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9412 nft_commit_notify() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9451 nf_tables_commit_audit_collect() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9451 nf_tables_commit_audit_collect() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9495 nft_gc_seq_begin() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9496 nft_gc_seq_begin() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9503 nft_gc_seq_end() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9529 nf_tables_commit() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9537 nf_tables_commit() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9585 nf_tables_commit() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9589 nf_tables_commit() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9665 nf_tables_commit() warn: if statement not indented
+net/netfilter/nf_tables_api.c:9666 nf_tables_commit() warn: if statement not indented
+net/netfilter/nf_tables_api.c:10165 nft_set_catchall_loops() warn: if statement not indented
+net/netfilter/nf_tables_api.c:10165 nft_set_catchall_loops() warn: if statement not indented
+net/netfilter/nf_tables_api.c:10573 nft_data_init() warn: if statement not indented
+net/netfilter/nf_tables_api.c:10616 nft_data_release() warn: if statement not indented
+net/netfilter/nf_tables_api.c:10640 nft_data_dump() warn: if statement not indented
+net/netfilter/nf_tables_api.c:10652 __nft_release_basechain() warn: if statement not indented
+net/netfilter/nf_tables_api.c:10858 nf_tables_exit_net() warn: if statement not indented
+net/netfilter/nf_tables_api.c:10859 nf_tables_exit_net() warn: if statement not indented
+net/netfilter/nf_tables_api.c:10860 nf_tables_exit_net() warn: if statement not indented
+  CHECK   net/netfilter/nft_chain_filter.c
+./include/net/netfilter/nf_tables_ipv4.h:68 nft_set_pktinfo_ipv4_ingress() warn: if statement not indented
+./include/net/netfilter/nf_tables_ipv4.h:82 nft_set_pktinfo_ipv4_ingress() warn: if statement not indented
+./include/net/netfilter/nf_tables_ipv4.h:69 nft_set_pktinfo_ipv4_ingress() warn: missing unwind goto?
+./include/net/netfilter/nf_tables_ipv6.h:91 nft_set_pktinfo_ipv6_ingress() warn: if statement not indented
+./include/net/netfilter/nf_tables_ipv6.h:91 nft_set_pktinfo_ipv6_ingress() warn: if statement not indented
+./include/net/netfilter/nf_tables_ipv6.h:91 nft_set_pktinfo_ipv6_ingress() warn: if statement not indented
+./include/net/netfilter/nf_tables_ipv6.h:108 nft_set_pktinfo_ipv6_ingress() warn: if statement not indented
+./include/net/netfilter/nf_tables_ipv6.h:108 nft_set_pktinfo_ipv6_ingress() warn: if statement not indented
+./include/net/netfilter/nf_tables_ipv6.h:108 nft_set_pktinfo_ipv6_ingress() warn: if statement not indented
+./include/net/netfilter/nf_tables_ipv6.h:92 nft_set_pktinfo_ipv6_ingress() warn: missing unwind goto?
+./include/net/addrconf.h:323 __in6_dev_get() warn: if statement not indented
+  CHECK   net/netfilter/nf_tables_trace.c
+net/netfilter/nf_tables_trace.c:50 nf_trace_fill_ll_header() warn: if statement not indented
+net/netfilter/nf_tables_trace.c:271 nft_trace_notify() warn: if statement not indented
+net/netfilter/nf_tables_trace.c:289 nft_trace_init() warn: if statement not indented
+  CHECK   net/netfilter/nft_immediate.c
+./include/net/netfilter/nf_tables.h:1159 nft_use_dec() warn: if statement not indented
+./include/linux/list.h:115 __list_del() warn: if statement not indented
+  CHECK   net/netfilter/nft_cmp.c
+net/netfilter/nft_cmp.c:133 nft_payload_n2h() warn: if statement not indented
+  CHECK   net/netfilter/nft_range.c
+  CHECK   net/netfilter/nft_bitwise.c
+  CHECK   net/netfilter/nft_byteorder.c
+  CHECK   net/netfilter/nft_payload.c
+net/netfilter/nft_payload.c: note: in included file (through include/net/sctp/sctp.h, include/net/sctp/checksum.h):
+./include/net/sctp/structs.h:335:41: warning: array of flexible structures
+net/netfilter/nft_payload.c:160 nft_payload_eval() warn: if statement not indented
+net/netfilter/nft_payload.c:698 nft_payload_set_eval() warn: if statement not indented
+  CHECK   net/netfilter/nft_lookup.c
+net/netfilter/nft_lookup.c:51 nft_set_do_lookup() warn: if statement not indented
+  CHECK   net/netfilter/nft_dynset.c
+./arch/x86/include/asm/atomic.h:202 arch_atomic_try_cmpxchg() warn: if statement not indented
+net/netfilter/nft_dynset.c:171 nft_dynset_init() warn: if statement not indented
+net/netfilter/nft_dynset.c:262 nft_dynset_init() warn: missing unwind goto?
+./include/net/netns/generic.h:46 net_generic() warn: if statement not indented
+  CHECK   net/netfilter/nft_meta.c
+net/netfilter/nft_meta.c:117 nft_meta_get_eval_pkttype_lo() warn: if statement not indented
+net/netfilter/nft_meta.c:122 nft_meta_get_eval_pkttype_lo() warn: if statement not indented
+./include/linux/cgroup-defs.h:808 sock_cgroup_classid() warn: if statement not indented
+net/netfilter/nft_meta.c:408 nft_meta_get_eval() warn: if statement not indented
+net/netfilter/nft_meta.c:454 nft_meta_set_eval() warn: if statement not indented
+  CHECK   net/netfilter/nft_rt.c
+net/netfilter/nft_rt.c:96 nft_rt_get_eval() warn: if statement not indented
+./include/linux/skbuff.h:1121 skb_dst() warn: if statement not indented
+  CHECK   net/netfilter/nft_exthdr.c
+net/netfilter/nft_exthdr.c: note: in included file (through include/net/sctp/sctp.h):
+./include/net/sctp/structs.h:335:41: warning: array of flexible structures
+net/netfilter/nft_exthdr.c:304 nft_exthdr_tcp_set_eval() warn: if statement not indented
+  CHECK   net/netfilter/nft_last.c
+net/netfilter/nft_last.c:62 nft_last_eval() warn: if statement not indented
+net/netfilter/nft_last.c:63 nft_last_eval() warn: if statement not indented
+net/netfilter/nft_last.c:64 nft_last_eval() warn: if statement not indented
+net/netfilter/nft_last.c:65 nft_last_eval() warn: if statement not indented
+net/netfilter/nft_last.c:72 nft_last_dump() warn: if statement not indented
+net/netfilter/nft_last.c:73 nft_last_dump() warn: if statement not indented
+net/netfilter/nft_last.c:77 nft_last_dump() warn: if statement not indented
+  CHECK   net/netfilter/nft_counter.c
+net/netfilter/nft_counter.c:79 nft_counter_do_init() warn: if statement not indented
+./arch/x86/include/asm/preempt.h:80 __preempt_count_add() warn: if statement not indented
+./arch/x86/include/asm/preempt.h:80 __preempt_count_add() warn: if statement not indented
+net/netfilter/nft_counter.c:132 nft_counter_fetch() warn: for statement not indented
+./include/linux/seqlock.h:101 seqcount_lockdep_reader_access() warn: if statement not indented
+./include/linux/seqlock.h:104 seqcount_lockdep_reader_access() warn: if statement not indented
+./include/linux/seqlock.h:259 __seqprop_sequence() warn: if statement not indented
+./include/linux/seqlock.h:429 do___read_seqcount_retry() warn: if statement not indented
+net/netfilter/nft_counter.c:41 nft_counter_do_eval() warn: if statement not indented
+net/netfilter/nft_counter.c:46 nft_counter_do_eval() warn: if statement not indented
+net/netfilter/nft_counter.c:46 nft_counter_do_eval() warn: if statement not indented
+./include/linux/seqlock.h:269 __seqprop_assert() warn: if statement not indented
+net/netfilter/nft_counter.c:246 nft_counter_clone() warn: if statement not indented
+net/netfilter/nft_counter.c:271 nft_counter_offload_stats() warn: if statement not indented
+net/netfilter/nft_counter.c:274 nft_counter_offload_stats() warn: if statement not indented
+net/netfilter/nft_counter.c:274 nft_counter_offload_stats() warn: if statement not indented
+net/netfilter/nft_counter.c:275 nft_counter_offload_stats() warn: if statement not indented
+  CHECK   net/netfilter/nft_chain_route.c
+  CHECK   net/netfilter/nf_tables_offload.c
+./include/linux/netdevice.h:3985 __dev_put() warn: if statement not indented
+./include/linux/netdevice.h:3985 __dev_put() warn: if statement not indented
+net/netfilter/nf_tables_offload.c:175 nft_offload_update_dependency() warn: if statement not indented
+net/netfilter/nf_tables_offload.c:179 nft_offload_update_dependency() warn: if statement not indented
+./include/linux/list.h:292 list_empty() warn: if statement not indented
+./include/linux/list.h:115 __list_del() warn: if statement not indented
+net/netfilter/nf_tables_offload.c:359 nft_block_setup() warn: if statement not indented
+./include/linux/list.h:37 INIT_LIST_HEAD() warn: if statement not indented
+./include/linux/list.h:38 INIT_LIST_HEAD() warn: if statement not indented
+./include/net/netns/generic.h:46 net_generic() warn: if statement not indented
+./include/linux/list.h:75 __list_add() warn: if statement not indented
+net/netfilter/nf_tables_offload.c:553 nft_flow_rule_offload_abort() warn: if statement not indented
+  CHECK   net/netfilter/nft_set_hash.c
+net/netfilter/nft_set_hash.c:494:9: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nft_set_hash.c:494:9: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nft_set_hash.c:514:9: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nft_set_hash.c:514:9: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nft_set_hash.c:535:9: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nft_set_hash.c:535:9: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nft_set_hash.c:641:17: error: static assertion failed: "pointer type mismatch in container_of()"
+net/netfilter/nft_set_hash.c:641:17: error: static assertion failed: "pointer type mismatch in container_of()"
+./include/net/netfilter/nf_tables.h:1447 nft_genmask_cur() warn: if statement not indented
+./include/linux/rhashtable.h:594 __rhashtable_lookup() warn: if statement not indented
+./include/linux/rhashtable.h:599 __rhashtable_lookup() warn: if statement not indented
+./include/linux/rhashtable.h:614 __rhashtable_lookup() warn: if statement not indented
+./include/linux/rhashtable.h:369 rht_ptr_rcu() warn: if statement not indented
+./include/linux/rhashtable.h:980 rhashtable_lookup_get_insert_key() warn: if statement not indented
+./include/linux/rhashtable.h:715 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:725 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:754 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:756 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:758 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:758 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:758 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:779 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/rhashtable.h:784 __rhashtable_insert_fast() warn: if statement not indented
+./include/linux/bit_spinlock.h:28 bit_spin_lock() warn: if statement not indented
+./include/linux/bit_spinlock.h:60 bit_spin_unlock() warn: if statement not indented
+./include/linux/bit_spinlock.h:65 bit_spin_unlock() warn: if statement not indented
+./include/linux/rhashtable.h:401 rht_assign_unlock() warn: if statement not indented
+./include/linux/rhashtable.h:401 rht_assign_unlock() warn: if statement not indented
+./include/linux/rhashtable.h:401 rht_assign_unlock() warn: if statement not indented
+./include/linux/rhashtable.h:402 rht_assign_unlock() warn: if statement not indented
+./arch/x86/include/asm/preempt.h:80 __preempt_count_add() warn: if statement not indented
+./arch/x86/include/asm/preempt.h:80 __preempt_count_add() warn: if statement not indented
+./include/linux/rhashtable.h:1076 __rhashtable_remove_fast() warn: if statement not indented
+./include/linux/rhashtable.h:1085 __rhashtable_remove_fast() warn: if statement not indented
+./include/linux/rhashtable.h:1085 __rhashtable_remove_fast() warn: if statement not indented
+./include/linux/rhashtable.h:1027 __rhashtable_remove_fast_one() warn: if statement not indented
+./include/linux/rhashtable.h:1038 __rhashtable_remove_fast_one() warn: if statement not indented
+./include/linux/rhashtable.h:1045 __rhashtable_remove_fast_one() warn: if statement not indented
+./include/linux/rhashtable.h:1045 __rhashtable_remove_fast_one() warn: if statement not indented
+./include/linux/rhashtable.h:1045 __rhashtable_remove_fast_one() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:1511 nft_set_elem_dead() warn: if statement not indented
+net/netfilter/nft_set_hash.c:327 nft_rhash_gc() warn: if statement not indented
+net/netfilter/nft_set_hash.c:347 nft_rhash_gc() warn: if statement not indented
+./include/net/netns/generic.h:46 net_generic() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:1519 nft_set_elem_is_dead() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:606 nft_set_gc_interval() warn: if statement not indented
+./include/linux/list.h:37 INIT_LIST_HEAD() warn: if statement not indented
+./include/linux/list.h:38 INIT_LIST_HEAD() warn: if statement not indented
+net/netfilter/nft_set_hash.c:494 nft_hash_lookup() warn: if statement not indented
+net/netfilter/nft_set_hash.c:494 nft_hash_lookup() warn: if statement not indented
+net/netfilter/nft_set_hash.c:514 nft_hash_get() warn: if statement not indented
+net/netfilter/nft_set_hash.c:514 nft_hash_get() warn: if statement not indented
+net/netfilter/nft_set_hash.c:535 nft_hash_lookup_fast() warn: if statement not indented
+net/netfilter/nft_set_hash.c:535 nft_hash_lookup_fast() warn: if statement not indented
+./include/linux/rculist.h:590 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:591 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:593 hlist_add_head_rcu() warn: if statement not indented
+./include/linux/rculist.h:514 hlist_del_rcu() warn: if statement not indented
+./include/linux/list.h:884 __hlist_del() warn: if statement not indented
+./include/linux/list.h:886 __hlist_del() warn: if statement not indented
+net/netfilter/nft_set_hash.c:641 nft_hash_walk() warn: if statement not indented
+net/netfilter/nft_set_hash.c:641 nft_hash_walk() warn: if statement not indented
+  CHECK   net/netfilter/nft_set_bitmap.c
+./include/net/netfilter/nf_tables.h:1447 nft_genmask_cur() warn: if statement not indented
+net/netfilter/nft_set_bitmap.c:96 nft_bitmap_elem_find() warn: if statement not indented
+net/netfilter/nft_set_bitmap.c:96 nft_bitmap_elem_find() warn: if statement not indented
+net/netfilter/nft_set_bitmap.c:114 nft_bitmap_get() warn: if statement not indented
+net/netfilter/nft_set_bitmap.c:114 nft_bitmap_get() warn: if statement not indented
+./include/linux/rculist.h:84 __list_add_rcu() warn: if statement not indented
+./include/linux/rculist.h:84 __list_add_rcu() warn: if statement not indented
+./include/linux/rculist.h:84 __list_add_rcu() warn: if statement not indented
+./include/linux/list.h:115 __list_del() warn: if statement not indented
+net/netfilter/nft_set_bitmap.c:223 nft_bitmap_walk() warn: if statement not indented
+net/netfilter/nft_set_bitmap.c:223 nft_bitmap_walk() warn: if statement not indented
+./include/linux/list.h:37 INIT_LIST_HEAD() warn: if statement not indented
+./include/linux/list.h:38 INIT_LIST_HEAD() warn: if statement not indented
+  CHECK   net/netfilter/nft_set_rbtree.c
+./include/net/netfilter/nf_tables.h:1519 nft_set_elem_is_dead() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:65 __nft_rbtree_lookup() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:74 __nft_rbtree_lookup() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:82 __nft_rbtree_lookup() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:85 __nft_rbtree_lookup() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:95 __nft_rbtree_lookup() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:1447 nft_genmask_cur() warn: if statement not indented
+./include/linux/seqlock.h:429 do___read_seqcount_retry() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:121 nft_rbtree_lookup() warn: for statement not indented
+net/netfilter/nft_set_rbtree.c:129 nft_rbtree_lookup() warn: for statement not indented
+./include/linux/seqlock.h:101 seqcount_lockdep_reader_access() warn: if statement not indented
+./include/linux/seqlock.h:104 seqcount_lockdep_reader_access() warn: if statement not indented
+./include/linux/seqlock.h:274 __seqprop_raw_spinlock_sequence() warn: if statement not indented
+./include/linux/seqlock.h:274 __seqprop_raw_spinlock_sequence() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:146 __nft_rbtree_get() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:156 __nft_rbtree_get() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:160 __nft_rbtree_get() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:165 __nft_rbtree_get() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:182 __nft_rbtree_get() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:204 nft_rbtree_get() warn: for statement not indented
+net/netfilter/nft_set_rbtree.c:215 nft_rbtree_get() warn: for statement not indented
+net/netfilter/nft_set_rbtree.c:274 nft_rbtree_gc_elem() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:282 nft_rbtree_gc_elem() warn: if statement not indented
+./include/linux/rbtree.h:74 rb_link_node_rcu() warn: if statement not indented
+./include/linux/rbtree.h:74 rb_link_node_rcu() warn: if statement not indented
+./include/linux/rbtree.h:74 rb_link_node_rcu() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:501 nft_rbtree_insert() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:503 nft_rbtree_insert() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:503 nft_rbtree_insert() warn: if statement not indented
+./include/linux/seqlock.h:274 __seqprop_raw_spinlock_assert() warn: if statement not indented
+./include/linux/seqlock.h:274 __seqprop_raw_spinlock_preemptible() warn: if statement not indented
+./arch/x86/include/asm/preempt.h:80 __preempt_count_add() warn: if statement not indented
+./arch/x86/include/asm/preempt.h:80 __preempt_count_add() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:518 nft_rbtree_remove() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:520 nft_rbtree_remove() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:520 nft_rbtree_remove() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:630 nft_rbtree_gc() warn: if statement not indented
+net/netfilter/nft_set_rbtree.c:643 nft_rbtree_gc() warn: if statement not indented
+./include/net/netns/generic.h:46 net_generic() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:1511 nft_set_elem_dead() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:606 nft_set_gc_interval() warn: if statement not indented
+./include/linux/list.h:37 INIT_LIST_HEAD() warn: if statement not indented
+./include/linux/list.h:38 INIT_LIST_HEAD() warn: if statement not indented
+  CHECK   net/netfilter/nft_set_pipapo.c
+net/netfilter/nft_set_pipapo.c:427 nft_pipapo_lookup() warn: if statement not indented
+net/netfilter/nft_set_pipapo.c:448 nft_pipapo_lookup() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:1447 nft_genmask_cur() warn: if statement not indented
+net/netfilter/nft_set_pipapo.c:872 pipapo_lt_bits_adjust() warn: if statement not indented
+net/netfilter/nft_set_pipapo.c:1255 nft_pipapo_insert() warn: if statement not indented
+net/netfilter/nft_set_pipapo.c:1263 nft_pipapo_insert() warn: if statement not indented
+./arch/x86/include/asm/preempt.h:80 __preempt_count_add() warn: if statement not indented
+./arch/x86/include/asm/preempt.h:80 __preempt_count_add() warn: if statement not indented
+net/netfilter/nft_set_pipapo.c:1693 nft_pipapo_commit() warn: if statement not indented
+net/netfilter/nft_set_pipapo.c:1694 nft_pipapo_commit() warn: if statement not indented
+net/netfilter/nft_set_pipapo.c:1694 nft_pipapo_commit() warn: if statement not indented
+net/netfilter/nft_set_pipapo.c:1694 nft_pipapo_commit() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:606 nft_set_gc_interval() warn: if statement not indented
+./include/net/netns/generic.h:46 net_generic() warn: if statement not indented
+net/netfilter/nft_set_pipapo.c:2023 nft_pipapo_walk() warn: if statement not indented
+net/netfilter/nft_set_pipapo.c:2178 nft_pipapo_init() warn: if statement not indented
+net/netfilter/nft_set_pipapo.c:2178 nft_pipapo_init() warn: if statement not indented
+net/netfilter/nft_set_pipapo.c:2178 nft_pipapo_init() warn: if statement not indented
+  CHECK   net/netfilter/nft_set_pipapo_avx2.c
+net/netfilter/nft_set_pipapo_avx2.c:179 nft_pipapo_avx2_refill() warn: if statement not indented
+net/netfilter/nft_set_pipapo_avx2.c:179 nft_pipapo_avx2_refill() warn: if statement not indented
+net/netfilter/nft_set_pipapo_avx2.c:180 nft_pipapo_avx2_refill() warn: if statement not indented
+net/netfilter/nft_set_pipapo_avx2.c:180 nft_pipapo_avx2_refill() warn: if statement not indented
+net/netfilter/nft_set_pipapo_avx2.c:181 nft_pipapo_avx2_refill() warn: if statement not indented
+net/netfilter/nft_set_pipapo_avx2.c:181 nft_pipapo_avx2_refill() warn: if statement not indented
+net/netfilter/nft_set_pipapo_avx2.c:182 nft_pipapo_avx2_refill() warn: if statement not indented
+net/netfilter/nft_set_pipapo_avx2.c:182 nft_pipapo_avx2_refill() warn: if statement not indented
+net/netfilter/nft_set_pipapo_avx2.c:1062 nft_pipapo_avx2_lookup_slow() warn: if statement not indented
+net/netfilter/nft_set_pipapo_avx2.c:1134 nft_pipapo_avx2_lookup() warn: if statement not indented
+net/netfilter/nft_set_pipapo_avx2.c:1200 nft_pipapo_avx2_lookup() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:1447 nft_genmask_cur() warn: if statement not indented
+  CHECK   net/netfilter/nft_ct.c
+net/netfilter/nft_ct.c:118 nft_ct_get_eval() warn: if statement not indented
+./include/net/netfilter/nf_conntrack.h:288 nf_ct_expires() warn: if statement not indented
+net/netfilter/nft_ct.c:1138 nft_ct_helper_obj_eval() warn: if statement not indented
+net/netfilter/nft_ct.c:1150 nft_ct_helper_obj_eval() warn: if statement not indented
+net/netfilter/nft_ct.c:1150 nft_ct_helper_obj_eval() warn: if statement not indented
+net/netfilter/nft_ct.c:1150 nft_ct_helper_obj_eval() warn: if statement not indented
+net/netfilter/nft_ct.c:1343 nft_ct_module_init() warn: if statement not indented
+  CHECK   net/netfilter/nft_limit.c
+  CHECK   net/netfilter/nft_nat.c
+  CHECK   net/netfilter/nft_objref.c
+./include/net/netfilter/nf_tables.h:1159 nft_use_dec() warn: if statement not indented
+./include/net/netfilter/nf_tables.h:1165 nft_use_inc_restore() warn: if statement not indented
+  CHECK   net/netfilter/nft_chain_nat.c
+  CHECK   net/netfilter/x_tables.c
+./include/linux/list.h:75 __list_add() warn: if statement not indented
+./include/linux/list.h:115 __list_del() warn: if statement not indented
+./include/linux/thread_info.h:233 check_copy_size() warn: if statement not indented
+net/netfilter/x_tables.c:491 xt_check_match() warn: if statement not indented
+net/netfilter/x_tables.c:499 xt_check_match() warn: if statement not indented
+net/netfilter/x_tables.c:507 xt_check_match() warn: if statement not indented
+net/netfilter/x_tables.c:517 xt_check_match() warn: if statement not indented
+net/netfilter/x_tables.c:590 xt_check_table_hooks() warn: if statement not indented
+net/netfilter/x_tables.c:628 xt_check_table_hooks() warn: if statement not indented
+net/netfilter/x_tables.c:669 xt_compat_add_offset() warn: if statement not indented
+net/netfilter/x_tables.c:671 xt_compat_add_offset() warn: if statement not indented
+net/netfilter/x_tables.c:688 xt_compat_flush_offsets() warn: if statement not indented
+net/netfilter/x_tables.c:721 xt_compat_init_offsets() warn: if statement not indented
+net/netfilter/x_tables.c:726 xt_compat_init_offsets() warn: if statement not indented
+net/netfilter/x_tables.c:861 xt_compat_check_entry_offsets() warn: if statement not indented
+net/netfilter/x_tables.c:1006 xt_check_target() warn: if statement not indented
+net/netfilter/x_tables.c:1014 xt_check_target() warn: if statement not indented
+net/netfilter/x_tables.c:1022 xt_check_target() warn: if statement not indented
+net/netfilter/x_tables.c:1032 xt_check_target() warn: if statement not indented
+./include/net/netns/generic.h:46 net_generic() warn: if statement not indented
+net/netfilter/x_tables.c:1405 xt_replace_table() warn: if statement not indented
+./include/linux/seqlock.h:259 __seqprop_sequence() warn: if statement not indented
+net/netfilter/x_tables.c:1483 xt_register_table() warn: if statement not indented
+net/netfilter/x_tables.c:1770 xt_register_template() warn: if statement not indented
+net/netfilter/x_tables.c:1779 xt_register_template() warn: if statement not indented
+net/netfilter/x_tables.c:1809 xt_unregister_template() warn: if statement not indented
+net/netfilter/x_tables.c:1924 xt_percpu_counter_alloc() warn: if statement not indented
+./include/linux/list.h:37 INIT_LIST_HEAD() warn: if statement not indented
+./include/linux/list.h:38 INIT_LIST_HEAD() warn: if statement not indented
+net/netfilter/x_tables.c:1970 xt_net_exit() warn: if statement not indented
+./include/linux/list.h:292 list_empty() warn: if statement not indented
+  CHECK   net/netfilter/xt_tcpudp.c
+net/netfilter/xt_tcpudp.c:44 tcp_find_option() warn: if statement not indented
+net/netfilter/xt_tcpudp.c:80 tcp_mt() warn: if statement not indented
+net/netfilter/xt_tcpudp.c:91 tcp_mt() warn: if statement not indented
+net/netfilter/xt_tcpudp.c:143 udp_mt() warn: if statement not indented
+  CHECK   net/netfilter/xt_CONNSECMARK.c
+net/netfilter/xt_CONNSECMARK.c:90 connsecmark_tg_check() warn: if statement not indented
+net/netfilter/xt_CONNSECMARK.c:101 connsecmark_tg_check() warn: if statement not indented
+net/netfilter/xt_CONNSECMARK.c:107 connsecmark_tg_check() warn: if statement not indented
+  CHECK   net/netfilter/xt_NFLOG.c
+  CHECK   net/netfilter/xt_SECMARK.c
+net/netfilter/xt_SECMARK.c:54 checkentry_lsm() warn: if statement not indented
+net/netfilter/xt_SECMARK.c:60 checkentry_lsm() warn: if statement not indented
+net/netfilter/xt_SECMARK.c:67 checkentry_lsm() warn: if statement not indented
+net/netfilter/xt_SECMARK.c:82 secmark_tg_check() warn: if statement not indented
+net/netfilter/xt_SECMARK.c:88 secmark_tg_check() warn: if statement not indented
+net/netfilter/xt_SECMARK.c:97 secmark_tg_check() warn: if statement not indented
+  CHECK   net/netfilter/xt_TCPMSS.c
+net/netfilter/xt_TCPMSS.c:108 tcpmss_mangle_packet() warn: if statement not indented
+./include/linux/skbuff.h:1121 skb_dst() warn: if statement not indented
+net/netfilter/xt_TCPMSS.c:273 tcpmss_tg4_check() warn: if statement not indented
+net/netfilter/xt_TCPMSS.c:282 tcpmss_tg4_check() warn: if statement not indented
+net/netfilter/xt_TCPMSS.c:297 tcpmss_tg6_check() warn: if statement not indented
+net/netfilter/xt_TCPMSS.c:306 tcpmss_tg6_check() warn: if statement not indented
+  CHECK   net/netfilter/xt_conntrack.c
+./include/net/netfilter/nf_conntrack.h:288 nf_ct_expires() warn: if statement not indented
+net/netfilter/xt_conntrack.c:272 conntrack_mt_check() warn: if statement not indented
+  CHECK   net/netfilter/xt_policy.c
+./include/linux/skbuff.h:1121 skb_dst() warn: if statement not indented
+net/netfilter/xt_policy.c:153 policy_mt_check() warn: if statement not indented
+  CHECK   net/netfilter/xt_state.c
+net/netfilter/xt_state.c:44 state_mt_check() warn: if statement not indented
+  CC [M]  net/netfilter/nf_log_syslog.o
+  CHECK   net/netfilter/nf_log_syslog.c
+net/netfilter/nf_log_syslog.c:217 nf_log_dump_tcp_header() warn: mask and shift to zero: expr='__builtin_bswap32((((th->words[3]) & 15))) >> 22'
+  CC [M]  net/netfilter/xt_mark.o
+  CHECK   net/netfilter/xt_mark.c
+  CC [M]  net/netfilter/xt_nat.o
+  CHECK   net/netfilter/xt_nat.c
+net/netfilter/xt_nat.c:21 xt_nat_checkentry_v0() warn: if statement not indented
+net/netfilter/xt_nat.c:60 xt_snat_target_v0() warn: if statement not indented
+net/netfilter/xt_nat.c:77 xt_dnat_target_v0() warn: if statement not indented
+net/netfilter/xt_nat.c:93 xt_snat_target_v1() warn: if statement not indented
+net/netfilter/xt_nat.c:112 xt_dnat_target_v1() warn: if statement not indented
+net/netfilter/xt_nat.c:129 xt_snat_target_v2() warn: if statement not indented
+net/netfilter/xt_nat.c:144 xt_dnat_target_v2() warn: if statement not indented
+  CC [M]  net/netfilter/xt_LOG.o
+  CHECK   net/netfilter/xt_LOG.c
+net/netfilter/xt_LOG.c:53 log_tg_check() warn: if statement not indented
+net/netfilter/xt_LOG.c:58 log_tg_check() warn: if statement not indented
+  CC [M]  net/netfilter/xt_MASQUERADE.o
+  CHECK   net/netfilter/xt_MASQUERADE.c
+net/netfilter/xt_MASQUERADE.c:24 masquerade_tg_check() warn: if statement not indented
+net/netfilter/xt_MASQUERADE.c:28 masquerade_tg_check() warn: if statement not indented
+  CC [M]  net/netfilter/xt_addrtype.o
+  CHECK   net/netfilter/xt_addrtype.c
+net/netfilter/xt_addrtype.c:197 addrtype_mt_checkentry_v1() warn: if statement not indented
