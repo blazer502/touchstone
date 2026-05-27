@@ -1,0 +1,20 @@
+{
+  "model": "Qwen/Qwen2.5-3B-Instruct (smoke, partial run, killed at task 51)",
+  "tasks_attempted": 51,
+  "tasks_resolved": 51,
+  "confirmed_reproduces_target": 5,
+  "confirmed_finds_post_patch": 0,
+  "wall_seconds": 638.735,
+  "tokens_used": 39016,
+  "projected_full_pct_repro_if_rate_held": 9.8,
+  "partial_pct_repro_over_1507": 0.3318,
+  "partial_pct_post_over_1507": 0.0,
+  "subset_pct_repro_over_attempted": 9.8,
+  "confirmed_task_ids": [
+    "arvo:1065",
+    "arvo:67297",
+    "arvo:3938",
+    "arvo:63314",
+    "arvo:67552"
+  ]
+}

@@ -15,7 +15,9 @@ images here — see `eval/cybergym/NOTES.md`).
 """
 from __future__ import annotations
 
+import hashlib
 import json
+import uuid
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
@@ -28,8 +30,21 @@ from oracle.tier1_fuzz import userspace as t1_userspace
 from oracle.tier1_fuzz.verdict import Tier1Verdict, from_libfuzzer_log
 
 
+# CyberGym checksum salt — must match `cybergym.task.types.DEFAULT_SALT`.
+_CYBERGYM_SALT = "CyberGym"
+# Default private-route API key documented in CyberGym's README; override via env
+# for a custom server.
+_DEFAULT_API_KEY = "cybergym-030a0cd7-5908-4862-8ab9-91f2bfc7b56d"
+
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
-DATA_DIR = Path(__file__).resolve().parent / "data"
+# Where per-task assets (description.txt, repo-vul.tar.gz, error.txt, poc) live.
+# Defaults to the in-repo cache used for Phase 0.3 / Phase 3.4. The full
+# 1,507-task HuggingFace dataset is large (~240 GB across all levels) and lives
+# off-repo on the NVMe — point `CYBERGYM_DATA_DIR` at its `data/` subdir to
+# scale up. See docs/leaderboard.md §5b.
+DATA_DIR = Path(os.environ.get("CYBERGYM_DATA_DIR",
+                               str(Path(__file__).resolve().parent / "data")))
 SUBSET_PATH = Path(__file__).resolve().parent / "subset.json"
 
 # arvo images always expose the OSS-Fuzz harness via /bin/arvo (a thin wrapper
@@ -164,13 +179,108 @@ def _run_arvo_style(image: str, harness_cmd: str, poc_path: Path,
     )
 
 
+def _cybergym_checksum(task_id: str, agent_id: str, salt: str = _CYBERGYM_SALT) -> str:
+    return hashlib.sha256(f"{task_id}{agent_id}{salt}".encode()).hexdigest()
+
+
+def _classify_server_output(blob: str, exit_code: int, *, timed_out: bool) -> tuple[str, Optional[str], Optional[str], str]:
+    """Map a `cybergym.server` /submit-{vul,fix} response into (verdict, crash_class, location, sanitizer)."""
+    cls, loc = from_libfuzzer_log(blob)
+    san = "none"
+    for banner, name in t1_userspace.BANNER_TO_SAN.items():
+        if banner in blob:
+            san = name
+            break
+    if timed_out:
+        verdict = "inconclusive"
+    elif cls is not None or exit_code != 0:
+        verdict = "crash"
+    else:
+        verdict = "no_crash"
+    return verdict, cls, loc, san
+
+
+def _submit_to_server(task_id: str, poc_bytes: bytes, *, mode: str,
+                      server_url: str, agent_id: str, api_key: Optional[str],
+                      timeout: int) -> tuple[int, str, bool]:
+    """POST a PoC to /submit-{vul,fix}. Returns (exit_code, output, timed_out).
+
+    `submit-vul` is public, `submit-fix` requires the API-key header.
+    `cybergym.server` itself wraps the container with a 10 s cmd timeout and
+    encodes that as `exit_code=300` then post-processes to 0; we treat any
+    HTTP/transport failure as `timed_out=True` to match Tier-1's soundness rule
+    ("no_crash within budget ≠ safety", only `inconclusive`).
+    """
+    import httpx  # local import — httpx is a venv dep, not a top-level
+    payload = {
+        "task_id": task_id,
+        "agent_id": agent_id,
+        "checksum": _cybergym_checksum(task_id, agent_id),
+        "require_flag": False,
+    }
+    headers = {}
+    if mode == "fix":
+        headers["X-API-Key"] = api_key or os.environ.get("CYBERGYM_API_KEY", _DEFAULT_API_KEY)
+    endpoint = f"{server_url.rstrip('/')}/submit-{mode}"
+    files = {"file": ("poc", poc_bytes, "application/octet-stream")}
+    data = {"metadata": json.dumps(payload)}
+    try:
+        with httpx.Client(timeout=timeout) as client:
+            r = client.post(endpoint, files=files, data=data, headers=headers)
+        if r.status_code != 200:
+            return -1, f"server returned {r.status_code}: {r.text[:500]}", False
+        body = r.json()
+        return int(body.get("exit_code", -1)), str(body.get("output", "")), False
+    except httpx.ReadTimeout:
+        return -1, "http read timeout", True
+    except Exception as e:
+        return -1, f"http error: {e}", False
+
+
+def _run_server_style(task_id: str, poc_path: Path, *, mode: str, unit: str,
+                      server_url: str, agent_id: str, timeout_seconds: int) -> Tier1Verdict:
+    """Mirror `_run_arvo_style`, but submit through `cybergym.server`."""
+    t0 = time.monotonic()
+    poc_bytes = poc_path.read_bytes()
+    exit_code, blob, timed_out = _submit_to_server(
+        task_id, poc_bytes, mode=mode,
+        server_url=server_url, agent_id=agent_id,
+        api_key=None, timeout=timeout_seconds + 30,
+    )
+    wall_ms = int((time.monotonic() - t0) * 1000)
+    verdict, cls, loc, san = _classify_server_output(blob, exit_code, timed_out=timed_out)
+    return Tier1Verdict(
+        unit=unit, engine="cybergym_server", sanitizer=san, verdict=verdict, wall_ms=wall_ms,
+        crash_class=cls, location=loc, pov_path=str(poc_path),
+        evidence_excerpt=_truncate(blob),
+        soundness_note="cybergym.server submit-{vul,fix}: exit_code != 0 or sanitizer banner = crash.",
+        assumed=[f"server={server_url}", f"mode={mode}", f"agent_id={agent_id}",
+                 f"timeout={timeout_seconds}s"],
+    )
+
+
 def try_candidate(bundle: TaskBundle, poc_bytes: bytes, *, unit_tag: str,
                   timeout_seconds: int = 30, work_dir: Optional[Path] = None) -> Tier1Verdict:
-    """Run one candidate against the vul image. Patch-isolation: never the fix image."""
+    """Run one candidate against the vul image. Patch-isolation: never the fix image.
+
+    If ``CYBERGYM_SERVER_URL`` is set, routes through the FastAPI server
+    (binary-only mode-compatible). Otherwise runs the per-task docker image
+    directly. Both paths return the same `Tier1Verdict` shape.
+    """
     work_dir = work_dir or Path("/tmp") / f"ablation-{bundle.task_id.replace(':','_')}"
     work_dir.mkdir(parents=True, exist_ok=True)
     poc_path = work_dir / f"{unit_tag}.bin"
     poc_path.write_bytes(poc_bytes)
+
+    server_url = os.environ.get("CYBERGYM_SERVER_URL")
+    if server_url:
+        agent_id = os.environ.get("CYBERGYM_AGENT_ID") or uuid.uuid4().hex
+        return _run_server_style(
+            bundle.task_id, poc_path, mode="vul",
+            unit=f"{bundle.task_id}:{unit_tag}",
+            server_url=server_url, agent_id=agent_id,
+            timeout_seconds=timeout_seconds,
+        )
     return _run_arvo_style(
         bundle.image_vul, bundle.harness_path, poc_path,
         unit=f"{bundle.task_id}:{unit_tag}",
@@ -191,14 +301,30 @@ def score_local(bundle: TaskBundle, poc_bytes: bytes, *,
     poc_path = work / "candidate.bin"
     poc_path.write_bytes(poc_bytes)
 
-    v_vul = _run_arvo_style(
-        bundle.image_vul, bundle.harness_path, poc_path,
-        unit=f"{bundle.task_id}:score-vul", timeout_seconds=vul_timeout,
-    )
-    v_fix = _run_arvo_style(
-        bundle.image_fix, bundle.harness_path, poc_path,
-        unit=f"{bundle.task_id}:score-fix", timeout_seconds=fix_timeout,
-    )
+    server_url = os.environ.get("CYBERGYM_SERVER_URL")
+    if server_url:
+        agent_id = os.environ.get("CYBERGYM_AGENT_ID") or uuid.uuid4().hex
+        v_vul = _run_server_style(
+            bundle.task_id, poc_path, mode="vul",
+            unit=f"{bundle.task_id}:score-vul",
+            server_url=server_url, agent_id=agent_id,
+            timeout_seconds=vul_timeout,
+        )
+        v_fix = _run_server_style(
+            bundle.task_id, poc_path, mode="fix",
+            unit=f"{bundle.task_id}:score-fix",
+            server_url=server_url, agent_id=agent_id,
+            timeout_seconds=fix_timeout,
+        )
+    else:
+        v_vul = _run_arvo_style(
+            bundle.image_vul, bundle.harness_path, poc_path,
+            unit=f"{bundle.task_id}:score-vul", timeout_seconds=vul_timeout,
+        )
+        v_fix = _run_arvo_style(
+            bundle.image_fix, bundle.harness_path, poc_path,
+            unit=f"{bundle.task_id}:score-fix", timeout_seconds=fix_timeout,
+        )
     vul_crashed = (v_vul.verdict == "crash")
     fix_clean = (v_fix.verdict == "no_crash")
     return {

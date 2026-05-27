@@ -1,0 +1,140 @@
+{
+  "_doc": "Declarative roster of codebases this system has run sound verification against. Each entry's analysis-state fields point at the artifact paths that ground the claim. Used by eval.roster.aggregate to render docs/codebase-roster.md.",
+
+  "codebases": [
+    {
+      "id": "linux-6.1.72-netfilter",
+      "kind": "kernel-subsystem",
+      "version": "Linux 6.1.72",
+      "scope": "net/netfilter/",
+      "loc": 124323,
+      "stage_a": {
+        "status": "done",
+        "kept_units": 3029,
+        "total_units": 3886,
+        "surface_reduction_pct": 22.05,
+        "missed_critical_path": 0,
+        "artifact": "surface/slice/linux-6.1.72-netfilter.json"
+      },
+      "stage_b": {"status": "deferred", "note": "Phase 1.3 smokes only; netfilter-wide run gated on Phase-3 SVF integration."},
+      "oracle_runs": {
+        "tier1_kasan": {"status": "done", "cve": "CVE-2024-1086", "artifact": "eval/kernelctf/artifacts/dmesg-cve-2024-1086.log"},
+        "tier1_syzkaller": {"status": "deferred", "note": "syzlang descriptor wired (Phase 2.1); syz-manager fuzz pass deferred."}
+      },
+      "cex_artifacts": []
+    },
+
+    {
+      "id": "linux-6.1.72-live-lts-cos",
+      "kind": "kernel-subsystem",
+      "version": "Linux 6.1.72 + COS restrictions",
+      "scope": "net/netfilter/ (restricted)",
+      "stage_a": {"status": "shares", "with": "linux-6.1.72-netfilter"},
+      "oracle_runs": {
+        "tier1_kasan_live": {"status": "done", "verdict": "no_crash (restriction holds)", "artifact": "run-logs/phase4.2-summary.json"},
+        "tier1_kasan_historical": {"status": "done", "verdict": "crash (positive control)", "artifact": "eval/kernelctf/artifacts/dmesg-cve-2024-1086.log"}
+      },
+      "cex_artifacts": []
+    },
+
+    {
+      "id": "juliet-memory-safety",
+      "kind": "synthetic-corpus",
+      "version": "Juliet C/C++ v1.3 NIST SARD",
+      "scope": "CWE476/415/416/121 (s01)",
+      "loc": 0,
+      "sources": 1486,
+      "labeled_bad": 1074,
+      "stage_a": {
+        "status": "done",
+        "kept_units": 3345,
+        "total_units": 3368,
+        "surface_reduction_pct": 0.68,
+        "missed_bug_count": 0,
+        "artifact": "eval/juliet/stage_a.json"
+      },
+      "stage_b": {
+        "status": "done",
+        "checked": 12,
+        "unsafe": 12,
+        "safe": 0,
+        "inconclusive": 0,
+        "false_safe": 0
+      },
+      "cex_artifacts": []
+    },
+
+    {
+      "id": "cybergym-arvo",
+      "kind": "real-world-poc-task",
+      "version": "CyberGym 1507-task (HF dataset 2025-09)",
+      "scope": "arvo + oss-fuzz",
+      "total_tasks": 1507,
+      "stage_a": {"status": "not_setup"},
+      "stage_b": {"status": "not_setup"},
+      "oracle_runs": {
+        "tier1_cybergym_server": {
+          "status": "partial",
+          "attempted": 196,
+          "confirmed_reproduces": 5,
+          "confirmed_post_patch": 0,
+          "artifact": "run-logs/leaderboard-70b-partial-summary.json"
+        }
+      },
+      "cex_artifacts": [
+        "run-logs/cex/cybergym/arvo_1065.json",
+        "run-logs/cex/cybergym/arvo_3938.json",
+        "run-logs/cex/cybergym/arvo_63314.json",
+        "run-logs/cex/cybergym/arvo_67297.json",
+        "run-logs/cex/cybergym/arvo_67552.json"
+      ]
+    },
+
+    {
+      "id": "sqlite3-3.37.2",
+      "kind": "live-library",
+      "version": "SQLite 3.37.2 (host libsqlite3-dev)",
+      "scope": "in-memory sqlite3_exec harness",
+      "stage_a": {"status": "deferred"},
+      "stage_b": {"status": "deferred"},
+      "oracle_runs": {
+        "tier1_libfuzzer": {"status": "done", "verdict": "inconclusive (no crash in 15s wall budget)"},
+        "tier1_positive_control": {"status": "done", "verdict": "crash (stack-OOB on OOB!-prefix input)", "artifact": "run-logs/phase4.3-summary.json"}
+      },
+      "cex_artifacts": []
+    },
+
+    {
+      "id": "magma",
+      "kind": "synthetic-corpus",
+      "version": "Magma (Hazimeh et al. — bug injection benchmark)",
+      "scope": "TBD",
+      "stage_a": {"status": "not_setup", "note": "deferred to roster build-out; ~20 GB disk + per-target build harnesses needed."},
+      "stage_b": {"status": "not_setup"},
+      "oracle_runs": {},
+      "cex_artifacts": []
+    },
+
+    {
+      "id": "openssl-latest",
+      "kind": "live-library",
+      "version": "TBD",
+      "scope": "OSS-Fuzz harness (-lssl -lcrypto)",
+      "stage_a": {"status": "not_setup"},
+      "stage_b": {"status": "not_setup"},
+      "oracle_runs": {},
+      "cex_artifacts": []
+    },
+
+    {
+      "id": "libxml2-latest",
+      "kind": "live-library",
+      "version": "TBD",
+      "scope": "OSS-Fuzz harness (-lxml2)",
+      "stage_a": {"status": "not_setup"},
+      "stage_b": {"status": "not_setup"},
+      "oracle_runs": {},
+      "cex_artifacts": []
+    }
+  ]
+}

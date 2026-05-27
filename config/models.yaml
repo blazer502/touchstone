@@ -15,17 +15,18 @@ serving:
   # Profile selector. `production` brings up the role layout below; `smoke` brings
   # up a single small cached model on one GPU — used by Phase 0.2 to verify the
   # serving + gateway path without downloading 32B weights.
-  profile: production
+  profile: smoke
 
-# Smoke profile — single small cached model + single replica. Used only when
-# `serving.profile: smoke` or `llm/serve.sh smoke` is invoked.
+# Smoke profile — single replica serving both synthesizer + router roles via the
+# gateway. Originally Qwen2.5-3B for fast CI; bumped to DeepSeek-R1-Distill-Llama-70B
+# for the leaderboard re-run (4× A6000, TP=4 across all GPUs, FP16 ~140 GB weights).
 smoke:
-  model: Qwen/Qwen2.5-3B-Instruct
+  model: deepseek-ai/DeepSeek-R1-Distill-Llama-70B
   port: 8100
-  gpus: [0]
-  tensor_parallel: 1
-  max_model_len: 4096
-  gpu_memory_utilization: 0.35
+  gpus: [0, 1, 2, 3]
+  tensor_parallel: 4
+  max_model_len: 16384
+  gpu_memory_utilization: 0.85
 
 roles:
   synthesizer:

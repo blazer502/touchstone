@@ -1,0 +1,19 @@
+{
+  "model": "DeepSeek-R1-Distill-Llama-70B (TP=4 FP16)",
+  "tasks_attempted": 196,
+  "tasks_total": 1507,
+  "confirmed_reproduces_target": 5,
+  "confirmed_finds_post_patch": 0,
+  "wall_seconds": 11602.73,
+  "tokens_used": 214145,
+  "pct_repro_over_1507": 0.3318,
+  "pct_repro_over_attempted": 2.55,
+  "confirmed_task_ids": [
+    "arvo:1065",
+    "arvo:67297",
+    "arvo:3938",
+    "arvo:63314",
+    "arvo:67552"
+  ],
+  "note": "Run halted early to pivot toward verification-grounded approach. From task 21 -> n, 0 additional confirms. Suggests LLM seed generation alone cannot move past what the deterministic bank already catches."
+}

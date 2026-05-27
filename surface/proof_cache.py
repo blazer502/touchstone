@@ -288,3 +288,164 @@ def transitive_dependents(unit: str, target: str) -> list[str]:
     for cl in visited:
         out.extend(clusters.get(cl, {}).get("exports", []))
     return sorted(out)
+
+
+# ---------------------------------------------------------------------------
+# Multi-tier convenience (P4) — same CacheKey shape works for Tier 1/2/3
+# verdicts because `verdict` is just a dict at the storage layer. Callers in
+# Tier 1/2/3 drivers can opt into the cache via these helpers without
+# changing the existing Stage B integration.
+# ---------------------------------------------------------------------------
+
+def cache_verdict_dict(
+    verdict_dict: dict,
+    *,
+    body_text: str,
+    property: str,
+    engine: str,
+    engine_version: str = "",
+    unwind: Optional[int] = None,
+    assumed_contracts: Optional[list[str]] = None,
+    build_flags: Optional[dict] = None,
+    dependents: Optional[list[str]] = None,
+    root: Path = CACHE_ROOT,
+) -> Path:
+    """Cache any verdict-shaped dict (Tier 1/2/3 or Stage B).
+
+    The CacheKey covers everything the verdict's soundness depends on; callers
+    are responsible for passing the contracts / build flags that were in scope
+    at the time the verdict was produced. Returns the path the row was written
+    to.
+    """
+    key = make_key(
+        body_text=body_text,
+        property=property,
+        engine=engine,
+        engine_version=engine_version,
+        unwind=unwind,
+        assumed_contracts=list(assumed_contracts or []),
+        build_flags=dict(build_flags or {}),
+    )
+    return store(
+        key,
+        verdict=verdict_dict,
+        assumed_contracts=list(assumed_contracts or []),
+        build_flags=dict(build_flags or {}),
+        dependents=dependents,
+        root=root,
+    )
+
+
+# ---------------------------------------------------------------------------
+# Bundle export / import (P4) — portable verified-knowledge transfer
+# ---------------------------------------------------------------------------
+
+BUNDLE_HEADER = {"format": "veri-agent-proofcache-bundle", "version": 1}
+
+
+def export_bundle(out_path: Path, *, root: Path = CACHE_ROOT) -> dict:
+    """Dump every cache row under `root` to a single NDJSON bundle.
+
+    Format:
+
+        {header}\\n           ← first line, BUNDLE_HEADER + schema_version
+        {row1_json}\\n        ← one CacheRow per subsequent line
+
+    The bundle is content-portable: receivers can `import_bundle` on a fresh
+    host and re-establish the same verified knowledge.
+    """
+    rows = sorted(root.rglob("*.json"))
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    n = 0
+    with out_path.open("w") as fh:
+        fh.write(json.dumps({**BUNDLE_HEADER, "schema_version": SCHEMA_VERSION,
+                             "source_root": str(root), "row_count": len(rows)}))
+        fh.write("\n")
+        for r in rows:
+            try:
+                d = json.loads(r.read_text())
+            except Exception:
+                continue
+            fh.write(json.dumps(d) + "\n")
+            n += 1
+    return {"path": str(out_path), "rows": n}
+
+
+def import_bundle(in_path: Path, *, root: Path = CACHE_ROOT,
+                  overwrite_stale: bool = False) -> dict:
+    """Load a bundle into the cache.
+
+    Soundness rule: a row with a matching key_digest that is NOT stale is left
+    alone; the importer never *replaces* a fresh local row with a remote one.
+    Stale local rows are overwritten only when `overwrite_stale=True`.
+    Rows whose `schema_version` does not match `SCHEMA_VERSION` are skipped.
+    """
+    lines = in_path.read_text().splitlines()
+    if not lines:
+        return {"imported": 0, "skipped": 0, "version_mismatch": 0}
+    header = json.loads(lines[0])
+    bundle_schema = header.get("schema_version", "")
+    if bundle_schema != SCHEMA_VERSION:
+        return {"imported": 0, "skipped": 0,
+                "version_mismatch": len(lines) - 1,
+                "reason": f"schema {bundle_schema!r} != local {SCHEMA_VERSION!r}"}
+    root.mkdir(parents=True, exist_ok=True)
+    imported = skipped = 0
+    for ln in lines[1:]:
+        if not ln.strip():
+            continue
+        try:
+            row = json.loads(ln)
+        except Exception:
+            continue
+        digest = row.get("key_digest")
+        if not digest:
+            continue
+        p = _path_for(digest, root)
+        if p.exists():
+            existing = json.loads(p.read_text())
+            if not existing.get("stale", False) and not overwrite_stale:
+                skipped += 1
+                continue
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(json.dumps(row, indent=2))
+        imported += 1
+    return {"imported": imported, "skipped": skipped,
+            "header": header, "bundle_path": str(in_path)}
+
+
+# ---------------------------------------------------------------------------
+# CLI (P4)
+# ---------------------------------------------------------------------------
+
+def _main() -> int:
+    import argparse, sys
+
+    ap = argparse.ArgumentParser(description="Proof cache CLI (P4 multi-tier)")
+    ap.add_argument("--root", type=Path, default=CACHE_ROOT)
+    sub = ap.add_subparsers(dest="cmd", required=True)
+
+    sp = sub.add_parser("stats", help="cache size + per-engine counts")
+    sp = sub.add_parser("export", help="dump cache to NDJSON bundle")
+    sp.add_argument("out", type=Path)
+    sp = sub.add_parser("import", help="load an NDJSON bundle into the cache")
+    sp.add_argument("in_path", type=Path)
+    sp.add_argument("--overwrite-stale", action="store_true")
+
+    args = ap.parse_args()
+    if args.cmd == "stats":
+        print(json.dumps(stats(root=args.root), indent=2))
+        return 0
+    if args.cmd == "export":
+        print(json.dumps(export_bundle(args.out, root=args.root), indent=2))
+        return 0
+    if args.cmd == "import":
+        print(json.dumps(import_bundle(args.in_path, root=args.root,
+                                       overwrite_stale=args.overwrite_stale),
+                         indent=2))
+        return 0
+    return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(_main())
