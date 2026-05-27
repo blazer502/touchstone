@@ -1,4 +1,4 @@
-# CyberGym integration notes (Phase 0.3)
+# CyberGym integration notes
 
 Source: `repo/` is a depth-1 clone of `github.com/sunblaze-ucb/cybergym`.
 Local venv: `venv/` (Python 3.12 — required; system python is 3.10). Activated as
@@ -64,12 +64,12 @@ must wrap as the **oracle ground truth**.
 ## Disk budget
 
 Host has ~125 GB free, full dataset is ~240 GB, full image set is ~10 TB. So we **must** stick
-to one task at a time for Phase 0.3, and the adapter layer must be parameterized so the same
-flow runs against any task without per-task code.
+to one task at a time, and the adapter layer is parameterized so the same flow runs against
+any task without per-task code.
 
 ## Adapter surface (what we'll build on our side)
 
-The PLAN §5c protocol-conformance points (C1–C6). Concrete mapping for us:
+Protocol-conformance points C1–C6. Concrete mapping for us:
 
 - **C1 task adapter** → `eval/cybergym/adapter.py` with `resolve(task_id) -> TaskBundle` calling
   `cybergym.task.gen_task.generate_task` against the local server.
@@ -82,6 +82,6 @@ The PLAN §5c protocol-conformance points (C1–C6). Concrete mapping for us:
   data_dir layout cleanly separates `-vul`/`-fix` so this is enforced by argument passing.
 - **C4 sanitizer parity** → done by construction: the task's vul/fix Docker images carry the
   original OSS-Fuzz sanitizer build, we don't recompile.
-- **C5 batch runner** → deferred; Phase 0.3 needs one-task end-to-end only.
+- **C5 batch runner** → deferred; one-task end-to-end is sufficient for the initial wiring.
 - **C6 feedback loop** → server response is `{exit_code, output, poc_id}`. We'll map exit_code
   into our oracle verdict (crash / no-crash / timeout) in the adapter.

@@ -1,10 +1,10 @@
-# kernelCTF Phase-0.4 — sanity-only historical reproduction
+# kernelCTF — historical-reproduction smoke
 
-Phase 0.4 in PLAN §6 calls for: "Fetch one *historical* kernelCTF submission's exact LTS
-version + config; build with KASAN+KCOV; boot under QEMU via kctf; run syzkaller against the
-relevant subsystem with the published PoC's syscall surface and confirm KASAN reports the
-known bug." This is a **smoke test of the kernel toolchain**, not a scored benchmark —
-kernelCTF is a field target.
+End-to-end smoke test of the kernel toolchain: fetch one *historical* kernelCTF submission's
+exact LTS version + config; build with KASAN+KCOV; boot under QEMU via kctf; run syzkaller
+against the relevant subsystem with the published PoC's syscall surface and confirm KASAN
+reports the known bug. kernelCTF is a field target; this run is a toolchain smoke, not a
+scored benchmark.
 
 ## Submission picked
 
@@ -20,7 +20,7 @@ kernelCTF is a field target.
     on a debug kernel (KASAN+slub_debug) the double-free fires deterministically because
     KASAN poisons the freed slab on first `kfree`.
   - **Subsystem already on the LLM-funnel radar** (`net/netfilter/`), so the static
-    scoping done in 0.4e is reusable later in Phase 1.
+    scoping done here is reusable later by Stage A.
   - **Pure netlink/userns** — no kernelCTF-specific binary deps, no `/flag` lookup needed
     to observe the KASAN report.
 - We do **not** need the full kernelCTF LPE; we extract the *trigger* (nft setup that
@@ -45,12 +45,11 @@ kernelCTF is a field target.
 6. Success = the dmesg captured to `artifacts/dmesg-cve-2024-1086.log` contains
    `BUG: KASAN:` originating in `net/netfilter/nf_tables_core.c` or `nft_immediate.c`.
 
-## Static scoping (0.4e)
+## Static scoping
 
 `scoping/run_scoping.sh` runs Smatch + Coccinelle + Sparse over `net/netfilter/` of the
 6.1.72 source. Output goes to `scoping/{smatch,cocci,sparse}.out`. This is a smoke run —
-the 0.4 "Done when" only requires the tools to *execute on a smoke input*; full
-soundness/coverage analysis is Phase 1.
+toolchain smoke only; full soundness/coverage analysis runs as part of Stage A.
 
 ## Cost / disk budget
 
