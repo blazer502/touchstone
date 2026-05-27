@@ -2,12 +2,18 @@
 
 **Verification-accelerated vulnerability-discovery agent for C / C++ and the Linux kernel.**
 
-veri-agent finds memory-safety bugs in C/C++ code (including the Linux kernel)
-by combining a local LLM proposer with a soundness-checked verification funnel.
-The LLM proposes candidate bug sites, harnesses, contracts, and exploit
-hypotheses; sound program-analysis tools (Frama-C, CBMC, KLEE, AFL++/libFuzzer,
-syzkaller, …) dispose of them. **Final verdicts always come from a sound
-checker — never from the LLM.**
+veri-agent discovers vulnerabilities in C/C++ code (including the Linux
+kernel) by combining a local LLM proposer with a soundness-checked
+verification funnel. The LLM proposes candidate bug sites, harnesses,
+contracts, and exploit hypotheses; sound program-analysis tools (Frama-C,
+CBMC, KLEE, AFL++/libFuzzer, syzkaller, …) dispose of them. **Final
+verdicts always come from a sound checker — never from the LLM.**
+
+Scope is whatever the integrated checkers can express: sanitizer-detectable
+memory-safety bugs (UAF, OOB, UoUV, double-free, null-deref) are the
+demonstrated end-to-end class, with undefined-behavior (UBSan), kernel data
+races (KCSAN), and arbitrary CBMC/ESBMC- or ACSL-expressible safety
+properties also in reach.
 
 The result is a guess-and-check loop that is:
 
