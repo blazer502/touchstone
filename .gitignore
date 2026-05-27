@@ -58,3 +58,26 @@ eval/kernelctf-latest/configs/lakitu_defconfig
 eval/kernelctf-latest/configs/lakitu_defconfig.b64
 # syz-manager workdirs (corpus + crashes — runtime state)
 eval/kernelctf-latest/syzkaller/workdir-*/
+
+# libFuzzer / MSan / profile-runtime artifacts (drop in cwd during runs)
+%%stderr
+*.profraw
+generate_temporary_file.*.mgc
+http_config.conf
+random.icc
+fuzz-*-config-read-*
+
+# Transient leaderboard smoke artifacts (kept only the full-1507 runs)
+run-logs/leaderboard-regression*.json*
+run-logs/leaderboard-regression*.jsonl
+run-logs/leaderboard-server-smoke*.jsonl
+run-logs/leaderboard-server-smoke*.json
+run-logs/leaderboard-multiturn-subset*.jsonl
+run-logs/leaderboard-multiturn-subset*.json
+run-logs/leaderboard-bankfuzz-smoke*.json*
+run-logs/leaderboard-bankonly-smoke*.json*
+run-logs/leaderboard-smoke*.json*
+run-logs/llm-gateway.log
+
+# Pre-commit hook private state
+scripts/git-hooks/targets.txt

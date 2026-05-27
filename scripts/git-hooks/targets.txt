@@ -1,4 +1,0 @@
-# Targets the pre-commit hook will run `surface.incremental impacted` against.
-# One target id per line; the id must correspond to a directory under
-# surface/tasks/<target>/ (Phase 1.1 cluster index).
-linux-6.1.72-netfilter
