@@ -85,3 +85,97 @@ def from_kasan_log(text: str) -> tuple[Optional[str], Optional[str]]:
     elif (m := re.search(r"BUG:\s+KASAN:\s+([\w\-]+)", text)):
         cls = m.group(1)
     return cls, loc
+
+
+# Kernel BUG signatures beyond KASAN. Each tuple is (regex, sanitizer, class_tmpl, location_tmpl).
+# Ordered most-specific-first; first match wins.
+_KERN_BUG_PATTERNS = [
+    (r"BUG:\s+KASAN:\s+([\w\-]+)\s+in\s+(\S+)",                       "KASAN",  "{1}",                       "{2}"),
+    (r"BUG:\s+KASAN:\s+([\w\-]+)",                                     "KASAN",  "{1}",                       None),
+    (r"BUG:\s+KMSAN:\s+([\w\-]+)\s+in\s+(\S+)",                       "KMSAN",  "{1}",                       "{2}"),
+    (r"BUG:\s+KMSAN:\s+([\w\-]+)",                                     "KMSAN",  "{1}",                       None),
+    (r"BUG:\s+KCSAN:\s+data-race\s+in\s+(\S+)",                       "KCSAN",  "data-race",                 "{1}"),
+    (r"BUG:\s+KCSAN:\s+([\w\-]+)",                                     "KCSAN",  "{1}",                       None),
+    (r"UBSAN:\s+([\w\-]+)\s+in\s+(\S+):(\d+)",                        "UBSAN",  "{1}",                       "{2}:{3}"),
+    (r"UBSAN:\s+([\w\-]+)",                                            "UBSAN",  "{1}",                       None),
+    (r"BUG:\s+kernel\s+NULL\s+pointer\s+dereference",                  "kernel", "null-deref",                None),
+    (r"BUG:\s+unable\s+to\s+handle\s+(?:kernel\s+)?paging\s+request",  "kernel", "bad-paging",                None),
+    (r"general\s+protection\s+fault",                                  "kernel", "general-protection-fault",  None),
+    (r"kernel\s+BUG\s+at\s+(\S+:\d+)",                                 "kernel", "kernel-bug",                "{1}"),
+    (r"Oops:\s+\d+",                                                   "kernel", "oops",                      None),
+    (r"BUG:\s+soft\s+lockup",                                          "kernel", "soft-lockup",               None),
+    (r"BUG:\s+spinlock\s+(\w+)",                                       "kernel", "spinlock-{1}",              None),
+    (r"watchdog:\s+BUG:\s+(\S+\s+lockup)",                             "kernel", "watchdog-{1}",              None),
+    (r"INFO:\s+task\s+hung",                                           "kernel", "task-hung",                 None),
+    (r"INFO:\s+task\s+\S+:\d+\s+blocked\s+for\s+more\s+than",          "kernel", "task-hung",                 None),
+    (r"INFO:\s+rcu_sched\s+self-detected",                             "kernel", "rcu-stall",                 None),
+    (r"INFO:\s+rcu_preempt\s+detected",                                "kernel", "rcu-stall",                 None),
+    (r"WARNING:\s+CPU:",                                               "kernel", "warning",                   None),
+    (r"WARNING:\s+",                                                   "kernel", "warning",                   None),
+]
+
+
+def from_kernel_bug_log(text: str) -> tuple[Optional[str], Optional[str], Optional[str]]:
+    """Parse a kernel dmesg for ANY known BUG/WARN/DoS signature.
+
+    Returns (sanitizer, crash_class, location). All may be None if nothing
+    matched. The first pattern that hits wins (most-specific-first ordering).
+    """
+    import re
+
+    for pat, san, cls_tmpl, loc_tmpl in _KERN_BUG_PATTERNS:
+        m = re.search(pat, text, re.MULTILINE)
+        if not m:
+            continue
+        groups = list(m.groups())
+        def _fmt(t: Optional[str]) -> Optional[str]:
+            if t is None:
+                return None
+            out = t
+            for i, g in enumerate(groups, start=1):
+                out = out.replace("{" + str(i) + "}", g if g else "")
+            return out
+        # Also try to attach the top kernel-mode RIP if we don't have a location.
+        loc = _fmt(loc_tmpl)
+        if loc is None:
+            rip = re.search(r"RIP:\s+0010:(\S+)", text)
+            if rip:
+                loc = rip.group(1)
+        return san, _fmt(cls_tmpl), loc
+    return None, None, None
+
+
+# Severity ranking for kernel bug classes.
+#   crash : memory-safety + hard kernel oopses (highest priority)
+#   warn  : WARNs, UBSAN, KCSAN data-races (audit-worthy, not always exploitable)
+#   dos   : soft-lockup, hangs, rcu-stalls (DoS class only)
+_CRASH_SEVERITY_BY_SAN = {
+    "KASAN": "crash",
+    "KMSAN": "crash",
+    "KCSAN": "warn",
+    "UBSAN": "warn",
+}
+_CRASH_SEVERITY_BY_KCLASS = {
+    "null-deref": "crash",
+    "bad-paging": "crash",
+    "general-protection-fault": "crash",
+    "kernel-bug": "crash",
+    "oops": "crash",
+    "soft-lockup": "dos",
+    "task-hung": "dos",
+    "rcu-stall": "dos",
+    "warning": "warn",
+}
+
+
+def classify_kernel_bug(sanitizer: Optional[str], cls: Optional[str]) -> str:
+    """(sanitizer, class) → one of {'crash', 'warn', 'dos', 'unknown'}."""
+    if sanitizer is None or cls is None:
+        return "unknown"
+    if sanitizer in _CRASH_SEVERITY_BY_SAN:
+        return _CRASH_SEVERITY_BY_SAN[sanitizer]
+    if sanitizer == "kernel":
+        for prefix, sev in _CRASH_SEVERITY_BY_KCLASS.items():
+            if cls == prefix or cls.startswith(prefix.split("-")[0] + "-"):
+                return sev
+    return "unknown"
