@@ -148,17 +148,22 @@ def run_candidate(
 
     cmd = [str(harness.binary), str(poc_path)]
     t0 = time.monotonic()
+    # Capture as bytes — libFuzzer binaries occasionally emit non-UTF-8
+    # in stderr (e.g. PNG header 0x89 echoed back) and `text=True` would
+    # crash with UnicodeDecodeError. Decode lossily on our side.
     try:
-        r = subprocess.run(cmd, capture_output=True, text=True,
+        r = subprocess.run(cmd, capture_output=True, text=False,
                            env=env, timeout=timeout_seconds, check=False)
         timed_out = False
         rc = r.returncode
-        blob = (r.stdout or "") + "\n" + (r.stderr or "")
+        out_b = r.stdout or b""
+        err_b = r.stderr or b""
     except subprocess.TimeoutExpired as e:
         timed_out = True
         rc = -1
-        blob = ((e.stdout.decode(errors="replace") if isinstance(e.stdout, bytes) else (e.stdout or "")) + "\n"
-                + (e.stderr.decode(errors="replace") if isinstance(e.stderr, bytes) else (e.stderr or "")))
+        out_b = e.stdout if isinstance(e.stdout, bytes) else (e.stdout or "").encode("latin-1", "replace")
+        err_b = e.stderr if isinstance(e.stderr, bytes) else (e.stderr or "").encode("latin-1", "replace")
+    blob = out_b.decode("utf-8", errors="replace") + "\n" + err_b.decode("utf-8", errors="replace")
     wall_ms = int((time.monotonic() - t0) * 1000)
 
     cls, loc = from_libfuzzer_log(blob)
