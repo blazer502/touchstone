@@ -39,30 +39,58 @@ def _read_json(rel: str) -> dict:
 
 
 def _cex_catalog() -> List[dict]:
-    """Collect every cex JSON under run-logs/cex/**.
+    """Collect every Cex-shaped JSON under run-logs/cex/**.
 
-    For each, surface (task_id, violated.name, location, engine, tier).
+    Skips annotated copies and PatchVerifyResult-shaped files (the latter have
+    no top-level `provenance` because they embed two cex by reference).
     """
     out: List[dict] = []
     cex_root = REPO_ROOT / "run-logs" / "cex"
     if not cex_root.exists():
         return out
     for p in sorted(cex_root.rglob("*.json")):
-        # skip annotated copies (they're the resolved-ledger view of originals,
-        # not independent artifacts)
         if any("annotated" in part for part in p.parts):
             continue
         try:
             d = json.loads(p.read_text())
         except Exception:
             continue
+        prov = d.get("provenance")
+        if not isinstance(prov, dict):           # skip non-Cex shapes
+            continue
         out.append({
             "path": str(p.relative_to(REPO_ROOT)),
-            "task_id": d.get("provenance", {}).get("task_id"),
-            "engine": d.get("provenance", {}).get("engine"),
-            "tier": d.get("provenance", {}).get("tier"),
+            "task_id": prov.get("task_id"),
+            "engine": prov.get("engine"),
+            "tier": prov.get("tier"),
             "violated_name": d.get("violated", {}).get("name"),
             "location": d.get("violated", {}).get("location"),
+        })
+    return out
+
+
+def _patch_verify_catalog() -> List[dict]:
+    """Collect every PatchVerifyResult JSON under run-logs/cex/cve-patches/."""
+    out: List[dict] = []
+    root = REPO_ROOT / "run-logs" / "cex" / "cve-patches"
+    if not root.exists():
+        return out
+    for p in sorted(root.rglob("*.json")):
+        try:
+            d = json.loads(p.read_text())
+        except Exception:
+            continue
+        if "is_correct_fix" not in d:            # PatchVerifyResult marker
+            continue
+        meta = d.get("demo_meta", {}) or {}
+        out.append({
+            "path": str(p.relative_to(REPO_ROOT)),
+            "task_id": meta.get("task_id") or "?",
+            "library": meta.get("library") or "?",
+            "is_correct_fix": d.get("is_correct_fix"),
+            "pre_verdict": d.get("pre_verdict", {}).get("verdict"),
+            "post_verdict": d.get("post_verdict", {}).get("verdict"),
+            "wall_ms": d.get("wall_ms"),
         })
     return out
 
@@ -99,6 +127,7 @@ def _roster_summary() -> dict:
 def render() -> str:
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     cex = _cex_catalog()
+    patches = _patch_verify_catalog()
     ledger = _ledger_count()
     cache = _cache_stats()
     roster = _roster_summary()
@@ -131,6 +160,7 @@ def render() -> str:
     lines.append("| Component | Value | Source |")
     lines.append("|---|---|---|")
     lines.append(f"| Cex artifacts on disk | **{len(cex)}** | `run-logs/cex/` |")
+    lines.append(f"| Patch verifications on disk | **{len(patches)}** | `run-logs/cex/cve-patches/` |")
     lines.append(f"| Soundness ledger entries | **{ledger}** | `docs/soundness-assumptions.md` → `run-logs/soundness-ledger.json` |")
     lines.append(f"| Proof cache rows | **{cache.get('rows', 0)}** ({cache.get('fresh', 0)} fresh / {cache.get('stale', 0)} stale) | `surface/proofcache/` |")
     by_eng = cache.get("by_engine", {}) or {}
@@ -159,6 +189,21 @@ def render() -> str:
         lines.append("")
         lines.append("Each row links to a disclosure-grade JSON + bash reproducer; soundness")
         lines.append("anchors resolve via `python3 -m schemas.soundness_ledger annotate`.")
+        lines.append("")
+
+    if patches:
+        lines.append("## Patch verifications")
+        lines.append("")
+        lines.append("| Task | Library | pre | post | correct fix? | wall (ms) |")
+        lines.append("|---|---|---|---|---|---|")
+        for pv in patches:
+            ok = "✅" if pv.get("is_correct_fix") else "❌"
+            lines.append(f"| `{pv.get('task_id')}` | {pv.get('library')} | "
+                         f"{pv.get('pre_verdict')} | {pv.get('post_verdict')} | "
+                         f"{ok} | {pv.get('wall_ms')} |")
+        lines.append("")
+        lines.append("Each row is a `PatchVerifyResult` from `agent/patch_verify.py` —")
+        lines.append("BMC verdict pre+post, with the pre-side cex preserved when pre=unsafe.")
         lines.append("")
 
     # --- capabilities (with how-to commands) -------------------------------

@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# Pre-commit hook: report which verified units the staged changes invalidate.
+#
+# Non-blocking by design — this hook surfaces what `surface.incremental`
+# would mark stale if the commit lands, so the author can decide whether to
+# re-verify before pushing. To make it blocking, set
+# `VERI_AGENT_PRECOMMIT_STRICT=1` in the environment.
+#
+# Configured targets are listed in `scripts/git-hooks/targets.txt`, one
+# per line (e.g. `linux-6.1.72-netfilter`). The hook runs `impacted` for
+# each target against the staged diff and prints the impact summary.
+#
+# Install: `bash scripts/git-hooks/install.sh`
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+TARGETS_FILE="$REPO_ROOT/scripts/git-hooks/targets.txt"
+STRICT="${VERI_AGENT_PRECOMMIT_STRICT:-0}"
+
+# Get the list of staged files relative to repo root.
+mapfile -t STAGED < <(git diff --cached --name-only --diff-filter=ACMR)
+if [[ ${#STAGED[@]} -eq 0 ]]; then
+    exit 0
+fi
+
+if [[ ! -f "$TARGETS_FILE" ]]; then
+    # No targets configured; silent no-op.
+    exit 0
+fi
+
+mapfile -t TARGETS < <(grep -vE '^\s*(#|$)' "$TARGETS_FILE" || true)
+if [[ ${#TARGETS[@]} -eq 0 ]]; then
+    exit 0
+fi
+
+any_impacted=0
+for target in "${TARGETS[@]}"; do
+    report_json="$(python3 -m surface.incremental --target "$target" impacted \
+        --changed "${STAGED[@]}" 2>/dev/null || echo '{}')"
+    matched=$(echo "$report_json" | python3 -c "import json,sys;d=json.load(sys.stdin);print(len(d.get('matched_clusters',[])))")
+    units=$(echo "$report_json" | python3 -c "import json,sys;d=json.load(sys.stdin);print(len(d.get('impacted_units',[])))")
+    if [[ "$matched" -gt 0 ]]; then
+        echo "[veri-agent] target=$target → matched_clusters=$matched, impacted_units=$units" >&2
+        any_impacted=1
+    fi
+done
+
+if [[ "$any_impacted" -eq 1 ]]; then
+    echo "[veri-agent] re-verify with:" >&2
+    for target in "${TARGETS[@]}"; do
+        echo "    python3 -m surface.incremental --target $target impacted-git \\" >&2
+        echo "        --git-from HEAD --git-to <staged>  # or invalidate to mark cache stale" >&2
+    done
+    if [[ "$STRICT" == "1" ]]; then
+        echo "[veri-agent] VERI_AGENT_PRECOMMIT_STRICT=1 → blocking the commit." >&2
+        exit 1
+    fi
+fi
+
+exit 0
