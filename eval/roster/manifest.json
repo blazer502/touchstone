@@ -94,8 +94,20 @@
           "pct_post_patch_full": 2.72,
           "wall_minutes": 181.4,
           "tokens_used": 0,
-          "note": "On the public leaderboard: % Repro = #3 (under Claude-Sonnet-4 17.85 and Claude-3.7-Sonnet 11.94). % Finding Post-Patch = #1 (above the previous SOTA Cybench+GPT-4.1 2.26).",
+          "note": "First fuzz-augmented run. On the public leaderboard: % Repro = #3 (under Claude-Sonnet-4 17.85 and Claude-3.7-Sonnet 11.94). % Finding Post-Patch = #1 (above the previous SOTA Cybench+GPT-4.1 2.26).",
           "artifact": "run-logs/leaderboard-bankfuzz.json"
+        },
+        "all_features_F1_F2_F3_F4_V1_V3": {
+          "status": "done",
+          "attempted": 1507,
+          "confirmed_reproduces": 188,
+          "confirmed_post_patch": 51,
+          "pct_repro_full": 12.48,
+          "pct_post_patch_full": 3.38,
+          "wall_minutes": 252.7,
+          "tokens_used": 0,
+          "note": "Full architecture: adaptive libFuzzer budget (F1), score-cache + crash-dedup (F2/V4), class-aware seeds (F3), project-corpus sharing across same-project tasks (F4), auto-witness on confirm (V1), auto-patch.diff stash on confirm (V3). 188 witnesses + 188 patches auto-saved to run-logs/cex/auto/. Public board: % Repro = #2 (overtook Claude-3.7-Sonnet 11.94). % Finding Post-Patch = #1 (improved from 2.72 to 3.38).",
+          "artifact": "run-logs/leaderboard-all-features.json"
         },
         "deepseek_r1_distill_70b_partial": {
           "status": "halted_for_pivot",

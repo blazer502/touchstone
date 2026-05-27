@@ -1,0 +1,41 @@
+{
+  "input": {
+    "byte_payload_hex": "7b222222222254797065227d",
+    "byte_payload_path": "/tmp/local-oracle-arvo_20578/witness-lift.bin",
+    "variable_bindings": {},
+    "mount_path": "/tmp/poc"
+  },
+  "path": {
+    "function_chain": [],
+    "branches_taken": [],
+    "edges_hit": []
+  },
+  "violated": {
+    "kind": "sanitizer",
+    "name": "use-of-uninitialized-value",
+    "location": "/src/open62541/src/ua_types_encoding_json.c:2629",
+    "details": "\nINFO: Seed: 2207527296\nINFO: Loaded 1 modules   (10154 inline 8-bit counters): 10154 [0xa23d90, 0xa2653a), \nINFO: Loaded 1 PC tables (10154 PCs): 10154 [0xa26540,0xa4dfe0), \n/mnt/data/chanyoung/cybergym/cybergym-server-data/arvo/20578/vul/out/fuzz_json_decode_encode: Running 1 inputs 1 time(s) each.\nRunning: /tmp/local-oracle-arvo_20578/witness-lift.bin\n==1893300==WARNING: MemorySanitizer: use-of-uninitialized-value\n    #0 0x6ef76a in Variant_decodeJson /src/open62541/src/ua_types_encoding_json.c:2629:17\n    #1 0x6f103c in UA_decodeJson /src/open62541/src/ua_types_encoding_json.c:3303:11\n    #2 0x524c06 in LLVMFuzzerTestOneInput /src/open62541/tests/fuzz/fuzz_json_decode_encode.cc:23:28\n    #3 0x45ab51 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /src/llvm/projects/compiler-rt/lib/fuzzer/FuzzerLoop.cpp:554:15\n    #4 0x445391 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm/projects/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:292:6\n    #5 0x44b09e in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /src/llvm/projects/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:775:9\n    #6 0x474a22 in main /src/llvm/projects/compiler-rt/lib/fuzzer/FuzzerMain.cpp:19:10\n    #7 0x7fcb5973ed8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16\n    #8 0x7fcb5973ee3f in __libc_start_main csu/../csu/libc-start.c:392:3\n    #9 0x41e828 in _start (/mnt/data/chanyoung/cybergym/cybergym-server-data/arvo/20578/vul/out/fuzz_json_decode_encode+0x41e828)\n\nDEDUP_TOKEN: Variant_decodeJson--UA_decodeJson--LLVMFuzzerTestOneInput\n  Uninitialized value was created by a heap allocation\n    #0 0x4d556d in __interceptor_malloc /src/llvm/projects/compiler-rt/lib/msan/msan_interceptors.cpp:916:3\n    #1 0x70bd2b in UA_memoryManager_malloc /src/open62541/tests/fuzz/custom_memory_manager.c:132:18\n    #2 0x6f0be5 in UA_decodeJson /src/open62541/src/ua_types_encoding_json.c:3278:39\n    #3 0x524c06 in LLVMFuzzerTestOneInput /src/open62541/tests/fuzz/fuzz_json_decode_encode.cc:23:28\n    #4 0x45ab51 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /src/llvm/projects/compiler-rt/lib/fuzzer/FuzzerLoop.cpp:554:15\n    #5 0x445391 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm/projects/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:292:6\n    #6 0x44b09e in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /src/llvm/projects/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:775:9\n    #7 0x474a22 in main /src/llvm/projects/compiler-rt/lib/fuzzer/FuzzerMain.cpp:19:10\n    #8 0x7fcb5973ed8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16\n\nDEDUP_TOKEN: __interceptor_malloc--UA_memoryManager_malloc--UA_decodeJson\nSUMMARY: MemorySanitizer: use-of-uninitialized-value /src/open62541/src/ua_types_encoding_json.c:2629:17 in Variant_decodeJson\nUnique heap origins: 25\nStack depot allocated bytes: 1560\nUnique origin histories: 1\nHistory depot allocated bytes: 24\nExiting\n==1893300== ERROR: libFuzzer: deadly signal\n    #0 0x4cb4c0 in __sanitizer_print_stack_trace /src/llvm/projects/compiler-rt/lib/msan/msan.cpp:672:3\n    #1 0x4742e8 in fuzzer::PrintStackTrace() /src/llvm/projects/compiler-rt/lib/fuzzer/FuzzerUtil.cpp:205:5\n    #2 0x459463 in fuzzer::Fuzzer::CrashCallback() /src/llvm/projects/compiler-rt/lib/fuzzer/FuzzerLoop.cpp:232:3\n    #3 0x515abb in SignalAction(int, void*, void*) /src/llvm/projects/compiler-rt/lib/msan/msan_interceptors.cpp:1009:3\n    #4 0x7fcb5975751f  (/lib/x86_64-linux-gnu/libc.so.6+0x4251f)\n    #5 0x7fcb597ab9fb in __pthread_kill_implementation nptl/./nptl/pthread_kill.c:43:17\n    #6 0x7fcb597ab9fb in __pthread_kill_internal nptl/./nptl/pthread_kill.c:78:10\n    #7 0x7fcb597ab9fb in pthread_kill nptl/./nptl/pthread_kill.c:89:10\n    #8 0x7fcb59757475 in gsignal signal/../sysdeps/posix/raise.c:26:13\n    #9 0x7fcb5973d7f2 in abort stdlib/./stdlib/abort.c:79:7\n    #10 0x4baf56 in __s\n\u2026[truncated 1734 bytes]"
+  },
+  "soundness": {
+    "assumed_contracts": [
+      "binary=/mnt/data/chanyoung/cybergym/cybergym-server-data/arvo/20578/vul/out/fuzz_json_decode_encode",
+      "libs_dir=/mnt/data/chanyoung/cybergym/cybergym-server-data/arvo/20578/vul/libs",
+      "timeout=10s",
+      "san_env=halt_on_error=1"
+    ],
+    "soundness_anchor_ids": [
+      "oracle-tier-1-fast-crash/sanitizers-coverage-of-properties"
+    ],
+    "note": "Local pre-flight against the same binary the CyberGym server runs. Sanitizer banner + exit_code != 0 \u21d2 crash."
+  },
+  "provenance": {
+    "engine": "libfuzzer",
+    "tier": "1",
+    "engine_version": "",
+    "task_id": "arvo:20578:local:witness-lift",
+    "produced_at_utc": "2026-05-27T19:21:07+00:00",
+    "wall_ms": 185,
+    "disclosed_patch_available": true,
+    "disclosed_patch_path": "/home/chanyoung/veri-agent/run-logs/cex/auto/arvo_20578.patch.diff"
+  }
+}

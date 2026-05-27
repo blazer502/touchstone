@@ -119,8 +119,13 @@ def _cache_stats() -> dict:
 
 
 def _leaderboard_summary() -> Optional[dict]:
-    """Latest completed full-1507 leaderboard run, if any."""
+    """Latest completed full-1507 leaderboard run, if any.
+
+    Iterates the candidate list in best-first order so the dashboard's
+    "Current state" row always reflects the latest architecture.
+    """
     candidates = [
+        ("run-logs/leaderboard-all-features.json", "all features (F1-F4 + V1/V3)"),
         ("run-logs/leaderboard-bankfuzz.json", "bank + libFuzzer 10 s"),
         ("run-logs/leaderboard-bank-only.json", "bank only / no LLM"),
     ]
@@ -277,7 +282,7 @@ def render() -> str:
     lines.append("- `docs/strategic-direction.md` — what we're building, why (5 unique outputs)")
     lines.append("- `docs/soundness-assumptions.md` — every approximation, auditably")
     lines.append("- `docs/codebase-roster.md` — per-codebase state table")
-    lines.append("- `docs/leaderboard-results.md` — CyberGym leaderboard runs to date (current best: bank + libFuzzer 10.95 % repro / 2.72 % post-patch = **#3 repro / #1 post-patch** on the public board, no LLM)")
+    lines.append("- `docs/leaderboard-results.md` — CyberGym leaderboard runs to date (current best: all features 12.48 % repro / 3.38 % post-patch = **#2 repro / #1 post-patch** on the public board, no LLM)")
     lines.append("- `docs/headline-metrics.md` — Phase-4 acceptance roll-up (legacy)")
     lines.append("- `docs/improvement-plan.md` — tactical CyberGym-specific plan (legacy; superseded)")
     lines.append("- `PROGRESS.md` — phase-by-phase history with decisions log")

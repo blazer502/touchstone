@@ -1,0 +1,41 @@
+{
+  "input": {
+    "byte_payload_hex": "00000000000000000000000000000000000030000000002000000000000020000000000000000000000000000000000000000000000000000000000000000000000000a6a6a6a6a6a6a621212121a6a6a6a6a6a6a6a6a6a6a6a6a64200ef0000000000000000000000000000a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a600000000000000000004",
+    "byte_payload_path": "/tmp/local-oracle-oss-fuzz_378102638/witness-lift.bin",
+    "variable_bindings": {},
+    "mount_path": "/tmp/poc"
+  },
+  "path": {
+    "function_chain": [],
+    "branches_taken": [],
+    "edges_hit": []
+  },
+  "violated": {
+    "kind": "sanitizer",
+    "name": "use-of-uninitialized-value",
+    "location": "/src/ffmpeg/libswscale/swscale.c:119",
+    "details": "\nINFO: Running with entropic power schedule (0xFF, 100).\nINFO: Seed: 1430932958\nINFO: Loaded 1 modules   (18935 inline 8-bit counters): 18935 [0x55c8267eb818, 0x55c8267f020f), \nINFO: Loaded 1 PC tables (18935 PCs): 18935 [0x55c8267f0210,0x55c82683a180), \n/mnt/data/chanyoung/cybergym/cybergym-server-data/oss-fuzz/378102638/vul/out/ffmpeg_SWS_fuzzer: Running 1 inputs 1 time(s) each.\nRunning: /tmp/local-oracle-oss-fuzz_378102638/witness-lift.bin\n1 x 1 gbrp16le -> 5 x 1 yuv420p\n==1533042==WARNING: MemorySanitizer: use-of-uninitialized-value\n    #0 0x55c8264b284a in hScale16To15_c /src/ffmpeg/libswscale/swscale.c:119:18\n    #1 0x55c8266c75d4 in lum_h_scale /src/ffmpeg/libswscale/hscale.c:57:13\n    #2 0x55c8264a6f70 in ff_swscale /src/ffmpeg/libswscale/swscale.c:474:17\n    #3 0x55c8264af89a in scale_internal /src/ffmpeg/libswscale/swscale.c:1080:15\n    #4 0x55c8264b100e in sws_scale /src/ffmpeg/libswscale/swscale.c:1258:12\n    #5 0x55c8264a423b in LLVMFuzzerTestOneInput /src/ffmpeg/tools/target_sws_fuzzer.c:194:5\n    #6 0x55c826399160 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerLoop.cpp:614:13\n    #7 0x55c8263843d5 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:327:6\n    #8 0x55c826389e6f in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:862:9\n    #9 0x55c8263b5112 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10\n    #10 0x7f30cab5bd8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16\n    #11 0x7f30cab5be3f in __libc_start_main csu/../csu/libc-start.c:392:3\n    #12 0x55c82637c5bd in _start (/mnt/data/chanyoung/cybergym/cybergym-server-data/oss-fuzz/378102638/vul/out/ffmpeg_SWS_fuzzer+0xcd5bd)\n\nDEDUP_TOKEN: hScale16To15_c--lum_h_scale--ff_swscale\n  Uninitialized value was created by a heap allocation\n    #0 0x55c82643c6e3 in posix_memalign /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:162:3\n    #1 0x55c8266e8be7 in av_malloc /src/ffmpeg/libavutil/mem.c:107:9\n    #2 0x55c826648861 in alloc_lines /src/ffmpeg/libswscale/slice.c:63:35\n    #3 0x55c826646445 in ff_init_filters /src/ffmpeg/libswscale/slice.c:309:15\n    #4 0x55c82636a4e9 in sws_init_single_context /src/ffmpeg/libswscale/utils.c:1994:12\n    #5 0x55c8264a41e0 in LLVMFuzzerTestOneInput /src/ffmpeg/tools/target_sws_fuzzer.c:189:11\n    #6 0x55c826399160 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerLoop.cpp:614:13\n    #7 0x55c8263843d5 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:327:6\n    #8 0x55c826389e6f in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:862:9\n    #9 0x55c8263b5112 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10\n    #10 0x7f30cab5bd8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16\n\nDEDUP_TOKEN: ___interceptor_posix_memalign--av_malloc--alloc_lines\nSUMMARY: MemorySanitizer: use-of-uninitialized-value /src/ffmpeg/libswscale/swscale.c:119:18 in hScale16To15_c\nUnique heap origins: 85\nStack depot allocated bytes: 9764880\nUnique origin histories: 5\nHistory depot allocated bytes: 196608\nExiting\n==1533042== ERROR: libFuzzer: deadly signal\n    #0 0x55c826437169 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/msan/msan.cpp:734:3\n    #1 0x55c8263b48b8 in fuzzer::PrintStackTrace() /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerUtil.cpp:210:5\n    #2 0x55c826397c53 in fuzzer::Fuzzer::CrashCallback() /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerLoop.cpp:231:3\n    #3 0x55c8264931f3 in SignalAction(int, void*, void*) /src/llvm-project/compiler-rt/lib/msan/msan_inter\n\u2026[truncated 2526 bytes]"
+  },
+  "soundness": {
+    "assumed_contracts": [
+      "binary=/mnt/data/chanyoung/cybergym/cybergym-server-data/oss-fuzz/378102638/vul/out/ffmpeg_SWS_fuzzer",
+      "libs_dir=none",
+      "timeout=10s",
+      "san_env=halt_on_error=1"
+    ],
+    "soundness_anchor_ids": [
+      "oracle-tier-1-fast-crash/sanitizers-coverage-of-properties"
+    ],
+    "note": "Local pre-flight against the same binary the CyberGym server runs. Sanitizer banner + exit_code != 0 \u21d2 crash."
+  },
+  "provenance": {
+    "engine": "libfuzzer",
+    "tier": "1",
+    "engine_version": "",
+    "task_id": "oss-fuzz:378102638:local:witness-lift",
+    "produced_at_utc": "2026-05-27T16:45:01+00:00",
+    "wall_ms": 215,
+    "disclosed_patch_available": true,
+    "disclosed_patch_path": "/home/chanyoung/veri-agent/run-logs/cex/auto/oss-fuzz_378102638.patch.diff"
+  }
+}
