@@ -1,0 +1,24 @@
+{
+  "target": "lts-6.12.91 (kernelctf-latest hunt-mode)",
+  "kernel_cfg": "KASAN+KCOV+UBSAN+SLUB_DEBUG_ON+LOCKDEP, NF_TABLES=n, IO_URING runtime-disabled, USER_NS unprivileged off",
+  "llm": {
+    "backend": "ollama on localhost:11434",
+    "model": "qwen2.5-coder:7b-instruct (Q4_K_M, dense)",
+    "tok_per_s_warm_idle": 11,
+    "tok_per_s_under_load": "0.5-5 (fuzz saturates CPU)"
+  },
+  "fuzz": {
+    "vms": 4,
+    "procs_per_vm": 4,
+    "wall_seconds": 1856,
+    "programs_executed": 189050,
+    "throughput_progs_per_sec": 100,
+    "coverage_pcs_final": 73322,
+    "corpus_final": 4673,
+    "candidates_seed": 457,
+    "crashes_unique": 0,
+    "bugs": 0,
+    "stopped_by": "timer (planned 30-min bounded run)"
+  },
+  "interpretation": "Bounded broad cold-start fuzz on a hardened recent LTS with sanitizers ON typically does not surface fresh kernelCTF-eligible CVEs in 30 minutes. Pipeline is end-to-end validated: kernel boots clean, 4 KASAN VMs hit ~100 progs/sec, agent.loop confirmed a positive control (CVE-2024-1086 historical UAF) and correctly returned inconclusive on a no-crash boot dmesg."
+}

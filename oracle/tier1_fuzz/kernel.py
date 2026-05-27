@@ -28,7 +28,7 @@ import time
 from pathlib import Path
 from typing import Optional
 
-from .verdict import Tier1Verdict, from_kasan_log
+from .verdict import Tier1Verdict, from_kasan_log, from_kernel_bug_log, classify_kernel_bug
 
 
 def _truncate(text: str, limit: int = 6000) -> str:
@@ -72,23 +72,34 @@ def kasan_replay(qemu_script: Path, log_path: Optional[Path] = None,
 
 
 def kasan_replay_from_log(log_path: Path, unit: str = "kernelctf-historical") -> Tier1Verdict:
-    """Parse a previously-captured dmesg log for a KASAN BUG banner.
+    """Parse a previously-captured dmesg log for ANY recognized kernel BUG/WARN/DoS signature.
 
-    Used by the metrics harness to avoid re-booting QEMU on every baseline
-    run (≈90s per boot). The serial log produced by ``scripts/run_qemu.sh``
-    is the authoritative evidence; this is a pure parser over that file.
+    Recognises KASAN/KMSAN/KCSAN/UBSAN sanitizer banners + raw kernel oopses
+    (null-deref, bad-paging, GPF, soft-lockup, task-hung, RCU stalls, WARN).
+    Severity tag goes into ``soundness_note`` so downstream consumers can
+    distinguish exploit-relevant crashes from DoS-class hangs.
+
+    Verdict mapping:
+      severity=crash → 'crash'  (memory safety + hard oopses; routes as confirmed)
+      severity=warn  → 'crash'  (UBSAN/KCSAN/WARN — surface to user for audit)
+      severity=dos   → 'crash'  (soft-lockup/task-hung — DoS class; lower priority)
+      no signature   → 'inconclusive'
     """
     text = log_path.read_text(errors="replace")
-    cls, loc = from_kasan_log(text)
-    has_bug = bool(re.search(r"BUG:\s+KASAN:", text))
+    san, cls, loc = from_kernel_bug_log(text)
+    severity = classify_kernel_bug(san, cls)
+    has_bug = severity != "unknown"
     verdict = "crash" if has_bug else "inconclusive"
     return Tier1Verdict(
-        unit=unit, engine="kasan_replay", sanitizer="KASAN", verdict=verdict, wall_ms=0,
+        unit=unit, engine="kasan_replay",
+        sanitizer=(san if san in {"KASAN", "KMSAN", "KCSAN", "UBSAN"} else "none"),
+        verdict=verdict, wall_ms=0,
         crash_class=cls, location=loc,
         pov_path=str(log_path),
         evidence_excerpt=_truncate(text),
-        soundness_note=("Replay from captured log. KASAN BUG banner is the verdict — "
-                        "the wall_ms=0 here is bookkeeping (the boot happened in 0.4)."),
+        soundness_note=(f"replay-from-log; severity={severity}; sanitizer={san or '-'}; "
+                        "memory-safety (KASAN/KMSAN) is sanitizer-confirmed; DoS-class "
+                        "(soft-lockup/task-hung) is informational and may be fuzzer-overload."),
         assumed=["log=parsed-only", "no fresh qemu boot"],
     )
 

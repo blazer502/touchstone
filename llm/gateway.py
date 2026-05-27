@@ -47,10 +47,17 @@ class Router:
         self.cfg = cfg
         self.replicas: dict[str, list[tuple[str, str]]] = {}
         profile = os.environ.get("VERI_PROFILE") or cfg.get("serving", {}).get("profile", "production")
+        self.profile = profile
         if profile == "smoke":
             s = cfg["smoke"]
             url = f"http://127.0.0.1:{s['port']}"
             # In smoke profile both roles resolve to the same replica.
+            self.replicas["synthesizer"] = [(s["model"], url)]
+            self.replicas["router"] = [(s["model"], url)]
+        elif profile == "cpu":
+            s = cfg["cpu"]
+            url = f"http://127.0.0.1:{s['port']}"
+            # CPU profile: ollama backend, both roles share one dense model.
             self.replicas["synthesizer"] = [(s["model"], url)]
             self.replicas["router"] = [(s["model"], url)]
         else:
@@ -98,9 +105,12 @@ def create_app(config_path: Path | None = None) -> FastAPI:
     async def health() -> dict[str, Any]:
         # Probe each backend's /health.
         status = {}
+        health_path = "/health"
+        if router.profile == "cpu":
+            health_path = cfg.get("cpu", {}).get("backend_health_path", "/api/version")
         async def probe(role: str, url: str):
             try:
-                r = await client.get(f"{url}/health", timeout=2.0)
+                r = await client.get(f"{url}{health_path}", timeout=2.0)
                 return role, url, r.status_code
             except Exception as e:
                 return role, url, f"err: {e.__class__.__name__}"

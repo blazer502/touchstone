@@ -28,6 +28,16 @@ smoke:
   max_model_len: 16384
   gpu_memory_utilization: 0.85
 
+# CPU profile — points the gateway at an already-running ollama backend.
+# No GPU required. Both synthesizer + router roles resolve to one dense
+# Qwen2.5-Coder-7B-Instruct Q4_K_M (~11 tok/s on this Xeon Gold 6136 with
+# AVX-512). Selected by `VERI_PROFILE=cpu`.
+cpu:
+  model: qwen2.5-coder:7b-instruct
+  port: 11434
+  backend_health_path: /api/version
+  max_model_len: 8192
+
 roles:
   synthesizer:
     model: Qwen/Qwen2.5-Coder-32B-Instruct
