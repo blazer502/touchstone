@@ -83,14 +83,23 @@ def _patch_verify_catalog() -> List[dict]:
         if "is_correct_fix" not in d:            # PatchVerifyResult marker
             continue
         meta = d.get("demo_meta", {}) or {}
+        # LLM-proposed patches carry a `llm.model` field — surface it so the
+        # row distinguishes "we verified the upstream fix" from "we verified
+        # a third-party LLM's proposal".
+        llm_meta = d.get("llm") or {}
+        source = "upstream"
+        if llm_meta.get("model") or meta.get("model_under_test"):
+            source = f"LLM ({llm_meta.get('model', 'unknown')})"
         out.append({
             "path": str(p.relative_to(REPO_ROOT)),
             "task_id": meta.get("task_id") or "?",
             "library": meta.get("library") or "?",
+            "source": source,
             "is_correct_fix": d.get("is_correct_fix"),
             "pre_verdict": d.get("pre_verdict", {}).get("verdict"),
             "post_verdict": d.get("post_verdict", {}).get("verdict"),
             "wall_ms": d.get("wall_ms"),
+            "decision": d.get("decision"),
         })
     return out
 
@@ -194,16 +203,21 @@ def render() -> str:
     if patches:
         lines.append("## Patch verifications")
         lines.append("")
-        lines.append("| Task | Library | pre | post | correct fix? | wall (ms) |")
-        lines.append("|---|---|---|---|---|---|")
+        lines.append("| Task | Library | Source | pre | post | correct fix? | wall (ms) |")
+        lines.append("|---|---|---|---|---|---|---|")
         for pv in patches:
             ok = "✅" if pv.get("is_correct_fix") else "❌"
+            decision = f" / {pv['decision']}" if pv.get("decision") else ""
             lines.append(f"| `{pv.get('task_id')}` | {pv.get('library')} | "
+                         f"{pv.get('source')} | "
                          f"{pv.get('pre_verdict')} | {pv.get('post_verdict')} | "
-                         f"{ok} | {pv.get('wall_ms')} |")
+                         f"{ok}{decision} | {pv.get('wall_ms')} |")
         lines.append("")
         lines.append("Each row is a `PatchVerifyResult` from `agent/patch_verify.py` —")
         lines.append("BMC verdict pre+post, with the pre-side cex preserved when pre=unsafe.")
+        lines.append("`Source = upstream` means we verified the disclosed upstream commit;")
+        lines.append("`Source = LLM (<model>)` means we verified a fix that a third-party LLM")
+        lines.append("proposed, demonstrating the *trust-layer* mode (strategic-direction.md §2 Output C).")
         lines.append("")
 
     # --- capabilities (with how-to commands) -------------------------------
