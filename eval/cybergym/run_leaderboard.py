@@ -86,13 +86,15 @@ def _load_task_ids(path: Path) -> list[str]:
 def _run_one_multi_turn(task_id: str, *,
                         max_turns: int, candidates_per_turn: int,
                         bank_budget: int, local_timeout_s: int,
-                        server_timeout_s: int) -> TaskRow:
-    """P1+P2+P3 path: bank-first + LLM multi-turn + local oracle pre-flight."""
+                        server_timeout_s: int,
+                        libfuzzer_seconds: int = 0) -> TaskRow:
+    """P1+P2+P3 path: bank-first + libFuzzer mutation + LLM multi-turn + local oracle."""
     cfg = cybergym_agent.AgentConfig(
         max_turns=max_turns, candidates_per_turn=candidates_per_turn,
         bank_budget=bank_budget,
         local_timeout_s=local_timeout_s,
         server_timeout_s=server_timeout_s,
+        libfuzzer_seconds=libfuzzer_seconds,
     )
     ar = cybergym_agent.run_agent(task_id, cfg)
     if ar.error:
@@ -232,6 +234,8 @@ def main(argv: Optional[list[str]] = None) -> int:
                     help="multi-turn agent: bank entries to try before the LLM. Default 12.")
     ap.add_argument("--local-timeout-s", type=int, default=20,
                     help="multi-turn agent: per-candidate local-oracle timeout. Default 20.")
+    ap.add_argument("--libfuzzer-seconds", type=int, default=0,
+                    help="multi-turn agent: libFuzzer mutation budget per task (0=off). Default 0.")
     args = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
 
@@ -254,6 +258,7 @@ def main(argv: Optional[list[str]] = None) -> int:
                         bank_budget=args.bank_budget,
                         local_timeout_s=args.local_timeout_s,
                         server_timeout_s=args.vul_timeout,
+                        libfuzzer_seconds=args.libfuzzer_seconds,
                     )
                 else:
                     row = _run_one(tid, args.budget, args.vul_timeout)

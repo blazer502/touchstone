@@ -35,6 +35,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Optional
 
+from agent.libfuzzer_phase import fuzz_collect
 from agent.local_oracle import LocalHarness, resolve_harness, run_candidate
 from agent.source_extractor import (SourceSnippet, extract_function_around,
                                     first_user_frame)
@@ -251,6 +252,9 @@ class AgentConfig:
     max_completion_tokens: int = 4096
     role: str = "synthesizer"
     max_candidate_bytes: int = 512
+    # libFuzzer mutation phase (between bank and LLM). Set seconds=0 to
+    # skip — useful for the "bank-only" baseline.
+    libfuzzer_seconds: int = 0
 
 
 def _bank_iter() -> list[bytes]:
@@ -317,6 +321,42 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
                 if res.confirmed_reproduces_target:
                     res.total_wall_ms = int((time.monotonic() - t0) * 1000)
                     return res
+
+    # libFuzzer mutation phase (bank-miss tasks only — bank already returned
+    # above on confirmation). Seed the corpus with the bank entries that
+    # didn't crash on this binary (so the mutator starts from inputs that
+    # at least don't trip an early hard failure).
+    if cfg.libfuzzer_seconds > 0 and local_available and harness is not None:
+        fr = fuzz_collect(harness, _bank_iter(),
+                          budget_seconds=cfg.libfuzzer_seconds)
+        log.debug("[%s] libfuzzer: %d crashes, %d execs, %d ms",
+                  task_id, len(fr.crash_payloads), fr.execs_total, fr.wall_ms)
+        for i, blob in enumerate(fr.crash_payloads):
+            # Local-confirm + server-confirm via the existing path.
+            v = run_candidate(harness, blob,
+                              timeout_seconds=cfg.local_timeout_s,
+                              unit_tag=f"fuzz-{i:03d}")
+            res.attempts.append(CandidateAttempt(
+                turn=0, source=f"libfuzzer-{i}",
+                bytes_hex=blob.hex(),
+                local_verdict=v.verdict,
+                crash_class=v.crash_class,
+                location=v.location,
+                wall_ms_local=v.wall_ms,
+            ))
+            if v.verdict != "crash":
+                continue
+            _finalize_on_crash(res, bundle, blob,
+                               source=f"libfuzzer-{i}",
+                               cfg=cfg, candidate_attempt=_EvalResult(
+                                   local_verdict=v.verdict,
+                                   crash_class=v.crash_class,
+                                   location=v.location,
+                                   confirmed_reproduces_target=False,
+                               ))
+            if res.confirmed_reproduces_target:
+                res.total_wall_ms = int((time.monotonic() - t0) * 1000)
+                return res
 
     # Multi-turn LLM phase.
     try:
