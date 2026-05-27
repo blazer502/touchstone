@@ -325,6 +325,7 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
                                    cfg=cfg, candidate_attempt=v)
                 if res.confirmed_reproduces_target:
                     res.total_wall_ms = int((time.monotonic() - t0) * 1000)
+                    _auto_lift_witness(task, harness, cfg, res)
                     return res
 
     # libFuzzer mutation phase (bank-miss tasks only — bank already returned
@@ -378,6 +379,7 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
                                ))
             if res.confirmed_reproduces_target:
                 res.total_wall_ms = int((time.monotonic() - t0) * 1000)
+                _auto_lift_witness(task, harness, cfg, res)
                 return res
 
     # Multi-turn LLM phase.
@@ -429,7 +431,32 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
                 break
 
     res.total_wall_ms = int((time.monotonic() - t0) * 1000)
+    _auto_lift_witness(task, harness, cfg, res)
     return res
+
+
+def _auto_lift_witness(task: BenchmarkTask, harness: Optional[LocalHarness],
+                       cfg: AgentConfig, res: AgentResult) -> None:
+    """V1: every confirmed reproducer gets an audit-grade Witness on disk.
+
+    Re-runs the winning candidate one extra time through the local oracle
+    to get a fresh sanitizer banner with file:line, then lifts via
+    `from_tier1`. Failure is non-fatal — leaderboard score is already
+    locked in `res.confirmed_reproduces_target`.
+    """
+    if not (res.confirmed_reproduces_target and res.winning_poc_hex
+            and harness is not None):
+        return
+    try:
+        blob = bytes.fromhex(res.winning_poc_hex)
+        v = run_candidate(harness, blob,
+                          timeout_seconds=cfg.local_timeout_s,
+                          unit_tag="witness-lift")
+        from agent.score_cache import write_witness
+        wp = write_witness(task, blob, v)
+        log.info("[%s] witness → %s", task.task_id, wp)
+    except Exception as e:
+        log.warning("[%s] witness auto-lift failed: %s", task.task_id, e)
 
 
 # --- helpers ---------------------------------------------------------------

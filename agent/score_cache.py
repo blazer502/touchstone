@@ -229,6 +229,31 @@ def stats(root: Path = CACHE_ROOT) -> dict:
     return {"rows": len(rows), "task_ids": len(by_task)}
 
 
+WITNESS_AUTO_ROOT = REPO_ROOT / "run-logs" / "cex" / "auto"
+
+
+def write_witness(task: BenchmarkTask, poc_bytes: bytes,
+                  tier1_verdict, *,
+                  out_dir: Path = WITNESS_AUTO_ROOT,
+                  soundness_anchor_ids: Optional[list[str]] = None) -> Path:
+    """V1: write an audit-grade Witness JSON for a confirmed crash.
+
+    Benchmark-agnostic — caller supplies any `BenchmarkTask` + the
+    `Tier1Verdict` from re-running the winning candidate locally; the
+    Witness shape is uniform across benchmarks. One JSON per task id
+    (later confirms overwrite earlier ones for the same task — by design,
+    we want the latest minimum-PoC).
+    """
+    from schemas.witness import from_tier1
+    w = from_tier1(tier1_verdict, pov_bytes=poc_bytes,
+                   soundness_anchor_ids=soundness_anchor_ids)
+    safe = task.task_id.replace(":", "_").replace("/", "_")
+    p = out_dir / f"{safe}.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(w.to_json())
+    return p
+
+
 __all__ = [
     "ScoreResult",
     "BenchmarkTask",
@@ -236,6 +261,7 @@ __all__ = [
     "get", "put",
     "signature", "dedup_crashes",
     "cache_key", "stats",
+    "write_witness", "WITNESS_AUTO_ROOT",
     "CACHE_ROOT",
 ]
 
