@@ -1,0 +1,27 @@
+{
+  "subsystem": "net/netfilter",
+  "target": "linux-6.12.91-net-netfilter",
+  "dispatcher_classes": [
+    "genetlink",
+    "ip_setsockopt",
+    "ipset_netlink",
+    "iptables_setsockopt",
+    "ipvs_netlink",
+    "nfnetlink",
+    "nftables_netlink",
+    "packet_hook",
+    "sysctl"
+  ],
+  "syscalls": [
+    "recvmsg$packet",
+    "sendmsg$IPVS_*",
+    "sendmsg$NETLINK",
+    "sendmsg$nl_netfilter",
+    "sendmsg$packet",
+    "setsockopt$inet_*",
+    "socket$packet",
+    "syz_genetlink_*",
+    "syz_ipset_*"
+  ],
+  "note": "Heuristic mapping. Router refines at fuzz launch."
+}

@@ -1,0 +1,53 @@
+{
+  "cluster": "nft_dup",
+  "scope": "net/netfilter",
+  "sources": [
+    {
+      "path": "net/netfilter/nft_dup_netdev.c",
+      "loc": 114,
+      "patterns": {
+        "ops_vtable": 1,
+        "container_of": 0,
+        "refcount": 0,
+        "rcu": 0,
+        "allocator": 0,
+        "parser_sm": 0
+      }
+    }
+  ],
+  "loc": 114,
+  "pattern_totals": {
+    "ops_vtable": 1,
+    "container_of": 0,
+    "refcount": 0,
+    "rcu": 0,
+    "allocator": 0,
+    "parser_sm": 0
+  },
+  "exports": [
+    "nft_dup_netdev_dump",
+    "nft_dup_netdev_eval",
+    "nft_dup_netdev_init",
+    "nft_dup_netdev_module_exit",
+    "nft_dup_netdev_module_init",
+    "nft_dup_netdev_offload",
+    "nft_dup_netdev_offload_action"
+  ],
+  "callees_internal": [
+    "nft_dup_netdev_dump",
+    "nft_dup_netdev_eval",
+    "nft_dup_netdev_init",
+    "nft_dup_netdev_module_exit",
+    "nft_dup_netdev_module_init",
+    "nft_dup_netdev_offload",
+    "nft_dup_netdev_offload_action"
+  ],
+  "callees_external": {
+    "nf_dup": 2,
+    "nf_tables": 4
+  },
+  "export_count": 7,
+  "dominant_patterns": [
+    "ops_vtable"
+  ]
+}

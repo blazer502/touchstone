@@ -1,0 +1,132 @@
+{
+  "cluster": "nft_chain",
+  "scope": "net/netfilter",
+  "sources": [
+    {
+      "path": "net/netfilter/nft_chain_filter.c",
+      "loc": 455,
+      "patterns": {
+        "ops_vtable": 7,
+        "container_of": 0,
+        "refcount": 0,
+        "rcu": 0,
+        "allocator": 1,
+        "parser_sm": 1
+      }
+    },
+    {
+      "path": "net/netfilter/nft_chain_nat.c",
+      "loc": 150,
+      "patterns": {
+        "ops_vtable": 3,
+        "container_of": 0,
+        "refcount": 0,
+        "rcu": 0,
+        "allocator": 0,
+        "parser_sm": 1
+      }
+    },
+    {
+      "path": "net/netfilter/nft_chain_route.c",
+      "loc": 170,
+      "patterns": {
+        "ops_vtable": 3,
+        "container_of": 0,
+        "refcount": 0,
+        "rcu": 0,
+        "allocator": 0,
+        "parser_sm": 1
+      }
+    }
+  ],
+  "loc": 775,
+  "pattern_totals": {
+    "ops_vtable": 13,
+    "container_of": 0,
+    "refcount": 0,
+    "rcu": 0,
+    "allocator": 1,
+    "parser_sm": 3
+  },
+  "exports": [
+    "nf_route_table_hook4",
+    "nf_route_table_hook6",
+    "nf_route_table_inet",
+    "nf_tables_netdev_event",
+    "nft_chain_filter_arp_fini",
+    "nft_chain_filter_arp_init",
+    "nft_chain_filter_bridge_fini",
+    "nft_chain_filter_bridge_init",
+    "nft_chain_filter_fini",
+    "nft_chain_filter_inet_fini",
+    "nft_chain_filter_inet_init",
+    "nft_chain_filter_init",
+    "nft_chain_filter_ipv4_fini",
+    "nft_chain_filter_ipv4_init",
+    "nft_chain_filter_ipv6_fini",
+    "nft_chain_filter_ipv6_init",
+    "nft_chain_filter_netdev_fini",
+    "nft_chain_filter_netdev_init",
+    "nft_chain_nat_exit",
+    "nft_chain_nat_init",
+    "nft_chain_route_fini",
+    "nft_chain_route_init",
+    "nft_do_chain_arp",
+    "nft_do_chain_bridge",
+    "nft_do_chain_inet",
+    "nft_do_chain_inet_ingress",
+    "nft_do_chain_ipv4",
+    "nft_do_chain_ipv6",
+    "nft_do_chain_netdev",
+    "nft_nat_do_chain",
+    "nft_nat_inet_reg",
+    "nft_nat_inet_unreg",
+    "nft_netdev_event"
+  ],
+  "callees_internal": [
+    "nf_route_table_hook4",
+    "nf_route_table_hook6",
+    "nf_route_table_inet",
+    "nf_tables_netdev_event",
+    "nft_chain_filter_arp_fini",
+    "nft_chain_filter_arp_init",
+    "nft_chain_filter_bridge_fini",
+    "nft_chain_filter_bridge_init",
+    "nft_chain_filter_fini",
+    "nft_chain_filter_inet_fini",
+    "nft_chain_filter_inet_init",
+    "nft_chain_filter_init",
+    "nft_chain_filter_ipv4_fini",
+    "nft_chain_filter_ipv4_init",
+    "nft_chain_filter_ipv6_fini",
+    "nft_chain_filter_ipv6_init",
+    "nft_chain_filter_netdev_fini",
+    "nft_chain_filter_netdev_init",
+    "nft_chain_nat_exit",
+    "nft_chain_nat_init",
+    "nft_chain_route_fini",
+    "nft_chain_route_init",
+    "nft_do_chain_arp",
+    "nft_do_chain_bridge",
+    "nft_do_chain_inet",
+    "nft_do_chain_inet_ingress",
+    "nft_do_chain_ipv4",
+    "nft_do_chain_ipv6",
+    "nft_do_chain_netdev",
+    "nft_nat_do_chain",
+    "nft_nat_inet_reg",
+    "nft_nat_inet_unreg",
+    "nft_netdev_event"
+  ],
+  "callees_external": {
+    "nf_tables": 10,
+    "core": 1,
+    "nf_nat": 2
+  },
+  "export_count": 33,
+  "dominant_patterns": [
+    "ops_vtable",
+    "parser_sm",
+    "allocator"
+  ]
+}

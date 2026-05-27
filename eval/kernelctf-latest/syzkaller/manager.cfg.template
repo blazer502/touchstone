@@ -1,0 +1,35 @@
+{
+  "_comment": "syz-manager config template for kernelctf-latest (lts-6.12.91).",
+  "_comment_subsystem": "Substitute __SUBSYSTEM__ when launching. enable_syscalls is filled by surface/run_stage_a.sh for the chosen subsystem.",
+
+  "target": "linux/amd64",
+  "http": "127.0.0.1:50000",
+  "workdir": "__ROOT__/syzkaller/workdir-__SUBSYSTEM__",
+  "kernel_obj": "__ROOT__/linux/build-latest",
+  "kernel_src": "__ROOT__/linux/source",
+  "image": "__ROOT__/initramfs/build/disk.img",
+  "sshkey": "__ROOT__/initramfs/build/id_rsa",
+  "syzkaller": "/opt/syzkaller",
+  "procs": 4,
+  "type": "qemu",
+  "vm": {
+    "count": 2,
+    "kernel": "__ROOT__/artifacts/bzImage-latest",
+    "initrd": "__ROOT__/artifacts/initramfs-latest.cpio.gz",
+    "cpu": 2,
+    "mem": 2048,
+    "qemu_args": "-enable-kvm -cpu host -nographic -no-reboot"
+  },
+  "reproduce": true,
+  "cover": true,
+  "sandbox": "none",
+  "enable_syscalls": [
+    "__SYSCALL_LIST_PLACEHOLDER__"
+  ],
+  "disable_syscalls": [
+    "syz_io_uring_*",
+    "io_uring_*",
+    "syz_nf_tables_*",
+    "syz_emit_ethernet"
+  ]
+}

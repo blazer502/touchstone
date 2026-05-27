@@ -1,0 +1,20 @@
+[
+  {
+    "cid": "k-latest-1-boot-smoke",
+    "description": "kernelCTF-latest (lts-6.12.91 hunt-mode kernel): KASAN-replay over the boot-only dmesg log produced by run_qemu_latest.sh. No exploit ran; expected verdict is 'inconclusive' (no_crash ≠ safe), confirming that the boot smoke is healthy and the dispatch wiring is intact. When a real fuzz pass eventually produces a new dmesg with a KASAN report, this same candidate will flip to 'confirmed'.",
+    "class_hint": "kernel_uaf",
+    "tier1_kasan": {
+      "dmesg_path": "eval/kernelctf-latest/artifacts/dmesg-latest-setup.log",
+      "unit": "kernelctf-latest:lts-6.12.91-boot-smoke"
+    }
+  },
+  {
+    "cid": "k-latest-2-historical-positive-control",
+    "description": "Positive control: same dispatch wiring routed against the Phase-0.4 historical 6.1.72 dmesg (NF_TABLES=y, CVE-2024-1086 exploit fires). Expected: 'confirmed' KASAN UAF. Proves the kernelCTF-latest candidate shape is dispatch-identical to the historical one and only the underlying dmesg differs.",
+    "class_hint": "kernel_uaf",
+    "tier1_kasan": {
+      "dmesg_path": "eval/kernelctf/artifacts/dmesg-cve-2024-1086.log",
+      "unit": "kernelctf-historical:cve-2024-1086-replay"
+    }
+  }
+]

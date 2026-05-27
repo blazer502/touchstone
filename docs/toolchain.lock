@@ -39,7 +39,7 @@ ANGR_VERSION=9.2.213
 # --- Tier 1 fuzzing ---
 AFLPP_VERSION=4.21c
 LIBFUZZER_VERSION=14   # ships with the matching clang
-SYZKALLER_COMMIT=04f1f81e2d4b6f3f3f3f3f3f3f3f3f3f3f3f3f3f  # placeholder — fill from upstream HEAD when first built
+SYZKALLER_COMMIT=2b01f00eb6f2  # google/syzkaller master @ 2026-05-27 (kernelctf-latest setup)
 
 # --- Static / kernel-idiom analyzers ---
 # Smatch: only meaningful version is the git HEAD at build time; pin the commit.

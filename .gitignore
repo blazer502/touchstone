@@ -43,3 +43,18 @@ eval/kernelctf/artifacts/bzImage-live
 eval/kernelctf/artifacts/initramfs-live.cpio.gz
 eval/kernelctf/artifacts/build-live-stderr.log
 eval/kernelctf/artifacts/build-live-stdout.log
+
+# kernelCTF-latest heavy artifacts (sources + bzImage + initramfs rebuilt
+# from pinned recipe in eval/kernelctf-latest/scripts/).
+eval/kernelctf-latest/linux/
+eval/kernelctf-latest/initramfs/
+eval/kernelctf-latest/artifacts/bzImage-latest
+eval/kernelctf-latest/artifacts/initramfs-latest.cpio.gz
+eval/kernelctf-latest/artifacts/build-latest-stderr.log
+eval/kernelctf-latest/artifacts/build-latest-stdout.log
+eval/kernelctf-latest/artifacts/dmesg-latest-setup.log
+# lakitu_defconfig is re-fetched from cos.googlesource.com by make_config_latest.sh
+eval/kernelctf-latest/configs/lakitu_defconfig
+eval/kernelctf-latest/configs/lakitu_defconfig.b64
+# syz-manager workdirs (corpus + crashes — runtime state)
+eval/kernelctf-latest/syzkaller/workdir-*/

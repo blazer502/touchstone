@@ -1,0 +1,76 @@
+{
+  "cluster": "nf_log",
+  "scope": "net/netfilter",
+  "sources": [
+    {
+      "path": "net/netfilter/nf_log_syslog.c",
+      "loc": 1084,
+      "patterns": {
+        "ops_vtable": 2,
+        "container_of": 0,
+        "refcount": 0,
+        "rcu": 0,
+        "allocator": 0,
+        "parser_sm": 0
+      }
+    }
+  ],
+  "loc": 1084,
+  "pattern_totals": {
+    "ops_vtable": 2,
+    "container_of": 0,
+    "refcount": 0,
+    "rcu": 0,
+    "allocator": 0,
+    "parser_sm": 0
+  },
+  "exports": [
+    "dump_arp_packet",
+    "dump_ipv4_packet",
+    "dump_ipv6_packet",
+    "dump_mac_header",
+    "nf_log_allowed",
+    "nf_log_arp_packet",
+    "nf_log_dump_packet_common",
+    "nf_log_dump_sk_uid_gid",
+    "nf_log_dump_tcp_header",
+    "nf_log_dump_udp_header",
+    "nf_log_dump_vlan",
+    "nf_log_ip6_packet",
+    "nf_log_ip_packet",
+    "nf_log_netdev_packet",
+    "nf_log_syslog_exit",
+    "nf_log_syslog_init",
+    "nf_log_syslog_net_exit",
+    "nf_log_syslog_net_init",
+    "nf_log_unknown_packet"
+  ],
+  "callees_internal": [
+    "dump_arp_packet",
+    "dump_ipv4_packet",
+    "dump_ipv6_packet",
+    "dump_mac_header",
+    "nf_log_allowed",
+    "nf_log_arp_packet",
+    "nf_log_dump_packet_common",
+    "nf_log_dump_sk_uid_gid",
+    "nf_log_dump_tcp_header",
+    "nf_log_dump_udp_header",
+    "nf_log_dump_vlan",
+    "nf_log_ip6_packet",
+    "nf_log_ip_packet",
+    "nf_log_netdev_packet",
+    "nf_log_syslog_exit",
+    "nf_log_syslog_init",
+    "nf_log_syslog_net_exit",
+    "nf_log_syslog_net_init",
+    "nf_log_unknown_packet"
+  ],
+  "callees_external": {
+    "nf": 7
+  },
+  "export_count": 19,
+  "dominant_patterns": [
+    "ops_vtable"
+  ]
+}

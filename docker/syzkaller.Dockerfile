@@ -1,5 +1,5 @@
 # syzkaller built from source at a pinned commit.
-ARG BASE_IMAGE=golang:1.22-bookworm
+ARG BASE_IMAGE=golang:1.26-bookworm
 FROM ${BASE_IMAGE}
 
 ARG SYZKALLER_COMMIT=master
@@ -13,4 +13,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PATH=/opt/syzkaller/bin:$PATH
-CMD ["syz-manager", "-version"]
+CMD ["syz-manager", "-help"]

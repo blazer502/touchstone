@@ -1,0 +1,415 @@
+{
+  "target": "linux-6.12.91-net-netfilter",
+  "source_root": "/home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source",
+  "scope": "net/netfilter",
+  "generated_at": 1779847617,
+  "cluster_count": 26,
+  "source_count": 252,
+  "total_loc": 130066,
+  "clusters": [
+    {
+      "cluster": "nf_conntrack",
+      "source_count": 36,
+      "loc": 25266,
+      "export_count": 626,
+      "dominant_patterns": [
+        "rcu",
+        "allocator",
+        "ops_vtable"
+      ],
+      "fanout_external": 32,
+      "depends_on": [
+        "core",
+        "ipset",
+        "nf",
+        "nf_nat",
+        "nfnetlink",
+        "utils",
+        "xt"
+      ]
+    },
+    {
+      "cluster": "ipvs",
+      "source_count": 31,
+      "loc": 21529,
+      "export_count": 554,
+      "dominant_patterns": [
+        "rcu",
+        "allocator",
+        "ops_vtable"
+      ],
+      "fanout_external": 14,
+      "depends_on": [
+        "core",
+        "ipset",
+        "nf",
+        "nf_conntrack",
+        "xt"
+      ]
+    },
+    {
+      "cluster": "nft",
+      "source_count": 35,
+      "loc": 15081,
+      "export_count": 521,
+      "dominant_patterns": [
+        "ops_vtable",
+        "allocator",
+        "rcu"
+      ],
+      "fanout_external": 285,
+      "depends_on": [
+        "nf",
+        "nf_conntrack",
+        "nf_nat",
+        "nf_synproxy",
+        "nf_tables",
+        "nfnetlink",
+        "nft_set",
+        "utils",
+        "x",
+        "xt"
+      ]
+    },
+    {
+      "cluster": "xt",
+      "source_count": 72,
+      "loc": 14780,
+      "export_count": 583,
+      "dominant_patterns": [
+        "allocator",
+        "ops_vtable",
+        "rcu"
+      ],
+      "fanout_external": 228,
+      "depends_on": [
+        "ipset",
+        "ipvs",
+        "nf",
+        "nf_conntrack",
+        "nf_nat",
+        "nfnetlink",
+        "nft",
+        "utils",
+        "x"
+      ]
+    },
+    {
+      "cluster": "nf_tables",
+      "source_count": 4,
+      "loc": 13362,
+      "export_count": 433,
+      "dominant_patterns": [
+        "allocator",
+        "rcu",
+        "refcount"
+      ],
+      "fanout_external": 21,
+      "depends_on": [
+        "core",
+        "nfnetlink",
+        "nft",
+        "nft_chain",
+        "nft_flow"
+      ]
+    },
+    {
+      "cluster": "ipset",
+      "source_count": 19,
+      "loc": 9788,
+      "export_count": 361,
+      "dominant_patterns": [
+        "rcu",
+        "allocator",
+        "parser_sm"
+      ],
+      "fanout_external": 9,
+      "depends_on": [
+        "nf",
+        "nf_conntrack",
+        "nfnetlink"
+      ]
+    },
+    {
+      "cluster": "nfnetlink",
+      "source_count": 8,
+      "loc": 6887,
+      "export_count": 192,
+      "dominant_patterns": [
+        "rcu",
+        "allocator",
+        "ops_vtable"
+      ],
+      "fanout_external": 26,
+      "depends_on": [
+        "nf",
+        "nf_conntrack",
+        "xt"
+      ]
+    },
+    {
+      "cluster": "nft_set",
+      "source_count": 5,
+      "loc": 5669,
+      "export_count": 151,
+      "dominant_patterns": [
+        "rcu",
+        "allocator",
+        "container_of"
+      ],
+      "fanout_external": 22,
+      "depends_on": [
+        "nf_tables"
+      ]
+    },
+    {
+      "cluster": "nf_nat",
+      "source_count": 12,
+      "loc": 4569,
+      "export_count": 133,
+      "dominant_patterns": [
+        "ops_vtable",
+        "allocator",
+        "rcu"
+      ],
+      "fanout_external": 51,
+      "depends_on": [
+        "core",
+        "nf_conntrack",
+        "utils"
+      ]
+    },
+    {
+      "cluster": "nf_flow",
+      "source_count": 7,
+      "loc": 3247,
+      "export_count": 139,
+      "dominant_patterns": [
+        "allocator",
+        "container_of",
+        "ops_vtable"
+      ],
+      "fanout_external": 3,
+      "depends_on": [
+        "nf_conntrack",
+        "nf_tables"
+      ]
+    },
+    {
+      "cluster": "x",
+      "source_count": 1,
+      "loc": 2041,
+      "export_count": 79,
+      "dominant_patterns": [
+        "allocator",
+        "ops_vtable"
+      ],
+      "fanout_external": 0,
+      "depends_on": []
+    },
+    {
+      "cluster": "nf",
+      "source_count": 4,
+      "loc": 1667,
+      "export_count": 65,
+      "dominant_patterns": [
+        "rcu",
+        "allocator",
+        "ops_vtable"
+      ],
+      "fanout_external": 7,
+      "depends_on": [
+        "nf_conntrack",
+        "nfnetlink"
+      ]
+    },
+    {
+      "cluster": "nf_synproxy",
+      "source_count": 1,
+      "loc": 1221,
+      "export_count": 36,
+      "dominant_patterns": [
+        "ops_vtable",
+        "parser_sm"
+      ],
+      "fanout_external": 5,
+      "depends_on": [
+        "core",
+        "nf_conntrack"
+      ]
+    },
+    {
+      "cluster": "nf_log",
+      "source_count": 1,
+      "loc": 1084,
+      "export_count": 19,
+      "dominant_patterns": [
+        "ops_vtable"
+      ],
+      "fanout_external": 7,
+      "depends_on": [
+        "nf"
+      ]
+    },
+    {
+      "cluster": "core",
+      "source_count": 1,
+      "loc": 835,
+      "export_count": 32,
+      "dominant_patterns": [
+        "rcu",
+        "ops_vtable",
+        "container_of"
+      ],
+      "fanout_external": 5,
+      "depends_on": [
+        "nf",
+        "nf_hooks"
+      ]
+    },
+    {
+      "cluster": "nft_chain",
+      "source_count": 3,
+      "loc": 775,
+      "export_count": 33,
+      "dominant_patterns": [
+        "ops_vtable",
+        "parser_sm",
+        "allocator"
+      ],
+      "fanout_external": 13,
+      "depends_on": [
+        "core",
+        "nf_nat",
+        "nf_tables"
+      ]
+    },
+    {
+      "cluster": "nft_flow",
+      "source_count": 1,
+      "loc": 547,
+      "export_count": 20,
+      "dominant_patterns": [
+        "ops_vtable"
+      ],
+      "fanout_external": 13,
+      "depends_on": [
+        "nf_conntrack",
+        "nf_flow",
+        "nf_tables",
+        "utils"
+      ]
+    },
+    {
+      "cluster": "nf_bpf",
+      "source_count": 1,
+      "loc": 332,
+      "export_count": 15,
+      "dominant_patterns": [
+        "rcu",
+        "container_of",
+        "allocator"
+      ],
+      "fanout_external": 2,
+      "depends_on": [
+        "core"
+      ]
+    },
+    {
+      "cluster": "nft_reject",
+      "source_count": 2,
+      "loc": 302,
+      "export_count": 13,
+      "dominant_patterns": [
+        "ops_vtable"
+      ],
+      "fanout_external": 10,
+      "depends_on": [
+        "nf_tables",
+        "nft"
+      ]
+    },
+    {
+      "cluster": "nft_fwd",
+      "source_count": 1,
+      "loc": 284,
+      "export_count": 12,
+      "dominant_patterns": [
+        "ops_vtable"
+      ],
+      "fanout_external": 7,
+      "depends_on": [
+        "nf_dup",
+        "nf_tables"
+      ]
+    },
+    {
+      "cluster": "utils",
+      "source_count": 1,
+      "loc": 233,
+      "export_count": 8,
+      "dominant_patterns": [],
+      "fanout_external": 0,
+      "depends_on": []
+    },
+    {
+      "cluster": "nft_fib",
+      "source_count": 2,
+      "loc": 171,
+      "export_count": 6,
+      "dominant_patterns": [
+        "ops_vtable"
+      ],
+      "fanout_external": 4,
+      "depends_on": [
+        "nf_tables"
+      ]
+    },
+    {
+      "cluster": "nf_hooks",
+      "source_count": 1,
+      "loc": 124,
+      "export_count": 7,
+      "dominant_patterns": [
+        "allocator",
+        "ops_vtable"
+      ],
+      "fanout_external": 0,
+      "depends_on": []
+    },
+    {
+      "cluster": "nft_dup",
+      "source_count": 1,
+      "loc": 114,
+      "export_count": 7,
+      "dominant_patterns": [
+        "ops_vtable"
+      ],
+      "fanout_external": 6,
+      "depends_on": [
+        "nf_dup",
+        "nf_tables"
+      ]
+    },
+    {
+      "cluster": "nf_dup",
+      "source_count": 1,
+      "loc": 95,
+      "export_count": 4,
+      "dominant_patterns": [],
+      "fanout_external": 1,
+      "depends_on": [
+        "nf_tables"
+      ]
+    },
+    {
+      "cluster": "nft_ct",
+      "source_count": 1,
+      "loc": 63,
+      "export_count": 1,
+      "dominant_patterns": [],
+      "fanout_external": 0,
+      "depends_on": []
+    }
+  ]
+}
