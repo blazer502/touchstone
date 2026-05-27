@@ -12,7 +12,7 @@ Status semantics:
 - `shares` — analysis is shared with another roster entry (e.g. a kernel
   config-restricted variant sharing the base slice)
 
-| ID | Kind | Stage A surface | Stage B (sound proof) | Oracle runs | Cex artifacts |
+| ID | Kind | Stage A surface | Stage B (sound proof) | Oracle runs | Witness artifacts |
 |---|---|---|---|---|---|
 | `linux-6.1.72-netfilter` | kernel-subsystem | **22.05%** (3029/3886) missed=0 | deferred | `tier1_kasan`=done<br>`tier1_syzkaller`=deferred · syzlang descriptor wired (Phase 2.1); syz-manager fuzz pass deferred. | — |
 | `linux-6.1.72-live-lts-cos` | kernel-subsystem | shares: linux-6.1.72-netfilter | ? | `tier1_kasan_live`=done · no_crash (restriction holds)<br>`tier1_kasan_historical`=done · crash (positive control) | — |
@@ -44,7 +44,7 @@ Status semantics:
 
 - **Scope**: arvo + oss-fuzz
 - **Tasks**: 1,507
-- **Cex artifacts** (5):
+- **Witness artifacts** (5):
   - `run-logs/cex/cybergym/arvo_1065.json`
   - `run-logs/cex/cybergym/arvo_3938.json`
   - `run-logs/cex/cybergym/arvo_63314.json`

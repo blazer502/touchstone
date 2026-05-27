@@ -21,7 +21,7 @@
         "tier1_kasan": {"status": "done", "cve": "CVE-2024-1086", "artifact": "eval/kernelctf/artifacts/dmesg-cve-2024-1086.log"},
         "tier1_syzkaller": {"status": "deferred", "note": "syzlang descriptor wired (Phase 2.1); syz-manager fuzz pass deferred."}
       },
-      "cex_artifacts": []
+      "witness_artifacts": []
     },
 
     {
@@ -34,7 +34,7 @@
         "tier1_kasan_live": {"status": "done", "verdict": "no_crash (restriction holds)", "artifact": "run-logs/phase4.2-summary.json"},
         "tier1_kasan_historical": {"status": "done", "verdict": "crash (positive control)", "artifact": "eval/kernelctf/artifacts/dmesg-cve-2024-1086.log"}
       },
-      "cex_artifacts": []
+      "witness_artifacts": []
     },
 
     {
@@ -61,7 +61,7 @@
         "inconclusive": 0,
         "false_safe": 0
       },
-      "cex_artifacts": []
+      "witness_artifacts": []
     },
 
     {
@@ -105,7 +105,7 @@
           "artifact": "run-logs/leaderboard-70b-partial-summary.json"
         }
       },
-      "cex_artifacts": [
+      "witness_artifacts": [
         "run-logs/cex/cybergym/arvo_1065.json",
         "run-logs/cex/cybergym/arvo_3938.json",
         "run-logs/cex/cybergym/arvo_63314.json",
@@ -125,7 +125,7 @@
         "tier1_libfuzzer": {"status": "done", "verdict": "inconclusive (no crash in 15s wall budget)"},
         "tier1_positive_control": {"status": "done", "verdict": "crash (stack-OOB on OOB!-prefix input)", "artifact": "run-logs/phase4.3-summary.json"}
       },
-      "cex_artifacts": []
+      "witness_artifacts": []
     },
 
     {
@@ -136,7 +136,7 @@
       "stage_a": {"status": "not_setup", "note": "deferred to roster build-out; ~20 GB disk + per-target build harnesses needed."},
       "stage_b": {"status": "not_setup"},
       "oracle_runs": {},
-      "cex_artifacts": []
+      "witness_artifacts": []
     },
 
     {
@@ -147,7 +147,7 @@
       "stage_a": {"status": "not_setup"},
       "stage_b": {"status": "not_setup"},
       "oracle_runs": {},
-      "cex_artifacts": []
+      "witness_artifacts": []
     },
 
     {
@@ -158,7 +158,7 @@
       "stage_a": {"status": "not_setup"},
       "stage_b": {"status": "not_setup"},
       "oracle_runs": {},
-      "cex_artifacts": []
+      "witness_artifacts": []
     }
   ]
 }

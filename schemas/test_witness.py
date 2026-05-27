@@ -13,7 +13,7 @@ from pathlib import Path
 
 def _t1():
     from oracle.tier1_fuzz.verdict import Tier1Verdict
-    from schemas.cex import from_tier1
+    from schemas.witness import from_tier1
 
     pov_bytes = bytes.fromhex("4d5a90ff")
     v = Tier1Verdict(
@@ -44,7 +44,7 @@ def _t1():
 
 def _t2():
     from oracle.tier2_symbolic.verdict import Tier2Verdict
-    from schemas.cex import from_tier2
+    from schemas.witness import from_tier2
 
     v = Tier2Verdict(
         unit="klee:div_by_zero",
@@ -69,7 +69,7 @@ def _t2():
 
 def _t3():
     from oracle.tier3_bmc.verdict import Tier3Verdict
-    from schemas.cex import from_tier3
+    from schemas.witness import from_tier3
 
     # Write a fake cbmc PoV file with assignments.
     pov_dir = tempfile.mkdtemp(prefix="cex-smoke-")

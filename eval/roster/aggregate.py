@@ -80,7 +80,7 @@ def _oracle_cell(cb: dict) -> str:
 
 
 def _cex_cell(cb: dict) -> str:
-    arts = cb.get("cex_artifacts", []) or []
+    arts = cb.get("witness_artifacts", []) or []
     return f"{len(arts)}" if arts else "—"
 
 
@@ -93,7 +93,7 @@ def _missing_artifacts(cb: dict) -> List[str]:
     for run_name, run in cb.get("oracle_runs", {}).items():
         if isinstance(run, dict) and run.get("artifact") and not _artifact_exists(run["artifact"]):
             miss.append(f"{cb['id']}.oracle_runs.{run_name}.artifact: {run['artifact']}")
-    for a in cb.get("cex_artifacts", []) or []:
+    for a in cb.get("witness_artifacts", []) or []:
         if not _artifact_exists(a):
             miss.append(f"{cb['id']}.cex_artifact: {a}")
     return miss
@@ -116,7 +116,7 @@ def render(manifest_path: Path = MANIFEST) -> str:
     rows.append("- `shares` — analysis is shared with another roster entry (e.g. a kernel")
     rows.append("  config-restricted variant sharing the base slice)")
     rows.append("")
-    rows.append("| ID | Kind | Stage A surface | Stage B (sound proof) | Oracle runs | Cex artifacts |")
+    rows.append("| ID | Kind | Stage A surface | Stage B (sound proof) | Oracle runs | Witness artifacts |")
     rows.append("|---|---|---|---|---|---|")
     for cb in m["codebases"]:
         rows.append("| `{id}` | {kind} | {sa} | {sb} | {orc} | {cex} |".format(
@@ -140,9 +140,9 @@ def render(manifest_path: Path = MANIFEST) -> str:
             rows.append(f"- **Sources**: {cb['sources']:,}")
         if cb.get("labeled_bad"):
             rows.append(f"- **Labeled `_bad`**: {cb['labeled_bad']:,}")
-        arts = cb.get("cex_artifacts", []) or []
+        arts = cb.get("witness_artifacts", []) or []
         if arts:
-            rows.append(f"- **Cex artifacts** ({len(arts)}):")
+            rows.append(f"- **Witness artifacts** ({len(arts)}):")
             for a in arts:
                 rows.append(f"  - `{a}`")
         rows.append("")

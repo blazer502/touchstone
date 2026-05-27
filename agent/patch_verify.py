@@ -24,7 +24,7 @@ from typing import List, Optional
 from oracle.tier3_bmc.assertions import Hypothesis, synthesize, write_harness
 from oracle.tier3_bmc.cbmc_driver import run_cbmc_oracle
 from oracle.tier3_bmc.verdict import Tier3Verdict
-from schemas.cex import Cex, from_tier3
+from schemas.witness import Witness, from_tier3
 
 
 log = logging.getLogger("patch_verify")

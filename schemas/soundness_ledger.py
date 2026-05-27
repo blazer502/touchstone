@@ -1,7 +1,7 @@
 """Machine-readable soundness ledger built from `docs/soundness-assumptions.md`.
 
 The markdown doc is the human source of truth; this module parses it into
-JSON-shape entries so that Cex artifacts can cross-reference assumptions by
+JSON-shape entries so that Witness artifacts can cross-reference assumptions by
 stable id, and downstream tooling (audit dashboards, disclosure attachments,
 incremental analysis driver) can read the same ledger.
 
@@ -179,7 +179,7 @@ def resolve(anchor_ids: Iterable[str], path: Path = DEFAULT_DOC) -> Dict[str, Op
 
 
 def annotate_cex_dict(cex_dict: dict, path: Path = DEFAULT_DOC) -> dict:
-    """Augment a Cex disclosure-blob dict with resolved ledger entries.
+    """Augment a Witness disclosure-blob dict with resolved ledger entries.
 
     Adds `cex_dict["soundness"]["resolved"]` = list of LedgerEntry-dicts (or
     `{anchor_id, found: False}` for unresolved). Non-destructive: the original
@@ -271,11 +271,11 @@ def main(argv=None) -> int:
     sp.add_argument("anchor", type=str)
     sp.set_defaults(func=_cmd_lookup)
 
-    sp = sub.add_parser("validate", help="check Cex JSONs all reference known anchors")
+    sp = sub.add_parser("validate", help="check Witness JSONs all reference known anchors")
     sp.add_argument("files", nargs="+")
     sp.set_defaults(func=_cmd_validate)
 
-    sp = sub.add_parser("annotate", help="rewrite Cex JSONs to embed resolved ledger entries")
+    sp = sub.add_parser("annotate", help="rewrite Witness JSONs to embed resolved ledger entries")
     sp.add_argument("files", nargs="+")
     sp.add_argument("--out", type=str, default=None,
                     help="output dir; if omitted, rewrites in-place")

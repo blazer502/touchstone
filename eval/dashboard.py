@@ -5,7 +5,7 @@ Aggregates:
 
   * Strategic direction summary (5 unique outputs)
   * Codebase roster (eval.roster.aggregate / eval/roster/manifest.json)
-  * Cex artifact catalog (run-logs/cex/**)
+  * Bug witness catalog (run-logs/cex/**)
   * Soundness ledger size (run-logs/soundness-ledger.json)
   * Proof cache stats (surface.proof_cache.stats)
   * Patch-verify capability (agent.patch_verify smoke)
@@ -39,7 +39,7 @@ def _read_json(rel: str) -> dict:
 
 
 def _cex_catalog() -> List[dict]:
-    """Collect every Cex-shaped JSON under run-logs/cex/**.
+    """Collect every Witness-shaped JSON under run-logs/cex/**.
 
     Skips annotated copies and PatchVerifyResult-shaped files (the latter have
     no top-level `provenance` because they embed two cex by reference).
@@ -180,7 +180,7 @@ def render() -> str:
     lines.append("| | Artifact class | Why LLM-only agents can't do this | Where we built it |")
     lines.append("|---|---|---|---|")
     lines.append("| **A** | Sound attack-surface reduction with audit trail | LLM has no sound reachability | `surface/` Stage A+B, 22.05 % netfilter |")
-    lines.append("| **B** | Cex-backed PoC (input + path + violated property) | LLM guesses bytes, can't prove root cause | `schemas/cex.py`, 5 CyberGym confirms lifted |")
+    lines.append("| **B** | Verified bug witness (input + path + violated property) | LLM guesses bytes, can't prove root cause | `schemas/witness.py`, 5 CyberGym confirms lifted |")
     lines.append("| **C** | Verified patch | LLM proposes, we prove | `agent/patch_verify.py` |")
     lines.append("| **D** | Persistent verified knowledge base | Agents are stateless | `surface/proof_cache.py` + bundle import/export |")
     lines.append("| **E** | Counterexample-driven LLM | No ground-truth cex source | `surface/contract_synth.py` + `must_not_assume` filter |")
@@ -191,7 +191,7 @@ def render() -> str:
     lines.append("")
     lines.append("| Component | Value | Source |")
     lines.append("|---|---|---|")
-    lines.append(f"| Cex artifacts on disk | **{len(cex)}** | `run-logs/cex/` |")
+    lines.append(f"| Witness artifacts on disk | **{len(cex)}** | `run-logs/cex/` |")
     lines.append(f"| Patch verifications on disk | **{len(patches)}** | `run-logs/cex/cve-patches/` |")
     lines.append(f"| Soundness ledger entries | **{ledger}** | `docs/soundness-assumptions.md` → `run-logs/soundness-ledger.json` |")
     lines.append(f"| Proof cache rows | **{cache.get('rows', 0)}** ({cache.get('fresh', 0)} fresh / {cache.get('stale', 0)} stale) | `surface/proofcache/` |")
@@ -209,7 +209,7 @@ def render() -> str:
 
     # --- cex catalog --------------------------------------------------------
     if cex:
-        lines.append("## Cex artifact catalog")
+        lines.append("## Witness artifact catalog")
         lines.append("")
         lines.append("| Task | Tier | Engine | Violation | Location |")
         lines.append("|---|---|---|---|---|")
@@ -252,7 +252,7 @@ def render() -> str:
     lines.append("# A — Sound surface reduction")
     lines.append("python3 -m surface.stage_a --target linux-6.1.72-netfilter")
     lines.append("")
-    lines.append("# B — Lift a confirm into Cex (bytes + repro + disclosure JSON)")
+    lines.append("# B — Lift a confirm into a Witness (bytes + repro + disclosure JSON)")
     lines.append("python3 -m schemas.lift_cybergym --tasks arvo:1065")
     lines.append("")
     lines.append("# C — Verify a patch via BMC pre/post")
@@ -262,7 +262,7 @@ def render() -> str:
     lines.append("python3 -m surface.proof_cache export run-logs/cache-bundle.ndjson")
     lines.append("python3 -m surface.proof_cache import run-logs/cache-bundle.ndjson")
     lines.append("")
-    lines.append("# E — Cex-driven contract synth (Stage B refinement)")
+    lines.append("# E — witness-driven contract synth (Stage B refinement)")
     lines.append("python3 -m surface.stage_b_refine_cli --manifest <m.json>")
     lines.append("")
     lines.append("# Incremental (P5) — minimal re-verify on git diff")

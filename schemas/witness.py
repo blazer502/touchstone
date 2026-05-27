@@ -1,18 +1,24 @@
-"""First-class counterexample (cex) artifact — uniform across Tier 1/2/3 + KASAN.
+"""First-class bug-witness artifact — uniform across Tier 1/2/3 + KASAN.
 
-A `Cex` packages the structured evidence for a violation found by any oracle in
-the system. Same shape regardless of which engine produced it; reducers project
-it to whatever consumer needs to read it:
+A `Witness` packages the structured evidence for a property violation found by
+any oracle in the system. Same shape regardless of which engine produced it;
+reducers project it to whatever consumer needs to read it:
 
-    bytes               (cybergym-style PoC submission)
-    regression-test C   (reproduces locally, no external state)
+    bytes               (CyberGym-style PoC submission)
+    regression-test     (reproduces locally, no external state)
     disclosure blob     (JSON; responsible-disclosure attachment)
 
 The point of the abstraction is that the *same* analysis run produces *multiple*
 artifacts at no extra cost — we already have the evidence; we just pick the
 projection a given consumer needs.
 
-See `docs/strategic-direction.md` §2 (Output B "Cex-backed PoC") + §7.
+Terminology note: in formal verification this object is called a *counterexample*
+(`cex`). We use **witness** — the SV-COMP standard term — because it reads as a
+plain English word and avoids overloading "PoC" / "Cex" jargon when this
+artifact is shown to a security-audit reader. The legacy `Cex = Witness` alias
+at the bottom keeps prior imports working during the rename.
+
+See `docs/strategic-direction.md` §2 (Output B "Verified bug witness") + §7.
 """
 from __future__ import annotations
 
@@ -75,7 +81,7 @@ class ViolatedProperty:
 
 @dataclass
 class SoundnessNote:
-    """Which over-/under-approximations this cex stands on.
+    """Which over-/under-approximations this witness stands on.
 
     `soundness_anchor_ids` reference rows in `docs/soundness-assumptions.md`
     by free-text id. `assumed_contracts` is the list of `__CPROVER_assume`
@@ -89,7 +95,7 @@ class SoundnessNote:
 
 @dataclass
 class Provenance:
-    """Who produced this cex.
+    """Who produced this witness.
 
     `tier` is "1" / "2" / "3" / "0" (KASAN / dmesg replay) — strings to keep
     the json serialisation tidy across consumers in other languages.
@@ -105,8 +111,8 @@ class Provenance:
 # --- the artifact ------------------------------------------------------------
 
 @dataclass
-class Cex:
-    """First-class verified counterexample.
+class Witness:
+    """First-class verified bug witness.
 
     Use the `from_tier{1,2,3}` constructors below to lift a tiered verdict
     into this shape. Use `to_bytes` / `to_regression_test` / `to_disclosure_blob`
@@ -121,7 +127,7 @@ class Cex:
     # ---- reducers --------------------------------------------------------
 
     def to_bytes(self) -> Optional[bytes]:
-        """The raw PoC byte stream, if this cex has one (fuzz tier)."""
+        """The raw PoC byte stream, if this witness has one (fuzz tier)."""
         if self.input.byte_payload_hex is not None:
             return bytes.fromhex(self.input.byte_payload_hex)
         if self.input.byte_payload_path:
@@ -138,7 +144,7 @@ class Cex:
         Tier-2 (symbolic): python that re-runs the ktest under klee-replay
                          (or angr concretisation) — best-effort, since the
                          original ktest may not survive a code change.
-        Tier-3 (BMC):    C source that instantiates the harness with the cex
+        Tier-3 (BMC):    C source that instantiates the harness with the witness
                          variable bindings and asserts the violated property.
         """
         if self.provenance.tier == "1":
@@ -222,10 +228,10 @@ class Cex:
 # --- constructors from existing verdict shapes -------------------------------
 
 def from_tier1(v: "Tier1Verdict", pov_bytes: Optional[bytes] = None,
-               soundness_anchor_ids: Optional[List[str]] = None) -> Cex:
-    """Lift a Tier-1 (fuzz/sanitizer) verdict into a Cex.
+               soundness_anchor_ids: Optional[List[str]] = None) -> Witness:
+    """Lift a Tier-1 (fuzz/sanitizer) verdict into a Witness.
 
-    `pov_bytes` is required when the cex needs to be byte-projected (most fuzz
+    `pov_bytes` is required when the witness needs to be byte-projected (most fuzz
     cases). If not supplied but `v.pov_path` exists on disk, we read it.
     """
     payload_hex = None
@@ -236,7 +242,7 @@ def from_tier1(v: "Tier1Verdict", pov_bytes: Optional[bytes] = None,
         if p.exists():
             payload_hex = p.read_bytes().hex()
 
-    return Cex(
+    return Witness(
         input=InputAssignment(
             byte_payload_hex=payload_hex,
             byte_payload_path=v.pov_path,
@@ -263,11 +269,11 @@ def from_tier1(v: "Tier1Verdict", pov_bytes: Optional[bytes] = None,
 
 def from_tier2(v: "Tier2Verdict", *, pov_bytes: Optional[bytes] = None,
                variable_bindings: Optional[Dict[str, str]] = None,
-               soundness_anchor_ids: Optional[List[str]] = None) -> Cex:
-    """Lift a Tier-2 (symbolic) verdict into a Cex.
+               soundness_anchor_ids: Optional[List[str]] = None) -> Witness:
+    """Lift a Tier-2 (symbolic) verdict into a Witness.
 
-    For KLEE the cex is a `.ktest` (binary blob) — pass it as `pov_bytes`.
-    For angr the cex is concretised stdin/argv — pass it as `pov_bytes` too.
+    For KLEE the witness is a `.ktest` (binary blob) — pass it as `pov_bytes`.
+    For angr the witness is concretised stdin/argv — pass it as `pov_bytes` too.
     Concrete variable bindings (when extractable) populate `variable_bindings`.
     """
     payload_hex = pov_bytes.hex() if pov_bytes is not None else None
@@ -275,7 +281,7 @@ def from_tier2(v: "Tier2Verdict", *, pov_bytes: Optional[bytes] = None,
         p = Path(v.pov_path)
         if p.exists():
             payload_hex = p.read_bytes().hex()
-    return Cex(
+    return Witness(
         input=InputAssignment(
             byte_payload_hex=payload_hex,
             byte_payload_path=v.pov_path,
@@ -302,10 +308,10 @@ def from_tier2(v: "Tier2Verdict", *, pov_bytes: Optional[bytes] = None,
 
 def from_tier3(v: "Tier3Verdict",
                variable_bindings: Optional[Dict[str, str]] = None,
-               soundness_anchor_ids: Optional[List[str]] = None) -> Cex:
-    """Lift a Tier-3 (BMC) verdict into a Cex.
+               soundness_anchor_ids: Optional[List[str]] = None) -> Witness:
+    """Lift a Tier-3 (BMC) verdict into a Witness.
 
-    For CBMC the cex is a set of nondet variable assignments. Parse them out
+    For CBMC the witness is a set of nondet variable assignments. Parse them out
     of `v.pov_path` (a `.cbmc-pov.json` file emitted by `cbmc_driver`) when
     `variable_bindings` is not supplied.
     """
@@ -320,7 +326,7 @@ def from_tier3(v: "Tier3Verdict",
                 bindings = {str(k): str(v_) for k, v_ in bindings.items()}
             except Exception:
                 pass
-    return Cex(
+    return Witness(
         input=InputAssignment(
             byte_payload_path=v.pov_path,
             variable_bindings=bindings,
@@ -342,3 +348,8 @@ def from_tier3(v: "Tier3Verdict",
             engine=v.engine, tier="3", task_id=v.unit, wall_ms=v.wall_ms,
         ),
     )
+
+
+# Legacy alias — earlier code paths imported `Cex`. New code should use
+# `Witness`; this alias is kept so the rename doesn't break in-flight scripts.
+Cex = Witness

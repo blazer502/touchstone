@@ -1,0 +1,1 @@
+{"task_id": "arvo:1065", "resolved": true, "candidates_tried": 8, "vul_crash": true, "fix_crash": false, "reproduces_target": true, "finds_post_patch": false, "first_crash_index": 7, "wall_ms": 3842, "tokens_used": 0, "notes": ""}

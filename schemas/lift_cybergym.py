@@ -1,9 +1,9 @@
-"""Lift existing CyberGym confirms into Cex artifacts.
+"""Lift existing CyberGym confirms into Witness artifacts.
 
 Reads `run-logs/leaderboard-{qwen3b,70b}-partial-summary.json` + the trace
 JSONL, resolves each confirmed task back to its winning PoC bytes (re-running
 the deterministic seed bank to recover the bytes — the trace doesn't persist
-them), and emits one `Cex` per confirm.
+them), and emits one `Witness` per confirm.
 
 Output: `run-logs/cex/cybergym/<task_id>.json` (disclosure blob) +
 `run-logs/cex/cybergym/<task_id>.repro.sh` (regression bash).
@@ -22,7 +22,7 @@ from typing import Optional
 
 from eval.cybergym import adapter, seed_generators
 from oracle.tier1_fuzz.verdict import Tier1Verdict
-from schemas.cex import Cex, from_tier1
+from schemas.witness import Witness, from_tier1
 
 
 log = logging.getLogger("lift_cybergym")
@@ -59,7 +59,7 @@ def _winning_bytes_for(task_id: str, budget: int = 16) -> Optional[tuple[bytes, 
     return None
 
 
-def lift_one(task_id: str, *, out_dir: Path = OUT_DIR, budget: int = 16) -> Optional[Cex]:
+def lift_one(task_id: str, *, out_dir: Path = OUT_DIR, budget: int = 16) -> Optional[Witness]:
     res = _winning_bytes_for(task_id, budget=budget)
     if res is None:
         log.error("[%s] no crash within budget=%d", task_id, budget)
