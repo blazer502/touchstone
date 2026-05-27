@@ -90,8 +90,9 @@ def _run_one_multi_turn(task_id: str, *,
                         libfuzzer_seconds: int = 0,
                         libfuzzer_adaptive: bool = False,
                         libfuzzer_budget_max: int = 30,
-                        libfuzzer_stagnation_window: int = 4) -> TaskRow:
-    """P1+P2+P3 path: bank-first + libFuzzer mutation + LLM multi-turn + local oracle."""
+                        libfuzzer_stagnation_window: int = 4,
+                        project_corpus=None) -> TaskRow:
+    """P1+P2+P3+F4 path: bank-first + libFuzzer mutation + project corpus + LLM."""
     cfg = cybergym_agent.AgentConfig(
         max_turns=max_turns, candidates_per_turn=candidates_per_turn,
         bank_budget=bank_budget,
@@ -102,7 +103,7 @@ def _run_one_multi_turn(task_id: str, *,
         libfuzzer_budget_max=libfuzzer_budget_max,
         libfuzzer_stagnation_window=libfuzzer_stagnation_window,
     )
-    ar = cybergym_agent.run_agent(task_id, cfg)
+    ar = cybergym_agent.run_agent(task_id, cfg, project_corpus=project_corpus)
     if ar.error:
         return TaskRow(task_id=task_id, resolved=False, notes=ar.error)
     row = TaskRow(
@@ -253,11 +254,34 @@ def main(argv: Optional[list[str]] = None) -> int:
                     help="F1 adaptive mode: terminate after this many seconds "
                          "with no new coverage (after the minimum budget). "
                          "Default 4s.")
+    ap.add_argument("--project-corpus", action="store_true",
+                    help="F4: pool seeds across tasks in the same project_group. "
+                         "Tasks get sorted by project before running so cross-"
+                         "pollination compounds within batches.")
+    ap.add_argument("--project-corpus-dir", type=Path, default=None,
+                    help="F4: optional persistence dir. Re-runs of the same "
+                         "benchmark inherit prior discoveries.")
     args = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
 
     task_ids = _load_task_ids(args.tasks_file)
     log.info("loaded %d task ids from %s", len(task_ids), args.tasks_file)
+
+    # F4: pool seeds across tasks in the same project_group, and order tasks
+    # by project so consecutive runs amplify the pool.
+    project_corpus = None
+    if args.project_corpus:
+        from agent.project_corpus import ProjectCorpus
+        from eval.cybergym.task_adapter import resolve_task as _resolve_task
+        project_corpus = ProjectCorpus(persist_root=args.project_corpus_dir)
+        # Sort task_ids by project_group (best-effort; unresolved ids → "?")
+        def _proj_key(tid: str) -> str:
+            try:
+                return _resolve_task(tid).project_group() or "?"
+            except Exception:
+                return "?"
+        task_ids = sorted(task_ids, key=_proj_key)
+        log.info("F4 project corpus enabled; tasks reordered by project_group")
 
     trace_path = args.trace or args.out.with_name(args.out.stem + "-trace.jsonl")
     trace_path.parent.mkdir(parents=True, exist_ok=True)
@@ -279,6 +303,7 @@ def main(argv: Optional[list[str]] = None) -> int:
                         libfuzzer_adaptive=args.libfuzzer_adaptive,
                         libfuzzer_budget_max=args.libfuzzer_budget_max,
                         libfuzzer_stagnation_window=args.libfuzzer_stagnation_window,
+                        project_corpus=project_corpus,
                     )
                 else:
                     row = _run_one(tid, args.budget, args.vul_timeout)

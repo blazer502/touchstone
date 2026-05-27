@@ -37,6 +37,7 @@ from typing import Optional
 
 from agent.bug_class_seeds import augmented_seeds
 from agent.libfuzzer_phase import fuzz_collect, fuzz_collect_adaptive
+from agent.project_corpus import ProjectCorpus
 from agent.local_oracle import LocalHarness, resolve_harness, run_candidate
 from agent.score_cache import dedup_crashes, score_cached, signature
 from agent.source_extractor import (SourceSnippet, extract_function_around,
@@ -273,14 +274,37 @@ def _bank_iter() -> list[bytes]:
     return list(_FALLBACK_BANK)
 
 
-def _bank_for(task: BenchmarkTask) -> list[bytes]:
-    """F3: augment the deterministic bank with class-specific seeds when the
-    benchmark exposes a bug-class hint. Falls back to the generic bank."""
-    return augmented_seeds(_bank_iter(), task.bug_class_hint())
+def _bank_for(task: BenchmarkTask,
+              corpus: Optional[ProjectCorpus] = None) -> list[bytes]:
+    """F3 + F4: augment the deterministic bank with
+      - bug-class-specific seeds (when task exposes a bug_class_hint)
+      - inputs another task in the same project_group already produced
+        (when a ProjectCorpus is passed in).
+
+    Order: default bank → class supplements → project pool (oldest first).
+    """
+    seeds = augmented_seeds(_bank_iter(), task.bug_class_hint())
+    if corpus is not None:
+        proj_seeds = corpus.seeds_for(task)
+        # Append project pool last; dedupe.
+        seen = {bytes(b) for b in seeds}
+        for b in proj_seeds:
+            if b in seen:
+                continue
+            seeds.append(b)
+            seen.add(b)
+    return seeds
 
 
-def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
-    """Top-level entry. See module docstring for the loop shape."""
+def run_agent(task_id: str, cfg: AgentConfig = AgentConfig(),
+              *, project_corpus: Optional[ProjectCorpus] = None) -> AgentResult:
+    """Top-level entry. See module docstring for the loop shape.
+
+    `project_corpus`: optional cross-task seed pool (F4). When passed,
+    the bank phase + libFuzzer corpus include inputs other tasks in the
+    same `project_group()` already produced; on a confirmed crash the
+    winning bytes are added back to the pool for downstream tasks.
+    """
     res = AgentResult(
         task_id=task_id, confirmed_reproduces_target=False,
         confirmed_finds_post_patch=False, winning_poc_hex=None,
@@ -328,7 +352,7 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
 
     # Bank-first phase.
     if cfg.use_bank_first:
-        for i, blob in enumerate(_bank_for(task)[: cfg.bank_budget]):
+        for i, blob in enumerate(_bank_for(task, project_corpus)[: cfg.bank_budget]):
             v = _eval_local_then_server(
                 bundle, harness, blob, source="bank",
                 unit_tag=f"bank-{i:03d}",
@@ -340,7 +364,7 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
                                    cfg=cfg, candidate_attempt=v)
                 if res.confirmed_reproduces_target:
                     res.total_wall_ms = int((time.monotonic() - t0) * 1000)
-                    _auto_lift_witness(task, harness, cfg, res)
+                    _auto_lift_witness(task, harness, cfg, res, project_corpus)
                     return res
 
     # libFuzzer mutation phase (bank-miss tasks only — bank already returned
@@ -350,13 +374,13 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
     if cfg.libfuzzer_seconds > 0 and local_available and harness is not None:
         if cfg.libfuzzer_adaptive:
             fr = fuzz_collect_adaptive(
-                harness, _bank_for(task),
+                harness, _bank_for(task, project_corpus),
                 budget_min=cfg.libfuzzer_seconds,
                 budget_max=cfg.libfuzzer_budget_max,
                 stagnation_window=cfg.libfuzzer_stagnation_window,
             )
         else:
-            fr = fuzz_collect(harness, _bank_for(task),
+            fr = fuzz_collect(harness, _bank_for(task, project_corpus),
                               budget_seconds=cfg.libfuzzer_seconds)
         log.debug("[%s] libfuzzer: %d crashes, %d execs, %d ms",
                   task_id, len(fr.crash_payloads), fr.execs_total, fr.wall_ms)
@@ -402,7 +426,7 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
                                ))
             if res.confirmed_reproduces_target:
                 res.total_wall_ms = int((time.monotonic() - t0) * 1000)
-                _auto_lift_witness(task, harness, cfg, res)
+                _auto_lift_witness(task, harness, cfg, res, project_corpus)
                 return res
 
     # Multi-turn LLM phase.
@@ -454,12 +478,13 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
                 break
 
     res.total_wall_ms = int((time.monotonic() - t0) * 1000)
-    _auto_lift_witness(task, harness, cfg, res)
+    _auto_lift_witness(task, harness, cfg, res, project_corpus)
     return res
 
 
 def _auto_lift_witness(task: BenchmarkTask, harness: Optional[LocalHarness],
-                       cfg: AgentConfig, res: AgentResult) -> None:
+                       cfg: AgentConfig, res: AgentResult,
+                       project_corpus: Optional[ProjectCorpus] = None) -> None:
     """V1 + V3: every confirmed reproducer gets a Witness on disk; if the
     benchmark also exposes the disclosed patch, save it alongside.
 
@@ -487,6 +512,14 @@ def _auto_lift_witness(task: BenchmarkTask, harness: Optional[LocalHarness],
                           unit_tag="witness-lift")
         wp = write_witness(task, blob, v)
         log.info("[%s] witness → %s", task.task_id, wp)
+        # F4: contribute the winning input to the project's corpus pool so
+        # later tasks in the same project see it as a seed.
+        if project_corpus is not None:
+            try:
+                project_corpus.record(task, blob)
+            except Exception as e:
+                log.warning("[%s] project_corpus record failed: %s",
+                            task.task_id, e)
     except Exception as e:
         log.warning("[%s] witness auto-lift failed: %s", task.task_id, e)
         return
