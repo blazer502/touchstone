@@ -35,7 +35,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Optional
 
-from agent.libfuzzer_phase import fuzz_collect
+from agent.libfuzzer_phase import fuzz_collect, fuzz_collect_adaptive
 from agent.local_oracle import LocalHarness, resolve_harness, run_candidate
 from agent.score_cache import dedup_crashes, score_cached, signature
 from agent.source_extractor import (SourceSnippet, extract_function_around,
@@ -258,6 +258,14 @@ class AgentConfig:
     # libFuzzer mutation phase (between bank and LLM). Set seconds=0 to
     # skip — useful for the "bank-only" baseline.
     libfuzzer_seconds: int = 0
+    # F1: coverage-driven adaptive scheduling. When True, `libfuzzer_seconds`
+    # is used only as the *minimum* budget; the actual wall ranges between
+    # `libfuzzer_seconds` and `libfuzzer_budget_max` and terminates early on
+    # coverage stagnation. Saves wall on easy/dead tasks, gives hard tasks
+    # more time. Same crash-collection semantics.
+    libfuzzer_adaptive: bool = False
+    libfuzzer_budget_max: int = 30
+    libfuzzer_stagnation_window: int = 4
 
 
 def _bank_iter() -> list[bytes]:
@@ -333,8 +341,16 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
     # didn't crash on this binary (so the mutator starts from inputs that
     # at least don't trip an early hard failure).
     if cfg.libfuzzer_seconds > 0 and local_available and harness is not None:
-        fr = fuzz_collect(harness, _bank_iter(),
-                          budget_seconds=cfg.libfuzzer_seconds)
+        if cfg.libfuzzer_adaptive:
+            fr = fuzz_collect_adaptive(
+                harness, _bank_iter(),
+                budget_min=cfg.libfuzzer_seconds,
+                budget_max=cfg.libfuzzer_budget_max,
+                stagnation_window=cfg.libfuzzer_stagnation_window,
+            )
+        else:
+            fr = fuzz_collect(harness, _bank_iter(),
+                              budget_seconds=cfg.libfuzzer_seconds)
         log.debug("[%s] libfuzzer: %d crashes, %d execs, %d ms",
                   task_id, len(fr.crash_payloads), fr.execs_total, fr.wall_ms)
         # Phase 1: locally re-verify every crash artifact; collect sanitizer

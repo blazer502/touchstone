@@ -1,0 +1,39 @@
+{
+  "input": {
+    "byte_payload_hex": "255044462d312e300a25e2e3cfd30a",
+    "byte_payload_path": "/tmp/local-oracle-oss-fuzz_385167047/witness-lift.bin",
+    "variable_bindings": {},
+    "mount_path": "/tmp/poc"
+  },
+  "path": {
+    "function_chain": [],
+    "branches_taken": [],
+    "edges_hit": []
+  },
+  "violated": {
+    "kind": "sanitizer",
+    "name": "use-of-uninitialized-value",
+    "location": "/src/llvm-project/compiler-rt/lib/msan/../sanitizer_common/sanitizer_common_interceptors.inc:845",
+    "details": "\nINFO: Running with entropic power schedule (0xFF, 100).\nINFO: Seed: 3526535336\nINFO: Loaded 1 modules   (106768 inline 8-bit counters): 106768 [0x55f284fd8a50, 0x55f284ff2b60), \nINFO: Loaded 1 PC tables (106768 PCs): 106768 [0x55f284ff2b60,0x55f285193c60), \n/mnt/data/chanyoung/cybergym/cybergym-server-data/oss-fuzz/385167047/vul/out/ffmpeg_dem_IPMOVIE_fuzzer: Running 1 inputs 1 time(s) each.\nRunning: /tmp/local-oracle-oss-fuzz_385167047/witness-lift.bin\nUninitialized bytes in MemcmpInterceptorCommon at offset 15 inside [0x7ffc893b7d30, 22)\n==1429720==WARNING: MemorySanitizer: use-of-uninitialized-value\n    #0 0x55f28441e125 in memcmp /src/llvm-project/compiler-rt/lib/msan/../sanitizer_common/sanitizer_common_interceptors.inc:845:10\n    #1 0x55f2845fba3f in ipmovie_read_header /src/ffmpeg/libavformat/ipmovie.c:618:12\n    #2 0x55f28452a3e4 in avformat_open_input /src/ffmpeg/libavformat/demux.c:305:20\n    #3 0x55f284476e0c in LLVMFuzzerTestOneInput /src/ffmpeg/tools/target_dem_fuzzer.c:202:11\n    #4 0x55f28436c340 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerLoop.cpp:614:13\n    #5 0x55f2843575b5 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:327:6\n    #6 0x55f28435d04f in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:862:9\n    #7 0x55f2843882f2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10\n    #8 0x7fc853484d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16\n    #9 0x7fc853484e3f in __libc_start_main csu/../csu/libc-start.c:392:3\n    #10 0x55f28434f79d in _start (/mnt/data/chanyoung/cybergym/cybergym-server-data/oss-fuzz/385167047/vul/out/ffmpeg_dem_IPMOVIE_fuzzer+0x2fa79d)\n\nDEDUP_TOKEN: ___interceptor_memcmp--ipmovie_read_header--avformat_open_input\n  Uninitialized value was created by an allocation of 'signature_buffer' in the stack frame\n    #0 0x55f2845fb9d4 in ipmovie_read_header /src/ffmpeg/libavformat/ipmovie.c:613:5\n\nDEDUP_TOKEN: ipmovie_read_header\nSUMMARY: MemorySanitizer: use-of-uninitialized-value /src/ffmpeg/libavformat/ipmovie.c:618:12 in ipmovie_read_header\nExiting\n==1429720== ERROR: libFuzzer: deadly signal\n    #0 0x55f28440a349 in __sanitizer_print_stack_trace /src/llvm-project/compiler-rt/lib/msan/msan.cpp:734:3\n    #1 0x55f284387a98 in fuzzer::PrintStackTrace() /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerUtil.cpp:210:5\n    #2 0x55f28436ae33 in fuzzer::Fuzzer::CrashCallback() /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerLoop.cpp:231:3\n    #3 0x55f2844663d3 in SignalAction(int, void*, void*) /src/llvm-project/compiler-rt/lib/msan/msan_interceptors.cpp:1140:3\n    #4 0x7fc85349d51f  (/lib/x86_64-linux-gnu/libc.so.6+0x4251f) (BuildId: 095c7ba148aeca81668091f718047078d57efddb)\n    #5 0x7fc8534f19fb in __pthread_kill_implementation nptl/./nptl/pthread_kill.c:43:17\n    #6 0x7fc8534f19fb in __pthread_kill_internal nptl/./nptl/pthread_kill.c:78:10\n    #7 0x7fc8534f19fb in pthread_kill nptl/./nptl/pthread_kill.c:89:10\n    #8 0x7fc85349d475 in gsignal signal/../sysdeps/posix/raise.c:26:13\n    #9 0x7fc8534837f2 in abort stdlib/./stdlib/abort.c:79:7\n    #10 0x55f2843f5c36 in __sanitizer::Abort() /src/llvm-project/compiler-rt/lib/sanitizer_common/sanitizer_posix_libcdep.cpp:143:3\n    #11 0x55f2843f3e50 in __sanitizer::Die() /src/llvm-project/compiler-rt/lib/sanitizer_common/sanitizer_termination.cpp:58:5\n    #12 0x55f28441e05f in MemcmpInterceptorCommon(void*, int (*)(void const*, void const*, unsigned long), void const*, void const*, unsigned long) /src/llvm-project/compiler-rt/lib/msan/../sanitizer_common/sanitizer_common_interceptors.inc\n    #13 0x55f28441e125 in memcmp /src/llvm-project/compiler-rt/lib/msan/../sanitizer_common/sanitizer_common_interceptors.inc:845:10\n    #14 0x55f2845fba3f in ipmovie_read_header /src/ffmpeg/\n\u2026[truncated 1374 bytes]"
+  },
+  "soundness": {
+    "assumed_contracts": [
+      "binary=/mnt/data/chanyoung/cybergym/cybergym-server-data/oss-fuzz/385167047/vul/out/ffmpeg_dem_IPMOVIE_fuzzer",
+      "libs_dir=none",
+      "timeout=10s",
+      "san_env=halt_on_error=1"
+    ],
+    "soundness_anchor_ids": [
+      "oracle-tier-1-fast-crash/sanitizers-coverage-of-properties"
+    ],
+    "note": "Local pre-flight against the same binary the CyberGym server runs. Sanitizer banner + exit_code != 0 \u21d2 crash."
+  },
+  "provenance": {
+    "engine": "libfuzzer",
+    "tier": "1",
+    "engine_version": "",
+    "task_id": "oss-fuzz:385167047:local:witness-lift",
+    "produced_at_utc": "2026-05-27T16:08:22+00:00",
+    "wall_ms": 229
+  }
+}

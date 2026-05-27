@@ -6,14 +6,24 @@ asking the LLM to do: take a seed corpus, mutate it, score against the
 target. Running it in mutation mode for a few seconds beats burning
 minutes of 70B reasoning to ask "what byte sequence might crash this?".
 
-API:
+Two APIs:
 
-    crashes = fuzz_collect(harness, seeds, budget_seconds=10)
+    fuzz_collect(harness, seeds, budget_seconds=10)
+        Fixed-budget run. Easy to reason about; wall = budget_seconds.
 
-Returns a list of raw byte payloads — one per `crash-<sha>` artifact
-libFuzzer wrote during mutation. The caller (cybergym_agent) submits
-each through `adapter.score_local` to apply the (vul=crash ∧ fix=no_crash)
-scoring rule.
+    fuzz_collect_adaptive(harness, seeds,
+                          budget_min=3, budget_max=30,
+                          stagnation_window=4)
+        F1 coverage-driven scheduling: terminate the child as soon as
+        libFuzzer hasn't reported new coverage in `stagnation_window`
+        seconds (after `budget_min`); never run past `budget_max`. On a
+        large run, easy tasks free their leftover budget for the next
+        task; hard tasks get the headroom they actually need.
+
+Both return a list of raw byte payloads — one per `crash-<sha>` artifact
+libFuzzer wrote during the run. The caller scores them through
+`score_cached` so the `vul=crash ∧ fix=no_crash` rule keeps verdict
+authority.
 """
 from __future__ import annotations
 
@@ -144,6 +154,184 @@ def fuzz_collect(harness: LocalHarness,
             continue
         if 0 < len(payload) <= max_seed_bytes:
             crash_payloads.append(payload)
+
+    return FuzzResult(
+        crash_payloads=crash_payloads,
+        execs_total=execs_total,
+        wall_ms=wall_ms,
+        timed_out=timed_out,
+        error=err_msg,
+    )
+
+
+# --- F1: coverage-driven adaptive scheduling -------------------------------
+
+_COV_RE = re.compile(rb"cov:\s*(\d+)\s+ft:\s*(\d+)")
+
+
+def fuzz_collect_adaptive(harness: LocalHarness,
+                          seeds: Iterable[bytes],
+                          *,
+                          budget_min: int = 3,
+                          budget_max: int = 30,
+                          stagnation_window: int = 4,
+                          max_seed_bytes: int = 4096,
+                          corpus_dir: Optional[Path] = None,
+                          artifact_dir: Optional[Path] = None) -> FuzzResult:
+    """Adaptive-budget libFuzzer run.
+
+    Streams libFuzzer's stderr and tracks `cov: N ft: M` updates. Behaviour:
+
+    - Always runs at least `budget_min` seconds.
+    - Past `budget_min`, terminates if no new coverage / features for
+      `stagnation_window` seconds.
+    - Hard ceiling at `budget_max`. libFuzzer also exits on its own when
+      it hits a crash (default behaviour); we let that path return early.
+
+    Same `FuzzResult` shape as `fuzz_collect`, so callers can swap freely.
+    """
+    if corpus_dir is None:
+        corpus_dir = Path(tempfile.mkdtemp(prefix="libfuzz-corp-"))
+    if artifact_dir is None:
+        artifact_dir = Path(tempfile.mkdtemp(prefix="libfuzz-art-"))
+    corpus_dir.mkdir(parents=True, exist_ok=True)
+    artifact_dir.mkdir(parents=True, exist_ok=True)
+
+    seeded = 0
+    for i, blob in enumerate(seeds):
+        if len(blob) > max_seed_bytes:
+            continue
+        (corpus_dir / f"seed-{i:04d}").write_bytes(blob)
+        seeded += 1
+    if seeded == 0:
+        (corpus_dir / "seed-empty").write_bytes(b"")
+
+    env = dict(os.environ)
+    env.update(_SAN_ENV)
+    env.update(harness.env_extra)
+    if harness.libs_dir is not None:
+        existing = env.get("LD_LIBRARY_PATH", "")
+        env["LD_LIBRARY_PATH"] = (str(harness.libs_dir) +
+                                  (":" + existing if existing else ""))
+
+    cmd = [
+        str(harness.binary),
+        str(corpus_dir),
+        f"-max_total_time={budget_max}",        # hard cap
+        f"-artifact_prefix={str(artifact_dir)}/",
+        "-print_final_stats=1",
+        "-rss_limit_mb=2048",
+        "-timeout=5",
+    ]
+    t0 = time.monotonic()
+    last_cov_update = t0
+    last_cov_summary: tuple[Optional[int], Optional[int]] = (None, None)
+    stderr_buf: list[bytes] = []
+    timed_out = False
+    err_msg: Optional[str] = None
+    early_terminated = False
+
+    import select  # local import — only adaptive path needs it
+    try:
+        proc = subprocess.Popen(cmd, env=env,
+                                stdout=subprocess.DEVNULL,
+                                stderr=subprocess.PIPE,
+                                bufsize=0)
+    except Exception as e:
+        return FuzzResult(crash_payloads=[], execs_total=0,
+                          wall_ms=0, timed_out=False,
+                          error=f"libfuzzer-spawn-error: {e}")
+
+    poll_dt = 0.5
+    try:
+        while True:
+            now = time.monotonic()
+            elapsed = now - t0
+
+            # Hard cap.
+            if elapsed >= budget_max:
+                proc.terminate()
+                break
+
+            rc = proc.poll()
+            if rc is not None:
+                # libFuzzer exited (typically on a crash or natural end).
+                break
+
+            # Stagnation check (only after the minimum budget).
+            if (elapsed > budget_min
+                    and (now - last_cov_update) > stagnation_window):
+                proc.terminate()
+                early_terminated = True
+                break
+
+            # Pull whatever stderr is available without blocking.
+            ready, _, _ = select.select([proc.stderr], [], [], poll_dt)
+            if not ready:
+                continue
+            chunk = proc.stderr.read(4096)
+            if not chunk:
+                # EOF on stderr → process is wrapping up
+                continue
+            stderr_buf.append(chunk)
+            for m in _COV_RE.finditer(chunk):
+                summary = (int(m.group(1)), int(m.group(2)))
+                if summary != last_cov_summary:
+                    last_cov_summary = summary
+                    last_cov_update = time.monotonic()
+    except Exception as e:
+        err_msg = f"libfuzzer-stream-error: {e}"
+        try:
+            proc.terminate()
+        except Exception:
+            pass
+
+    # Drain remaining output.
+    try:
+        rest, _ = proc.communicate(timeout=5)
+        if rest:
+            stderr_buf.append(rest)
+    except subprocess.TimeoutExpired:
+        timed_out = True
+        try:
+            proc.kill()
+            proc.communicate(timeout=5)
+        except Exception:
+            pass
+
+    wall_ms = int((time.monotonic() - t0) * 1000)
+    stderr = b"".join(stderr_buf).decode("utf-8", errors="replace")
+
+    # Stats + crash collection — same shape as fuzz_collect.
+    execs_total = 0
+    m_final = _FINAL_STATS_RE.search(stderr)
+    if m_final:
+        execs_total = int(m_final.group(1))
+    else:
+        last = 0
+        for m in _EXECS_RE.finditer(stderr):
+            last = int(m.group(1))
+        execs_total = last
+
+    crash_payloads: list[bytes] = []
+    if artifact_dir.exists():
+        for p in sorted(artifact_dir.iterdir()):
+            if not p.is_file():
+                continue
+            name = p.name
+            if not (name.startswith("crash-") or name.startswith("oom-")
+                    or name.startswith("timeout-")):
+                continue
+            try:
+                payload = p.read_bytes()
+            except Exception:
+                continue
+            if 0 < len(payload) <= max_seed_bytes:
+                crash_payloads.append(payload)
+
+    log.debug("[adaptive] wall=%dms execs=%d crashes=%d early_term=%s cov=%s",
+              wall_ms, execs_total, len(crash_payloads),
+              early_terminated, last_cov_summary)
 
     return FuzzResult(
         crash_payloads=crash_payloads,

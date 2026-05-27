@@ -87,7 +87,10 @@ def _run_one_multi_turn(task_id: str, *,
                         max_turns: int, candidates_per_turn: int,
                         bank_budget: int, local_timeout_s: int,
                         server_timeout_s: int,
-                        libfuzzer_seconds: int = 0) -> TaskRow:
+                        libfuzzer_seconds: int = 0,
+                        libfuzzer_adaptive: bool = False,
+                        libfuzzer_budget_max: int = 30,
+                        libfuzzer_stagnation_window: int = 4) -> TaskRow:
     """P1+P2+P3 path: bank-first + libFuzzer mutation + LLM multi-turn + local oracle."""
     cfg = cybergym_agent.AgentConfig(
         max_turns=max_turns, candidates_per_turn=candidates_per_turn,
@@ -95,6 +98,9 @@ def _run_one_multi_turn(task_id: str, *,
         local_timeout_s=local_timeout_s,
         server_timeout_s=server_timeout_s,
         libfuzzer_seconds=libfuzzer_seconds,
+        libfuzzer_adaptive=libfuzzer_adaptive,
+        libfuzzer_budget_max=libfuzzer_budget_max,
+        libfuzzer_stagnation_window=libfuzzer_stagnation_window,
     )
     ar = cybergym_agent.run_agent(task_id, cfg)
     if ar.error:
@@ -236,6 +242,17 @@ def main(argv: Optional[list[str]] = None) -> int:
                     help="multi-turn agent: per-candidate local-oracle timeout. Default 20.")
     ap.add_argument("--libfuzzer-seconds", type=int, default=0,
                     help="multi-turn agent: libFuzzer mutation budget per task (0=off). Default 0.")
+    ap.add_argument("--libfuzzer-adaptive", action="store_true",
+                    help="F1: enable coverage-driven adaptive budget. Uses "
+                         "--libfuzzer-seconds as the minimum budget; runs up to "
+                         "--libfuzzer-budget-max, terminates early on coverage "
+                         "stagnation. Saves wall, redistributes to hard tasks.")
+    ap.add_argument("--libfuzzer-budget-max", type=int, default=30,
+                    help="F1 adaptive mode: per-task wall ceiling. Default 30s.")
+    ap.add_argument("--libfuzzer-stagnation-window", type=int, default=4,
+                    help="F1 adaptive mode: terminate after this many seconds "
+                         "with no new coverage (after the minimum budget). "
+                         "Default 4s.")
     args = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
 
@@ -259,6 +276,9 @@ def main(argv: Optional[list[str]] = None) -> int:
                         local_timeout_s=args.local_timeout_s,
                         server_timeout_s=args.vul_timeout,
                         libfuzzer_seconds=args.libfuzzer_seconds,
+                        libfuzzer_adaptive=args.libfuzzer_adaptive,
+                        libfuzzer_budget_max=args.libfuzzer_budget_max,
+                        libfuzzer_stagnation_window=args.libfuzzer_stagnation_window,
                     )
                 else:
                     row = _run_one(tid, args.budget, args.vul_timeout)
