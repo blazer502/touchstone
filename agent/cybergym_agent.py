@@ -37,11 +37,14 @@ from typing import Optional
 
 from agent.libfuzzer_phase import fuzz_collect
 from agent.local_oracle import LocalHarness, resolve_harness, run_candidate
+from agent.score_cache import dedup_crashes, score_cached, signature
 from agent.source_extractor import (SourceSnippet, extract_function_around,
                                     first_user_frame)
+from agent.task_interface import BenchmarkTask, ScoreResult
 from eval.cybergym import adapter
 from eval.cybergym.seed_generators import (_FALLBACK_BANK, _decode_one,
                                             _parse_json_candidates)
+from eval.cybergym.task_adapter import CyberGymTask
 from llm.client import LLMClient, LLMUnavailable
 from oracle.tier1_fuzz.verdict import Tier1Verdict
 
@@ -277,6 +280,8 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
     except Exception as e:
         res.error = f"resolve-error: {e}"
         return res
+    # Benchmark-agnostic task facade (F2/V4) — agent calls go through this.
+    task: BenchmarkTask = CyberGymTask(bundle)
 
     # Source extraction (P2). Best-effort — many tasks don't have error.txt
     # at level 1, in which case we just skip the source-grounded prompt half.
@@ -316,7 +321,7 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
                 local_available=local_available,
             )
             if v.confirmed_reproduces_target or v.crash_class is not None:
-                _finalize_on_crash(res, bundle, blob, source=f"bank-{i:03d}",
+                _finalize_on_crash(res, task, blob, source=f"bank-{i:03d}",
                                    cfg=cfg, candidate_attempt=v)
                 if res.confirmed_reproduces_target:
                     res.total_wall_ms = int((time.monotonic() - t0) * 1000)
@@ -331,8 +336,10 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
                           budget_seconds=cfg.libfuzzer_seconds)
         log.debug("[%s] libfuzzer: %d crashes, %d execs, %d ms",
                   task_id, len(fr.crash_payloads), fr.execs_total, fr.wall_ms)
+        # Phase 1: locally re-verify every crash artifact; collect sanitizer
+        # evidence so we can deduplicate by root-cause signature.
+        rerun: list[tuple[bytes, Tier1Verdict]] = []
         for i, blob in enumerate(fr.crash_payloads):
-            # Local-confirm + server-confirm via the existing path.
             v = run_candidate(harness, blob,
                               timeout_seconds=cfg.local_timeout_s,
                               unit_tag=f"fuzz-{i:03d}")
@@ -344,14 +351,29 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
                 location=v.location,
                 wall_ms_local=v.wall_ms,
             ))
-            if v.verdict != "crash":
-                continue
-            _finalize_on_crash(res, bundle, blob,
-                               source=f"libfuzzer-{i}",
+            if v.verdict == "crash":
+                rerun.append((blob, v))
+        # Phase 2: dedup by DEDUP_TOKEN / SUMMARY / top-frame signature so we
+        # don't score 20 crash artifacts that all share one root cause. (F2)
+        deduped = dedup_crashes([(blob, v.evidence_excerpt) for blob, v in rerun])
+        if rerun:
+            log.info("[%s] libfuzzer: %d crash artifacts, %d unique root causes "
+                     "(dedup %.0f%%)",
+                     task_id, len(rerun), len(deduped),
+                     100 * (1 - len(deduped) / max(len(rerun), 1)))
+        # Phase 3: score one representative per signature; first reproducing
+        # hit wins and we return. score_cached short-circuits repeated content.
+        for j, (blob, _excerpt) in enumerate(deduped):
+            # Locate the matching local verdict for this blob to populate
+            # _EvalResult — needed because _finalize_on_crash uses it for
+            # bookkeeping (we already appended an attempt above).
+            v = next((vv for bb, vv in rerun if bb == blob), None)
+            _finalize_on_crash(res, task, blob,
+                               source=f"libfuzzer-{j}",
                                cfg=cfg, candidate_attempt=_EvalResult(
-                                   local_verdict=v.verdict,
-                                   crash_class=v.crash_class,
-                                   location=v.location,
+                                   local_verdict=v.verdict if v else "crash",
+                                   crash_class=v.crash_class if v else None,
+                                   location=v.location if v else None,
                                    confirmed_reproduces_target=False,
                                ))
             if res.confirmed_reproduces_target:
@@ -393,7 +415,7 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
                     local_available=local_available,
                 )
                 if v.confirmed_reproduces_target or v.crash_class is not None:
-                    _finalize_on_crash(res, bundle, blob,
+                    _finalize_on_crash(res, task, blob,
                                        source=f"llm-turn{turn}-{i}",
                                        cfg=cfg, candidate_attempt=v)
                     crash_in_turn = True
@@ -483,29 +505,30 @@ def _eval_local_then_server(bundle: adapter.TaskBundle,
     )
 
 
-def _finalize_on_crash(res: AgentResult, bundle: adapter.TaskBundle,
+def _finalize_on_crash(res: AgentResult, task: BenchmarkTask,
                        blob: bytes, *, source: str,
                        cfg: AgentConfig,
                        candidate_attempt: _EvalResult) -> None:
-    """On a local crash, submit through `adapter.score_local` to lock the score.
+    """On a local crash, score through the benchmark's oracle to lock the score.
 
-    Updates `res` in place. Idempotent on subsequent successful scores: the
-    first confirm wins; we don't keep searching after `confirmed_reproduces=True`.
+    Goes through `score_cached` (F2/V4) so a re-run with the same binary +
+    same PoC short-circuits to a cache hit. Idempotent: the first confirm
+    wins; we don't keep searching after `confirmed_reproduces=True`.
     """
     if res.confirmed_reproduces_target:
         return
-    score = adapter.score_local(bundle, blob,
-                                vul_timeout=cfg.server_timeout_s,
-                                fix_timeout=cfg.server_timeout_s)
+    sr: ScoreResult = score_cached(task, blob,
+                                   vul_timeout=cfg.server_timeout_s,
+                                   fix_timeout=cfg.server_timeout_s)
     if res.attempts:
         last = res.attempts[-1]
         last.submitted = True
-        last.server_vul_verdict = score["vul_verdict"]
-        last.server_fix_verdict = score["fix_verdict"]
-    if score.get("success"):
+        last.server_vul_verdict = "crash" if sr.vul_crashed else "no_crash"
+        last.server_fix_verdict = "crash" if sr.fix_crashed else "no_crash"
+    if sr.reproduces_target:
         res.confirmed_reproduces_target = True
         res.winning_poc_hex = blob.hex()
         res.winning_source = source
-    if score.get("fix_verdict") == "crash":
+    if sr.fix_crashed:
         res.confirmed_finds_post_patch = True
         # Keep going to find a target-reproducing crash too, unless we already have one.
