@@ -46,6 +46,7 @@ from typing import Optional
 
 from . import adapter
 from . import seed_generators as seeds
+from agent import cybergym_agent
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -80,6 +81,36 @@ def _load_task_ids(path: Path) -> list[str]:
                 out.append(tid)
         return out
     raise ValueError(f"unrecognised tasks-file schema: {path}")
+
+
+def _run_one_multi_turn(task_id: str, *,
+                        max_turns: int, candidates_per_turn: int,
+                        bank_budget: int, local_timeout_s: int,
+                        server_timeout_s: int) -> TaskRow:
+    """P1+P2+P3 path: bank-first + LLM multi-turn + local oracle pre-flight."""
+    cfg = cybergym_agent.AgentConfig(
+        max_turns=max_turns, candidates_per_turn=candidates_per_turn,
+        bank_budget=bank_budget,
+        local_timeout_s=local_timeout_s,
+        server_timeout_s=server_timeout_s,
+    )
+    ar = cybergym_agent.run_agent(task_id, cfg)
+    if ar.error:
+        return TaskRow(task_id=task_id, resolved=False, notes=ar.error)
+    row = TaskRow(
+        task_id=task_id, resolved=True,
+        candidates_tried=len(ar.attempts),
+        vul_crash=bool(ar.winning_poc_hex),
+        fix_crash=ar.confirmed_finds_post_patch,
+        reproduces_target=ar.confirmed_reproduces_target,
+        finds_post_patch=ar.confirmed_finds_post_patch,
+        first_crash_index=next((i for i, a in enumerate(ar.attempts)
+                                if a.crash_class is not None), None),
+        wall_ms=ar.total_wall_ms,
+        tokens_used=ar.total_tokens,
+        notes=(f"turns={len(ar.turns)} winning={ar.winning_source or 'none'}"),
+    )
+    return row
 
 
 def _run_one(task_id: str, budget: int, vul_timeout: int) -> TaskRow:
@@ -191,6 +222,16 @@ def main(argv: Optional[list[str]] = None) -> int:
                     help="Where to write the JSON record.")
     ap.add_argument("--trace", type=Path, default=None,
                     help="Per-task JSONL trace path (default: out.with_suffix('-trace.jsonl')).")
+    ap.add_argument("--agent", choices=["seed-gen", "multi-turn"], default="seed-gen",
+                    help="Per-task agent: seed-gen (legacy one-shot) or multi-turn (P1+P2+P3).")
+    ap.add_argument("--max-turns", type=int, default=3,
+                    help="multi-turn agent: max LLM rounds after the bank. Default 3.")
+    ap.add_argument("--candidates-per-turn", type=int, default=8,
+                    help="multi-turn agent: candidates per LLM round. Default 8.")
+    ap.add_argument("--bank-budget", type=int, default=12,
+                    help="multi-turn agent: bank entries to try before the LLM. Default 12.")
+    ap.add_argument("--local-timeout-s", type=int, default=20,
+                    help="multi-turn agent: per-candidate local-oracle timeout. Default 20.")
     args = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
 
@@ -205,7 +246,17 @@ def main(argv: Optional[list[str]] = None) -> int:
     with trace_path.open("w") as fh:
         for i, tid in enumerate(task_ids, 1):
             try:
-                row = _run_one(tid, args.budget, args.vul_timeout)
+                if args.agent == "multi-turn":
+                    row = _run_one_multi_turn(
+                        tid,
+                        max_turns=args.max_turns,
+                        candidates_per_turn=args.candidates_per_turn,
+                        bank_budget=args.bank_budget,
+                        local_timeout_s=args.local_timeout_s,
+                        server_timeout_s=args.vul_timeout,
+                    )
+                else:
+                    row = _run_one(tid, args.budget, args.vul_timeout)
             except KeyboardInterrupt:
                 raise
             except Exception as e:
