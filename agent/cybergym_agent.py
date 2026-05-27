@@ -460,26 +460,58 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
 
 def _auto_lift_witness(task: BenchmarkTask, harness: Optional[LocalHarness],
                        cfg: AgentConfig, res: AgentResult) -> None:
-    """V1: every confirmed reproducer gets an audit-grade Witness on disk.
+    """V1 + V3: every confirmed reproducer gets a Witness on disk; if the
+    benchmark also exposes the disclosed patch, save it alongside.
 
-    Re-runs the winning candidate one extra time through the local oracle
-    to get a fresh sanitizer banner with file:line, then lifts via
-    `from_tier1`. Failure is non-fatal — leaderboard score is already
-    locked in `res.confirmed_reproduces_target`.
+    Witness (V1): re-run the winning candidate locally once to capture a
+    fresh sanitizer trace, lift via `from_tier1`, write
+    `run-logs/cex/auto/<task>.json`.
+
+    Patch (V3): when `task.disclosed_patch_diff()` returns a non-empty diff,
+    save it alongside the witness as `<task>.patch.diff` and tag the
+    witness with `disclosed_patch_available: true`. Full auto-verify of
+    the patch (run patch_verify against the extracted pre/post function
+    bodies) is a follow-up — V3-simple here is the bookkeeping step that
+    pairs every confirm with its disclosed patch.
+
+    All failures non-fatal — leaderboard score is already locked.
     """
     if not (res.confirmed_reproduces_target and res.winning_poc_hex
             and harness is not None):
         return
+    from agent.score_cache import write_witness, WITNESS_AUTO_ROOT
     try:
         blob = bytes.fromhex(res.winning_poc_hex)
         v = run_candidate(harness, blob,
                           timeout_seconds=cfg.local_timeout_s,
                           unit_tag="witness-lift")
-        from agent.score_cache import write_witness
         wp = write_witness(task, blob, v)
         log.info("[%s] witness → %s", task.task_id, wp)
     except Exception as e:
         log.warning("[%s] witness auto-lift failed: %s", task.task_id, e)
+        return
+
+    # V3: stash the disclosed patch alongside the witness.
+    try:
+        patch = task.disclosed_patch_diff()
+        if patch:
+            safe = task.task_id.replace(":", "_").replace("/", "_")
+            patch_path = WITNESS_AUTO_ROOT / f"{safe}.patch.diff"
+            patch_path.parent.mkdir(parents=True, exist_ok=True)
+            patch_path.write_text(patch)
+            # Annotate the witness JSON with the patch availability.
+            try:
+                witness_path = WITNESS_AUTO_ROOT / f"{safe}.json"
+                if witness_path.exists():
+                    j = json.loads(witness_path.read_text())
+                    j.setdefault("provenance", {})["disclosed_patch_available"] = True
+                    j["provenance"]["disclosed_patch_path"] = str(patch_path)
+                    witness_path.write_text(json.dumps(j, indent=2))
+            except Exception:
+                pass
+            log.info("[%s] patch.diff stashed → %s", task.task_id, patch_path)
+    except Exception as e:
+        log.warning("[%s] patch stash failed: %s", task.task_id, e)
 
 
 # --- helpers ---------------------------------------------------------------
