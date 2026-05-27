@@ -35,6 +35,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Optional
 
+from agent.bug_class_seeds import augmented_seeds
 from agent.libfuzzer_phase import fuzz_collect, fuzz_collect_adaptive
 from agent.local_oracle import LocalHarness, resolve_harness, run_candidate
 from agent.score_cache import dedup_crashes, score_cached, signature
@@ -272,6 +273,12 @@ def _bank_iter() -> list[bytes]:
     return list(_FALLBACK_BANK)
 
 
+def _bank_for(task: BenchmarkTask) -> list[bytes]:
+    """F3: augment the deterministic bank with class-specific seeds when the
+    benchmark exposes a bug-class hint. Falls back to the generic bank."""
+    return augmented_seeds(_bank_iter(), task.bug_class_hint())
+
+
 def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
     """Top-level entry. See module docstring for the loop shape."""
     res = AgentResult(
@@ -321,7 +328,7 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
 
     # Bank-first phase.
     if cfg.use_bank_first:
-        for i, blob in enumerate(_bank_iter()[: cfg.bank_budget]):
+        for i, blob in enumerate(_bank_for(task)[: cfg.bank_budget]):
             v = _eval_local_then_server(
                 bundle, harness, blob, source="bank",
                 unit_tag=f"bank-{i:03d}",
@@ -343,13 +350,13 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig()) -> AgentResult:
     if cfg.libfuzzer_seconds > 0 and local_available and harness is not None:
         if cfg.libfuzzer_adaptive:
             fr = fuzz_collect_adaptive(
-                harness, _bank_iter(),
+                harness, _bank_for(task),
                 budget_min=cfg.libfuzzer_seconds,
                 budget_max=cfg.libfuzzer_budget_max,
                 stagnation_window=cfg.libfuzzer_stagnation_window,
             )
         else:
-            fr = fuzz_collect(harness, _bank_iter(),
+            fr = fuzz_collect(harness, _bank_for(task),
                               budget_seconds=cfg.libfuzzer_seconds)
         log.debug("[%s] libfuzzer: %d crashes, %d execs, %d ms",
                   task_id, len(fr.crash_payloads), fr.execs_total, fr.wall_ms)
