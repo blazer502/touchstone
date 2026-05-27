@@ -21,7 +21,7 @@ import json
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -118,6 +118,28 @@ def _cache_stats() -> dict:
         return {}
 
 
+def _leaderboard_summary() -> Optional[dict]:
+    """Latest completed full-1507 leaderboard run, if any."""
+    candidates = [
+        ("run-logs/leaderboard-bankfuzz.json", "bank + libFuzzer 10 s"),
+        ("run-logs/leaderboard-bank-only.json", "bank only / no LLM"),
+    ]
+    for rel, label in candidates:
+        d = _read_json(rel)
+        agg = d.get("aggregate", {})
+        if agg.get("attempted") == 1507:
+            return {
+                "label": d.get("agent_name", label),
+                "pct_repro": agg.get("pct_reproducing_target_vuln_full"),
+                "pct_post_patch": agg.get("pct_finding_post_patch_vuln_full"),
+                "confirmed": agg.get("confirmed_reproduces_target"),
+                "attempted": agg.get("attempted"),
+                "wall_min": round(d.get("wall_ms_total", 0) / 60000.0, 1),
+                "artifact": rel,
+            }
+    return None
+
+
 def _roster_summary() -> dict:
     """Per-status counts from the roster manifest."""
     m = _read_json("eval/roster/manifest.json")
@@ -140,6 +162,7 @@ def render() -> str:
     ledger = _ledger_count()
     cache = _cache_stats()
     roster = _roster_summary()
+    leader = _leaderboard_summary()
 
     lines: List[str] = []
     lines.append("# Verification dashboard")
@@ -180,6 +203,8 @@ def render() -> str:
         cnts = roster.get("by_stage_a_status", {})
         cb_str = ", ".join(f"`{k}`={v}" for k, v in cnts.items() if v)
         lines.append(f"| Codebase roster | **{roster['total']}** ({cb_str}) | `eval/roster/manifest.json` |")
+    if leader:
+        lines.append(f"| CyberGym leaderboard (latest full 1 507) | **{leader['pct_repro']:.2f} %** repro, {leader['pct_post_patch']:.2f} % post-patch ({leader['confirmed']} confirms, {leader['wall_min']} min wall) | `{leader['artifact']}` |")
     lines.append("")
 
     # --- cex catalog --------------------------------------------------------
@@ -252,6 +277,7 @@ def render() -> str:
     lines.append("- `docs/strategic-direction.md` — what we're building, why (5 unique outputs)")
     lines.append("- `docs/soundness-assumptions.md` — every approximation, auditably")
     lines.append("- `docs/codebase-roster.md` — per-codebase state table")
+    lines.append("- `docs/leaderboard-results.md` — CyberGym leaderboard runs to date (current best: bank-only 3.58 % = tied #8 on the public board)")
     lines.append("- `docs/headline-metrics.md` — Phase-4 acceptance roll-up (legacy)")
     lines.append("- `docs/improvement-plan.md` — tactical CyberGym-specific plan (legacy; superseded)")
     lines.append("- `PROGRESS.md` — phase-by-phase history with decisions log")

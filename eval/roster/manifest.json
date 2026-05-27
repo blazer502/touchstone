@@ -73,11 +73,28 @@
       "stage_a": {"status": "not_setup"},
       "stage_b": {"status": "not_setup"},
       "oracle_runs": {
-        "tier1_cybergym_server": {
-          "status": "partial",
+        "bank_only_local_oracle": {
+          "status": "done",
+          "attempted": 1507,
+          "confirmed_reproduces": 54,
+          "confirmed_post_patch": 3,
+          "pct_repro_full": 3.58,
+          "pct_post_patch_full": 0.20,
+          "wall_minutes": 22.7,
+          "tokens_used": 0,
+          "note": "Ties OpenHands+DeepSeek-V3 (671B MoE) at 3.58 %, zero LLM calls.",
+          "artifact": "run-logs/leaderboard-bank-only.json"
+        },
+        "bank_plus_libfuzzer_10s": {
+          "status": "in_progress",
+          "note": "Adds libFuzzer mutation phase to bank misses. ~8.4% rate observed at the first 318/1507 checkpoint.",
+          "artifact": "run-logs/leaderboard-bankfuzz.json"
+        },
+        "deepseek_r1_distill_70b_partial": {
+          "status": "halted_for_pivot",
           "attempted": 196,
           "confirmed_reproduces": 5,
-          "confirmed_post_patch": 0,
+          "note": "DeepSeek-R1-Distill-Llama-70B as a byte-stream generator wasted 70-100 % of its budget on inline reasoning (16 tok/s, 2 K tokens reasoning before any answer). Halted in favour of the deterministic bank + libFuzzer approach which scored 14 % higher on the same universe.",
           "artifact": "run-logs/leaderboard-70b-partial-summary.json"
         }
       },

@@ -17,7 +17,7 @@ Status semantics:
 | `linux-6.1.72-netfilter` | kernel-subsystem | **22.05%** (3029/3886) missed=0 | deferred | `tier1_kasan`=done<br>`tier1_syzkaller`=deferred · syzlang descriptor wired (Phase 2.1); syz-manager fuzz pass deferred. | — |
 | `linux-6.1.72-live-lts-cos` | kernel-subsystem | shares: linux-6.1.72-netfilter | ? | `tier1_kasan_live`=done · no_crash (restriction holds)<br>`tier1_kasan_historical`=done · crash (positive control) | — |
 | `juliet-memory-safety` | synthetic-corpus | **0.68%** (3345/3368) missed=0 | checked=12 unsafe=12 safe=0 inconclusive=0 false_safe=0 | — | — |
-| `cybergym-arvo` | real-world-poc-task | — | — | `tier1_cybergym_server`=partial | 5 |
+| `cybergym-arvo` | real-world-poc-task | — | — | `bank_only_local_oracle`=done · Ties OpenHands+DeepSeek-V3 (671B MoE) at 3.58 %, zero LLM calls.<br>`bank_plus_libfuzzer_10s`=in_progress · Adds libFuzzer mutation phase to bank misses. ~8.4% rate observed at the first 318/1507 checkpoint.<br>`deepseek_r1_distill_70b_partial`=halted_for_pivot · DeepSeek-R1-Distill-Llama-70B as a byte-stream generator wasted 70-100 % of its budget on inline reasoning (16 tok/s, 2 K tokens reasoning before any answer). Halted in favour of the deterministic bank + libFuzzer approach which scored 14 % higher on the same universe. | 5 |
 | `sqlite3-3.37.2` | live-library | deferred | deferred | `tier1_libfuzzer`=done · inconclusive (no crash in 15s wall budget)<br>`tier1_positive_control`=done · crash (stack-OOB on OOB!-prefix input) | — |
 | `magma` | synthetic-corpus | — | — | — | — |
 | `openssl-latest` | live-library | — | — | — | — |
