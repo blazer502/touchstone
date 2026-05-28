@@ -23,7 +23,7 @@
   },
   "reproduce": true,
   "cover": true,
-  "sandbox": "none",
+  "sandbox": "setuid",
   "enable_syscalls": [
     "__SYSCALL_LIST_PLACEHOLDER__"
   ],

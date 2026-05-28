@@ -289,6 +289,12 @@ If you add a new tool, append its assumptions here before relying on its verdict
 
 - **`triage` (E2) — dynamic controllability is an execution-grounded measurement, not a proof.** `probe_oob_controllability` varies the reproduced trigger's length, re-runs via the Tier-1 replay, and reports `size_attacker_controlled=True` only when the OOB offset *strictly tracks* input length across crashing variants. A `True` here is a measured re-execution fact (the overflow distance moved with the input); it still does not prove a working exploit — it sharpens the priority ranking. Scoped to the userspace local-binary backend + OOB primitives; UAF/kernel/docker return `not_probed` (never silently "not controllable").
 
+## Kernel threat model (Phase 9b — `eval/kernelctf-latest/syzkaller/manager-*.cfg`)
+
+- **Kernel exploitability = unprivileged-local-user reachability; root-only crashes are OUT OF SCOPE.** We only count a kernel bug as an exploit candidate if an *unprivileged local user* (no capabilities) can trigger it — the kernelCTF "local attacker → LPE" model. This is enforced **at fuzz time**: every `manager-*.cfg` runs `sandbox: setuid`, so syz-executor drops to a fresh unprivileged uid (all caps cleared) before executing each program. Capability-gated paths (`CAP_SYS_ADMIN`, `CAP_NET_ADMIN`, …) `EPERM` and never produce a counted crash, so any bucket the campaign surfaces is unprivileged-reachable *by construction*. (Contrast: `sandbox: none` runs as root and finds root-only crashes — e.g. the historical `rmap_walk_file` finding whose `MADV_HWPOISON` trigger needed `CAP_SYS_ADMIN`, making it ineligible. That class can't recur under setuid.)
+
+- **Provenance, not a new verdict lever.** A 9a `exploit_triage` of `memory-corruption`/`exploitable` on a setuid-sandbox bucket means "an unprivileged user can reach a corruption primitive here" — but it is still a *proposer* ranking; the working LPE is proven only by the weaponization stage. A crash replayed from a `sandbox: none` source (e.g. a historical-CVE smoke) carries no unprivileged-reachability guarantee and must be re-checked under setuid before being treated as in-scope. The unprivileged-reachability claim is only as strong as the sandbox the crash was produced under.
+
 ---
 
 If you add a new tool, append its assumptions to the relevant section before
