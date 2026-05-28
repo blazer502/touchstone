@@ -267,6 +267,18 @@ If you add a new tool, append its assumptions here before relying on its verdict
 
 - **`kernel CONFIG_*` — cache key embeds every variant.** Every cached proof's key embeds the `CONFIG_*` set, arch, and compiler/sanitizer mode. Any drift = cache miss = re-verify.
 
+## Crash-reproducer pipeline (R-track — `schemas/reproducer.py`, `oracle/repro/`)
+
+- **`repro` — `repro_rate` is a finite-N frequency estimate; `unreproducible` is NEVER `safe`.** The pipeline re-runs a candidate trigger N times (userspace: fresh processes; kernel: QEMU+KASAN boots) and reports `repro_rate = signature-matched-hits / N`. A verdict of `unreproducible` (rate 0) means "not reproduced within N runs under this build/config", exactly mirroring the PLAN §3 Tier-1 "no-crash within budget is inconclusive, not safe" rule. Only a sound engine (Stage B / Tier-3 BMC) may emit `safe`. Raising N tightens the estimate; it never converts the claim to a proof of absence.
+
+- **`repro` — the re-run is the verdict authority; synthesized/templated triggers are candidates.** A "hit" requires the re-run to fire a crash whose `crash_signature` (sanitizer | class | location, with ASLR addresses and kernel `+0x..` frame offsets stripped) equals the target bucket's. Re-firing a *different* bug does not count toward `repro_rate`. The R2 kernel synthesis may propose a syscall surface from a bug-class syzlang template (`template_proposed`) or, with syzkaller binaries present, via `syz-repro`+`syz-prog2c`; either way the proposed program is an UNVERIFIED candidate until the R3 re-run fires the matching signature. LLM/template proposes, execution decides (PLAN §8).
+
+- **`repro` — a `Reproducer` is bound to `build_id`.** Userspace `build_id` = harness-binary content hash (local) or image tag (docker); kernel `build_id` = the kernel/build identifier. Replaying a reproducer against a different build is a cache miss — the same discipline as the Phase 1.4 proof-cache key. A high `repro_rate` is a claim about *this* build only.
+
+- **`repro` — kernel synthesis degrades to `infrastructure_pending`, never to a fake reproducer.** When syzkaller binaries are absent and no bug-class template matches, `synthesize_kernel_reproducer` returns `infrastructure_pending` with the missing-tool reason — it never fabricates a "reproducer" it cannot stand behind. Same honest-stub discipline as `oracle/tier2_symbolic/s2e_driver.py` and `tier1_fuzz.kernel.syzkaller_smoke`.
+
+- **`repro` — minimization must preserve the signature.** libFuzzer `-minimize_crash` output is adopted only after a confirm pass shows the minimized input still fires the SAME signature on every confirm run; otherwise the original trigger is kept (`minimized=False`). Minimization is best-effort (MSan uninit-value bugs often don't shrink) and never required for a `reproducible` verdict.
+
 ---
 
 If you add a new tool, append its assumptions to the relevant section before

@@ -82,6 +82,7 @@ class Candidate:
     tier2_angr: Optional[dict] = None
     tier3_cbmc: Optional[dict] = None
     refine: Optional[dict] = None    # RefinementSpec as a dict
+    repro: Optional[dict] = None     # opt-in crash-reproducer spec (R-track)
 
 
 # --- Result shape ------------------------------------------------------------
@@ -120,6 +121,7 @@ class AgentResult:
     route_trace: dict
     refinement: RefinementOutcome
     total_wall_ms: int
+    reproducibility: Optional[dict] = None   # ReproVerdict dict when scored (R-track)
 
     def to_dict(self) -> dict:
         return {
@@ -128,6 +130,7 @@ class AgentResult:
             "route_trace": self.route_trace,
             "refinement": asdict(self.refinement),
             "total_wall_ms": self.total_wall_ms,
+            "reproducibility": self.reproducibility,
         }
 
 
@@ -248,6 +251,56 @@ def _maybe_refine(
     return decision, out
 
 
+# --- Reproducibility step (R-track) ------------------------------------------
+
+def _maybe_score_reproducibility(c: Candidate, decision: AgentDecision) -> Optional[dict]:
+    """If a ``repro`` spec is attached and we have a runtime PoV, score
+    reproducibility (and minimize) via the crash-reproducer pipeline.
+
+    Opt-in and confined to ``confirmed`` dispositions: only a real runtime PoV
+    is worth re-running for determinism. The re-run is the verdict authority;
+    a low/zero ``repro_rate`` is reported honestly (never demoted to "safe").
+    Any failure is swallowed into an ``error`` dict so it can't break the loop.
+    """
+    spec = c.repro
+    if not isinstance(spec, dict) or decision.disposition != "confirmed":
+        return None
+    runs = int(spec.get("runs", 5))
+    threshold = float(spec.get("threshold", 0.9))
+    try:
+        if spec.get("domain") == "kernel":
+            from oracle.repro.kernel import measure_kernel_reproducibility
+            qs = spec.get("qemu_script")
+            if not qs:
+                return None
+            v = measure_kernel_reproducibility(
+                Path(qs), runs=runs, threshold=threshold,
+                timeout_seconds=int(spec.get("timeout_seconds", 120)),
+                unit=c.cid,
+                log_path=Path(spec["log_path"]) if spec.get("log_path") else None,
+                build_id=spec.get("build_id", ""))
+            return v.to_dict()
+        # userspace
+        poc = spec.get("poc")
+        if not poc:
+            return None
+        minimize = bool(spec.get("minimize", True))
+        from oracle.repro.pipeline import run_userspace_docker, run_userspace_local
+        if spec.get("image"):
+            v = run_userspace_docker(spec["image"], spec["harness_path"], Path(poc),
+                                     runs=runs, threshold=threshold, minimize=minimize,
+                                     unit=c.cid)
+        elif spec.get("harness_bin"):
+            v = run_userspace_local(Path(spec["harness_bin"]), Path(poc),
+                                    runs=runs, threshold=threshold, minimize=minimize,
+                                    unit=c.cid)
+        else:
+            return None
+        return v.to_dict()
+    except Exception as e:  # reproducibility scoring must never break the loop
+        return {"verdict": "error", "error": repr(e)}
+
+
 # --- Public entrypoint -------------------------------------------------------
 
 def agent_step(
@@ -276,6 +329,7 @@ def agent_step(
         c, decision, tr.final_verdict,
         client=client, allow_rule_fallback=allow_rule_fallback,
     )
+    repro = _maybe_score_reproducibility(c, decision)
     total_ms = int((time.monotonic() - t0) * 1000)
     return AgentResult(
         candidate_id=c.cid,
@@ -283,6 +337,7 @@ def agent_step(
         route_trace=tr.to_dict(),
         refinement=ref,
         total_wall_ms=total_ms,
+        reproducibility=repro,
     )
 
 
@@ -298,6 +353,7 @@ def _candidate_from_json(d: dict) -> Candidate:
         tier2_angr=d.get("tier2_angr"),
         tier3_cbmc=d.get("tier3_cbmc"),
         refine=d.get("refine"),
+        repro=d.get("repro"),
     )
 
 

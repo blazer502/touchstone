@@ -32,6 +32,7 @@ from eval.harness.adapters import (  # noqa: E402
     magma,
     oracle_synth,
     precision,
+    reproducer as reproducer_adapter,
     router as router_adapter,
     router_llm as router_llm_adapter,
     specmine,
@@ -62,6 +63,7 @@ ADAPTERS = [
     ("agent-loop", agent_loop.baseline_rows),
     ("kernelctf-live", kernelctf_live.baseline_rows),
     ("specmine", specmine.baseline_rows),
+    ("reproducer", reproducer_adapter.baseline_rows),
     ("end-to-end", e2e_adapter.baseline_rows),
 ]
 

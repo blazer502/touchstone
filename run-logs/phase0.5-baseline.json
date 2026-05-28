@@ -1,8 +1,8 @@
 {
   "phase": "0.5",
-  "rows": 87,
+  "rows": 90,
   "by_status": {
-    "success": 79,
+    "success": 82,
     "not_setup": 7,
     "partial": 1
   },
@@ -21,6 +21,7 @@
     "magma",
     "oracle-synth",
     "precision",
+    "reproducer",
     "router",
     "router_llm",
     "specmine",

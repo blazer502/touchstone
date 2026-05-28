@@ -1,0 +1,36 @@
+{
+  "unit": "arvo:1065",
+  "domain": "userspace",
+  "verdict": "reproducible",
+  "repro_rate": 1.0,
+  "runs": 5,
+  "signature": "MSan|use-of-uninitialized-value|/src/file/src/funcs.c:478",
+  "threshold": 0.9,
+  "reproducer": {
+    "signature": "MSan|use-of-uninitialized-value|/src/file/src/funcs.c:478",
+    "domain": "userspace",
+    "repro_rate": 1.0,
+    "runs": 5,
+    "build_id": "n132/arvo:1065-vul",
+    "engine": "libfuzzer",
+    "replay_cmd": "docker run --rm --network=none -v /tmp/tmp.AxKb4H2o7w:/poc:ro n132/arvo:1065-vul /out/magic_fuzzer /poc",
+    "minimized": false,
+    "minimized_trigger_path": null,
+    "minimized_trigger_hex": "3c3f786d6c2076657273696f6e3d22312e30223f3e",
+    "original_trigger_path": "/tmp/tmp.AxKb4H2o7w",
+    "original_size_bytes": 21,
+    "minimized_size_bytes": 21,
+    "crash_class": "use-of-uninitialized-value",
+    "location": "/src/file/src/funcs.c:478",
+    "wall_ms": 2847
+  },
+  "wall_ms": 2848,
+  "soundness_note": "repro_rate is a finite-N frequency estimate; 'unreproducible' = not reproduced within N runs under this build, NOT 'safe'. Re-run (sanitizer) is the verdict authority.",
+  "assumed": [
+    "backend=docker",
+    "image=n132/arvo:1065-vul",
+    "harness=/out/magic_fuzzer",
+    "runs=5",
+    "sanitizer=auto"
+  ]
+}
