@@ -110,6 +110,9 @@ _KERN_BUG_PATTERNS = [
     (r"INFO:\s+task\s+\S+:\d+\s+blocked\s+for\s+more\s+than",          "kernel", "task-hung",                 None),
     (r"INFO:\s+rcu_sched\s+self-detected",                             "kernel", "rcu-stall",                 None),
     (r"INFO:\s+rcu_preempt\s+detected",                                "kernel", "rcu-stall",                 None),
+    # Debug-infra exhaustion: lockdep's static tables overflowed. NOT a bug —
+    # cannot occur on a production (no-LOCKDEP) kernel. Lowest signal.
+    (r"BUG:\s+MAX_LOCKDEP_(?:ENTRIES|CHAINS|KEYS|STACK_TRACE_ENTRIES)\s+too\s+low", "kernel", "lockdep-table-exhaustion", None),
     (r"WARNING:\s+possible\s+circular\s+locking\s+dependency",         "kernel", "lockdep-deadlock",          None),
     (r"WARNING:\s+suspicious\s+RCU\s+usage",                           "kernel", "lockdep-rcu",               None),
     (r"WARNING:\s+possible\s+irq\s+lock\s+inversion",                  "kernel", "lockdep-irq-inversion",     None),
@@ -186,6 +189,7 @@ _CRASH_SEVERITY_BY_KCLASS = {
     "lockdep-rcu": "warn",
     "lockdep-irq-inversion": "warn",
     "lockdep-recursive": "warn",
+    "lockdep-table-exhaustion": "dos",
     "warning": "warn",
 }
 
@@ -197,7 +201,11 @@ def classify_kernel_bug(sanitizer: Optional[str], cls: Optional[str]) -> str:
     if sanitizer in _CRASH_SEVERITY_BY_SAN:
         return _CRASH_SEVERITY_BY_SAN[sanitizer]
     if sanitizer == "kernel":
+        # Exact match wins over prefix match (e.g. "lockdep-table-exhaustion"
+        # must not be swallowed by the "lockdep-" prefix of "lockdep-deadlock").
+        if cls in _CRASH_SEVERITY_BY_KCLASS:
+            return _CRASH_SEVERITY_BY_KCLASS[cls]
         for prefix, sev in _CRASH_SEVERITY_BY_KCLASS.items():
-            if cls == prefix or cls.startswith(prefix.split("-")[0] + "-"):
+            if cls.startswith(prefix.split("-")[0] + "-"):
                 return sev
     return "unknown"
