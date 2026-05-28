@@ -122,6 +122,7 @@ class AgentResult:
     refinement: RefinementOutcome
     total_wall_ms: int
     reproducibility: Optional[dict] = None   # ReproVerdict dict when scored (R-track)
+    triage: Optional[dict] = None            # ExploitTriage dict for a confirmed crash (Phase 9a)
 
     def to_dict(self) -> dict:
         return {
@@ -131,6 +132,7 @@ class AgentResult:
             "refinement": asdict(self.refinement),
             "total_wall_ms": self.total_wall_ms,
             "reproducibility": self.reproducibility,
+            "triage": self.triage,
         }
 
 
@@ -301,6 +303,39 @@ def _maybe_score_reproducibility(c: Candidate, decision: AgentDecision) -> Optio
         return {"verdict": "error", "error": repr(e)}
 
 
+# --- Exploitability triage (Phase 9a) ----------------------------------------
+
+def _maybe_triage(decision: AgentDecision, tr) -> Optional[dict]:
+    """Classify the exploit primitive + severity of a confirmed/candidate crash.
+
+    Read-only over the deciding tier's sanitizer/KASAN ``evidence_excerpt`` —
+    adds no new trust, only structure. Proposer (Phase 9a): severity is a
+    heuristic exploit-potential ranking, never a proof. Returns None when the
+    disposition isn't crash-bearing or no sanitizer evidence is present.
+    """
+    if decision.disposition not in ("confirmed", "candidate", "bmc_unsafe"):
+        return None
+    chosen = None
+    for a in tr.attempts:
+        rv = a.raw_verdict or {}
+        if rv.get("evidence_excerpt"):
+            if rv.get("verdict") == "crash":
+                chosen = rv
+                break
+            chosen = chosen or rv
+    if not chosen:
+        return None
+    try:
+        from exploit.triage import triage_from_text
+        from schemas.reproducer import crash_signature
+        sig = crash_signature(chosen.get("sanitizer"), chosen.get("crash_class"),
+                              chosen.get("location"))
+        return triage_from_text(chosen["evidence_excerpt"], unit=tr.hypothesis_id,
+                                signature=sig).to_dict()
+    except Exception as e:  # triage must never break the loop
+        return {"primitive": "error", "error": repr(e)}
+
+
 # --- Public entrypoint -------------------------------------------------------
 
 def agent_step(
@@ -330,6 +365,7 @@ def agent_step(
         client=client, allow_rule_fallback=allow_rule_fallback,
     )
     repro = _maybe_score_reproducibility(c, decision)
+    triage = _maybe_triage(decision, tr)
     total_ms = int((time.monotonic() - t0) * 1000)
     return AgentResult(
         candidate_id=c.cid,
@@ -338,6 +374,7 @@ def agent_step(
         refinement=ref,
         total_wall_ms=total_ms,
         reproducibility=repro,
+        triage=triage,
     )
 
 

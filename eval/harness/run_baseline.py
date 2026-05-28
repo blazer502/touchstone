@@ -24,6 +24,7 @@ from eval.harness.adapters import (  # noqa: E402
     cybergym,
     cybergym_ablation,
     end_to_end as e2e_adapter,
+    exploit_triage as exploit_triage_adapter,
     juliet,
     kernelctf,
     kernelctf_live,
@@ -64,6 +65,7 @@ ADAPTERS = [
     ("kernelctf-live", kernelctf_live.baseline_rows),
     ("specmine", specmine.baseline_rows),
     ("reproducer", reproducer_adapter.baseline_rows),
+    ("exploit-triage", exploit_triage_adapter.baseline_rows),
     ("end-to-end", e2e_adapter.baseline_rows),
 ]
 

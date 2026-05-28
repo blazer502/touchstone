@@ -279,6 +279,16 @@ If you add a new tool, append its assumptions here before relying on its verdict
 
 - **`repro` — minimization must preserve the signature.** libFuzzer `-minimize_crash` output is adopted only after a confirm pass shows the minimized input still fires the SAME signature on every confirm run; otherwise the original trigger is kept (`minimized=False`). Minimization is best-effort (MSan uninit-value bugs often don't shrink) and never required for a `reproducible` verdict.
 
+## Exploitability triage (Phase 9a — `schemas/exploit_triage.py`, `exploit/`)
+
+- **`triage` — proposer, never a decider; `dos-only` is NOT "provably unexploitable".** Triage classifies a *reproduced* crash into a memory-safety primitive (oob-write / uaf / double-free / oob-read / uninit / memory-corruption / null-deref / dos) and ranks `severity` (exploitable / maybe / dos-only) by **heuristic exploit potential**. `severity=dos-only` means "no read/write/leak primitive *evident in this crash artifact*", exactly the shape of the Tier-1 "no-crash ≠ safe" and Phase-8 "unreproducible ≠ safe" rules — it is NOT a proof that the bug can't be exploited (a null-deref is exploitable when `mmap_min_addr=0`; a lockdep/WARN can still be a real bug). The sound check that a primitive is *real* is the weaponization stage actually constructing it; triage only ranks where to spend that effort.
+
+- **`triage` — facts come only from the sound oracle's artifact; triage adds no trust.** `parse_crash_facts` extracts access direction/size, fault address, alloc/free-stack presence, and OOB offset from the sanitizer/KASAN banner the Tier-1 oracle already produced. Triage restructures that evidence; it never re-decides whether a crash occurred. The severity ranking is the only judgement, and it is a documented heuristic (write-capable → exploitable; read/uninit → maybe; null-deref/hang/WARN → dos-only; kernel bad-magic/poison/refcount → memory-corruption/maybe).
+
+- **`triage` — UAF is ranked `exploitable` regardless of the caught access direction.** The use-after-free *class* is write-capable via reallocate-and-control even when KASAN caught a read (CVE-2024-1086 is a read-detected UAF that is a strong LPE primitive). This is a deliberate over-rank toward "worth weaponizing", which is the safe direction for a proposer that only decides *priority*, never *safety*. It can over-prioritize a benign UAF (a lead-side precision cost), never under-prioritize a real one.
+
+- **`triage` (E2) — dynamic controllability is an execution-grounded measurement, not a proof.** `probe_oob_controllability` varies the reproduced trigger's length, re-runs via the Tier-1 replay, and reports `size_attacker_controlled=True` only when the OOB offset *strictly tracks* input length across crashing variants. A `True` here is a measured re-execution fact (the overflow distance moved with the input); it still does not prove a working exploit — it sharpens the priority ranking. Scoped to the userspace local-binary backend + OOB primitives; UAF/kernel/docker return `not_probed` (never silently "not controllable").
+
 ---
 
 If you add a new tool, append its assumptions to the relevant section before

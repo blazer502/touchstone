@@ -1,0 +1,23 @@
+{
+  "unit": "arvo:1065",
+  "signature": "",
+  "primitive": "uninit",
+  "severity": "maybe",
+  "access": null,
+  "access_size": null,
+  "sanitizer": "MSan",
+  "location": "/src/file/src/softmagic.c:365",
+  "controllability": {
+    "write_capable": false,
+    "access_size_known": false,
+    "size_attacker_controlled": "unknown",
+    "offset_attacker_controlled": "unknown",
+    "freed_obj_controllable": "n/a"
+  },
+  "rationale": "uninit: information-disclosure primitive (out-of-bounds read / uninitialized value) \u2014 leaks memory; can defeat KASLR or escalate, but is not a direct write.",
+  "soundness_note": "triage is a proposer; severity is a heuristic exploit-potential ranking, not a proof. 'dos-only' = no write/leak primitive evident in the artifact, never 'provably unexploitable'. The primitive is proven only by the weaponization stage.",
+  "assumed": [
+    "primitive_from=sanitizer-artifact",
+    "sanitizer=MSan"
+  ]
+}

@@ -1,8 +1,8 @@
 {
   "phase": "0.5",
-  "rows": 90,
+  "rows": 93,
   "by_status": {
-    "success": 82,
+    "success": 85,
     "not_setup": 7,
     "partial": 1
   },
@@ -13,6 +13,7 @@
     "cybergym",
     "cybergym-ablation",
     "end-to-end",
+    "exploit-triage",
     "juliet",
     "kernelctf",
     "kernelctf-live",
