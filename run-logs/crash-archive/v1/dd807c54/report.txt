@@ -1,0 +1,93 @@
+bridge_slave_0: entered promiscuous mode
+bridge0: port 2(bridge_slave_1) entered blocking state
+bridge0: port 2(bridge_slave_1) entered disabled state
+bridge_slave_1: entered allmulticast mode
+bridge_slave_1: entered promiscuous mode
+INFO: task syz.0.568:3132 blocked for more than 123 seconds.
+      Not tainted 6.12.91 #3
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz.0.568       state:D stack:0     pid:3132  tgid:3131  ppid:357    flags:0x00000004
+Call Trace:
+ <TASK>
+ context_switch home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:5345 [inline]
+ __schedule+0x1120/0x60d0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6725
+ __schedule_loop home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6802 [inline]
+ schedule+0xdd/0x330 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6817
+ schedule_preempt_disabled+0x15/0x30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6874
+ __mutex_lock_common home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:684 [inline]
+ __mutex_lock+0x9c3/0x1720 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:752
+ bdev_open+0x41f/0xe40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:921
+ blkdev_open+0x331/0x400 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/fops.c:627
+ do_dentry_open+0x6dc/0x13a0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/open.c:952
+ vfs_open+0x87/0x3f0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/open.c:1084
+ do_open home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/namei.c:3782 [inline]
+ path_openat+0x1dfb/0x2dd0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/namei.c:3941
+ do_filp_open+0x1bf/0x3d0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/namei.c:3968
+ do_sys_openat2+0x17f/0x1e0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/open.c:1411
+ do_sys_open home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/open.c:1426 [inline]
+ __do_sys_openat home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/open.c:1442 [inline]
+ __se_sys_openat home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/open.c:1437 [inline]
+ __x64_sys_openat+0x147/0x200 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/open.c:1437
+ do_syscall_x64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:47 [inline]
+ do_syscall_64+0x78/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:78
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7cefc45919c0
+RSP: 002b:00007cefc5470b70 EFLAGS: 00000293 ORIG_RAX: 0000000000000101
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007cefc45919c0
+RDX: 0000000000000000 RSI: 00007cefc5470c10 RDI: 00000000ffffff9c
+RBP: 00007cefc5470c10 R08: 0000000000000000 R09: 002364626e2f7665
+R10: 0000000000000000 R11: 0000000000000293 R12: cccccccccccccccd
+R13: 00007cefc4806038 R14: 00007cefc4805fa0 R15: 00007ffe556abc78
+ </TASK>
+
+Showing all locks held in the system:
+1 lock held by khungtaskd/34:
+ #0: ffffffff8813aa40 (rcu_read_lock){....}-{1:2}, at: rcu_lock_acquire home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/rcupdate.h:337 [inline]
+ #0: ffffffff8813aa40 (rcu_read_lock){....}-{1:2}, at: rcu_read_lock home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/rcupdate.h:849 [inline]
+ #0: ffffffff8813aa40 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x6f/0x340 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:6723
+1 lock held by (udev-worker)/1179:
+ #0: ffff8880206c54c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0x41f/0xe40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:921
+1 lock held by syz.0.568/3132:
+ #0: ffff8880206c54c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0x41f/0xe40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:921
+1 lock held by syz.3.1047/4899:
+ #0: ffff8880206c54c8 (&disk->open_mutex){+.+.}-{3:3}, at: sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+1 lock held by syz.2.1822/7757:
+ #0: ffff8880206c54c8 (&disk->open_mutex){+.+.}-{3:3}, at: sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+3 locks held by kworker/0:5/9745:
+ #0: ffff88806c847b18 (&rq->__lock){-.-.}-{2:2}, at: raw_spin_rq_lock_nested+0x2c/0x170 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:599
+ #1: ffff88806c8319c8 (psi_seq){-.-.}-{0:0}, at: psi_sched_switch home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/stats.h:220 [inline]
+ #1: ffff88806c8319c8 (psi_seq){-.-.}-{0:0}, at: __schedule+0x232d/0x60d0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6719
+ #2: ffff888010c84418 (&host->lock){-.-.}-{2:2}, at: spin_lock_irq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/spinlock.h:376 [inline]
+ #2: ffff888010c84418 (&host->lock){-.-.}-{2:2}, at: ata_sff_pio_task+0x7a/0x5f0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/ata/libata-sff.c:1219
+1 lock held by syz.6.2836/11102:
+ #0: ffff8880206c54c8 (&disk->open_mutex){+.+.}-{3:3}, at: sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+1 lock held by syz.5.2899/11315:
+ #0: ffff8880206c54c8 (&disk->open_mutex){+.+.}-{3:3}, at: sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+1 lock held by syz.8.3021/11694:
+ #0: ffff8880206c54c8 (&disk->open_mutex){+.+.}-{3:3}, at: sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+1 lock held by syz-executor/11806:
+1 lock held by syz-executor/11931:
+1 lock held by syz-executor/12080:
+1 lock held by syz.1.3124/12368:
+ #0: ffff8880206c54c8 (&disk->open_mutex){+.+.}-{3:3}, at: sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+1 lock held by syz.1.3124/12375:
+ #0: ffff8880206c54c8 (&disk->open_mutex){+.+.}-{3:3}, at: sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+1 lock held by syz.0.3188/12686:
+ #0: ffff8880206c54c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0x41f/0xe40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:921
+1 lock held by syz-executor/12800:
+1 lock held by syz.3.3345/13297:
+ #0: ffff8880206c54c8 (&disk->open_mutex){+.+.}-{3:3}, at: sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+2 locks held by syz.7.3360/13342:
+1 lock held by syz-executor/13347:
+2 locks held by syz.7.3363/13353:
+
+=============================================
+
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+
+SYZFAIL: failed to recv rpc
+fd=3 want=4 recv=0 n=0 (errno 9: Bad file descriptor)
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+

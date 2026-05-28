@@ -1,0 +1,43 @@
+{
+	"Count": 0,
+	"Nodes": {
+		"BUG: soft lockup in unix_stream_recvmsg": {
+			"Count": 10,
+			"Nodes": {
+				"BUG: soft lockup in unix_stream_recvmsg": {
+					"Count": 1,
+					"Nodes": {
+						"BUG: soft lockup in unix_stream_recvmsg": {
+							"Count": 1,
+							"Nodes": {
+								"BUG: soft lockup in unix_stream_recvmsg": {
+									"Count": 1,
+									"Nodes": {
+										"INFO: task hung in set_selection_kernel": {
+											"Count": 1,
+											"Nodes": {
+												"INFO: task hung in vt_resize": {
+													"Count": 1,
+													"Nodes": {
+														"INFO: task hung in con_install": {
+															"Count": 1,
+															"Nodes": null
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"SYZFAIL: failed to recv rpc": {
+					"Count": 7,
+					"Nodes": null
+				}
+			}
+		}
+	}
+}

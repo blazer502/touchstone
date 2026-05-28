@@ -1,0 +1,105 @@
+bond0: (slave bond_slave_0): Enslaving as an active interface with an up link
+bond0: (slave bond_slave_1): Enslaving as an active interface with an up link
+veth0_vlan: entered promiscuous mode
+veth1_vlan: entered promiscuous mode
+watchdog: BUG: soft lockup - CPU#1 stuck for 26s! [syz.0.52596:168542]
+Modules linked in:
+irq event stamp: 28558430
+hardirqs last  enabled at (28558429): [<ffffffff8648d6a2>] __raw_spin_unlock_irqrestore home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/spinlock_api_smp.h:151 [inline]
+hardirqs last  enabled at (28558429): [<ffffffff8648d6a2>] _raw_spin_unlock_irqrestore+0x42/0x50 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/spinlock.c:194
+hardirqs last disabled at (28558430): [<ffffffff8645ef8e>] sysvec_apic_timer_interrupt+0xe/0x90 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/apic/apic.c:1049
+softirqs last  enabled at (28551854): [<ffffffff8152e953>] __do_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:613 [inline]
+softirqs last  enabled at (28551854): [<ffffffff8152e953>] invoke_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:453 [inline]
+softirqs last  enabled at (28551854): [<ffffffff8152e953>] __irq_exit_rcu+0xc3/0x100 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:662
+softirqs last disabled at (28551849): [<ffffffff8152e953>] __do_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:613 [inline]
+softirqs last disabled at (28551849): [<ffffffff8152e953>] invoke_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:453 [inline]
+softirqs last disabled at (28551849): [<ffffffff8152e953>] __irq_exit_rcu+0xc3/0x100 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:662
+CPU: 1 UID: 0 PID: 168542 Comm: syz.0.52596 Not tainted 6.12.91 #3
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
+RIP: 0010:arch_local_irq_enable home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/include/asm/paravirt.h:699 [inline]
+RIP: 0010:arch_local_irq_restore home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/include/asm/irqflags.h:159 [inline]
+RIP: 0010:__raw_spin_unlock_irqrestore home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/spinlock_api_smp.h:151 [inline]
+RIP: 0010:_raw_spin_unlock_irqrestore+0x48/0x50 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/spinlock.c:194
+Code: fb 48 89 df e8 09 74 24 fb f7 c5 00 02 00 00 75 0e 65 ff 0d b2 91 bb 79 5b 5d e9 c3 3c 00 00 e8 8e c0 50 fb fb 0f 1f 44 00 00 <eb> e5 66 0f 1f 44 00 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+RSP: 0018:ffff888030b0fa10 EFLAGS: 00000202
+RAX: 0000000001b3c45d RBX: ffff8880111ff740 RCX: ffffffff816c54a1
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: ffffffff8648d6a2
+RBP: 0000000000000202 R08: 0000000000000001 R09: fffffbfff1682535
+R10: ffffffff8b4129af R11: 0000000000000000 R12: 000000000000009d
+R13: ffff8880213ed09c R14: ffff8880213ecf00 R15: ffff88802624ee40
+FS:  00007838d00446c0(0000) GS:ffff88806c900000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000000110c29267d CR3: 000000005ae58005 CR4: 0000000000772ef0
+DR0: 0000000000000040 DR1: fffffffffffffffd DR2: 0000000050709840
+DR3: 0000000000000001 DR6: 00000000ffff0ff0 DR7: 0000000000000400
+PKRU: 80000000
+Call Trace:
+ <TASK>
+ unix_stream_data_wait home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/unix/af_unix.c:2603 [inline]
+ unix_stream_read_generic+0x1721/0x28e0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/unix/af_unix.c:2860
+ unix_stream_recvmsg+0x197/0x1c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/unix/af_unix.c:3013
+ sock_recvmsg_nosec home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:1033 [inline]
+ sock_recvmsg+0x1ce/0x210 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:1055
+ __sys_recvfrom+0x209/0x310 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2244
+ __do_sys_recvfrom home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2259 [inline]
+ __se_sys_recvfrom home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2255 [inline]
+ __x64_sys_recvfrom+0xe5/0x1c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2255
+ do_syscall_x64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:47 [inline]
+ do_syscall_64+0x78/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:78
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7838cf1931a9
+Code: ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007838d0044038 EFLAGS: 00000246 ORIG_RAX: 000000000000002d
+RAX: ffffffffffffffda RBX: 00007838cf405fa0 RCX: 00007838cf1931a9
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000006
+RBP: 00007838cf218ce0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000040016002 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007838cf406038 R14: 00007838cf405fa0 R15: 00007ffe477561a8
+ </TASK>
+Sending NMI from CPU 1 to CPUs 0:
+NMI backtrace for cpu 0
+CPU: 0 UID: 0 PID: 169199 Comm: modprobe Not tainted 6.12.91 #3
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
+RIP: 0010:putname+0x0/0x170 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/namei.c:266
+Code: 87 e8 44 9f ef ff e9 60 ff ff ff 66 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 <f3> 0f 1e fa 0f 1f 44 00 00 41 55 41 54 55 53 48 89 fb e8 39 7b 8f
+RSP: 0018:ffff8880006dfeb8 EFLAGS: 00000293
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: 0000000000000000
+RDX: ffff88804ccea3c0 RSI: ffffffff81fe8e38 RDI: ffff8880006c91c0
+RBP: ffff88805a46f400 R08: 0000000000000001 R09: 0000000000000000
+R10: 0000000000000001 R11: ffffffff89537fba R12: ffff8880006c91c0
+R13: ffff888032e17a40 R14: ffffffff8816c9c0 R15: ffff88805a46f45c
+FS:  0000000000000000(0000) GS:ffff88806c800000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000078a50734c110 CR3: 00000000006d2005 CR4: 0000000000772ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ kernel_execve+0x310/0x3b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/exec.c:2049
+ call_usermodehelper_exec_async+0x23e/0x4b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/umh.c:110
+ ret_from_fork+0x4a/0x80 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/process.c:152
+ ret_from_fork_asm+0x1a/0x30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/entry_64.S:244
+ </TASK>
+fuse: Bad value for 'fd'
+fuse: Bad value for 'fd'
+fuse: Invalid rootmode
+veth0_vlan: entered promiscuous mode
+veth1_vlan: entered promiscuous mode
+bridge_slave_1: left allmulticast mode
+bridge_slave_1: left promiscuous mode
+bridge0: port 2(bridge_slave_1) entered disabled state
+bridge_slave_0: left allmulticast mode
+bridge_slave_0: left promiscuous mode
+bridge0: port 1(bridge_slave_0) entered disabled state
+bond0 (unregistering): (slave bond_slave_0): Releasing backup interface
+bond0 (unregistering): (slave bond_slave_1): Releasing backup interface
+bond0 (unregistering): Released all slaves
+veth1_vlan: left promiscuous mode
+veth0_vlan: left promiscuous mode
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+
+SYZFAIL: failed to recv rpc
+fd=3 want=4 recv=0 n=0 (errno 9: Bad file descriptor)
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+

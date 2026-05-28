@@ -1,0 +1,9 @@
+{
+	"Count": 0,
+	"Nodes": {
+		"INFO: task hung in do_coredump": {
+			"Count": 2,
+			"Nodes": null
+		}
+	}
+}

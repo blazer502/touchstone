@@ -1,0 +1,150 @@
+bridge0: port 2(bridge_slave_1) entered blocking state
+bridge0: port 2(bridge_slave_1) entered forwarding state
+veth1_vlan: entered promiscuous mode
+overlay: Unknown parameter 'smackfshat'
+8021q: adding VLAN 0 to HW filter on device bond0
+watchdog: BUG: soft lockup - CPU#1 stuck for 26s! [syz.9.14081:72434]
+Modules linked in:
+irq event stamp: 29259744
+hardirqs last  enabled at (29259743): [<ffffffff8648d6a2>] __raw_spin_unlock_irqrestore home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/spinlock_api_smp.h:151 [inline]
+hardirqs last  enabled at (29259743): [<ffffffff8648d6a2>] _raw_spin_unlock_irqrestore+0x42/0x50 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/spinlock.c:194
+hardirqs last disabled at (29259744): [<ffffffff8645ef8e>] sysvec_apic_timer_interrupt+0xe/0x90 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/apic/apic.c:1049
+softirqs last  enabled at (29259614): [<ffffffff8152e953>] __do_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:613 [inline]
+softirqs last  enabled at (29259614): [<ffffffff8152e953>] invoke_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:453 [inline]
+softirqs last  enabled at (29259614): [<ffffffff8152e953>] __irq_exit_rcu+0xc3/0x100 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:662
+softirqs last disabled at (29259609): [<ffffffff8152e953>] __do_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:613 [inline]
+softirqs last disabled at (29259609): [<ffffffff8152e953>] invoke_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:453 [inline]
+softirqs last disabled at (29259609): [<ffffffff8152e953>] __irq_exit_rcu+0xc3/0x100 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:662
+CPU: 1 UID: 0 PID: 72434 Comm: syz.9.14081 Not tainted 6.12.91 #3
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
+RIP: 0010:lock_acquire+0x1e0/0x4f0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:5793
+Code: e8 e5 8b ff ff b8 ff ff ff ff 48 83 c4 28 65 0f c1 05 9c 36 96 7e 83 f8 01 0f 85 9a 02 00 00 48 85 ed 74 06 fb 0f 1f 44 00 00 <48> b8 00 00 00 00 00 fc ff df 48 01 c3 48 c7 03 00 00 00 00 48 c7
+RSP: 0018:ffff88803ab37930 EFLAGS: 00000206
+RAX: 0000000000000001 RBX: 1ffff11007566f27 RCX: ffffffff816c878a
+RDX: 0000000000000001 RSI: 0000000000000008 RDI: ffffffff8ade02d8
+RBP: 0000000000000200 R08: 0000000000000000 R09: fffffbfff1682535
+R10: ffffffff8b4129af R11: 0000000000000000 R12: 0000000000000001
+R13: 0000000000000000 R14: ffff88803a9e2138 R15: 0000000000000000
+FS:  00007c65b52eb6c0(0000) GS:ffff88806c900000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007c65b52a9d58 CR3: 0000000030574003 CR4: 0000000000772ef0
+DR0: 0000000000000000 DR1: 0000000000000afe DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000400
+PKRU: 80000000
+Call Trace:
+ <TASK>
+ __raw_spin_lock home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/spinlock_api_smp.h:133 [inline]
+ _raw_spin_lock+0x30/0x40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/spinlock.c:154
+ spin_lock home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/spinlock.h:351 [inline]
+ unix_stream_read_generic+0x3cf/0x28e0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/unix/af_unix.c:2820
+ unix_stream_recvmsg+0x197/0x1c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/unix/af_unix.c:3013
+ sock_recvmsg_nosec home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:1033 [inline]
+ sock_recvmsg+0x1ce/0x210 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:1055
+ __sys_recvfrom+0x209/0x310 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2244
+ __do_sys_recvfrom home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2259 [inline]
+ __se_sys_recvfrom home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2255 [inline]
+ __x64_sys_recvfrom+0xe5/0x1c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2255
+ do_syscall_x64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:47 [inline]
+ do_syscall_64+0x78/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:78
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7c65b43931a9
+Code: ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007c65b52eb038 EFLAGS: 00000246 ORIG_RAX: 000000000000002d
+RAX: ffffffffffffffda RBX: 00007c65b4605fa0 RCX: 00007c65b43931a9
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000006
+RBP: 00007c65b4418ce0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000040016002 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007c65b4606038 R14: 00007c65b4605fa0 R15: 00007ffc8bd74c58
+ </TASK>
+Sending NMI from CPU 1 to CPUs 0:
+Soft offlining pfn 0xacc6 at process virtual address 0x200000ffc000
+NMI backtrace for cpu 0
+CPU: 0 UID: 0 PID: 74277 Comm: syz.6.14129 Not tainted 6.12.91 #3
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
+RIP: 0010:notifier_call_chain+0x153/0x3c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/notifier.c:83
+Code: 00 31 ff 89 ee e8 6d cb 32 00 85 ed 0f 84 18 01 00 00 4c 89 f3 e8 8d d0 32 00 48 8d 7b 08 48 89 f8 48 c1 e8 03 42 80 3c 28 00 <0f> 85 19 02 00 00 48 89 d8 4c 8b 73 08 48 c1 e8 03 42 80 3c 28 00
+RSP: 0018:ffff88806c809c58 EFLAGS: 00000046
+RAX: 1ffffffff0fd5e5d RBX: ffffffff87eaf2e0 RCX: ffffffff815c09a6
+RDX: ffff88801a59a3c0 RSI: ffffffff815c0a83 RDI: ffffffff87eaf2e8
+RBP: 00000000ffffffff R08: 0000000000000005 R09: 0000000000000000
+R10: 00000000ffffffff R11: ffff88806c809ff8 R12: 0000000000000000
+R13: dffffc0000000000 R14: 000000003bd741c5 R15: 0000000000000000
+FS:  00007c1daa5d86c0(0000) GS:ffff88806c800000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007c1daa5d7f98 CR3: 00000000128b6004 CR4: 0000000000772ef0
+PKRU: 80000000
+Call Trace:
+ <IRQ>
+ update_pvclock_gtod home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/time/timekeeping.c:570 [inline]
+ timekeeping_update+0x288/0x4a0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/time/timekeeping.c:666
+ timekeeping_advance+0x6a7/0xa60 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/time/timekeeping.c:2244
+ update_wall_time+0x16/0x40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/time/timekeeping.c:2260
+ tick_do_update_jiffies64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/time/tick-sched.c:149 [inline]
+ tick_do_update_jiffies64+0x233/0x380 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/time/tick-sched.c:57
+ tick_sched_do_timer home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/time/tick-sched.c:243 [inline]
+ tick_nohz_handler+0x328/0x520 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/time/tick-sched.c:290
+ __run_hrtimer home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/time/hrtimer.c:1753 [inline]
+ __hrtimer_run_queues+0x5a7/0xa60 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/time/hrtimer.c:1817
+ hrtimer_interrupt+0x2f4/0x7b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/time/hrtimer.c:1879
+ local_apic_timer_interrupt home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/apic/apic.c:1038 [inline]
+ __sysvec_apic_timer_interrupt+0xef/0x380 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/apic/apic.c:1055
+ instr_sysvec_apic_timer_interrupt home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/apic/apic.c:1049 [inline]
+ sysvec_apic_timer_interrupt+0x6c/0x90 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/apic/apic.c:1049
+ </IRQ>
+ <TASK>
+ asm_sysvec_apic_timer_interrupt+0x1a/0x20 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/include/asm/idtentry.h:702
+RIP: 0010:arch_local_irq_enable home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/include/asm/paravirt.h:699 [inline]
+RIP: 0010:arch_local_irq_restore home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/include/asm/irqflags.h:159 [inline]
+RIP: 0010:console_trylock_spinning home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/printk/printk.c:2035 [inline]
+RIP: 0010:vprintk_emit+0x6fd/0x730 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/printk/printk.c:2406
+Code: 09 fd d9 04 e8 d4 2b 00 00 be 00 02 00 00 31 ff e8 88 fd 1f 00 e9 75 ff ff ff e8 7e 02 20 00 e8 99 be 2a 00 fb 0f 1f 44 00 00 <e9> 83 fe ff ff e8 89 1f d7 04 48 c7 c7 e0 4c cf 8a e8 9d 25 80 00
+RSP: 0018:ffff8880129ff968 EFLAGS: 00000202
+RAX: 000000000000003b RBX: 0000000000000043 RCX: 0000000000000000
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: ffffffff816ed897
+RBP: 1ffff1100253ff2f R08: 0000000000000001 R09: 0000000000000000
+R10: 0000000000000001 R11: ffffffffffffbc68 R12: 0000000000000000
+R13: 0000000000000200 R14: ffff88801b630040 R15: 0000000000000003
+ vprintk+0x9f/0xc0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/printk/printk_safe.c:73
+ _printk+0xcd/0x100 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/printk/printk.c:2432
+ madvise_inject_error home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/madvise.c:1161 [inline]
+ do_madvise+0x298e/0x4220 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/madvise.c:1451
+ __do_sys_madvise home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/madvise.c:1488 [inline]
+ __se_sys_madvise home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/madvise.c:1486 [inline]
+ __x64_sys_madvise+0xae/0x120 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/madvise.c:1486
+ do_syscall_x64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:47 [inline]
+ do_syscall_64+0x78/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:78
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7c1da97931a9
+Code: ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007c1daa5d8038 EFLAGS: 00000246 ORIG_RAX: 000000000000001c
+RAX: ffffffffffffffda RBX: 00007c1da9a06090 RCX: 00007c1da97931a9
+RDX: 0000000000000065 RSI: 0000000000003000 RDI: 0000200000ffc000
+RBP: 00007c1da9818ce0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007c1da9a06128 R14: 00007c1da9a06090 R15: 00007ffc24a6c708
+ </TASK>
+Soft offline: 0xacc6: page already poisoned
+Soft offlining pfn 0xacc6 at process virtual address 0x200000ffd000
+Soft offline: 0xacc6: page already poisoned
+Soft offlining pfn 0xacc6 at process virtual address 0x200000ffe000
+Soft offline: 0xacc6: page already poisoned
+bridge0: port 1(bridge_slave_0) entered blocking state
+bridge0: port 1(bridge_slave_0) entered forwarding state
+bridge0: port 2(bridge_slave_1) entered blocking state
+bridge0: port 2(bridge_slave_1) entered forwarding state
+8021q: adding VLAN 0 to HW filter on device bond0
+bridge0: port 1(bridge_slave_0) entered blocking state
+bridge0: port 1(bridge_slave_0) entered forwarding state
+bridge0: port 2(bridge_slave_1) entered blocking state
+bridge0: port 2(bridge_slave_1) entered forwarding state
+veth0_vlan: entered promiscuous mode
+veth1_vlan: entered promiscuous mode
+veth0_vlan: entered promiscuous mode
+veth1_vlan: entered promiscuous mode
+veth0_vlan: entered promiscuous mode
+veth1_vlan: entered promiscuous mode
+veth0_vlan: entered promiscuous mode
+veth1_vlan: entered promiscuous mode
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+

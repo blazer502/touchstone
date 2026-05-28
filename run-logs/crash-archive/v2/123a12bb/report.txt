@@ -1,0 +1,66 @@
+netlink: 1860 bytes leftover after parsing attributes in process `syz.6.3876'.
+netlink: 1860 bytes leftover after parsing attributes in process `syz.6.3876'.
+netlink: 384 bytes leftover after parsing attributes in process `syz.0.3877'.
+INFO: task syz.5.387:2303 blocked for more than 122 seconds.
+      Not tainted 6.12.91 #3
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz.5.387       state:D stack:0     pid:2303  tgid:2298  ppid:373    flags:0x00000004
+Call Trace:
+ <TASK>
+ context_switch home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:5345 [inline]
+ __schedule+0x1120/0x60d0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6725
+ __schedule_loop home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6802 [inline]
+ schedule+0xdd/0x330 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6817
+ schedule_timeout+0x2ec/0x3c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/time/timer.c:2593
+ do_wait_for_common home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/completion.c:95 [inline]
+ __wait_for_common home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/completion.c:116 [inline]
+ wait_for_common home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/completion.c:127 [inline]
+ wait_for_completion_state+0x17c/0x500 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/completion.c:264
+ coredump_wait home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/coredump.c:448 [inline]
+ do_coredump+0x853/0x44c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/coredump.c:629
+ get_signal+0x2348/0x2540 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/signal.c:2903
+ arch_do_signal_or_restart+0x96/0x770 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/signal.c:337
+ exit_to_user_mode_loop home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/entry/common.c:111 [inline]
+ exit_to_user_mode_prepare home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/entry-common.h:328 [inline]
+ __syscall_exit_to_user_mode_work home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/entry/common.c:207 [inline]
+ syscall_exit_to_user_mode+0xe9/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/entry/common.c:218
+ do_syscall_64+0x84/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:84
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7ea841d931a9
+RSP: 002b:00007ea842ce3038 EFLAGS: 00000246 ORIG_RAX: 000000000000007e
+RAX: ffffffffffffffda RBX: 00007ea842006090 RCX: 00007ea841d931a9
+RDX: 0000000000000000 RSI: 0000200000000140 RDI: 0000200000000040
+RBP: 00007ea841e18ce0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007ea842006128 R14: 00007ea842006090 R15: 00007fffb88f01e8
+ </TASK>
+
+Showing all locks held in the system:
+1 lock held by khungtaskd/34:
+ #0: ffffffff8813aa40 (rcu_read_lock){....}-{1:2}, at: rcu_lock_acquire home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/rcupdate.h:337 [inline]
+ #0: ffffffff8813aa40 (rcu_read_lock){....}-{1:2}, at: rcu_read_lock home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/rcupdate.h:849 [inline]
+ #0: ffffffff8813aa40 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x6f/0x340 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:6723
+2 locks held by kworker/u8:2/36:
+ #0: ffff88800c0b4d48 ((wq_completion)events_unbound){+.+.}-{0:0}, at: process_one_work+0xf76/0x1920 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/workqueue.c:3239
+ #1: ffff88800cf4fd78 (connector_reaper_work){+.+.}-{0:0}, at: process_one_work+0x83b/0x1920 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/workqueue.c:3240
+2 locks held by agetty/308:
+ #0: ffff888021fad0a0 (&tty->ldisc_sem){++++}-{0:0}, at: tty_ldisc_ref_wait+0x29/0x80 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/tty/tty_ldisc.c:243
+ #1: ffffc900009172f0 (&ldata->atomic_read_lock){+.+.}-{3:3}, at: n_tty_read+0xfe2/0x1490 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/tty/n_tty.c:2212
+1 lock held by sshd/340:
+2 locks held by kworker/u8:8/691:
+ #0: ffff88800c0b4d48 ((wq_completion)events_unbound){+.+.}-{0:0}, at: process_one_work+0xf76/0x1920 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/workqueue.c:3239
+ #1: ffff888017c77d78 ((reaper_work).work){+.+.}-{0:0}, at: process_one_work+0x83b/0x1920 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/workqueue.c:3240
+2 locks held by syz.6.3844/14381:
+2 locks held by syz.7.3874/14476:
+ #0: ffff888036075148 (&type->i_mutex_dir_key#8){++++}-{3:3}, at: inode_lock_shared home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/fs.h:825 [inline]
+ #0: ffff888036075148 (&type->i_mutex_dir_key#8){++++}-{3:3}, at: open_last_lookups home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/namei.c:3701 [inline]
+ #0: ffff888036075148 (&type->i_mutex_dir_key#8){++++}-{3:3}, at: path_openat+0x889/0x2dd0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/namei.c:3938
+ #1: ffff8880360755f8 (&fi->mutex){+.+.}-{3:3}, at: fuse_lock_inode+0xd7/0x110 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/fuse/inode.c:551
+1 lock held by syz.4.3881/14498:
+ #0: ffff88806c947b18 (&rq->__lock){-.-.}-{2:2}, at: raw_spin_rq_lock_nested+0x2c/0x170 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:599
+
+=============================================
+
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+

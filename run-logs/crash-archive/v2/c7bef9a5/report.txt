@@ -1,0 +1,61 @@
+CIFS: VFS: CIFS mount error: No usable UNC path provided in device string!
+audit: type=1326 audit(2000000175.610:142): auid=0 uid=0 gid=0 ses=3 subj=unconfined pid=41354 comm="syz.0.8044" exe="/syz-executor" sig=31 arch=c000003e syscall=202 compat=0 ip=0x7cf621f931a9 code=0x0
+INFO: task syz.5.5784:25965 blocked for more than 123 seconds.
+      Not tainted 6.12.91 #3
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz.5.5784      state:D stack:0     pid:25965 tgid:25960 ppid:16186  flags:0x00004006
+Call Trace:
+ <TASK>
+ context_switch home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:5345 [inline]
+ __schedule+0x1120/0x60d0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6725
+ __schedule_loop home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6802 [inline]
+ schedule+0xdd/0x330 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6817
+ super_lock+0x2af/0x3e0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/super.c:114
+ super_lock_shared home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/super.c:139 [inline]
+ iterate_supers+0xbe/0x240 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/super.c:931
+ ksys_sync+0x8f/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/sync.c:102
+ __do_sys_sync+0x13/0x20 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/sync.c:113
+ do_syscall_x64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:47 [inline]
+ do_syscall_64+0x78/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:78
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7b90c99931a9
+RSP: 002b:00007b90ca8b7038 EFLAGS: 00000246 ORIG_RAX: 00000000000000a2
+RAX: ffffffffffffffda RBX: 00007b90c9c06090 RCX: 00007b90c99931a9
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
+RBP: 00007b90c9c06090 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007b90c9c06128 R14: 00007b90c9c06090 R15: 00007ffe873b30a8
+ </TASK>
+
+Showing all locks held in the system:
+1 lock held by khungtaskd/34:
+ #0: ffffffff8813aa40 (rcu_read_lock){....}-{1:2}, at: rcu_lock_acquire home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/rcupdate.h:337 [inline]
+ #0: ffffffff8813aa40 (rcu_read_lock){....}-{1:2}, at: rcu_read_lock home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/rcupdate.h:849 [inline]
+ #0: ffffffff8813aa40 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x6f/0x340 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:6723
+1 lock held by systemd-journal/155:
+2 locks held by agetty/308:
+ #0: ffff88800f0068a0 (&tty->ldisc_sem){++++}-{0:0}, at: tty_ldisc_ref_wait+0x29/0x80 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/tty/tty_ldisc.c:243
+ #1: ffffc900009032f0 (&ldata->atomic_read_lock){+.+.}-{3:3}, at: n_tty_read+0xfe2/0x1490 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/tty/n_tty.c:2212
+1 lock held by syz.9.5465/24449:
+ #0: ffff8880517210e0 (&type->s_umount_key#56/1){+.+.}-{3:3}, at: alloc_super+0x23a/0xbe0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/super.c:344
+1 lock held by (udev-worker)/25529:
+ #0: ffff888020d16cc8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0x41f/0xe40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:921
+1 lock held by syz.4.7016/33626:
+ #0: ffff888020d16cc8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0x41f/0xe40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:921
+1 lock held by syz-executor/38436:
+1 lock held by syz-executor/40185:
+ #0: ffffffff8814f3b8 (rcu_state.exp_mutex){+.+.}-{3:3}, at: exp_funnel_lock+0x287/0x3a0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/rcu/tree_exp.h:297
+2 locks held by syz.4.8019/41235:
+1 lock held by syz.3.8032/41297:
+1 lock held by syz.3.8032/41316:
+ #0: ffff88800ff41558 (&mm->mmap_lock){++++}-{3:3}, at: mmap_write_lock home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/mmap_lock.h:105 [inline]
+ #0: ffff88800ff41558 (&mm->mmap_lock){++++}-{3:3}, at: mmu_notifier_register+0x76/0x290 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/mmu_notifier.c:704
+1 lock held by syz.3.8032/41321:
+ #0: ffff88800ff41558 (&mm->mmap_lock){++++}-{3:3}, at: mmap_write_lock home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/mmap_lock.h:105 [inline]
+ #0: ffff88800ff41558 (&mm->mmap_lock){++++}-{3:3}, at: mmu_notifier_register+0x76/0x290 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/mmu_notifier.c:704
+
+=============================================
+
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+

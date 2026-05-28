@@ -1,0 +1,4 @@
+# {Threaded:false Repeat:true RepeatTimes:0 Procs:6 Slowdown:1 Sandbox: SandboxArg:0 Leak:false NetInjection:false NetDevices:false NetReset:false Cgroups:false BinfmtMisc:false CloseFDs:false KCSAN:false DevlinkPCI:false NicVF:false USB:false VhciInjection:false Wifi:false IEEE802154:false Sysctl:false Swap:false UseTmpDir:false HandleSegv:false Trace:false CallComments:true LegacyOptions:{Collide:false Fault:false FaultCall:0 FaultNth:0}}
+socketpair$unix(0x1, 0x1, 0x0, &(0x7f0000002280)={<r0=>0xffffffffffffffff, <r1=>0xffffffffffffffff})
+sendto$unix(r1, &(0x7f0000000000)=';4', 0x2, 0x4000001, 0x0, 0x0)
+recvfrom$unix(r0, 0x0, 0x0, 0x40016002, 0x0, 0x0)

@@ -1,0 +1,191 @@
+Memory failure: 0x5cffb: keeping poisoned page in swap cache
+------------[ cut here ]------------
+DEBUG_RWSEMS_WARN_ON(sem->magic != sem): count = 0x0, magic = 0x0, owner = 0x0, curr 0xffff88800e674740, list not empty
+WARNING: CPU: 0 PID: 62 at kernel/locking/rwsem.c:1279 __down_read_trylock home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/rwsem.c:1279 [inline]
+WARNING: CPU: 0 PID: 62 at kernel/locking/rwsem.c:1279 down_read_trylock+0x326/0x3b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/rwsem.c:1563
+Modules linked in:
+CPU: 0 UID: 0 PID: 62 Comm: kswapd0 Not tainted 6.12.91 #3
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
+RIP: 0010:__down_read_trylock home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/rwsem.c:1279 [inline]
+RIP: 0010:down_read_trylock+0x326/0x3b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/rwsem.c:1563
+netlink: 8 bytes leftover after parsing attributes in process `syz.9.16652'.
+Code: 02 00 75 78 48 8b 13 41 55 4d 89 f0 48 89 e9 65 4c 8b 0d ed 17 99 7e 48 c7 c6 80 e4 8d 86 48 c7 c7 c0 e4 8d 86 e8 6a 9c e5 ff <0f> 0b 5a e9 f3 fe ff ff 48 c7 c7 94 0e 03 89 e8 36 ae 83 00 e9 52
+RSP: 0000:ffff88800ed17008 EFLAGS: 00010286
+RAX: 0000000000000000 RBX: ffff8880104b0ba0 RCX: ffffffff81a2b72f
+RDX: ffff88800e674740 RSI: ffffffff8150ee47 RDI: 0000000000000001
+RBP: 0000000000000000 R08: 0000000000000001 R09: 0000000000000000
+R10: 0000000000000000 R11: 00000000000a37b0 R12: 1ffff11001da2e02
+R13: ffffffff868de440 R14: 0000000000000000 R15: 0000000000000000
+FS:  0000000000000000(0000) GS:ffff88806c800000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007840090791f0 CR3: 0000000007f24002 CR4: 0000000000772ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ i_mmap_trylock_read home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/fs.h:522 [inline]
+ rmap_walk_file+0x44e/0x5f0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/rmap.c:2672
+ rmap_walk home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/rmap.c:2712 [inline]
+ try_to_unmap+0x137/0x1c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/rmap.c:1990
+ unmap_poisoned_folio+0x128/0x4b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory-failure.c:1625
+ shrink_folio_list+0x12cd/0x3f40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:1091
+ shrink_inactive_list home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:1983 [inline]
+ shrink_list home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:2220 [inline]
+ shrink_lruvec+0xf63/0x3170 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:5741
+ shrink_node_memcgs home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:5943 [inline]
+ shrink_node+0x9b8/0x43b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:5983
+ kswapd_shrink_node home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:6797 [inline]
+ balance_pgdat+0x95b/0x1b30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:6989
+ kswapd+0x5d7/0xbc0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:7258
+ kthread+0x2ca/0x3c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/kthread.c:389
+ ret_from_fork+0x4a/0x80 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/process.c:152
+ ret_from_fork_asm+0x1a/0x30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/entry_64.S:244
+ </TASK>
+irq event stamp: 1684647
+hardirqs last  enabled at (1684657): [<ffffffff816e33c7>] __up_console_sem+0x87/0xa0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/printk/printk.c:344
+hardirqs last disabled at (1684666): [<ffffffff816e33ac>] __up_console_sem+0x6c/0xa0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/printk/printk.c:342
+softirqs last  enabled at (1684588): [<ffffffff8152e953>] __do_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:613 [inline]
+softirqs last  enabled at (1684588): [<ffffffff8152e953>] invoke_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:453 [inline]
+softirqs last  enabled at (1684588): [<ffffffff8152e953>] __irq_exit_rcu+0xc3/0x100 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:662
+softirqs last disabled at (1684575): [<ffffffff8152e953>] __do_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:613 [inline]
+softirqs last disabled at (1684575): [<ffffffff8152e953>] invoke_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:453 [inline]
+softirqs last disabled at (1684575): [<ffffffff8152e953>] __irq_exit_rcu+0xc3/0x100 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
+------------[ cut here ]------------
+DEBUG_RWSEMS_WARN_ON(sem->magic != sem): count = 0x100, magic = 0x0, owner = 0xffff88800e674741, curr 0xffff88800e674740, list not empty
+WARNING: CPU: 0 PID: 62 at kernel/locking/rwsem.c:1340 __up_read+0x4f8/0x720 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/rwsem.c:1340
+Modules linked in:
+CPU: 0 UID: 0 PID: 62 Comm: kswapd0 Tainted: G        W          6.12.91 #3
+Tainted: [W]=WARN
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
+RIP: 0010:__up_read+0x4f8/0x720 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/rwsem.c:1340
+Code: 49 8b 17 41 56 48 c7 c6 80 e4 8d 86 48 c7 c7 c0 e4 8d 86 65 4c 8b 0d c7 fa 98 7e 4c 8b 44 24 10 48 8b 4c 24 08 e8 48 7f e5 ff <0f> 0b 5f e9 e7 fd ff ff 49 8d 5f 58 c6 05 5f be 91 07 01 48 b8 00
+RSP: 0000:ffff88800ed16ff0 EFLAGS: 00010286
+RAX: 0000000000000000 RBX: ffffffff89030e94 RCX: ffffffff81a2b72f
+RDX: ffff88800e674740 RSI: ffffffff8150ee47 RDI: 0000000000000001
+RBP: ffff8880104b0ba8 R08: 0000000000000001 R09: 0000000000000000
+R10: 0000000000000000 R11: 00000000000a4ca0 R12: 1ffff11001da2e01
+R13: ffff8880104b0c08 R14: ffffffff868de440 R15: ffff8880104b0ba0
+FS:  0000000000000000(0000) GS:ffff88806c800000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007840090791f0 CR3: 0000000007f24002 CR4: 0000000000772ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ i_mmap_unlock_read home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/fs.h:532 [inline]
+ rmap_walk_file+0x524/0x5f0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/rmap.c:2702
+ rmap_walk home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/rmap.c:2712 [inline]
+ try_to_unmap+0x137/0x1c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/rmap.c:1990
+ unmap_poisoned_folio+0x128/0x4b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory-failure.c:1625
+ shrink_folio_list+0x12cd/0x3f40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:1091
+ shrink_inactive_list home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:1983 [inline]
+ shrink_list home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:2220 [inline]
+ shrink_lruvec+0xf63/0x3170 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:5741
+ shrink_node_memcgs home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:5943 [inline]
+ shrink_node+0x9b8/0x43b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:5983
+ kswapd_shrink_node home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:6797 [inline]
+ balance_pgdat+0x95b/0x1b30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:6989
+ kswapd+0x5d7/0xbc0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/vmscan.c:7258
+ kthread+0x2ca/0x3c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/kthread.c:389
+ ret_from_fork+0x4a/0x80 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/process.c:152
+ ret_from_fork_asm+0x1a/0x30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/entry_64.S:244
+ </TASK>
+irq event stamp: 1684709
+hardirqs last  enabled at (1684709): [<ffffffff816e33c7>] __up_console_sem+0x87/0xa0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/printk/printk.c:344
+hardirqs last disabled at (1684708): [<ffffffff816e33ac>] __up_console_sem+0x6c/0xa0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/printk/printk.c:342
+softirqs last  enabled at (1684588): [<ffffffff8152e953>] __do_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:613 [inline]
+softirqs last  enabled at (1684588): [<ffffffff8152e953>] invoke_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:453 [inline]
+softirqs last  enabled at (1684588): [<ffffffff8152e953>] __irq_exit_rcu+0xc3/0x100 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:662
+softirqs last disabled at (1684575): [<ffffffff8152e953>] __do_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:613 [inline]
+softirqs last disabled at (1684575): [<ffffffff8152e953>] invoke_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:453 [inline]
+softirqs last disabled at (1684575): [<ffffffff8152e953>] __irq_exit_rcu+0xc3/0x100 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:662
+---[ end trace 0000000000000000 ]---
+input: syz0 as /devices/virtual/input/input320
+block nbd3: Possible stuck request ffff8880106f5e80: control (read@0,1024B). Runtime 49 seconds
+block nbd3: Possible stuck request ffff8880106f6040: control (read@1024,1024B). Runtime 49 seconds
+block nbd3: Possible stuck request ffff8880106f6200: control (read@2048,1024B). Runtime 49 seconds
+block nbd3: Possible stuck request ffff8880106f63c0: control (read@3072,1024B). Runtime 49 seconds
+block nbd3: Possible stuck request ffff8880106f5e80: control (read@0,1024B). Runtime 50 seconds
+block nbd3: Possible stuck request ffff8880106f6040: control (read@1024,1024B). Runtime 50 seconds
+block nbd3: Possible stuck request ffff8880106f6200: control (read@2048,1024B). Runtime 50 seconds
+block nbd3: Possible stuck request ffff8880106f63c0: control (read@3072,1024B). Runtime 50 seconds
+block nbd3: Possible stuck request ffff8880106f5e80: control (read@0,1024B). Runtime 51 seconds
+block nbd3: Possible stuck request ffff8880106f6040: control (read@1024,1024B). Runtime 51 seconds
+block nbd3: Possible stuck request ffff8880106f6200: control (read@2048,1024B). Runtime 51 seconds
+block nbd3: Possible stuck request ffff8880106f63c0: control (read@3072,1024B). Runtime 51 seconds
+block nbd3: Possible stuck request ffff8880106f5e80: control (read@0,1024B). Runtime 52 seconds
+block nbd3: Possible stuck request ffff8880106f6040: control (read@1024,1024B). Runtime 52 seconds
+block nbd3: Possible stuck request ffff8880106f6200: control (read@2048,1024B). Runtime 52 seconds
+block nbd3: Possible stuck request ffff8880106f63c0: control (read@3072,1024B). Runtime 52 seconds
+block nbd3: Possible stuck request ffff8880106f5e80: control (read@0,1024B). Runtime 53 seconds
+block nbd3: Possible stuck request ffff8880106f6040: control (read@1024,1024B). Runtime 53 seconds
+block nbd3: Possible stuck request ffff8880106f6200: control (read@2048,1024B). Runtime 53 seconds
+block nbd3: Possible stuck request ffff8880106f63c0: control (read@3072,1024B). Runtime 53 seconds
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+
+softirqs last  enabled at (1684588): [<ffffffff8152e953>] __irq_exit_rcu+0xc3/0x100
+softirqs last disabled at (1684575): [<ffffffff8152e953>] __irq_exit_rcu+0xc3/0x100
+---[ end trace 0000000000000000 ]---
+------------[ cut here ]------------
+DEBUG_RWSEMS_WARN_ON(sem->magic != sem): count = 0x100, magic = 0x0, owner = 0xffff88800e674741, curr 0xffff88800e674740, list not empty
+WARNING: CPU: 0 PID: 62 at kernel/locking/rwsem.c:1340 __up_read+0x4f8/0x720
+Modules linked in:
+CPU: 0 UID: 0 PID: 62 Comm: kswapd0 Tainted: G        W          6.12.91 #3
+Tainted: [W]=WARN
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
+RIP: 0010:__up_read+0x4f8/0x720
+Code: 49 8b 17 41 56 48 c7 c6 80 e4 8d 86 48 c7 c7 c0 e4 8d 86 65 4c 8b 0d c7 fa 98 7e 4c 8b 44 24 10 48 8b 4c 24 08 e8 48 7f e5 ff <0f> 0b 5f e9 e7 fd ff ff 49 8d 5f 58 c6 05 5f be 91 07 01 48 b8 00
+RSP: 0000:ffff88800ed16ff0 EFLAGS: 00010286
+RAX: 0000000000000000 RBX: ffffffff89030e94 RCX: ffffffff81a2b72f
+RDX: ffff88800e674740 RSI: ffffffff8150ee47 RDI: 0000000000000001
+RBP: ffff8880104b0ba8 R08: 0000000000000001 R09: 0000000000000000
+R10: 0000000000000000 R11: 00000000000a4ca0 R12: 1ffff11001da2e01
+R13: ffff8880104b0c08 R14: ffffffff868de440 R15: ffff8880104b0ba0
+FS:  0000000000000000(0000) GS:ffff88806c800000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007840090791f0 CR3: 0000000007f24002 CR4: 0000000000772ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ rmap_walk_file+0x524/0x5f0
+ try_to_unmap+0x137/0x1c0
+ unmap_poisoned_folio+0x128/0x4b0
+ shrink_folio_list+0x12cd/0x3f40
+ shrink_lruvec+0xf63/0x3170
+ shrink_node+0x9b8/0x43b0
+ balance_pgdat+0x95b/0x1b30
+ kswapd+0x5d7/0xbc0
+ kthread+0x2ca/0x3c0
+ ret_from_fork+0x4a/0x80
+ ret_from_fork_asm+0x1a/0x30
+ </TASK>
+irq event stamp: 1684709
+hardirqs last  enabled at (1684709): [<ffffffff816e33c7>] __up_console_sem+0x87/0xa0
+hardirqs last disabled at (1684708): [<ffffffff816e33ac>] __up_console_sem+0x6c/0xa0
+softirqs last  enabled at (1684588): [<ffffffff8152e953>] __irq_exit_rcu+0xc3/0x100
+softirqs last disabled at (1684575): [<ffffffff8152e953>] __irq_exit_rcu+0xc3/0x100
+---[ end trace 0000000000000000 ]---
+input: syz0 as /devices/virtual/input/input320
+block nbd3: Possible stuck request ffff8880106f5e80: control (read@0,1024B). Runtime 49 seconds
+block nbd3: Possible stuck request ffff8880106f6040: control (read@1024,1024B). Runtime 49 seconds
+block nbd3: Possible stuck request ffff8880106f6200: control (read@2048,1024B). Runtime 49 seconds
+block nbd3: Possible stuck request ffff8880106f63c0: control (read@3072,1024B). Runtime 49 seconds
+block nbd3: Possible stuck request ffff8880106f5e80: control (read@0,1024B). Runtime 50 seconds
+block nbd3: Possible stuck request ffff8880106f6040: control (read@1024,1024B). Runtime 50 seconds
+block nbd3: Possible stuck request ffff8880106f6200: control (read@2048,1024B). Runtime 50 seconds
+block nbd3: Possible stuck request ffff8880106f63c0: control (read@3072,1024B). Runtime 50 seconds
+block nbd3: Possible stuck request ffff8880106f5e80: control (read@0,1024B). Runtime 51 seconds
+block nbd3: Possible stuck request ffff8880106f6040: control (read@1024,1024B). Runtime 51 seconds
+block nbd3: Possible stuck request ffff8880106f6200: control (read@2048,1024B). Runtime 51 seconds
+block nbd3: Possible stuck request ffff8880106f63c0: control (read@3072,1024B). Runtime 51 seconds
+block nbd3: Possible stuck request ffff8880106f5e80: control (read@0,1024B). Runtime 52 seconds
+block nbd3: Possible stuck request ffff8880106f6040: control (read@1024,1024B). Runtime 52 seconds
+block nbd3: Possible stuck request ffff8880106f6200: control (read@2048,1024B). Runtime 52 seconds
+block nbd3: Possible stuck request ffff8880106f63c0: control (read@3072,1024B). Runtime 52 seconds
+block nbd3: Possible stuck request ffff8880106f5e80: control (read@0,1024B). Runtime 53 seconds
+block nbd3: Possible stuck request ffff8880106f6040: control (read@1024,1024B). Runtime 53 seconds
+block nbd3: Possible stuck request ffff8880106f6200: control (read@2048,1024B). Runtime 53 seconds
+block nbd3: Possible stuck request ffff8880106f63c0: control (read@3072,1024B). Runtime 53 seconds
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+

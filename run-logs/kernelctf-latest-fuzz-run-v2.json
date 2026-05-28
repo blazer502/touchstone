@@ -1,0 +1,55 @@
+{
+  "target": "lts-6.12.91 (kernelctf-latest hunt-mode)",
+  "run": "v2 corpus-seeded overnight",
+  "started_at": "2026-05-27T21:30:00+09:00",
+  "stopped_at": "2026-05-28T05:30:06+09:00",
+  "wall_seconds": 28806,
+  "stopped_by": "8h timer",
+  "seed": "v1 corpus.db (5.8 MB, 15,840 programs)",
+  "fuzz": {
+    "vms": 6,
+    "procs_per_vm": 6,
+    "programs_executed": 1349778,
+    "throughput_progs_per_sec_avg": 47,
+    "coverage_pcs_final": 143472,
+    "corpus_final": 16706,
+    "unique_crash_buckets": 12,
+    "repros_attempted": 3,
+    "repros_succeeded": 0
+  },
+  "findings_by_class": {
+    "memory_corruption_class": {
+      "count": 1,
+      "buckets": [{
+        "hash": "8b4322e8",
+        "title": "WARNING in rmap_walk_file",
+        "class": "rwsem-magic-corruption",
+        "details": "DEBUG_RWSEMS_WARN_ON triggered with sem->magic = 0x0 (init sets to &sem self-pointer). Trigger path: kswapd -> shrink_node -> shrink_folio_list -> unmap_poisoned_folio -> try_to_unmap -> rmap_walk_file -> i_mmap_trylock_read. Means i_mmap_rwsem of an inode was freed/zeroed while kswapd held a reference. Potential UAF on inode struct via memory-failure path. syzkaller could not reproduce.",
+        "kernelctf_eligibility": "Possibly. Requires deterministic repro; syzkaller failed to find one. Worth submitting to syzbot mailing list for triage; without repro it cannot be confirmed as kernelCTF-eligible."
+      }]
+    },
+    "lockdep_warn_class": {
+      "count": 2,
+      "buckets": ["40117f7e", "798f1c91"],
+      "note": "Same root cause — circular dep mmap_lock -> cpuctx_mutex -> pmus_lock -> cpu_hotplug_lock. Two sightings, syzkaller bucketed under different titles. NOT kernelCTF-eligible (lock-ordering bug, not memory corruption)."
+    },
+    "dos_class": {
+      "task_hung": 6,
+      "soft_lockup": 2,
+      "note": "Most are syzkaller-overload artifacts on this triple-sanitizer debug kernel (KASAN+SLUB_DEBUG_ON+LOCKDEP+UBSAN). Typically do not reproduce on production kernels. NOT kernelCTF-eligible."
+    },
+    "non_classified": {
+      "suppressed_userspace_fault": 1,
+      "no_output_from_test_machine": 1
+    }
+  },
+  "agent_loop_disposition_summary": {
+    "crash_severity": 1,
+    "warn_severity": 2,
+    "dos_severity": 14,
+    "unknown": 2,
+    "total_confirmed": 17,
+    "total_inconclusive": 2
+  },
+  "interpretation": "1 potential memory-corruption finding (rwsem-magic-corruption in mm/memory-failure path) but with no deterministic reproducer. Pipeline end-to-end validated: kernel + KVM-passthrough syz-manager + CPU LLM + agent.loop with full bug-class classifier. The corpus-seed warm-start matters: v2 hit 143k PCs vs v1's 130k cold-start in the same hardware, and v2 surfaced 6 NEW bucket classes (lockdep-deadlock, rwsem-magic-corruption, iterate_supers hang, no-output, do_coredump hang) absent from v1."
+}

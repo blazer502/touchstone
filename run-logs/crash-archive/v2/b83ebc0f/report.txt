@@ -1,0 +1,60 @@
+block nbd7: Possible stuck request ffff888010cce1c0: control (read@1024,1024B). Runtime 73 seconds
+block nbd7: Possible stuck request ffff888010cce380: control (read@2048,1024B). Runtime 73 seconds
+block nbd7: Possible stuck request ffff888010cce540: control (read@3072,1024B). Runtime 73 seconds
+INFO: task syz.1.8686:34882 blocked for more than 122 seconds.
+      Not tainted 6.12.91 #3
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz.1.8686      state:D stack:0     pid:34882 tgid:34881 ppid:21218  flags:0x00004004
+Call Trace:
+ <TASK>
+ context_switch home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:5345 [inline]
+ __schedule+0x1120/0x60d0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6725
+ __schedule_loop home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6802 [inline]
+ schedule+0xdd/0x330 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6817
+ schedule_preempt_disabled+0x15/0x30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/sched/core.c:6874
+ __mutex_lock_common home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:684 [inline]
+ __mutex_lock+0x9c3/0x1720 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:752
+ sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+ ksys_sync+0xb8/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/sync.c:105
+ __do_sys_sync+0x13/0x20 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/sync.c:113
+ do_syscall_x64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:47 [inline]
+ do_syscall_64+0x78/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:78
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7eac795931a9
+RSP: 002b:00007eac7a36a038 EFLAGS: 00000246 ORIG_RAX: 00000000000000a2
+RAX: ffffffffffffffda RBX: 00007eac79805fa0 RCX: 00007eac795931a9
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
+RBP: 00007eac79805fa0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007eac79806038 R14: 00007eac79805fa0 R15: 00007fff2d29dc18
+ </TASK>
+
+Showing all locks held in the system:
+1 lock held by khungtaskd/34:
+ #0: ffffffff8813aa40 (rcu_read_lock){....}-{1:2}, at: rcu_lock_acquire home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/rcupdate.h:337 [inline]
+ #0: ffffffff8813aa40 (rcu_read_lock){....}-{1:2}, at: rcu_read_lock home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/rcupdate.h:849 [inline]
+ #0: ffffffff8813aa40 (rcu_read_lock){....}-{1:2}, at: debug_show_all_locks+0x6f/0x340 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:6723
+1 lock held by (udev-worker)/12888:
+ #0: ffff888010c224c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0x41f/0xe40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:921
+1 lock held by (udev-worker)/15908:
+ #0: ffff888020fad4c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0x41f/0xe40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:921
+1 lock held by syz.1.8686/34882:
+ #0: ffff888010c224c8 (&disk->open_mutex){+.+.}-{3:3}, at: sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+1 lock held by syz.5.9499/39176:
+ #0: ffff888010c224c8 (&disk->open_mutex){+.+.}-{3:3}, at: sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+1 lock held by syz.3.9704/40024:
+ #0: ffff888010c224c8 (&disk->open_mutex){+.+.}-{3:3}, at: sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+1 lock held by syz.6.9849/40935:
+ #0: ffff888010c224c8 (&disk->open_mutex){+.+.}-{3:3}, at: sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+1 lock held by syz.7.10069/42917:
+ #0: ffff888010c224c8 (&disk->open_mutex){+.+.}-{3:3}, at: bdev_open+0x41f/0xe40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:921
+1 lock held by syz.5.11016/47941:
+ #0: ffff888010c224c8 (&disk->open_mutex){+.+.}-{3:3}, at: sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+1 lock held by syz.8.11260/49033:
+ #0: ffff888010c224c8 (&disk->open_mutex){+.+.}-{3:3}, at: sync_bdevs+0x102/0x360 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/bdev.c:1264
+
+=============================================
+
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+

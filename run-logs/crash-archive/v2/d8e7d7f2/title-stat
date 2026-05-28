@@ -1,0 +1,69 @@
+{
+	"Count": 0,
+	"Nodes": {
+		"INFO: task hung in sync_bdevs": {
+			"Count": 53,
+			"Nodes": {
+				"INFO: task hung in bdev_open": {
+					"Count": 7,
+					"Nodes": {
+						"INFO: task hung in bdev_open": {
+							"Count": 1,
+							"Nodes": null
+						},
+						"INFO: task hung in sync_bdevs": {
+							"Count": 1,
+							"Nodes": null
+						}
+					}
+				},
+				"INFO: task hung in sync_bdevs": {
+					"Count": 16,
+					"Nodes": {
+						"INFO: task hung in sync_bdevs": {
+							"Count": 3,
+							"Nodes": {
+								"INFO: task hung in sync_bdevs": {
+									"Count": 1,
+									"Nodes": {
+										"SYZFAIL: failed to recv rpc": {
+											"Count": 1,
+											"Nodes": null
+										}
+									}
+								},
+								"SYZFAIL: failed to recv rpc": {
+									"Count": 1,
+									"Nodes": null
+								}
+							}
+						}
+					}
+				},
+				"SYZFAIL: failed to recv rpc": {
+					"Count": 5,
+					"Nodes": {
+						"INFO: task hung in bdev_open": {
+							"Count": 2,
+							"Nodes": {
+								"INFO: task hung in sync_bdevs": {
+									"Count": 1,
+									"Nodes": {
+										"INFO: task hung in sync_bdevs": {
+											"Count": 1,
+											"Nodes": null
+										}
+									}
+								}
+							}
+						},
+						"INFO: task hung in sync_bdevs": {
+							"Count": 1,
+							"Nodes": null
+						}
+					}
+				}
+			}
+		}
+	}
+}
