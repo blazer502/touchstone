@@ -1,0 +1,45 @@
+{
+  "callee": "perf_event_read",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "__perf_event_read_value",
+      "file": "kernel/events/core.c",
+      "line": 5636,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 5634
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_read_value",
+      "file": "kernel/events/core.c",
+      "line": 5645,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 5634
+        }
+      ]
+    },
+    {
+      "caller": "__perf_read_group_add",
+      "file": "kernel/events/core.c",
+      "line": 5677,
+      "guards": []
+    },
+    {
+      "caller": "_perf_event_reset",
+      "file": "kernel/events/core.c",
+      "line": 5897,
+      "guards": []
+    }
+  ]
+}

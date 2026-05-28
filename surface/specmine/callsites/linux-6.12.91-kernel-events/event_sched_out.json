@@ -1,0 +1,131 @@
+{
+  "callee": "event_sched_out",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "group_sched_out",
+      "file": "kernel/events/core.c",
+      "line": 2378,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(group_event->state != PERF_EVENT_STATE_ACTIVE)",
+          "exit_kind": "return",
+          "source_line": 2373,
+          "exit_line": 2374
+        }
+      ]
+    },
+    {
+      "caller": "group_sched_out",
+      "file": "kernel/events/core.c",
+      "line": 2384,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(group_event->state != PERF_EVENT_STATE_ACTIVE)",
+          "exit_kind": "return",
+          "source_line": 2373,
+          "exit_line": 2374
+        }
+      ]
+    },
+    {
+      "caller": "__perf_remove_from_context",
+      "file": "kernel/events/core.c",
+      "line": 2459,
+      "guards": []
+    },
+    {
+      "caller": "__event_disable",
+      "file": "kernel/events/core.c",
+      "line": 2528,
+      "guards": []
+    },
+    {
+      "caller": "group_sched_in",
+      "file": "kernel/events/core.c",
+      "line": 2717,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(group_event->state == PERF_EVENT_STATE_OFF)",
+          "exit_kind": "return",
+          "source_line": 2686,
+          "exit_line": 2687
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event_sched_in(group_event, ctx))",
+          "exit_kind": "goto",
+          "source_line": 2691,
+          "exit_line": 2692
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event_sched_in(event, ctx))",
+          "exit_kind": "goto",
+          "source_line": 2698
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!pmu->commit_txn(pmu))",
+          "exit_kind": "return",
+          "source_line": 2704,
+          "exit_line": 2705
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event == partial_group)",
+          "exit_kind": "break",
+          "source_line": 2714,
+          "exit_line": 2715
+        }
+      ]
+    },
+    {
+      "caller": "group_sched_in",
+      "file": "kernel/events/core.c",
+      "line": 2719,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(group_event->state == PERF_EVENT_STATE_OFF)",
+          "exit_kind": "return",
+          "source_line": 2686,
+          "exit_line": 2687
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event_sched_in(group_event, ctx))",
+          "exit_kind": "goto",
+          "source_line": 2691,
+          "exit_line": 2692
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event_sched_in(event, ctx))",
+          "exit_kind": "goto",
+          "source_line": 2698
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!pmu->commit_txn(pmu))",
+          "exit_kind": "return",
+          "source_line": 2704,
+          "exit_line": 2705
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event == partial_group)",
+          "exit_kind": "break",
+          "source_line": 2714,
+          "exit_line": 2715
+        }
+      ]
+    }
+  ]
+}

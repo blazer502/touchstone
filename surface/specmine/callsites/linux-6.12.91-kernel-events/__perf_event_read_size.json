@@ -1,0 +1,41 @@
+{
+  "callee": "__perf_event_read_size",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "perf_event__header_size",
+      "file": "kernel/events/core.c",
+      "line": 1962,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_validate_size",
+      "file": "kernel/events/core.c",
+      "line": 2009,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_validate_size",
+      "file": "kernel/events/core.c",
+      "line": 2013,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_validate_size",
+      "file": "kernel/events/core.c",
+      "line": 2028,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event == group_leader)",
+          "exit_kind": "return",
+          "source_line": 2024,
+          "exit_line": 2025
+        }
+      ]
+    }
+  ]
+}

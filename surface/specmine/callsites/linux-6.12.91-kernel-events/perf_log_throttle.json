@@ -1,0 +1,105 @@
+{
+  "callee": "perf_log_throttle",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "perf_event_disable_inatomic",
+      "file": "kernel/events/core.c",
+      "line": 2618,
+      "guards": []
+    },
+    {
+      "caller": "event_sched_in",
+      "file": "kernel/events/core.c",
+      "line": 2650,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->lock)",
+          "source_line": 2630
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->ctx != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2628
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state <= PERF_EVENT_STATE_OFF)",
+          "exit_kind": "return",
+          "source_line": 2632,
+          "exit_line": 2633
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "unlikely(event->hw.interrupts == MAX_INTERRUPTS)",
+          "polarity": "in_true_branch",
+          "source_line": 2649
+        }
+      ]
+    },
+    {
+      "caller": "perf_adjust_freq_unthr_events",
+      "file": "kernel/events/core.c",
+      "line": 4271,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state != PERF_EVENT_STATE_ACTIVE)",
+          "exit_kind": "continue",
+          "source_line": 4260,
+          "exit_line": 4261
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!event_filter_match(event))",
+          "exit_kind": "continue",
+          "source_line": 4264,
+          "exit_line": 4265
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "hwc->interrupts == MAX_INTERRUPTS",
+          "polarity": "in_true_branch",
+          "source_line": 4269
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_period",
+      "file": "kernel/events/core.c",
+      "line": 5979,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "active",
+          "polarity": "in_true_branch",
+          "source_line": 5971
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "event->hw.interrupts == MAX_INTERRUPTS",
+          "polarity": "in_true_branch",
+          "source_line": 5977
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_account_interrupt",
+      "file": "kernel/events/core.c",
+      "line": 9769,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "unlikely(throttle && hwc->interrupts >= max_samples_per_tick)",
+          "polarity": "in_true_branch",
+          "source_line": 9765
+        }
+      ]
+    }
+  ]
+}

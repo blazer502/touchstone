@@ -1,0 +1,1615 @@
+{
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "generated_at": 1779948955,
+  "fp_table_stats": {
+    "fields": 128,
+    "type_field_slots": 33,
+    "callback_functions": 174
+  },
+  "keep_set_delta": {
+    "defined_functions": 699,
+    "entry_functions": 6,
+    "address_taken_total": 83,
+    "baseline_keep": 386,
+    "baseline_pruned_pct": 44.78,
+    "mlta_keep": 321,
+    "mlta_pruned_pct": 54.08,
+    "keep_set_reduction": 65,
+    "resolution_counts": {
+      "indirect_callsites": 56,
+      "typefield_resolved": 3,
+      "field_only_resolved": 29,
+      "unresolved_bare_fp": 7
+    },
+    "unresolved_indirect_callsites": 24,
+    "bare_fp_callsites": 7,
+    "mlta_subset_of_baseline": false,
+    "mlta_only_funcs": 7,
+    "baseline_only_funcs": 72,
+    "soundness_mode": "precision (opt-in). Net pruning rises to 54.08% vs baseline 44.78%, riding on the MLTA completeness assumption for 31 unresolved/bare-fp callsites. Default Stage A (reachability.py) is UNCHANGED \u2014 the Juliet soundness gate is untouched. The fully-sound use is the reverse-resolution proposer hint for Phase 5.2."
+  },
+  "field_to_funcs": {
+    "abi": [
+      "PERF_SAMPLE_REGS_ABI_NONE"
+    ],
+    "active_uprobe": [
+      "uprobe"
+    ],
+    "add": [
+      "cpu_clock_event_add",
+      "hw_breakpoint_add",
+      "perf_swevent_add",
+      "perf_trace_add",
+      "task_clock_event_add"
+    ],
+    "attach_state": [
+      "PERF_ATTACH_TASK"
+    ],
+    "attr_groups": [
+      "kprobe_attr_groups",
+      "uprobe_attr_groups"
+    ],
+    "attrs": [
+      "kprobe_attrs",
+      "pmu_dev_attrs",
+      "uprobe_attrs"
+    ],
+    "aux_event": [
+      "group_leader"
+    ],
+    "aux_head": [
+      "aux_head"
+    ],
+    "aux_mmap_locked": [
+      "extra"
+    ],
+    "aux_overwrite": [
+      "overwrite"
+    ],
+    "aux_pgoff": [
+      "pgoff"
+    ],
+    "aux_watermark": [
+      "watermark"
+    ],
+    "bp_len": [
+      "HW_BREAKPOINT_LEN_1"
+    ],
+    "bp_type": [
+      "HW_BREAKPOINT_RW"
+    ],
+    "bpf_cookie": [
+      "bpf_cookie"
+    ],
+    "branch_sample_type": [
+      "mask"
+    ],
+    "cancel_txn": [
+      "perf_pmu_cancel_txn",
+      "perf_pmu_nop_void"
+    ],
+    "capabilities": [
+      "PERF_PMU_CAP_NO_NMI"
+    ],
+    "cgrp": [
+      "cgrp"
+    ],
+    "chained": [
+      "chained"
+    ],
+    "check_period": [
+      "perf_event_nop_int"
+    ],
+    "close": [
+      "perf_mmap_close"
+    ],
+    "comm": [
+      "comm"
+    ],
+    "comm_size": [
+      "size"
+    ],
+    "commit_txn": [
+      "perf_pmu_commit_txn",
+      "perf_pmu_nop_int"
+    ],
+    "compat_ioctl": [
+      "perf_compat_ioctl"
+    ],
+    "cpu": [
+      "cpu"
+    ],
+    "ctx": [
+      "child_ctx",
+      "ctx"
+    ],
+    "data_offset": [
+      "PAGE_SIZE"
+    ],
+    "del": [
+      "cpu_clock_event_del",
+      "hw_breakpoint_del",
+      "perf_swevent_del",
+      "perf_trace_del",
+      "task_clock_event_del"
+    ],
+    "destroy": [
+      "bp_perf_event_destroy",
+      "perf_kprobe_destroy",
+      "perf_uprobe_destroy",
+      "sw_perf_event_destroy",
+      "tp_perf_event_destroy"
+    ],
+    "dev": [
+      "PMU_NULL_DEV"
+    ],
+    "dev_groups": [
+      "pmu_dev_groups"
+    ],
+    "entry": [
+      "entry"
+    ],
+    "event": [
+      "event"
+    ],
+    "event_idx": [
+      "perf_event_idx_default"
+    ],
+    "event_init": [
+      "cpu_clock_event_init",
+      "hw_breakpoint_event_init",
+      "perf_kprobe_event_init",
+      "perf_swevent_init",
+      "perf_tp_event_init",
+      "perf_uprobe_event_init",
+      "task_clock_event_init"
+    ],
+    "exit": [
+      "test_exit"
+    ],
+    "fasync": [
+      "perf_fasync"
+    ],
+    "fault": [
+      "perf_mmap_fault",
+      "xol_fault"
+    ],
+    "file_name": [
+      "name"
+    ],
+    "file_size": [
+      "size"
+    ],
+    "flags": [
+      "flags"
+    ],
+    "freq_count_stamp": [
+      "now"
+    ],
+    "freq_time_stamp": [
+      "now"
+    ],
+    "function": [
+      "perf_mux_hrtimer_handler",
+      "perf_swevent_hrtimer"
+    ],
+    "group_leader": [
+      "group_leader",
+      "sibling"
+    ],
+    "head": [
+      "aux_head"
+    ],
+    "header_size": [
+      "size"
+    ],
+    "heap_size": [
+      "heap_size"
+    ],
+    "hrtimer_interval_ms": [
+      "PERF_CPU_HRTIMER",
+      "timer"
+    ],
+    "hw_id": [
+      "hw_id"
+    ],
+    "id_header_size": [
+      "size"
+    ],
+    "info": [
+      "hw"
+    ],
+    "init": [
+      "test_init"
+    ],
+    "ino": [
+      "ino"
+    ],
+    "ino_generation": [
+      "gen"
+    ],
+    "inode": [
+      "inode"
+    ],
+    "interrupts": [
+      "MAX_INTERRUPTS"
+    ],
+    "interrupts_seq": [
+      "seq"
+    ],
+    "is_visible": [
+      "pmu_dev_is_visible"
+    ],
+    "last_period": [
+      "sample_period"
+    ],
+    "less": [
+      "perf_less_group_idx"
+    ],
+    "maj": [
+      "maj"
+    ],
+    "max_stack": [
+      "max_stack"
+    ],
+    "may_split": [
+      "perf_mmap_may_split"
+    ],
+    "mm": [
+      "mm"
+    ],
+    "mmap": [
+      "perf_mmap"
+    ],
+    "mmap_locked": [
+      "extra"
+    ],
+    "name": [
+      "name"
+    ],
+    "next": [
+      "curr",
+      "prev"
+    ],
+    "notifier_call": [
+      "arch_uprobe_exception_notify",
+      "hw_breakpoint_exceptions_notify",
+      "perf_reboot"
+    ],
+    "nr_pages": [
+      "nr_pages"
+    ],
+    "offset": [
+      "offset"
+    ],
+    "open": [
+      "perf_mmap_open"
+    ],
+    "orig_ret_vaddr": [
+      "orig_ret_vaddr"
+    ],
+    "overflow_handler": [
+      "overflow_handler",
+      "perf_event_output_backward",
+      "perf_event_output_forward"
+    ],
+    "overflow_handler_context": [
+      "context"
+    ],
+    "owner": [
+      "TASK_TOMBSTONE",
+      "current"
+    ],
+    "page_mkwrite": [
+      "perf_mmap_fault"
+    ],
+    "parent": [
+      "parent_event"
+    ],
+    "parent_ctx": [
+      "cloned_ctx",
+      "parent_ctx"
+    ],
+    "path": [
+      "path_enomem",
+      "pathname"
+    ],
+    "path_size": [
+      "size"
+    ],
+    "pending_kill": [
+      "POLL_HUP",
+      "POLL_IN"
+    ],
+    "pending_work": [
+      "pending_id"
+    ],
+    "perf_event_ctxp": [
+      "child_ctx"
+    ],
+    "period": [
+      "nr"
+    ],
+    "pmu": [
+      "pmu"
+    ],
+    "pmu_ctx": [
+      "epc",
+      "pmu_ctx"
+    ],
+    "pmu_disable": [
+      "perf_pmu_nop_void"
+    ],
+    "pmu_enable": [
+      "perf_pmu_nop_void"
+    ],
+    "poll": [
+      "perf_poll"
+    ],
+    "priority": [
+      "INT_MIN"
+    ],
+    "prog": [
+      "prog"
+    ],
+    "prot": [
+      "prot"
+    ],
+    "rb": [
+      "rb"
+    ],
+    "read": [
+      "cpu_clock_event_read",
+      "hw_breakpoint_pmu_read",
+      "perf_read",
+      "perf_swevent_read",
+      "task_clock_event_read"
+    ],
+    "ref_ctr_offset": [
+      "ref_ctr_offset"
+    ],
+    "regs": [
+      "regs"
+    ],
+    "release": [
+      "perf_release",
+      "pmu_dev_release"
+    ],
+    "return_instances": [
+      "ri"
+    ],
+    "sample_freq": [
+      "value"
+    ],
+    "sample_max_stack": [
+      "sysctl_perf_event_max_stack"
+    ],
+    "sample_period": [
+      "sample_period",
+      "value"
+    ],
+    "size": [
+      "header_size",
+      "size"
+    ],
+    "stack_user_size": [
+      "stack_size"
+    ],
+    "start": [
+      "cpu_clock_event_start",
+      "hw_breakpoint_start",
+      "perf_swevent_start",
+      "task_clock_event_start"
+    ],
+    "start_txn": [
+      "perf_pmu_nop_txn",
+      "perf_pmu_start_txn"
+    ],
+    "state": [
+      "PERF_EVENT_STATE_INACTIVE",
+      "PERF_EVENT_STATE_OFF",
+      "PERF_HES_STOPPED",
+      "UTASK_RUNNING",
+      "UTASK_SSTEP",
+      "UTASK_SSTEP_ACK",
+      "UTASK_SSTEP_TRAPPED"
+    ],
+    "stop": [
+      "cpu_clock_event_stop",
+      "hw_breakpoint_stop",
+      "perf_swevent_stop",
+      "task_clock_event_stop"
+    ],
+    "swp": [
+      "swap_ptr"
+    ],
+    "task_ctx": [
+      "ctx"
+    ],
+    "task_ctx_data": [
+      "task_ctx_data"
+    ],
+    "task_ctx_nr": [
+      "perf_sw_context"
+    ],
+    "task_epc": [
+      "pmu_ctx"
+    ],
+    "test_cases": [
+      "hw_breakpoint_test_cases"
+    ],
+    "timestamp": [
+      "now"
+    ],
+    "tree": [
+      "RB_ROOT"
+    ],
+    "tstamp": [
+      "now"
+    ],
+    "type": [
+      "PERF_RECORD_AUX_OUTPUT_HW_ID",
+      "PERF_RECORD_ITRACE_START",
+      "PERF_RECORD_LOST",
+      "PERF_RECORD_MMAP2",
+      "PERF_RECORD_SAMPLE",
+      "PERF_RECORD_SWITCH",
+      "PERF_RECORD_SWITCH_CPU_WIDE",
+      "PERF_RECORD_UNTHROTTLE",
+      "type"
+    ],
+    "unlocked_ioctl": [
+      "perf_ioctl"
+    ],
+    "uprobe": [
+      "uprobe"
+    ],
+    "user_page": [
+      "all_buf"
+    ],
+    "utask": [
+      "n_utask"
+    ],
+    "vaddr": [
+      "bp_vaddr",
+      "vaddr"
+    ],
+    "val": [
+      "PERF_MEM_NA"
+    ],
+    "xol_vaddr": [
+      "xol_vaddr"
+    ]
+  },
+  "func_to_typefields": {
+    "HW_BREAKPOINT_LEN_1": [
+      [
+        "?",
+        "bp_len"
+      ]
+    ],
+    "HW_BREAKPOINT_RW": [
+      [
+        "?",
+        "bp_type"
+      ]
+    ],
+    "INT_MIN": [
+      [
+        "notifier_block",
+        "priority"
+      ]
+    ],
+    "MAX_INTERRUPTS": [
+      [
+        "?",
+        "interrupts"
+      ]
+    ],
+    "PAGE_SIZE": [
+      [
+        "?",
+        "data_offset"
+      ]
+    ],
+    "PERF_ATTACH_TASK": [
+      [
+        "?",
+        "attach_state"
+      ]
+    ],
+    "PERF_CPU_HRTIMER": [
+      [
+        "?",
+        "hrtimer_interval_ms"
+      ]
+    ],
+    "PERF_EVENT_STATE_INACTIVE": [
+      [
+        "?",
+        "state"
+      ]
+    ],
+    "PERF_EVENT_STATE_OFF": [
+      [
+        "?",
+        "state"
+      ]
+    ],
+    "PERF_HES_STOPPED": [
+      [
+        "?",
+        "state"
+      ]
+    ],
+    "PERF_MEM_NA": [
+      [
+        "?",
+        "val"
+      ]
+    ],
+    "PERF_PMU_CAP_NO_NMI": [
+      [
+        "pmu",
+        "capabilities"
+      ]
+    ],
+    "PERF_RECORD_AUX_OUTPUT_HW_ID": [
+      [
+        "?",
+        "type"
+      ]
+    ],
+    "PERF_RECORD_ITRACE_START": [
+      [
+        "?",
+        "type"
+      ]
+    ],
+    "PERF_RECORD_LOST": [
+      [
+        "?",
+        "type"
+      ]
+    ],
+    "PERF_RECORD_MMAP2": [
+      [
+        "?",
+        "type"
+      ]
+    ],
+    "PERF_RECORD_SAMPLE": [
+      [
+        "?",
+        "type"
+      ]
+    ],
+    "PERF_RECORD_SWITCH": [
+      [
+        "?",
+        "type"
+      ]
+    ],
+    "PERF_RECORD_SWITCH_CPU_WIDE": [
+      [
+        "?",
+        "type"
+      ]
+    ],
+    "PERF_RECORD_UNTHROTTLE": [
+      [
+        "?",
+        "type"
+      ]
+    ],
+    "PERF_SAMPLE_REGS_ABI_NONE": [
+      [
+        "?",
+        "abi"
+      ]
+    ],
+    "PMU_NULL_DEV": [
+      [
+        "pmu",
+        "dev"
+      ]
+    ],
+    "POLL_HUP": [
+      [
+        "?",
+        "pending_kill"
+      ]
+    ],
+    "POLL_IN": [
+      [
+        "?",
+        "pending_kill"
+      ]
+    ],
+    "RB_ROOT": [
+      [
+        "?",
+        "tree"
+      ]
+    ],
+    "TASK_TOMBSTONE": [
+      [
+        "?",
+        "owner"
+      ]
+    ],
+    "UTASK_RUNNING": [
+      [
+        "?",
+        "state"
+      ]
+    ],
+    "UTASK_SSTEP": [
+      [
+        "?",
+        "state"
+      ]
+    ],
+    "UTASK_SSTEP_ACK": [
+      [
+        "?",
+        "state"
+      ]
+    ],
+    "UTASK_SSTEP_TRAPPED": [
+      [
+        "?",
+        "state"
+      ]
+    ],
+    "all_buf": [
+      [
+        "?",
+        "user_page"
+      ]
+    ],
+    "arch_uprobe_exception_notify": [
+      [
+        "notifier_block",
+        "notifier_call"
+      ]
+    ],
+    "aux_head": [
+      [
+        "?",
+        "aux_head"
+      ],
+      [
+        "?",
+        "head"
+      ]
+    ],
+    "bp_perf_event_destroy": [
+      [
+        "?",
+        "destroy"
+      ]
+    ],
+    "bp_vaddr": [
+      [
+        "?",
+        "vaddr"
+      ]
+    ],
+    "bpf_cookie": [
+      [
+        "?",
+        "bpf_cookie"
+      ]
+    ],
+    "cgrp": [
+      [
+        "?",
+        "cgrp"
+      ]
+    ],
+    "chained": [
+      [
+        "?",
+        "chained"
+      ]
+    ],
+    "child_ctx": [
+      [
+        "?",
+        "ctx"
+      ],
+      [
+        "?",
+        "perf_event_ctxp"
+      ]
+    ],
+    "cloned_ctx": [
+      [
+        "?",
+        "parent_ctx"
+      ]
+    ],
+    "comm": [
+      [
+        "?",
+        "comm"
+      ]
+    ],
+    "context": [
+      [
+        "?",
+        "overflow_handler_context"
+      ]
+    ],
+    "cpu": [
+      [
+        "?",
+        "cpu"
+      ]
+    ],
+    "cpu_clock_event_add": [
+      [
+        "pmu",
+        "add"
+      ]
+    ],
+    "cpu_clock_event_del": [
+      [
+        "pmu",
+        "del"
+      ]
+    ],
+    "cpu_clock_event_init": [
+      [
+        "pmu",
+        "event_init"
+      ]
+    ],
+    "cpu_clock_event_read": [
+      [
+        "pmu",
+        "read"
+      ]
+    ],
+    "cpu_clock_event_start": [
+      [
+        "pmu",
+        "start"
+      ]
+    ],
+    "cpu_clock_event_stop": [
+      [
+        "pmu",
+        "stop"
+      ]
+    ],
+    "ctx": [
+      [
+        "?",
+        "ctx"
+      ],
+      [
+        "?",
+        "task_ctx"
+      ]
+    ],
+    "curr": [
+      [
+        "?",
+        "next"
+      ]
+    ],
+    "current": [
+      [
+        "?",
+        "owner"
+      ]
+    ],
+    "entry": [
+      [
+        "?",
+        "entry"
+      ]
+    ],
+    "epc": [
+      [
+        "?",
+        "pmu_ctx"
+      ]
+    ],
+    "event": [
+      [
+        "?",
+        "event"
+      ]
+    ],
+    "extra": [
+      [
+        "?",
+        "aux_mmap_locked"
+      ],
+      [
+        "?",
+        "mmap_locked"
+      ]
+    ],
+    "flags": [
+      [
+        "?",
+        "flags"
+      ]
+    ],
+    "gen": [
+      [
+        "?",
+        "ino_generation"
+      ]
+    ],
+    "group_leader": [
+      [
+        "?",
+        "aux_event"
+      ],
+      [
+        "?",
+        "group_leader"
+      ]
+    ],
+    "header_size": [
+      [
+        "?",
+        "size"
+      ]
+    ],
+    "heap_size": [
+      [
+        "?",
+        "heap_size"
+      ]
+    ],
+    "hw": [
+      [
+        "?",
+        "info"
+      ]
+    ],
+    "hw_breakpoint_add": [
+      [
+        "pmu",
+        "add"
+      ]
+    ],
+    "hw_breakpoint_del": [
+      [
+        "pmu",
+        "del"
+      ]
+    ],
+    "hw_breakpoint_event_init": [
+      [
+        "pmu",
+        "event_init"
+      ]
+    ],
+    "hw_breakpoint_exceptions_notify": [
+      [
+        "notifier_block",
+        "notifier_call"
+      ]
+    ],
+    "hw_breakpoint_pmu_read": [
+      [
+        "pmu",
+        "read"
+      ]
+    ],
+    "hw_breakpoint_start": [
+      [
+        "pmu",
+        "start"
+      ]
+    ],
+    "hw_breakpoint_stop": [
+      [
+        "pmu",
+        "stop"
+      ]
+    ],
+    "hw_breakpoint_test_cases": [
+      [
+        "kunit_suite",
+        "test_cases"
+      ]
+    ],
+    "hw_id": [
+      [
+        "?",
+        "hw_id"
+      ]
+    ],
+    "ino": [
+      [
+        "?",
+        "ino"
+      ]
+    ],
+    "inode": [
+      [
+        "?",
+        "inode"
+      ]
+    ],
+    "kprobe_attr_groups": [
+      [
+        "pmu",
+        "attr_groups"
+      ]
+    ],
+    "kprobe_attrs": [
+      [
+        "attribute_group",
+        "attrs"
+      ]
+    ],
+    "maj": [
+      [
+        "?",
+        "maj"
+      ]
+    ],
+    "mask": [
+      [
+        "?",
+        "branch_sample_type"
+      ]
+    ],
+    "max_stack": [
+      [
+        "?",
+        "max_stack"
+      ]
+    ],
+    "mm": [
+      [
+        "?",
+        "mm"
+      ]
+    ],
+    "n_utask": [
+      [
+        "?",
+        "utask"
+      ]
+    ],
+    "name": [
+      [
+        "?",
+        "file_name"
+      ],
+      [
+        "?",
+        "name"
+      ]
+    ],
+    "now": [
+      [
+        "?",
+        "freq_count_stamp"
+      ],
+      [
+        "?",
+        "freq_time_stamp"
+      ],
+      [
+        "?",
+        "timestamp"
+      ],
+      [
+        "?",
+        "tstamp"
+      ]
+    ],
+    "nr": [
+      [
+        "?",
+        "period"
+      ]
+    ],
+    "nr_pages": [
+      [
+        "?",
+        "nr_pages"
+      ]
+    ],
+    "offset": [
+      [
+        "?",
+        "offset"
+      ]
+    ],
+    "orig_ret_vaddr": [
+      [
+        "?",
+        "orig_ret_vaddr"
+      ]
+    ],
+    "overflow_handler": [
+      [
+        "?",
+        "overflow_handler"
+      ]
+    ],
+    "overwrite": [
+      [
+        "?",
+        "aux_overwrite"
+      ]
+    ],
+    "parent_ctx": [
+      [
+        "?",
+        "parent_ctx"
+      ]
+    ],
+    "parent_event": [
+      [
+        "?",
+        "parent"
+      ]
+    ],
+    "path_enomem": [
+      [
+        "?",
+        "path"
+      ]
+    ],
+    "pathname": [
+      [
+        "?",
+        "path"
+      ]
+    ],
+    "pending_id": [
+      [
+        "?",
+        "pending_work"
+      ]
+    ],
+    "perf_compat_ioctl": [
+      [
+        "file_operations",
+        "compat_ioctl"
+      ]
+    ],
+    "perf_event_idx_default": [
+      [
+        "?",
+        "event_idx"
+      ]
+    ],
+    "perf_event_nop_int": [
+      [
+        "?",
+        "check_period"
+      ]
+    ],
+    "perf_event_output_backward": [
+      [
+        "?",
+        "overflow_handler"
+      ]
+    ],
+    "perf_event_output_forward": [
+      [
+        "?",
+        "overflow_handler"
+      ]
+    ],
+    "perf_fasync": [
+      [
+        "file_operations",
+        "fasync"
+      ]
+    ],
+    "perf_ioctl": [
+      [
+        "file_operations",
+        "unlocked_ioctl"
+      ]
+    ],
+    "perf_kprobe_destroy": [
+      [
+        "?",
+        "destroy"
+      ]
+    ],
+    "perf_kprobe_event_init": [
+      [
+        "pmu",
+        "event_init"
+      ]
+    ],
+    "perf_less_group_idx": [
+      [
+        "min_heap_callbacks",
+        "less"
+      ]
+    ],
+    "perf_mmap": [
+      [
+        "file_operations",
+        "mmap"
+      ]
+    ],
+    "perf_mmap_close": [
+      [
+        "vm_operations_struct",
+        "close"
+      ]
+    ],
+    "perf_mmap_fault": [
+      [
+        "vm_operations_struct",
+        "fault"
+      ],
+      [
+        "vm_operations_struct",
+        "page_mkwrite"
+      ]
+    ],
+    "perf_mmap_may_split": [
+      [
+        "vm_operations_struct",
+        "may_split"
+      ]
+    ],
+    "perf_mmap_open": [
+      [
+        "vm_operations_struct",
+        "open"
+      ]
+    ],
+    "perf_mux_hrtimer_handler": [
+      [
+        "?",
+        "function"
+      ]
+    ],
+    "perf_pmu_cancel_txn": [
+      [
+        "?",
+        "cancel_txn"
+      ]
+    ],
+    "perf_pmu_commit_txn": [
+      [
+        "?",
+        "commit_txn"
+      ]
+    ],
+    "perf_pmu_nop_int": [
+      [
+        "?",
+        "commit_txn"
+      ]
+    ],
+    "perf_pmu_nop_txn": [
+      [
+        "?",
+        "start_txn"
+      ]
+    ],
+    "perf_pmu_nop_void": [
+      [
+        "?",
+        "cancel_txn"
+      ],
+      [
+        "?",
+        "pmu_disable"
+      ],
+      [
+        "?",
+        "pmu_enable"
+      ]
+    ],
+    "perf_pmu_start_txn": [
+      [
+        "?",
+        "start_txn"
+      ]
+    ],
+    "perf_poll": [
+      [
+        "file_operations",
+        "poll"
+      ]
+    ],
+    "perf_read": [
+      [
+        "file_operations",
+        "read"
+      ]
+    ],
+    "perf_reboot": [
+      [
+        "notifier_block",
+        "notifier_call"
+      ]
+    ],
+    "perf_release": [
+      [
+        "file_operations",
+        "release"
+      ]
+    ],
+    "perf_sw_context": [
+      [
+        "pmu",
+        "task_ctx_nr"
+      ]
+    ],
+    "perf_swevent_add": [
+      [
+        "pmu",
+        "add"
+      ]
+    ],
+    "perf_swevent_del": [
+      [
+        "pmu",
+        "del"
+      ]
+    ],
+    "perf_swevent_hrtimer": [
+      [
+        "?",
+        "function"
+      ]
+    ],
+    "perf_swevent_init": [
+      [
+        "pmu",
+        "event_init"
+      ]
+    ],
+    "perf_swevent_read": [
+      [
+        "pmu",
+        "read"
+      ]
+    ],
+    "perf_swevent_start": [
+      [
+        "pmu",
+        "start"
+      ]
+    ],
+    "perf_swevent_stop": [
+      [
+        "pmu",
+        "stop"
+      ]
+    ],
+    "perf_tp_event_init": [
+      [
+        "pmu",
+        "event_init"
+      ]
+    ],
+    "perf_trace_add": [
+      [
+        "pmu",
+        "add"
+      ]
+    ],
+    "perf_trace_del": [
+      [
+        "pmu",
+        "del"
+      ]
+    ],
+    "perf_uprobe_destroy": [
+      [
+        "?",
+        "destroy"
+      ]
+    ],
+    "perf_uprobe_event_init": [
+      [
+        "pmu",
+        "event_init"
+      ]
+    ],
+    "pgoff": [
+      [
+        "?",
+        "aux_pgoff"
+      ]
+    ],
+    "pmu": [
+      [
+        "?",
+        "pmu"
+      ]
+    ],
+    "pmu_ctx": [
+      [
+        "?",
+        "pmu_ctx"
+      ],
+      [
+        "?",
+        "task_epc"
+      ]
+    ],
+    "pmu_dev_attrs": [
+      [
+        "attribute_group",
+        "attrs"
+      ]
+    ],
+    "pmu_dev_groups": [
+      [
+        "bus_type",
+        "dev_groups"
+      ]
+    ],
+    "pmu_dev_is_visible": [
+      [
+        "attribute_group",
+        "is_visible"
+      ]
+    ],
+    "pmu_dev_release": [
+      [
+        "?",
+        "release"
+      ]
+    ],
+    "prev": [
+      [
+        "?",
+        "next"
+      ]
+    ],
+    "prog": [
+      [
+        "?",
+        "prog"
+      ]
+    ],
+    "prot": [
+      [
+        "?",
+        "prot"
+      ]
+    ],
+    "rb": [
+      [
+        "?",
+        "rb"
+      ]
+    ],
+    "ref_ctr_offset": [
+      [
+        "?",
+        "ref_ctr_offset"
+      ]
+    ],
+    "regs": [
+      [
+        "?",
+        "regs"
+      ]
+    ],
+    "ri": [
+      [
+        "?",
+        "return_instances"
+      ]
+    ],
+    "sample_period": [
+      [
+        "?",
+        "last_period"
+      ],
+      [
+        "?",
+        "sample_period"
+      ]
+    ],
+    "seq": [
+      [
+        "?",
+        "interrupts_seq"
+      ]
+    ],
+    "sibling": [
+      [
+        "?",
+        "group_leader"
+      ]
+    ],
+    "size": [
+      [
+        "?",
+        "comm_size"
+      ],
+      [
+        "?",
+        "file_size"
+      ],
+      [
+        "?",
+        "header_size"
+      ],
+      [
+        "?",
+        "id_header_size"
+      ],
+      [
+        "?",
+        "path_size"
+      ],
+      [
+        "?",
+        "size"
+      ]
+    ],
+    "stack_size": [
+      [
+        "?",
+        "stack_user_size"
+      ]
+    ],
+    "sw_perf_event_destroy": [
+      [
+        "?",
+        "destroy"
+      ]
+    ],
+    "swap_ptr": [
+      [
+        "min_heap_callbacks",
+        "swp"
+      ]
+    ],
+    "sysctl_perf_event_max_stack": [
+      [
+        "?",
+        "sample_max_stack"
+      ]
+    ],
+    "task_clock_event_add": [
+      [
+        "pmu",
+        "add"
+      ]
+    ],
+    "task_clock_event_del": [
+      [
+        "pmu",
+        "del"
+      ]
+    ],
+    "task_clock_event_init": [
+      [
+        "pmu",
+        "event_init"
+      ]
+    ],
+    "task_clock_event_read": [
+      [
+        "pmu",
+        "read"
+      ]
+    ],
+    "task_clock_event_start": [
+      [
+        "pmu",
+        "start"
+      ]
+    ],
+    "task_clock_event_stop": [
+      [
+        "pmu",
+        "stop"
+      ]
+    ],
+    "task_ctx_data": [
+      [
+        "?",
+        "task_ctx_data"
+      ]
+    ],
+    "test_exit": [
+      [
+        "kunit_suite",
+        "exit"
+      ]
+    ],
+    "test_init": [
+      [
+        "kunit_suite",
+        "init"
+      ]
+    ],
+    "timer": [
+      [
+        "?",
+        "hrtimer_interval_ms"
+      ]
+    ],
+    "tp_perf_event_destroy": [
+      [
+        "?",
+        "destroy"
+      ]
+    ],
+    "type": [
+      [
+        "?",
+        "type"
+      ]
+    ],
+    "uprobe": [
+      [
+        "?",
+        "active_uprobe"
+      ],
+      [
+        "?",
+        "uprobe"
+      ]
+    ],
+    "uprobe_attr_groups": [
+      [
+        "pmu",
+        "attr_groups"
+      ]
+    ],
+    "uprobe_attrs": [
+      [
+        "attribute_group",
+        "attrs"
+      ]
+    ],
+    "vaddr": [
+      [
+        "?",
+        "vaddr"
+      ]
+    ],
+    "value": [
+      [
+        "?",
+        "sample_freq"
+      ],
+      [
+        "?",
+        "sample_period"
+      ]
+    ],
+    "watermark": [
+      [
+        "?",
+        "aux_watermark"
+      ]
+    ],
+    "xol_fault": [
+      [
+        "vm_special_mapping",
+        "fault"
+      ]
+    ],
+    "xol_vaddr": [
+      [
+        "?",
+        "xol_vaddr"
+      ]
+    ]
+  }
+}

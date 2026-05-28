@@ -1,0 +1,221 @@
+{
+  "generated_at": 1779948956,
+  "min_support": 3,
+  "outliers": [
+    {
+      "callee": "perf_event__output_id_sample",
+      "caller": "__perf_output_begin",
+      "callsite_count": 16,
+      "contract_kind_class": "early",
+      "contract_kind_label": "early_return",
+      "file": "kernel/events/ring_buffer.c",
+      "guards_present": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 167
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!rb))",
+          "source_line": 175
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(rb->paused))",
+          "source_line": 178
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb->overwrite)",
+          "source_line": 203
+        },
+        {
+          "kind": "enclosing_if",
+          "polarity": "in_true_branch",
+          "predicate": "unlikely(have_lost)",
+          "source_line": 248
+        }
+      ],
+      "line": 258,
+      "local_establishment": 0.0,
+      "missing_contract": "!(ret)",
+      "support_count": 15,
+      "support_pct": 0.9375,
+      "suspicion": 0.9375
+    },
+    {
+      "callee": "perf_output_end",
+      "caller": "__perf_event_output",
+      "callsite_count": 16,
+      "contract_kind_class": "early",
+      "contract_kind_label": "early_return",
+      "file": "kernel/events/core.c",
+      "guards_present": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 8129
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "source_line": 8135
+        }
+      ],
+      "line": 8140,
+      "local_establishment": 0.0,
+      "missing_contract": "!(ret)",
+      "support_count": 15,
+      "support_pct": 0.9375,
+      "suspicion": 0.9375
+    },
+    {
+      "callee": "bp_slots_histogram_add",
+      "caller": "toggle_bp_slot",
+      "callsite_count": 9,
+      "contract_kind_class": "early",
+      "contract_kind_label": "early_return",
+      "file": "kernel/events/hw_breakpoint.c",
+      "guards_present": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held_write(&bp_cpuinfo_sem)",
+          "source_line": 423
+        },
+        {
+          "kind": "enclosing_if",
+          "polarity": "in_true_branch",
+          "predicate": "!bp->hw.target",
+          "source_line": 416
+        }
+      ],
+      "line": 424,
+      "local_establishment": 0.0,
+      "missing_contract": "!(!bp->hw.target)",
+      "support_count": 8,
+      "support_pct": 0.8889,
+      "suspicion": 0.8889
+    },
+    {
+      "callee": "bp_slots_histogram_add",
+      "caller": "toggle_bp_slot",
+      "callsite_count": 9,
+      "contract_kind_class": "early",
+      "contract_kind_label": "early_return",
+      "file": "kernel/events/hw_breakpoint.c",
+      "guards_present": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held_write(&bp_cpuinfo_sem)",
+          "source_line": 423
+        },
+        {
+          "kind": "enclosing_if",
+          "polarity": "in_true_branch",
+          "predicate": "!bp->hw.target",
+          "source_line": 416
+        }
+      ],
+      "line": 424,
+      "local_establishment": 0.0,
+      "missing_contract": "!(!enable)",
+      "support_count": 8,
+      "support_pct": 0.8889,
+      "suspicion": 0.8889
+    },
+    {
+      "callee": "bp_slots_histogram_add",
+      "caller": "toggle_bp_slot",
+      "callsite_count": 9,
+      "contract_kind_class": "early",
+      "contract_kind_label": "early_return",
+      "file": "kernel/events/hw_breakpoint.c",
+      "guards_present": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held_write(&bp_cpuinfo_sem)",
+          "source_line": 423
+        },
+        {
+          "kind": "enclosing_if",
+          "polarity": "in_true_branch",
+          "predicate": "!bp->hw.target",
+          "source_line": 416
+        }
+      ],
+      "line": 424,
+      "local_establishment": 0.0,
+      "missing_contract": "!(ret)",
+      "support_count": 8,
+      "support_pct": 0.8889,
+      "suspicion": 0.8889
+    },
+    {
+      "callee": "bp_slots_histogram_add",
+      "caller": "toggle_bp_slot",
+      "callsite_count": 9,
+      "contract_kind_class": "lock",
+      "contract_kind_label": "lock_held",
+      "file": "kernel/events/hw_breakpoint.c",
+      "guards_present": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held_write(&bp_cpuinfo_sem)",
+          "source_line": 423
+        },
+        {
+          "kind": "enclosing_if",
+          "polarity": "in_true_branch",
+          "predicate": "!bp->hw.target",
+          "source_line": 416
+        }
+      ],
+      "line": 424,
+      "local_establishment": 0.0,
+      "missing_contract": "lockdep_assert_held_read(&bp_cpuinfo_sem)",
+      "support_count": 8,
+      "support_pct": 0.8889,
+      "suspicion": 0.8889
+    },
+    {
+      "callee": "bp_slots_histogram_add",
+      "caller": "toggle_bp_slot",
+      "callsite_count": 9,
+      "contract_kind_class": "null",
+      "contract_kind_label": "null_check",
+      "file": "kernel/events/hw_breakpoint.c",
+      "guards_present": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held_write(&bp_cpuinfo_sem)",
+          "source_line": 423
+        },
+        {
+          "kind": "enclosing_if",
+          "polarity": "in_true_branch",
+          "predicate": "!bp->hw.target",
+          "source_line": 416
+        }
+      ],
+      "line": 424,
+      "local_establishment": 0.0,
+      "missing_contract": "enable != NULL",
+      "support_count": 8,
+      "support_pct": 0.8889,
+      "suspicion": 0.8889
+    }
+  ],
+  "stats": {
+    "by_kind_class": {
+      "early": 5,
+      "lock": 1,
+      "null": 1
+    },
+    "outliers_with_local_establishment": 0,
+    "total_outliers": 7,
+    "wall_seconds": 0.01
+  },
+  "target": "linux-6.12.91-kernel-events",
+  "tau": 0.85
+}

@@ -1,0 +1,92 @@
+{
+  "callee": "perf_event_groups_first",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "perf_event_groups_next",
+      "file": "kernel/events/core.c",
+      "line": 1815,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(next)",
+          "exit_kind": "return",
+          "source_line": 1808,
+          "exit_line": 1809
+        }
+      ]
+    },
+    {
+      "caller": "visit_groups_merge",
+      "file": "kernel/events/core.c",
+      "line": 3894,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&cpuctx->ctx.lock)",
+          "source_line": 3881
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(pmu->filter && pmu->filter(pmu, cpu))",
+          "exit_kind": "return",
+          "source_line": 3870,
+          "exit_line": 3871
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ctx->task",
+          "polarity": "in_false_branch",
+          "source_line": 3887
+        }
+      ]
+    },
+    {
+      "caller": "visit_groups_merge",
+      "file": "kernel/events/core.c",
+      "line": 3898,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&cpuctx->ctx.lock)",
+          "source_line": 3881
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(pmu->filter && pmu->filter(pmu, cpu))",
+          "exit_kind": "return",
+          "source_line": 3870,
+          "exit_line": 3871
+        }
+      ]
+    },
+    {
+      "caller": "visit_groups_merge",
+      "file": "kernel/events/core.c",
+      "line": 3902,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&cpuctx->ctx.lock)",
+          "source_line": 3881
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(pmu->filter && pmu->filter(pmu, cpu))",
+          "exit_kind": "return",
+          "source_line": 3870,
+          "exit_line": 3871
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "; css; css = css->parent",
+          "polarity": "in_true_branch",
+          "source_line": 3901
+        }
+      ]
+    }
+  ]
+}

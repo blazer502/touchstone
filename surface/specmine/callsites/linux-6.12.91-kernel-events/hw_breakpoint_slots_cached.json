@@ -1,0 +1,131 @@
+{
+  "callee": "hw_breakpoint_slots_cached",
+  "defined_in": "kernel/events/hw_breakpoint.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "bp_slots_histogram_alloc",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 188,
+      "guards": []
+    },
+    {
+      "caller": "bp_slots_histogram_max",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 251,
+      "guards": []
+    },
+    {
+      "caller": "bp_slots_histogram_max_merge",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 268,
+      "guards": []
+    },
+    {
+      "caller": "__reserve_bp_slot",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 592,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "constraints_initialized != NULL",
+          "source_line": 579
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!constraints_initialized)",
+          "exit_kind": "return",
+          "source_line": 579,
+          "exit_line": 580
+        }
+      ]
+    },
+    {
+      "caller": "hw_breakpoint_is_used",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 909,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "constraints_initialized != NULL",
+          "source_line": 899
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!constraints_initialized)",
+          "exit_kind": "return",
+          "source_line": 899,
+          "exit_line": 900
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->cpu_pinned)",
+          "exit_kind": "return",
+          "source_line": 906,
+          "exit_line": 907
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "int type = 0; type < TYPE_MAX; ++type",
+          "polarity": "in_true_branch",
+          "source_line": 903
+        }
+      ]
+    },
+    {
+      "caller": "hw_breakpoint_is_used",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 917,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "constraints_initialized != NULL",
+          "source_line": 899
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!constraints_initialized)",
+          "exit_kind": "return",
+          "source_line": 899,
+          "exit_line": 900
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->cpu_pinned)",
+          "exit_kind": "return",
+          "source_line": 906,
+          "exit_line": 907
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(atomic_read(&info->tsk_pinned.count[slot]))",
+          "exit_kind": "return",
+          "source_line": 910,
+          "exit_line": 911
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "int type = 0; type < TYPE_MAX; ++type",
+          "polarity": "in_true_branch",
+          "source_line": 916
+        }
+      ]
+    },
+    {
+      "caller": "hw_breakpoint_event_init",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 956,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(bp->attr.type != PERF_TYPE_BREAKPOINT)",
+          "exit_kind": "return",
+          "source_line": 949,
+          "exit_line": 950
+        }
+      ]
+    }
+  ]
+}

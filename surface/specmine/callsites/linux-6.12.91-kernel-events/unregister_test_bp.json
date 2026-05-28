@@ -1,0 +1,70 @@
+{
+  "callee": "unregister_test_bp",
+  "defined_in": "kernel/events/hw_breakpoint_test.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "test_one_task_on_all_cpus",
+      "file": "kernel/events/hw_breakpoint_test.c",
+      "line": 155,
+      "guards": []
+    },
+    {
+      "caller": "test_two_tasks_on_all_cpus",
+      "file": "kernel/events/hw_breakpoint_test.c",
+      "line": 173,
+      "guards": []
+    },
+    {
+      "caller": "test_one_task_on_one_cpu",
+      "file": "kernel/events/hw_breakpoint_test.c",
+      "line": 189,
+      "guards": []
+    },
+    {
+      "caller": "test_one_task_mixed",
+      "file": "kernel/events/hw_breakpoint_test.c",
+      "line": 206,
+      "guards": []
+    },
+    {
+      "caller": "test_one_task_mixed",
+      "file": "kernel/events/hw_breakpoint_test.c",
+      "line": 207,
+      "guards": []
+    },
+    {
+      "caller": "test_task_on_all_and_one_cpu",
+      "file": "kernel/events/hw_breakpoint_test.c",
+      "line": 268,
+      "guards": []
+    },
+    {
+      "caller": "test_task_on_all_and_one_cpu",
+      "file": "kernel/events/hw_breakpoint_test.c",
+      "line": 272,
+      "guards": []
+    },
+    {
+      "caller": "test_exit",
+      "file": "kernel/events/hw_breakpoint_test.c",
+      "line": 311,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "int i = 0; i < MAX_TEST_BREAKPOINTS; ++i",
+          "polarity": "in_true_branch",
+          "source_line": 309
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "test_bps[i]",
+          "polarity": "in_true_branch",
+          "source_line": 310
+        }
+      ]
+    }
+  ]
+}

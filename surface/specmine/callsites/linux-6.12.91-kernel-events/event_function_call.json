@@ -1,0 +1,106 @@
+{
+  "callee": "event_function_call",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "perf_remove_from_context",
+      "file": "kernel/events/core.c",
+      "line": 2521,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->mutex)",
+          "source_line": 2505
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx->is_active)",
+          "exit_kind": "return",
+          "source_line": 2513
+        }
+      ]
+    },
+    {
+      "caller": "_perf_event_disable",
+      "file": "kernel/events/core.c",
+      "line": 2588,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state <= PERF_EVENT_STATE_OFF)",
+          "exit_kind": "return",
+          "source_line": 2582
+        }
+      ]
+    },
+    {
+      "caller": "_perf_event_enable",
+      "file": "kernel/events/core.c",
+      "line": 3129,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state == PERF_EVENT_STATE_ERROR)",
+          "exit_kind": "goto",
+          "source_line": 3117
+        }
+      ]
+    },
+    {
+      "caller": "_perf_event_period",
+      "file": "kernel/events/core.c",
+      "line": 6015,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "value != NULL",
+          "source_line": 6002
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!is_sampling_event(event))",
+          "exit_kind": "return",
+          "source_line": 5999,
+          "exit_line": 6000
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!value)",
+          "exit_kind": "return",
+          "source_line": 6002,
+          "exit_line": 6003
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(value > sysctl_perf_event_sample_rate)",
+          "exit_kind": "return",
+          "source_line": 6006,
+          "exit_line": 6007
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->attr.freq)",
+          "exit_kind": "return",
+          "source_line": 6005
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(perf_event_check_period(event, value))",
+          "exit_kind": "return",
+          "source_line": 6009,
+          "exit_line": 6010
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(value & (1ULL << 63))",
+          "exit_kind": "return",
+          "source_line": 6011,
+          "exit_line": 6012
+        }
+      ]
+    }
+  ]
+}

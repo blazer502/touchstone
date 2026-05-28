@@ -1,0 +1,53 @@
+{
+  "callee": "ctx_sched_in",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "perf_ctx_enable",
+      "file": "kernel/events/core.c",
+      "line": 760,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_sched_in",
+      "file": "kernel/events/core.c",
+      "line": 2784,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_sched_in",
+      "file": "kernel/events/core.c",
+      "line": 2786,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "ctx",
+          "polarity": "in_true_branch",
+          "source_line": 2785
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_sched_in",
+      "file": "kernel/events/core.c",
+      "line": 2787,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_sched_in",
+      "file": "kernel/events/core.c",
+      "line": 2789,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "ctx",
+          "polarity": "in_true_branch",
+          "source_line": 2788
+        }
+      ]
+    }
+  ]
+}

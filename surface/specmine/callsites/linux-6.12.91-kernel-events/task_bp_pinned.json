@@ -1,0 +1,123 @@
+{
+  "callee": "task_bp_pinned",
+  "defined_in": "kernel/events/hw_breakpoint.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "max_bp_pinned_slots",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 377,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "bp->hw.target && bp->cpu < 0",
+          "polarity": "in_true_branch",
+          "source_line": 376
+        }
+      ]
+    },
+    {
+      "caller": "max_bp_pinned_slots",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 397,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(max_pinned >= 0)",
+          "exit_kind": "return",
+          "source_line": 379
+        }
+      ]
+    },
+    {
+      "caller": "toggle_bp_slot",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 472,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held_write(&bp_cpuinfo_sem)",
+          "source_line": 423
+        },
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held_read(&bp_cpuinfo_sem)",
+          "source_line": 436
+        },
+        {
+          "kind": "null_check",
+          "predicate": "enable != NULL",
+          "source_line": 459
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!bp->hw.target)",
+          "exit_kind": "return",
+          "source_line": 416
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 466,
+          "exit_line": 467
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!enable)",
+          "exit_kind": "return",
+          "source_line": 459
+        }
+      ]
+    },
+    {
+      "caller": "toggle_bp_slot",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 507,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held_write(&bp_cpuinfo_sem)",
+          "source_line": 423
+        },
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held_read(&bp_cpuinfo_sem)",
+          "source_line": 436
+        },
+        {
+          "kind": "null_check",
+          "predicate": "enable != NULL",
+          "source_line": 459
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!bp->hw.target)",
+          "exit_kind": "return",
+          "source_line": 416
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 466,
+          "exit_line": 467
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!enable)",
+          "exit_kind": "return",
+          "source_line": 459
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "next_tsk_pinned >= 0",
+          "polarity": "in_false_branch",
+          "source_line": 503
+        }
+      ]
+    }
+  ]
+}

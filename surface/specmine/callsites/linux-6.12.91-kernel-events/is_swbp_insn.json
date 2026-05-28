@@ -1,0 +1,33 @@
+{
+  "callee": "is_swbp_insn",
+  "defined_in": "kernel/events/uprobes.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "is_trap_insn",
+      "file": "kernel/events/uprobes.c",
+      "line": 255,
+      "guards": []
+    },
+    {
+      "caller": "verify_opcode",
+      "file": "kernel/events/uprobes.c",
+      "line": 287,
+      "guards": []
+    },
+    {
+      "caller": "verify_opcode",
+      "file": "kernel/events/uprobes.c",
+      "line": 289,
+      "guards": []
+    },
+    {
+      "caller": "uprobe_write_opcode",
+      "file": "kernel/events/uprobes.c",
+      "line": 488,
+      "guards": []
+    }
+  ]
+}

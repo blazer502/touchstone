@@ -1,0 +1,40 @@
+{
+  "callee": "perf_clock",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "__update_context_time",
+      "file": "kernel/events/core.c",
+      "line": 1510,
+      "guards": []
+    },
+    {
+      "caller": "calc_timer_values",
+      "file": "kernel/events/core.c",
+      "line": 4686,
+      "guards": []
+    },
+    {
+      "caller": "__perf_event_account_interrupt",
+      "file": "kernel/events/core.c",
+      "line": 9774,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "event->attr.freq",
+          "polarity": "in_true_branch",
+          "source_line": 9773
+        }
+      ]
+    },
+    {
+      "caller": "task_clock_event_read",
+      "file": "kernel/events/core.c",
+      "line": 11582,
+      "guards": []
+    }
+  ]
+}

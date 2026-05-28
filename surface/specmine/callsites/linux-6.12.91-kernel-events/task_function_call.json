@@ -1,0 +1,99 @@
+{
+  "callee": "task_function_call",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "event_function_call",
+      "file": "kernel/events/core.c",
+      "line": 340,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->mutex)",
+          "source_line": 328
+        },
+        {
+          "kind": "null_check",
+          "predicate": "task != NULL",
+          "source_line": 331
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!task)",
+          "exit_kind": "return",
+          "source_line": 331
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(task == TASK_TOMBSTONE)",
+          "exit_kind": "return",
+          "source_line": 336,
+          "exit_line": 337
+        }
+      ]
+    },
+    {
+      "caller": "perf_install_in_context",
+      "file": "kernel/events/core.c",
+      "line": 3023,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->mutex)",
+          "source_line": 2947
+        },
+        {
+          "kind": "null_check",
+          "predicate": "task != NULL",
+          "source_line": 2980
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!exclusive_event_installable(event, ctx))",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2949
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->cpu != cpu)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2952
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(task == TASK_TOMBSTONE)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2988
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->task == TASK_TOMBSTONE)",
+          "exit_kind": "return",
+          "source_line": 2971
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!task)",
+          "exit_kind": "return",
+          "source_line": 2980
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(task == TASK_TOMBSTONE))",
+          "exit_kind": "return",
+          "source_line": 2988,
+          "exit_line": 2989
+        }
+      ]
+    },
+    {
+      "caller": "perf_cgroup_attach",
+      "file": "kernel/events/core.c",
+      "line": 14391,
+      "guards": []
+    }
+  ]
+}

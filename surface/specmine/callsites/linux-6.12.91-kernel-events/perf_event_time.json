@@ -1,0 +1,54 @@
+{
+  "callee": "perf_event_time",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_sample_event_took",
+      "file": "kernel/events/core.c",
+      "line": 622,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(max_len == 0)",
+          "exit_kind": "return",
+          "source_line": 574,
+          "exit_line": 575
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(avg_len <= max_len)",
+          "exit_kind": "return",
+          "source_line": 589,
+          "exit_line": 590
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_update_time",
+      "file": "kernel/events/core.c",
+      "line": 686,
+      "guards": []
+    },
+    {
+      "caller": "list_add_event",
+      "file": "kernel/events/core.c",
+      "line": 1847,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->lock)",
+          "source_line": 1842
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->attach_state & PERF_ATTACH_CONTEXT)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 1844
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "callee": "cpu_function_call",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "event_function_call",
+      "file": "kernel/events/core.c",
+      "line": 332,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->mutex)",
+          "source_line": 328
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!task",
+          "polarity": "in_true_branch",
+          "source_line": 331
+        }
+      ]
+    },
+    {
+      "caller": "perf_install_in_context",
+      "file": "kernel/events/core.c",
+      "line": 2981,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->mutex)",
+          "source_line": 2947
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!exclusive_event_installable(event, ctx))",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2949
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->cpu != cpu)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2952
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->task == TASK_TOMBSTONE)",
+          "exit_kind": "return",
+          "source_line": 2971
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!task",
+          "polarity": "in_true_branch",
+          "source_line": 2980
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_stop",
+      "file": "kernel/events/core.c",
+      "line": 3206,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(READ_ONCE(event->state) != PERF_EVENT_STATE_ACTIVE)",
+          "exit_kind": "return",
+          "source_line": 3195,
+          "exit_line": 3196
+        }
+      ]
+    },
+    {
+      "caller": "perf_pmu_output_stop",
+      "file": "kernel/events/core.c",
+      "line": 8412,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 8397
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cpu == -1)",
+          "exit_kind": "continue",
+          "source_line": 8409,
+          "exit_line": 8410
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_mux_interval_ms_store",
+      "file": "kernel/events/core.c",
+      "line": 11752,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 11742
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 11732,
+          "exit_line": 11733
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(timer < 1)",
+          "exit_kind": "return",
+          "source_line": 11735,
+          "exit_line": 11736
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(timer == pmu->hrtimer_interval_ms)",
+          "exit_kind": "return",
+          "source_line": 11739,
+          "exit_line": 11740
+        }
+      ]
+    }
+  ]
+}

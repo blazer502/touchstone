@@ -1,0 +1,113 @@
+{
+  "callee": "perf_event_stop",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "ring_buffer_attach",
+      "file": "kernel/events/core.c",
+      "line": 6420,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->parent)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 6380
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->rcu_pending)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 6387
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "has_aux(event)",
+          "polarity": "in_true_branch",
+          "source_line": 6419
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_addr_filters_exec",
+      "file": "kernel/events/core.c",
+      "line": 8319,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!has_addr_filter(event))",
+          "exit_kind": "return",
+          "source_line": 8300,
+          "exit_line": 8301
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "restart",
+          "polarity": "in_true_branch",
+          "source_line": 8318
+        }
+      ]
+    },
+    {
+      "caller": "__perf_addr_filters_adjust",
+      "file": "kernel/events/core.c",
+      "line": 9145,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!has_addr_filter(event))",
+          "exit_kind": "return",
+          "source_line": 9125,
+          "exit_line": 9126
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!vma->vm_file)",
+          "exit_kind": "return",
+          "source_line": 9128,
+          "exit_line": 9129
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "restart",
+          "polarity": "in_true_branch",
+          "source_line": 9144
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_addr_filters_apply",
+      "file": "kernel/events/core.c",
+      "line": 11084,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "mm != NULL",
+          "source_line": 11049
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(task == TASK_TOMBSTONE)",
+          "exit_kind": "return",
+          "source_line": 11044,
+          "exit_line": 11045
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!mm)",
+          "exit_kind": "goto",
+          "source_line": 11049,
+          "exit_line": 11050
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ifh->nr_file_filters)",
+          "exit_kind": "goto",
+          "source_line": 11047
+        }
+      ]
+    }
+  ]
+}

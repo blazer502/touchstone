@@ -1,0 +1,373 @@
+{
+  "callee": "ring_buffer_put",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "ring_buffer_attach",
+      "file": "kernel/events/core.c",
+      "line": 6425,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->parent)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 6380
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->rcu_pending)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 6387
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "old_rb",
+          "polarity": "in_true_branch",
+          "source_line": 6424
+        }
+      ]
+    },
+    {
+      "caller": "perf_mmap_close",
+      "file": "kernel/events/core.c",
+      "line": 6610,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "detach_rest != NULL",
+          "source_line": 6550
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(refcount_read(&rb->aux_refcount))",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 6535
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!atomic_dec_and_mutex_lock(&event->mmap_count, &event->mmap_mutex))",
+          "exit_kind": "goto",
+          "source_line": 6543,
+          "exit_line": 6544
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!detach_rest)",
+          "exit_kind": "goto",
+          "source_line": 6550,
+          "exit_line": 6551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!atomic_long_inc_not_zero(&event->refcount))",
+          "exit_kind": "continue",
+          "source_line": 6561
+        }
+      ]
+    },
+    {
+      "caller": "perf_prepare_sample_aux",
+      "file": "kernel/events/core.c",
+      "line": 7238,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "sampler != NULL",
+          "source_line": 7215
+        },
+        {
+          "kind": "null_check",
+          "predicate": "rb != NULL",
+          "source_line": 7225
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(READ_ONCE(sampler->state) != PERF_EVENT_STATE_ACTIVE)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 7218
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(READ_ONCE(sampler->oncpu) != smp_processor_id())",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 7221
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!sampler)",
+          "exit_kind": "goto",
+          "source_line": 7215,
+          "exit_line": 7216
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(READ_ONCE(sampler->state) != PERF_EVENT_STATE_ACTIVE))",
+          "exit_kind": "goto",
+          "source_line": 7218,
+          "exit_line": 7219
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(READ_ONCE(sampler->oncpu) != smp_processor_id()))",
+          "exit_kind": "goto",
+          "source_line": 7221,
+          "exit_line": 7222
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb)",
+          "exit_kind": "goto",
+          "source_line": 7225,
+          "exit_line": 7226
+        }
+      ]
+    },
+    {
+      "caller": "perf_aux_sample_output",
+      "file": "kernel/events/core.c",
+      "line": 7319,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "rb != NULL",
+          "source_line": 7291
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!sampler || !data->aux_size)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 7287
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(size < 0)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 7302
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(pad >= sizeof(u64))",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 7310
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(!sampler || !data->aux_size))",
+          "exit_kind": "return",
+          "source_line": 7287,
+          "exit_line": 7288
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb)",
+          "exit_kind": "return",
+          "source_line": 7291,
+          "exit_line": 7292
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(size < 0))",
+          "exit_kind": "goto",
+          "source_line": 7302,
+          "exit_line": 7303
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_aux_pause",
+      "file": "kernel/events/core.c",
+      "line": 8112,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "rb != NULL",
+          "source_line": 8095
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!event)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 8091
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(!event))",
+          "exit_kind": "return",
+          "source_line": 8091,
+          "exit_line": 8092
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb)",
+          "exit_kind": "return",
+          "source_line": 8095,
+          "exit_line": 8096
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(READ_ONCE(rb->aux_in_pause_resume))",
+          "exit_kind": "break",
+          "source_line": 8103,
+          "exit_line": 8104
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_set_output",
+      "file": "kernel/events/core.c",
+      "line": 12762,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 12701
+        },
+        {
+          "kind": "null_check",
+          "predicate": "output_event != NULL",
+          "source_line": 12700
+        },
+        {
+          "kind": "null_check",
+          "predicate": "rb != NULL",
+          "source_line": 12757
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!output_event)",
+          "exit_kind": "goto",
+          "source_line": 12700
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event == output_event)",
+          "exit_kind": "goto",
+          "source_line": 12706,
+          "exit_line": 12707
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(output_event->cpu != event->cpu)",
+          "exit_kind": "goto",
+          "source_line": 12712,
+          "exit_line": 12713
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(output_event->cpu == -1 && output_event->hw.target != event->hw.target)",
+          "exit_kind": "goto",
+          "source_line": 12718,
+          "exit_line": 12719
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(output_event->clock != event->clock)",
+          "exit_kind": "goto",
+          "source_line": 12724,
+          "exit_line": 12725
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(is_write_backward(output_event) != is_write_backward(event))",
+          "exit_kind": "goto",
+          "source_line": 12731,
+          "exit_line": 12732
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(atomic_read(&event->mmap_count))",
+          "exit_kind": "goto",
+          "source_line": 12751,
+          "exit_line": 12752
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb)",
+          "exit_kind": "goto",
+          "source_line": 12757,
+          "exit_line": 12758
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "output_event",
+          "polarity": "in_true_branch",
+          "source_line": 12754
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!atomic_read(&rb->mmap_count)",
+          "polarity": "in_true_branch",
+          "source_line": 12761
+        }
+      ]
+    },
+    {
+      "caller": "perf_aux_output_begin",
+      "file": "kernel/events/ring_buffer.c",
+      "line": 458,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "rb != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(nest)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 414
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb)",
+          "exit_kind": "return",
+          "source_line": 389,
+          "exit_line": 390
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb_has_aux(rb))",
+          "exit_kind": "goto",
+          "source_line": 392,
+          "exit_line": 393
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!atomic_read(&rb->aux_mmap_count))",
+          "exit_kind": "goto",
+          "source_line": 403,
+          "exit_line": 404
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!refcount_inc_not_zero(&rb->aux_refcount))",
+          "exit_kind": "goto",
+          "source_line": 406,
+          "exit_line": 407
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(nest))",
+          "exit_kind": "goto",
+          "source_line": 414,
+          "exit_line": 415
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!handle->size)",
+          "exit_kind": "goto",
+          "source_line": 443
+        }
+      ]
+    },
+    {
+      "caller": "perf_aux_output_end",
+      "file": "kernel/events/ring_buffer.c",
+      "line": 538,
+      "guards": []
+    }
+  ]
+}

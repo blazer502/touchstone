@@ -1,0 +1,33 @@
+{
+  "callee": "perf_swevent_get_recursion_context",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "perf_pending_disable",
+      "file": "kernel/events/core.c",
+      "line": 6979,
+      "guards": []
+    },
+    {
+      "caller": "perf_pending_irq",
+      "file": "kernel/events/core.c",
+      "line": 6994,
+      "guards": []
+    },
+    {
+      "caller": "perf_pending_task",
+      "file": "kernel/events/core.c",
+      "line": 7018,
+      "guards": []
+    },
+    {
+      "caller": "__perf_sw_event",
+      "file": "kernel/events/core.c",
+      "line": 10261,
+      "guards": []
+    }
+  ]
+}

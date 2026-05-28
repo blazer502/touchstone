@@ -1,0 +1,120 @@
+{
+  "contracts": [
+    {
+      "callee": "bp_slots_histogram_add",
+      "callsite_count": 9,
+      "kind_class": "lock",
+      "kind_label": "lock_held",
+      "outlier_count": 0,
+      "predicate": "lockdep_assert_held_write(&bp_cpuinfo_sem)",
+      "support_count": 9,
+      "support_pct": 1.0
+    },
+    {
+      "callee": "__heap_add",
+      "callsite_count": 3,
+      "kind_class": "early",
+      "kind_label": "early_return",
+      "outlier_count": 0,
+      "predicate": "!(pmu->filter && pmu->filter(pmu, cpu))",
+      "support_count": 3,
+      "support_pct": 1.0
+    },
+    {
+      "callee": "__heap_add",
+      "callsite_count": 3,
+      "kind_class": "lock",
+      "kind_label": "lock_held",
+      "outlier_count": 0,
+      "predicate": "lockdep_assert_held(&cpuctx->ctx.lock)",
+      "support_count": 3,
+      "support_pct": 1.0
+    },
+    {
+      "callee": "perf_event__output_id_sample",
+      "callsite_count": 16,
+      "kind_class": "early",
+      "kind_label": "early_return",
+      "outlier_count": 1,
+      "predicate": "!(ret)",
+      "support_count": 15,
+      "support_pct": 0.9375
+    },
+    {
+      "callee": "perf_output_end",
+      "callsite_count": 16,
+      "kind_class": "early",
+      "kind_label": "early_return",
+      "outlier_count": 1,
+      "predicate": "!(ret)",
+      "support_count": 15,
+      "support_pct": 0.9375
+    },
+    {
+      "callee": "bp_slots_histogram_add",
+      "callsite_count": 9,
+      "kind_class": "early",
+      "kind_label": "early_return",
+      "outlier_count": 1,
+      "predicate": "!(!bp->hw.target)",
+      "support_count": 8,
+      "support_pct": 0.8889
+    },
+    {
+      "callee": "bp_slots_histogram_add",
+      "callsite_count": 9,
+      "kind_class": "early",
+      "kind_label": "early_return",
+      "outlier_count": 1,
+      "predicate": "!(!enable)",
+      "support_count": 8,
+      "support_pct": 0.8889
+    },
+    {
+      "callee": "bp_slots_histogram_add",
+      "callsite_count": 9,
+      "kind_class": "early",
+      "kind_label": "early_return",
+      "outlier_count": 1,
+      "predicate": "!(ret)",
+      "support_count": 8,
+      "support_pct": 0.8889
+    },
+    {
+      "callee": "bp_slots_histogram_add",
+      "callsite_count": 9,
+      "kind_class": "lock",
+      "kind_label": "lock_held",
+      "outlier_count": 1,
+      "predicate": "lockdep_assert_held_read(&bp_cpuinfo_sem)",
+      "support_count": 8,
+      "support_pct": 0.8889
+    },
+    {
+      "callee": "bp_slots_histogram_add",
+      "callsite_count": 9,
+      "kind_class": "null",
+      "kind_label": "null_check",
+      "outlier_count": 1,
+      "predicate": "enable != NULL",
+      "support_count": 8,
+      "support_pct": 0.8889
+    }
+  ],
+  "generated_at": 1779948956,
+  "min_support": 3,
+  "stats": {
+    "by_kind_class": {
+      "early": 6,
+      "lock": 3,
+      "null": 1
+    },
+    "callees_examined": 112,
+    "callees_with_contracts": 4,
+    "mined_contracts": 10,
+    "total_callsites": 631,
+    "wall_seconds": 0.01
+  },
+  "target": "linux-6.12.91-kernel-events",
+  "tau": 0.85
+}

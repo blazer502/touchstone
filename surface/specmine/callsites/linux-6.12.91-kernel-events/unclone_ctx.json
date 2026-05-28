@@ -1,0 +1,146 @@
+{
+  "callee": "unclone_ctx",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "perf_event_enable_on_exec",
+      "file": "kernel/events/core.c",
+      "line": 4534,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "irqs_disabled",
+          "source_line": 4514
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(current->perf_event_ctxp != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 4515
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(current->perf_event_ctxp != ctx))",
+          "exit_kind": "goto",
+          "source_line": 4515,
+          "exit_line": 4516
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx->nr_events)",
+          "exit_kind": "goto",
+          "source_line": 4518,
+          "exit_line": 4519
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "enabled",
+          "polarity": "in_true_branch",
+          "source_line": 4533
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_remove_on_exec",
+      "file": "kernel/events/core.c",
+      "line": 4580,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 4561
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctx->task != current)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 4563
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(ctx->task != current))",
+          "exit_kind": "goto",
+          "source_line": 4563,
+          "exit_line": 4564
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!event->attr.remove_on_exec)",
+          "exit_kind": "continue",
+          "source_line": 4567,
+          "exit_line": 4568
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "modified",
+          "polarity": "in_true_branch",
+          "source_line": 4579
+        }
+      ]
+    },
+    {
+      "caller": "find_get_context",
+      "file": "kernel/events/core.c",
+      "line": 4938,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "task != NULL",
+          "source_line": 4918
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 4921,
+          "exit_line": 4922
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!task)",
+          "exit_kind": "return",
+          "source_line": 4918
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ctx",
+          "polarity": "in_true_branch",
+          "source_line": 4937
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_exit_task_context",
+      "file": "kernel/events/core.c",
+      "line": 13572,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 13553
+        },
+        {
+          "kind": "null_check",
+          "predicate": "child_ctx != NULL",
+          "source_line": 13540
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(child != current)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 13537
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!child_ctx)",
+          "exit_kind": "return",
+          "source_line": 13540,
+          "exit_line": 13541
+        }
+      ]
+    }
+  ]
+}

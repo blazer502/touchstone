@@ -1,0 +1,72 @@
+{
+  "callee": "ctx_time_freeze",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "__perf_install_in_context",
+      "file": "kernel/events/core.c",
+      "line": 2918,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(reprogram && cpuctx->task_ctx && cpuctx->task_ctx != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2900
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(task_curr(ctx->task) && !reprogram)",
+          "exit_kind": "goto",
+          "source_line": 2895
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "reprogram",
+          "polarity": "in_true_branch",
+          "source_line": 2917
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_enable",
+      "file": "kernel/events/core.c",
+      "line": 3064,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_enable_on_exec",
+      "file": "kernel/events/core.c",
+      "line": 4523,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "irqs_disabled",
+          "source_line": 4514
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(current->perf_event_ctxp != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 4515
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(current->perf_event_ctxp != ctx))",
+          "exit_kind": "goto",
+          "source_line": 4515,
+          "exit_line": 4516
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx->nr_events)",
+          "exit_kind": "goto",
+          "source_line": 4518,
+          "exit_line": 4519
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "callee": "find_slot_idx",
+  "defined_in": "kernel/events/hw_breakpoint.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "task_bp_pinned",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 339,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 333
+        },
+        {
+          "kind": "null_check",
+          "predicate": "head != NULL",
+          "source_line": 335
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!head)",
+          "exit_kind": "goto",
+          "source_line": 335,
+          "exit_line": 336
+        }
+      ]
+    },
+    {
+      "caller": "__reserve_bp_slot",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 587,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "constraints_initialized != NULL",
+          "source_line": 579
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!constraints_initialized)",
+          "exit_kind": "return",
+          "source_line": 579,
+          "exit_line": 580
+        }
+      ]
+    },
+    {
+      "caller": "__release_bp_slot",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 612,
+      "guards": []
+    },
+    {
+      "caller": "hw_breakpoint_event_init",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 956,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(bp->attr.type != PERF_TYPE_BREAKPOINT)",
+          "exit_kind": "return",
+          "source_line": 949,
+          "exit_line": 950
+        }
+      ]
+    }
+  ]
+}

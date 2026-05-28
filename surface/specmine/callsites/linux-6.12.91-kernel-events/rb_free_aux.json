@@ -1,0 +1,80 @@
+{
+  "callee": "rb_free_aux",
+  "defined_in": "kernel/events/ring_buffer.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_mmap_close",
+      "file": "kernel/events/core.c",
+      "line": 6534,
+      "guards": []
+    },
+    {
+      "caller": "perf_aux_output_begin",
+      "file": "kernel/events/ring_buffer.c",
+      "line": 455,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "rb != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(nest)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 414
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb)",
+          "exit_kind": "return",
+          "source_line": 389,
+          "exit_line": 390
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb_has_aux(rb))",
+          "exit_kind": "goto",
+          "source_line": 392,
+          "exit_line": 393
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!atomic_read(&rb->aux_mmap_count))",
+          "exit_kind": "goto",
+          "source_line": 403,
+          "exit_line": 404
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!refcount_inc_not_zero(&rb->aux_refcount))",
+          "exit_kind": "goto",
+          "source_line": 406,
+          "exit_line": 407
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(nest))",
+          "exit_kind": "goto",
+          "source_line": 414,
+          "exit_line": 415
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!handle->size)",
+          "exit_kind": "goto",
+          "source_line": 443
+        }
+      ]
+    },
+    {
+      "caller": "perf_aux_output_end",
+      "file": "kernel/events/ring_buffer.c",
+      "line": 537,
+      "guards": []
+    }
+  ]
+}

@@ -1,0 +1,284 @@
+{
+  "callee": "perf_event_update_time",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "perf_event_update_sibling_time",
+      "file": "kernel/events/core.c",
+      "line": 698,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_set_state",
+      "file": "kernel/events/core.c",
+      "line": 707,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state == state)",
+          "exit_kind": "return",
+          "source_line": 704,
+          "exit_line": 705
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_sync_stat",
+      "file": "kernel/events/core.c",
+      "line": 3516,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!event->attr.inherit_stat)",
+          "exit_kind": "return",
+          "source_line": 3504,
+          "exit_line": 3505
+        }
+      ]
+    },
+    {
+      "caller": "event_update_userpage",
+      "file": "kernel/events/core.c",
+      "line": 3939,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(likely(!atomic_read(&event->mmap_count)))",
+          "exit_kind": "return",
+          "source_line": 3936,
+          "exit_line": 3937
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_read",
+      "file": "kernel/events/core.c",
+      "line": 4648,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->task && cpuctx->task_ctx != ctx)",
+          "exit_kind": "return",
+          "source_line": 4642,
+          "exit_line": 4643
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_read",
+      "file": "kernel/events/core.c",
+      "line": 4838,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!((unsigned)event_cpu >= nr_cpu_ids)",
+          "exit_kind": "return",
+          "source_line": 4795,
+          "exit_line": 4796
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(state == PERF_EVENT_STATE_ACTIVE)",
+          "exit_kind": "return",
+          "source_line": 4783
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(state != PERF_EVENT_STATE_INACTIVE)",
+          "exit_kind": "goto",
+          "source_line": 4827
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "state == PERF_EVENT_STATE_ACTIVE",
+          "polarity": "in_false_branch",
+          "source_line": 4821
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "state == PERF_EVENT_STATE_INACTIVE",
+          "polarity": "in_true_branch",
+          "source_line": 4821
+        }
+      ]
+    },
+    {
+      "caller": "perf_mmap",
+      "file": "kernel/events/core.c",
+      "line": 6815,
+      "guards": [
+        {
+          "kind": "capability_check",
+          "predicate": "capable(CAP_IPC_LOCK)",
+          "source_line": 6789
+        },
+        {
+          "kind": "null_check",
+          "predicate": "rb != NULL",
+          "source_line": 6681
+        },
+        {
+          "kind": "null_check",
+          "predicate": "rb != NULL",
+          "source_line": 6804
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->ctx->parent_ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 6733
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!rb && event->rb)",
+          "macro": "WARN_ON",
+          "source_line": 6794
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->cpu == -1 && event->attr.inherit)",
+          "exit_kind": "return",
+          "source_line": 6648,
+          "exit_line": 6649
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(vma->vm_flags & VM_SHARED))",
+          "exit_kind": "return",
+          "source_line": 6651,
+          "exit_line": 6652
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 6655,
+          "exit_line": 6656
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!event->rb)",
+          "exit_kind": "return",
+          "source_line": 6670,
+          "exit_line": 6671
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nr_pages > INT_MAX)",
+          "exit_kind": "return",
+          "source_line": 6674,
+          "exit_line": 6675
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb)",
+          "exit_kind": "goto",
+          "source_line": 6681,
+          "exit_line": 6682
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(aux_offset < perf_data_size(rb) + PAGE_SIZE)",
+          "exit_kind": "goto",
+          "source_line": 6690,
+          "exit_line": 6691
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(aux_offset != vma->vm_pgoff << PAGE_SHIFT)",
+          "exit_kind": "goto",
+          "source_line": 6693,
+          "exit_line": 6694
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(rb_has_aux(rb) && rb->aux_pgoff != vma->vm_pgoff)",
+          "exit_kind": "goto",
+          "source_line": 6697,
+          "exit_line": 6698
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(aux_size != vma_size || aux_size != nr_pages * PAGE_SIZE)",
+          "exit_kind": "goto",
+          "source_line": 6700,
+          "exit_line": 6701
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(rb_has_aux(rb) && rb->aux_nr_pages != nr_pages)",
+          "exit_kind": "goto",
+          "source_line": 6704,
+          "exit_line": 6705
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!is_power_of_2(nr_pages))",
+          "exit_kind": "goto",
+          "source_line": 6707,
+          "exit_line": 6708
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!atomic_inc_not_zero(&rb->mmap_count))",
+          "exit_kind": "goto",
+          "source_line": 6710,
+          "exit_line": 6711
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(rb_has_aux(rb))",
+          "exit_kind": "goto",
+          "source_line": 6713
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nr_pages != 0 && !is_power_of_2(nr_pages))",
+          "exit_kind": "return",
+          "source_line": 6727,
+          "exit_line": 6728
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(vma_size != PAGE_SIZE * (1 + nr_pages))",
+          "exit_kind": "return",
+          "source_line": 6730,
+          "exit_line": 6731
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(data_page_nr(event->rb) != nr_pages)",
+          "exit_kind": "goto",
+          "source_line": 6737
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!atomic_inc_not_zero(&event->rb->mmap_count))",
+          "exit_kind": "goto",
+          "source_line": 6742
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->rb)",
+          "exit_kind": "goto",
+          "source_line": 6736
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb)",
+          "exit_kind": "goto",
+          "source_line": 6804
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!rb",
+          "polarity": "in_true_branch",
+          "source_line": 6799
+        }
+      ]
+    }
+  ]
+}

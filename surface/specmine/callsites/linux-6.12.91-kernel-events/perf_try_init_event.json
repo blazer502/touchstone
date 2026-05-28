@@ -1,0 +1,95 @@
+{
+  "callee": "perf_try_init_event",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_init_event",
+      "file": "kernel/events/core.c",
+      "line": 12153,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "event->parent && event->parent->pmu",
+          "polarity": "in_true_branch",
+          "source_line": 12151
+        }
+      ]
+    },
+    {
+      "caller": "perf_init_event",
+      "file": "kernel/events/core.c",
+      "line": 12182,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ret != NULL",
+          "source_line": 12154
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ret)",
+          "exit_kind": "goto",
+          "source_line": 12154,
+          "exit_line": 12155
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->parent && event->parent->pmu)",
+          "exit_kind": "goto",
+          "source_line": 12151
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "pmu",
+          "polarity": "in_true_branch",
+          "source_line": 12177
+        }
+      ]
+    },
+    {
+      "caller": "perf_init_event",
+      "file": "kernel/events/core.c",
+      "line": 12195,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_is_held(&pmus_srcu)",
+          "source_line": 12194
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ret != NULL",
+          "source_line": 12154
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ret)",
+          "exit_kind": "goto",
+          "source_line": 12154,
+          "exit_line": 12155
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->parent && event->parent->pmu)",
+          "exit_kind": "goto",
+          "source_line": 12151
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == -ENOENT && event->attr.type != type && !extended_type)",
+          "exit_kind": "goto",
+          "source_line": 12183
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(pmu)",
+          "exit_kind": "goto",
+          "source_line": 12177
+        }
+      ]
+    }
+  ]
+}

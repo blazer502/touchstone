@@ -1,0 +1,68 @@
+{
+  "callee": "event_cgroup",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "perf_event_groups_cmp",
+      "file": "kernel/events/core.c",
+      "line": 1654,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(left_cpu < right->cpu)",
+          "exit_kind": "return",
+          "source_line": 1640,
+          "exit_line": 1641
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(left_cpu > right->cpu)",
+          "exit_kind": "return",
+          "source_line": 1642,
+          "exit_line": 1643
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(left_pmu < right->pmu_ctx->pmu)",
+          "exit_kind": "return",
+          "source_line": 1646,
+          "exit_line": 1647
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(left_pmu > right->pmu_ctx->pmu)",
+          "exit_kind": "return",
+          "source_line": 1648,
+          "exit_line": 1649
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(left_pmu)",
+          "exit_kind": "return",
+          "source_line": 1645
+        }
+      ]
+    },
+    {
+      "caller": "__group_less",
+      "file": "kernel/events/core.c",
+      "line": 1694,
+      "guards": []
+    },
+    {
+      "caller": "__group_cmp_ignore_cgroup",
+      "file": "kernel/events/core.c",
+      "line": 1720,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_groups_next",
+      "file": "kernel/events/core.c",
+      "line": 1803,
+      "guards": []
+    }
+  ]
+}

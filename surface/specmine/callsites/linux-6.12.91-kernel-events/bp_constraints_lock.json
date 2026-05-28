@@ -1,0 +1,27 @@
+{
+  "callee": "bp_constraints_lock",
+  "defined_in": "kernel/events/hw_breakpoint.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "reserve_bp_slot",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 600,
+      "guards": []
+    },
+    {
+      "caller": "release_bp_slot",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 619,
+      "guards": []
+    },
+    {
+      "caller": "modify_bp_slot",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 649,
+      "guards": []
+    }
+  ]
+}

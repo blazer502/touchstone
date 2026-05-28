@@ -1,0 +1,51 @@
+{
+  "callee": "perf_event_task",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_event_fork",
+      "file": "kernel/events/core.c",
+      "line": 8527,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_exit_task_context",
+      "file": "kernel/events/core.c",
+      "line": 13583,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 13553
+        },
+        {
+          "kind": "null_check",
+          "predicate": "child_ctx != NULL",
+          "source_line": 13540
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(child != current)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 13537
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!child_ctx)",
+          "exit_kind": "return",
+          "source_line": 13540,
+          "exit_line": 13541
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_exit_task",
+      "file": "kernel/events/core.c",
+      "line": 13625,
+      "guards": []
+    }
+  ]
+}

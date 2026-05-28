@@ -1,0 +1,198 @@
+{
+  "callee": "add_event_to_ctx",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "__perf_install_in_context",
+      "file": "kernel/events/core.c",
+      "line": 2919,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(reprogram && cpuctx->task_ctx && cpuctx->task_ctx != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2900
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(task_curr(ctx->task) && !reprogram)",
+          "exit_kind": "goto",
+          "source_line": 2895
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "reprogram",
+          "polarity": "in_true_branch",
+          "source_line": 2917
+        }
+      ]
+    },
+    {
+      "caller": "__perf_install_in_context",
+      "file": "kernel/events/core.c",
+      "line": 2923,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(reprogram && cpuctx->task_ctx && cpuctx->task_ctx != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2900
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(task_curr(ctx->task) && !reprogram)",
+          "exit_kind": "goto",
+          "source_line": 2895
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "reprogram",
+          "polarity": "in_false_branch",
+          "source_line": 2922
+        }
+      ]
+    },
+    {
+      "caller": "perf_install_in_context",
+      "file": "kernel/events/core.c",
+      "line": 2975,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->mutex)",
+          "source_line": 2947
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!exclusive_event_installable(event, ctx))",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2949
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->cpu != cpu)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2952
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->task == TASK_TOMBSTONE)",
+          "exit_kind": "return",
+          "source_line": 2971
+        }
+      ]
+    },
+    {
+      "caller": "perf_install_in_context",
+      "file": "kernel/events/core.c",
+      "line": 3045,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->mutex)",
+          "source_line": 2947
+        },
+        {
+          "kind": "null_check",
+          "predicate": "task != NULL",
+          "source_line": 2980
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!exclusive_event_installable(event, ctx))",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2949
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->cpu != cpu)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2952
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(task == TASK_TOMBSTONE)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2988
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(task == TASK_TOMBSTONE)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 3028
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->task == TASK_TOMBSTONE)",
+          "exit_kind": "return",
+          "source_line": 2971
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!task)",
+          "exit_kind": "return",
+          "source_line": 2980
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(task == TASK_TOMBSTONE))",
+          "exit_kind": "return",
+          "source_line": 2988,
+          "exit_line": 2989
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!task_function_call(task, __perf_install_in_context, event))",
+          "exit_kind": "return",
+          "source_line": 3023,
+          "exit_line": 3024
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(task == TASK_TOMBSTONE))",
+          "exit_kind": "return",
+          "source_line": 3028
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(task_curr(task))",
+          "exit_kind": "goto",
+          "source_line": 3041
+        }
+      ]
+    },
+    {
+      "caller": "inherit_event",
+      "file": "kernel/events/core.c",
+      "line": 13841,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(child_event)",
+          "source_line": 13779
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(pmu_ctx)",
+          "source_line": 13786
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(child_event))",
+          "exit_kind": "return",
+          "source_line": 13779,
+          "exit_line": 13780
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(pmu_ctx))",
+          "exit_kind": "return",
+          "source_line": 13786
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "callee": "perf_event_wakeup",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_pending_irq",
+      "file": "kernel/events/core.c",
+      "line": 7002,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "event->pending_wakeup",
+          "polarity": "in_true_branch",
+          "source_line": 7000
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_exit_event",
+      "file": "kernel/events/core.c",
+      "line": 13521,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "parent_event",
+          "polarity": "in_true_branch",
+          "source_line": 13516
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_exit_event",
+      "file": "kernel/events/core.c",
+      "line": 13529,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(parent_event)",
+          "exit_kind": "return",
+          "source_line": 13516
+        }
+      ]
+    }
+  ]
+}

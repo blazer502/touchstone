@@ -1,0 +1,214 @@
+{
+  "callee": "perf_pmu_disable",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 12,
+  "callsites": [
+    {
+      "caller": "perf_ctx_disable",
+      "file": "kernel/events/core.c",
+      "line": 748,
+      "guards": []
+    },
+    {
+      "caller": "event_sched_out",
+      "file": "kernel/events/core.c",
+      "line": 2343,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->lock)",
+          "source_line": 2331
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->ctx != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2330
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state != PERF_EVENT_STATE_ACTIVE)",
+          "exit_kind": "return",
+          "source_line": 2333,
+          "exit_line": 2334
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_disable",
+      "file": "kernel/events/core.c",
+      "line": 2544,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state < PERF_EVENT_STATE_INACTIVE)",
+          "exit_kind": "return",
+          "source_line": 2541,
+          "exit_line": 2542
+        }
+      ]
+    },
+    {
+      "caller": "event_sched_in",
+      "file": "kernel/events/core.c",
+      "line": 2654,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->lock)",
+          "source_line": 2630
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->ctx != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2628
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state <= PERF_EVENT_STATE_OFF)",
+          "exit_kind": "return",
+          "source_line": 2632,
+          "exit_line": 2633
+        }
+      ]
+    },
+    {
+      "caller": "ctx_resched",
+      "file": "kernel/events/core.c",
+      "line": 2824,
+      "guards": []
+    },
+    {
+      "caller": "ctx_resched",
+      "file": "kernel/events/core.c",
+      "line": 2828,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "task_ctx",
+          "polarity": "in_true_branch",
+          "source_line": 2826
+        }
+      ]
+    },
+    {
+      "caller": "__pmu_ctx_sched_out",
+      "file": "kernel/events/core.c",
+      "line": 3365,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(cpc->task_epc && cpc->task_epc != pmu_ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 3358
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(event_type & EVENT_ALL))",
+          "exit_kind": "return",
+          "source_line": 3362,
+          "exit_line": 3363
+        }
+      ]
+    },
+    {
+      "caller": "__perf_pmu_sched_task",
+      "file": "kernel/events/core.c",
+      "line": 3754,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!pmu->sched_task)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 3750
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(!pmu->sched_task))",
+          "exit_kind": "return",
+          "source_line": 3750,
+          "exit_line": 3751
+        }
+      ]
+    },
+    {
+      "caller": "perf_adjust_freq_unthr_context",
+      "file": "kernel/events/core.c",
+      "line": 4330,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(ctx->nr_freq || unthrottle))",
+          "exit_kind": "return",
+          "source_line": 4317,
+          "exit_line": 4318
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(pmu_ctx->nr_freq || unthrottle))",
+          "exit_kind": "continue",
+          "source_line": 4323,
+          "exit_line": 4324
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_pmu_ctx_is_active(pmu_ctx))",
+          "exit_kind": "continue",
+          "source_line": 4325,
+          "exit_line": 4326
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(pmu_ctx->pmu->capabilities & PERF_PMU_CAP_NO_INTERRUPT)",
+          "exit_kind": "continue",
+          "source_line": 4327,
+          "exit_line": 4328
+        }
+      ]
+    },
+    {
+      "caller": "perf_rotate_context",
+      "file": "kernel/events/core.c",
+      "line": 4430,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(cpu_rotate || task_rotate))",
+          "exit_kind": "return",
+          "source_line": 4426,
+          "exit_line": 4427
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_period",
+      "file": "kernel/events/core.c",
+      "line": 5972,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "active",
+          "polarity": "in_true_branch",
+          "source_line": 5971
+        }
+      ]
+    },
+    {
+      "caller": "perf_pmu_start_txn",
+      "file": "kernel/events/core.c",
+      "line": 11649,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~PERF_PMU_TXN_ADD)",
+          "exit_kind": "return",
+          "source_line": 11646,
+          "exit_line": 11647
+        }
+      ]
+    }
+  ]
+}

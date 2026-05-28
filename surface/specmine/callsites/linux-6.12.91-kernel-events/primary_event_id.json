@@ -1,0 +1,150 @@
+{
+  "callee": "primary_event_id",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 9,
+  "callsites": [
+    {
+      "caller": "__perf_read_group_add",
+      "file": "kernel/events/core.c",
+      "line": 5730,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 5678,
+          "exit_line": 5679
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "read_format & PERF_FORMAT_ID",
+          "polarity": "in_true_branch",
+          "source_line": 5729
+        }
+      ]
+    },
+    {
+      "caller": "__perf_read_group_add",
+      "file": "kernel/events/core.c",
+      "line": 5737,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 5678,
+          "exit_line": 5679
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "read_format & PERF_FORMAT_ID",
+          "polarity": "in_true_branch",
+          "source_line": 5736
+        }
+      ]
+    },
+    {
+      "caller": "perf_read_one",
+      "file": "kernel/events/core.c",
+      "line": 5802,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "read_format & PERF_FORMAT_ID",
+          "polarity": "in_true_branch",
+          "source_line": 5801
+        }
+      ]
+    },
+    {
+      "caller": "_perf_ioctl",
+      "file": "kernel/events/core.c",
+      "line": 6088,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_from_user(&value, (u64 __user *)arg, sizeof(value)))",
+          "exit_kind": "return",
+          "source_line": 6081,
+          "exit_line": 6082
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "cmd",
+          "polarity": "in_true_branch",
+          "source_line": 6063
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_header__init_id",
+      "file": "kernel/events/core.c",
+      "line": 7347,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "sample_type & (PERF_SAMPLE_ID | PERF_SAMPLE_IDENTIFIER)",
+          "polarity": "in_true_branch",
+          "source_line": 7346
+        }
+      ]
+    },
+    {
+      "caller": "perf_output_read_one",
+      "file": "kernel/events/core.c",
+      "line": 7418,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "read_format & PERF_FORMAT_ID",
+          "polarity": "in_true_branch",
+          "source_line": 7417
+        }
+      ]
+    },
+    {
+      "caller": "perf_output_read_group",
+      "file": "kernel/events/core.c",
+      "line": 7455,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "irqs_disabled",
+          "source_line": 7440
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "read_format & PERF_FORMAT_ID",
+          "polarity": "in_true_branch",
+          "source_line": 7454
+        }
+      ]
+    },
+    {
+      "caller": "perf_output_read_group",
+      "file": "kernel/events/core.c",
+      "line": 7469,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "irqs_disabled",
+          "source_line": 7440
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "read_format & PERF_FORMAT_ID",
+          "polarity": "in_true_branch",
+          "source_line": 7468
+        }
+      ]
+    },
+    {
+      "caller": "perf_log_throttle",
+      "file": "kernel/events/core.c",
+      "line": 9381,
+      "guards": []
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "callee": "get_event_list",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_group_detach",
+      "file": "kernel/events/core.c",
+      "line": 2276,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->lock)",
+          "source_line": 2227
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(event->attach_state & PERF_ATTACH_GROUP))",
+          "exit_kind": "return",
+          "source_line": 2232,
+          "exit_line": 2233
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(leader != event)",
+          "exit_kind": "goto",
+          "source_line": 2242
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "sibling->attach_state & PERF_ATTACH_CONTEXT",
+          "polarity": "in_true_branch",
+          "source_line": 2272
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "sibling->state == PERF_EVENT_STATE_ACTIVE",
+          "polarity": "in_true_branch",
+          "source_line": 2275
+        }
+      ]
+    },
+    {
+      "caller": "group_can_go_on",
+      "file": "kernel/events/core.c",
+      "line": 2749,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->group_caps & PERF_EV_CAP_SOFTWARE)",
+          "exit_kind": "return",
+          "source_line": 2737,
+          "exit_line": 2738
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cpc->exclusive)",
+          "exit_kind": "return",
+          "source_line": 2743,
+          "exit_line": 2744
+        }
+      ]
+    },
+    {
+      "caller": "merge_sched_in",
+      "file": "kernel/events/core.c",
+      "line": 3969,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state <= PERF_EVENT_STATE_OFF)",
+          "exit_kind": "return",
+          "source_line": 3961,
+          "exit_line": 3962
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!event_filter_match(event))",
+          "exit_kind": "return",
+          "source_line": 3964,
+          "exit_line": 3965
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "group_can_go_on(event, *can_add_hw)",
+          "polarity": "in_true_branch",
+          "source_line": 3967
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!group_sched_in(event, ctx)",
+          "polarity": "in_true_branch",
+          "source_line": 3968
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "callee": "perf_event_create_kernel_counter",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "register_user_hw_breakpoint",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 746,
+      "guards": []
+    },
+    {
+      "caller": "register_wide_hw_breakpoint",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 856,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "cpu_events != NULL",
+          "source_line": 851
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cpu_events)",
+          "exit_kind": "return",
+          "source_line": 851,
+          "exit_line": 852
+        }
+      ]
+    },
+    {
+      "caller": "register_test_bp",
+      "file": "kernel/events/hw_breakpoint_test.c",
+      "line": 42,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(idx < 0 || idx >= MAX_TEST_BREAKPOINTS)",
+          "macro": "WARN_ON",
+          "source_line": 35
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON(idx < 0 || idx >= MAX_TEST_BREAKPOINTS))",
+          "exit_kind": "return",
+          "source_line": 35,
+          "exit_line": 36
+        }
+      ]
+    }
+  ]
+}

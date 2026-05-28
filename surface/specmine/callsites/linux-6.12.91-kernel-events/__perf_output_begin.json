@@ -1,0 +1,27 @@
+{
+  "callee": "__perf_output_begin",
+  "defined_in": "kernel/events/ring_buffer.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_output_begin_forward",
+      "file": "kernel/events/ring_buffer.c",
+      "line": 277,
+      "guards": []
+    },
+    {
+      "caller": "perf_output_begin_backward",
+      "file": "kernel/events/ring_buffer.c",
+      "line": 284,
+      "guards": []
+    },
+    {
+      "caller": "perf_output_begin",
+      "file": "kernel/events/ring_buffer.c",
+      "line": 292,
+      "guards": []
+    }
+  ]
+}

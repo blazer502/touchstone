@@ -1,0 +1,114 @@
+{
+  "callee": "is_cgroup_event",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "perf_event_time",
+      "file": "kernel/events/core.c",
+      "line": 1542,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!ctx))",
+          "exit_kind": "return",
+          "source_line": 1539,
+          "exit_line": 1540
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_time_now",
+      "file": "kernel/events/core.c",
+      "line": 1555,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!ctx))",
+          "exit_kind": "return",
+          "source_line": 1552,
+          "exit_line": 1553
+        }
+      ]
+    },
+    {
+      "caller": "__perf_install_in_context",
+      "file": "kernel/events/core.c",
+      "line": 2906,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(reprogram && cpuctx->task_ctx && cpuctx->task_ctx != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2900
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(task_curr(ctx->task) && !reprogram)",
+          "exit_kind": "goto",
+          "source_line": 2895
+        }
+      ]
+    },
+    {
+      "caller": "perf_install_in_context",
+      "file": "kernel/events/core.c",
+      "line": 2969,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->mutex)",
+          "source_line": 2947
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!exclusive_event_installable(event, ctx))",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2949
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->cpu != cpu)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2952
+        }
+      ]
+    },
+    {
+      "caller": "unaccount_event",
+      "file": "kernel/events/core.c",
+      "line": 5216,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->parent)",
+          "exit_kind": "return",
+          "source_line": 5193,
+          "exit_line": 5194
+        }
+      ]
+    },
+    {
+      "caller": "__free_event",
+      "file": "kernel/events/core.c",
+      "line": 5344,
+      "guards": []
+    },
+    {
+      "caller": "account_event",
+      "file": "kernel/events/core.c",
+      "line": 12284,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->parent)",
+          "exit_kind": "return",
+          "source_line": 12259,
+          "exit_line": 12260
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "callee": "perf_swevent_put_recursion_context",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "perf_pending_disable",
+      "file": "kernel/events/core.c",
+      "line": 6982,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "rctx >= 0",
+          "polarity": "in_true_branch",
+          "source_line": 6981
+        }
+      ]
+    },
+    {
+      "caller": "perf_pending_irq",
+      "file": "kernel/events/core.c",
+      "line": 7006,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "rctx >= 0",
+          "polarity": "in_true_branch",
+          "source_line": 7005
+        }
+      ]
+    },
+    {
+      "caller": "perf_pending_task",
+      "file": "kernel/events/core.c",
+      "line": 7028,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "rctx >= 0",
+          "polarity": "in_true_branch",
+          "source_line": 7027
+        }
+      ]
+    },
+    {
+      "caller": "__perf_sw_event",
+      "file": "kernel/events/core.c",
+      "line": 10267,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(rctx < 0))",
+          "exit_kind": "goto",
+          "source_line": 10262,
+          "exit_line": 10263
+        }
+      ]
+    },
+    {
+      "caller": "perf_trace_run_bpf_submit",
+      "file": "kernel/events/core.c",
+      "line": 10551,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "bpf_prog_array_valid(call)",
+          "polarity": "in_true_branch",
+          "source_line": 10548
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!trace_call_bpf(call, raw_data) || hlist_empty(head)",
+          "polarity": "in_true_branch",
+          "source_line": 10550
+        }
+      ]
+    },
+    {
+      "caller": "perf_tp_event",
+      "file": "kernel/events/core.c",
+      "line": 10659,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ctx != NULL",
+          "source_line": 10649
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx)",
+          "exit_kind": "goto",
+          "source_line": 10649,
+          "exit_line": 10650
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(task && task != current)",
+          "exit_kind": "goto",
+          "source_line": 10644
+        }
+      ]
+    }
+  ]
+}

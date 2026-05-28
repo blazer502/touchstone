@@ -1,0 +1,112 @@
+{
+  "callee": "perf_scope_cpumask",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "cpumask_show",
+      "file": "kernel/events/core.c",
+      "line": 11801,
+      "guards": []
+    },
+    {
+      "caller": "perf_try_init_event",
+      "file": "kernel/events/core.c",
+      "line": 12109,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!ctx)",
+          "macro": "BUG_ON",
+          "source_line": 12079
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!try_module_get(pmu->module))",
+          "exit_kind": "return",
+          "source_line": 12063,
+          "exit_line": 12064
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 12088,
+          "exit_line": 12089
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "pmu->scope != PERF_PMU_SCOPE_NONE && event->cpu >= 0",
+          "polarity": "in_true_branch",
+          "source_line": 12103
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_clear_cpumask",
+      "file": "kernel/events/core.c",
+      "line": 14139,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "scope = PERF_PMU_SCOPE_NONE + 1; scope < PERF_PMU_MAX_SCOPE; scope++",
+          "polarity": "in_true_branch",
+          "source_line": 14137
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_setup_cpumask",
+      "file": "kernel/events/core.c",
+      "line": 14202,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "cpumask_empty(perf_online_mask)",
+          "polarity": "in_true_branch",
+          "source_line": 14200
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "scope = PERF_PMU_SCOPE_NONE + 1; scope < PERF_PMU_MAX_SCOPE; scope++",
+          "polarity": "in_true_branch",
+          "source_line": 14201
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_setup_cpumask",
+      "file": "kernel/events/core.c",
+      "line": 14213,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!pmu_cpumask)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 14203
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(!pmu_cpumask))",
+          "exit_kind": "continue",
+          "source_line": 14203,
+          "exit_line": 14204
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cpumask_empty(perf_online_mask))",
+          "exit_kind": "continue",
+          "source_line": 14200
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "scope = PERF_PMU_SCOPE_NONE + 1; scope < PERF_PMU_MAX_SCOPE; scope++",
+          "polarity": "in_true_branch",
+          "source_line": 14210
+        }
+      ]
+    }
+  ]
+}

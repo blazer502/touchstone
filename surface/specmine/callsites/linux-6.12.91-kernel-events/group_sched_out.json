@@ -1,0 +1,81 @@
+{
+  "callee": "group_sched_out",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "__perf_event_disable",
+      "file": "kernel/events/core.c",
+      "line": 2552,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state < PERF_EVENT_STATE_INACTIVE)",
+          "exit_kind": "return",
+          "source_line": 2541,
+          "exit_line": 2542
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "event == event->group_leader",
+          "polarity": "in_true_branch",
+          "source_line": 2551
+        }
+      ]
+    },
+    {
+      "caller": "__pmu_ctx_sched_out",
+      "file": "kernel/events/core.c",
+      "line": 3370,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(cpc->task_epc && cpc->task_epc != pmu_ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 3358
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(event_type & EVENT_ALL))",
+          "exit_kind": "return",
+          "source_line": 3362,
+          "exit_line": 3363
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "event_type & EVENT_PINNED",
+          "polarity": "in_true_branch",
+          "source_line": 3366
+        }
+      ]
+    },
+    {
+      "caller": "__pmu_ctx_sched_out",
+      "file": "kernel/events/core.c",
+      "line": 3377,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(cpc->task_epc && cpc->task_epc != pmu_ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 3358
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(event_type & EVENT_ALL))",
+          "exit_kind": "return",
+          "source_line": 3362,
+          "exit_line": 3363
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "event_type & EVENT_FLEXIBLE",
+          "polarity": "in_true_branch",
+          "source_line": 3373
+        }
+      ]
+    }
+  ]
+}

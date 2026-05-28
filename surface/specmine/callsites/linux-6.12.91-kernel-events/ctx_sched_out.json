@@ -1,0 +1,117 @@
+{
+  "callee": "ctx_sched_out",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "perf_ctx_enable",
+      "file": "kernel/events/core.c",
+      "line": 759,
+      "guards": []
+    },
+    {
+      "caller": "task_ctx_sched_out",
+      "file": "kernel/events/core.c",
+      "line": 2777,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctx != cpuctx->task_ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2774
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cpuctx->task_ctx)",
+          "exit_kind": "return",
+          "source_line": 2771,
+          "exit_line": 2772
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(ctx != cpuctx->task_ctx))",
+          "exit_kind": "return",
+          "source_line": 2774,
+          "exit_line": 2775
+        }
+      ]
+    },
+    {
+      "caller": "ctx_resched",
+      "file": "kernel/events/core.c",
+      "line": 2841,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "cpu_event",
+          "polarity": "in_true_branch",
+          "source_line": 2840
+        }
+      ]
+    },
+    {
+      "caller": "ctx_resched",
+      "file": "kernel/events/core.c",
+      "line": 2843,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "event_type & EVENT_PINNED",
+          "polarity": "in_true_branch",
+          "source_line": 2842
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_context_sched_in",
+      "file": "kernel/events/core.c",
+      "line": 4102,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 4067
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ctx != NULL",
+          "source_line": 4069
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx)",
+          "exit_kind": "goto",
+          "source_line": 4069,
+          "exit_line": 4070
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cpuctx->task_ctx == ctx)",
+          "exit_kind": "goto",
+          "source_line": 4072
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx->nr_events)",
+          "exit_kind": "goto",
+          "source_line": 4088,
+          "exit_line": 4089
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!RB_EMPTY_ROOT(&ctx->pinned_groups.tree)",
+          "polarity": "in_true_branch",
+          "source_line": 4100
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_exit_context",
+      "file": "kernel/events/core.c",
+      "line": 14123,
+      "guards": []
+    }
+  ]
+}

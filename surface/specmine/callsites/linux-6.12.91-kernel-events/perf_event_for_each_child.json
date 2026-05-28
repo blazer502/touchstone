@@ -1,0 +1,161 @@
+{
+  "callee": "perf_event_for_each_child",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "perf_event_for_each",
+      "file": "kernel/events/core.c",
+      "line": 5950,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->mutex)",
+          "source_line": 5946
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_for_each",
+      "file": "kernel/events/core.c",
+      "line": 5952,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->mutex)",
+          "source_line": 5946
+        }
+      ]
+    },
+    {
+      "caller": "_perf_ioctl",
+      "file": "kernel/events/core.c",
+      "line": 6168,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(prog)",
+          "source_line": 6122
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_from_user(&value, (u64 __user *)arg, sizeof(value)))",
+          "exit_kind": "return",
+          "source_line": 6081,
+          "exit_line": 6082
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_to_user((void __user *)arg, &id, sizeof(id)))",
+          "exit_kind": "return",
+          "source_line": 6090,
+          "exit_line": 6091
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 6102,
+          "exit_line": 6103
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(arg != -1)",
+          "exit_kind": "return",
+          "source_line": 6098
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(prog))",
+          "exit_kind": "return",
+          "source_line": 6122,
+          "exit_line": 6123
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 6126
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb || !rb->nr_pages)",
+          "exit_kind": "return",
+          "source_line": 6139
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 6156,
+          "exit_line": 6157
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_task_enable",
+      "file": "kernel/events/core.c",
+      "line": 6221,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 6218
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_task_disable",
+      "file": "kernel/events/core.c",
+      "line": 6237,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 6234
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_set_addr_filter",
+      "file": "kernel/events/core.c",
+      "line": 11321,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&event->ctx->mutex)",
+          "source_line": 11304
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->parent)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 11306
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(event->parent))",
+          "exit_kind": "return",
+          "source_line": 11306,
+          "exit_line": 11307
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 11310,
+          "exit_line": 11311
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 11314,
+          "exit_line": 11315
+        }
+      ]
+    }
+  ]
+}

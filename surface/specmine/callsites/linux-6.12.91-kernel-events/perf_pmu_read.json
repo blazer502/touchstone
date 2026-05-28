@@ -1,0 +1,140 @@
+{
+  "callee": "perf_pmu_read",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "__perf_event_sync_stat",
+      "file": "kernel/events/core.c",
+      "line": 3514,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!event->attr.inherit_stat)",
+          "exit_kind": "return",
+          "source_line": 3504,
+          "exit_line": 3505
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_read",
+      "file": "kernel/events/core.c",
+      "line": 4656,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->task && cpuctx->task_ctx != ctx)",
+          "exit_kind": "return",
+          "source_line": 4642,
+          "exit_line": 4643
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state != PERF_EVENT_STATE_ACTIVE)",
+          "exit_kind": "return",
+          "source_line": 4652,
+          "exit_line": 4653
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!data->group",
+          "polarity": "in_true_branch",
+          "source_line": 4655
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_read",
+      "file": "kernel/events/core.c",
+      "line": 4664,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->task && cpuctx->task_ctx != ctx)",
+          "exit_kind": "return",
+          "source_line": 4642,
+          "exit_line": 4643
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state != PERF_EVENT_STATE_ACTIVE)",
+          "exit_kind": "return",
+          "source_line": 4652,
+          "exit_line": 4653
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!data->group)",
+          "exit_kind": "return",
+          "source_line": 4655
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_read",
+      "file": "kernel/events/core.c",
+      "line": 4666,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->task && cpuctx->task_ctx != ctx)",
+          "exit_kind": "return",
+          "source_line": 4642,
+          "exit_line": 4643
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state != PERF_EVENT_STATE_ACTIVE)",
+          "exit_kind": "return",
+          "source_line": 4652,
+          "exit_line": 4653
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!data->group)",
+          "exit_kind": "return",
+          "source_line": 4655
+        }
+      ]
+    },
+    {
+      "caller": "perf_output_read_group",
+      "file": "kernel/events/core.c",
+      "line": 7451,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "irqs_disabled",
+          "source_line": 7440
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "(leader != event) && !handle->skip_read",
+          "polarity": "in_true_branch",
+          "source_line": 7450
+        }
+      ]
+    },
+    {
+      "caller": "perf_output_read_group",
+      "file": "kernel/events/core.c",
+      "line": 7465,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "irqs_disabled",
+          "source_line": 7440
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "(sub != event) && !handle->skip_read",
+          "polarity": "in_true_branch",
+          "source_line": 7464
+        }
+      ]
+    }
+  ]
+}

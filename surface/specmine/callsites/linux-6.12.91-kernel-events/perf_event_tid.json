@@ -1,0 +1,165 @@
+{
+  "callee": "perf_event_tid",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 9,
+  "callsites": [
+    {
+      "caller": "__perf_event_header__init_id",
+      "file": "kernel/events/core.c",
+      "line": 7340,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "sample_type & PERF_SAMPLE_TID",
+          "polarity": "in_true_branch",
+          "source_line": 7337
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_read_event",
+      "file": "kernel/events/core.c",
+      "line": 8195,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_task_output",
+      "file": "kernel/events/core.c",
+      "line": 8469,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_task_match(event))",
+          "exit_kind": "return",
+          "source_line": 8458,
+          "exit_line": 8459
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 8465,
+          "exit_line": 8466
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_task_output",
+      "file": "kernel/events/core.c",
+      "line": 8478,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_task_match(event))",
+          "exit_kind": "return",
+          "source_line": 8458,
+          "exit_line": 8459
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 8465,
+          "exit_line": 8466
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "task_event->event_id.header.type == PERF_RECORD_EXIT",
+          "polarity": "in_false_branch",
+          "source_line": 8476
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_comm_output",
+      "file": "kernel/events/core.c",
+      "line": 8573,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_comm_match(event))",
+          "exit_kind": "return",
+          "source_line": 8562,
+          "exit_line": 8563
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 8569,
+          "exit_line": 8570
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_namespaces_output",
+      "file": "kernel/events/core.c",
+      "line": 8673,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_namespaces_match(event))",
+          "exit_kind": "return",
+          "source_line": 8661,
+          "exit_line": 8662
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 8668,
+          "exit_line": 8669
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_mmap_output",
+      "file": "kernel/events/core.c",
+      "line": 8928,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_mmap_match(event, data))",
+          "exit_kind": "return",
+          "source_line": 8908,
+          "exit_line": 8909
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 8924,
+          "exit_line": 8925
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_switch_output",
+      "file": "kernel/events/core.c",
+      "line": 9311,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_switch_match(event))",
+          "exit_kind": "return",
+          "source_line": 9298,
+          "exit_line": 9299
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "event->ctx->task",
+          "polarity": "in_false_branch",
+          "source_line": 9305
+        }
+      ]
+    },
+    {
+      "caller": "perf_log_itrace_start",
+      "file": "kernel/events/core.c",
+      "line": 9705,
+      "guards": []
+    }
+  ]
+}

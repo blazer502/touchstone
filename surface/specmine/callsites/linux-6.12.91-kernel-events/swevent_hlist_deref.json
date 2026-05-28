@@ -1,0 +1,39 @@
+{
+  "callee": "swevent_hlist_deref",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "swevent_hlist_release",
+      "file": "kernel/events/core.c",
+      "line": 10324,
+      "guards": []
+    },
+    {
+      "caller": "swevent_hlist_get_cpu",
+      "file": "kernel/events/core.c",
+      "line": 10359,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 10358
+        }
+      ]
+    },
+    {
+      "caller": "perf_swevent_init_cpu",
+      "file": "kernel/events/core.c",
+      "line": 14105,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 14104
+        }
+      ]
+    }
+  ]
+}

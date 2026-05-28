@@ -1,0 +1,66 @@
+{
+  "cluster": "callchain",
+  "scope": "kernel/events",
+  "sources": [
+    {
+      "path": "kernel/events/callchain.c",
+      "loc": 293,
+      "patterns": {
+        "ops_vtable": 0,
+        "container_of": 1,
+        "refcount": 1,
+        "rcu": 3,
+        "allocator": 6,
+        "parser_sm": 0
+      }
+    }
+  ],
+  "loc": 293,
+  "pattern_totals": {
+    "ops_vtable": 0,
+    "container_of": 1,
+    "refcount": 1,
+    "rcu": 3,
+    "allocator": 6,
+    "parser_sm": 0
+  },
+  "exports": [
+    "alloc_callchain_buffers",
+    "fixup_uretprobe_trampoline_entries",
+    "get_callchain_buffers",
+    "get_callchain_entry",
+    "get_perf_callchain",
+    "perf_callchain_entry__sizeof",
+    "perf_callchain_kernel",
+    "perf_callchain_user",
+    "perf_event_max_stack_handler",
+    "put_callchain_buffers",
+    "put_callchain_entry",
+    "release_callchain_buffers",
+    "release_callchain_buffers_rcu"
+  ],
+  "callees_internal": [
+    "alloc_callchain_buffers",
+    "fixup_uretprobe_trampoline_entries",
+    "get_callchain_buffers",
+    "get_callchain_entry",
+    "get_perf_callchain",
+    "perf_callchain_entry__sizeof",
+    "perf_callchain_kernel",
+    "perf_callchain_user",
+    "perf_event_max_stack_handler",
+    "put_callchain_buffers",
+    "put_callchain_entry",
+    "release_callchain_buffers",
+    "release_callchain_buffers_rcu"
+  ],
+  "callees_external": {
+    "uprobes": 1
+  },
+  "export_count": 13,
+  "dominant_patterns": [
+    "allocator",
+    "rcu",
+    "container_of"
+  ]
+}

@@ -1,0 +1,466 @@
+{
+  "target": "linux-6.12.91-kernel-events",
+  "source_root": "/home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source",
+  "scope": "kernel/events",
+  "generated_at": 1779948956,
+  "stats": {
+    "defined_callees": 699,
+    "mining_callees": 386,
+    "callers_scanned": 699,
+    "callees_with_callsites": 314,
+    "callees_emitted": 112,
+    "total_callsites": 631,
+    "total_guards": 2525,
+    "wall_seconds": 0.55
+  },
+  "callees": {
+    "perf_ctx_unlock": {
+      "callsite_count": 12,
+      "out_file": "perf_ctx_unlock.json"
+    },
+    "perf_ctx_lock": {
+      "callsite_count": 10,
+      "out_file": "perf_ctx_lock.json"
+    },
+    "cpu_function_call": {
+      "callsite_count": 5,
+      "out_file": "cpu_function_call.json"
+    },
+    "task_function_call": {
+      "callsite_count": 3,
+      "out_file": "task_function_call.json"
+    },
+    "update_context_time": {
+      "callsite_count": 6,
+      "out_file": "update_context_time.json"
+    },
+    "perf_event_time": {
+      "callsite_count": 3,
+      "out_file": "perf_event_time.json"
+    },
+    "perf_event_update_time": {
+      "callsite_count": 7,
+      "out_file": "perf_event_update_time.json"
+    },
+    "perf_event_update_sibling_time": {
+      "callsite_count": 3,
+      "out_file": "perf_event_update_sibling_time.json"
+    },
+    "perf_pmu_disable": {
+      "callsite_count": 12,
+      "out_file": "perf_pmu_disable.json"
+    },
+    "perf_pmu_enable": {
+      "callsite_count": 13,
+      "out_file": "perf_pmu_enable.json"
+    },
+    "ctx_sched_out": {
+      "callsite_count": 6,
+      "out_file": "ctx_sched_out.json"
+    },
+    "ctx_sched_in": {
+      "callsite_count": 5,
+      "out_file": "ctx_sched_in.json"
+    },
+    "put_ctx": {
+      "callsite_count": 17,
+      "out_file": "put_ctx.json"
+    },
+    "perf_clock": {
+      "callsite_count": 4,
+      "out_file": "perf_clock.json"
+    },
+    "is_cgroup_event": {
+      "callsite_count": 7,
+      "out_file": "is_cgroup_event.json"
+    },
+    "event_cgroup": {
+      "callsite_count": 4,
+      "out_file": "event_cgroup.json"
+    },
+    "perf_event_groups_first": {
+      "callsite_count": 4,
+      "out_file": "perf_event_groups_first.json"
+    },
+    "has_inherit_and_sample_read": {
+      "callsite_count": 5,
+      "out_file": "has_inherit_and_sample_read.json"
+    },
+    "__perf_event_read_size": {
+      "callsite_count": 4,
+      "out_file": "__perf_event_read_size.json"
+    },
+    "perf_event__header_size": {
+      "callsite_count": 6,
+      "out_file": "perf_event__header_size.json"
+    },
+    "perf_cgroup_event_disable": {
+      "callsite_count": 4,
+      "out_file": "perf_cgroup_event_disable.json"
+    },
+    "perf_event_set_state": {
+      "callsite_count": 9,
+      "out_file": "perf_event_set_state.json"
+    },
+    "put_event": {
+      "callsite_count": 9,
+      "out_file": "put_event.json"
+    },
+    "__event_disable": {
+      "callsite_count": 4,
+      "out_file": "__event_disable.json"
+    },
+    "get_event_list": {
+      "callsite_count": 3,
+      "out_file": "get_event_list.json"
+    },
+    "event_sched_out": {
+      "callsite_count": 6,
+      "out_file": "event_sched_out.json"
+    },
+    "event_function_call": {
+      "callsite_count": 4,
+      "out_file": "event_function_call.json"
+    },
+    "ctx_time_update_event": {
+      "callsite_count": 3,
+      "out_file": "ctx_time_update_event.json"
+    },
+    "group_sched_out": {
+      "callsite_count": 3,
+      "out_file": "group_sched_out.json"
+    },
+    "perf_event_ctx_lock": {
+      "callsite_count": 11,
+      "out_file": "perf_event_ctx_lock.json"
+    },
+    "_perf_event_disable": {
+      "callsite_count": 3,
+      "out_file": "_perf_event_disable.json"
+    },
+    "perf_event_ctx_unlock": {
+      "callsite_count": 12,
+      "out_file": "perf_event_ctx_unlock.json"
+    },
+    "perf_log_throttle": {
+      "callsite_count": 5,
+      "out_file": "perf_log_throttle.json"
+    },
+    "task_ctx_sched_out": {
+      "callsite_count": 3,
+      "out_file": "task_ctx_sched_out.json"
+    },
+    "ctx_resched": {
+      "callsite_count": 4,
+      "out_file": "ctx_resched.json"
+    },
+    "ctx_time_freeze": {
+      "callsite_count": 3,
+      "out_file": "ctx_time_freeze.json"
+    },
+    "add_event_to_ctx": {
+      "callsite_count": 5,
+      "out_file": "add_event_to_ctx.json"
+    },
+    "get_event_type": {
+      "callsite_count": 3,
+      "out_file": "get_event_type.json"
+    },
+    "exclusive_event_installable": {
+      "callsite_count": 4,
+      "out_file": "exclusive_event_installable.json"
+    },
+    "event_filter_match": {
+      "callsite_count": 5,
+      "out_file": "event_filter_match.json"
+    },
+    "_perf_event_enable": {
+      "callsite_count": 3,
+      "out_file": "_perf_event_enable.json"
+    },
+    "__pmu_ctx_sched_out": {
+      "callsite_count": 3,
+      "out_file": "__pmu_ctx_sched_out.json"
+    },
+    "perf_pmu_read": {
+      "callsite_count": 6,
+      "out_file": "perf_pmu_read.json"
+    },
+    "perf_event_update_userpage": {
+      "callsite_count": 8,
+      "out_file": "perf_event_update_userpage.json"
+    },
+    "perf_ctx_disable": {
+      "callsite_count": 5,
+      "out_file": "perf_ctx_disable.json"
+    },
+    "perf_ctx_sched_task_cb": {
+      "callsite_count": 4,
+      "out_file": "perf_ctx_sched_task_cb.json"
+    },
+    "perf_ctx_enable": {
+      "callsite_count": 5,
+      "out_file": "perf_ctx_enable.json"
+    },
+    "__heap_add": {
+      "callsite_count": 3,
+      "out_file": "__heap_add.json"
+    },
+    "__pmu_ctx_sched_in": {
+      "callsite_count": 4,
+      "out_file": "__pmu_ctx_sched_in.json"
+    },
+    "unclone_ctx": {
+      "callsite_count": 4,
+      "out_file": "unclone_ctx.json"
+    },
+    "perf_remove_from_owner": {
+      "callsite_count": 3,
+      "out_file": "perf_remove_from_owner.json"
+    },
+    "perf_event_exit_event": {
+      "callsite_count": 3,
+      "out_file": "perf_event_exit_event.json"
+    },
+    "perf_scope_cpu_topology_cpumask": {
+      "callsite_count": 5,
+      "out_file": "perf_scope_cpu_topology_cpumask.json"
+    },
+    "__perf_event_read_cpu": {
+      "callsite_count": 3,
+      "out_file": "__perf_event_read_cpu.json"
+    },
+    "calc_timer_values": {
+      "callsite_count": 3,
+      "out_file": "calc_timer_values.json"
+    },
+    "get_ctx": {
+      "callsite_count": 6,
+      "out_file": "get_ctx.json"
+    },
+    "ring_buffer_attach": {
+      "callsite_count": 7,
+      "out_file": "ring_buffer_attach.json"
+    },
+    "perf_addr_filters_splice": {
+      "callsite_count": 3,
+      "out_file": "perf_addr_filters_splice.json"
+    },
+    "put_pmu_ctx": {
+      "callsite_count": 7,
+      "out_file": "put_pmu_ctx.json"
+    },
+    "perf_remove_from_context": {
+      "callsite_count": 7,
+      "out_file": "perf_remove_from_context.json"
+    },
+    "perf_event_read": {
+      "callsite_count": 4,
+      "out_file": "perf_event_read.json"
+    },
+    "perf_event_count": {
+      "callsite_count": 9,
+      "out_file": "perf_event_count.json"
+    },
+    "primary_event_id": {
+      "callsite_count": 9,
+      "out_file": "primary_event_id.json"
+    },
+    "perf_event_for_each_child": {
+      "callsite_count": 6,
+      "out_file": "perf_event_for_each_child.json"
+    },
+    "perf_event_set_output": {
+      "callsite_count": 4,
+      "out_file": "perf_event_set_output.json"
+    },
+    "perf_copy_attr": {
+      "callsite_count": 3,
+      "out_file": "perf_copy_attr.json"
+    },
+    "perf_event_stop": {
+      "callsite_count": 4,
+      "out_file": "perf_event_stop.json"
+    },
+    "ring_buffer_put": {
+      "callsite_count": 8,
+      "out_file": "ring_buffer_put.json"
+    },
+    "ring_buffer_get": {
+      "callsite_count": 6,
+      "out_file": "ring_buffer_get.json"
+    },
+    "rb_free_aux": {
+      "callsite_count": 3,
+      "out_file": "rb_free_aux.json"
+    },
+    "perf_swevent_get_recursion_context": {
+      "callsite_count": 4,
+      "out_file": "perf_swevent_get_recursion_context.json"
+    },
+    "perf_swevent_put_recursion_context": {
+      "callsite_count": 6,
+      "out_file": "perf_swevent_put_recursion_context.json"
+    },
+    "perf_event_wakeup": {
+      "callsite_count": 3,
+      "out_file": "perf_event_wakeup.json"
+    },
+    "perf_event_pid": {
+      "callsite_count": 11,
+      "out_file": "perf_event_pid.json"
+    },
+    "perf_event_tid": {
+      "callsite_count": 9,
+      "out_file": "perf_event_tid.json"
+    },
+    "perf_event_clock": {
+      "callsite_count": 3,
+      "out_file": "perf_event_clock.json"
+    },
+    "perf_output_end": {
+      "callsite_count": 16,
+      "out_file": "perf_output_end.json"
+    },
+    "perf_event_header__init_id": {
+      "callsite_count": 16,
+      "out_file": "perf_event_header__init_id.json"
+    },
+    "perf_output_begin": {
+      "callsite_count": 15,
+      "out_file": "perf_output_begin.json"
+    },
+    "perf_event__output_id_sample": {
+      "callsite_count": 16,
+      "out_file": "perf_event__output_id_sample.json"
+    },
+    "perf_iterate_ctx": {
+      "callsite_count": 6,
+      "out_file": "perf_iterate_ctx.json"
+    },
+    "perf_pin_task_context": {
+      "callsite_count": 3,
+      "out_file": "perf_pin_task_context.json"
+    },
+    "perf_unpin_context": {
+      "callsite_count": 6,
+      "out_file": "perf_unpin_context.json"
+    },
+    "perf_iterate_sb": {
+      "callsite_count": 9,
+      "out_file": "perf_iterate_sb.json"
+    },
+    "perf_event_task": {
+      "callsite_count": 3,
+      "out_file": "perf_event_task.json"
+    },
+    "perf_swevent_set_period": {
+      "callsite_count": 3,
+      "out_file": "perf_swevent_set_period.json"
+    },
+    "swevent_hlist_deref": {
+      "callsite_count": 3,
+      "out_file": "swevent_hlist_deref.json"
+    },
+    "free_filters_list": {
+      "callsite_count": 3,
+      "out_file": "free_filters_list.json"
+    },
+    "perf_scope_cpumask": {
+      "callsite_count": 5,
+      "out_file": "perf_scope_cpumask.json"
+    },
+    "perf_try_init_event": {
+      "callsite_count": 3,
+      "out_file": "perf_try_init_event.json"
+    },
+    "perf_event__state_init": {
+      "callsite_count": 3,
+      "out_file": "perf_event__state_init.json"
+    },
+    "perf_allow_kernel": {
+      "callsite_count": 3,
+      "out_file": "perf_allow_kernel.json"
+    },
+    "perf_event_alloc": {
+      "callsite_count": 3,
+      "out_file": "perf_event_alloc.json"
+    },
+    "find_get_pmu_context": {
+      "callsite_count": 4,
+      "out_file": "find_get_pmu_context.json"
+    },
+    "perf_install_in_context": {
+      "callsite_count": 5,
+      "out_file": "perf_install_in_context.json"
+    },
+    "free_event": {
+      "callsite_count": 4,
+      "out_file": "free_event.json"
+    },
+    "is_swbp_insn": {
+      "callsite_count": 4,
+      "out_file": "is_swbp_insn.json"
+    },
+    "get_task_bps_mutex": {
+      "callsite_count": 3,
+      "out_file": "get_task_bps_mutex.json"
+    },
+    "get_bp_info": {
+      "callsite_count": 11,
+      "out_file": "get_bp_info.json"
+    },
+    "hw_breakpoint_slots_cached": {
+      "callsite_count": 7,
+      "out_file": "hw_breakpoint_slots_cached.json"
+    },
+    "find_slot_idx": {
+      "callsite_count": 4,
+      "out_file": "find_slot_idx.json"
+    },
+    "hw_breakpoint_weight": {
+      "callsite_count": 6,
+      "out_file": "hw_breakpoint_weight.json"
+    },
+    "task_bp_pinned": {
+      "callsite_count": 4,
+      "out_file": "task_bp_pinned.json"
+    },
+    "bp_slots_histogram_add": {
+      "callsite_count": 9,
+      "out_file": "bp_slots_histogram_add.json"
+    },
+    "bp_constraints_lock": {
+      "callsite_count": 3,
+      "out_file": "bp_constraints_lock.json"
+    },
+    "__reserve_bp_slot": {
+      "callsite_count": 4,
+      "out_file": "__reserve_bp_slot.json"
+    },
+    "bp_constraints_unlock": {
+      "callsite_count": 3,
+      "out_file": "bp_constraints_unlock.json"
+    },
+    "__release_bp_slot": {
+      "callsite_count": 3,
+      "out_file": "__release_bp_slot.json"
+    },
+    "perf_event_create_kernel_counter": {
+      "callsite_count": 3,
+      "out_file": "perf_event_create_kernel_counter.json"
+    },
+    "perf_output_wakeup": {
+      "callsite_count": 4,
+      "out_file": "perf_output_wakeup.json"
+    },
+    "__perf_output_begin": {
+      "callsite_count": 3,
+      "out_file": "__perf_output_begin.json"
+    },
+    "unregister_test_bp": {
+      "callsite_count": 8,
+      "out_file": "unregister_test_bp.json"
+    }
+  }
+}

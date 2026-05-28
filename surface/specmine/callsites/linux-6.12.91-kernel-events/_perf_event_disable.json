@@ -1,0 +1,34 @@
+{
+  "callee": "_perf_event_disable",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_event_disable",
+      "file": "kernel/events/core.c",
+      "line": 2605,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_modify_breakpoint",
+      "file": "kernel/events/core.c",
+      "line": 3286,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_pause",
+      "file": "kernel/events/core.c",
+      "line": 5910,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->attr.inherit)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 5909
+        }
+      ]
+    }
+  ]
+}

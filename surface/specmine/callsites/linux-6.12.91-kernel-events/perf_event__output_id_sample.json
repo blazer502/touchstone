@@ -1,0 +1,319 @@
+{
+  "callee": "perf_event__output_id_sample",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 16,
+  "callsites": [
+    {
+      "caller": "perf_event_read_event",
+      "file": "kernel/events/core.c",
+      "line": 8206,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 8201,
+          "exit_line": 8202
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_task_output",
+      "file": "kernel/events/core.c",
+      "line": 8485,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_task_match(event))",
+          "exit_kind": "return",
+          "source_line": 8458,
+          "exit_line": 8459
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 8465,
+          "exit_line": 8466
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_comm_output",
+      "file": "kernel/events/core.c",
+      "line": 8579,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_comm_match(event))",
+          "exit_kind": "return",
+          "source_line": 8562,
+          "exit_line": 8563
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 8569,
+          "exit_line": 8570
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_namespaces_output",
+      "file": "kernel/events/core.c",
+      "line": 8678,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_namespaces_match(event))",
+          "exit_kind": "return",
+          "source_line": 8661,
+          "exit_line": 8662
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 8668,
+          "exit_line": 8669
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_cgroup_output",
+      "file": "kernel/events/core.c",
+      "line": 8801,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_cgroup_match(event))",
+          "exit_kind": "return",
+          "source_line": 8788,
+          "exit_line": 8789
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 8795,
+          "exit_line": 8796
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_mmap_output",
+      "file": "kernel/events/core.c",
+      "line": 8956,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_mmap_match(event, data))",
+          "exit_kind": "return",
+          "source_line": 8908,
+          "exit_line": 8909
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 8924,
+          "exit_line": 8925
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_aux_event",
+      "file": "kernel/events/core.c",
+      "line": 9233,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 9229,
+          "exit_line": 9230
+        }
+      ]
+    },
+    {
+      "caller": "perf_log_lost_samples",
+      "file": "kernel/events/core.c",
+      "line": 9267,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 9263,
+          "exit_line": 9264
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_switch_output",
+      "file": "kernel/events/core.c",
+      "line": 9325,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_switch_match(event))",
+          "exit_kind": "return",
+          "source_line": 9298,
+          "exit_line": 9299
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 9317,
+          "exit_line": 9318
+        }
+      ]
+    },
+    {
+      "caller": "perf_log_throttle",
+      "file": "kernel/events/core.c",
+      "line": 9396,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 9392,
+          "exit_line": 9393
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_ksymbol_output",
+      "file": "kernel/events/core.c",
+      "line": 9440,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_ksymbol_match(event))",
+          "exit_kind": "return",
+          "source_line": 9428,
+          "exit_line": 9429
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 9435,
+          "exit_line": 9436
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_bpf_output",
+      "file": "kernel/events/core.c",
+      "line": 9529,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_bpf_match(event))",
+          "exit_kind": "return",
+          "source_line": 9518,
+          "exit_line": 9519
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 9525,
+          "exit_line": 9526
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_text_poke_output",
+      "file": "kernel/events/core.c",
+      "line": 9641,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_text_poke_match(event))",
+          "exit_kind": "return",
+          "source_line": 9621,
+          "exit_line": 9622
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 9628,
+          "exit_line": 9629
+        }
+      ]
+    },
+    {
+      "caller": "perf_log_itrace_start",
+      "file": "kernel/events/core.c",
+      "line": 9714,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 9710,
+          "exit_line": 9711
+        }
+      ]
+    },
+    {
+      "caller": "perf_report_aux_output_id",
+      "file": "kernel/events/core.c",
+      "line": 9744,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 9740,
+          "exit_line": 9741
+        }
+      ]
+    },
+    {
+      "caller": "__perf_output_begin",
+      "file": "kernel/events/ring_buffer.c",
+      "line": 258,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 167
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!rb))",
+          "exit_kind": "goto",
+          "source_line": 175,
+          "exit_line": 176
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(rb->paused))",
+          "exit_kind": "goto",
+          "source_line": 178
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb->overwrite)",
+          "exit_kind": "goto",
+          "source_line": 203
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "unlikely(have_lost)",
+          "polarity": "in_true_branch",
+          "source_line": 248
+        }
+      ]
+    }
+  ]
+}

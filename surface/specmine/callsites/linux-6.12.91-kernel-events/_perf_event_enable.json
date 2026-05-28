@@ -1,0 +1,42 @@
+{
+  "callee": "_perf_event_enable",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_event_enable",
+      "file": "kernel/events/core.c",
+      "line": 3140,
+      "guards": []
+    },
+    {
+      "caller": "_perf_event_refresh",
+      "file": "kernel/events/core.c",
+      "line": 3260,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->attr.inherit || !is_sampling_event(event))",
+          "exit_kind": "return",
+          "source_line": 3256,
+          "exit_line": 3257
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_modify_breakpoint",
+      "file": "kernel/events/core.c",
+      "line": 3291,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!bp->attr.disabled",
+          "polarity": "in_true_branch",
+          "source_line": 3290
+        }
+      ]
+    }
+  ]
+}

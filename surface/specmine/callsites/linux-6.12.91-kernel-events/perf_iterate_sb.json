@@ -1,0 +1,132 @@
+{
+  "callee": "perf_iterate_sb",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 9,
+  "callsites": [
+    {
+      "caller": "perf_event_task",
+      "file": "kernel/events/core.c",
+      "line": 8520,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_comm_event",
+      "file": "kernel/events/core.c",
+      "line": 8600,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_namespaces",
+      "file": "kernel/events/core.c",
+      "line": 8755,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!atomic_read(&nr_namespaces_events))",
+          "exit_kind": "return",
+          "source_line": 8707,
+          "exit_line": 8708
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_cgroup",
+      "file": "kernel/events/core.c",
+      "line": 8850,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!atomic_read(&nr_cgroup_events))",
+          "exit_kind": "return",
+          "source_line": 8815,
+          "exit_line": 8816
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_mmap_event",
+      "file": "kernel/events/core.c",
+      "line": 9065,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "buf != NULL",
+          "source_line": 8998
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(name)",
+          "source_line": 9008
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!buf)",
+          "exit_kind": "goto",
+          "source_line": 8998
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(name))",
+          "exit_kind": "goto",
+          "source_line": 9008
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(file)",
+          "exit_kind": "goto",
+          "source_line": 8993
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_switch",
+      "file": "kernel/events/core.c",
+      "line": 9356,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_ksymbol",
+      "file": "kernel/events/core.c",
+      "line": 9485,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!atomic_read(&nr_ksymbol_events))",
+          "exit_kind": "return",
+          "source_line": 9453,
+          "exit_line": 9454
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_bpf_event",
+      "file": "kernel/events/core.c",
+      "line": 9591,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!atomic_read(&nr_bpf_events))",
+          "exit_kind": "return",
+          "source_line": 9572,
+          "exit_line": 9573
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_text_poke",
+      "file": "kernel/events/core.c",
+      "line": 9675,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!atomic_read(&nr_text_poke_events))",
+          "exit_kind": "return",
+          "source_line": 9652,
+          "exit_line": 9653
+        }
+      ]
+    }
+  ]
+}

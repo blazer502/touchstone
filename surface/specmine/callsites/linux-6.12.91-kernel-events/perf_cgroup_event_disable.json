@@ -1,0 +1,110 @@
+{
+  "callee": "perf_cgroup_event_disable",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "list_del_event",
+      "file": "kernel/events/core.c",
+      "line": 2107,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->lock)",
+          "source_line": 2076
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->ctx != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2075
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(event->attach_state & PERF_ATTACH_CONTEXT))",
+          "exit_kind": "return",
+          "source_line": 2081,
+          "exit_line": 2082
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "event->state > PERF_EVENT_STATE_OFF",
+          "polarity": "in_true_branch",
+          "source_line": 2106
+        }
+      ]
+    },
+    {
+      "caller": "event_sched_out",
+      "file": "kernel/events/core.c",
+      "line": 2350,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->lock)",
+          "source_line": 2331
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->ctx != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2330
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state != PERF_EVENT_STATE_ACTIVE)",
+          "exit_kind": "return",
+          "source_line": 2333,
+          "exit_line": 2334
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "event->pending_disable",
+          "polarity": "in_true_branch",
+          "source_line": 2348
+        }
+      ]
+    },
+    {
+      "caller": "__event_disable",
+      "file": "kernel/events/core.c",
+      "line": 2529,
+      "guards": []
+    },
+    {
+      "caller": "merge_sched_in",
+      "file": "kernel/events/core.c",
+      "line": 3975,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state <= PERF_EVENT_STATE_OFF)",
+          "exit_kind": "return",
+          "source_line": 3961,
+          "exit_line": 3962
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!event_filter_match(event))",
+          "exit_kind": "return",
+          "source_line": 3964,
+          "exit_line": 3965
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "event->state == PERF_EVENT_STATE_INACTIVE",
+          "polarity": "in_true_branch",
+          "source_line": 3972
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "event->attr.pinned",
+          "polarity": "in_true_branch",
+          "source_line": 3974
+        }
+      ]
+    }
+  ]
+}

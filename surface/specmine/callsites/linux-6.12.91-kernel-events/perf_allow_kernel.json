@@ -1,0 +1,209 @@
+{
+  "callee": "perf_allow_kernel",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_copy_attr",
+      "file": "kernel/events/core.c",
+      "line": 12626,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 12569,
+          "exit_line": 12570
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(size < PERF_ATTR_SIZE_VER0 || size > PAGE_SIZE)",
+          "exit_kind": "goto",
+          "source_line": 12575,
+          "exit_line": 12576
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == -E2BIG)",
+          "exit_kind": "goto",
+          "source_line": 12580,
+          "exit_line": 12581
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 12579
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr->__reserved_1 || attr->__reserved_2 || attr->__reserved_3)",
+          "exit_kind": "return",
+          "source_line": 12587,
+          "exit_line": 12588
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr->sample_type & ~(PERF_SAMPLE_MAX-1))",
+          "exit_kind": "return",
+          "source_line": 12590,
+          "exit_line": 12591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr->read_format & ~(PERF_FORMAT_MAX-1))",
+          "exit_kind": "return",
+          "source_line": 12593,
+          "exit_line": 12594
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(mask & ~(PERF_SAMPLE_BRANCH_MAX-1))",
+          "exit_kind": "return",
+          "source_line": 12600,
+          "exit_line": 12601
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(mask & ~PERF_SAMPLE_BRANCH_PLM_ALL))",
+          "exit_kind": "return",
+          "source_line": 12604,
+          "exit_line": 12605
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "attr->sample_type & PERF_SAMPLE_BRANCH_STACK",
+          "polarity": "in_true_branch",
+          "source_line": 12596
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "mask & PERF_SAMPLE_BRANCH_PERM_PLM",
+          "polarity": "in_true_branch",
+          "source_line": 12625
+        }
+      ]
+    },
+    {
+      "caller": "SYSCALL_DEFINE5",
+      "file": "kernel/events/core.c",
+      "line": 12889,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~PERF_FLAG_ALL)",
+          "exit_kind": "return",
+          "source_line": 12876,
+          "exit_line": 12877
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12880,
+          "exit_line": 12881
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12885,
+          "exit_line": 12886
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!attr.exclude_kernel",
+          "polarity": "in_true_branch",
+          "source_line": 12888
+        }
+      ]
+    },
+    {
+      "caller": "SYSCALL_DEFINE5",
+      "file": "kernel/events/core.c",
+      "line": 12909,
+      "guards": [
+        {
+          "kind": "capability_check",
+          "predicate": "perfmon_capable()",
+          "source_line": 12895
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~PERF_FLAG_ALL)",
+          "exit_kind": "return",
+          "source_line": 12876,
+          "exit_line": 12877
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12880,
+          "exit_line": 12881
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12885,
+          "exit_line": 12886
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12890,
+          "exit_line": 12891
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!attr.exclude_kernel)",
+          "exit_kind": "return",
+          "source_line": 12888
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!perfmon_capable())",
+          "exit_kind": "return",
+          "source_line": 12895,
+          "exit_line": 12896
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.namespaces)",
+          "exit_kind": "return",
+          "source_line": 12894
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.sample_freq > sysctl_perf_event_sample_rate)",
+          "exit_kind": "return",
+          "source_line": 12900,
+          "exit_line": 12901
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.freq)",
+          "exit_kind": "return",
+          "source_line": 12899
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.sample_period & (1ULL << 63))",
+          "exit_kind": "return",
+          "source_line": 12903,
+          "exit_line": 12904
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "(attr.sample_type & PERF_SAMPLE_PHYS_ADDR)",
+          "polarity": "in_true_branch",
+          "source_line": 12908
+        }
+      ]
+    }
+  ]
+}

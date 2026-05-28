@@ -1,0 +1,48 @@
+{
+  "callee": "__reserve_bp_slot",
+  "defined_in": "kernel/events/hw_breakpoint.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "reserve_bp_slot",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 601,
+      "guards": []
+    },
+    {
+      "caller": "__modify_bp_slot",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 631,
+      "guards": []
+    },
+    {
+      "caller": "__modify_bp_slot",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 641,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "err",
+          "polarity": "in_true_branch",
+          "source_line": 632
+        }
+      ]
+    },
+    {
+      "caller": "dbg_reserve_bp_slot",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 670,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(bp_constraints_is_locked(bp))",
+          "exit_kind": "return",
+          "source_line": 665,
+          "exit_line": 666
+        }
+      ]
+    }
+  ]
+}

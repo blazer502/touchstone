@@ -1,0 +1,124 @@
+{
+  "callee": "update_context_time",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "perf_sample_event_took",
+      "file": "kernel/events/core.c",
+      "line": 621,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(max_len == 0)",
+          "exit_kind": "return",
+          "source_line": 574,
+          "exit_line": 575
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(avg_len <= max_len)",
+          "exit_kind": "return",
+          "source_line": 589,
+          "exit_line": 590
+        }
+      ]
+    },
+    {
+      "caller": "__ctx_time_update",
+      "file": "kernel/events/core.c",
+      "line": 2393,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->is_active & EVENT_FROZEN)",
+          "exit_kind": "return",
+          "source_line": 2391,
+          "exit_line": 2392
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ctx->is_active & EVENT_TIME",
+          "polarity": "in_true_branch",
+          "source_line": 2390
+        }
+      ]
+    },
+    {
+      "caller": "ctx_time_update_event",
+      "file": "kernel/events/core.c",
+      "line": 2421,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->is_active & EVENT_FROZEN)",
+          "exit_kind": "return",
+          "source_line": 2419,
+          "exit_line": 2420
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ctx->is_active & EVENT_TIME",
+          "polarity": "in_true_branch",
+          "source_line": 2418
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_sync_stat",
+      "file": "kernel/events/core.c",
+      "line": 3544,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx->nr_stat)",
+          "exit_kind": "return",
+          "source_line": 3541,
+          "exit_line": 3542
+        }
+      ]
+    },
+    {
+      "caller": "perf_rotate_context",
+      "file": "kernel/events/core.c",
+      "line": 4442,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(cpu_rotate || task_rotate))",
+          "exit_kind": "return",
+          "source_line": 4426,
+          "exit_line": 4427
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "task_event || (task_epc && cpu_event)",
+          "polarity": "in_true_branch",
+          "source_line": 4441
+        }
+      ]
+    },
+    {
+      "caller": "perf_rotate_context",
+      "file": "kernel/events/core.c",
+      "line": 4447,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(cpu_rotate || task_rotate))",
+          "exit_kind": "return",
+          "source_line": 4426,
+          "exit_line": 4427
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cpu_event",
+          "polarity": "in_true_branch",
+          "source_line": 4446
+        }
+      ]
+    }
+  ]
+}

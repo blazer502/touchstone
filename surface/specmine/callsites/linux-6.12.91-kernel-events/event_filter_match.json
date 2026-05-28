@@ -1,0 +1,92 @@
+{
+  "callee": "event_filter_match",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "__perf_event_enable",
+      "file": "kernel/events/core.c",
+      "line": 3072,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx->is_active)",
+          "exit_kind": "return",
+          "source_line": 3069,
+          "exit_line": 3070
+        }
+      ]
+    },
+    {
+      "caller": "merge_sched_in",
+      "file": "kernel/events/core.c",
+      "line": 3964,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state <= PERF_EVENT_STATE_OFF)",
+          "exit_kind": "return",
+          "source_line": 3961,
+          "exit_line": 3962
+        }
+      ]
+    },
+    {
+      "caller": "perf_adjust_freq_unthr_events",
+      "file": "kernel/events/core.c",
+      "line": 4264,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state != PERF_EVENT_STATE_ACTIVE)",
+          "exit_kind": "continue",
+          "source_line": 4260,
+          "exit_line": 4261
+        }
+      ]
+    },
+    {
+      "caller": "perf_iterate_ctx",
+      "file": "kernel/events/core.c",
+      "line": 8224,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state < PERF_EVENT_STATE_INACTIVE)",
+          "exit_kind": "continue",
+          "source_line": 8222,
+          "exit_line": 8223
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!all",
+          "polarity": "in_true_branch",
+          "source_line": 8221
+        }
+      ]
+    },
+    {
+      "caller": "perf_iterate_sb_cpu",
+      "file": "kernel/events/core.c",
+      "line": 8248,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!smp_load_acquire(&event->ctx))",
+          "exit_kind": "continue",
+          "source_line": 8243,
+          "exit_line": 8244
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state < PERF_EVENT_STATE_INACTIVE)",
+          "exit_kind": "continue",
+          "source_line": 8246,
+          "exit_line": 8247
+        }
+      ]
+    }
+  ]
+}

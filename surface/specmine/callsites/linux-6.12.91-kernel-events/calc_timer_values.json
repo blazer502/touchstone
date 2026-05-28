@@ -1,0 +1,76 @@
+{
+  "callee": "calc_timer_values",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_event_read_local",
+      "file": "kernel/events/core.c",
+      "line": 4761,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "irqs_disabled",
+          "source_line": 4711
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->attr.inherit)",
+          "exit_kind": "goto",
+          "source_line": 4717
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->attr.pinned && event_oncpu != smp_processor_id())",
+          "exit_kind": "goto",
+          "source_line": 4744
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "enabled || running",
+          "polarity": "in_true_branch",
+          "source_line": 4758
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_update_userpage",
+      "file": "kernel/events/core.c",
+      "line": 6308,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 6294
+        },
+        {
+          "kind": "null_check",
+          "predicate": "rb != NULL",
+          "source_line": 6296
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb)",
+          "exit_kind": "goto",
+          "source_line": 6296,
+          "exit_line": 6297
+        }
+      ]
+    },
+    {
+      "caller": "perf_output_read",
+      "file": "kernel/events/core.c",
+      "line": 7509,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "read_format & PERF_FORMAT_TOTAL_TIMES",
+          "polarity": "in_true_branch",
+          "source_line": 7508
+        }
+      ]
+    }
+  ]
+}

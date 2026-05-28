@@ -1,0 +1,88 @@
+{
+  "target": "linux-6.12.91-kernel-events",
+  "source_root": "/home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source",
+  "scope": "kernel/events",
+  "generated_at": 1779948944,
+  "cluster_count": 5,
+  "source_count": 6,
+  "total_loc": 19508,
+  "clusters": [
+    {
+      "cluster": "core",
+      "source_count": 1,
+      "loc": 14410,
+      "export_count": 490,
+      "dominant_patterns": [
+        "rcu",
+        "allocator",
+        "container_of"
+      ],
+      "fanout_external": 14,
+      "depends_on": [
+        "callchain",
+        "hw",
+        "ring"
+      ]
+    },
+    {
+      "cluster": "uprobes",
+      "source_count": 1,
+      "loc": 2465,
+      "export_count": 100,
+      "dominant_patterns": [
+        "allocator",
+        "ops_vtable",
+        "container_of"
+      ],
+      "fanout_external": 1,
+      "depends_on": [
+        "callchain"
+      ]
+    },
+    {
+      "cluster": "hw",
+      "source_count": 2,
+      "loc": 1358,
+      "export_count": 64,
+      "dominant_patterns": [
+        "ops_vtable",
+        "rcu",
+        "allocator"
+      ],
+      "fanout_external": 10,
+      "depends_on": [
+        "core"
+      ]
+    },
+    {
+      "cluster": "ring",
+      "source_count": 1,
+      "loc": 982,
+      "export_count": 32,
+      "dominant_patterns": [
+        "allocator",
+        "rcu",
+        "refcount"
+      ],
+      "fanout_external": 7,
+      "depends_on": [
+        "core"
+      ]
+    },
+    {
+      "cluster": "callchain",
+      "source_count": 1,
+      "loc": 293,
+      "export_count": 13,
+      "dominant_patterns": [
+        "allocator",
+        "rcu",
+        "container_of"
+      ],
+      "fanout_external": 1,
+      "depends_on": [
+        "uprobes"
+      ]
+    }
+  ]
+}

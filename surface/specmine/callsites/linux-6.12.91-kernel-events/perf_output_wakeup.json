@@ -1,0 +1,132 @@
+{
+  "callee": "perf_output_wakeup",
+  "defined_in": "kernel/events/ring_buffer.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "perf_output_put_handle",
+      "file": "kernel/events/ring_buffer.c",
+      "line": 135,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nest > 1)",
+          "exit_kind": "goto",
+          "source_line": 65
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(head != local_read(&rb->head)))",
+          "exit_kind": "goto",
+          "source_line": 129
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "handle->wakeup != local_read(&rb->wakeup)",
+          "polarity": "in_true_branch",
+          "source_line": 134
+        }
+      ]
+    },
+    {
+      "caller": "perf_aux_output_begin",
+      "file": "kernel/events/ring_buffer.c",
+      "line": 445,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "rb != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(nest)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 414
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb)",
+          "exit_kind": "return",
+          "source_line": 389,
+          "exit_line": 390
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb_has_aux(rb))",
+          "exit_kind": "goto",
+          "source_line": 392,
+          "exit_line": 393
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!atomic_read(&rb->aux_mmap_count))",
+          "exit_kind": "goto",
+          "source_line": 403,
+          "exit_line": 404
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!refcount_inc_not_zero(&rb->aux_refcount))",
+          "exit_kind": "goto",
+          "source_line": 406,
+          "exit_line": 407
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(nest))",
+          "exit_kind": "goto",
+          "source_line": 414,
+          "exit_line": 415
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!rb->aux_overwrite",
+          "polarity": "in_true_branch",
+          "source_line": 432
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!handle->size",
+          "polarity": "in_true_branch",
+          "source_line": 443
+        }
+      ]
+    },
+    {
+      "caller": "perf_aux_output_end",
+      "file": "kernel/events/ring_buffer.c",
+      "line": 530,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "wakeup",
+          "polarity": "in_true_branch",
+          "source_line": 527
+        }
+      ]
+    },
+    {
+      "caller": "perf_aux_output_skip",
+      "file": "kernel/events/ring_buffer.c",
+      "line": 557,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(size > handle->size)",
+          "exit_kind": "return",
+          "source_line": 550,
+          "exit_line": 551
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "rb_need_aux_wakeup(rb)",
+          "polarity": "in_true_branch",
+          "source_line": 556
+        }
+      ]
+    }
+  ]
+}

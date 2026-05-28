@@ -1,0 +1,7 @@
+{
+  "source": "llm",
+  "tokens_used": 527,
+  "latency_s": 17.881,
+  "target_func": "perf_event_ctx_lock_nested",
+  "entry_surface": "perf_event_open + perf_ioctl(perf_fd)"
+}

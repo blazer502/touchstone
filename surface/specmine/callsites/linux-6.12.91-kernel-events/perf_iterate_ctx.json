@@ -1,0 +1,135 @@
+{
+  "callee": "perf_iterate_ctx",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "perf_iterate_sb",
+      "file": "kernel/events/core.c",
+      "line": 8275,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "preempt_disabled",
+          "source_line": 8267
+        },
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 8266
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "task_ctx",
+          "polarity": "in_true_branch",
+          "source_line": 8274
+        }
+      ]
+    },
+    {
+      "caller": "perf_iterate_sb",
+      "file": "kernel/events/core.c",
+      "line": 8283,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "preempt_disabled",
+          "source_line": 8267
+        },
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 8266
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(task_ctx)",
+          "exit_kind": "goto",
+          "source_line": 8274
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ctx",
+          "polarity": "in_true_branch",
+          "source_line": 8282
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_exec",
+      "file": "kernel/events/core.c",
+      "line": 8333,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ctx != NULL",
+          "source_line": 8327
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx)",
+          "exit_kind": "return",
+          "source_line": 8327,
+          "exit_line": 8328
+        }
+      ]
+    },
+    {
+      "caller": "__perf_pmu_output_stop",
+      "file": "kernel/events/core.c",
+      "line": 8382,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 8381
+        }
+      ]
+    },
+    {
+      "caller": "__perf_pmu_output_stop",
+      "file": "kernel/events/core.c",
+      "line": 8384,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 8381
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cpuctx->task_ctx",
+          "polarity": "in_true_branch",
+          "source_line": 8383
+        }
+      ]
+    },
+    {
+      "caller": "perf_addr_filters_adjust",
+      "file": "kernel/events/core.c",
+      "line": 9165,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 9162
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(vma->vm_flags & VM_EXEC))",
+          "exit_kind": "return",
+          "source_line": 9159,
+          "exit_line": 9160
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ctx",
+          "polarity": "in_true_branch",
+          "source_line": 9164
+        }
+      ]
+    }
+  ]
+}

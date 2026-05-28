@@ -1,0 +1,104 @@
+{
+  "callee": "perf_remove_from_owner",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_event_enable_on_exec",
+      "file": "kernel/events/core.c",
+      "line": 4546,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(current->perf_event_ctxp != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 4515
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(current->perf_event_ctxp != ctx))",
+          "exit_kind": "goto",
+          "source_line": 4515,
+          "exit_line": 4516
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx->nr_events)",
+          "exit_kind": "goto",
+          "source_line": 4518,
+          "exit_line": 4519
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_remove_on_exec",
+      "file": "kernel/events/core.c",
+      "line": 4571,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 4561
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctx->task != current)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 4563
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(ctx->task != current))",
+          "exit_kind": "goto",
+          "source_line": 4563,
+          "exit_line": 4564
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!event->attr.remove_on_exec)",
+          "exit_kind": "continue",
+          "source_line": 4567,
+          "exit_line": 4568
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!is_kernel_event(event)",
+          "polarity": "in_true_branch",
+          "source_line": 4570
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_release_kernel",
+      "file": "kernel/events/core.c",
+      "line": 5512,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ctx != NULL",
+          "source_line": 5505
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 5506
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx)",
+          "exit_kind": "goto",
+          "source_line": 5505
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!is_kernel_event(event)",
+          "polarity": "in_true_branch",
+          "source_line": 5511
+        }
+      ]
+    }
+  ]
+}

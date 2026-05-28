@@ -1,0 +1,107 @@
+{
+  "callee": "perf_copy_attr",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_fget_light",
+      "file": "kernel/events/core.c",
+      "line": 6052,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!fd_file(f))",
+          "exit_kind": "return",
+          "source_line": 6038,
+          "exit_line": 6039
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fd_file(f)->f_op != &perf_fops)",
+          "exit_kind": "return",
+          "source_line": 6041
+        }
+      ]
+    },
+    {
+      "caller": "_perf_ioctl",
+      "file": "kernel/events/core.c",
+      "line": 6153,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(prog)",
+          "source_line": 6122
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_from_user(&value, (u64 __user *)arg, sizeof(value)))",
+          "exit_kind": "return",
+          "source_line": 6081,
+          "exit_line": 6082
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_to_user((void __user *)arg, &id, sizeof(id)))",
+          "exit_kind": "return",
+          "source_line": 6090,
+          "exit_line": 6091
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 6102,
+          "exit_line": 6103
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(arg != -1)",
+          "exit_kind": "return",
+          "source_line": 6098
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(prog))",
+          "exit_kind": "return",
+          "source_line": 6122,
+          "exit_line": 6123
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 6126
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rb || !rb->nr_pages)",
+          "exit_kind": "return",
+          "source_line": 6139
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "cmd",
+          "polarity": "in_true_branch",
+          "source_line": 6063
+        }
+      ]
+    },
+    {
+      "caller": "SYSCALL_DEFINE5",
+      "file": "kernel/events/core.c",
+      "line": 12879,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~PERF_FLAG_ALL)",
+          "exit_kind": "return",
+          "source_line": 12876,
+          "exit_line": 12877
+        }
+      ]
+    }
+  ]
+}

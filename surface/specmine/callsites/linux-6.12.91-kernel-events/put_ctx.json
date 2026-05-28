@@ -1,0 +1,809 @@
+{
+  "callee": "put_ctx",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 17,
+  "callsites": [
+    {
+      "caller": "perf_event_ctx_lock_nested",
+      "file": "kernel/events/core.c",
+      "line": 1340,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!refcount_inc_not_zero(&ctx->refcount))",
+          "exit_kind": "goto",
+          "source_line": 1331
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "event->ctx != ctx",
+          "polarity": "in_true_branch",
+          "source_line": 1338
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_ctx_unlock",
+      "file": "kernel/events/core.c",
+      "line": 1357,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_enable_on_exec",
+      "file": "kernel/events/core.c",
+      "line": 4543,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(current->perf_event_ctxp != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 4515
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(current->perf_event_ctxp != ctx))",
+          "exit_kind": "goto",
+          "source_line": 4515,
+          "exit_line": 4516
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx->nr_events)",
+          "exit_kind": "goto",
+          "source_line": 4518,
+          "exit_line": 4519
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "clone_ctx",
+          "polarity": "in_true_branch",
+          "source_line": 4542
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_remove_on_exec",
+      "file": "kernel/events/core.c",
+      "line": 4587,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctx->task != current)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 4563
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(ctx->task != current))",
+          "exit_kind": "goto",
+          "source_line": 4563,
+          "exit_line": 4564
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!event->attr.remove_on_exec)",
+          "exit_kind": "continue",
+          "source_line": 4567,
+          "exit_line": 4568
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "clone_ctx",
+          "polarity": "in_true_branch",
+          "source_line": 4586
+        }
+      ]
+    },
+    {
+      "caller": "find_get_context",
+      "file": "kernel/events/core.c",
+      "line": 4944,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "task != NULL",
+          "source_line": 4918
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 4921,
+          "exit_line": 4922
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!task)",
+          "exit_kind": "return",
+          "source_line": 4918
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ctx",
+          "polarity": "in_true_branch",
+          "source_line": 4937
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "clone_ctx",
+          "polarity": "in_true_branch",
+          "source_line": 4943
+        }
+      ]
+    },
+    {
+      "caller": "find_get_context",
+      "file": "kernel/events/core.c",
+      "line": 4969,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "task != NULL",
+          "source_line": 4918
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ctx != NULL",
+          "source_line": 4948
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 4921,
+          "exit_line": 4922
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!task)",
+          "exit_kind": "return",
+          "source_line": 4918
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx)",
+          "exit_kind": "goto",
+          "source_line": 4948,
+          "exit_line": 4949
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ctx",
+          "polarity": "in_false_branch",
+          "source_line": 4945
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "unlikely(err)",
+          "polarity": "in_true_branch",
+          "source_line": 4968
+        }
+      ]
+    },
+    {
+      "caller": "__free_event",
+      "file": "kernel/events/core.c",
+      "line": 5372,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!event->ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 5362
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->pmu_ctx->ctx != event->ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 5363
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "event->ctx",
+          "polarity": "in_true_branch",
+          "source_line": 5371
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_release_kernel",
+      "file": "kernel/events/core.c",
+      "line": 5577,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ctx != NULL",
+          "source_line": 5505
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 5506
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctx->parent_ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 5515
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx)",
+          "exit_kind": "goto",
+          "source_line": 5505
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_exec",
+      "file": "kernel/events/core.c",
+      "line": 8336,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ctx != NULL",
+          "source_line": 8327
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx)",
+          "exit_kind": "return",
+          "source_line": 8327,
+          "exit_line": 8328
+        }
+      ]
+    },
+    {
+      "caller": "SYSCALL_DEFINE5",
+      "file": "kernel/events/core.c",
+      "line": 13234,
+      "guards": [
+        {
+          "kind": "capability_check",
+          "predicate": "perfmon_capable()",
+          "source_line": 12895
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(task)",
+          "source_line": 12950
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(event)",
+          "source_line": 12967
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(ctx)",
+          "source_line": 13014
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(pmu_ctx)",
+          "source_line": 13111
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(event_file)",
+          "source_line": 13145
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctx->parent_ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 13142
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~PERF_FLAG_ALL)",
+          "exit_kind": "return",
+          "source_line": 12876,
+          "exit_line": 12877
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12880,
+          "exit_line": 12881
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12885,
+          "exit_line": 12886
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12890,
+          "exit_line": 12891
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!attr.exclude_kernel)",
+          "exit_kind": "return",
+          "source_line": 12888
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!perfmon_capable())",
+          "exit_kind": "return",
+          "source_line": 12895,
+          "exit_line": 12896
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.namespaces)",
+          "exit_kind": "return",
+          "source_line": 12894
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.sample_freq > sysctl_perf_event_sample_rate)",
+          "exit_kind": "return",
+          "source_line": 12900,
+          "exit_line": 12901
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.freq)",
+          "exit_kind": "return",
+          "source_line": 12899
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.sample_period & (1ULL << 63))",
+          "exit_kind": "return",
+          "source_line": 12903,
+          "exit_line": 12904
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12910,
+          "exit_line": 12911
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((attr.sample_type & PERF_SAMPLE_PHYS_ADDR))",
+          "exit_kind": "return",
+          "source_line": 12908
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12917,
+          "exit_line": 12918
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.sample_type & PERF_SAMPLE_REGS_INTR)",
+          "exit_kind": "return",
+          "source_line": 12915
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((flags & PERF_FLAG_PID_CGROUP) && (pid == -1 || cpu == -1))",
+          "exit_kind": "return",
+          "source_line": 12927,
+          "exit_line": 12928
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event_fd < 0)",
+          "exit_kind": "return",
+          "source_line": 12934,
+          "exit_line": 12935
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 12939,
+          "exit_line": 12940
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(group_fd != -1)",
+          "exit_kind": "goto",
+          "source_line": 12937
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(task))",
+          "exit_kind": "goto",
+          "source_line": 12950
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(event))",
+          "exit_kind": "goto",
+          "source_line": 12967
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->pmu->capabilities & PERF_PMU_CAP_NO_INTERRUPT)",
+          "exit_kind": "goto",
+          "source_line": 12973
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 12987,
+          "exit_line": 12988
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.use_clockid)",
+          "exit_kind": "goto",
+          "source_line": 12985
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 12996,
+          "exit_line": 12997
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_check_permission(&attr, task))",
+          "exit_kind": "goto",
+          "source_line": 13006,
+          "exit_line": 13007
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(task)",
+          "exit_kind": "goto",
+          "source_line": 12994
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(ctx))",
+          "exit_kind": "goto",
+          "source_line": 13014
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->task == TASK_TOMBSTONE)",
+          "exit_kind": "goto",
+          "source_line": 13021
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cpuctx->online)",
+          "exit_kind": "goto",
+          "source_line": 13035
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(group_leader->group_leader != group_leader)",
+          "exit_kind": "goto",
+          "source_line": 13048,
+          "exit_line": 13049
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(group_leader->clock != event->clock)",
+          "exit_kind": "goto",
+          "source_line": 13052,
+          "exit_line": 13053
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(group_leader->cpu != event->cpu)",
+          "exit_kind": "goto",
+          "source_line": 13060,
+          "exit_line": 13061
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(group_leader->ctx != ctx)",
+          "exit_kind": "goto",
+          "source_line": 13066,
+          "exit_line": 13067
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.exclusive || attr.pinned)",
+          "exit_kind": "goto",
+          "source_line": 13072,
+          "exit_line": 13073
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!is_software_event(event))",
+          "exit_kind": "goto",
+          "source_line": 13089
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(group_leader)",
+          "exit_kind": "goto",
+          "source_line": 13041
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(pmu_ctx))",
+          "exit_kind": "goto",
+          "source_line": 13111
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 13119,
+          "exit_line": 13120
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(output_event)",
+          "exit_kind": "goto",
+          "source_line": 13117
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!perf_event_validate_size(event))",
+          "exit_kind": "goto",
+          "source_line": 13123
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(perf_need_aux_event(event) && !perf_get_aux_event(event, group_leader))",
+          "exit_kind": "goto",
+          "source_line": 13128
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!exclusive_event_installable(event, ctx))",
+          "exit_kind": "goto",
+          "source_line": 13137
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(event_file))",
+          "exit_kind": "goto",
+          "source_line": 13145
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_create_kernel_counter",
+      "file": "kernel/events/core.c",
+      "line": 13347,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(event)",
+          "source_line": 13280
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(ctx)",
+          "source_line": 13296
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(pmu_ctx)",
+          "source_line": 13309
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctx->parent_ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 13301
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr->aux_output || attr->aux_action)",
+          "exit_kind": "return",
+          "source_line": 13275,
+          "exit_line": 13276
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(event))",
+          "exit_kind": "goto",
+          "source_line": 13280
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(ctx))",
+          "exit_kind": "goto",
+          "source_line": 13296
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->task == TASK_TOMBSTONE)",
+          "exit_kind": "goto",
+          "source_line": 13303
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(pmu_ctx))",
+          "exit_kind": "goto",
+          "source_line": 13309
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cpuctx->online)",
+          "exit_kind": "goto",
+          "source_line": 13324
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!exclusive_event_installable(event, ctx))",
+          "exit_kind": "goto",
+          "source_line": 13330
+        }
+      ]
+    },
+    {
+      "caller": "__perf_pmu_install_event",
+      "file": "kernel/events/core.c",
+      "line": 13395,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_exit_task_context",
+      "file": "kernel/events/core.c",
+      "line": 13568,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 13553
+        },
+        {
+          "kind": "null_check",
+          "predicate": "child_ctx != NULL",
+          "source_line": 13540
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(child != current)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 13537
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!child_ctx)",
+          "exit_kind": "return",
+          "source_line": 13540,
+          "exit_line": 13541
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_exit_task_context",
+      "file": "kernel/events/core.c",
+      "line": 13576,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 13553
+        },
+        {
+          "kind": "null_check",
+          "predicate": "child_ctx != NULL",
+          "source_line": 13540
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(child != current)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 13537
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!child_ctx)",
+          "exit_kind": "return",
+          "source_line": 13540,
+          "exit_line": 13541
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "clone_ctx",
+          "polarity": "in_true_branch",
+          "source_line": 13575
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_exit_task_context",
+      "file": "kernel/events/core.c",
+      "line": 13590,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "child_ctx != NULL",
+          "source_line": 13540
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(child != current)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 13537
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!child_ctx)",
+          "exit_kind": "return",
+          "source_line": 13540,
+          "exit_line": 13541
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_free_task",
+      "file": "kernel/events/core.c",
+      "line": 13697,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ctx != NULL",
+          "source_line": 13660
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx)",
+          "exit_kind": "return",
+          "source_line": 13660,
+          "exit_line": 13661
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_init_context",
+      "file": "kernel/events/core.c",
+      "line": 14041,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "parent_ctx != NULL",
+          "source_line": 13969
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(likely(!parent->perf_event_ctxp))",
+          "exit_kind": "return",
+          "source_line": 13961,
+          "exit_line": 13962
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!parent_ctx)",
+          "exit_kind": "return",
+          "source_line": 13969,
+          "exit_line": 13970
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 13992,
+          "exit_line": 13993
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 14008,
+          "exit_line": 14009
+        }
+      ]
+    }
+  ]
+}

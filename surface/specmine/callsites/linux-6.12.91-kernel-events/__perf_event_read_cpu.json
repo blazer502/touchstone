@@ -1,0 +1,70 @@
+{
+  "callee": "__perf_event_read_cpu",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_event_read_local",
+      "file": "kernel/events/core.c",
+      "line": 4733,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "irqs_disabled",
+          "source_line": 4711
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->attr.inherit)",
+          "exit_kind": "goto",
+          "source_line": 4717
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_read_local",
+      "file": "kernel/events/core.c",
+      "line": 4734,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "irqs_disabled",
+          "source_line": 4711
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event->attr.inherit)",
+          "exit_kind": "goto",
+          "source_line": 4717
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_read",
+      "file": "kernel/events/core.c",
+      "line": 4805,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "preempt_disabled",
+          "source_line": 4804
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((unsigned)event_cpu >= nr_cpu_ids)",
+          "exit_kind": "return",
+          "source_line": 4795,
+          "exit_line": 4796
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "state == PERF_EVENT_STATE_ACTIVE",
+          "polarity": "in_true_branch",
+          "source_line": 4783
+        }
+      ]
+    }
+  ]
+}

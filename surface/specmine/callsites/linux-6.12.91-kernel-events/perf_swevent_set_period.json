@@ -1,0 +1,48 @@
+{
+  "callee": "perf_swevent_set_period",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_swevent_overflow",
+      "file": "kernel/events/core.c",
+      "line": 10056,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!overflow",
+          "polarity": "in_true_branch",
+          "source_line": 10055
+        }
+      ]
+    },
+    {
+      "caller": "perf_swevent_add",
+      "file": "kernel/events/core.c",
+      "line": 10284,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "is_sampling_event(event)",
+          "polarity": "in_true_branch",
+          "source_line": 10282
+        }
+      ]
+    },
+    {
+      "caller": "hw_breakpoint_add",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 975,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "is_sampling_event(bp)",
+          "polarity": "in_true_branch",
+          "source_line": 973
+        }
+      ]
+    }
+  ]
+}

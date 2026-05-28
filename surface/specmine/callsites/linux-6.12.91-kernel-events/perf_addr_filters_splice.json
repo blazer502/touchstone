@@ -1,0 +1,80 @@
+{
+  "callee": "perf_addr_filters_splice",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "exclusive_event_installable",
+      "file": "kernel/events/core.c",
+      "line": 5330,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->mutex)",
+          "source_line": 5317
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!is_exclusive_pmu(pmu))",
+          "exit_kind": "return",
+          "source_line": 5319,
+          "exit_line": 5320
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(exclusive_event_match(iter_event, event))",
+          "exit_kind": "return",
+          "source_line": 5323,
+          "exit_line": 5324
+        }
+      ]
+    },
+    {
+      "caller": "_free_event",
+      "file": "kernel/events/core.c",
+      "line": 5403,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_set_addr_filter",
+      "file": "kernel/events/core.c",
+      "line": 11318,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&event->ctx->mutex)",
+          "source_line": 11304
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->parent)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 11306
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(event->parent))",
+          "exit_kind": "return",
+          "source_line": 11306,
+          "exit_line": 11307
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 11310,
+          "exit_line": 11311
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 11314,
+          "exit_line": 11315
+        }
+      ]
+    }
+  ]
+}

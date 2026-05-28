@@ -1,0 +1,200 @@
+{
+  "callee": "put_event",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 9,
+  "callsites": [
+    {
+      "caller": "perf_aux_output_match",
+      "file": "kernel/events/core.c",
+      "line": 2127,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!has_aux(aux_event))",
+          "exit_kind": "return",
+          "source_line": 2118,
+          "exit_line": 2119
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!event->pmu->aux_output_match)",
+          "exit_kind": "return",
+          "source_line": 2121,
+          "exit_line": 2122
+        }
+      ]
+    },
+    {
+      "caller": "perf_put_aux_event",
+      "file": "kernel/events/core.c",
+      "line": 2143,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "event->aux_event",
+          "polarity": "in_true_branch",
+          "source_line": 2140
+        }
+      ]
+    },
+    {
+      "caller": "perf_put_aux_event",
+      "file": "kernel/events/core.c",
+      "line": 2156,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->aux_event)",
+          "exit_kind": "return",
+          "source_line": 2140
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(iter->aux_event != event)",
+          "exit_kind": "continue",
+          "source_line": 2152,
+          "exit_line": 2153
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_release_kernel",
+      "file": "kernel/events/core.c",
+      "line": 5597,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ctx != NULL",
+          "source_line": 5505
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 5506
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctx->parent_ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 5515
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx)",
+          "exit_kind": "goto",
+          "source_line": 5505
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_release_kernel",
+      "file": "kernel/events/core.c",
+      "line": 5612,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ctx != NULL",
+          "source_line": 5505
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 5506
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctx->parent_ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 5515
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx)",
+          "exit_kind": "goto",
+          "source_line": 5505
+        }
+      ]
+    },
+    {
+      "caller": "perf_mmap_close",
+      "file": "kernel/events/core.c",
+      "line": 6585,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "detach_rest != NULL",
+          "source_line": 6550
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(refcount_read(&rb->aux_refcount))",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 6535
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!atomic_dec_and_mutex_lock(&event->mmap_count, &event->mmap_mutex))",
+          "exit_kind": "goto",
+          "source_line": 6543,
+          "exit_line": 6544
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!detach_rest)",
+          "exit_kind": "goto",
+          "source_line": 6550,
+          "exit_line": 6551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!atomic_long_inc_not_zero(&event->refcount))",
+          "exit_kind": "continue",
+          "source_line": 6561
+        }
+      ]
+    },
+    {
+      "caller": "perf_pending_task",
+      "file": "kernel/events/core.c",
+      "line": 7025,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_exit_event",
+      "file": "kernel/events/core.c",
+      "line": 13522,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "parent_event",
+          "polarity": "in_true_branch",
+          "source_line": 13516
+        }
+      ]
+    },
+    {
+      "caller": "perf_free_event",
+      "file": "kernel/events/core.c",
+      "line": 13644,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!parent)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 13633
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(!parent))",
+          "exit_kind": "return",
+          "source_line": 13633,
+          "exit_line": 13634
+        }
+      ]
+    }
+  ]
+}

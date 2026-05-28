@@ -1,0 +1,109 @@
+{
+  "callee": "has_inherit_and_sample_read",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "list_add_event",
+      "file": "kernel/events/core.c",
+      "line": 1865,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->lock)",
+          "source_line": 1842
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->attach_state & PERF_ATTACH_CONTEXT)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 1844
+        }
+      ]
+    },
+    {
+      "caller": "list_del_event",
+      "file": "kernel/events/core.c",
+      "line": 2091,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->lock)",
+          "source_line": 2076
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(event->ctx != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 2075
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(event->attach_state & PERF_ATTACH_CONTEXT))",
+          "exit_kind": "return",
+          "source_line": 2081,
+          "exit_line": 2082
+        }
+      ]
+    },
+    {
+      "caller": "perf_output_read_one",
+      "file": "kernel/events/core.c",
+      "line": 7408,
+      "guards": []
+    },
+    {
+      "caller": "perf_output_read_group",
+      "file": "kernel/events/core.c",
+      "line": 7434,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_alloc",
+      "file": "kernel/events/core.c",
+      "line": 12457,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "event != NULL",
+          "source_line": 12353
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!task || cpu != -1)",
+          "exit_kind": "return",
+          "source_line": 12342,
+          "exit_line": 12343
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((unsigned)cpu >= nr_cpu_ids)",
+          "exit_kind": "return",
+          "source_line": 12341
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr->sigtrap && !task)",
+          "exit_kind": "return",
+          "source_line": 12345,
+          "exit_line": 12347
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr->sigtrap && !task)",
+          "exit_kind": "return",
+          "source_line": 12345
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!event)",
+          "exit_kind": "return",
+          "source_line": 12353,
+          "exit_line": 12354
+        }
+      ]
+    }
+  ]
+}

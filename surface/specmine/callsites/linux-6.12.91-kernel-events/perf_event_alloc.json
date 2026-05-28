@@ -1,0 +1,172 @@
+{
+  "callee": "perf_event_alloc",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "SYSCALL_DEFINE5",
+      "file": "kernel/events/core.c",
+      "line": 12965,
+      "guards": [
+        {
+          "kind": "capability_check",
+          "predicate": "perfmon_capable()",
+          "source_line": 12895
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(task)",
+          "source_line": 12950
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~PERF_FLAG_ALL)",
+          "exit_kind": "return",
+          "source_line": 12876,
+          "exit_line": 12877
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12880,
+          "exit_line": 12881
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12885,
+          "exit_line": 12886
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12890,
+          "exit_line": 12891
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!attr.exclude_kernel)",
+          "exit_kind": "return",
+          "source_line": 12888
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!perfmon_capable())",
+          "exit_kind": "return",
+          "source_line": 12895,
+          "exit_line": 12896
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.namespaces)",
+          "exit_kind": "return",
+          "source_line": 12894
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.sample_freq > sysctl_perf_event_sample_rate)",
+          "exit_kind": "return",
+          "source_line": 12900,
+          "exit_line": 12901
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.freq)",
+          "exit_kind": "return",
+          "source_line": 12899
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.sample_period & (1ULL << 63))",
+          "exit_kind": "return",
+          "source_line": 12903,
+          "exit_line": 12904
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12910,
+          "exit_line": 12911
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((attr.sample_type & PERF_SAMPLE_PHYS_ADDR))",
+          "exit_kind": "return",
+          "source_line": 12908
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 12917,
+          "exit_line": 12918
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr.sample_type & PERF_SAMPLE_REGS_INTR)",
+          "exit_kind": "return",
+          "source_line": 12915
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((flags & PERF_FLAG_PID_CGROUP) && (pid == -1 || cpu == -1))",
+          "exit_kind": "return",
+          "source_line": 12927,
+          "exit_line": 12928
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event_fd < 0)",
+          "exit_kind": "return",
+          "source_line": 12934,
+          "exit_line": 12935
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 12939,
+          "exit_line": 12940
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(group_fd != -1)",
+          "exit_kind": "goto",
+          "source_line": 12937
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(task))",
+          "exit_kind": "goto",
+          "source_line": 12950
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_create_kernel_counter",
+      "file": "kernel/events/core.c",
+      "line": 13278,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(attr->aux_output || attr->aux_action)",
+          "exit_kind": "return",
+          "source_line": 13275,
+          "exit_line": 13276
+        }
+      ]
+    },
+    {
+      "caller": "inherit_event",
+      "file": "kernel/events/core.c",
+      "line": 13774,
+      "guards": []
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "callee": "perf_event_ctx_lock",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 11,
+  "callsites": [
+    {
+      "caller": "perf_event_disable",
+      "file": "kernel/events/core.c",
+      "line": 2604,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_enable",
+      "file": "kernel/events/core.c",
+      "line": 3139,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_refresh",
+      "file": "kernel/events/core.c",
+      "line": 3273,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_release_kernel",
+      "file": "kernel/events/core.c",
+      "line": 5514,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ctx != NULL",
+          "source_line": 5505
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 5506
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx)",
+          "exit_kind": "goto",
+          "source_line": 5505
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_read_value",
+      "file": "kernel/events/core.c",
+      "line": 5660,
+      "guards": []
+    },
+    {
+      "caller": "perf_read",
+      "file": "kernel/events/core.c",
+      "line": 5865,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 5862,
+          "exit_line": 5863
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_pause",
+      "file": "kernel/events/core.c",
+      "line": 5908,
+      "guards": []
+    },
+    {
+      "caller": "perf_event_period",
+      "file": "kernel/events/core.c",
+      "line": 6025,
+      "guards": []
+    },
+    {
+      "caller": "perf_ioctl",
+      "file": "kernel/events/core.c",
+      "line": 6184,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 6181,
+          "exit_line": 6182
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_task_enable",
+      "file": "kernel/events/core.c",
+      "line": 6220,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 6218
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_task_disable",
+      "file": "kernel/events/core.c",
+      "line": 6236,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 6234
+        }
+      ]
+    }
+  ]
+}

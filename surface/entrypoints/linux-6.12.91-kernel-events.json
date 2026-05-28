@@ -1,0 +1,80 @@
+{
+  "target": "linux-6.12.91-kernel-events",
+  "source_root": "/home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source",
+  "scope": "kernel/events",
+  "generated_at": 1779948944,
+  "entry_count": 7,
+  "unique_functions": 7,
+  "by_dispatcher_class": {
+    "char_device": 6,
+    "syscall": 1
+  },
+  "by_struct_type": {
+    "file_operations": 6
+  },
+  "entries": [
+    {
+      "func": "perf_release",
+      "file": "kernel/events/core.c",
+      "line": 6874,
+      "struct_type": "file_operations",
+      "struct_name": "perf_fops",
+      "field": "release",
+      "dispatcher_class": "char_device"
+    },
+    {
+      "func": "perf_read",
+      "file": "kernel/events/core.c",
+      "line": 6875,
+      "struct_type": "file_operations",
+      "struct_name": "perf_fops",
+      "field": "read",
+      "dispatcher_class": "char_device"
+    },
+    {
+      "func": "perf_poll",
+      "file": "kernel/events/core.c",
+      "line": 6876,
+      "struct_type": "file_operations",
+      "struct_name": "perf_fops",
+      "field": "poll",
+      "dispatcher_class": "char_device"
+    },
+    {
+      "func": "perf_ioctl",
+      "file": "kernel/events/core.c",
+      "line": 6877,
+      "struct_type": "file_operations",
+      "struct_name": "perf_fops",
+      "field": "unlocked_ioctl",
+      "dispatcher_class": "char_device"
+    },
+    {
+      "func": "perf_compat_ioctl",
+      "file": "kernel/events/core.c",
+      "line": 6878,
+      "struct_type": "file_operations",
+      "struct_name": "perf_fops",
+      "field": "compat_ioctl",
+      "dispatcher_class": "char_device"
+    },
+    {
+      "func": "perf_mmap",
+      "file": "kernel/events/core.c",
+      "line": 6879,
+      "struct_type": "file_operations",
+      "struct_name": "perf_fops",
+      "field": "mmap",
+      "dispatcher_class": "char_device"
+    },
+    {
+      "func": "__do_sys_perf_event_open",
+      "file": "kernel/events/core.c",
+      "line": 12856,
+      "struct_type": null,
+      "struct_name": null,
+      "field": null,
+      "dispatcher_class": "syscall"
+    }
+  ]
+}

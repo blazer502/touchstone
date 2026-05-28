@@ -1,0 +1,97 @@
+{
+  "callee": "task_ctx_sched_out",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ctx_resched",
+      "file": "kernel/events/core.c",
+      "line": 2830,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "task_ctx",
+          "polarity": "in_true_branch",
+          "source_line": 2826
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_context_sched_out",
+      "file": "kernel/events/core.c",
+      "line": 3701,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "next_ctx != NULL",
+          "source_line": 3624
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(likely(!ctx))",
+          "exit_kind": "return",
+          "source_line": 3619,
+          "exit_line": 3620
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!next_ctx)",
+          "exit_kind": "goto",
+          "source_line": 3624,
+          "exit_line": 3625
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!parent && !next_parent)",
+          "exit_kind": "goto",
+          "source_line": 3631,
+          "exit_line": 3632
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(context_equiv(ctx, next_ctx))",
+          "exit_kind": "goto",
+          "source_line": 3646
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "do_switch",
+          "polarity": "in_true_branch",
+          "source_line": 3695
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_exit_task_context",
+      "file": "kernel/events/core.c",
+      "line": 13561,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 13553
+        },
+        {
+          "kind": "null_check",
+          "predicate": "child_ctx != NULL",
+          "source_line": 13540
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(child != current)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 13537
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!child_ctx)",
+          "exit_kind": "return",
+          "source_line": 13540,
+          "exit_line": 13541
+        }
+      ]
+    }
+  ]
+}

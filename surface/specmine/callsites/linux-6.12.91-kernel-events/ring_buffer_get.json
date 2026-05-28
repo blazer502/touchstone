@@ -1,0 +1,177 @@
+{
+  "callee": "ring_buffer_get",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "perf_mmap_close",
+      "file": "kernel/events/core.c",
+      "line": 6506,
+      "guards": []
+    },
+    {
+      "caller": "perf_prepare_sample_aux",
+      "file": "kernel/events/core.c",
+      "line": 7224,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "sampler != NULL",
+          "source_line": 7215
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(READ_ONCE(sampler->state) != PERF_EVENT_STATE_ACTIVE)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 7218
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(READ_ONCE(sampler->oncpu) != smp_processor_id())",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 7221
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!sampler)",
+          "exit_kind": "goto",
+          "source_line": 7215,
+          "exit_line": 7216
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(READ_ONCE(sampler->state) != PERF_EVENT_STATE_ACTIVE))",
+          "exit_kind": "goto",
+          "source_line": 7218,
+          "exit_line": 7219
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(READ_ONCE(sampler->oncpu) != smp_processor_id()))",
+          "exit_kind": "goto",
+          "source_line": 7221,
+          "exit_line": 7222
+        }
+      ]
+    },
+    {
+      "caller": "perf_aux_sample_output",
+      "file": "kernel/events/core.c",
+      "line": 7290,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!sampler || !data->aux_size)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 7287
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(!sampler || !data->aux_size))",
+          "exit_kind": "return",
+          "source_line": 7287,
+          "exit_line": 7288
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_aux_pause",
+      "file": "kernel/events/core.c",
+      "line": 8094,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!event)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 8091
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(!event))",
+          "exit_kind": "return",
+          "source_line": 8091,
+          "exit_line": 8092
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_set_output",
+      "file": "kernel/events/core.c",
+      "line": 12756,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 12701
+        },
+        {
+          "kind": "null_check",
+          "predicate": "output_event != NULL",
+          "source_line": 12700
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!output_event)",
+          "exit_kind": "goto",
+          "source_line": 12700
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event == output_event)",
+          "exit_kind": "goto",
+          "source_line": 12706,
+          "exit_line": 12707
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(output_event->cpu != event->cpu)",
+          "exit_kind": "goto",
+          "source_line": 12712,
+          "exit_line": 12713
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(output_event->cpu == -1 && output_event->hw.target != event->hw.target)",
+          "exit_kind": "goto",
+          "source_line": 12718,
+          "exit_line": 12719
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(output_event->clock != event->clock)",
+          "exit_kind": "goto",
+          "source_line": 12724,
+          "exit_line": 12725
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(is_write_backward(output_event) != is_write_backward(event))",
+          "exit_kind": "goto",
+          "source_line": 12731,
+          "exit_line": 12732
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(atomic_read(&event->mmap_count))",
+          "exit_kind": "goto",
+          "source_line": 12751,
+          "exit_line": 12752
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "output_event",
+          "polarity": "in_true_branch",
+          "source_line": 12754
+        }
+      ]
+    },
+    {
+      "caller": "perf_aux_output_begin",
+      "file": "kernel/events/ring_buffer.c",
+      "line": 388,
+      "guards": []
+    }
+  ]
+}

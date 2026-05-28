@@ -1,0 +1,85 @@
+{
+  "callee": "__pmu_ctx_sched_out",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ctx_sched_out",
+      "file": "kernel/events/core.c",
+      "line": 3458,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->lock)",
+          "source_line": 3407
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctx->is_active)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 3413
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(cpuctx->task_ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 3415
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(cpuctx->task_ctx != ctx)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 3450
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(likely(!ctx->nr_events))",
+          "exit_kind": "return",
+          "source_line": 3409
+        }
+      ]
+    },
+    {
+      "caller": "perf_rotate_context",
+      "file": "kernel/events/core.c",
+      "line": 4443,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(cpu_rotate || task_rotate))",
+          "exit_kind": "return",
+          "source_line": 4426,
+          "exit_line": 4427
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "task_event || (task_epc && cpu_event)",
+          "polarity": "in_true_branch",
+          "source_line": 4441
+        }
+      ]
+    },
+    {
+      "caller": "perf_rotate_context",
+      "file": "kernel/events/core.c",
+      "line": 4448,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(cpu_rotate || task_rotate))",
+          "exit_kind": "return",
+          "source_line": 4426,
+          "exit_line": 4427
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cpu_event",
+          "polarity": "in_true_branch",
+          "source_line": 4446
+        }
+      ]
+    }
+  ]
+}

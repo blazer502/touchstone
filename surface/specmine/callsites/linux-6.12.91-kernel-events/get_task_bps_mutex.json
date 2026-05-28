@@ -1,0 +1,27 @@
+{
+  "callee": "get_task_bps_mutex",
+  "defined_in": "kernel/events/hw_breakpoint.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "bp_constraints_lock",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 117,
+      "guards": []
+    },
+    {
+      "caller": "bp_constraints_is_locked",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 151,
+      "guards": []
+    },
+    {
+      "caller": "assert_bp_constraints_lock_held",
+      "file": "kernel/events/hw_breakpoint.c",
+      "line": 160,
+      "guards": []
+    }
+  ]
+}

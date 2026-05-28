@@ -1,0 +1,17 @@
+Okay, so I need to write a minimal syzlang fragment to target the kernel function perf_event_ctx_lock_nested. The entry point is through perf_event_open and perf_ioctl with a perf file descriptor. 
+
+First, I should create a resource that opens a perf event. Using syscall perf_event_open with the necessary arguments: -1 for pid (meaning current process), 0 for hardware events, -1 for all CPUs, and 0 for flags. This will give me a perf fd.
+
+Next, I need to perform an ioctl on this fd. The ioctl syscall is used here, with the perf fd, the PERF_EVENT_IOC_ENABLE command, and a pointer to an integer. This will enable the event, which should trigger the perf_event_ctx_lock_nested function.
+
+I also need to define the types used. The PERF_EVENT_IOC_ENABLE is a command, so I define it as an int. The flags for the ioctl are also an int.
+
+Putting it all together, the resource opens the perf event, then sends the ioctl to enable it. This should increase coverage towards the target function. I should make sure the fragment is minimal, so only the necessary steps are included without any extra calls or types.
+</think>
+
+```syzlang
+resource perf_fd(file:perf_event_open(-1, 0, -1, 0))
+
+sendmsg$perf_ioctl(perf_fd, PERF_EVENT_IOC_ENABLE, &int)
+type int = int
+type PERF_EVENT_IOC_ENABLE = 0x2401

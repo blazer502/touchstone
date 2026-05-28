@@ -1,0 +1,95 @@
+{
+  "callee": "__event_disable",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "perf_aux_output_match",
+      "file": "kernel/events/core.c",
+      "line": 2128,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!has_aux(aux_event))",
+          "exit_kind": "return",
+          "source_line": 2118,
+          "exit_line": 2119
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!event->pmu->aux_output_match)",
+          "exit_kind": "return",
+          "source_line": 2121,
+          "exit_line": 2122
+        }
+      ]
+    },
+    {
+      "caller": "perf_put_aux_event",
+      "file": "kernel/events/core.c",
+      "line": 2163,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->aux_event)",
+          "exit_kind": "return",
+          "source_line": 2140
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(iter->aux_event != event)",
+          "exit_kind": "continue",
+          "source_line": 2152,
+          "exit_line": 2153
+        }
+      ]
+    },
+    {
+      "caller": "perf_group_detach",
+      "file": "kernel/events/core.c",
+      "line": 2264,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&ctx->lock)",
+          "source_line": 2227
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(event->attach_state & PERF_ATTACH_GROUP))",
+          "exit_kind": "return",
+          "source_line": 2232,
+          "exit_line": 2233
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(leader != event)",
+          "exit_kind": "goto",
+          "source_line": 2242
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "sibling->event_caps & PERF_EV_CAP_SIBLING",
+          "polarity": "in_true_branch",
+          "source_line": 2263
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_disable",
+      "file": "kernel/events/core.c",
+      "line": 2558,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state < PERF_EVENT_STATE_INACTIVE)",
+          "exit_kind": "return",
+          "source_line": 2541,
+          "exit_line": 2542
+        }
+      ]
+    }
+  ]
+}

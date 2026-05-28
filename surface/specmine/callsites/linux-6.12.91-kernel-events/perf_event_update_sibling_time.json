@@ -1,0 +1,93 @@
+{
+  "callee": "perf_event_update_sibling_time",
+  "defined_in": "kernel/events/core.c",
+  "target": "linux-6.12.91-kernel-events",
+  "scope": "kernel/events",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "perf_event_set_state",
+      "file": "kernel/events/core.c",
+      "line": 713,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event->state == state)",
+          "exit_kind": "return",
+          "source_line": 704,
+          "exit_line": 705
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "(event->state < 0) ^ (state < 0)",
+          "polarity": "in_true_branch",
+          "source_line": 712
+        }
+      ]
+    },
+    {
+      "caller": "__perf_event_read",
+      "file": "kernel/events/core.c",
+      "line": 4650,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->task && cpuctx->task_ctx != ctx)",
+          "exit_kind": "return",
+          "source_line": 4642,
+          "exit_line": 4643
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "data->group",
+          "polarity": "in_true_branch",
+          "source_line": 4649
+        }
+      ]
+    },
+    {
+      "caller": "perf_event_read",
+      "file": "kernel/events/core.c",
+      "line": 4840,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!((unsigned)event_cpu >= nr_cpu_ids)",
+          "exit_kind": "return",
+          "source_line": 4795,
+          "exit_line": 4796
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(state == PERF_EVENT_STATE_ACTIVE)",
+          "exit_kind": "return",
+          "source_line": 4783
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(state != PERF_EVENT_STATE_INACTIVE)",
+          "exit_kind": "goto",
+          "source_line": 4827
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "state == PERF_EVENT_STATE_ACTIVE",
+          "polarity": "in_false_branch",
+          "source_line": 4821
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "state == PERF_EVENT_STATE_INACTIVE",
+          "polarity": "in_true_branch",
+          "source_line": 4821
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "group",
+          "polarity": "in_true_branch",
+          "source_line": 4839
+        }
+      ]
+    }
+  ]
+}
