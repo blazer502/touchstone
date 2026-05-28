@@ -1,0 +1,85 @@
+{
+  "cyclic_sccs": [
+    {
+      "internal_edges": [
+        {
+          "inner": "aux_mutex",
+          "outer": "mmap_mutex",
+          "weight": 1
+        },
+        {
+          "inner": "mmap_mutex",
+          "outer": "aux_mutex",
+          "weight": 1
+        }
+      ],
+      "locks": [
+        "aux_mutex",
+        "mmap_mutex"
+      ],
+      "size": 2
+    }
+  ],
+  "generated_at": 1779949577,
+  "inversion_leads": [],
+  "min_dominant_weight": 3,
+  "scope": "kernel/events",
+  "stats": {
+    "cyclic_sccs": 1,
+    "distinct_edges": 9,
+    "functions_with_nested_locking": 13,
+    "inversion_leads": 0,
+    "lock_classes": 11,
+    "low_confidence_cycles_suppressed": 1,
+    "ordered_pairs": 17,
+    "two_cycles": 1
+  },
+  "target": "linux-6.12.91-kernel-events",
+  "top_order_edges": [
+    {
+      "inner": "lock",
+      "outer": "mutex",
+      "weight": 5
+    },
+    {
+      "inner": "lock",
+      "outer": "rcu",
+      "weight": 4
+    },
+    {
+      "inner": "lock",
+      "outer": "ctx.lock",
+      "weight": 2
+    },
+    {
+      "inner": "child_mutex",
+      "outer": "mutex",
+      "weight": 1
+    },
+    {
+      "inner": "aux_mutex",
+      "outer": "mmap_mutex",
+      "weight": 1
+    },
+    {
+      "inner": "mmap_mutex",
+      "outer": "aux_mutex",
+      "weight": 1
+    },
+    {
+      "inner": "b",
+      "outer": "a",
+      "weight": 1
+    },
+    {
+      "inner": "mutex",
+      "outer": "rwsem_r:signal->exec_update_lock",
+      "weight": 1
+    },
+    {
+      "inner": "mutex",
+      "outer": "pmus_lock",
+      "weight": 1
+    }
+  ]
+}

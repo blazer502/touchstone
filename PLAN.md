@@ -609,6 +609,28 @@ output: poc_input_artifact          # bytes, conformant to fuzz_entrypoint ABI
   kernel runtime loop is wired end-to-end (runtime step may be infra-deferred); and Components (1)
   and (3) run on the stronger analysis substrate without any Phase-1–5 soundness regression.
 
+- **Phase 7 — New bug-class mining modes (lock-order; started).** Phase 5/6 mining finds *missing
+  pre-call guards*; it cannot express lock-*ordering* bugs (circular lock dependencies — the class
+  kernelctf-latest Candidate A landed in). Phase 7 adds mining modes for bug classes that need a
+  different structural shape than "guard before callee."
+
+  - **7.1 Lock-order mining (static lockdep). [done]** `surface/specmine/lock_order.py` extracts the
+    per-function lock-acquire order via a held-stack (acquiring L while H is held emits the ordered
+    pair `H → L`), aggregates into a weighted lock-order graph (node = lock class, edge = "acquired
+    before", weight = #sites), detects cycles (2-cycles + Tarjan SCCs), and flags the minority-weight
+    edge of each cycle as the inversion lead. `--min-dominant-weight` suppresses low-confidence
+    1-vs-1 artifacts. Soundness: proposer-only — **lockdep at runtime is the verdict authority** for
+    this class (CBMC can't prove a deadlock from source), so a lead is confirmed by a lockdep splat
+    under directed (6.3) fuzzing. Validated on a synthetic inversion fixture (detects the
+    minority-weight `b→a` inversion against a 5-site `a→b` convention) and on 6.12.91 `kernel/events/`
+    (recovers the *documented* perf `mmap_mutex → aux_mutex` hierarchy; 1-vs-1 artifact correctly
+    suppressed). *Done when:* the miner detects a planted inversion against an established order on a
+    fixture and extracts real lock-order conventions on a kernel subsystem, with the runtime
+    confirmation deferred to lockdep under directed fuzzing.
+  - **7.x (queued):** whole-kernel-scope run to surface Candidate A's cross-subsystem cycle;
+    type-aware lock-class identity (via 6.2 MLTA `(type,field)`) to cut the class-merge false-cycle
+    rate; refcount-pairing and RCU-grace-period mining as further bug-class modes.
+
 ---
 
 ## 7. Budget & Funnel Economics (hard constraint)

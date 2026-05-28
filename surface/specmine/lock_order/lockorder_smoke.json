@@ -1,0 +1,81 @@
+{
+  "cyclic_sccs": [
+    {
+      "internal_edges": [
+        {
+          "inner": "a_lock",
+          "outer": "b_lock",
+          "weight": 1
+        },
+        {
+          "inner": "b_lock",
+          "outer": "a_lock",
+          "weight": 5
+        }
+      ],
+      "locks": [
+        "a_lock",
+        "b_lock"
+      ],
+      "size": 2
+    }
+  ],
+  "generated_at": 1779949577,
+  "inversion_leads": [
+    {
+      "dominant_order": "a_lock -> b_lock",
+      "dominant_weight": 5,
+      "inversion_order": "b_lock -> a_lock",
+      "inversion_sites": [
+        {
+          "caller": "buggy_inverter",
+          "file": "fixture.c",
+          "line": 64
+        }
+      ],
+      "inversion_weight": 1,
+      "kind": "2-cycle",
+      "suspicion": 0.8333
+    }
+  ],
+  "min_dominant_weight": 3,
+  "scope": ".",
+  "stats": {
+    "cyclic_sccs": 1,
+    "distinct_edges": 5,
+    "functions_with_nested_locking": 8,
+    "inversion_leads": 1,
+    "lock_classes": 5,
+    "low_confidence_cycles_suppressed": 0,
+    "ordered_pairs": 10,
+    "two_cycles": 1
+  },
+  "target": "lockorder_smoke",
+  "top_order_edges": [
+    {
+      "inner": "b_lock",
+      "outer": "a_lock",
+      "weight": 5
+    },
+    {
+      "inner": "y_lock",
+      "outer": "x_lock",
+      "weight": 2
+    },
+    {
+      "inner": "a_lock",
+      "outer": "b_lock",
+      "weight": 1
+    },
+    {
+      "inner": "z_lock",
+      "outer": "x_lock",
+      "weight": 1
+    },
+    {
+      "inner": "z_lock",
+      "outer": "y_lock",
+      "weight": 1
+    }
+  ]
+}
