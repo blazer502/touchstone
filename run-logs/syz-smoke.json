@@ -1,0 +1,19 @@
+{
+  "smoke": "kernelctf-latest directed syz-manager run (9b.4)",
+  "kernel": "lts-6.12.91 hunt (KASAN+KCOV; CONFIG_E1000 absent -> virtio-net-pci)",
+  "connected": true,
+  "vms": 1,
+  "procs": 2,
+  "programs_executed": 6818,
+  "coverage_pcs": 29033,
+  "corpus_final": 285,
+  "exec_per_sec_peak": 36,
+  "crashes": 0,
+  "window_s": 198,
+  "fixes": [
+    "vm.network_device=virtio-net-pci (hunt kernel lacks CONFIG_E1000, has CONFIG_VIRTIO_NET)",
+    "syzimg.img eth0 static 10.0.2.15/24 gw 10.0.2.2 (minimal-image DHCP timed out)"
+  ],
+  "interpretation": "Runtime loop closes end-to-end: VM boots the hunt kernel, syz-manager SSHes in, executes programs + accumulates coverage. 0 crashes in a 3-min window is expected; a novel bug needs the long directed campaign (8h run = reference, 12 buckets). syzimg.img is a 1GB build artifact, not committed.",
+  "log": "run-logs/syz-smoke-full.log"
+}

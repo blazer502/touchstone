@@ -18,6 +18,7 @@
     "initrd": "__ROOT__/artifacts/initramfs-latest.cpio.gz",
     "cpu": 2,
     "mem": 2048,
+    "network_device": "virtio-net-pci",
     "qemu_args": "-enable-kvm -cpu host -nographic -no-reboot"
   },
   "reproduce": true,
