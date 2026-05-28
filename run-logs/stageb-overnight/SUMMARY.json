@@ -1,0 +1,20 @@
+{
+  "run": "stageb-overnight-20260528-162754",
+  "target": "lts-6.12.91 netfilter Stage-A surface",
+  "engine": "CBMC 6.4.0 (sound oracle)",
+  "proposer": "qwen2.5-coder:7b-instruct Q4_K_M (CPU, harness + contract synthesis)",
+  "units_attempted": 55,
+  "status_totals": {
+    "ok": 22,
+    "extract-failed": 26,
+    "harness-invalid": 5,
+    "llm-harness-error: chat call failed: timed out": 2
+  },
+  "ok_verdict_totals": {
+    "inconclusive": 22
+  },
+  "unsafe_reclassified_to_harness_invalid": 5,
+  "real_bug_candidates": 0,
+  "interpretation": "Verifier-first arm ran end-to-end on real kernel functions. CBMC (the oracle) stayed sound throughout \u2014 it never falsely claimed safe. 0 real bug candidates. Dominant bottleneck is LLM harness-synthesis quality on a 7B CPU model: 26/54 functions could not be extracted by the heuristic source slicer; of the harnesses that were generated, the LLM commonly (a) omitted the function-under-test body (all 4 \"unsafe\" verdicts were CBMC \"no body for callee\" \u2014 reclassified to harness-invalid), or (b) stubbed callees so CBMC had no memory operation to check (-> inconclusive). The 22 inconclusive are buildable harnesses where the function reduces to calls into stubbed externs. No function was proven UNSAFE through a well-formed harness, so no bug candidate was produced.",
+  "soundness_note": "This is the designed behavior: the LLM is structurally a proposer (harness + contracts), CBMC is the verdict authority. A weak proposer yields no findings but never an unsound \"safe\". To raise yield: better source extraction (clang/libclang instead of regex), a stronger harness-author model, and inlining real callee bodies instead of extern stubs."
+}

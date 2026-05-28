@@ -239,8 +239,35 @@ def main() -> int:
                 row["status"] = f"stage_b-error: {type(e).__name__}: {str(e)[:200]}"
                 outfh.write(json.dumps(row) + "\n"); outfh.flush(); continue
 
+            # Guard: a CBMC "unsafe" on a harness that fails to *compile/link*
+            # the function-under-test is a harness-synthesis defect, NOT a kernel
+            # bug. CBMC is sound here (it never claims safe), but the LLM gave it
+            # a broken translation unit. Downgrade so the verdict isn't mistaken
+            # for a real finding. Real unsafe verdicts (a genuine bounds/pointer
+            # violation reached through a well-formed harness) are preserved.
+            HARNESS_DEFECT_MARKERS = (
+                "no body for callee",
+                "is not declared",
+                "conflicting types",
+                "implicit declaration",
+                "use of undeclared",
+                "parse error",
+                "conversion error",
+                "CONVERSION ERROR",
+            )
+            evidence = (rv.final.evidence or "")
+            verdict = rv.final.verdict
+            if verdict == "unsafe" and any(m in evidence for m in HARNESS_DEFECT_MARKERS):
+                row["status"] = "harness-invalid"
+                row["verdict"] = "harness-invalid"
+                row["defect_evidence"] = evidence[-400:]
+                row["iters"] = len(rv.history) - 1
+                outfh.write(json.dumps(row) + "\n"); outfh.flush()
+                print(f"  -> harness-invalid (CBMC could not build the function-under-test)")
+                continue
+
             row["status"] = "ok"
-            row["verdict"] = rv.final.verdict
+            row["verdict"] = verdict
             row["iters"] = len(rv.history) - 1
             row["contracts"] = list(rv.accumulated_contracts)
             row["llm_tokens_refine"] = rv.total_tokens
