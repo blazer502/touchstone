@@ -1,0 +1,185 @@
+{
+  "callee": "optlen",
+  "defined_in": "net/netfilter/xt_TCPMSS.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "nft_exthdr_tcp_eval",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 208,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "tcph != NULL",
+          "source_line": 203
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tcph)",
+          "exit_kind": "goto",
+          "source_line": 203,
+          "exit_line": 204
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = sizeof(*tcph); i < tcphdr_len - 1; i += optl",
+          "polarity": "in_true_branch",
+          "source_line": 207
+        }
+      ]
+    },
+    {
+      "caller": "nft_exthdr_tcp_set_eval",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 261,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "tcph != NULL",
+          "source_line": 246
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tcph)",
+          "exit_kind": "goto",
+          "source_line": 246,
+          "exit_line": 247
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(pkt->skb, nft_thoff(pkt) + tcphdr_len))",
+          "exit_kind": "goto",
+          "source_line": 249,
+          "exit_line": 250
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = sizeof(*tcph); i < tcphdr_len - 1; i += optl",
+          "polarity": "in_true_branch",
+          "source_line": 255
+        }
+      ]
+    },
+    {
+      "caller": "nft_exthdr_tcp_strip_eval",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 338,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "tcph != NULL",
+          "source_line": 326
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tcph)",
+          "exit_kind": "goto",
+          "source_line": 326,
+          "exit_line": 327
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(pkt->skb, nft_thoff(pkt) + tcphdr_len))",
+          "exit_kind": "goto",
+          "source_line": 329,
+          "exit_line": 330
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = sizeof(*tcph); i < tcphdr_len - 1; i += optl",
+          "polarity": "in_true_branch",
+          "source_line": 335
+        }
+      ]
+    },
+    {
+      "caller": "tcpmss_mangle_packet",
+      "file": "net/netfilter/xt_TCPMSS.c",
+      "line": 117,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(par->fragoff != 0)",
+          "exit_kind": "return",
+          "source_line": 86,
+          "exit_line": 87
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, skb->len))",
+          "exit_kind": "return",
+          "source_line": 89,
+          "exit_line": 90
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(len < (int)sizeof(struct tcphdr))",
+          "exit_kind": "return",
+          "source_line": 93,
+          "exit_line": 94
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(len < tcp_hdrlen || tcp_hdrlen < sizeof(struct tcphdr))",
+          "exit_kind": "return",
+          "source_line": 99,
+          "exit_line": 100
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(min_mtu <= minlen)",
+          "exit_kind": "return",
+          "source_line": 107
+        }
+      ]
+    },
+    {
+      "caller": "tcpoptstrip_mangle_packet",
+      "file": "net/netfilter/xt_TCPOPTSTRIP.c",
+      "line": 64,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "tcph != NULL",
+          "source_line": 45
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(par->fragoff != 0)",
+          "exit_kind": "return",
+          "source_line": 41,
+          "exit_line": 42
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tcph)",
+          "exit_kind": "return",
+          "source_line": 45,
+          "exit_line": 46
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tcp_hdrlen < sizeof(struct tcphdr))",
+          "exit_kind": "return",
+          "source_line": 49,
+          "exit_line": 50
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, tcphoff + tcp_hdrlen))",
+          "exit_kind": "return",
+          "source_line": 52,
+          "exit_line": 53
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = sizeof(struct tcphdr); i < tcp_hdrlen - 1; i += optl",
+          "polarity": "in_true_branch",
+          "source_line": 63
+        }
+      ]
+    }
+  ]
+}

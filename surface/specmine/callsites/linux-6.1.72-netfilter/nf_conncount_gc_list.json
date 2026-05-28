@@ -1,0 +1,94 @@
+{
+  "callee": "nf_conncount_gc_list",
+  "defined_in": "net/netfilter/nf_conncount.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "insert_tree",
+      "file": "net/netfilter/nf_conncount.c",
+      "line": 356,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 327
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(gc_count >= ARRAY_SIZE(gc_nodes))",
+          "exit_kind": "continue",
+          "source_line": 353,
+          "exit_line": 354
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "*rbnode",
+          "polarity": "in_true_branch",
+          "source_line": 331
+        }
+      ]
+    },
+    {
+      "caller": "count_tree",
+      "file": "net/netfilter/nf_conncount.c",
+      "line": 426,
+      "guards": [
+        {
+          "kind": "enclosing_while",
+          "predicate": "parent",
+          "polarity": "in_true_branch",
+          "source_line": 412
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "diff > 0",
+          "polarity": "in_false_branch",
+          "source_line": 422
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!tuple",
+          "polarity": "in_true_branch",
+          "source_line": 425
+        }
+      ]
+    },
+    {
+      "caller": "tree_gc_worker",
+      "file": "net/netfilter/nf_conncount.c",
+      "line": 470,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "bh_disabled",
+          "source_line": 466
+        },
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 467
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "node = rb_first(root); node != NULL; node = rb_next(node)",
+          "polarity": "in_true_branch",
+          "source_line": 468
+        }
+      ]
+    },
+    {
+      "caller": "nft_connlimit_gc",
+      "file": "net/netfilter/nft_connlimit.c",
+      "line": 243,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "bh_disabled",
+          "source_line": 242
+        }
+      ]
+    }
+  ]
+}

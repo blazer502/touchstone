@@ -1,0 +1,161 @@
+{
+  "callee": "synproxy_build_options",
+  "defined_in": "net/netfilter/nf_synproxy_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "synproxy_send_client_synack",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 482,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 462
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 462,
+          "exit_line": 463
+        }
+      ]
+    },
+    {
+      "caller": "synproxy_send_server_syn",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 528,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 505
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 505,
+          "exit_line": 506
+        }
+      ]
+    },
+    {
+      "caller": "synproxy_send_server_ack",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 568,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 550
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 550,
+          "exit_line": 551
+        }
+      ]
+    },
+    {
+      "caller": "synproxy_send_client_ack",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 606,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 588
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 588,
+          "exit_line": 589
+        }
+      ]
+    },
+    {
+      "caller": "synproxy_send_client_synack_ipv6",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 895,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 875
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 875,
+          "exit_line": 876
+        }
+      ]
+    },
+    {
+      "caller": "synproxy_send_server_syn_ipv6",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 942,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 919
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 919,
+          "exit_line": 920
+        }
+      ]
+    },
+    {
+      "caller": "synproxy_send_server_ack_ipv6",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 982,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 964
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 964,
+          "exit_line": 965
+        }
+      ]
+    },
+    {
+      "caller": "synproxy_send_client_ack_ipv6",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 1021,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 1003
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 1003,
+          "exit_line": 1004
+        }
+      ]
+    }
+  ]
+}

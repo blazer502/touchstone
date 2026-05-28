@@ -1,0 +1,118 @@
+{
+  "callee": "nf_conntrack_helper_unregister",
+  "defined_in": "net/netfilter/nf_conntrack_helper.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "h323_helper_init",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1755,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 1739,
+          "exit_line": 1740
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 1743,
+          "exit_line": 1744
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 1747,
+          "exit_line": 1748
+        }
+      ]
+    },
+    {
+      "caller": "h323_helper_exit",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1765,
+      "guards": []
+    },
+    {
+      "caller": "nf_conntrack_helpers_unregister",
+      "file": "net/netfilter/nf_conntrack_helper.c",
+      "line": 484,
+      "guards": [
+        {
+          "kind": "enclosing_while",
+          "predicate": "n-- > 0",
+          "polarity": "in_true_branch",
+          "source_line": 483
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_netbios_ns_fini",
+      "file": "net/netfilter/nf_conntrack_netbios_ns.c",
+      "line": 67,
+      "guards": []
+    },
+    {
+      "caller": "nf_conntrack_pptp_fini",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 609,
+      "guards": []
+    },
+    {
+      "caller": "nf_conntrack_snmp_fini",
+      "file": "net/netfilter/nf_conntrack_snmp.c",
+      "line": 71,
+      "guards": []
+    },
+    {
+      "caller": "nfnl_cthelper_del",
+      "file": "net/netfilter/nfnetlink_cthelper.c",
+      "line": 721,
+      "guards": [
+        {
+          "kind": "capability_check",
+          "predicate": "capable(CAP_NET_ADMIN)",
+          "source_line": 691
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!capable(CAP_NET_ADMIN))",
+          "exit_kind": "return",
+          "source_line": 691,
+          "exit_line": 692
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 699,
+          "exit_line": 700
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFCTH_TUPLE])",
+          "exit_kind": "return",
+          "source_line": 697
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "refcount_dec_if_one(&cur->refcnt)",
+          "polarity": "in_true_branch",
+          "source_line": 719
+        }
+      ]
+    },
+    {
+      "caller": "nfnl_cthelper_exit",
+      "file": "net/netfilter/nfnetlink_cthelper.c",
+      "line": 797,
+      "guards": []
+    }
+  ]
+}

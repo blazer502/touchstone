@@ -1,0 +1,43 @@
+{
+  "callee": "in_vrf_postrouting",
+  "defined_in": "net/netfilter/nf_nat_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ipv4_confirm",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 179,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!ct || ctinfo == IP_CT_RELATED_REPLY)",
+          "exit_kind": "return",
+          "source_line": 176,
+          "exit_line": 177
+        }
+      ]
+    },
+    {
+      "caller": "ipv6_confirm",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 390,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!ct || ctinfo == IP_CT_RELATED_REPLY)",
+          "exit_kind": "return",
+          "source_line": 387,
+          "exit_line": 388
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_inet_fn",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 728,
+      "guards": []
+    }
+  ]
+}

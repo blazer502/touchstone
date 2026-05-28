@@ -1,0 +1,109 @@
+{
+  "callee": "__nft_reg_track_cancel",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "__nft_reg_track_clobber",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 728,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = track->regs[dreg].num_reg; i > 0; i--",
+          "polarity": "in_true_branch",
+          "source_line": 727
+        }
+      ]
+    },
+    {
+      "caller": "nft_reg_track_cancel",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 763,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < regcount; i++, dreg++",
+          "polarity": "in_true_branch",
+          "source_line": 762
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_set_reduce",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 754,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!track->regs[i].selector)",
+          "exit_kind": "continue",
+          "source_line": 748,
+          "exit_line": 749
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(track->regs[i].selector->ops != &nft_ct_get_ops)",
+          "exit_kind": "continue",
+          "source_line": 751,
+          "exit_line": 752
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < NFT_REG32_NUM; i++",
+          "polarity": "in_true_branch",
+          "source_line": 747
+        }
+      ]
+    },
+    {
+      "caller": "nft_meta_set_reduce",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 794,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!track->regs[i].selector)",
+          "exit_kind": "continue",
+          "source_line": 788,
+          "exit_line": 789
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(track->regs[i].selector->ops != &nft_meta_get_ops)",
+          "exit_kind": "continue",
+          "source_line": 791,
+          "exit_line": 792
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < NFT_REG32_NUM; i++",
+          "polarity": "in_true_branch",
+          "source_line": 787
+        }
+      ]
+    },
+    {
+      "caller": "nft_payload_set_reduce",
+      "file": "net/netfilter/nft_payload.c",
+      "line": 822,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!track->regs[i].selector)",
+          "exit_kind": "continue",
+          "source_line": 815,
+          "exit_line": 816
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < NFT_REG32_NUM; i++",
+          "polarity": "in_true_branch",
+          "source_line": 814
+        }
+      ]
+    }
+  ]
+}

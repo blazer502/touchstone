@@ -1,0 +1,121 @@
+{
+  "callee": "ctnetlink_alloc_expect",
+  "defined_in": "net/netfilter/nf_conntrack_netlink.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ctnetlink_stat_ct",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2637,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb2 == NULL)",
+          "exit_kind": "return",
+          "source_line": 2606,
+          "exit_line": 2607
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err <= 0)",
+          "exit_kind": "return",
+          "source_line": 2613
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_glue_attach_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2890,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2873,
+          "exit_line": 2874
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2878,
+          "exit_line": 2879
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(helper == NULL)",
+          "exit_kind": "return",
+          "source_line": 2886,
+          "exit_line": 2887
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_EXPECT_HELP_NAME])",
+          "exit_kind": "return",
+          "source_line": 2881
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_create_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3628,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "h != NULL",
+          "source_line": 3597
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3584,
+          "exit_line": 3585
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3588,
+          "exit_line": 3589
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3592,
+          "exit_line": 3593
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!h)",
+          "exit_kind": "return",
+          "source_line": 3597,
+          "exit_line": 3598
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request_module(\"nfct-helper-%s\", helpname) < 0)",
+          "exit_kind": "goto",
+          "source_line": 3610
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(helper)",
+          "exit_kind": "goto",
+          "source_line": 3617
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(helper == NULL)",
+          "exit_kind": "goto",
+          "source_line": 3607
+        }
+      ]
+    }
+  ]
+}

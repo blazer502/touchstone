@@ -1,0 +1,38 @@
+{
+  "contracts": [
+    {
+      "callee": "safe_wrapper",
+      "callsite_count": 4,
+      "kind_class": "lock",
+      "kind_label": "lock_held",
+      "outlier_count": 0,
+      "predicate": "rcu_read_lock_held",
+      "support_count": 4,
+      "support_pct": 1.0
+    },
+    {
+      "callee": "lookup_thing",
+      "callsite_count": 12,
+      "kind_class": "lock",
+      "kind_label": "lock_held",
+      "outlier_count": 2,
+      "predicate": "rcu_read_lock_held",
+      "support_count": 10,
+      "support_pct": 0.8333
+    }
+  ],
+  "generated_at": 1779927167,
+  "min_support": 2,
+  "stats": {
+    "by_kind_class": {
+      "lock": 2
+    },
+    "callees_examined": 2,
+    "callees_with_contracts": 2,
+    "mined_contracts": 2,
+    "total_callsites": 16,
+    "wall_seconds": 0.0
+  },
+  "target": "mining_smoke",
+  "tau": 0.83
+}

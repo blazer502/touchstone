@@ -1,0 +1,27 @@
+{
+  "callee": "conntrack_mt",
+  "defined_in": "net/netfilter/xt_conntrack.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "conntrack_mt_v1",
+      "file": "net/netfilter/xt_conntrack.c",
+      "line": 247,
+      "guards": []
+    },
+    {
+      "caller": "conntrack_mt_v2",
+      "file": "net/netfilter/xt_conntrack.c",
+      "line": 255,
+      "guards": []
+    },
+    {
+      "caller": "conntrack_mt_v3",
+      "file": "net/netfilter/xt_conntrack.c",
+      "line": 263,
+      "guards": []
+    }
+  ]
+}

@@ -204,17 +204,102 @@ escalation. Magma stays as a secondary precision check (near-zero false confirma
 
 ---
 
+## 3b. Component (3): Specification Mining as Bug Oracle (vuln-class-general)
+
+**Thesis.** Sound verification doesn't just prune safe regions — it discovers bugs as outliers in
+mined-contract distributions. Mine pre-call invariants from the codebase's own conventions; outlier
+callsites where the mined invariant does not hold become hypothesis seeds; the existing Component (2)
+sound oracle confirms or refutes via the existing tiered engines. This generalises beyond memory
+safety natively because every recurring pre-call pattern is a different bug class
+(**locking, auth/capability, bounds/length, null/init, refcount, taint-sanitization, state-machine,
+resource-cleanup**) — the mining doesn't change per class, only the *shape* of the missing guard
+does.
+
+This component restructures verification's role: it is no longer just a prune/decide filter
+(Component 1, 2) but a *bug proposer* whose hypotheses are grounded in the target's own code
+conventions, not in the LLM's priors. Two soundness properties carry over from Components (1) and
+(2):
+- **Mining is a proposer, not a decider.** A mined contract is a *conjecture* until verified by
+  Stage B; an outlier is a *lead* until refuted/confirmed by Tier 2/3. Final verdict authority
+  stays with the sound checker (§8 guardrail).
+- **Cache key compatibility.** Mined contracts are recorded as `assumed_contracts` in the
+  Phase 1.4 proof-cache key, so any reuse of a proof that depended on a mined contract becomes
+  invalid the moment that contract changes — same soundness rule, no new lever.
+
+### 3b.1 — Callsite + guard extraction
+For each callee `F`, collect every callsite in the target tree and walk backward through the
+caller's CFG to extract preceding guard conditions: `if(...)` / `while(...)` / `BUG_ON` / `WARN_ON` /
+`__must_check` / lock-acquire (`*_lock`, `rcu_read_lock*`, `mutex_lock`) / capability-check
+(`capable`, `ns_capable`) / null-check / bounds-check / sanitizer-call. The extractor uses a real
+AST (libclang or tree-sitter for kernel macro-heavy code), keyed off the Phase 1.1 cluster
+decomposition so mining stays partitionable per task and reusable across versions via the proof
+cache.
+
+### 3b.2 — Contract synthesis from callsite distributions
+Cluster guards across callsites per callee with **variable-role normalization** (`arg0`, `arg1`,
+`return_of(X)`, `field_of(arg.X)`) and local SMT equivalence (Z3) so syntactically different
+predicates that mean the same thing collapse. A guard cluster with support ≥τ (default τ=0.85)
+becomes a *mined contract* for that callee. Each callsite that doesn't match a mined contract emits
+an outlier with suspicion score `support_pct × (1 − local_establishment)`, where
+`local_establishment` is a cheap one-hop interprocedural check ("does the immediate caller plausibly
+establish the contract from its own callers?").
+
+### 3b.3 — Sound verification (forward + backward)
+A mined contract is a conjecture; the sound checker decides.
+- **Forward (Stage B):** prove the contract holds on its support set via Frama-C/EVA + CBMC, cached
+  through the Phase 1.4 proof cache. A failing forward proof downgrades the contract to
+  "low-confidence" — outliers still emitted, but flagged so 3b.5 reranks them.
+- **Backward (Tier 2/3):** for each outlier, dispatch through `agent.router.route()` with the
+  property "the callee's mined contract is violated, and a sanitizer/assertion fires reaching the
+  callee." Tier 2 (KLEE/angr) for feasibility, Tier 3 (CBMC) for bounded definitive judgment.
+  UNSAT/safe ⇒ benign outlier (suspicion lowered); SAT/unsafe ⇒ confirmed bug with witness.
+
+### 3b.4 — Vuln-class taxonomy + per-class report
+Classify mined contracts by the *shape* of the missing guard, not the body: **locking** (lock-acquire
+predicate), **auth/capability** (`capable`/`ns_capable` form), **bounds/length** (compare on a
+length/index field), **null/init-check**, **refcount** (read of refcount > 0), **state-machine**
+(`state == EXPECTED`), **taint-sanitization** (string-escape / shell-quote call), and
+**resource-cleanup** (acquire/release pairing). Per-class formatter renders outliers as
+human-readable leads ("missing `capable(CAP_NET_ADMIN)` before `nf_tables_newrule`") — this is the
+breadth-of-vuln-class deliverable.
+
+### 3b.5 — LLM-assisted contract refinement (Phase 3.1 pattern)
+When backward verification returns `inconclusive` (engine timeout, or the contract needs widening —
+e.g. mined `rcu_read_lock` should be `rcu_read_lock || in_irq()`), the synthesizer LLM is invoked
+under the Phase 3.1 proposer pattern: prompt = mined contract + outlier callsite + engine trace;
+output is a refined contract; the sound checker re-verifies. **LLM proposes, engine decides**
+(§8). Rule-based fallback exists for gateway-down operation, exercising the same loop deterministically.
+
+**Output of Component (3):** a ranked list of **confirmed bug leads**, each carrying the mined
+contract, the violating callsite, the sound-checker witness (PoV or constraint), and a vuln-class
+label. The output schema is compatible with Component (2)'s router so confirmed leads flow into the
+same agent loop as Component (1)'s candidate sites — no parallel pipeline.
+
+**Acceptance:** on the Phase 0.4 historical target (Linux 6.1.72 `net/netfilter/`, contains
+CVE-2024-1086), the system must (a) re-discover the CVE's underlying convention violation as a
+top-N outlier under the same mining/scoring procedure used for unlabeled targets, (b) confirm it as
+a bug via the existing Tier-2/3 oracle without LLM intervention in the verdict, and (c) preserve the
+Phase 1.5 / Phase 2.5 soundness gates (`missed_bug_count = 0`, `false_confirmations = 0`). On at
+least one current field target (live LTS kernel or live library), produce ≥1 confirmed lead in ≥2
+vuln classes including at least one non-memory-safety class.
+
+---
+
 ## 4. The Closed Loop (orchestration)
 
 1. **Ingest** target repo; build (kernel: with KCOV+sanitizer configs; userspace: with sanitizer
    instrumentation). Reuse **OSS-Fuzz** build harnesses where available.
 2. **Component (1)** produces the minimized attack surface + candidate sites.
-3. **Agent loop** per candidate: synthesizer proposes an exploit hypothesis → **router** picks a
-   tier → oracle returns confirm / refute / inconclusive → on refute, prune; on inconclusive,
-   refine hypothesis or escalate tier; on confirm, emit PoV + report.
-4. **Counterexamples** from any tier feed back to Component (1) Stage B (to repair contracts) and to
-   the agent (to refine the next proposal).
-5. **Budget governor** enforces token + tier-cost caps; cheap tiers must absorb most hypotheses
+3. **Component (3)** mines pre-call contracts from the target's own callsite distributions and emits
+   outlier callsites as bug leads — a second candidate stream that complements Component (1)'s
+   surface candidates and is naturally vuln-class-general (locking, auth, bounds, refcount,
+   taint, …).
+4. **Agent loop** per candidate (from either source): synthesizer proposes an exploit hypothesis →
+   **router** picks a tier → oracle returns confirm / refute / inconclusive → on refute, prune; on
+   inconclusive, refine hypothesis or escalate tier; on confirm, emit PoV + report.
+5. **Counterexamples** from any tier feed back to Component (1) Stage B (to repair contracts),
+   Component (3) (to re-rank/refine mined contracts), and the agent (to refine the next proposal).
+6. **Budget governor** enforces token + tier-cost caps; cheap tiers must absorb most hypotheses
    (funnel economics, see §7).
 
 Reuse, do not rebuild, the orchestration/artifact-exchange/budget layer: base it on the
@@ -230,6 +315,7 @@ repo/
   config/            models.yaml, budget.yaml, targets/*.yaml
   ingest/            repo fetch, build (kernel + userspace), OSS-Fuzz harness reuse
   surface/           Stage A (reachability/taint) + Stage B (Frama-C/CBMC) + entry-point catalogs
+    specmine/        Component (3) callsite/guard extraction, contract mining, outlier ranking
   oracle/
     tier1_fuzz/      syzkaller + AFL++/libFuzzer drivers, sanitizer configs, harness generators
     tier2_symbolic/  S2E, KLEE, SymCC drivers + constraint-hint generators
@@ -412,6 +498,65 @@ output: poc_input_artifact          # bytes, conformant to fuzz_entrypoint ABI
   check. *Done when:* the system autonomously produces at least one reproducible PoV on a real target
   and reports surface-reduction + cost metrics end-to-end.
 
+- **Phase 5 — Component (3) Specification Mining as Bug Oracle (vuln-class-general).** Add the
+  spec-mining proposer described in §3b on top of the Phase 1–4 sound pipeline. Goal: expand the
+  set of vuln classes the system can find beyond memory safety by mining pre-call contracts from the
+  target's own conventions and confirming outliers via the existing sound oracle. Sub-steps:
+
+  - **5.1 Callsite + guard extractor (no LLM).** Walk the target tree; for each callee F, harvest
+    callsites and walk back through the caller's CFG to extract preceding guard conditions
+    (if/while/assert/BUG_ON/lock-acquire/capable/null-check/bounds-check/sanitizer-call). Use a real
+    AST parser (libclang or tree-sitter) keyed off the Phase 1.1 cluster decomposition so mining is
+    partitionable per task. Output: `surface/specmine/callsites/<target>/<callee>.json` with
+    `{callsite_location, guards: [{kind, predicate, var_bindings}], surrounding_context}`.
+    *Done when:* ledger over Phase 0.4 `net/netfilter/` reproduces obvious patterns
+    (e.g. `rcu_read_lock`/`rcu_read_lock_bh` ≥X% before `nft_*_eval`; `mutex_is_locked` /
+    `lockdep_assert_held` before commit-path callees); fixed-seed determinism; wall budget on the
+    same order as Phase 1.1.
+  - **5.2 Contract miner + outlier extractor (no LLM).** Cluster guards across callsites per
+    callee with variable-role normalization (`arg0`, `arg1`, `return_of(X)`, `field_of(arg.X)`) +
+    local SMT equivalence (Z3) so syntactically different predicates that mean the same thing
+    collapse. A guard cluster with support ≥τ (default τ=0.85) becomes a *mined contract*; each
+    callsite that doesn't match emits an outlier with suspicion =
+    `support_pct × (1 − local_establishment)` (one-hop interprocedural check).
+    *Done when:* ≥50 mined contracts on `net/netfilter/`; CVE-2024-1086 sites rank in top-N
+    outliers; deterministic.
+  - **5.3 Sound verification (forward + backward; the soundness gate).** Forward: prove the mined
+    contract holds on its support set via Stage B (Frama-C/EVA + CBMC under the Phase 1.4 proof
+    cache). Backward: for each outlier, dispatch through `agent.router.route()` with the property
+    "the mined contract is violated and a sanitizer/assertion fires." Tier 2 for feasibility,
+    Tier 3 for definitive judgment. Mirrors the Phase 1.5 / 2.5 soundness gates structurally — an
+    outlier is reported as *confirmed* only when the sound checker returns SAT/unsafe with a
+    witness. *Done when:* all confirmed outliers carry sound-checker witnesses;
+    `false_confirmations = 0` on the corpus from 5.6.
+  - **5.4 Vuln-class taxonomy + per-class report formatter (no LLM).** Classify mined contracts by
+    the *shape* of the missing guard: locking, auth/capability, bounds/length, null/init,
+    refcount, state-machine, taint-sanitization, resource-cleanup. Per-class formatter so a
+    confirmed outlier reads as e.g. "missing `capable(CAP_NET_ADMIN)` before `nf_tables_newrule`",
+    not a generic "spec violation". *Done when:* outliers from 5.2 populate ≥4 classes on the
+    netfilter target; report-formatter emits one lead per outlier.
+  - **5.5 LLM-assisted contract refinement (Phase 3.1 pattern).** When backward verification
+    returns `inconclusive` (engine timeout or contract needs widening), invoke the Phase 3.1
+    synthesizer with `{mined contract, outlier callsite, engine trace}` to propose a refined
+    contract; the sound checker re-verifies. Rule-based fallback covers gateway-down operation.
+    *Done when:* ≥1 mined contract refined and re-verified end-to-end via the live gateway;
+    fallback path exercised with `GATEWAY_PORT=9`.
+  - **5.6 Closed-loop + headline eval.** Plug outliers as a new candidate source into
+    `agent.loop` (`Candidate(class="spec-mine-outlier", ...)`). Run on: (a) Phase 0.4 historical
+    target as positive control (must re-discover CVE-2024-1086 from outliers + confirm via
+    Tier-2/3), (b) live LTS `net/<subsystem>/`, (c) SQLite live (Phase 4.3 target), (d) CyberGym
+    subset as an additional ablation signal. Metrics adapter
+    `eval/harness/adapters/specmine.py`: outlier count, confirmed-outlier count, per-class
+    breakdown, false-positive rate, wall-time, soundness-gate status. *Done when:* ≥1 outlier
+    across ≥2 vuln classes (including ≥1 non-memory-safety class) confirmed by the existing
+    oracle on a field target; soundness gate intact; CVE-2024-1086 re-discovered on the historical
+    target.
+
+  *Phase 5 done when:* mining produces measurable mined-contract density on a real target,
+  soundness gates hold (`false_confirmations = 0`, no Phase-1 regression on Juliet), and the
+  headline lead-confirmation in 5.6 lands across ≥2 vuln classes including ≥1 non-memory-safety
+  class.
+
 ---
 
 ## 7. Budget & Funnel Economics (hard constraint)
@@ -447,6 +592,7 @@ expensive symbolic execution, BMC, and LLM contract-synthesis run only on the su
 | Orchestration / build / budget | OSS-CRS (base), ATLANTIS / RoboDuck (reference), OSS-Fuzz harnesses |
 | Stage A reachability/taint | Smatch, Coccinelle, Sparse, SVF, CodeQL |
 | Stage B sound proof | Frama-C/EVA (primary), CBMC, ESBMC |
+| Spec mining (Component 3) | libclang / tree-sitter (AST), Z3 (guard equivalence), reuses Stage B + Tier 2/3 engines for verification |
 | Oracle Tier 1 (fast) | syzkaller + KASAN/KMSAN/KCSAN/UBSAN/KCOV (kernel); AFL++/libFuzzer + ASan/MSan/UBSan (userspace) |
 | Oracle Tier 2 (symbolic) | S2E (kernel); KLEE, SymCC/SymQEMU (userspace); angr (binary) |
 | Oracle Tier 3 (BMC) | CBMC, ESBMC |

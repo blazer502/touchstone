@@ -1,0 +1,72 @@
+{
+  "callee": "nfnetlink_get_subsys",
+  "defined_in": "net/netfilter/nfnetlink.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nfnetlink_rcv_msg",
+      "file": "net/netfilter/nfnetlink.c",
+      "line": 232,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 230
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nlmsg_len(nlh) < sizeof(struct nfgenmsg))",
+          "exit_kind": "return",
+          "source_line": 225,
+          "exit_line": 226
+        }
+      ]
+    },
+    {
+      "caller": "nfnetlink_rcv_msg",
+      "file": "net/netfilter/nfnetlink.c",
+      "line": 238,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 237
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nlmsg_len(nlh) < sizeof(struct nfgenmsg))",
+          "exit_kind": "return",
+          "source_line": 225,
+          "exit_line": 226
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ss",
+          "polarity": "in_true_branch",
+          "source_line": 233
+        }
+      ]
+    },
+    {
+      "caller": "nfnetlink_bind",
+      "file": "net/netfilter/nfnetlink.c",
+      "line": 711,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 710
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(group <= NFNLGRP_NONE || group > NFNLGRP_MAX)",
+          "exit_kind": "return",
+          "source_line": 705,
+          "exit_line": 706
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "callee": "ip_vs_proto_get",
+  "defined_in": "net/netfilter/ipvs/ip_vs_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 10,
+  "callsites": [
+    {
+      "caller": "ip_vs_app_inc_new",
+      "file": "net/netfilter/ipvs/ip_vs_app.c",
+      "line": 80,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_app_inc_release",
+      "file": "net/netfilter/ipvs/ip_vs_app.c",
+      "line": 129,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_out_icmp",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 964,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_gather_frags(ipvs, skb, ip_vs_defrag_user(hooknum)))",
+          "exit_kind": "return",
+          "source_line": 930,
+          "exit_line": 931
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_is_fragment(ip_hdr(skb)))",
+          "exit_kind": "return",
+          "source_line": 929
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ic == NULL)",
+          "exit_kind": "return",
+          "source_line": 937,
+          "exit_line": 938
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cih == NULL)",
+          "exit_kind": "return",
+          "source_line": 961,
+          "exit_line": 962
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_out_icmp_v6",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 1031,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ic == NULL)",
+          "exit_kind": "return",
+          "source_line": 1003,
+          "exit_line": 1004
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ic->icmp6_type & ICMPV6_INFOMSG_MASK)",
+          "exit_kind": "return",
+          "source_line": 1013
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ipvsh->flags & IP6_FH_F_FRAG)",
+          "exit_kind": "return",
+          "source_line": 1020,
+          "exit_line": 1021
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_state_name",
+      "file": "net/netfilter/ipvs/ip_vs_proto.c",
+      "line": 207,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(state >= IP_VS_CTPL_S_LAST)",
+          "exit_kind": "return",
+          "source_line": 203,
+          "exit_line": 204
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->flags & IP_VS_CONN_F_TEMPLATE)",
+          "exit_kind": "return",
+          "source_line": 201
+        }
+      ]
+    },
+    {
+      "caller": "ah_esp_conn_in_get",
+      "file": "net/netfilter/ipvs/ip_vs_proto_ah_esp.c",
+      "line": 71,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!cp",
+          "polarity": "in_true_branch",
+          "source_line": 63
+        }
+      ]
+    },
+    {
+      "caller": "ah_esp_conn_out_get",
+      "file": "net/netfilter/ipvs/ip_vs_proto_ah_esp.c",
+      "line": 93,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!cp",
+          "polarity": "in_true_branch",
+          "source_line": 89
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_process_message_v0",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 995,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(p + SIMPLE_CONN_SIZE > buffer+buflen)",
+          "exit_kind": "return",
+          "source_line": 974
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(p > buffer+buflen)",
+          "exit_kind": "return",
+          "source_line": 984
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i=0; i<m->nr_conns; i++",
+          "polarity": "in_true_branch",
+          "source_line": 971
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!(flags & IP_VS_CONN_F_TEMPLATE)",
+          "polarity": "in_true_branch",
+          "source_line": 994
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_proc_sync_conn",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 1153,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(s->v6.type & STYPE_F_INET6)",
+          "exit_kind": "goto",
+          "source_line": 1084
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(p > msg_end)",
+          "exit_kind": "return",
+          "source_line": 1099,
+          "exit_line": 1100
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(p+2 > msg_end)",
+          "exit_kind": "return",
+          "source_line": 1107,
+          "exit_line": 1108
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!plen || ((p + plen) > msg_end))",
+          "exit_kind": "return",
+          "source_line": 1112,
+          "exit_line": 1113
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_proc_seqopt(p, plen, &opt_flags, &opt))",
+          "exit_kind": "return",
+          "source_line": 1117,
+          "exit_line": 1118
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(ptype & IPVS_OPT_F_PARAM))",
+          "exit_kind": "goto",
+          "source_line": 1137
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!(flags & IP_VS_CONN_F_TEMPLATE)",
+          "polarity": "in_true_branch",
+          "source_line": 1152
+        }
+      ]
+    },
+    {
+      "caller": "ipvs_mt",
+      "file": "net/netfilter/xt_ipvs.c",
+      "line": 81,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(data->bitmask == XT_IPVS_IPVS_PROPERTY)",
+          "exit_kind": "goto",
+          "source_line": 60
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb->ipvs_property)",
+          "exit_kind": "goto",
+          "source_line": 67
+        }
+      ]
+    }
+  ]
+}

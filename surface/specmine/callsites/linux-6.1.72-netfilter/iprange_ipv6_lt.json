@@ -1,0 +1,73 @@
+{
+  "callee": "iprange_ipv6_lt",
+  "defined_in": "net/netfilter/xt_iprange.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "iprange_mt6",
+      "file": "net/netfilter/xt_iprange.c",
+      "line": 73,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->flags & IPRANGE_SRC",
+          "polarity": "in_true_branch",
+          "source_line": 72
+        }
+      ]
+    },
+    {
+      "caller": "iprange_mt6",
+      "file": "net/netfilter/xt_iprange.c",
+      "line": 74,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->flags & IPRANGE_SRC",
+          "polarity": "in_true_branch",
+          "source_line": 72
+        }
+      ]
+    },
+    {
+      "caller": "iprange_mt6",
+      "file": "net/netfilter/xt_iprange.c",
+      "line": 86,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(m)",
+          "exit_kind": "return",
+          "source_line": 76
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->flags & IPRANGE_DST",
+          "polarity": "in_true_branch",
+          "source_line": 85
+        }
+      ]
+    },
+    {
+      "caller": "iprange_mt6",
+      "file": "net/netfilter/xt_iprange.c",
+      "line": 87,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(m)",
+          "exit_kind": "return",
+          "source_line": 76
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->flags & IPRANGE_DST",
+          "polarity": "in_true_branch",
+          "source_line": 85
+        }
+      ]
+    }
+  ]
+}

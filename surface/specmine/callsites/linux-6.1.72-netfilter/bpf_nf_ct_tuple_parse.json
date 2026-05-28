@@ -1,0 +1,65 @@
+{
+  "callee": "bpf_nf_ct_tuple_parse",
+  "defined_in": "net/netfilter/nf_conntrack_bpf.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "__bpf_nf_ct_alloc_entry",
+      "file": "net/netfilter/nf_conntrack_bpf.c",
+      "line": 116,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(opts->netns_id < BPF_F_CURRENT_NETNS))",
+          "exit_kind": "return",
+          "source_line": 113,
+          "exit_line": 114
+        }
+      ]
+    },
+    {
+      "caller": "__bpf_nf_ct_alloc_entry",
+      "file": "net/netfilter/nf_conntrack_bpf.c",
+      "line": 121,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(opts->netns_id < BPF_F_CURRENT_NETNS))",
+          "exit_kind": "return",
+          "source_line": 113,
+          "exit_line": 114
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 118,
+          "exit_line": 119
+        }
+      ]
+    },
+    {
+      "caller": "__bpf_nf_ct_lookup",
+      "file": "net/netfilter/nf_conntrack_bpf.c",
+      "line": 165,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(opts->l4proto != IPPROTO_TCP && opts->l4proto != IPPROTO_UDP))",
+          "exit_kind": "return",
+          "source_line": 160,
+          "exit_line": 161
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(opts->netns_id < BPF_F_CURRENT_NETNS))",
+          "exit_kind": "return",
+          "source_line": 162,
+          "exit_line": 163
+        }
+      ]
+    }
+  ]
+}

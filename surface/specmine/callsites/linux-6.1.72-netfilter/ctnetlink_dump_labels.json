@@ -1,0 +1,234 @@
+{
+  "callee": "ctnetlink_dump_labels",
+  "defined_in": "net/netfilter/nf_conntrack_netlink.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ctnetlink_dump_extinfo",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 546,
+      "guards": []
+    },
+    {
+      "caller": "ctnetlink_conntrack_event",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 823,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nlh != NULL",
+          "source_line": 762
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nest_parms != NULL",
+          "source_line": 768
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nest_parms != NULL",
+          "source_line": 778
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!item->report && !nfnetlink_has_listeners(net, group))",
+          "exit_kind": "return",
+          "source_line": 752,
+          "exit_line": 753
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 756,
+          "exit_line": 757
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh)",
+          "exit_kind": "goto",
+          "source_line": 762,
+          "exit_line": 763
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nest_parms)",
+          "exit_kind": "goto",
+          "source_line": 768,
+          "exit_line": 769
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_tuples(skb, nf_ct_tuple(ct, IP_CT_DIR_ORIGINAL)) < 0)",
+          "exit_kind": "goto",
+          "source_line": 770,
+          "exit_line": 771
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nest_parms)",
+          "exit_kind": "goto",
+          "source_line": 778,
+          "exit_line": 779
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_tuples(skb, nf_ct_tuple(ct, IP_CT_DIR_REPLY)) < 0)",
+          "exit_kind": "goto",
+          "source_line": 780,
+          "exit_line": 781
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_id(skb, ct) < 0)",
+          "exit_kind": "goto",
+          "source_line": 791,
+          "exit_line": 792
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_status(skb, ct) < 0)",
+          "exit_kind": "goto",
+          "source_line": 794,
+          "exit_line": 795
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_timeout(skb, ct, true) < 0)",
+          "exit_kind": "goto",
+          "source_line": 798,
+          "exit_line": 799
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(events & (1 << IPCT_DESTROY))",
+          "exit_kind": "goto",
+          "source_line": 797
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_timeout(skb, ct, false) < 0)",
+          "exit_kind": "goto",
+          "source_line": 806,
+          "exit_line": 807
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "events & (1 << IPCT_DESTROY)",
+          "polarity": "in_false_branch",
+          "source_line": 805
+        }
+      ]
+    },
+    {
+      "caller": "__ctnetlink_glue_build",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2741,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nest_parms != NULL",
+          "source_line": 2681
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nest_parms != NULL",
+          "source_line": 2691
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nest_parms)",
+          "exit_kind": "goto",
+          "source_line": 2681,
+          "exit_line": 2682
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_tuples(skb, nf_ct_tuple(ct, IP_CT_DIR_ORIGINAL)) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2683,
+          "exit_line": 2684
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nest_parms)",
+          "exit_kind": "goto",
+          "source_line": 2691,
+          "exit_line": 2692
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_tuples(skb, nf_ct_tuple(ct, IP_CT_DIR_REPLY)) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2693,
+          "exit_line": 2694
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_id(skb, ct) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2704,
+          "exit_line": 2705
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_status(skb, ct) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2707,
+          "exit_line": 2708
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_timeout(skb, ct, false) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2710,
+          "exit_line": 2711
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_protoinfo(skb, ct, false) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2713,
+          "exit_line": 2714
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_helpinfo(skb, ct) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2720,
+          "exit_line": 2721
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->secmark && ctnetlink_dump_secctx(skb, ct) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2724,
+          "exit_line": 2725
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->master && ctnetlink_dump_master(skb, ct) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2727,
+          "exit_line": 2728
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_ct_synproxy(skb, ct) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2734,
+          "exit_line": 2735
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_mark(skb, ct, true) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2738,
+          "exit_line": 2739
+        }
+      ]
+    }
+  ]
+}

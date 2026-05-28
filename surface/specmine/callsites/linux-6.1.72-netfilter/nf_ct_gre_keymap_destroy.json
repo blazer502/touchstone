@@ -1,0 +1,76 @@
+{
+  "callee": "nf_ct_gre_keymap_destroy",
+  "defined_in": "net/netfilter/nf_conntrack_proto_gre.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "destroy_gre_conntrack",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 581,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "master",
+          "polarity": "in_true_branch",
+          "source_line": 580
+        }
+      ]
+    },
+    {
+      "caller": "pptp_destroy_siblings",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 167,
+      "guards": []
+    },
+    {
+      "caller": "exp_gre",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 232,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(exp_orig == NULL)",
+          "exit_kind": "goto",
+          "source_line": 195,
+          "exit_line": 196
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(exp_reply == NULL)",
+          "exit_kind": "goto",
+          "source_line": 199,
+          "exit_line": 200
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_expect_related(exp_orig, 0) != 0)",
+          "exit_kind": "goto",
+          "source_line": 223,
+          "exit_line": 224
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_expect_related(exp_reply, 0) != 0)",
+          "exit_kind": "goto",
+          "source_line": 225,
+          "exit_line": 226
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_gre_keymap_add(ct, IP_CT_DIR_ORIGINAL, &exp_orig->tuple) != 0)",
+          "exit_kind": "goto",
+          "source_line": 229,
+          "exit_line": 230
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nf_ct_gre_keymap_add(ct, IP_CT_DIR_REPLY, &exp_reply->tuple) != 0",
+          "polarity": "in_true_branch",
+          "source_line": 231
+        }
+      ]
+    }
+  ]
+}

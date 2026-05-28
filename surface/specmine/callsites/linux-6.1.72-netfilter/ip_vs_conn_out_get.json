@@ -1,0 +1,82 @@
+{
+  "callee": "ip_vs_conn_out_get",
+  "defined_in": "net/netfilter/ipvs/ip_vs_conn.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "ip_vs_conn_out_get_proto",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 461,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_conn_fill_param_proto(ipvs, af, skb, iph, &p))",
+          "exit_kind": "return",
+          "source_line": 458,
+          "exit_line": 459
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_ftp_out",
+      "file": "net/netfilter/ipvs/ip_vs_ftp.c",
+      "line": 323,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->state != IP_VS_TCP_S_ESTABLISHED)",
+          "exit_kind": "return",
+          "source_line": 266,
+          "exit_line": 267
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, skb->len))",
+          "exit_kind": "return",
+          "source_line": 270,
+          "exit_line": 271
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!data || data >= data_limit)",
+          "exit_kind": "return",
+          "source_line": 277,
+          "exit_line": 278
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->app_data == (void *) IP_VS_FTP_PASV)",
+          "exit_kind": "return",
+          "source_line": 273
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!data || data >= data_limit)",
+          "exit_kind": "return",
+          "source_line": 294,
+          "exit_line": 295
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->app_data == (void *) IP_VS_FTP_EPSV)",
+          "exit_kind": "return",
+          "source_line": 290
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_nfct_expect_callback",
+      "file": "net/netfilter/ipvs/ip_vs_nfct.c",
+      "line": 161,
+      "guards": []
+    },
+    {
+      "caller": "ah_esp_conn_out_get",
+      "file": "net/netfilter/ipvs/ip_vs_proto_ah_esp.c",
+      "line": 88,
+      "guards": []
+    }
+  ]
+}

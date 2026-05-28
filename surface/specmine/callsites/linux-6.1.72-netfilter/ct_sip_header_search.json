@@ -1,0 +1,163 @@
+{
+  "callee": "ct_sip_header_search",
+  "defined_in": "net/netfilter/nf_conntrack_sip.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 10,
+  "callsites": [
+    {
+      "caller": "ct_sip_get_header",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 417,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(*dptr != '\\r' && *dptr != '\\n')",
+          "exit_kind": "continue",
+          "source_line": 378,
+          "exit_line": 379
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(++dptr >= limit)",
+          "exit_kind": "break",
+          "source_line": 380,
+          "exit_line": 381
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(++dptr >= limit)",
+          "exit_kind": "break",
+          "source_line": 383,
+          "exit_line": 384
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*(dptr - 1) == '\\r' && *dptr == '\\n')",
+          "exit_kind": "break",
+          "source_line": 382
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*dptr == ' ' || *dptr == '\\t')",
+          "exit_kind": "continue",
+          "source_line": 388,
+          "exit_line": 389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dptr == NULL)",
+          "exit_kind": "break",
+          "source_line": 405,
+          "exit_line": 406
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*dptr != ':' || ++dptr >= limit)",
+          "exit_kind": "break",
+          "source_line": 407,
+          "exit_line": 408
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dptr == NULL)",
+          "exit_kind": "break",
+          "source_line": 412,
+          "exit_line": 413
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "dptr += dataoff; dptr < limit; dptr++",
+          "polarity": "in_true_branch",
+          "source_line": 376
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "hdr->search",
+          "polarity": "in_true_branch",
+          "source_line": 416
+        }
+      ]
+    },
+    {
+      "caller": "ct_sip_next_header",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 446,
+      "guards": []
+    },
+    {
+      "caller": "ct_sip_next_header",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 450,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dptr != NULL",
+          "source_line": 447
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dptr)",
+          "exit_kind": "return",
+          "source_line": 447,
+          "exit_line": 448
+        }
+      ]
+    },
+    {
+      "caller": "ct_sip_parse_param",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 547,
+      "guards": []
+    },
+    {
+      "caller": "ct_sip_parse_param",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 551,
+      "guards": []
+    },
+    {
+      "caller": "ct_sip_parse_param",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 556,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "start != NULL",
+          "source_line": 552
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!start)",
+          "exit_kind": "return",
+          "source_line": 552,
+          "exit_line": 553
+        }
+      ]
+    },
+    {
+      "caller": "ct_sip_parse_address_param",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 575,
+      "guards": []
+    },
+    {
+      "caller": "ct_sip_parse_address_param",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 579,
+      "guards": []
+    },
+    {
+      "caller": "ct_sip_parse_numerical_param",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 603,
+      "guards": []
+    },
+    {
+      "caller": "ct_sip_parse_numerical_param",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 607,
+      "guards": []
+    }
+  ]
+}

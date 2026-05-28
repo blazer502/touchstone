@@ -1,0 +1,85 @@
+{
+  "callee": "nft_gc_seq_begin",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_tables_commit",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9591,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(list_empty(&nft_net->commit_list))",
+          "exit_kind": "return",
+          "source_line": 9518
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_tables_validate(net) < 0)",
+          "exit_kind": "return",
+          "source_line": 9545,
+          "exit_line": 9546
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 9549,
+          "exit_line": 9550
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 9557
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 9567
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_abort",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 10044,
+      "guards": []
+    },
+    {
+      "caller": "nft_rcv_nl_event",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 10779,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 10777
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event != NETLINK_URELEASE || n->protocol != NETLINK_NETFILTER)",
+          "exit_kind": "return",
+          "source_line": 10772,
+          "exit_line": 10773
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_exit_net",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 10847,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 10845
+        }
+      ]
+    }
+  ]
+}

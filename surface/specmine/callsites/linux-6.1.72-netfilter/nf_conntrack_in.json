@@ -1,0 +1,40 @@
+{
+  "callee": "nf_conntrack_in",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "ipv4_conntrack_in",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 191,
+      "guards": []
+    },
+    {
+      "caller": "ipv4_conntrack_local",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 213,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_is_fragment(ip_hdr(skb)))",
+          "exit_kind": "return",
+          "source_line": 198
+        }
+      ]
+    },
+    {
+      "caller": "ipv6_conntrack_in",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 407,
+      "guards": []
+    },
+    {
+      "caller": "ipv6_conntrack_local",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 414,
+      "guards": []
+    }
+  ]
+}

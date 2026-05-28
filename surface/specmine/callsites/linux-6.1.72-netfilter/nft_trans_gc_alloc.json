@@ -1,0 +1,90 @@
+{
+  "callee": "nft_trans_gc_alloc",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "nft_trans_gc_queue_async",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9234,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_gc_space(gc))",
+          "exit_kind": "return",
+          "source_line": 9228,
+          "exit_line": 9229
+        }
+      ]
+    },
+    {
+      "caller": "nft_trans_gc_queue_sync",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9260,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!lockdep_commit_lock_is_held(gc->net))",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 9251
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(!lockdep_commit_lock_is_held(gc->net)))",
+          "exit_kind": "return",
+          "source_line": 9251,
+          "exit_line": 9252
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_gc_space(gc))",
+          "exit_kind": "return",
+          "source_line": 9254,
+          "exit_line": 9255
+        }
+      ]
+    },
+    {
+      "caller": "nft_rhash_gc",
+      "file": "net/netfilter/nft_set_hash.c",
+      "line": 332,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_gc_is_pending(set))",
+          "exit_kind": "goto",
+          "source_line": 329,
+          "exit_line": 330
+        }
+      ]
+    },
+    {
+      "caller": "pipapo_gc",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 1565,
+      "guards": []
+    },
+    {
+      "caller": "nft_rbtree_gc_elem",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 246,
+      "guards": []
+    },
+    {
+      "caller": "nft_rbtree_gc",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 635,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_gc_is_pending(set))",
+          "exit_kind": "goto",
+          "source_line": 632,
+          "exit_line": 633
+        }
+      ]
+    }
+  ]
+}

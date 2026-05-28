@@ -1,0 +1,55 @@
+{
+  "callee": "ip_vs_ct_in_get",
+  "defined_in": "net/netfilter/ipvs/ip_vs_conn.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_sched_persist",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 340,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_new_conn_out",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 1170,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(svc->fwmark)",
+          "exit_kind": "return",
+          "source_line": 1150,
+          "exit_line": 1151
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!vport || !dport)",
+          "exit_kind": "return",
+          "source_line": 1152,
+          "exit_line": 1153
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc->flags & IP_VS_SVC_F_PERSISTENT",
+          "polarity": "in_true_branch",
+          "source_line": 1156
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_proc_conn",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 871,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!(flags & IP_VS_CONN_F_TEMPLATE)",
+          "polarity": "in_false_branch",
+          "source_line": 870
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "callee": "nft_setelem_parse_flags",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_get_set_elem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5690,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 5687,
+          "exit_line": 5688
+        }
+      ]
+    },
+    {
+      "caller": "nft_add_set_elem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6275,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 6270,
+          "exit_line": 6271
+        }
+      ]
+    },
+    {
+      "caller": "nft_del_setelem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6733,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 6730,
+          "exit_line": 6731
+        }
+      ]
+    }
+  ]
+}

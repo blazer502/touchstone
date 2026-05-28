@@ -1,0 +1,77 @@
+{
+  "callee": "expect_rtp_rtcp",
+  "defined_in": "net/netfilter/nf_conntrack_h323_main.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "process_h245_channel",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 342,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "channel->options & eH2250LogicalChannelParameters_mediaChannel",
+          "polarity": "in_true_branch",
+          "source_line": 340
+        }
+      ]
+    },
+    {
+      "caller": "process_h245_channel",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 351,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 344,
+          "exit_line": 345
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(channel->options & eH2250LogicalChannelParameters_mediaChannel)",
+          "exit_kind": "return",
+          "source_line": 340
+        }
+      ]
+    },
+    {
+      "caller": "process_olca",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 459,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 445,
+          "exit_line": 446
+        }
+      ]
+    },
+    {
+      "caller": "process_olca",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 469,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 445,
+          "exit_line": 446
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 462,
+          "exit_line": 463
+        }
+      ]
+    }
+  ]
+}

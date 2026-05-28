@@ -1,0 +1,84 @@
+{
+  "callee": "nfnl_log_pernet",
+  "defined_in": "net/netfilter/nfnetlink_log.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "instance_create",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 163,
+      "guards": []
+    },
+    {
+      "caller": "nfulnl_log_packet",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 691,
+      "guards": []
+    },
+    {
+      "caller": "nfulnl_rcv_nl_event",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 826,
+      "guards": []
+    },
+    {
+      "caller": "nfulnl_recv_config",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 877,
+      "guards": []
+    },
+    {
+      "caller": "get_first",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 1027,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "st != NULL",
+          "source_line": 1024
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!st)",
+          "exit_kind": "return",
+          "source_line": 1024,
+          "exit_line": 1025
+        }
+      ]
+    },
+    {
+      "caller": "get_next",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 1049,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(++st->bucket >= INSTANCE_BUCKETS)",
+          "exit_kind": "return",
+          "source_line": 1046,
+          "exit_line": 1047
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "!h",
+          "polarity": "in_true_branch",
+          "source_line": 1042
+        }
+      ]
+    },
+    {
+      "caller": "nfnl_log_net_init",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 1111,
+      "guards": []
+    },
+    {
+      "caller": "nfnl_log_net_exit",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 1138,
+      "guards": []
+    }
+  ]
+}

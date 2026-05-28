@@ -1,0 +1,27 @@
+{
+  "callee": "nf_tables_deactivate_set",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_dynset_deactivate",
+      "file": "net/netfilter/nft_dynset.c",
+      "line": 345,
+      "guards": []
+    },
+    {
+      "caller": "nft_lookup_deactivate",
+      "file": "net/netfilter/nft_lookup.c",
+      "line": 162,
+      "guards": []
+    },
+    {
+      "caller": "nft_objref_map_deactivate",
+      "file": "net/netfilter/nft_objref.c",
+      "line": 181,
+      "guards": []
+    }
+  ]
+}

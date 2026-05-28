@@ -1,0 +1,93 @@
+{
+  "callee": "nft_reg_track_cancel",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "nft_bitwise_reduce",
+      "file": "net/netfilter/nft_bitwise.c",
+      "line": 313,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!track->regs[priv->sreg].selector)",
+          "exit_kind": "return",
+          "source_line": 292,
+          "exit_line": 293
+        }
+      ]
+    },
+    {
+      "caller": "nft_bitwise_fast_reduce",
+      "file": "net/netfilter/nft_bitwise.c",
+      "line": 459,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!track->regs[priv->sreg].selector)",
+          "exit_kind": "return",
+          "source_line": 443,
+          "exit_line": 444
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "track->regs[priv->sreg].bitwise",
+          "polarity": "in_true_branch",
+          "source_line": 458
+        }
+      ]
+    },
+    {
+      "caller": "nft_byteorder_reduce",
+      "file": "net/netfilter/nft_byteorder.c",
+      "line": 177,
+      "guards": []
+    },
+    {
+      "caller": "nft_jhash_reduce",
+      "file": "net/netfilter/nft_hash.c",
+      "line": 173,
+      "guards": []
+    },
+    {
+      "caller": "nft_immediate_reduce",
+      "file": "net/netfilter/nft_immediate.c",
+      "line": 329,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "priv->dreg != NFT_REG_VERDICT",
+          "polarity": "in_true_branch",
+          "source_line": 328
+        }
+      ]
+    },
+    {
+      "caller": "nft_lookup_reduce",
+      "file": "net/netfilter/nft_lookup.c",
+      "line": 234,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "priv->set->flags & NFT_SET_MAP",
+          "polarity": "in_true_branch",
+          "source_line": 233
+        }
+      ]
+    },
+    {
+      "caller": "nft_ng_inc_reduce",
+      "file": "net/netfilter/nft_numgen.c",
+      "line": 92,
+      "guards": []
+    },
+    {
+      "caller": "nft_ng_random_reduce",
+      "file": "net/netfilter/nft_numgen.c",
+      "line": 184,
+      "guards": []
+    }
+  ]
+}

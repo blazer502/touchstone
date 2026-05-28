@@ -1,0 +1,130 @@
+{
+  "callee": "nf_nat_ipv6_manip_pkt",
+  "defined_in": "net/netfilter/nf_nat_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_nat_manip_pkt",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 430,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "target.src.l3num",
+          "polarity": "in_true_branch",
+          "source_line": 428
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_icmpv6_reply_translation",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 878,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctinfo != IP_CT_RELATED && ctinfo != IP_CT_RELATED_REPLY)",
+          "macro": "WARN_ON",
+          "source_line": 851
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, hdrlen + sizeof(*inside)))",
+          "exit_kind": "return",
+          "source_line": 853,
+          "exit_line": 854
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ip6_checksum(skb, hooknum, hdrlen, IPPROTO_ICMPV6))",
+          "exit_kind": "return",
+          "source_line": 855,
+          "exit_line": 856
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((ct->status & IPS_NAT_DONE_MASK) != IPS_NAT_DONE_MASK)",
+          "exit_kind": "return",
+          "source_line": 860,
+          "exit_line": 861
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->status & IPS_NAT_MASK)",
+          "exit_kind": "return",
+          "source_line": 862,
+          "exit_line": 863
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(inside->icmp6.icmp6_type == NDISC_REDIRECT)",
+          "exit_kind": "return",
+          "source_line": 859
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(ct->status & statusbit))",
+          "exit_kind": "return",
+          "source_line": 875,
+          "exit_line": 876
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_icmpv6_reply_translation",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 896,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctinfo != IP_CT_RELATED && ctinfo != IP_CT_RELATED_REPLY)",
+          "macro": "WARN_ON",
+          "source_line": 851
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, hdrlen + sizeof(*inside)))",
+          "exit_kind": "return",
+          "source_line": 853,
+          "exit_line": 854
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ip6_checksum(skb, hooknum, hdrlen, IPPROTO_ICMPV6))",
+          "exit_kind": "return",
+          "source_line": 855,
+          "exit_line": 856
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((ct->status & IPS_NAT_DONE_MASK) != IPS_NAT_DONE_MASK)",
+          "exit_kind": "return",
+          "source_line": 860,
+          "exit_line": 861
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->status & IPS_NAT_MASK)",
+          "exit_kind": "return",
+          "source_line": 862,
+          "exit_line": 863
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(inside->icmp6.icmp6_type == NDISC_REDIRECT)",
+          "exit_kind": "return",
+          "source_line": 859
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(ct->status & statusbit))",
+          "exit_kind": "return",
+          "source_line": 875,
+          "exit_line": 876
+        }
+      ]
+    }
+  ]
+}

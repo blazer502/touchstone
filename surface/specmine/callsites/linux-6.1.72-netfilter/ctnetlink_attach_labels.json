@@ -1,0 +1,237 @@
+{
+  "callee": "ctnetlink_attach_labels",
+  "defined_in": "net/netfilter/nf_conntrack_netlink.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ctnetlink_change_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2224,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_NAT_SRC] || cda[CTA_NAT_DST] || cda[CTA_TUPLE_MASTER])",
+          "exit_kind": "return",
+          "source_line": 2179,
+          "exit_line": 2180
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2184,
+          "exit_line": 2185
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_HELP])",
+          "exit_kind": "return",
+          "source_line": 2182
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2190,
+          "exit_line": 2191
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_TIMEOUT])",
+          "exit_kind": "return",
+          "source_line": 2188
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2196,
+          "exit_line": 2197
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_STATUS])",
+          "exit_kind": "return",
+          "source_line": 2194
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2202,
+          "exit_line": 2203
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_PROTOINFO])",
+          "exit_kind": "return",
+          "source_line": 2200
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2213,
+          "exit_line": 2214
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_SEQ_ADJ_ORIG] || cda[CTA_SEQ_ADJ_REPLY])",
+          "exit_kind": "return",
+          "source_line": 2211
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2219,
+          "exit_line": 2220
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_SYNPROXY])",
+          "exit_kind": "return",
+          "source_line": 2217
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_LABELS]",
+          "polarity": "in_true_branch",
+          "source_line": 2223
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_new_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2447,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(ct)",
+          "source_line": 2437
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2403,
+          "exit_line": 2404
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2409,
+          "exit_line": 2410
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_TUPLE_ORIG])",
+          "exit_kind": "return",
+          "source_line": 2406
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2416,
+          "exit_line": 2417
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_TUPLE_REPLY])",
+          "exit_kind": "return",
+          "source_line": 2413
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cda[CTA_TUPLE_ORIG] || !cda[CTA_TUPLE_REPLY])",
+          "exit_kind": "return",
+          "source_line": 2430,
+          "exit_line": 2431
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(otuple.dst.protonum != rtuple.dst.protonum)",
+          "exit_kind": "return",
+          "source_line": 2432,
+          "exit_line": 2433
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(ct))",
+          "exit_kind": "return",
+          "source_line": 2437,
+          "exit_line": 2438
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "h == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 2425
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->nlh->nlmsg_flags & NLM_F_CREATE",
+          "polarity": "in_true_branch",
+          "source_line": 2427
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_glue_parse_ct",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2819,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2805,
+          "exit_line": 2806
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_TIMEOUT])",
+          "exit_kind": "return",
+          "source_line": 2803
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2810,
+          "exit_line": 2811
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_STATUS])",
+          "exit_kind": "return",
+          "source_line": 2808
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2815,
+          "exit_line": 2816
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_HELP])",
+          "exit_kind": "return",
+          "source_line": 2813
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_LABELS]",
+          "polarity": "in_true_branch",
+          "source_line": 2818
+        }
+      ]
+    }
+  ]
+}

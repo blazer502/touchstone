@@ -1,0 +1,173 @@
+{
+  "callee": "nf_logger_find_get",
+  "defined_in": "net/netfilter/nf_log.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "nft_log_init",
+      "file": "net/netfilter/nft_log.c",
+      "line": 213,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_LOG_FLAGS] != NULL)",
+          "exit_kind": "return",
+          "source_line": 160,
+          "exit_line": 161
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_LOG_GROUP] != NULL)",
+          "exit_kind": "return",
+          "source_line": 158
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->prefix == NULL)",
+          "exit_kind": "return",
+          "source_line": 167,
+          "exit_line": 168
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla != NULL)",
+          "exit_kind": "return",
+          "source_line": 165
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(li->u.log.level > NFT_LOGLEVEL_AUDIT)",
+          "exit_kind": "goto",
+          "source_line": 182
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(li->u.log.logflags & ~NF_LOG_MASK)",
+          "exit_kind": "goto",
+          "source_line": 190
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(li->u.log.level == NFT_LOGLEVEL_AUDIT)",
+          "exit_kind": "return",
+          "source_line": 210,
+          "exit_line": 211
+        }
+      ]
+    },
+    {
+      "caller": "log_tg_check",
+      "file": "net/netfilter/xt_LOG.c",
+      "line": 62,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(par->family != NFPROTO_IPV4 && par->family != NFPROTO_IPV6)",
+          "exit_kind": "return",
+          "source_line": 49,
+          "exit_line": 50
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(loginfo->level >= 8)",
+          "exit_kind": "return",
+          "source_line": 52
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(loginfo->prefix[sizeof(loginfo->prefix)-1] != '\\0')",
+          "exit_kind": "return",
+          "source_line": 57
+        }
+      ]
+    },
+    {
+      "caller": "log_tg_check",
+      "file": "net/netfilter/xt_LOG.c",
+      "line": 66,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(par->family != NFPROTO_IPV4 && par->family != NFPROTO_IPV6)",
+          "exit_kind": "return",
+          "source_line": 49,
+          "exit_line": 50
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(loginfo->level >= 8)",
+          "exit_kind": "return",
+          "source_line": 52
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(loginfo->prefix[sizeof(loginfo->prefix)-1] != '\\0')",
+          "exit_kind": "return",
+          "source_line": 57
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret != 0 && !par->nft_compat",
+          "polarity": "in_true_branch",
+          "source_line": 63
+        }
+      ]
+    },
+    {
+      "caller": "nflog_tg_check",
+      "file": "net/netfilter/xt_NFLOG.c",
+      "line": 52,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->flags & ~XT_NFLOG_MASK)",
+          "exit_kind": "return",
+          "source_line": 47,
+          "exit_line": 48
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->prefix[sizeof(info->prefix) - 1] != '\\0')",
+          "exit_kind": "return",
+          "source_line": 49,
+          "exit_line": 50
+        }
+      ]
+    },
+    {
+      "caller": "nflog_tg_check",
+      "file": "net/netfilter/xt_NFLOG.c",
+      "line": 56,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->flags & ~XT_NFLOG_MASK)",
+          "exit_kind": "return",
+          "source_line": 47,
+          "exit_line": 48
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->prefix[sizeof(info->prefix) - 1] != '\\0')",
+          "exit_kind": "return",
+          "source_line": 49,
+          "exit_line": 50
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret != 0 && !par->nft_compat",
+          "polarity": "in_true_branch",
+          "source_line": 53
+        }
+      ]
+    },
+    {
+      "caller": "trace_tg_check",
+      "file": "net/netfilter/xt_TRACE.c",
+      "line": 17,
+      "guards": []
+    }
+  ]
+}

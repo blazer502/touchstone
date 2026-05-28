@@ -1,0 +1,259 @@
+{
+  "callee": "nf_tcp_log_invalid",
+  "defined_in": "net/netfilter/nf_conntrack_proto_tcp.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "tcp_in_window",
+      "file": "net/netfilter/nf_conntrack_proto_tcp.c",
+      "line": 641,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!tcph->ack)",
+          "exit_kind": "return",
+          "source_line": 546,
+          "exit_line": 548
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tcph->syn)",
+          "exit_kind": "return",
+          "source_line": 542
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dir == IP_CT_DIR_REPLY && !tcph->ack)",
+          "exit_kind": "return",
+          "source_line": 590,
+          "exit_line": 591
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!seq_ok",
+          "polarity": "in_true_branch",
+          "source_line": 616
+        }
+      ]
+    },
+    {
+      "caller": "tcp_in_window",
+      "file": "net/netfilter/nf_conntrack_proto_tcp.c",
+      "line": 645,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!tcph->ack)",
+          "exit_kind": "return",
+          "source_line": 546,
+          "exit_line": 548
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tcph->syn)",
+          "exit_kind": "return",
+          "source_line": 542
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dir == IP_CT_DIR_REPLY && !tcph->ack)",
+          "exit_kind": "return",
+          "source_line": 590,
+          "exit_line": 591
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!seq_ok",
+          "polarity": "in_true_branch",
+          "source_line": 616
+        }
+      ]
+    },
+    {
+      "caller": "tcp_in_window",
+      "file": "net/netfilter/nf_conntrack_proto_tcp.c",
+      "line": 651,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "seq_ok != NULL",
+          "source_line": 616
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tcph->ack)",
+          "exit_kind": "return",
+          "source_line": 546,
+          "exit_line": 548
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tcph->syn)",
+          "exit_kind": "return",
+          "source_line": 542
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dir == IP_CT_DIR_REPLY && !tcph->ack)",
+          "exit_kind": "return",
+          "source_line": 590,
+          "exit_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!seq_ok)",
+          "exit_kind": "return",
+          "source_line": 616
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!before(sack, receiver->td_end + 1))",
+          "exit_kind": "return",
+          "source_line": 650,
+          "exit_line": 651
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!before(sack, receiver->td_end + 1)",
+          "polarity": "in_true_branch",
+          "source_line": 650
+        }
+      ]
+    },
+    {
+      "caller": "tcp_in_window",
+      "file": "net/netfilter/nf_conntrack_proto_tcp.c",
+      "line": 659,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "seq_ok != NULL",
+          "source_line": 616
+        },
+        {
+          "kind": "null_check",
+          "predicate": "in_recv_win != NULL",
+          "source_line": 658
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tcph->ack)",
+          "exit_kind": "return",
+          "source_line": 546,
+          "exit_line": 548
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tcph->syn)",
+          "exit_kind": "return",
+          "source_line": 542
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dir == IP_CT_DIR_REPLY && !tcph->ack)",
+          "exit_kind": "return",
+          "source_line": 590,
+          "exit_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!seq_ok)",
+          "exit_kind": "return",
+          "source_line": 616
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!before(sack, receiver->td_end + 1))",
+          "exit_kind": "return",
+          "source_line": 650,
+          "exit_line": 651
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!in_recv_win)",
+          "exit_kind": "return",
+          "source_line": 658,
+          "exit_line": 659
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!in_recv_win",
+          "polarity": "in_true_branch",
+          "source_line": 658
+        }
+      ]
+    },
+    {
+      "caller": "tcp_in_window",
+      "file": "net/netfilter/nf_conntrack_proto_tcp.c",
+      "line": 663,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "seq_ok != NULL",
+          "source_line": 616
+        },
+        {
+          "kind": "null_check",
+          "predicate": "in_recv_win != NULL",
+          "source_line": 658
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tcph->ack)",
+          "exit_kind": "return",
+          "source_line": 546,
+          "exit_line": 548
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tcph->syn)",
+          "exit_kind": "return",
+          "source_line": 542
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dir == IP_CT_DIR_REPLY && !tcph->ack)",
+          "exit_kind": "return",
+          "source_line": 590,
+          "exit_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!seq_ok)",
+          "exit_kind": "return",
+          "source_line": 616
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!before(sack, receiver->td_end + 1))",
+          "exit_kind": "return",
+          "source_line": 650,
+          "exit_line": 651
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!in_recv_win)",
+          "exit_kind": "return",
+          "source_line": 658,
+          "exit_line": 659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!after(sack, receiver->td_end - MAXACKWINDOW(sender) - 1))",
+          "exit_kind": "return",
+          "source_line": 662,
+          "exit_line": 663
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!after(sack, receiver->td_end - MAXACKWINDOW(sender) - 1)",
+          "polarity": "in_true_branch",
+          "source_line": 662
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "callee": "find_set",
+  "defined_in": "net/netfilter/ipset/ip_set_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "ip_set_flush",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1283,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(protocol_min_failed(attr)))",
+          "exit_kind": "return",
+          "source_line": 1273,
+          "exit_line": 1274
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!attr[IPSET_ATTR_SETNAME]",
+          "polarity": "in_false_branch",
+          "source_line": 1282
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_rename",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1318,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_ad",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1794,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_utest",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1853,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_header",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1885,
+      "guards": []
+    }
+  ]
+}

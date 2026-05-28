@@ -1,0 +1,156 @@
+{
+  "callee": "nft_notify_enqueue",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "nf_tables_table_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1028,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 1014,
+          "exit_line": 1015
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 1022
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_chain_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1846,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 1831,
+          "exit_line": 1832
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 1840
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_rule_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3255,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 3233,
+          "exit_line": 3234
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 3250
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_set_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4345,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 4333,
+          "exit_line": 4334
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 4340
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_setelem_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5820,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx->report && !nfnetlink_has_listeners(net, NFNLGRP_NFTABLES))",
+          "exit_kind": "return",
+          "source_line": 5802,
+          "exit_line": 5803
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 5806,
+          "exit_line": 5807
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 5814
+        }
+      ]
+    },
+    {
+      "caller": "__nft_obj_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7612,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 7601,
+          "exit_line": 7602
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 7607
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_flowtable_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8468,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 8454,
+          "exit_line": 8455
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 8463
+        }
+      ]
+    }
+  ]
+}

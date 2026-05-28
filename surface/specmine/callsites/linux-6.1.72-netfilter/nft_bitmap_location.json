@@ -1,0 +1,52 @@
+{
+  "callee": "nft_bitmap_location",
+  "defined_in": "net/netfilter/nft_set_bitmap.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "nft_bitmap_lookup",
+      "file": "net/netfilter/nft_set_bitmap.c",
+      "line": 84,
+      "guards": []
+    },
+    {
+      "caller": "nft_bitmap_insert",
+      "file": "net/netfilter/nft_set_bitmap.c",
+      "line": 139,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(be)",
+          "exit_kind": "return",
+          "source_line": 134
+        }
+      ]
+    },
+    {
+      "caller": "nft_bitmap_remove",
+      "file": "net/netfilter/nft_set_bitmap.c",
+      "line": 156,
+      "guards": []
+    },
+    {
+      "caller": "nft_bitmap_activate",
+      "file": "net/netfilter/nft_set_bitmap.c",
+      "line": 171,
+      "guards": []
+    },
+    {
+      "caller": "nft_bitmap_flush",
+      "file": "net/netfilter/nft_set_bitmap.c",
+      "line": 185,
+      "guards": []
+    },
+    {
+      "caller": "nft_bitmap_deactivate",
+      "file": "net/netfilter/nft_set_bitmap.c",
+      "line": 202,
+      "guards": []
+    }
+  ]
+}

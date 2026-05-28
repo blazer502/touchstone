@@ -1,0 +1,60 @@
+{
+  "callee": "list_set_del",
+  "defined_in": "net/netfilter/ipset/ip_set_list_set.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "set_cleanup_entries",
+      "file": "net/netfilter/ipset/ip_set_list_set.c",
+      "line": 181,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "ip_set_timeout_expired(ext_timeout(e, set))",
+          "polarity": "in_true_branch",
+          "source_line": 180
+        }
+      ]
+    },
+    {
+      "caller": "list_set_udel",
+      "file": "net/netfilter/ipset/ip_set_list_set.c",
+      "line": 339,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(e->id != d->id)",
+          "exit_kind": "continue",
+          "source_line": 325
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d->before > 0)",
+          "exit_kind": "return",
+          "source_line": 330
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!prev || prev->id != d->refid)",
+          "exit_kind": "return",
+          "source_line": 336,
+          "exit_line": 337
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d->before < 0)",
+          "exit_kind": "return",
+          "source_line": 335
+        }
+      ]
+    },
+    {
+      "caller": "list_set_flush",
+      "file": "net/netfilter/ipset/ip_set_list_set.c",
+      "line": 418,
+      "guards": []
+    }
+  ]
+}

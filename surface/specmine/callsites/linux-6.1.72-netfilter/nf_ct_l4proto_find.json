@@ -1,0 +1,259 @@
+{
+  "callee": "nf_ct_l4proto_find",
+  "defined_in": "net/netfilter/nf_conntrack_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 15,
+  "callsites": [
+    {
+      "caller": "nf_ct_resolve_clash",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1143,
+      "guards": []
+    },
+    {
+      "caller": "gc_worker_can_early_drop",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1461,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!test_bit(IPS_ASSURED_BIT, &ct->status))",
+          "exit_kind": "return",
+          "source_line": 1458,
+          "exit_line": 1459
+        }
+      ]
+    },
+    {
+      "caller": "exp_seq_show",
+      "file": "net/netfilter/nf_conntrack_expect.c",
+      "line": 644,
+      "guards": []
+    },
+    {
+      "caller": "ctnetlink_dump_tuples",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 146,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 142
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret >= 0",
+          "polarity": "in_true_branch",
+          "source_line": 145
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_dump_protoinfo",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 204,
+      "guards": []
+    },
+    {
+      "caller": "ctnetlink_proto_size",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 645,
+      "guards": []
+    },
+    {
+      "caller": "ctnetlink_parse_tuple_proto",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1371,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1370
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 1359,
+          "exit_line": 1360
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(flags & CTA_FILTER_FLAG(CTA_PROTO_NUM)))",
+          "exit_kind": "return",
+          "source_line": 1362,
+          "exit_line": 1363
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[CTA_PROTO_NUM])",
+          "exit_kind": "return",
+          "source_line": 1365,
+          "exit_line": 1366
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_change_protoinfo",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2032,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2029,
+          "exit_line": 2030
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_exp_dump_mask",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2963,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 2960
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nest_parms != NULL",
+          "source_line": 2957
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nest_parms)",
+          "exit_kind": "goto",
+          "source_line": 2957,
+          "exit_line": 2958
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret >= 0",
+          "polarity": "in_true_branch",
+          "source_line": 2962
+        }
+      ]
+    },
+    {
+      "caller": "ct_seq_show",
+      "file": "net/netfilter/nf_conntrack_standalone.c",
+      "line": 324,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!ct)",
+          "macro": "WARN_ON",
+          "source_line": 305
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!refcount_inc_not_zero(&ct->ct_general.use)))",
+          "exit_kind": "return",
+          "source_line": 306,
+          "exit_line": 307
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_should_gc(ct))",
+          "exit_kind": "goto",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(NF_CT_DIRECTION(hash))",
+          "exit_kind": "goto",
+          "source_line": 318,
+          "exit_line": 319
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!net_eq(nf_ct_net(ct), net))",
+          "exit_kind": "goto",
+          "source_line": 321,
+          "exit_line": 322
+        }
+      ]
+    },
+    {
+      "caller": "cttimeout_new_timeout",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 149,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncmp(timeout->name, name, CTNL_TIMEOUT_NAME_MAX) != 0)",
+          "exit_kind": "continue",
+          "source_line": 121,
+          "exit_line": 122
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_EXCL)",
+          "exit_kind": "return",
+          "source_line": 124,
+          "exit_line": 125
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_REPLACE)",
+          "exit_kind": "return",
+          "source_line": 132
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(matching)",
+          "exit_kind": "return",
+          "source_line": 131
+        }
+      ]
+    },
+    {
+      "caller": "cttimeout_default_set",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 375,
+      "guards": []
+    },
+    {
+      "caller": "cttimeout_default_get",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 449,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!cda[CTA_TIMEOUT_L3PROTO] || !cda[CTA_TIMEOUT_L4PROTO])",
+          "exit_kind": "return",
+          "source_line": 444,
+          "exit_line": 445
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_timeout_obj_init",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 934,
+      "guards": []
+    },
+    {
+      "caller": "xt_ct_set_timeout",
+      "file": "net/netfilter/xt_CT.c",
+      "line": 117,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "proto != NULL",
+          "source_line": 112
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!proto)",
+          "exit_kind": "return",
+          "source_line": 112
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1097 @@
+{
+  "callee": "nfnetlink_unicast",
+  "defined_in": "net/netfilter/nfnetlink.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 24,
+  "callsites": [
+    {
+      "caller": "call_ad",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1760,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 1737
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ret || (ret == -IPSET_ERR_EXIST && eexist))",
+          "exit_kind": "return",
+          "source_line": 1722,
+          "exit_line": 1723
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 1737,
+          "exit_line": 1738
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 1752
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "lineno && use_lineno",
+          "polarity": "in_true_branch",
+          "source_line": 1724
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_header",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1905,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "set != NULL",
+          "source_line": 1886
+        },
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 1890
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nlh2 != NULL",
+          "source_line": 1895
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!set)",
+          "exit_kind": "return",
+          "source_line": 1886,
+          "exit_line": 1887
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 1890,
+          "exit_line": 1891
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh2)",
+          "exit_kind": "goto",
+          "source_line": 1895,
+          "exit_line": 1896
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_type",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1960,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 1944
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nlh2 != NULL",
+          "source_line": 1949
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 1940,
+          "exit_line": 1941
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 1944,
+          "exit_line": 1945
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh2)",
+          "exit_kind": "goto",
+          "source_line": 1949,
+          "exit_line": 1950
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_protocol",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1999,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 1986
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nlh2 != NULL",
+          "source_line": 1991
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!attr[IPSET_ATTR_PROTOCOL]))",
+          "exit_kind": "return",
+          "source_line": 1982,
+          "exit_line": 1983
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 1986,
+          "exit_line": 1987
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh2)",
+          "exit_kind": "goto",
+          "source_line": 1991,
+          "exit_line": 1992
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_u8(skb2, IPSET_ATTR_PROTOCOL, IPSET_PROTOCOL))",
+          "exit_kind": "goto",
+          "source_line": 1993,
+          "exit_line": 1994
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_u8(skb2, IPSET_ATTR_PROTOCOL_MIN, IPSET_PROTOCOL_MIN))",
+          "exit_kind": "goto",
+          "source_line": 1995,
+          "exit_line": 1996
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_byname",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 2041,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 2028
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nlh2 != NULL",
+          "source_line": 2033
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(id == IPSET_INVALID_ID)",
+          "exit_kind": "return",
+          "source_line": 2024,
+          "exit_line": 2025
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 2028,
+          "exit_line": 2029
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh2)",
+          "exit_kind": "goto",
+          "source_line": 2033,
+          "exit_line": 2034
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_byindex",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 2088,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 2076
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nlh2 != NULL",
+          "source_line": 2081
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(id >= inst->ip_set_max)",
+          "exit_kind": "return",
+          "source_line": 2069,
+          "exit_line": 2070
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set == NULL)",
+          "exit_kind": "return",
+          "source_line": 2072,
+          "exit_line": 2073
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 2076,
+          "exit_line": 2077
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh2)",
+          "exit_kind": "goto",
+          "source_line": 2081,
+          "exit_line": 2082
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_get_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1707,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "h != NULL",
+          "source_line": 1686
+        },
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 1692
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 1658
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1670,
+          "exit_line": 1671
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1682,
+          "exit_line": 1683
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!h)",
+          "exit_kind": "return",
+          "source_line": 1686,
+          "exit_line": 1687
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 1692
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err <= 0)",
+          "exit_kind": "return",
+          "source_line": 1702
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_stat_ct",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2618,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb2 == NULL)",
+          "exit_kind": "return",
+          "source_line": 2606,
+          "exit_line": 2607
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err <= 0)",
+          "exit_kind": "return",
+          "source_line": 2613
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_get_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3367,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "exp != NULL",
+          "source_line": 3338
+        },
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 3351
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_EXPECT_MASTER])",
+          "exit_kind": "return",
+          "source_line": 3308,
+          "exit_line": 3309
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 3307
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3322,
+          "exit_line": 3323
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3334,
+          "exit_line": 3335
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!exp)",
+          "exit_kind": "return",
+          "source_line": 3338,
+          "exit_line": 3339
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(id != nf_expect_get_id(exp))",
+          "exit_kind": "return",
+          "source_line": 3344
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 3351
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err <= 0)",
+          "exit_kind": "return",
+          "source_line": 3362
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_gettable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1130,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 1115
+        },
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 1121
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 1105
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 1115
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 1121,
+          "exit_line": 1122
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 1127,
+          "exit_line": 1128
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getchain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1943,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 1922
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(chain)",
+          "source_line": 1928
+        },
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 1934
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 1912
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 1922
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(chain))",
+          "exit_kind": "return",
+          "source_line": 1928
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 1934,
+          "exit_line": 1935
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 1940,
+          "exit_line": 1941
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getrule",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3460,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 3433
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(chain)",
+          "source_line": 3439
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(rule)",
+          "source_line": 3445
+        },
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 3451
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 3420
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 3433
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(chain))",
+          "exit_kind": "return",
+          "source_line": 3439
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(rule))",
+          "exit_kind": "return",
+          "source_line": 3445
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 3451,
+          "exit_line": 3452
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 3457,
+          "exit_line": 3458
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getset",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4485,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 4447
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(set)",
+          "source_line": 4474
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 4447
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 4455
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nfmsg->nfgen_family == NFPROTO_UNSPEC)",
+          "exit_kind": "return",
+          "source_line": 4468,
+          "exit_line": 4469
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nla[NFTA_SET_TABLE])",
+          "exit_kind": "return",
+          "source_line": 4470,
+          "exit_line": 4471
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(set))",
+          "exit_kind": "return",
+          "source_line": 4474,
+          "exit_line": 4475
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb2 == NULL)",
+          "exit_kind": "return",
+          "source_line": 4478,
+          "exit_line": 4479
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 4482,
+          "exit_line": 4483
+        }
+      ]
+    },
+    {
+      "caller": "nft_get_set_elem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5725,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 5687,
+          "exit_line": 5688
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 5691,
+          "exit_line": 5692
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nla[NFTA_SET_ELEM_KEY] && !(flags & NFT_SET_ELEM_CATCHALL))",
+          "exit_kind": "return",
+          "source_line": 5694,
+          "exit_line": 5695
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 5700,
+          "exit_line": 5701
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_KEY])",
+          "exit_kind": "return",
+          "source_line": 5697
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 5707,
+          "exit_line": 5708
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_KEY_END])",
+          "exit_kind": "return",
+          "source_line": 5704
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 5712,
+          "exit_line": 5713
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "return",
+          "source_line": 5717,
+          "exit_line": 5718
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 5722,
+          "exit_line": 5723
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getobj",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7522,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 7482
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(obj)",
+          "source_line": 7489
+        },
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 7495
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 7465
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 7482
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(obj))",
+          "exit_kind": "return",
+          "source_line": 7489
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 7495,
+          "exit_line": 7496
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 7519,
+          "exit_line": 7520
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getflowtable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8432,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 8413
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(flowtable)",
+          "source_line": 8418
+        },
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 8422
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 8396
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nla[NFTA_FLOWTABLE_NAME])",
+          "exit_kind": "return",
+          "source_line": 8408,
+          "exit_line": 8409
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 8413,
+          "exit_line": 8414
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(flowtable))",
+          "exit_kind": "return",
+          "source_line": 8418,
+          "exit_line": 8419
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 8422,
+          "exit_line": 8423
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 8429,
+          "exit_line": 8430
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getgen",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8607,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb2 == NULL)",
+          "exit_kind": "return",
+          "source_line": 8599,
+          "exit_line": 8600
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 8604,
+          "exit_line": 8605
+        }
+      ]
+    },
+    {
+      "caller": "nfnl_acct_get",
+      "file": "net/netfilter/nfnetlink_acct.c",
+      "line": 318,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 282
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[NFACCT_NAME])",
+          "exit_kind": "return",
+          "source_line": 293,
+          "exit_line": 294
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(strncmp(cur->name, acct_name, NFACCT_NAME_MAX)!= 0)",
+          "exit_kind": "continue",
+          "source_line": 300,
+          "exit_line": 301
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb2 == NULL)",
+          "exit_kind": "break",
+          "source_line": 304
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret <= 0)",
+          "exit_kind": "break",
+          "source_line": 313
+        }
+      ]
+    },
+    {
+      "caller": "nfnl_cthelper_get",
+      "file": "net/netfilter/nfnetlink_cthelper.c",
+      "line": 674,
+      "guards": [
+        {
+          "kind": "capability_check",
+          "predicate": "capable(CAP_NET_ADMIN)",
+          "source_line": 627
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!capable(CAP_NET_ADMIN))",
+          "exit_kind": "return",
+          "source_line": 627,
+          "exit_line": 628
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 630
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 642,
+          "exit_line": 643
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFCTH_TUPLE])",
+          "exit_kind": "return",
+          "source_line": 640
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb2 == NULL)",
+          "exit_kind": "break",
+          "source_line": 660
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret <= 0)",
+          "exit_kind": "break",
+          "source_line": 669
+        }
+      ]
+    },
+    {
+      "caller": "cttimeout_get_timeout",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 304,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 272
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cda[CTA_TIMEOUT_NAME])",
+          "exit_kind": "return",
+          "source_line": 279,
+          "exit_line": 280
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(strncmp(cur->name, name, CTNL_TIMEOUT_NAME_MAX) != 0)",
+          "exit_kind": "continue",
+          "source_line": 286,
+          "exit_line": 287
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb2 == NULL)",
+          "exit_kind": "break",
+          "source_line": 290
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret <= 0)",
+          "exit_kind": "break",
+          "source_line": 299
+        }
+      ]
+    },
+    {
+      "caller": "cttimeout_default_get",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 509,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "timeouts != NULL",
+          "source_line": 491
+        },
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 495
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cda[CTA_TIMEOUT_L3PROTO] || !cda[CTA_TIMEOUT_L4PROTO])",
+          "exit_kind": "return",
+          "source_line": 444,
+          "exit_line": 445
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(l4proto->l4proto != l4num)",
+          "exit_kind": "return",
+          "source_line": 451,
+          "exit_line": 452
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!timeouts)",
+          "exit_kind": "return",
+          "source_line": 491,
+          "exit_line": 492
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 495,
+          "exit_line": 496
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret <= 0)",
+          "exit_kind": "return",
+          "source_line": 504
+        }
+      ]
+    },
+    {
+      "caller": "__nfulnl_send",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 364,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(inst->qlen > 1)",
+          "exit_kind": "goto",
+          "source_line": 353
+        }
+      ]
+    },
+    {
+      "caller": "__nfqnl_enqueue_packet",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 690,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 670
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nskb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 666
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_drop_unconfirmed(entry))",
+          "exit_kind": "goto",
+          "source_line": 672,
+          "exit_line": 673
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(queue->queue_total >= queue->queue_maxlen)",
+          "exit_kind": "goto",
+          "source_line": 675
+        }
+      ]
+    },
+    {
+      "caller": "nfnl_compat_get_rcu",
+      "file": "net/netfilter/nft_compat.c",
+      "line": 701,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!try_module_get(THIS_MODULE))",
+          "exit_kind": "return",
+          "source_line": 676,
+          "exit_line": 677
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 682,
+          "exit_line": 683
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb2 == NULL)",
+          "exit_kind": "goto",
+          "source_line": 686
+        }
+      ]
+    }
+  ]
+}

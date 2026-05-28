@@ -1,0 +1,70 @@
+{
+  "callee": "nfct_timeout_pernet",
+  "defined_in": "net/netfilter/nfnetlink_cttimeout.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "cttimeout_new_timeout",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 102,
+      "guards": []
+    },
+    {
+      "caller": "ctnl_timeout_dump",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 241,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 240
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cb->args[2])",
+          "exit_kind": "return",
+          "source_line": 233,
+          "exit_line": 234
+        }
+      ]
+    },
+    {
+      "caller": "cttimeout_get_timeout",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 267,
+      "guards": []
+    },
+    {
+      "caller": "cttimeout_del_timeout",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 334,
+      "guards": []
+    },
+    {
+      "caller": "ctnl_timeout_find_get",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 515,
+      "guards": []
+    },
+    {
+      "caller": "cttimeout_net_init",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 586,
+      "guards": []
+    },
+    {
+      "caller": "cttimeout_net_pre_exit",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 596,
+      "guards": []
+    },
+    {
+      "caller": "cttimeout_net_exit",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 609,
+      "guards": []
+    }
+  ]
+}

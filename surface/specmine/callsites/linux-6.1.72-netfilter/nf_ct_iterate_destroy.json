@@ -1,0 +1,27 @@
+{
+  "callee": "nf_ct_iterate_destroy",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_conntrack_helper_unregister",
+      "file": "net/netfilter/nf_conntrack_helper.c",
+      "line": 426,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_cleanup",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 1171,
+      "guards": []
+    },
+    {
+      "caller": "cttimeout_exit",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 677,
+      "guards": []
+    }
+  ]
+}

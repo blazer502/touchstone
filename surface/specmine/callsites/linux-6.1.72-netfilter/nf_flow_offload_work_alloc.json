@@ -1,0 +1,35 @@
+{
+  "callee": "nf_flow_offload_work_alloc",
+  "defined_in": "net/netfilter/nf_flow_table_offload.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_flow_offload_add",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 1044,
+      "guards": []
+    },
+    {
+      "caller": "nf_flow_offload_del",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 1056,
+      "guards": []
+    },
+    {
+      "caller": "nf_flow_offload_stats",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 1074,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!((delta >= (9 * flow_offload_get_timeout(flow)) / 10))",
+          "exit_kind": "return",
+          "source_line": 1071,
+          "exit_line": 1072
+        }
+      ]
+    }
+  ]
+}

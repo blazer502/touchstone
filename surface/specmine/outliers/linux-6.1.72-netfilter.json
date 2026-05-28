@@ -1,0 +1,397 @@
+{
+  "generated_at": 1779926564,
+  "min_support": 3,
+  "outliers": [
+    {
+      "callee": "nft_ctx_init",
+      "caller": "nf_tables_deltable",
+      "callsite_count": 19,
+      "contract_kind_class": "early",
+      "contract_kind_label": "early_return",
+      "file": "net/netfilter/nf_tables_api.c",
+      "guards_present": [],
+      "line": 1534,
+      "local_establishment": 0.0,
+      "missing_contract": "!(IS_ERR(table))",
+      "support_count": 18,
+      "support_pct": 0.9474,
+      "suspicion": 0.9474
+    },
+    {
+      "callee": "nft_ctx_init",
+      "caller": "nf_tables_deltable",
+      "callsite_count": 19,
+      "contract_kind_class": "null",
+      "contract_kind_label": "null_check",
+      "file": "net/netfilter/nf_tables_api.c",
+      "guards_present": [],
+      "line": 1534,
+      "local_establishment": 0.0,
+      "missing_contract": "!IS_ERR_OR_NULL(table)",
+      "support_count": 18,
+      "support_pct": 0.9474,
+      "suspicion": 0.9474
+    },
+    {
+      "callee": "nfnetlink_set_err",
+      "caller": "nf_tables_gen_notify",
+      "callsite_count": 10,
+      "contract_kind_class": "early",
+      "contract_kind_label": "early_return",
+      "file": "net/netfilter/nf_tables_api.c",
+      "guards_present": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb2 == NULL)",
+          "source_line": 8574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "source_line": 8579
+        }
+      ],
+      "line": 8588,
+      "local_establishment": 0.0,
+      "missing_contract": "!(skb == NULL)",
+      "support_count": 9,
+      "support_pct": 0.9,
+      "suspicion": 0.9
+    },
+    {
+      "callee": "__nf_conntrack_helper_find",
+      "caller": "ctnetlink_glue_attach_expect",
+      "callsite_count": 9,
+      "contract_kind_class": "lock",
+      "contract_kind_label": "lock_held",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "guards_present": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "source_line": 2873
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "source_line": 2878
+        },
+        {
+          "kind": "enclosing_if",
+          "polarity": "in_true_branch",
+          "predicate": "cda[CTA_EXPECT_HELP_NAME]",
+          "source_line": 2881
+        }
+      ],
+      "line": 2884,
+      "local_establishment": 0.0,
+      "missing_contract": "rcu_read_lock_held",
+      "support_count": 8,
+      "support_pct": 0.8889,
+      "suspicion": 0.8889
+    },
+    {
+      "callee": "ip_vs_service_find",
+      "caller": "ip_vs_find_dest",
+      "callsite_count": 7,
+      "contract_kind_class": "early",
+      "contract_kind_label": "early_return",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "guards_present": [],
+      "line": 700,
+      "local_establishment": 0.0,
+      "missing_contract": "!(!ports)",
+      "support_count": 6,
+      "support_pct": 0.8571,
+      "suspicion": 0.8571
+    },
+    {
+      "callee": "ip_vs_service_find",
+      "caller": "ip_vs_find_dest",
+      "callsite_count": 7,
+      "contract_kind_class": "null",
+      "contract_kind_label": "null_check",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "guards_present": [],
+      "line": 700,
+      "local_establishment": 0.0,
+      "missing_contract": "ports != NULL",
+      "support_count": 6,
+      "support_pct": 0.8571,
+      "suspicion": 0.8571
+    },
+    {
+      "callee": "nft_trans_destroy",
+      "caller": "nft_delrule",
+      "callsite_count": 28,
+      "contract_kind_class": "switch",
+      "contract_kind_label": "enclosing_switch",
+      "file": "net/netfilter/nf_tables_api.c",
+      "guards_present": [
+        {
+          "kind": "early_return",
+          "predicate": "!(trans == NULL)",
+          "source_line": 520
+        },
+        {
+          "kind": "enclosing_if",
+          "polarity": "in_true_branch",
+          "predicate": "ctx->chain->flags & NFT_CHAIN_HW_OFFLOAD",
+          "source_line": 523
+        },
+        {
+          "kind": "enclosing_if",
+          "polarity": "in_true_branch",
+          "predicate": "IS_ERR(flow)",
+          "source_line": 525
+        }
+      ],
+      "line": 526,
+      "local_establishment": 0.0,
+      "missing_contract": "trans->msg_type",
+      "support_count": 24,
+      "support_pct": 0.8571,
+      "suspicion": 0.8571
+    },
+    {
+      "callee": "nft_trans_destroy",
+      "caller": "nft_delrule",
+      "callsite_count": 28,
+      "contract_kind_class": "switch",
+      "contract_kind_label": "enclosing_switch",
+      "file": "net/netfilter/nf_tables_api.c",
+      "guards_present": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(flow)",
+          "source_line": 525
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(trans == NULL)",
+          "source_line": 520
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(flow))",
+          "source_line": 525
+        },
+        {
+          "kind": "enclosing_if",
+          "polarity": "in_true_branch",
+          "predicate": "err < 0",
+          "source_line": 534
+        }
+      ],
+      "line": 535,
+      "local_establishment": 0.0,
+      "missing_contract": "trans->msg_type",
+      "support_count": 24,
+      "support_pct": 0.8571,
+      "suspicion": 0.8571
+    },
+    {
+      "callee": "nft_trans_destroy",
+      "caller": "nf_tables_updtable",
+      "callsite_count": 28,
+      "contract_kind_class": "switch",
+      "contract_kind_label": "enclosing_switch",
+      "file": "net/netfilter/nf_tables_api.c",
+      "guards_present": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctx->nla[NFTA_TABLE_FLAGS])",
+          "source_line": 1199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~NFT_TABLE_F_MASK)",
+          "source_line": 1203
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags == ctx->table->flags)",
+          "source_line": 1206
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->table->flags & __NFT_TABLE_F_UPDATE)",
+          "source_line": 1216
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(trans == NULL)",
+          "source_line": 1221
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "source_line": 1234
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(ctx->table->flags & __NFT_TABLE_F_UPDATE))",
+          "source_line": 1232
+        }
+      ],
+      "line": 1247,
+      "local_establishment": 0.0,
+      "missing_contract": "trans->msg_type",
+      "support_count": 24,
+      "support_pct": 0.8571,
+      "suspicion": 0.8571
+    },
+    {
+      "callee": "nft_trans_destroy",
+      "caller": "nf_tables_addchain",
+      "callsite_count": 28,
+      "contract_kind_class": "switch",
+      "contract_kind_label": "enclosing_switch",
+      "file": "net/netfilter/nf_tables_api.c",
+      "guards_present": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(stats)",
+          "source_line": 2389
+        },
+        {
+          "kind": "null_check",
+          "predicate": "blob != NULL",
+          "source_line": 2452
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(trans)",
+          "source_line": 2470
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & NFT_CHAIN_BINDING)",
+          "source_line": 2372
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "source_line": 2377
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(basechain == NULL)",
+          "source_line": 2381
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(stats))",
+          "source_line": 2389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "source_line": 2398
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_CHAIN_HOOK])",
+          "source_line": 2368
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & NFT_CHAIN_BASE)",
+          "source_line": 2407
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & NFT_CHAIN_HW_OFFLOAD)",
+          "source_line": 2409
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(chain == NULL)",
+          "source_line": 2413
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(flags & NFT_CHAIN_BINDING))",
+          "source_line": 2427
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!chain->name)",
+          "source_line": 2436
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(chain->udata == NULL)",
+          "source_line": 2443
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!blob)",
+          "source_line": 2452
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "source_line": 2461
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_use_inc(&table->use))",
+          "source_line": 2464
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(trans))",
+          "source_line": 2470
+        },
+        {
+          "kind": "enclosing_if",
+          "polarity": "in_true_branch",
+          "predicate": "err < 0",
+          "source_line": 2480
+        }
+      ],
+      "line": 2481,
+      "local_establishment": 0.0,
+      "missing_contract": "trans->msg_type",
+      "support_count": 24,
+      "support_pct": 0.8571,
+      "suspicion": 0.8571
+    },
+    {
+      "callee": "process_olc",
+      "caller": "process_h245",
+      "callsite_count": 7,
+      "contract_kind_class": "early",
+      "contract_kind_label": "early_return",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "guards_present": [
+        {
+          "kind": "enclosing_switch",
+          "polarity": "in_true_branch",
+          "predicate": "mscm->choice",
+          "source_line": 495
+        }
+      ],
+      "line": 499,
+      "local_establishment": 0.0,
+      "missing_contract": "!(ret < 0)",
+      "support_count": 6,
+      "support_pct": 0.8571,
+      "suspicion": 0.8571
+    }
+  ],
+  "stats": {
+    "by_kind_class": {
+      "early": 4,
+      "lock": 1,
+      "null": 2,
+      "switch": 4
+    },
+    "outliers_with_local_establishment": 0,
+    "total_outliers": 11,
+    "wall_seconds": 0.05
+  },
+  "target": "linux-6.1.72-netfilter",
+  "tau": 0.85
+}

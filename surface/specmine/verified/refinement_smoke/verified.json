@@ -1,0 +1,56 @@
+{
+  "engine": "cbmc",
+  "generated_at": 1779931303,
+  "min_support": 2,
+  "min_suspicion": 0.5,
+  "stats": {
+    "by_disposition": {
+      "inconclusive": 1
+    },
+    "confirmed": 0,
+    "false_confirmations": 0,
+    "inconclusive": 1,
+    "infrastructure_pending": 0,
+    "outliers_examined": 1,
+    "proposer_deprioritized": 0,
+    "refuted": 0,
+    "wall_seconds": 0.58
+  },
+  "target": "refinement_smoke",
+  "tau": 0.8,
+  "timeout_s": 30,
+  "unwind": 1,
+  "verified_outliers": [
+    {
+      "callee": "lookup_thing",
+      "caller": "caller_loopy_buggy",
+      "callsite_count": 11,
+      "contract_kind_class": "lock",
+      "contract_kind_label": "lock_held",
+      "disposition": "inconclusive",
+      "engine": "cbmc",
+      "engine_verdict": "inconclusive",
+      "engine_wall_ms": 557,
+      "evidence_excerpt": "converting SSA\nRunning propositional reduction\nSAT checker: instance is SATISFIABLE\nBuilding error trace\n** Results:\nlookup_thing_caller_loopy_buggy.c function __specmine_wrap_lookup_thing\n[__specmine_wrap_lookup_thing.assertion.1] line 47 specmine: rcu_read_lock_held must hold at lookup_thing entry: FAILURE\nlookup_thing_caller_loopy_buggy.c function caller_loopy_buggy\n[caller_loopy_buggy.overflow.2] line 54 arithmetic overflow on signed + in i + 1: SUCCESS\n[caller_loopy_buggy.unwind.0] line 54 unwinding as",
+      "file": "fixture.c",
+      "guards_present": [
+        {
+          "kind": "enclosing_for",
+          "polarity": "in_true_branch",
+          "predicate": "i = 0; i < n; i++",
+          "source_line": 123
+        }
+      ],
+      "harness_path": "/home/chanyoung/veri-agent/surface/specmine/verified/refinement_smoke/harnesses/lookup_thing_caller_loopy_buggy.c",
+      "line": 124,
+      "local_establishment": 0.0,
+      "missing_contract": "rcu_read_lock_held",
+      "soundness_note": "Unwinding assertion failed at --unwind=1: reachable behaviour exceeds the bound. Phase 3.1 will synthesize a loop invariant; until then this property cannot be bounded-sound proved.",
+      "support_count": 10,
+      "support_pct": 0.9091,
+      "suspicion": 0.9091,
+      "witness_path": null
+    }
+  ],
+  "via_router": false
+}

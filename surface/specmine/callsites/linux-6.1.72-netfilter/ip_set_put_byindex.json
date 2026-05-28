@@ -1,0 +1,149 @@
+{
+  "callee": "ip_set_put_byindex",
+  "defined_in": "net/netfilter/ipset/ip_set_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "list_set_del",
+      "file": "net/netfilter/ipset/ip_set_list_set.c",
+      "line": 159,
+      "guards": []
+    },
+    {
+      "caller": "list_set_replace",
+      "file": "net/netfilter/ipset/ip_set_list_set.c",
+      "line": 169,
+      "guards": []
+    },
+    {
+      "caller": "list_set_uadd",
+      "file": "net/netfilter/ipset/ip_set_list_set.c",
+      "line": 270,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "flag_exist != NULL",
+          "source_line": 263
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d->before == 0 || e->id != d->refid)",
+          "exit_kind": "continue",
+          "source_line": 248,
+          "exit_line": 249
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!flag_exist)",
+          "exit_kind": "return",
+          "source_line": 263,
+          "exit_line": 264
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "n",
+          "polarity": "in_true_branch",
+          "source_line": 262
+        }
+      ]
+    },
+    {
+      "caller": "list_set_uadt",
+      "file": "net/netfilter/ipset/ip_set_list_set.c",
+      "line": 404,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 364,
+          "exit_line": 365
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(e.id == IPSET_INVALID_ID)",
+          "exit_kind": "return",
+          "source_line": 367,
+          "exit_line": 368
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(s->type->features & IPSET_TYPE_NAME)",
+          "exit_kind": "goto",
+          "source_line": 370
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(e.before && !tb[IPSET_ATTR_NAMEREF])",
+          "exit_kind": "goto",
+          "source_line": 381
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(e.refid == IPSET_INVALID_ID)",
+          "exit_kind": "goto",
+          "source_line": 390
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "e.refid != IPSET_INVALID_ID",
+          "polarity": "in_true_branch",
+          "source_line": 403
+        }
+      ]
+    },
+    {
+      "caller": "list_set_uadt",
+      "file": "net/netfilter/ipset/ip_set_list_set.c",
+      "line": 406,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 364,
+          "exit_line": 365
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(e.id == IPSET_INVALID_ID)",
+          "exit_kind": "return",
+          "source_line": 367,
+          "exit_line": 368
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(s->type->features & IPSET_TYPE_NAME)",
+          "exit_kind": "goto",
+          "source_line": 370
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(e.before && !tb[IPSET_ATTR_NAMEREF])",
+          "exit_kind": "goto",
+          "source_line": 381
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(e.refid == IPSET_INVALID_ID)",
+          "exit_kind": "goto",
+          "source_line": 390
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "adt != IPSET_ADD || ret",
+          "polarity": "in_true_branch",
+          "source_line": 405
+        }
+      ]
+    },
+    {
+      "caller": "list_set_destroy",
+      "file": "net/netfilter/ipset/ip_set_list_set.c",
+      "line": 434,
+      "guards": []
+    }
+  ]
+}

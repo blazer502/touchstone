@@ -1,0 +1,45 @@
+{
+  "callee": "dl_seq_print",
+  "defined_in": "net/netfilter/xt_hashlimit.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "dl_seq_real_show_v2",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 1134,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 1130
+        }
+      ]
+    },
+    {
+      "caller": "dl_seq_real_show_v1",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 1149,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 1145
+        }
+      ]
+    },
+    {
+      "caller": "dl_seq_real_show",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 1164,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 1160
+        }
+      ]
+    }
+  ]
+}

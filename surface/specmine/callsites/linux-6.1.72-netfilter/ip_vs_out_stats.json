@@ -1,0 +1,222 @@
+{
+  "callee": "ip_vs_out_stats",
+  "defined_in": "net/netfilter/ipvs/ip_vs_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "handle_response_icmp",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 894,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(IP_VS_FWD_METHOD(cp) != IP_VS_CONN_F_MASQ)",
+          "exit_kind": "goto",
+          "source_line": 865,
+          "exit_line": 866
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb_csum_unnecessary(skb) && ip_vs_checksum_complete(skb, ihl))",
+          "exit_kind": "goto",
+          "source_line": 869
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, offset))",
+          "exit_kind": "goto",
+          "source_line": 879,
+          "exit_line": 880
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_route_me_harder(cp->ipvs, af, skb, hooknum))",
+          "exit_kind": "goto",
+          "source_line": 889,
+          "exit_line": 890
+        }
+      ]
+    },
+    {
+      "caller": "handle_response",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 1310,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(IP_VS_FWD_METHOD(cp) != IP_VS_CONN_F_MASQ)",
+          "exit_kind": "goto",
+          "source_line": 1266,
+          "exit_line": 1267
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, iph->len))",
+          "exit_kind": "goto",
+          "source_line": 1271,
+          "exit_line": 1272
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_route_me_harder(cp->ipvs, af, skb, hooknum))",
+          "exit_kind": "goto",
+          "source_line": 1304,
+          "exit_line": 1305
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_in_icmp",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 1781,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "pd != NULL",
+          "source_line": 1691
+        },
+        {
+          "kind": "null_check",
+          "predicate": "cp != NULL",
+          "source_line": 1713
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_gather_frags(ipvs, skb, ip_vs_defrag_user(hooknum)))",
+          "exit_kind": "return",
+          "source_line": 1602,
+          "exit_line": 1603
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_is_fragment(ip_hdr(skb)))",
+          "exit_kind": "return",
+          "source_line": 1601
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ic == NULL)",
+          "exit_kind": "return",
+          "source_line": 1609,
+          "exit_line": 1610
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cih == NULL)",
+          "exit_kind": "return",
+          "source_line": 1633,
+          "exit_line": 1634
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(cih->frag_off & htons(IP_OFFSET)))",
+          "exit_kind": "return",
+          "source_line": 1642,
+          "exit_line": 1643
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(skb_rtable(skb)->rt_flags & RTCF_LOCAL))",
+          "exit_kind": "return",
+          "source_line": 1645,
+          "exit_line": 1646
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest || dest->tun_type != IP_VS_CONN_F_TUNNEL_TYPE_IPIP)",
+          "exit_kind": "return",
+          "source_line": 1649,
+          "exit_line": 1650
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cih == NULL)",
+          "exit_kind": "return",
+          "source_line": 1653,
+          "exit_line": 1654
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cih->protocol == IPPROTO_IPIP)",
+          "exit_kind": "return",
+          "source_line": 1639
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(cih->frag_off & htons(IP_OFFSET)))",
+          "exit_kind": "return",
+          "source_line": 1664,
+          "exit_line": 1665
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ulen > 0)",
+          "exit_kind": "return",
+          "source_line": 1676
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!pd)",
+          "exit_kind": "return",
+          "source_line": 1691,
+          "exit_line": 1692
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tunnel || !sysctl_schedule_icmp(ipvs))",
+          "exit_kind": "return",
+          "source_line": 1716,
+          "exit_line": 1717
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ip_vs_try_to_schedule(ipvs, AF_INET, skb, pd, &v, &cp, &ciph))",
+          "exit_kind": "return",
+          "source_line": 1719,
+          "exit_line": 1720
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cp)",
+          "exit_kind": "return",
+          "source_line": 1713
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb_csum_unnecessary(skb) && ip_vs_checksum_complete(skb, ihl))",
+          "exit_kind": "goto",
+          "source_line": 1727
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(pskb_pull(skb, ihl + sizeof(_icmph)) == NULL)",
+          "exit_kind": "goto",
+          "source_line": 1747,
+          "exit_line": 1748
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(frag_off & htons(IP_DF)))",
+          "exit_kind": "goto",
+          "source_line": 1756,
+          "exit_line": 1757
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(pskb_pull(skb, offset2) == NULL)",
+          "exit_kind": "goto",
+          "source_line": 1773,
+          "exit_line": 1774
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tunnel",
+          "polarity": "in_true_branch",
+          "source_line": 1734
+        }
+      ]
+    }
+  ]
+}

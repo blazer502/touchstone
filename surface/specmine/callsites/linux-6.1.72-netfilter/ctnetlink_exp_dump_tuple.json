@@ -1,0 +1,76 @@
+{
+  "callee": "ctnetlink_exp_dump_tuple",
+  "defined_in": "net/netfilter/nf_conntrack_netlink.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ctnetlink_exp_dump_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3018,
+      "guards": []
+    },
+    {
+      "caller": "ctnetlink_exp_dump_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3022,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_exp_dump_tuple(skb, &exp->tuple, CTA_EXPECT_TUPLE) < 0)",
+          "exit_kind": "goto",
+          "source_line": 3018,
+          "exit_line": 3019
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_exp_dump_mask(skb, &exp->tuple, &exp->mask) < 0)",
+          "exit_kind": "goto",
+          "source_line": 3020,
+          "exit_line": 3021
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_exp_dump_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3042,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nest_parms != NULL",
+          "source_line": 3031
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_exp_dump_tuple(skb, &exp->tuple, CTA_EXPECT_TUPLE) < 0)",
+          "exit_kind": "goto",
+          "source_line": 3018,
+          "exit_line": 3019
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_exp_dump_mask(skb, &exp->tuple, &exp->mask) < 0)",
+          "exit_kind": "goto",
+          "source_line": 3020,
+          "exit_line": 3021
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nest_parms)",
+          "exit_kind": "goto",
+          "source_line": 3031,
+          "exit_line": 3032
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, CTA_EXPECT_NAT_DIR, htonl(exp->dir)))",
+          "exit_kind": "goto",
+          "source_line": 3034,
+          "exit_line": 3035
+        }
+      ]
+    }
+  ]
+}

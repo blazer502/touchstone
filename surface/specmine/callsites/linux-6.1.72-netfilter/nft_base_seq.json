@@ -1,0 +1,88 @@
+{
+  "callee": "nft_base_seq",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 9,
+  "callsites": [
+    {
+      "caller": "nf_tables_fill_table_info",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 962,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_fill_chain_info",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1768,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_fill_rule_info",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3173,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_fill_set",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4231,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_dump_set",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5489,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "set_found != NULL",
+          "source_line": 5479
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(table != dump_ctx->ctx.table)",
+          "exit_kind": "continue",
+          "source_line": 5467,
+          "exit_line": 5468
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set == dump_ctx->set)",
+          "exit_kind": "break",
+          "source_line": 5471
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!set_found)",
+          "exit_kind": "return",
+          "source_line": 5479
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_fill_setelem_info",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5558,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_fill_obj_info",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7304,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_fill_flowtable_info",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8253,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_fill_gen_info",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8499,
+      "guards": []
+    }
+  ]
+}

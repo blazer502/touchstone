@@ -1,0 +1,219 @@
+{
+  "callee": "nft_offload_set_dependency",
+  "defined_in": "net/netfilter/nf_tables_offload.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "nft_meta_get_offload",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 724,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->key",
+          "polarity": "in_true_branch",
+          "source_line": 720
+        }
+      ]
+    },
+    {
+      "caller": "nft_meta_get_offload",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 729,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->key",
+          "polarity": "in_true_branch",
+          "source_line": 720
+        }
+      ]
+    },
+    {
+      "caller": "nft_payload_offload_ll",
+      "file": "net/netfilter/nft_payload.c",
+      "line": 293,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, ETH_ALEN))",
+          "exit_kind": "return",
+          "source_line": 274,
+          "exit_line": 275
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, ETH_ALEN))",
+          "exit_kind": "return",
+          "source_line": 281,
+          "exit_line": 282
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, sizeof(__be16)))",
+          "exit_kind": "return",
+          "source_line": 288,
+          "exit_line": 289
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->offset",
+          "polarity": "in_true_branch",
+          "source_line": 272
+        }
+      ]
+    },
+    {
+      "caller": "nft_payload_offload_ll",
+      "file": "net/netfilter/nft_payload.c",
+      "line": 309,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, ETH_ALEN))",
+          "exit_kind": "return",
+          "source_line": 274,
+          "exit_line": 275
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, ETH_ALEN))",
+          "exit_kind": "return",
+          "source_line": 281,
+          "exit_line": 282
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, sizeof(__be16)))",
+          "exit_kind": "return",
+          "source_line": 288,
+          "exit_line": 289
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, sizeof(__be16)))",
+          "exit_kind": "return",
+          "source_line": 296,
+          "exit_line": 297
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, sizeof(__be16)))",
+          "exit_kind": "return",
+          "source_line": 304,
+          "exit_line": 305
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->offset",
+          "polarity": "in_true_branch",
+          "source_line": 272
+        }
+      ]
+    },
+    {
+      "caller": "nft_payload_offload_ll",
+      "file": "net/netfilter/nft_payload.c",
+      "line": 326,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, ETH_ALEN))",
+          "exit_kind": "return",
+          "source_line": 274,
+          "exit_line": 275
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, ETH_ALEN))",
+          "exit_kind": "return",
+          "source_line": 281,
+          "exit_line": 282
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, sizeof(__be16)))",
+          "exit_kind": "return",
+          "source_line": 288,
+          "exit_line": 289
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, sizeof(__be16)))",
+          "exit_kind": "return",
+          "source_line": 296,
+          "exit_line": 297
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, sizeof(__be16)))",
+          "exit_kind": "return",
+          "source_line": 304,
+          "exit_line": 305
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, sizeof(__be16)))",
+          "exit_kind": "return",
+          "source_line": 312,
+          "exit_line": 313
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, sizeof(__be16)))",
+          "exit_kind": "return",
+          "source_line": 321,
+          "exit_line": 322
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->offset",
+          "polarity": "in_true_branch",
+          "source_line": 272
+        }
+      ]
+    },
+    {
+      "caller": "nft_payload_offload_ip",
+      "file": "net/netfilter/nft_payload.c",
+      "line": 366,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, sizeof(__u8)))",
+          "exit_kind": "return",
+          "source_line": 361,
+          "exit_line": 362
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->offset",
+          "polarity": "in_true_branch",
+          "source_line": 341
+        }
+      ]
+    },
+    {
+      "caller": "nft_payload_offload_ip6",
+      "file": "net/netfilter/nft_payload.c",
+      "line": 406,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_payload_offload_mask(reg, priv->len, sizeof(__u8)))",
+          "exit_kind": "return",
+          "source_line": 401,
+          "exit_line": 402
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->offset",
+          "polarity": "in_true_branch",
+          "source_line": 381
+        }
+      ]
+    }
+  ]
+}

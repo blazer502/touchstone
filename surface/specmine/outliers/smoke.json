@@ -1,0 +1,13 @@
+{
+  "generated_at": 1779926552,
+  "min_support": 3,
+  "outliers": [],
+  "stats": {
+    "by_kind_class": {},
+    "outliers_with_local_establishment": 0,
+    "total_outliers": 0,
+    "wall_seconds": 0.0
+  },
+  "target": "smoke",
+  "tau": 0.85
+}

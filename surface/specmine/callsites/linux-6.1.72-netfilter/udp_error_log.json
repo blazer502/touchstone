@@ -1,0 +1,77 @@
+{
+  "callee": "udp_error_log",
+  "defined_in": "net/netfilter/nf_conntrack_proto_udp.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "udp_error",
+      "file": "net/netfilter/nf_conntrack_proto_udp.c",
+      "line": 55,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!hdr",
+          "polarity": "in_true_branch",
+          "source_line": 54
+        }
+      ]
+    },
+    {
+      "caller": "udp_error",
+      "file": "net/netfilter/nf_conntrack_proto_udp.c",
+      "line": 61,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "hdr != NULL",
+          "source_line": 54
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hdr)",
+          "exit_kind": "return",
+          "source_line": 54
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ntohs(hdr->len) > udplen || ntohs(hdr->len) < sizeof(*hdr)",
+          "polarity": "in_true_branch",
+          "source_line": 60
+        }
+      ]
+    },
+    {
+      "caller": "udp_error",
+      "file": "net/netfilter/nf_conntrack_proto_udp.c",
+      "line": 76,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "hdr != NULL",
+          "source_line": 54
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hdr)",
+          "exit_kind": "return",
+          "source_line": 54
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(hdr->len) > udplen || ntohs(hdr->len) < sizeof(*hdr))",
+          "exit_kind": "return",
+          "source_line": 60
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hdr->check)",
+          "exit_kind": "return",
+          "source_line": 66,
+          "exit_line": 67
+        }
+      ]
+    }
+  ]
+}

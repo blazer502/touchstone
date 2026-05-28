@@ -1,0 +1,61 @@
+{
+  "callee": "ip_vs_unlink_service",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ctl.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_del_service",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1603,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(svc == NULL)",
+          "exit_kind": "return",
+          "source_line": 1601,
+          "exit_line": 1602
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_flush",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1625,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < IP_VS_SVC_TAB_SIZE; idx++",
+          "polarity": "in_true_branch",
+          "source_line": 1621
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc->ipvs == ipvs",
+          "polarity": "in_true_branch",
+          "source_line": 1624
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_flush",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1636,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < IP_VS_SVC_TAB_SIZE; idx++",
+          "polarity": "in_true_branch",
+          "source_line": 1632
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc->ipvs == ipvs",
+          "polarity": "in_true_branch",
+          "source_line": 1635
+        }
+      ]
+    }
+  ]
+}

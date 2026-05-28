@@ -1,0 +1,68 @@
+{
+  "callee": "nf_ct_netns_do_get",
+  "defined_in": "net/netfilter/nf_conntrack_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_ct_netns_inet_get",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 591,
+      "guards": []
+    },
+    {
+      "caller": "nf_ct_netns_inet_get",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 595,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 593,
+          "exit_line": 594
+        }
+      ]
+    },
+    {
+      "caller": "nf_ct_netns_get",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 616,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "nfproto",
+          "polarity": "in_true_branch",
+          "source_line": 611
+        }
+      ]
+    },
+    {
+      "caller": "nf_ct_netns_get",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 627,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 617,
+          "exit_line": 618
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 621
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "nfproto",
+          "polarity": "in_true_branch",
+          "source_line": 611
+        }
+      ]
+    }
+  ]
+}

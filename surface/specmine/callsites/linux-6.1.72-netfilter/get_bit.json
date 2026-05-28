@@ -1,0 +1,43 @@
+{
+  "callee": "get_bit",
+  "defined_in": "net/netfilter/nf_conntrack_h323_asn1.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "decode_enum",
+      "file": "net/netfilter/nf_conntrack_h323_asn1.c",
+      "line": 366,
+      "guards": []
+    },
+    {
+      "caller": "decode_seq",
+      "file": "net/netfilter/nf_conntrack_h323_asn1.c",
+      "line": 531,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, 1))",
+          "exit_kind": "return",
+          "source_line": 529,
+          "exit_line": 530
+        }
+      ]
+    },
+    {
+      "caller": "decode_choice",
+      "file": "net/netfilter/nf_conntrack_h323_asn1.c",
+      "line": 756,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, 1))",
+          "exit_kind": "return",
+          "source_line": 754,
+          "exit_line": 755
+        }
+      ]
+    }
+  ]
+}

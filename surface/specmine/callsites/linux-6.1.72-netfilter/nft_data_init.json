@@ -1,0 +1,126 @@
+{
+  "callee": "nft_data_init",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 13,
+  "callsites": [
+    {
+      "caller": "nft_setelem_parse_key",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5613,
+      "guards": []
+    },
+    {
+      "caller": "nft_setelem_parse_data",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5633,
+      "guards": []
+    },
+    {
+      "caller": "nft_bitwise_init_bool",
+      "file": "net/netfilter/nft_bitwise.c",
+      "line": 115,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_BITWISE_DATA])",
+          "exit_kind": "return",
+          "source_line": 108,
+          "exit_line": 109
+        }
+      ]
+    },
+    {
+      "caller": "nft_bitwise_init_bool",
+      "file": "net/netfilter/nft_bitwise.c",
+      "line": 119,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_BITWISE_DATA])",
+          "exit_kind": "return",
+          "source_line": 108,
+          "exit_line": 109
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 116,
+          "exit_line": 117
+        }
+      ]
+    },
+    {
+      "caller": "nft_bitwise_init_shift",
+      "file": "net/netfilter/nft_bitwise.c",
+      "line": 148,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[NFTA_BITWISE_DATA])",
+          "exit_kind": "return",
+          "source_line": 145,
+          "exit_line": 146
+        }
+      ]
+    },
+    {
+      "caller": "nft_bitwise_extract_u32_data",
+      "file": "net/netfilter/nft_bitwise.c",
+      "line": 351,
+      "guards": []
+    },
+    {
+      "caller": "nft_cmp_init",
+      "file": "net/netfilter/nft_cmp.c",
+      "line": 82,
+      "guards": []
+    },
+    {
+      "caller": "nft_cmp_fast_init",
+      "file": "net/netfilter/nft_cmp.c",
+      "line": 220,
+      "guards": []
+    },
+    {
+      "caller": "nft_cmp16_fast_init",
+      "file": "net/netfilter/nft_cmp.c",
+      "line": 320,
+      "guards": []
+    },
+    {
+      "caller": "nft_cmp_select_ops",
+      "file": "net/netfilter/nft_cmp.c",
+      "line": 410,
+      "guards": []
+    },
+    {
+      "caller": "nft_immediate_init",
+      "file": "net/netfilter/nft_immediate.c",
+      "line": 61,
+      "guards": []
+    },
+    {
+      "caller": "nft_range_init",
+      "file": "net/netfilter/nft_range.c",
+      "line": 71,
+      "guards": []
+    },
+    {
+      "caller": "nft_range_init",
+      "file": "net/netfilter/nft_range.c",
+      "line": 76,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 73,
+          "exit_line": 74
+        }
+      ]
+    }
+  ]
+}

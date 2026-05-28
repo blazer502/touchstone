@@ -1,0 +1,53 @@
+{
+  "callee": "nf_conntrack_double_lock",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "__nf_ct_delete_from_lists",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 629,
+      "guards": []
+    },
+    {
+      "caller": "nf_conntrack_hash_check_insert",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 905,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "bh_disabled",
+          "source_line": 896
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_ext_valid_pre(ct->ext))",
+          "exit_kind": "return",
+          "source_line": 893,
+          "exit_line": 894
+        }
+      ]
+    },
+    {
+      "caller": "__nf_conntrack_confirm",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1197,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "bh_disabled",
+          "source_line": 1187
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(CTINFO2DIR(ctinfo) != IP_CT_DIR_ORIGINAL)",
+          "exit_kind": "return",
+          "source_line": 1183,
+          "exit_line": 1184
+        }
+      ]
+    }
+  ]
+}

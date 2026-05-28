@@ -1,0 +1,57 @@
+{
+  "callee": "ip_vs_zero_stats",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ctl.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "__ip_vs_update_dest",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 924,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected(dest->svc, 1)",
+          "source_line": 919
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!add && udest->af != dest->af)",
+          "macro": "BUG_ON",
+          "source_line": 880
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!old_svc",
+          "polarity": "in_false_branch",
+          "source_line": 922
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "old_svc != svc",
+          "polarity": "in_true_branch",
+          "source_line": 923
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_zero_service",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1739,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_zero_service",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1741,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_zero_all",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1764,
+      "guards": []
+    }
+  ]
+}

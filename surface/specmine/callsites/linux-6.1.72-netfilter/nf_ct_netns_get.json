@@ -1,0 +1,750 @@
+{
+  "callee": "nf_ct_netns_get",
+  "defined_in": "net/netfilter/nf_conntrack_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 31,
+  "callsites": [
+    {
+      "caller": "nf_conncount_init",
+      "file": "net/netfilter/nf_conncount.c",
+      "line": 544,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "data != NULL",
+          "source_line": 541
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!data)",
+          "exit_kind": "return",
+          "source_line": 541,
+          "exit_line": 542
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_pernet_init",
+      "file": "net/netfilter/nf_conntrack_standalone.c",
+      "line": 1172,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 1160,
+          "exit_line": 1161
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 1164,
+          "exit_line": 1165
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 1168,
+          "exit_line": 1169
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "enable_hooks",
+          "polarity": "in_true_branch",
+          "source_line": 1171
+        }
+      ]
+    },
+    {
+      "caller": "nft_connlimit_do_init",
+      "file": "net/netfilter/nft_connlimit.c",
+      "line": 88,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[NFTA_CONNLIMIT_COUNT])",
+          "exit_kind": "return",
+          "source_line": 67,
+          "exit_line": 68
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~NFT_CONNLIMIT_F_INV)",
+          "exit_kind": "return",
+          "source_line": 74,
+          "exit_line": 75
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CONNLIMIT_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 72
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!priv->list)",
+          "exit_kind": "return",
+          "source_line": 81,
+          "exit_line": 82
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_get_init",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 510,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION] != NULL)",
+          "exit_kind": "return",
+          "source_line": 400,
+          "exit_line": 401
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION] != NULL)",
+          "exit_kind": "return",
+          "source_line": 413,
+          "exit_line": 414
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION] != NULL)",
+          "exit_kind": "return",
+          "source_line": 419,
+          "exit_line": 420
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION] != NULL)",
+          "exit_kind": "return",
+          "source_line": 425,
+          "exit_line": 426
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION] == NULL)",
+          "exit_kind": "return",
+          "source_line": 439,
+          "exit_line": 440
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION] == NULL)",
+          "exit_kind": "return",
+          "source_line": 458,
+          "exit_line": 459
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION] == NULL)",
+          "exit_kind": "return",
+          "source_line": 465,
+          "exit_line": 466
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION] == NULL)",
+          "exit_kind": "return",
+          "source_line": 472,
+          "exit_line": 473
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION] != NULL)",
+          "exit_kind": "break",
+          "source_line": 493
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 507,
+          "exit_line": 508
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_set_init",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 618,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION])",
+          "exit_kind": "return",
+          "source_line": 556,
+          "exit_line": 557
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION])",
+          "exit_kind": "return",
+          "source_line": 563,
+          "exit_line": 564
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 567,
+          "exit_line": 568
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_ct_tmpl_alloc_pcpu())",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION])",
+          "exit_kind": "return",
+          "source_line": 585,
+          "exit_line": 586
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION])",
+          "exit_kind": "return",
+          "source_line": 592,
+          "exit_line": 593
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION])",
+          "exit_kind": "break",
+          "source_line": 601
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 615,
+          "exit_line": 616
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_timeout_obj_init",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 956,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(l4proto->l4proto != l4num)",
+          "exit_kind": "goto",
+          "source_line": 936
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(timeout == NULL)",
+          "exit_kind": "goto",
+          "source_line": 943
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 950,
+          "exit_line": 951
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_helper_obj_init",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 1088,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[NFTA_CT_HELPER_NAME] || !tb[NFTA_CT_HELPER_L4PROTO])",
+          "exit_kind": "return",
+          "source_line": 1039,
+          "exit_line": 1040
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!priv->l4proto)",
+          "exit_kind": "return",
+          "source_line": 1043,
+          "exit_line": 1044
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->family == NFPROTO_IPV6)",
+          "exit_kind": "return",
+          "source_line": 1056,
+          "exit_line": 1057
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->family == NFPROTO_IPV4)",
+          "exit_kind": "return",
+          "source_line": 1063,
+          "exit_line": 1064
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!help4 && !help6)",
+          "exit_kind": "return",
+          "source_line": 1082,
+          "exit_line": 1083
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_expect_obj_init",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 1239,
+      "guards": []
+    },
+    {
+      "caller": "nft_flow_offload_init",
+      "file": "net/netfilter/nft_flow_offload.c",
+      "line": 412,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(flowtable)",
+          "source_line": 404
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[NFTA_FLOW_TABLE_NAME])",
+          "exit_kind": "return",
+          "source_line": 399,
+          "exit_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(flowtable))",
+          "exit_kind": "return",
+          "source_line": 404,
+          "exit_line": 405
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_use_inc(&flowtable->use))",
+          "exit_kind": "return",
+          "source_line": 407,
+          "exit_line": 408
+        }
+      ]
+    },
+    {
+      "caller": "nft_masq_init",
+      "file": "net/netfilter/nft_masq.c",
+      "line": 73,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->flags & ~NF_NAT_RANGE_MASK)",
+          "exit_kind": "return",
+          "source_line": 52,
+          "exit_line": 53
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_MASQ_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 50
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 59,
+          "exit_line": 60
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 66,
+          "exit_line": 67
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_MASQ_REG_PROTO_MAX])",
+          "exit_kind": "return",
+          "source_line": 62
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_MASQ_REG_PROTO_MIN])",
+          "exit_kind": "return",
+          "source_line": 56
+        }
+      ]
+    },
+    {
+      "caller": "nft_nat_init",
+      "file": "net/netfilter/nft_nat.c",
+      "line": 255,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_FAMILY] == NULL)",
+          "exit_kind": "return",
+          "source_line": 189,
+          "exit_line": 190
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->family != NFPROTO_INET && ctx->family != family)",
+          "exit_kind": "return",
+          "source_line": 193,
+          "exit_line": 194
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_REG_ADDR_MIN])",
+          "exit_kind": "return",
+          "source_line": 204,
+          "exit_line": 205
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 213,
+          "exit_line": 214
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 220,
+          "exit_line": 221
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_REG_ADDR_MAX])",
+          "exit_kind": "return",
+          "source_line": 216
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_REG_ADDR_MIN])",
+          "exit_kind": "return",
+          "source_line": 210
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 233,
+          "exit_line": 234
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 240,
+          "exit_line": 241
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_REG_PROTO_MAX])",
+          "exit_kind": "return",
+          "source_line": 236
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_REG_PROTO_MIN])",
+          "exit_kind": "return",
+          "source_line": 230
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->flags & ~NF_NAT_RANGE_MASK)",
+          "exit_kind": "return",
+          "source_line": 251,
+          "exit_line": 252
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 249
+        }
+      ]
+    },
+    {
+      "caller": "nft_redir_init",
+      "file": "net/netfilter/nft_redir.c",
+      "line": 77,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 55,
+          "exit_line": 56
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 62,
+          "exit_line": 63
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_REDIR_REG_PROTO_MAX])",
+          "exit_kind": "return",
+          "source_line": 58
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_REDIR_REG_PROTO_MIN])",
+          "exit_kind": "return",
+          "source_line": 52
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->flags & ~NF_NAT_RANGE_MASK)",
+          "exit_kind": "return",
+          "source_line": 73,
+          "exit_line": 74
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_REDIR_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 71
+        }
+      ]
+    },
+    {
+      "caller": "nft_synproxy_do_init",
+      "file": "net/netfilter/nft_synproxy.c",
+      "line": 171,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~NF_SYNPROXY_OPT_MASK)",
+          "exit_kind": "return",
+          "source_line": 166,
+          "exit_line": 167
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_SYNPROXY_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 164
+        }
+      ]
+    },
+    {
+      "caller": "connsecmark_tg_check",
+      "file": "net/netfilter/xt_CONNSECMARK.c",
+      "line": 105,
+      "guards": []
+    },
+    {
+      "caller": "xt_ct_tg_check",
+      "file": "net/netfilter/xt_CT.c",
+      "line": 174,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->flags & XT_CT_NOTRACK)",
+          "exit_kind": "goto",
+          "source_line": 162
+        }
+      ]
+    },
+    {
+      "caller": "masquerade_tg_check",
+      "file": "net/netfilter/xt_MASQUERADE.c",
+      "line": 31,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(mr->range[0].flags & NF_NAT_RANGE_MAP_IPS)",
+          "exit_kind": "return",
+          "source_line": 23
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(mr->rangesize != 1)",
+          "exit_kind": "return",
+          "source_line": 27
+        }
+      ]
+    },
+    {
+      "caller": "masquerade_tg6_checkentry",
+      "file": "net/netfilter/xt_MASQUERADE.c",
+      "line": 68,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(range->flags & NF_NAT_RANGE_MAP_IPS)",
+          "exit_kind": "return",
+          "source_line": 65,
+          "exit_line": 66
+        }
+      ]
+    },
+    {
+      "caller": "netmap_tg6_checkentry",
+      "file": "net/netfilter/xt_NETMAP.c",
+      "line": 60,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(range->flags & NF_NAT_RANGE_MAP_IPS))",
+          "exit_kind": "return",
+          "source_line": 58,
+          "exit_line": 59
+        }
+      ]
+    },
+    {
+      "caller": "netmap_tg4_check",
+      "file": "net/netfilter/xt_NETMAP.c",
+      "line": 116,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(mr->range[0].flags & NF_NAT_RANGE_MAP_IPS))",
+          "exit_kind": "return",
+          "source_line": 108
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(mr->rangesize != 1)",
+          "exit_kind": "return",
+          "source_line": 112
+        }
+      ]
+    },
+    {
+      "caller": "redirect_tg6_checkentry",
+      "file": "net/netfilter/xt_REDIRECT.c",
+      "line": 41,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(range->flags & NF_NAT_RANGE_MAP_IPS)",
+          "exit_kind": "return",
+          "source_line": 38,
+          "exit_line": 39
+        }
+      ]
+    },
+    {
+      "caller": "redirect_tg4_check",
+      "file": "net/netfilter/xt_REDIRECT.c",
+      "line": 61,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(mr->range[0].flags & NF_NAT_RANGE_MAP_IPS)",
+          "exit_kind": "return",
+          "source_line": 53
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(mr->rangesize != 1)",
+          "exit_kind": "return",
+          "source_line": 57
+        }
+      ]
+    },
+    {
+      "caller": "xt_cluster_mt_checkentry",
+      "file": "net/netfilter/xt_cluster.c",
+      "line": 137,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->total_nodes > XT_CLUSTER_NODES_MAX)",
+          "exit_kind": "return",
+          "source_line": 127
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->node_mask >= (1ULL << info->total_nodes))",
+          "exit_kind": "return",
+          "source_line": 132
+        }
+      ]
+    },
+    {
+      "caller": "connbytes_mt_check",
+      "file": "net/netfilter/xt_connbytes.c",
+      "line": 113,
+      "guards": []
+    },
+    {
+      "caller": "connlabel_mt_check",
+      "file": "net/netfilter/xt_connlabel.c",
+      "line": 62,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->options & ~options)",
+          "exit_kind": "return",
+          "source_line": 56
+        }
+      ]
+    },
+    {
+      "caller": "connmark_tg_check",
+      "file": "net/netfilter/xt_connmark.c",
+      "line": 108,
+      "guards": []
+    },
+    {
+      "caller": "connmark_mt_check",
+      "file": "net/netfilter/xt_connmark.c",
+      "line": 138,
+      "guards": []
+    },
+    {
+      "caller": "conntrack_mt_check",
+      "file": "net/netfilter/xt_conntrack.c",
+      "line": 270,
+      "guards": []
+    },
+    {
+      "caller": "helper_mt_check",
+      "file": "net/netfilter/xt_helper.c",
+      "line": 59,
+      "guards": []
+    },
+    {
+      "caller": "xt_nat_checkentry_v0",
+      "file": "net/netfilter/xt_nat.c",
+      "line": 24,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(mr->rangesize != 1)",
+          "exit_kind": "return",
+          "source_line": 20
+        }
+      ]
+    },
+    {
+      "caller": "xt_nat_checkentry",
+      "file": "net/netfilter/xt_nat.c",
+      "line": 29,
+      "guards": []
+    },
+    {
+      "caller": "state_mt_check",
+      "file": "net/netfilter/xt_state.c",
+      "line": 42,
+      "guards": []
+    }
+  ]
+}

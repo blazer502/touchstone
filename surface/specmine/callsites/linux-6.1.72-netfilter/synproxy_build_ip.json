@@ -1,0 +1,85 @@
+{
+  "callee": "synproxy_build_ip",
+  "defined_in": "net/netfilter/nf_synproxy_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "synproxy_send_client_synack",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 466,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 462
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 462,
+          "exit_line": 463
+        }
+      ]
+    },
+    {
+      "caller": "synproxy_send_server_syn",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 509,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 505
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 505,
+          "exit_line": 506
+        }
+      ]
+    },
+    {
+      "caller": "synproxy_send_server_ack",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 554,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 550
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 550,
+          "exit_line": 551
+        }
+      ]
+    },
+    {
+      "caller": "synproxy_send_client_ack",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 592,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 588
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 588,
+          "exit_line": 589
+        }
+      ]
+    }
+  ]
+}

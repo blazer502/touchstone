@@ -1,0 +1,33 @@
+{
+  "callee": "recent_pernet",
+  "defined_in": "net/netfilter/xt_recent.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "recent_mt",
+      "file": "net/netfilter/xt_recent.c",
+      "line": 243,
+      "guards": []
+    },
+    {
+      "caller": "recent_mt_check",
+      "file": "net/netfilter/xt_recent.c",
+      "line": 335,
+      "guards": []
+    },
+    {
+      "caller": "recent_mt_destroy",
+      "file": "net/netfilter/xt_recent.c",
+      "line": 453,
+      "guards": []
+    },
+    {
+      "caller": "recent_net_init",
+      "file": "net/netfilter/xt_recent.c",
+      "line": 676,
+      "guards": []
+    }
+  ]
+}

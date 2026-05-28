@@ -1,0 +1,46 @@
+{
+  "callee": "match_set",
+  "defined_in": "net/netfilter/xt_set.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "set_match_v0",
+      "file": "net/netfilter/xt_set.c",
+      "line": 62,
+      "guards": []
+    },
+    {
+      "caller": "set_match_v1",
+      "file": "net/netfilter/xt_set.c",
+      "line": 129,
+      "guards": []
+    },
+    {
+      "caller": "set_match_v3",
+      "file": "net/netfilter/xt_set.c",
+      "line": 179,
+      "guards": []
+    },
+    {
+      "caller": "set_match_v4",
+      "file": "net/netfilter/xt_set.c",
+      "line": 202,
+      "guards": []
+    },
+    {
+      "caller": "set_target_v3",
+      "file": "net/netfilter/xt_set.c",
+      "line": 416,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->map_set.index != IPSET_INVALID_ID",
+          "polarity": "in_true_branch",
+          "source_line": 412
+        }
+      ]
+    }
+  ]
+}

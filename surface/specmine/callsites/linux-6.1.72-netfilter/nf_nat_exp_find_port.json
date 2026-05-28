@@ -1,0 +1,33 @@
+{
+  "callee": "nf_nat_exp_find_port",
+  "defined_in": "net/netfilter/nf_nat_helper.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_nat_amanda.c",
+      "line": 47,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_ftp",
+      "file": "net/netfilter/nf_nat_ftp.c",
+      "line": 89,
+      "guards": []
+    },
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_nat_irc.c",
+      "line": 51,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_sip_expect",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 413,
+      "guards": []
+    }
+  ]
+}

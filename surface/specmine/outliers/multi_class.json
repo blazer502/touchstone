@@ -1,0 +1,63 @@
+{
+  "generated_at": 1779931746,
+  "min_support": 2,
+  "outliers": [
+    {
+      "callee": "lookup_thing",
+      "caller": "caller_buggy_lock",
+      "callsite_count": 11,
+      "contract_kind_class": "lock",
+      "contract_kind_label": "lock_held",
+      "file": "fixture.c",
+      "guards_present": [],
+      "line": 126,
+      "local_establishment": 0.0,
+      "missing_contract": "rcu_read_lock_held",
+      "support_count": 10,
+      "support_pct": 0.9091,
+      "suspicion": 0.9091
+    },
+    {
+      "callee": "process_item",
+      "caller": "caller_buggy_null",
+      "callsite_count": 7,
+      "contract_kind_class": "early",
+      "contract_kind_label": "early_return",
+      "file": "fixture.c",
+      "guards_present": [],
+      "line": 182,
+      "local_establishment": 0.0,
+      "missing_contract": "!(IS_ERR(item))",
+      "support_count": 6,
+      "support_pct": 0.8571,
+      "suspicion": 0.8571
+    },
+    {
+      "callee": "process_item",
+      "caller": "caller_buggy_null",
+      "callsite_count": 7,
+      "contract_kind_class": "null",
+      "contract_kind_label": "null_check",
+      "file": "fixture.c",
+      "guards_present": [],
+      "line": 182,
+      "local_establishment": 0.0,
+      "missing_contract": "!IS_ERR_OR_NULL(item)",
+      "support_count": 6,
+      "support_pct": 0.8571,
+      "suspicion": 0.8571
+    }
+  ],
+  "stats": {
+    "by_kind_class": {
+      "early": 1,
+      "lock": 1,
+      "null": 1
+    },
+    "outliers_with_local_establishment": 0,
+    "total_outliers": 3,
+    "wall_seconds": 0.0
+  },
+  "target": "multi_class",
+  "tau": 0.83
+}

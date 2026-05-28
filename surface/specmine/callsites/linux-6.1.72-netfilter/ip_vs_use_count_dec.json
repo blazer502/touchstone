@@ -1,0 +1,586 @@
+{
+  "callee": "ip_vs_use_count_dec",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ctl.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 13,
+  "callsites": [
+    {
+      "caller": "register_ip_vs_app",
+      "file": "net/netfilter/ipvs/ip_vs_app.c",
+      "line": 206,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 194
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ip_vs_use_count_inc())",
+          "exit_kind": "goto",
+          "source_line": 197
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!strcmp(app->name, a->name)",
+          "polarity": "in_true_branch",
+          "source_line": 203
+        }
+      ]
+    },
+    {
+      "caller": "register_ip_vs_app",
+      "file": "net/netfilter/ipvs/ip_vs_app.c",
+      "line": 214,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 194
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ip_vs_use_count_inc())",
+          "exit_kind": "goto",
+          "source_line": 197
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!strcmp(app->name, a->name))",
+          "exit_kind": "goto",
+          "source_line": 203
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!a",
+          "polarity": "in_true_branch",
+          "source_line": 211
+        }
+      ]
+    },
+    {
+      "caller": "unregister_ip_vs_app",
+      "file": "net/netfilter/ipvs/ip_vs_app.c",
+      "line": 249,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 236
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(app && strcmp(app->name, a->name))",
+          "exit_kind": "continue",
+          "source_line": 239,
+          "exit_line": 240
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_add_service",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1425,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "sched != NULL",
+          "source_line": 1300
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ip_vs_use_count_inc())",
+          "exit_kind": "return",
+          "source_line": 1294,
+          "exit_line": 1295
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!sched)",
+          "exit_kind": "goto",
+          "source_line": 1300
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(pe == NULL)",
+          "exit_kind": "goto",
+          "source_line": 1310
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(plen < 1 || plen > 128)",
+          "exit_kind": "goto",
+          "source_line": 1322
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 1328,
+          "exit_line": 1329
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(u->af == AF_INET6)",
+          "exit_kind": "goto",
+          "source_line": 1319
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 1336,
+          "exit_line": 1337
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(svc == NULL)",
+          "exit_kind": "goto",
+          "source_line": 1342
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!svc->stats.cpustats)",
+          "exit_kind": "goto",
+          "source_line": 1348
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 1380,
+          "exit_line": 1381
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(sched)",
+          "exit_kind": "goto",
+          "source_line": 1378
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_del_service",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1577,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected(svc->scheduler, 1)",
+          "source_line": 1545
+        },
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected(svc->pe, 1)",
+          "source_line": 1550
+        }
+      ]
+    },
+    {
+      "caller": "register_ip_vs_pe",
+      "file": "net/netfilter/ipvs/ip_vs_pe.c",
+      "line": 81,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!ip_vs_use_count_inc())",
+          "exit_kind": "return",
+          "source_line": 71,
+          "exit_line": 72
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "strcmp(tmp->name, pe->name) == 0",
+          "polarity": "in_true_branch",
+          "source_line": 79
+        }
+      ]
+    },
+    {
+      "caller": "unregister_ip_vs_pe",
+      "file": "net/netfilter/ipvs/ip_vs_pe.c",
+      "line": 106,
+      "guards": []
+    },
+    {
+      "caller": "register_ip_vs_scheduler",
+      "file": "net/netfilter/ipvs/ip_vs_sched.c",
+      "line": 189,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "scheduler != NULL",
+          "source_line": 171
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!scheduler)",
+          "exit_kind": "return",
+          "source_line": 171
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!scheduler->name)",
+          "exit_kind": "return",
+          "source_line": 176
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ip_vs_use_count_inc())",
+          "exit_kind": "return",
+          "source_line": 182,
+          "exit_line": 183
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!list_empty(&scheduler->n_list)",
+          "polarity": "in_true_branch",
+          "source_line": 187
+        }
+      ]
+    },
+    {
+      "caller": "register_ip_vs_scheduler",
+      "file": "net/netfilter/ipvs/ip_vs_sched.c",
+      "line": 202,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "scheduler != NULL",
+          "source_line": 171
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!scheduler)",
+          "exit_kind": "return",
+          "source_line": 171
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!scheduler->name)",
+          "exit_kind": "return",
+          "source_line": 176
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ip_vs_use_count_inc())",
+          "exit_kind": "return",
+          "source_line": 182,
+          "exit_line": 183
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!list_empty(&scheduler->n_list))",
+          "exit_kind": "return",
+          "source_line": 187
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "strcmp(scheduler->name, sched->name) == 0",
+          "polarity": "in_true_branch",
+          "source_line": 200
+        }
+      ]
+    },
+    {
+      "caller": "unregister_ip_vs_scheduler",
+      "file": "net/netfilter/ipvs/ip_vs_sched.c",
+      "line": 245,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "scheduler != NULL",
+          "source_line": 225
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!scheduler)",
+          "exit_kind": "return",
+          "source_line": 225
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(list_empty(&scheduler->n_list))",
+          "exit_kind": "return",
+          "source_line": 231
+        }
+      ]
+    },
+    {
+      "caller": "start_sync_thread",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 1931,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dev != NULL",
+          "source_line": 1798
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ti != NULL",
+          "source_line": 1858
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(task)",
+          "source_line": 1880
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ip_vs_use_count_inc())",
+          "exit_kind": "return",
+          "source_line": 1767,
+          "exit_line": 1768
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(mutex_trylock(&ipvs->sync_mutex))",
+          "exit_kind": "break",
+          "source_line": 1773,
+          "exit_line": 1774
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(rtnl_trylock())",
+          "exit_kind": "break",
+          "source_line": 1777,
+          "exit_line": 1778
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dev)",
+          "exit_kind": "goto",
+          "source_line": 1798
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ipvs->ms)",
+          "exit_kind": "goto",
+          "source_line": 1819,
+          "exit_line": 1820
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(state == IP_VS_STATE_MASTER)",
+          "exit_kind": "goto",
+          "source_line": 1817
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ipvs->backup_tinfo)",
+          "exit_kind": "goto",
+          "source_line": 1827,
+          "exit_line": 1828
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(state == IP_VS_STATE_BACKUP)",
+          "exit_kind": "goto",
+          "source_line": 1825
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ipvs->ms)",
+          "exit_kind": "goto",
+          "source_line": 1843,
+          "exit_line": 1844
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(state == IP_VS_STATE_MASTER)",
+          "exit_kind": "goto",
+          "source_line": 1838
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ti)",
+          "exit_kind": "goto",
+          "source_line": 1858,
+          "exit_line": 1859
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tinfo->buf)",
+          "exit_kind": "goto",
+          "source_line": 1868,
+          "exit_line": 1869
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(state == IP_VS_STATE_BACKUP)",
+          "exit_kind": "goto",
+          "source_line": 1864
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(result < 0)",
+          "exit_kind": "goto",
+          "source_line": 1876,
+          "exit_line": 1877
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(task))",
+          "exit_kind": "goto",
+          "source_line": 1880
+        }
+      ]
+    },
+    {
+      "caller": "start_sync_thread",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 1939,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dev != NULL",
+          "source_line": 1798
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ti != NULL",
+          "source_line": 1858
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(task)",
+          "source_line": 1880
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ip_vs_use_count_inc())",
+          "exit_kind": "return",
+          "source_line": 1767,
+          "exit_line": 1768
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(mutex_trylock(&ipvs->sync_mutex))",
+          "exit_kind": "break",
+          "source_line": 1773,
+          "exit_line": 1774
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(rtnl_trylock())",
+          "exit_kind": "break",
+          "source_line": 1777,
+          "exit_line": 1778
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dev)",
+          "exit_kind": "goto",
+          "source_line": 1798
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ipvs->ms)",
+          "exit_kind": "goto",
+          "source_line": 1819,
+          "exit_line": 1820
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(state == IP_VS_STATE_MASTER)",
+          "exit_kind": "goto",
+          "source_line": 1817
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ipvs->backup_tinfo)",
+          "exit_kind": "goto",
+          "source_line": 1827,
+          "exit_line": 1828
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(state == IP_VS_STATE_BACKUP)",
+          "exit_kind": "goto",
+          "source_line": 1825
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ipvs->ms)",
+          "exit_kind": "goto",
+          "source_line": 1843,
+          "exit_line": 1844
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(state == IP_VS_STATE_MASTER)",
+          "exit_kind": "goto",
+          "source_line": 1838
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ti)",
+          "exit_kind": "goto",
+          "source_line": 1858,
+          "exit_line": 1859
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tinfo->buf)",
+          "exit_kind": "goto",
+          "source_line": 1868,
+          "exit_line": 1869
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(state == IP_VS_STATE_BACKUP)",
+          "exit_kind": "goto",
+          "source_line": 1864
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(result < 0)",
+          "exit_kind": "goto",
+          "source_line": 1876,
+          "exit_line": 1877
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(task))",
+          "exit_kind": "goto",
+          "source_line": 1880
+        }
+      ]
+    },
+    {
+      "caller": "stop_sync_thread",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 2021,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!ipvs->ms)",
+          "exit_kind": "goto",
+          "source_line": 1955,
+          "exit_line": 1956
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(state == IP_VS_STATE_MASTER)",
+          "exit_kind": "goto",
+          "source_line": 1953
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ipvs->backup_tinfo)",
+          "exit_kind": "goto",
+          "source_line": 1989,
+          "exit_line": 1990
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(state == IP_VS_STATE_BACKUP)",
+          "exit_kind": "goto",
+          "source_line": 1987
+        }
+      ]
+    }
+  ]
+}

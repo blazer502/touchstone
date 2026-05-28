@@ -1,0 +1,99 @@
+{
+  "callee": "maskl",
+  "defined_in": "net/netfilter/xt_hashlimit.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "hashlimit_ipv6_mask",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 616,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "p",
+          "polarity": "in_true_branch",
+          "source_line": 614
+        }
+      ]
+    },
+    {
+      "caller": "hashlimit_ipv6_mask",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 620,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "p",
+          "polarity": "in_true_branch",
+          "source_line": 614
+        }
+      ]
+    },
+    {
+      "caller": "hashlimit_ipv6_mask",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 624,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "p",
+          "polarity": "in_true_branch",
+          "source_line": 614
+        }
+      ]
+    },
+    {
+      "caller": "hashlimit_ipv6_mask",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 628,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "p",
+          "polarity": "in_true_branch",
+          "source_line": 614
+        }
+      ]
+    },
+    {
+      "caller": "hashlimit_init_dst",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 650,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "hinfo->family",
+          "polarity": "in_true_branch",
+          "source_line": 647
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "hinfo->cfg.mode & XT_HASHLIMIT_HASH_DIP",
+          "polarity": "in_true_branch",
+          "source_line": 649
+        }
+      ]
+    },
+    {
+      "caller": "hashlimit_init_dst",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 653,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "hinfo->family",
+          "polarity": "in_true_branch",
+          "source_line": 647
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "hinfo->cfg.mode & XT_HASHLIMIT_HASH_SIP",
+          "polarity": "in_true_branch",
+          "source_line": 652
+        }
+      ]
+    }
+  ]
+}

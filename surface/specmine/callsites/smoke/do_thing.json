@@ -1,0 +1,28 @@
+{
+  "callee": "do_thing",
+  "defined_in": "sample.c",
+  "target": "smoke",
+  "scope": ".",
+  "callsite_count": 1,
+  "callsites": [
+    {
+      "caller": "caller_with_capable",
+      "file": "sample.c",
+      "line": 39,
+      "guards": [
+        {
+          "kind": "capability_check",
+          "predicate": "capable(CAP_NET_ADMIN)",
+          "source_line": 33
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!capable(CAP_NET_ADMIN))",
+          "exit_kind": "return",
+          "source_line": 33,
+          "exit_line": 34
+        }
+      ]
+    }
+  ]
+}

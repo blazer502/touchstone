@@ -1,0 +1,46 @@
+{
+  "callee": "ct_sip_get_sdp_header",
+  "defined_in": "net/netfilter/nf_conntrack_sip.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "ct_sip_parse_sdp_addr",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 790,
+      "guards": []
+    },
+    {
+      "caller": "process_sdp",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1047,
+      "guards": []
+    },
+    {
+      "caller": "process_sdp",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1064,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < ARRAY_SIZE(sdp_media_types);",
+          "polarity": "in_true_branch",
+          "source_line": 1063
+        }
+      ]
+    },
+    {
+      "caller": "mangle_content_len",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 446,
+      "guards": []
+    },
+    {
+      "caller": "mangle_sdp_packet",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 474,
+      "guards": []
+    }
+  ]
+}

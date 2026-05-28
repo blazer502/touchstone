@@ -1,0 +1,385 @@
+{
+  "callee": "nft_table_lookup",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 21,
+  "callsites": [
+    {
+      "caller": "nf_tables_gettable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1114,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 1105
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_newtable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1345,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&nft_net->commit_mutex)",
+          "source_line": 1343
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_supported_family(family))",
+          "exit_kind": "return",
+          "source_line": 1340,
+          "exit_line": 1341
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_deltable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1545,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_TABLE_HANDLE]",
+          "polarity": "in_false_branch",
+          "source_line": 1543
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getchain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1921,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 1912
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_newchain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2677,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&nft_net->commit_mutex)",
+          "source_line": 2675
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_delchain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2776,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_getrule",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3432,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 3420
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_newrule",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3624,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&nft_net->commit_mutex)",
+          "source_line": 3622
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_delrule",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3868,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_getset",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4445,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_SET_TABLE]",
+          "polarity": "in_true_branch",
+          "source_line": 4444
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_newset",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4773,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!((desc.ktype & NFT_DATA_RESERVED_MASK) == NFT_DATA_RESERVED_MASK)",
+          "exit_kind": "return",
+          "source_line": 4680,
+          "exit_line": 4681
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_KEY_TYPE] != NULL)",
+          "exit_kind": "return",
+          "source_line": 4678
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(desc.klen == 0 || desc.klen > NFT_DATA_VALUE_MAXLEN)",
+          "exit_kind": "return",
+          "source_line": 4685,
+          "exit_line": 4686
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_FLAGS] != NULL)",
+          "exit_kind": "return",
+          "source_line": 4689
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(flags & NFT_SET_MAP))",
+          "exit_kind": "return",
+          "source_line": 4707,
+          "exit_line": 4708
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_DATA_LEN] == NULL)",
+          "exit_kind": "return",
+          "source_line": 4716,
+          "exit_line": 4717
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(desc.dlen == 0 || desc.dlen > NFT_DATA_VALUE_MAXLEN)",
+          "exit_kind": "return",
+          "source_line": 4719,
+          "exit_line": 4720
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(desc.dtype != NFT_DATA_VERDICT)",
+          "exit_kind": "return",
+          "source_line": 4715
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_DATA_TYPE] != NULL)",
+          "exit_kind": "return",
+          "source_line": 4706
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & NFT_SET_MAP)",
+          "exit_kind": "return",
+          "source_line": 4723,
+          "exit_line": 4724
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(flags & NFT_SET_OBJECT))",
+          "exit_kind": "return",
+          "source_line": 4727,
+          "exit_line": 4728
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_OBJ_TYPE] != NULL)",
+          "exit_kind": "return",
+          "source_line": 4726
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & NFT_SET_OBJECT)",
+          "exit_kind": "return",
+          "source_line": 4734,
+          "exit_line": 4735
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(flags & NFT_SET_TIMEOUT))",
+          "exit_kind": "return",
+          "source_line": 4741,
+          "exit_line": 4742
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 4745,
+          "exit_line": 4746
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_TIMEOUT] != NULL)",
+          "exit_kind": "return",
+          "source_line": 4740
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(flags & NFT_SET_TIMEOUT))",
+          "exit_kind": "return",
+          "source_line": 4750,
+          "exit_line": 4751
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_GC_INTERVAL] != NULL)",
+          "exit_kind": "return",
+          "source_line": 4749
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 4761,
+          "exit_line": 4762
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(desc.field_count > 1 && !(flags & NFT_SET_CONCAT))",
+          "exit_kind": "return",
+          "source_line": 4764,
+          "exit_line": 4765
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_DESC] != NULL)",
+          "exit_kind": "return",
+          "source_line": 4759
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & NFT_SET_CONCAT)",
+          "exit_kind": "return",
+          "source_line": 4766,
+          "exit_line": 4767
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & NFT_SET_CONCAT)",
+          "exit_kind": "return",
+          "source_line": 4766
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_delset",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4972,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nfmsg->nfgen_family == NFPROTO_UNSPEC)",
+          "exit_kind": "return",
+          "source_line": 4969,
+          "exit_line": 4970
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getsetelem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5747,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_newsetelem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6635,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_LIST_ELEMENTS] == NULL)",
+          "exit_kind": "return",
+          "source_line": 6632,
+          "exit_line": 6633
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_delsetelem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6912,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_newobj",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7198,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_getobj",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7481,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 7465
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_delobj",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7557,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_newflowtable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8020,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_delflowtable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8208,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_getflowtable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8411,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 8396
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nla[NFTA_FLOWTABLE_NAME])",
+          "exit_kind": "return",
+          "source_line": 8408,
+          "exit_line": 8409
+        }
+      ]
+    }
+  ]
+}

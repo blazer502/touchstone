@@ -1,0 +1,86 @@
+{
+  "callee": "stop_sync_thread",
+  "defined_in": "net/netfilter/ipvs/ip_vs_sync.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "do_ip_vs_set_ctl",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 2502,
+      "guards": [
+        {
+          "kind": "capability_check",
+          "predicate": "ns_capable(sock_net(sk)->user_ns, CAP_NET_ADMIN)",
+          "source_line": 2472
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ns_capable(sock_net(sk)->user_ns, CAP_NET_ADMIN))",
+          "exit_kind": "return",
+          "source_line": 2472,
+          "exit_line": 2473
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd < IP_VS_BASE_CTL || cmd > IP_VS_SO_SET_MAX)",
+          "exit_kind": "return",
+          "source_line": 2475,
+          "exit_line": 2476
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(len != set_arglen[CMDID(cmd)])",
+          "exit_kind": "return",
+          "source_line": 2477
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_from_sockptr(arg, ptr, len) != 0)",
+          "exit_kind": "return",
+          "source_line": 2483,
+          "exit_line": 2484
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd == IP_VS_SO_SET_STARTDAEMON)",
+          "exit_kind": "return",
+          "source_line": 2491
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cmd == IP_VS_SO_SET_STARTDAEMON",
+          "polarity": "in_false_branch",
+          "source_line": 2501
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_genl_del_daemon",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 3624,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!attrs[IPVS_DAEMON_ATTR_STATE])",
+          "exit_kind": "return",
+          "source_line": 3621,
+          "exit_line": 3622
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_sync_net_cleanup",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 2044,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_sync_net_cleanup",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 2048,
+      "guards": []
+    }
+  ]
+}

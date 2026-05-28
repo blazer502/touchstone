@@ -1,0 +1,75 @@
+{
+  "callee": "nf_ct_ext_add",
+  "defined_in": "net/netfilter/nf_conntrack_extend.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_ct_ecache_ext_add",
+      "file": "net/netfilter/nf_conntrack_ecache.c",
+      "line": 327,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(1)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 323
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctmask || expmask)",
+          "exit_kind": "break",
+          "source_line": 308,
+          "exit_line": 309
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!READ_ONCE(nf_ctnetlink_has_listener))",
+          "exit_kind": "return",
+          "source_line": 312,
+          "exit_line": 313
+        }
+      ]
+    },
+    {
+      "caller": "nf_ct_helper_ext_add",
+      "file": "net/netfilter/nf_conntrack_helper.c",
+      "line": 180,
+      "guards": []
+    },
+    {
+      "caller": "conntrack_pptp_help",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 513,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nf_ct_is_confirmed(ct) && (ct->status & IPS_NAT_MASK)",
+          "polarity": "in_true_branch",
+          "source_line": 510
+        }
+      ]
+    },
+    {
+      "caller": "nf_ct_nat_ext_add",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 573,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nat)",
+          "exit_kind": "return",
+          "source_line": 569,
+          "exit_line": 570
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nf_ct_is_confirmed(ct)",
+          "polarity": "in_true_branch",
+          "source_line": 572
+        }
+      ]
+    }
+  ]
+}

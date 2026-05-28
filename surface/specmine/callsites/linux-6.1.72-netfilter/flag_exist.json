@@ -1,0 +1,47 @@
+{
+  "callee": "flag_exist",
+  "defined_in": "net/netfilter/ipset/ip_set_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_set_create",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1054,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_destroy",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1232,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(protocol_min_failed(attr)))",
+          "exit_kind": "return",
+          "source_line": 1195,
+          "exit_line": 1196
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(s && (s->ref || s->ref_netlink))",
+          "exit_kind": "goto",
+          "source_line": 1215
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!attr[IPSET_ATTR_SETNAME]",
+          "polarity": "in_false_branch",
+          "source_line": 1231
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_ad",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1779,
+      "guards": []
+    }
+  ]
+}

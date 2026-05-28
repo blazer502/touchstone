@@ -1,0 +1,354 @@
+{
+  "callee": "nft_expr_dump",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "nf_tables_fill_rule_info",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3198,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nlh != NULL",
+          "source_line": 3174
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh)",
+          "exit_kind": "goto",
+          "source_line": 3174,
+          "exit_line": 3175
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_RULE_TABLE, table->name))",
+          "exit_kind": "goto",
+          "source_line": 3177,
+          "exit_line": 3178
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_RULE_CHAIN, chain->name))",
+          "exit_kind": "goto",
+          "source_line": 3179,
+          "exit_line": 3180
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event != NFT_MSG_DELRULE && handle)",
+          "exit_kind": "goto",
+          "source_line": 3185
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(list == NULL)",
+          "exit_kind": "goto",
+          "source_line": 3195,
+          "exit_line": 3196
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_fill_set",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4303,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nlh != NULL",
+          "source_line": 4232
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nest != NULL",
+          "source_line": 4279
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh)",
+          "exit_kind": "goto",
+          "source_line": 4232,
+          "exit_line": 4233
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_SET_TABLE, ctx->table->name))",
+          "exit_kind": "goto",
+          "source_line": 4235,
+          "exit_line": 4236
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_SET_NAME, set->name))",
+          "exit_kind": "goto",
+          "source_line": 4237,
+          "exit_line": 4238
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_SET_FLAGS, htonl(set->flags)))",
+          "exit_kind": "goto",
+          "source_line": 4243,
+          "exit_line": 4244
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_SET_KEY_TYPE, htonl(set->ktype)))",
+          "exit_kind": "goto",
+          "source_line": 4246,
+          "exit_line": 4247
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_SET_KEY_LEN, htonl(set->klen)))",
+          "exit_kind": "goto",
+          "source_line": 4248,
+          "exit_line": 4249
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_SET_DATA_TYPE, htonl(set->dtype)))",
+          "exit_kind": "goto",
+          "source_line": 4251,
+          "exit_line": 4252
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_SET_DATA_LEN, htonl(set->dlen)))",
+          "exit_kind": "goto",
+          "source_line": 4253,
+          "exit_line": 4254
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->flags & NFT_SET_MAP)",
+          "exit_kind": "goto",
+          "source_line": 4250
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_SET_POLICY, htonl(set->policy)))",
+          "exit_kind": "goto",
+          "source_line": 4270,
+          "exit_line": 4271
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->policy != NFT_SET_POL_PERFORMANCE)",
+          "exit_kind": "goto",
+          "source_line": 4269
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nest)",
+          "exit_kind": "goto",
+          "source_line": 4279,
+          "exit_line": 4280
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_tables_fill_expr_info(skb, set->exprs[0]) < 0)",
+          "exit_kind": "goto",
+          "source_line": 4293,
+          "exit_line": 4294
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->num_exprs == 1)",
+          "exit_kind": "goto",
+          "source_line": 4291
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nest == NULL)",
+          "exit_kind": "goto",
+          "source_line": 4299,
+          "exit_line": 4300
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "set->num_exprs == 1",
+          "polarity": "in_false_branch",
+          "source_line": 4297
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "set->num_exprs > 1",
+          "polarity": "in_true_branch",
+          "source_line": 4297
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < set->num_exprs; i++",
+          "polarity": "in_true_branch",
+          "source_line": 4302
+        }
+      ]
+    },
+    {
+      "caller": "nft_set_elem_expr_dump",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5293,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "num_exprs == 1",
+          "polarity": "in_true_branch",
+          "source_line": 5291
+        }
+      ]
+    },
+    {
+      "caller": "nft_set_elem_expr_dump",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5304,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_expr_dump(skb, NFTA_SET_ELEM_EXPR, expr) < 0)",
+          "exit_kind": "return",
+          "source_line": 5293,
+          "exit_line": 5294
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(num_exprs == 1)",
+          "exit_kind": "return",
+          "source_line": 5291
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nest == NULL)",
+          "exit_kind": "goto",
+          "source_line": 5299,
+          "exit_line": 5300
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "num_exprs == 1",
+          "polarity": "in_false_branch",
+          "source_line": 5297
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "num_exprs > 1",
+          "polarity": "in_true_branch",
+          "source_line": 5297
+        }
+      ]
+    },
+    {
+      "caller": "nft_dynset_dump",
+      "file": "net/netfilter/nft_dynset.c",
+      "line": 389,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_dump_register(skb, NFTA_DYNSET_SREG_KEY, priv->sreg_key))",
+          "exit_kind": "goto",
+          "source_line": 374,
+          "exit_line": 375
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_DYNSET_OP, htonl(priv->op)))",
+          "exit_kind": "goto",
+          "source_line": 379,
+          "exit_line": 380
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_DYNSET_SET_NAME, priv->set->name))",
+          "exit_kind": "goto",
+          "source_line": 381,
+          "exit_line": 382
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "priv->set->num_exprs == 0",
+          "polarity": "in_true_branch",
+          "source_line": 387
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "priv->num_exprs == 1",
+          "polarity": "in_true_branch",
+          "source_line": 388
+        }
+      ]
+    },
+    {
+      "caller": "nft_dynset_dump",
+      "file": "net/netfilter/nft_dynset.c",
+      "line": 400,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nest != NULL",
+          "source_line": 396
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_dump_register(skb, NFTA_DYNSET_SREG_KEY, priv->sreg_key))",
+          "exit_kind": "goto",
+          "source_line": 374,
+          "exit_line": 375
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_DYNSET_OP, htonl(priv->op)))",
+          "exit_kind": "goto",
+          "source_line": 379,
+          "exit_line": 380
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_DYNSET_SET_NAME, priv->set->name))",
+          "exit_kind": "goto",
+          "source_line": 381,
+          "exit_line": 382
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->num_exprs == 1)",
+          "exit_kind": "goto",
+          "source_line": 388
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nest)",
+          "exit_kind": "goto",
+          "source_line": 396,
+          "exit_line": 397
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "priv->set->num_exprs == 0",
+          "polarity": "in_true_branch",
+          "source_line": 387
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "priv->num_exprs == 1",
+          "polarity": "in_false_branch",
+          "source_line": 392
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "priv->num_exprs > 1",
+          "polarity": "in_true_branch",
+          "source_line": 392
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < priv->num_exprs; i++",
+          "polarity": "in_true_branch",
+          "source_line": 399
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "callee": "pipapo_clone",
+  "defined_in": "net/netfilter/nft_set_pipapo.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_pipapo_commit",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 1687,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!priv->dirty)",
+          "exit_kind": "return",
+          "source_line": 1684,
+          "exit_line": 1685
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_abort",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 1722,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected(priv->match, nft_pipapo_transaction_mutex_held(set))",
+          "source_line": 1720
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!priv->dirty)",
+          "exit_kind": "return",
+          "source_line": 1717,
+          "exit_line": 1718
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_init",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 2170,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "m != NULL",
+          "source_line": 2129
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(field_count > NFT_PIPAPO_MAX_FIELDS)",
+          "exit_kind": "return",
+          "source_line": 2124,
+          "exit_line": 2125
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!m)",
+          "exit_kind": "return",
+          "source_line": 2129,
+          "exit_line": 2130
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!m->scratch)",
+          "exit_kind": "goto",
+          "source_line": 2136
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!m->scratch_aligned)",
+          "exit_kind": "goto",
+          "source_line": 2145
+        }
+      ]
+    }
+  ]
+}

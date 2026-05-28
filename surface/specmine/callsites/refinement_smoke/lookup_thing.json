@@ -1,0 +1,142 @@
+{
+  "callee": "lookup_thing",
+  "defined_in": "fixture.c",
+  "target": "refinement_smoke",
+  "scope": ".",
+  "callsite_count": 11,
+  "callsites": [
+    {
+      "caller": "caller_a",
+      "file": "fixture.c",
+      "line": 27,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 26
+        }
+      ]
+    },
+    {
+      "caller": "caller_b",
+      "file": "fixture.c",
+      "line": 36,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 35
+        }
+      ]
+    },
+    {
+      "caller": "caller_c",
+      "file": "fixture.c",
+      "line": 45,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 44
+        }
+      ]
+    },
+    {
+      "caller": "caller_d",
+      "file": "fixture.c",
+      "line": 54,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 53
+        }
+      ]
+    },
+    {
+      "caller": "caller_e",
+      "file": "fixture.c",
+      "line": 63,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 62
+        }
+      ]
+    },
+    {
+      "caller": "caller_f",
+      "file": "fixture.c",
+      "line": 72,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 71
+        }
+      ]
+    },
+    {
+      "caller": "caller_g",
+      "file": "fixture.c",
+      "line": 81,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 80
+        }
+      ]
+    },
+    {
+      "caller": "caller_h",
+      "file": "fixture.c",
+      "line": 90,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 89
+        }
+      ]
+    },
+    {
+      "caller": "caller_i",
+      "file": "fixture.c",
+      "line": 99,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 98
+        }
+      ]
+    },
+    {
+      "caller": "caller_j",
+      "file": "fixture.c",
+      "line": 108,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 107
+        }
+      ]
+    },
+    {
+      "caller": "caller_loopy_buggy",
+      "file": "fixture.c",
+      "line": 124,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < n; i++",
+          "polarity": "in_true_branch",
+          "source_line": 123
+        }
+      ]
+    }
+  ]
+}

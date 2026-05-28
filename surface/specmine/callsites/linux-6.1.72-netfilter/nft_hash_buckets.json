@@ -1,0 +1,63 @@
+{
+  "callee": "nft_hash_buckets",
+  "defined_in": "net/netfilter/nft_set_hash.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nft_hash_privsize",
+      "file": "net/netfilter/nft_set_hash.c",
+      "line": 662,
+      "guards": []
+    },
+    {
+      "caller": "nft_hash_init",
+      "file": "net/netfilter/nft_set_hash.c",
+      "line": 671,
+      "guards": []
+    },
+    {
+      "caller": "nft_hash_estimate",
+      "file": "net/netfilter/nft_set_hash.c",
+      "line": 703,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!desc->size)",
+          "exit_kind": "return",
+          "source_line": 696,
+          "exit_line": 697
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(desc->klen == 4)",
+          "exit_kind": "return",
+          "source_line": 699,
+          "exit_line": 700
+        }
+      ]
+    },
+    {
+      "caller": "nft_hash_fast_estimate",
+      "file": "net/netfilter/nft_set_hash.c",
+      "line": 721,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!desc->size)",
+          "exit_kind": "return",
+          "source_line": 714,
+          "exit_line": 715
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(desc->klen != 4)",
+          "exit_kind": "return",
+          "source_line": 717,
+          "exit_line": 718
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "callee": "xt_rateest_put",
+  "defined_in": "net/netfilter/xt_RATEEST.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "xt_rateest_tg_checkentry",
+      "file": "net/netfilter/xt_RATEEST.c",
+      "line": 134,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strnlen(info->name, sizeof(est->name)) >= sizeof(est->name))",
+          "exit_kind": "return",
+          "source_line": 118,
+          "exit_line": 119
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "est",
+          "polarity": "in_true_branch",
+          "source_line": 125
+        }
+      ]
+    },
+    {
+      "caller": "xt_rateest_tg_destroy",
+      "file": "net/netfilter/xt_RATEEST.c",
+      "line": 179,
+      "guards": []
+    },
+    {
+      "caller": "xt_rateest_mt_checkentry",
+      "file": "net/netfilter/xt_rateest.c",
+      "line": 111,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "est1 != NULL",
+          "source_line": 96
+        },
+        {
+          "kind": "null_check",
+          "predicate": "est2 != NULL",
+          "source_line": 102
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(info->flags & (XT_RATEEST_MATCH_BPS | XT_RATEEST_MATCH_PPS)))",
+          "exit_kind": "goto",
+          "source_line": 82,
+          "exit_line": 83
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!est1)",
+          "exit_kind": "goto",
+          "source_line": 96,
+          "exit_line": 97
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!est2)",
+          "exit_kind": "goto",
+          "source_line": 102,
+          "exit_line": 103
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->flags & XT_RATEEST_MATCH_REL)",
+          "exit_kind": "goto",
+          "source_line": 100
+        }
+      ]
+    },
+    {
+      "caller": "xt_rateest_mt_destroy",
+      "file": "net/netfilter/xt_rateest.c",
+      "line": 120,
+      "guards": []
+    },
+    {
+      "caller": "xt_rateest_mt_destroy",
+      "file": "net/netfilter/xt_rateest.c",
+      "line": 122,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->est2",
+          "polarity": "in_true_branch",
+          "source_line": 121
+        }
+      ]
+    }
+  ]
+}

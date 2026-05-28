@@ -1,0 +1,129 @@
+{
+  "callee": "ip_set_pernet",
+  "defined_in": "net/netfilter/ipset/ip_set_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 20,
+  "callsites": [
+    {
+      "caller": "ip_set_rcu_get",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 713,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_get_byname",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 824,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_put_byindex",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 863,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_nfnl_get_byindex",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 900,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_nfnl_put",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 927,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_create",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1048,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_destroy",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1190,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_flush",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1269,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_rename",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1307,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_swap",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1355,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_dump_start",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1484,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_dump_do",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1536,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_ad",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1775,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_utest",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1841,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_header",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1876,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_byname",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 2013,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_byindex",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 2058,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_sockfn_get",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 2211,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_net_init",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 2336,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_net_exit",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 2355,
+      "guards": []
+    }
+  ]
+}

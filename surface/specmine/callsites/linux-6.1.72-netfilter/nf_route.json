@@ -1,0 +1,27 @@
+{
+  "callee": "nf_route",
+  "defined_in": "net/netfilter/utils.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_flow_route",
+      "file": "net/netfilter/nft_flow_offload.c",
+      "line": 253,
+      "guards": []
+    },
+    {
+      "caller": "get_tcpmss",
+      "file": "net/netfilter/nft_rt.c",
+      "line": 41,
+      "guards": []
+    },
+    {
+      "caller": "tcpmss_reverse_mtu",
+      "file": "net/netfilter/xt_TCPMSS.c",
+      "line": 62,
+      "guards": []
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "callee": "ip_set_nfnl_get_byindex",
+  "defined_in": "net/netfilter/ipset/ip_set_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 9,
+  "callsites": [
+    {
+      "caller": "set_match_v0_checkentry",
+      "file": "net/netfilter/xt_set.c",
+      "line": 88,
+      "guards": []
+    },
+    {
+      "caller": "set_match_v1_checkentry",
+      "file": "net/netfilter/xt_set.c",
+      "line": 139,
+      "guards": []
+    },
+    {
+      "caller": "set_target_v0_checkentry",
+      "file": "net/netfilter/xt_set.c",
+      "line": 238,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->add_set.index != IPSET_INVALID_ID",
+          "polarity": "in_true_branch",
+          "source_line": 237
+        }
+      ]
+    },
+    {
+      "caller": "set_target_v0_checkentry",
+      "file": "net/netfilter/xt_set.c",
+      "line": 247,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(index == IPSET_INVALID_ID)",
+          "exit_kind": "return",
+          "source_line": 239
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->del_set.index != IPSET_INVALID_ID",
+          "polarity": "in_true_branch",
+          "source_line": 246
+        }
+      ]
+    },
+    {
+      "caller": "set_target_v1_checkentry",
+      "file": "net/netfilter/xt_set.c",
+      "line": 313,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->add_set.index != IPSET_INVALID_ID",
+          "polarity": "in_true_branch",
+          "source_line": 312
+        }
+      ]
+    },
+    {
+      "caller": "set_target_v1_checkentry",
+      "file": "net/netfilter/xt_set.c",
+      "line": 322,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(index == IPSET_INVALID_ID)",
+          "exit_kind": "return",
+          "source_line": 314
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->del_set.index != IPSET_INVALID_ID",
+          "polarity": "in_true_branch",
+          "source_line": 321
+        }
+      ]
+    },
+    {
+      "caller": "set_target_v3_checkentry",
+      "file": "net/netfilter/xt_set.c",
+      "line": 441,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->add_set.index != IPSET_INVALID_ID",
+          "polarity": "in_true_branch",
+          "source_line": 440
+        }
+      ]
+    },
+    {
+      "caller": "set_target_v3_checkentry",
+      "file": "net/netfilter/xt_set.c",
+      "line": 451,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(index == IPSET_INVALID_ID)",
+          "exit_kind": "return",
+          "source_line": 443
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->del_set.index != IPSET_INVALID_ID",
+          "polarity": "in_true_branch",
+          "source_line": 450
+        }
+      ]
+    },
+    {
+      "caller": "set_target_v3_checkentry",
+      "file": "net/netfilter/xt_set.c",
+      "line": 476,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(index == IPSET_INVALID_ID)",
+          "exit_kind": "return",
+          "source_line": 443
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(index == IPSET_INVALID_ID)",
+          "exit_kind": "goto",
+          "source_line": 453
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(strncmp(par->table, \"mangle\", 7))",
+          "exit_kind": "goto",
+          "source_line": 462
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->map_set.index != IPSET_INVALID_ID",
+          "polarity": "in_true_branch",
+          "source_line": 461
+        }
+      ]
+    }
+  ]
+}

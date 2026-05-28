@@ -1,0 +1,22 @@
+{
+  "target": "refinement_smoke",
+  "source_root": "/tmp/refinement_smoke",
+  "scope": ".",
+  "generated_at": 1779931302,
+  "stats": {
+    "defined_callees": 12,
+    "mining_callees": 1,
+    "callers_scanned": 12,
+    "callees_with_callsites": 1,
+    "callees_emitted": 1,
+    "total_callsites": 11,
+    "total_guards": 11,
+    "wall_seconds": 0.0
+  },
+  "callees": {
+    "lookup_thing": {
+      "callsite_count": 11,
+      "out_file": "lookup_thing.json"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "callee": "nf_nat_unregister_fn",
+  "defined_in": "net/netfilter/nf_nat_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "nf_nat_ipv4_unregister_fn",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 831,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_ipv6_unregister_fn",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 1070,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_inet_register_fn",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 1091,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ops->pf != NFPROTO_INET)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 1080
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(ops->pf != NFPROTO_INET))",
+          "exit_kind": "return",
+          "source_line": 1080,
+          "exit_line": 1081
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 1085,
+          "exit_line": 1086
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret",
+          "polarity": "in_true_branch",
+          "source_line": 1090
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_inet_unregister_fn",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 1099,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_inet_unregister_fn",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 1100,
+      "guards": []
+    }
+  ]
+}

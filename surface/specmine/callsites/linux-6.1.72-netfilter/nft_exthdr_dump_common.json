@@ -1,0 +1,43 @@
+{
+  "callee": "nft_exthdr_dump_common",
+  "defined_in": "net/netfilter/nft_exthdr.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_exthdr_dump",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 681,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_dump_register(skb, NFTA_EXTHDR_DREG, priv->dreg))",
+          "exit_kind": "return",
+          "source_line": 678,
+          "exit_line": 679
+        }
+      ]
+    },
+    {
+      "caller": "nft_exthdr_dump_set",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 691,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_dump_register(skb, NFTA_EXTHDR_SREG, priv->sreg))",
+          "exit_kind": "return",
+          "source_line": 688,
+          "exit_line": 689
+        }
+      ]
+    },
+    {
+      "caller": "nft_exthdr_dump_strip",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 698,
+      "guards": []
+    }
+  ]
+}

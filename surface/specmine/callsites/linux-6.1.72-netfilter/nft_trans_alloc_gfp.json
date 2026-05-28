@@ -1,0 +1,27 @@
+{
+  "callee": "nft_trans_alloc_gfp",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_trans_alloc",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 171,
+      "guards": []
+    },
+    {
+      "caller": "nft_setelem_flush",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6819,
+      "guards": []
+    },
+    {
+      "caller": "__nft_set_catchall_flush",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6847,
+      "guards": []
+    }
+  ]
+}

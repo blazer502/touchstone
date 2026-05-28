@@ -1,0 +1,150 @@
+{
+  "callee": "nft_ct_get_eval_counter",
+  "defined_in": "net/netfilter/nft_ct.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_ct_get_eval",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 140,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct == NULL)",
+          "exit_kind": "goto",
+          "source_line": 89,
+          "exit_line": 90
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->master == NULL)",
+          "exit_kind": "goto",
+          "source_line": 113,
+          "exit_line": 114
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(help == NULL)",
+          "exit_kind": "goto",
+          "source_line": 116,
+          "exit_line": 117
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(helper == NULL)",
+          "exit_kind": "goto",
+          "source_line": 119,
+          "exit_line": 120
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->key",
+          "polarity": "in_true_branch",
+          "source_line": 92
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "acct",
+          "polarity": "in_true_branch",
+          "source_line": 139
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_get_eval",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 150,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct == NULL)",
+          "exit_kind": "goto",
+          "source_line": 89,
+          "exit_line": 90
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->master == NULL)",
+          "exit_kind": "goto",
+          "source_line": 113,
+          "exit_line": 114
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(help == NULL)",
+          "exit_kind": "goto",
+          "source_line": 116,
+          "exit_line": 117
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(helper == NULL)",
+          "exit_kind": "goto",
+          "source_line": 119,
+          "exit_line": 120
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->key",
+          "polarity": "in_true_branch",
+          "source_line": 92
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "acct",
+          "polarity": "in_true_branch",
+          "source_line": 149
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_get_eval",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 152,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct == NULL)",
+          "exit_kind": "goto",
+          "source_line": 89,
+          "exit_line": 90
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->master == NULL)",
+          "exit_kind": "goto",
+          "source_line": 113,
+          "exit_line": 114
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(help == NULL)",
+          "exit_kind": "goto",
+          "source_line": 116,
+          "exit_line": 117
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(helper == NULL)",
+          "exit_kind": "goto",
+          "source_line": 119,
+          "exit_line": 120
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->key",
+          "polarity": "in_true_branch",
+          "source_line": 92
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "acct",
+          "polarity": "in_true_branch",
+          "source_line": 149
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "callee": "nf_conntrack_helper_register",
+  "defined_in": "net/netfilter/nf_conntrack_helper.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "h323_helper_init",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1738,
+      "guards": []
+    },
+    {
+      "caller": "nf_conntrack_helpers_register",
+      "file": "net/netfilter/nf_conntrack_helper.c",
+      "line": 467,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < n; i++",
+          "polarity": "in_true_branch",
+          "source_line": 466
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_netbios_ns_init",
+      "file": "net/netfilter/nf_conntrack_netbios_ns.c",
+      "line": 62,
+      "guards": []
+    },
+    {
+      "caller": "nf_conntrack_pptp_init",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 604,
+      "guards": []
+    },
+    {
+      "caller": "nf_conntrack_snmp_init",
+      "file": "net/netfilter/nf_conntrack_snmp.c",
+      "line": 66,
+      "guards": []
+    },
+    {
+      "caller": "nfnl_cthelper_create",
+      "file": "net/netfilter/nfnetlink_cthelper.c",
+      "line": 274,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[NFCTH_TUPLE] || !tb[NFCTH_POLICY] || !tb[NFCTH_PRIV_DATA_LEN])",
+          "exit_kind": "return",
+          "source_line": 228,
+          "exit_line": 229
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nfcth == NULL)",
+          "exit_kind": "return",
+          "source_line": 232,
+          "exit_line": 233
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 237,
+          "exit_line": 238
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(size > sizeof_field(struct nf_conn_help, data))",
+          "exit_kind": "goto",
+          "source_line": 243
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFCTH_STATUS])",
+          "exit_kind": "break",
+          "source_line": 261
+        }
+      ]
+    }
+  ]
+}

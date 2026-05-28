@@ -1,0 +1,93 @@
+{
+  "callee": "__instance_destroy",
+  "defined_in": "net/netfilter/nfnetlink_log.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "instance_destroy",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 244,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 243
+        }
+      ]
+    },
+    {
+      "caller": "nfulnl_rcv_nl_event",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 840,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 832
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "event == NETLINK_URELEASE && n->protocol == NETLINK_NETFILTER",
+          "polarity": "in_true_branch",
+          "source_line": 828
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < INSTANCE_BUCKETS; i++",
+          "polarity": "in_true_branch",
+          "source_line": 833
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "n->portid == inst->peer_portid",
+          "polarity": "in_true_branch",
+          "source_line": 839
+        }
+      ]
+    },
+    {
+      "caller": "instance_destroy",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 186,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 185
+        }
+      ]
+    },
+    {
+      "caller": "nfqnl_rcv_nl_event",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1011,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 1003
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "event == NETLINK_URELEASE && n->protocol == NETLINK_NETFILTER",
+          "polarity": "in_true_branch",
+          "source_line": 999
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < INSTANCE_BUCKETS; i++",
+          "polarity": "in_true_branch",
+          "source_line": 1004
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "n->portid == inst->peer_portid",
+          "polarity": "in_true_branch",
+          "source_line": 1010
+        }
+      ]
+    }
+  ]
+}

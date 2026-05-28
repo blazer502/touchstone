@@ -1,0 +1,54 @@
+{
+  "callee": "ip_vs_conn_hash",
+  "defined_in": "net/netfilter/ipvs/ip_vs_conn.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_conn_fill_cport",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 503,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "ip_vs_conn_unhash(cp)",
+          "polarity": "in_true_branch",
+          "source_line": 493
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_check_template",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 798,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "ct->vport != htons(0xffff)",
+          "polarity": "in_true_branch",
+          "source_line": 793
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ip_vs_conn_unhash(ct)",
+          "polarity": "in_true_branch",
+          "source_line": 794
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_conn_new",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1038,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp == NULL)",
+          "exit_kind": "return",
+          "source_line": 951
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "callee": "nft_expr_clone",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_set_elem_expr_clone",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6002,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "expr != NULL",
+          "source_line": 5999
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!expr)",
+          "exit_kind": "goto",
+          "source_line": 5999,
+          "exit_line": 6000
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < set->num_exprs; i++",
+          "polarity": "in_true_branch",
+          "source_line": 5997
+        }
+      ]
+    },
+    {
+      "caller": "nft_set_elem_expr_setup",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6041,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(num_exprs == 0)",
+          "exit_kind": "return",
+          "source_line": 6030,
+          "exit_line": 6031
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_ext_check(tmpl, NFT_SET_EXT_EXPRESSIONS, len) < 0)",
+          "exit_kind": "return",
+          "source_line": 6036,
+          "exit_line": 6037
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < num_exprs; i++",
+          "polarity": "in_true_branch",
+          "source_line": 6039
+        }
+      ]
+    },
+    {
+      "caller": "nft_dynset_expr_setup",
+      "file": "net/netfilter/nft_dynset.c",
+      "line": 38,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < priv->num_exprs; i++",
+          "polarity": "in_true_branch",
+          "source_line": 36
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "callee": "nf_synproxy_ipv4_fini",
+  "defined_in": "net/netfilter/nf_synproxy_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_synproxy_do_init",
+      "file": "net/netfilter/nft_synproxy.c",
+      "line": 195,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~NF_SYNPROXY_OPT_MASK)",
+          "exit_kind": "return",
+          "source_line": 166,
+          "exit_line": 167
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_SYNPROXY_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 164
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 172,
+          "exit_line": 173
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 178,
+          "exit_line": 179
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 184,
+          "exit_line": 185
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 191,
+          "exit_line": 192
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ctx->family",
+          "polarity": "in_true_branch",
+          "source_line": 175
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "err",
+          "polarity": "in_true_branch",
+          "source_line": 194
+        }
+      ]
+    },
+    {
+      "caller": "nft_synproxy_do_destroy",
+      "file": "net/netfilter/nft_synproxy.c",
+      "line": 214,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ctx->family",
+          "polarity": "in_true_branch",
+          "source_line": 212
+        }
+      ]
+    },
+    {
+      "caller": "nft_synproxy_do_destroy",
+      "file": "net/netfilter/nft_synproxy.c",
+      "line": 223,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ctx->family",
+          "polarity": "in_true_branch",
+          "source_line": 212
+        }
+      ]
+    }
+  ]
+}

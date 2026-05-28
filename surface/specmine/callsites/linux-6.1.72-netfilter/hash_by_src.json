@@ -1,0 +1,73 @@
+{
+  "callee": "hash_by_src",
+  "defined_in": "net/netfilter/nf_nat_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "find_appropriate_src",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 282,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_setup_info",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 629,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON",
+          "source_line": 591
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(nf_nat_initialized(ct, maniptype))",
+          "macro": "WARN_ON",
+          "source_line": 594
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_is_confirmed(ct))",
+          "exit_kind": "return",
+          "source_line": 588,
+          "exit_line": 589
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON(nf_nat_initialized(ct, maniptype)))",
+          "exit_kind": "return",
+          "source_line": 594,
+          "exit_line": 595
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nfct_seqadj_ext_add(ct))",
+          "exit_kind": "return",
+          "source_line": 621,
+          "exit_line": 622
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_tuple_equal(&new_tuple, &curr_tuple))",
+          "exit_kind": "return",
+          "source_line": 607
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "maniptype == NF_NAT_MANIP_SRC",
+          "polarity": "in_true_branch",
+          "source_line": 625
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_cleanup_conntrack",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 808,
+      "guards": []
+    }
+  ]
+}

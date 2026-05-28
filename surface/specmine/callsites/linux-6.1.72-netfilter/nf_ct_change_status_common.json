@@ -1,0 +1,27 @@
+{
+  "callee": "nf_ct_change_status_common",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "bpf_ct_set_status",
+      "file": "net/netfilter/nf_conntrack_bpf.c",
+      "line": 457,
+      "guards": []
+    },
+    {
+      "caller": "bpf_ct_change_status",
+      "file": "net/netfilter/nf_conntrack_bpf.c",
+      "line": 472,
+      "guards": []
+    },
+    {
+      "caller": "ctnetlink_change_status",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1899,
+      "guards": []
+    }
+  ]
+}

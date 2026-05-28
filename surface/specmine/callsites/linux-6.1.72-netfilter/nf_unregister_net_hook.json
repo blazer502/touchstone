@@ -1,0 +1,107 @@
+{
+  "callee": "nf_unregister_net_hook",
+  "defined_in": "net/netfilter/core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "nf_unregister_net_hooks",
+      "file": "net/netfilter/core.c",
+      "line": 601,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < hookcount; i++",
+          "polarity": "in_true_branch",
+          "source_line": 600
+        }
+      ]
+    },
+    {
+      "caller": "nft_netdev_register_hooks",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 298,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 286,
+          "exit_line": 287
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(j-- <= 0)",
+          "exit_kind": "break",
+          "source_line": 295,
+          "exit_line": 296
+        }
+      ]
+    },
+    {
+      "caller": "nft_netdev_unregister_hooks",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 310,
+      "guards": []
+    },
+    {
+      "caller": "__nf_tables_unregister_hook",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 362,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(basechain->type->ops_unregister)",
+          "exit_kind": "return",
+          "source_line": 355,
+          "exit_line": 356
+        }
+      ]
+    },
+    {
+      "caller": "nft_unregister_flowtable_hook",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7835,
+      "guards": []
+    },
+    {
+      "caller": "__nft_unregister_flowtable_net_hooks",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7847,
+      "guards": []
+    },
+    {
+      "caller": "nft_netdev_event",
+      "file": "net/netfilter/nft_chain_filter.c",
+      "line": 341,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "found != NULL",
+          "source_line": 337
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event != NETDEV_UNREGISTER)",
+          "exit_kind": "return",
+          "source_line": 328,
+          "exit_line": 329
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!found)",
+          "exit_kind": "return",
+          "source_line": 337,
+          "exit_line": 338
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "n > 1",
+          "polarity": "in_true_branch",
+          "source_line": 340
+        }
+      ]
+    }
+  ]
+}

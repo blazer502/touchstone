@@ -1,0 +1,43 @@
+{
+  "callee": "nf_ct_get_tuple",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_ct_get_tuplepr",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 440,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(protoff <= 0)",
+          "exit_kind": "return",
+          "source_line": 437,
+          "exit_line": 438
+        }
+      ]
+    },
+    {
+      "caller": "resolve_normal_ct",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1838,
+      "guards": []
+    },
+    {
+      "caller": "__nf_conntrack_update",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 2215,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(dataoff <= 0)",
+          "exit_kind": "return",
+          "source_line": 2212,
+          "exit_line": 2213
+        }
+      ]
+    }
+  ]
+}

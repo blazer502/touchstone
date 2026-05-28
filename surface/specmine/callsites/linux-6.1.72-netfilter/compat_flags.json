@@ -1,0 +1,66 @@
+{
+  "callee": "compat_flags",
+  "defined_in": "net/netfilter/xt_set.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "set_match_v0_checkentry",
+      "file": "net/netfilter/xt_set.c",
+      "line": 102,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(index == IPSET_INVALID_ID)",
+          "exit_kind": "return",
+          "source_line": 90
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->match_set.u.flags[IPSET_DIM_MAX - 1] != 0)",
+          "exit_kind": "return",
+          "source_line": 95
+        }
+      ]
+    },
+    {
+      "caller": "set_target_v0_checkentry",
+      "file": "net/netfilter/xt_set.c",
+      "line": 267,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(index == IPSET_INVALID_ID)",
+          "exit_kind": "return",
+          "source_line": 239
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(index == IPSET_INVALID_ID)",
+          "exit_kind": "return",
+          "source_line": 248
+        }
+      ]
+    },
+    {
+      "caller": "set_target_v0_checkentry",
+      "file": "net/netfilter/xt_set.c",
+      "line": 268,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(index == IPSET_INVALID_ID)",
+          "exit_kind": "return",
+          "source_line": 239
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(index == IPSET_INVALID_ID)",
+          "exit_kind": "return",
+          "source_line": 248
+        }
+      ]
+    }
+  ]
+}

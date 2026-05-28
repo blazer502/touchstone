@@ -1,0 +1,33 @@
+{
+  "callee": "ip_set_rcu_get",
+  "defined_in": "net/netfilter/ipset/ip_set_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "ip_set_test",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 737,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_add",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 775,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_del",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 797,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_name_byindex",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 877,
+      "guards": []
+    }
+  ]
+}

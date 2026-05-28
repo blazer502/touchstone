@@ -1,0 +1,137 @@
+{
+  "callee": "nf_nat_ipv4_manip_pkt",
+  "defined_in": "net/netfilter/nf_nat_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_nat_manip_pkt",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 434,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_nat_ipv6_manip_pkt(skb, 0, &target, mtype))",
+          "exit_kind": "return",
+          "source_line": 430,
+          "exit_line": 431
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "target.src.l3num",
+          "polarity": "in_true_branch",
+          "source_line": 428
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_icmp_reply_translation",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 601,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctinfo != IP_CT_RELATED && ctinfo != IP_CT_RELATED_REPLY)",
+          "macro": "WARN_ON",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, hdrlen + sizeof(*inside)))",
+          "exit_kind": "return",
+          "source_line": 576,
+          "exit_line": 577
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ip_checksum(skb, hooknum, hdrlen, IPPROTO_ICMP))",
+          "exit_kind": "return",
+          "source_line": 578,
+          "exit_line": 579
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((ct->status & IPS_NAT_DONE_MASK) != IPS_NAT_DONE_MASK)",
+          "exit_kind": "return",
+          "source_line": 583,
+          "exit_line": 584
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->status & IPS_NAT_MASK)",
+          "exit_kind": "return",
+          "source_line": 585,
+          "exit_line": 586
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(inside->icmp.type == ICMP_REDIRECT)",
+          "exit_kind": "return",
+          "source_line": 582
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(ct->status & statusbit))",
+          "exit_kind": "return",
+          "source_line": 598,
+          "exit_line": 599
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_icmp_reply_translation",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 617,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctinfo != IP_CT_RELATED && ctinfo != IP_CT_RELATED_REPLY)",
+          "macro": "WARN_ON",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, hdrlen + sizeof(*inside)))",
+          "exit_kind": "return",
+          "source_line": 576,
+          "exit_line": 577
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ip_checksum(skb, hooknum, hdrlen, IPPROTO_ICMP))",
+          "exit_kind": "return",
+          "source_line": 578,
+          "exit_line": 579
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((ct->status & IPS_NAT_DONE_MASK) != IPS_NAT_DONE_MASK)",
+          "exit_kind": "return",
+          "source_line": 583,
+          "exit_line": 584
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->status & IPS_NAT_MASK)",
+          "exit_kind": "return",
+          "source_line": 585,
+          "exit_line": 586
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(inside->icmp.type == ICMP_REDIRECT)",
+          "exit_kind": "return",
+          "source_line": 582
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(ct->status & statusbit))",
+          "exit_kind": "return",
+          "source_line": 598,
+          "exit_line": 599
+        }
+      ]
+    }
+  ]
+}

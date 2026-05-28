@@ -1,0 +1,101 @@
+{
+  "callee": "ct_sip_parse_header_uri",
+  "defined_in": "net/netfilter/nf_conntrack_sip.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "process_register_request",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1254,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->status & IPS_EXPECTED)",
+          "exit_kind": "return",
+          "source_line": 1239,
+          "exit_line": 1240
+        }
+      ]
+    },
+    {
+      "caller": "process_register_response",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1361,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct_sip_info->register_cseq != cseq)",
+          "exit_kind": "return",
+          "source_line": 1346,
+          "exit_line": 1347
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(code >= 100 && code <= 199)",
+          "exit_kind": "return",
+          "source_line": 1349,
+          "exit_line": 1350
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(code < 200 || code > 299)",
+          "exit_kind": "goto",
+          "source_line": 1351,
+          "exit_line": 1352
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "1",
+          "polarity": "in_true_branch",
+          "source_line": 1358
+        }
+      ]
+    },
+    {
+      "caller": "process_sip_request",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1471,
+      "guards": []
+    },
+    {
+      "caller": "map_sip_addr",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 138,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 179,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 263,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request)",
+          "exit_kind": "goto",
+          "source_line": 187
+        }
+      ]
+    }
+  ]
+}

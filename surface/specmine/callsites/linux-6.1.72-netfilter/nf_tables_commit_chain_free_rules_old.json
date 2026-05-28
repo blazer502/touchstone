@@ -1,0 +1,161 @@
+{
+  "callee": "nf_tables_commit_chain_free_rules_old",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_tables_commit_chain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9050,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected()",
+          "source_line": 9034
+        },
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected()",
+          "source_line": 9036
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(g0 == g1)",
+          "exit_kind": "return",
+          "source_line": 9042,
+          "exit_line": 9043
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "chain->blob_next == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 9040
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "next_genbit",
+          "polarity": "in_true_branch",
+          "source_line": 9048
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_commit_chain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9053,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected()",
+          "source_line": 9034
+        },
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected()",
+          "source_line": 9036
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(g0 == g1)",
+          "exit_kind": "return",
+          "source_line": 9042,
+          "exit_line": 9043
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "chain->blob_next == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 9040
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "next_genbit",
+          "polarity": "in_false_branch",
+          "source_line": 9051
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_commit_chain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9070,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected()",
+          "source_line": 9034
+        },
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected()",
+          "source_line": 9036
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(g0 == g1)",
+          "exit_kind": "return",
+          "source_line": 9042,
+          "exit_line": 9043
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(chain->blob_next == NULL)",
+          "exit_kind": "return",
+          "source_line": 9040
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(g0 == g1)",
+          "exit_kind": "return",
+          "source_line": 9066,
+          "exit_line": 9067
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "next_genbit",
+          "polarity": "in_true_branch",
+          "source_line": 9069
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_commit_chain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9072,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected()",
+          "source_line": 9034
+        },
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected()",
+          "source_line": 9036
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(g0 == g1)",
+          "exit_kind": "return",
+          "source_line": 9042,
+          "exit_line": 9043
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(chain->blob_next == NULL)",
+          "exit_kind": "return",
+          "source_line": 9040
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(g0 == g1)",
+          "exit_kind": "return",
+          "source_line": 9066,
+          "exit_line": 9067
+        }
+      ]
+    }
+  ]
+}

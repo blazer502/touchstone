@@ -1,0 +1,16 @@
+{
+  "engine": "cbmc",
+  "source": "/home/chanyoung/veri-agent/surface/specmine/closed_loop/refinement_smoke/refined_harnesses/lookup_thing_caller_loopy_buggy.c",
+  "function": "main",
+  "property": "assertion",
+  "unwind": 8,
+  "target_location": "line 47 [__specmine_wrap_lookup_thing.assertion.1]",
+  "assignment": {
+    "return_value_nondet_int": "1",
+    "arg0": "1",
+    "n": "1",
+    "i": "0",
+    "r": "0",
+    "a0": "0"
+  }
+}

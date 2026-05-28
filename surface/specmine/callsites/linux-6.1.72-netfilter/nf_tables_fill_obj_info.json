@@ -1,0 +1,103 @@
+{
+  "callee": "nf_tables_fill_obj_info",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_tables_dump_obj",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7386,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 7361
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(family != NFPROTO_UNSPEC && family != table->family)",
+          "exit_kind": "continue",
+          "source_line": 7366,
+          "exit_line": 7367
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_is_active(net, obj))",
+          "exit_kind": "goto",
+          "source_line": 7371,
+          "exit_line": 7372
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(idx < s_idx)",
+          "exit_kind": "goto",
+          "source_line": 7373,
+          "exit_line": 7374
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getobj",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7516,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 7482
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(obj)",
+          "source_line": 7489
+        },
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 7495
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 7465
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 7482
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(obj))",
+          "exit_kind": "return",
+          "source_line": 7489
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 7495,
+          "exit_line": 7496
+        }
+      ]
+    },
+    {
+      "caller": "__nft_obj_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7604,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 7601,
+          "exit_line": 7602
+        }
+      ]
+    }
+  ]
+}

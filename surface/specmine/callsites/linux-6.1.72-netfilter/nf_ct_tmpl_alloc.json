@@ -1,0 +1,69 @@
+{
+  "callee": "nf_ct_tmpl_alloc",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "synproxy_net_init",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 336,
+      "guards": []
+    },
+    {
+      "caller": "nft_ct_set_zone_eval",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 270,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct)",
+          "exit_kind": "return",
+          "source_line": 245,
+          "exit_line": 246
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "likely(refcount_read(&ct->ct_general.use) == 1)",
+          "polarity": "in_false_branch",
+          "source_line": 266
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_tmpl_alloc_pcpu",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 375,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_ct_pcpu_template_refcnt)",
+          "exit_kind": "return",
+          "source_line": 371,
+          "exit_line": 372
+        }
+      ]
+    },
+    {
+      "caller": "xt_ct_tg_check",
+      "file": "net/netfilter/xt_CT.c",
+      "line": 184,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->flags & XT_CT_NOTRACK)",
+          "exit_kind": "goto",
+          "source_line": 162
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 175,
+          "exit_line": 176
+        }
+      ]
+    }
+  ]
+}

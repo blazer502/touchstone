@@ -1,0 +1,112 @@
+{
+  "callee": "udplite_error_log",
+  "defined_in": "net/netfilter/nf_conntrack_proto_udp.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "udplite_error",
+      "file": "net/netfilter/nf_conntrack_proto_udp.c",
+      "line": 150,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!hdr",
+          "polarity": "in_true_branch",
+          "source_line": 149
+        }
+      ]
+    },
+    {
+      "caller": "udplite_error",
+      "file": "net/netfilter/nf_conntrack_proto_udp.c",
+      "line": 158,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "hdr != NULL",
+          "source_line": 149
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hdr)",
+          "exit_kind": "return",
+          "source_line": 149
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cscov == 0",
+          "polarity": "in_false_branch",
+          "source_line": 157
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cscov < sizeof(*hdr) || cscov > udplen",
+          "polarity": "in_true_branch",
+          "source_line": 157
+        }
+      ]
+    },
+    {
+      "caller": "udplite_error",
+      "file": "net/netfilter/nf_conntrack_proto_udp.c",
+      "line": 164,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "hdr != NULL",
+          "source_line": 149
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hdr)",
+          "exit_kind": "return",
+          "source_line": 149
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cscov < sizeof(*hdr) || cscov > udplen)",
+          "exit_kind": "return",
+          "source_line": 157
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!hdr->check",
+          "polarity": "in_true_branch",
+          "source_line": 163
+        }
+      ]
+    },
+    {
+      "caller": "udplite_error",
+      "file": "net/netfilter/nf_conntrack_proto_udp.c",
+      "line": 173,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "hdr != NULL",
+          "source_line": 149
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hdr)",
+          "exit_kind": "return",
+          "source_line": 149
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cscov < sizeof(*hdr) || cscov > udplen)",
+          "exit_kind": "return",
+          "source_line": 157
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hdr->check)",
+          "exit_kind": "return",
+          "source_line": 163
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "target": "multi_class",
+  "source_root": "/tmp/multi_class",
+  "scope": ".",
+  "generated_at": 1779931745,
+  "stats": {
+    "defined_callees": 20,
+    "mining_callees": 2,
+    "callers_scanned": 20,
+    "callees_with_callsites": 2,
+    "callees_emitted": 2,
+    "total_callsites": 18,
+    "total_guards": 22,
+    "wall_seconds": 0.01
+  },
+  "callees": {
+    "lookup_thing": {
+      "callsite_count": 11,
+      "out_file": "lookup_thing.json"
+    },
+    "process_item": {
+      "callsite_count": 7,
+      "out_file": "process_item.json"
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "callee": "nft_netlink_dump_start_rcu",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "nf_tables_gettable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1111,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->nlh->nlmsg_flags & NLM_F_DUMP",
+          "polarity": "in_true_branch",
+          "source_line": 1105
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getchain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1918,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->nlh->nlmsg_flags & NLM_F_DUMP",
+          "polarity": "in_true_branch",
+          "source_line": 1912
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getrule",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3429,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->nlh->nlmsg_flags & NLM_F_DUMP",
+          "polarity": "in_true_branch",
+          "source_line": 3420
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getset",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4464,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 4447
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 4447
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->nlh->nlmsg_flags & NLM_F_DUMP",
+          "polarity": "in_true_branch",
+          "source_line": 4455
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getsetelem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5773,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 5749
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(set)",
+          "source_line": 5755
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 5749
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(set))",
+          "exit_kind": "return",
+          "source_line": 5755,
+          "exit_line": 5756
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->nlh->nlmsg_flags & NLM_F_DUMP",
+          "polarity": "in_true_branch",
+          "source_line": 5760
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getobj",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7474,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->nlh->nlmsg_flags & NLM_F_DUMP",
+          "polarity": "in_true_branch",
+          "source_line": 7465
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getflowtable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8405,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->nlh->nlmsg_flags & NLM_F_DUMP",
+          "polarity": "in_true_branch",
+          "source_line": 8396
+        }
+      ]
+    }
+  ]
+}

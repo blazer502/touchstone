@@ -1,0 +1,38 @@
+{
+  "generated_at": 1779931302,
+  "min_support": 2,
+  "outliers": [
+    {
+      "callee": "lookup_thing",
+      "caller": "caller_loopy_buggy",
+      "callsite_count": 11,
+      "contract_kind_class": "lock",
+      "contract_kind_label": "lock_held",
+      "file": "fixture.c",
+      "guards_present": [
+        {
+          "kind": "enclosing_for",
+          "polarity": "in_true_branch",
+          "predicate": "i = 0; i < n; i++",
+          "source_line": 123
+        }
+      ],
+      "line": 124,
+      "local_establishment": 0.0,
+      "missing_contract": "rcu_read_lock_held",
+      "support_count": 10,
+      "support_pct": 0.9091,
+      "suspicion": 0.9091
+    }
+  ],
+  "stats": {
+    "by_kind_class": {
+      "lock": 1
+    },
+    "outliers_with_local_establishment": 0,
+    "total_outliers": 1,
+    "wall_seconds": 0.0
+  },
+  "target": "refinement_smoke",
+  "tau": 0.8
+}

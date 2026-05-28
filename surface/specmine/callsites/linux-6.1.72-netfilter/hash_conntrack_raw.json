@@ -1,0 +1,73 @@
+{
+  "callee": "hash_conntrack_raw",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "__hash_conntrack",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 248,
+      "guards": []
+    },
+    {
+      "caller": "hash_conntrack",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 255,
+      "guards": []
+    },
+    {
+      "caller": "nf_conntrack_find_get",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 828,
+      "guards": []
+    },
+    {
+      "caller": "nf_conntrack_find_get",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 836,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(thash)",
+          "exit_kind": "return",
+          "source_line": 830,
+          "exit_line": 831
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(rid != zone_id)",
+          "exit_kind": "return",
+          "source_line": 834,
+          "exit_line": 835
+        }
+      ]
+    },
+    {
+      "caller": "resolve_normal_ct",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1849,
+      "guards": []
+    },
+    {
+      "caller": "resolve_normal_ct",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1855,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!h",
+          "polarity": "in_true_branch",
+          "source_line": 1852
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "zone_id != rid",
+          "polarity": "in_true_branch",
+          "source_line": 1854
+        }
+      ]
+    }
+  ]
+}

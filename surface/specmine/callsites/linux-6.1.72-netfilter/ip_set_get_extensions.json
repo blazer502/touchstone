@@ -1,0 +1,546 @@
+{
+  "callee": "ip_set_get_extensions",
+  "defined_in": "net/netfilter/ipset/ip_set_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 27,
+  "callsites": [
+    {
+      "caller": "bitmap_ip_uadt",
+      "file": "net/netfilter/ipset/ip_set_bitmap_ip.c",
+      "line": 150,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!tb[IPSET_ATTR_IP]))",
+          "exit_kind": "return",
+          "source_line": 143,
+          "exit_line": 144
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 147,
+          "exit_line": 148
+        }
+      ]
+    },
+    {
+      "caller": "bitmap_ipmac_uadt",
+      "file": "net/netfilter/ipset/ip_set_bitmap_ipmac.c",
+      "line": 261,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!tb[IPSET_ATTR_IP]))",
+          "exit_kind": "return",
+          "source_line": 254,
+          "exit_line": 255
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 258,
+          "exit_line": 259
+        }
+      ]
+    },
+    {
+      "caller": "bitmap_port_uadt",
+      "file": "net/netfilter/ipset/ip_set_bitmap_port.c",
+      "line": 174,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(port < map->first_port || port > map->last_port)",
+          "exit_kind": "return",
+          "source_line": 172,
+          "exit_line": 173
+        }
+      ]
+    },
+    {
+      "caller": "hash_ip4_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_ip.c",
+      "line": 118,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!tb[IPSET_ATTR_IP]))",
+          "exit_kind": "return",
+          "source_line": 111,
+          "exit_line": 112
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 115,
+          "exit_line": 116
+        }
+      ]
+    },
+    {
+      "caller": "hash_ip6_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_ip.c",
+      "line": 265,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!tb[IPSET_ATTR_IP]))",
+          "exit_kind": "return",
+          "source_line": 250,
+          "exit_line": 251
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_IP_TO]))",
+          "exit_kind": "return",
+          "source_line": 252,
+          "exit_line": 253
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cidr != HOST_MASK)",
+          "exit_kind": "return",
+          "source_line": 257,
+          "exit_line": 258
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_CIDR]))",
+          "exit_kind": "return",
+          "source_line": 254
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 262,
+          "exit_line": 263
+        }
+      ]
+    },
+    {
+      "caller": "hash_ipmac4_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_ipmac.c",
+      "line": 133,
+      "guards": []
+    },
+    {
+      "caller": "hash_ipmac6_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_ipmac.c",
+      "line": 252,
+      "guards": []
+    },
+    {
+      "caller": "hash_ipmark4_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_ipmark.c",
+      "line": 118,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 115,
+          "exit_line": 116
+        }
+      ]
+    },
+    {
+      "caller": "hash_ipmark6_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_ipmark.c",
+      "line": 260,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_IP_TO]))",
+          "exit_kind": "return",
+          "source_line": 247,
+          "exit_line": 248
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cidr != HOST_MASK)",
+          "exit_kind": "return",
+          "source_line": 252,
+          "exit_line": 253
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_CIDR]))",
+          "exit_kind": "return",
+          "source_line": 249
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 257,
+          "exit_line": 258
+        }
+      ]
+    },
+    {
+      "caller": "hash_ipport4_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_ipport.c",
+      "line": 128,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 125,
+          "exit_line": 126
+        }
+      ]
+    },
+    {
+      "caller": "hash_ipport6_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_ipport.c",
+      "line": 298,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_IP_TO]))",
+          "exit_kind": "return",
+          "source_line": 285,
+          "exit_line": 286
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cidr != HOST_MASK)",
+          "exit_kind": "return",
+          "source_line": 290,
+          "exit_line": 291
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_CIDR]))",
+          "exit_kind": "return",
+          "source_line": 287
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 295,
+          "exit_line": 296
+        }
+      ]
+    },
+    {
+      "caller": "hash_ipportip4_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_ipportip.c",
+      "line": 131,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 128,
+          "exit_line": 129
+        }
+      ]
+    },
+    {
+      "caller": "hash_ipportip6_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_ipportip.c",
+      "line": 309,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_IP_TO]))",
+          "exit_kind": "return",
+          "source_line": 296,
+          "exit_line": 297
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cidr != HOST_MASK)",
+          "exit_kind": "return",
+          "source_line": 301,
+          "exit_line": 302
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_CIDR]))",
+          "exit_kind": "return",
+          "source_line": 298
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 306,
+          "exit_line": 307
+        }
+      ]
+    },
+    {
+      "caller": "hash_ipportnet4_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_ipportnet.c",
+      "line": 186,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 183,
+          "exit_line": 184
+        }
+      ]
+    },
+    {
+      "caller": "hash_ipportnet6_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_ipportnet.c",
+      "line": 450,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_IP_TO]))",
+          "exit_kind": "return",
+          "source_line": 437,
+          "exit_line": 438
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cidr != HOST_MASK)",
+          "exit_kind": "return",
+          "source_line": 442,
+          "exit_line": 443
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_CIDR]))",
+          "exit_kind": "return",
+          "source_line": 439
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 447,
+          "exit_line": 448
+        }
+      ]
+    },
+    {
+      "caller": "hash_mac4_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_mac.c",
+      "line": 110,
+      "guards": []
+    },
+    {
+      "caller": "hash_net4_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_net.c",
+      "line": 157,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 154,
+          "exit_line": 155
+        }
+      ]
+    },
+    {
+      "caller": "hash_net6_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_net.c",
+      "line": 331,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_IP_TO]))",
+          "exit_kind": "return",
+          "source_line": 324,
+          "exit_line": 325
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 328,
+          "exit_line": 329
+        }
+      ]
+    },
+    {
+      "caller": "hash_netiface4_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_netiface.c",
+      "line": 220,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 217,
+          "exit_line": 218
+        }
+      ]
+    },
+    {
+      "caller": "hash_netiface6_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_netiface.c",
+      "line": 439,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_IP_TO]))",
+          "exit_kind": "return",
+          "source_line": 432,
+          "exit_line": 433
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 436,
+          "exit_line": 437
+        }
+      ]
+    },
+    {
+      "caller": "hash_netnet4_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_netnet.c",
+      "line": 190,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 183,
+          "exit_line": 184
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 187,
+          "exit_line": 188
+        }
+      ]
+    },
+    {
+      "caller": "hash_netnet6_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_netnet.c",
+      "line": 428,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_IP_TO] || tb[IPSET_ATTR_IP2_TO]))",
+          "exit_kind": "return",
+          "source_line": 417,
+          "exit_line": 418
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 421,
+          "exit_line": 422
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 425,
+          "exit_line": 426
+        }
+      ]
+    },
+    {
+      "caller": "hash_netport4_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_netport.c",
+      "line": 179,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 176,
+          "exit_line": 177
+        }
+      ]
+    },
+    {
+      "caller": "hash_netport6_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_netport.c",
+      "line": 401,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_IP_TO]))",
+          "exit_kind": "return",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 398,
+          "exit_line": 399
+        }
+      ]
+    },
+    {
+      "caller": "hash_netportnet4_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_netportnet.c",
+      "line": 218,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 211,
+          "exit_line": 212
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 215,
+          "exit_line": 216
+        }
+      ]
+    },
+    {
+      "caller": "hash_netportnet6_uadt",
+      "file": "net/netfilter/ipset/ip_set_hash_netportnet.c",
+      "line": 504,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tb[IPSET_ATTR_IP_TO] || tb[IPSET_ATTR_IP2_TO]))",
+          "exit_kind": "return",
+          "source_line": 493,
+          "exit_line": 494
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 497,
+          "exit_line": 498
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 501,
+          "exit_line": 502
+        }
+      ]
+    },
+    {
+      "caller": "list_set_uadt",
+      "file": "net/netfilter/ipset/ip_set_list_set.c",
+      "line": 363,
+      "guards": []
+    }
+  ]
+}

@@ -1,0 +1,1040 @@
+{
+  "callee": "nft_parse_register_load",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 31,
+  "callsites": [
+    {
+      "caller": "nft_bitwise_init",
+      "file": "net/netfilter/nft_bitwise.c",
+      "line": 174,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 169,
+          "exit_line": 170
+        }
+      ]
+    },
+    {
+      "caller": "nft_bitwise_fast_init",
+      "file": "net/netfilter/nft_bitwise.c",
+      "line": 367,
+      "guards": []
+    },
+    {
+      "caller": "nft_byteorder_init",
+      "file": "net/netfilter/nft_byteorder.c",
+      "line": 142,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 122,
+          "exit_line": 123
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 137,
+          "exit_line": 138
+        }
+      ]
+    },
+    {
+      "caller": "nft_cmp_init",
+      "file": "net/netfilter/nft_cmp.c",
+      "line": 86,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 83,
+          "exit_line": 84
+        }
+      ]
+    },
+    {
+      "caller": "nft_cmp_fast_init",
+      "file": "net/netfilter/nft_cmp.c",
+      "line": 224,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 221,
+          "exit_line": 222
+        }
+      ]
+    },
+    {
+      "caller": "nft_cmp16_fast_init",
+      "file": "net/netfilter/nft_cmp.c",
+      "line": 324,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 321,
+          "exit_line": 322
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_set_init",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 614,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION])",
+          "exit_kind": "return",
+          "source_line": 556,
+          "exit_line": 557
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION])",
+          "exit_kind": "return",
+          "source_line": 563,
+          "exit_line": 564
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 567,
+          "exit_line": 568
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_ct_tmpl_alloc_pcpu())",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION])",
+          "exit_kind": "return",
+          "source_line": 585,
+          "exit_line": 586
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION])",
+          "exit_kind": "return",
+          "source_line": 592,
+          "exit_line": 593
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CT_DIRECTION])",
+          "exit_kind": "break",
+          "source_line": 601
+        }
+      ]
+    },
+    {
+      "caller": "nft_dup_netdev_init",
+      "file": "net/netfilter/nft_dup_netdev.c",
+      "line": 43,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_DUP_SREG_DEV] == NULL)",
+          "exit_kind": "return",
+          "source_line": 40,
+          "exit_line": 41
+        }
+      ]
+    },
+    {
+      "caller": "nft_dynset_init",
+      "file": "net/netfilter/nft_dynset.c",
+      "line": 217,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&nft_net->commit_mutex)",
+          "source_line": 171
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(set)",
+          "source_line": 191
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~(NFT_DYNSET_F_INV | NFT_DYNSET_F_EXPR))",
+          "exit_kind": "return",
+          "source_line": 180,
+          "exit_line": 181
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_DYNSET_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 178
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(set))",
+          "exit_kind": "return",
+          "source_line": 191,
+          "exit_line": 192
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->flags & NFT_SET_OBJECT)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->ops->update == NULL)",
+          "exit_kind": "return",
+          "source_line": 197,
+          "exit_line": 198
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->flags & NFT_SET_CONSTANT)",
+          "exit_kind": "return",
+          "source_line": 200,
+          "exit_line": 201
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->op > NFT_DYNSET_OP_DELETE)",
+          "exit_kind": "return",
+          "source_line": 204,
+          "exit_line": 205
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(set->flags & NFT_SET_TIMEOUT))",
+          "exit_kind": "return",
+          "source_line": 209,
+          "exit_line": 210
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 213,
+          "exit_line": 214
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_DYNSET_TIMEOUT] != NULL)",
+          "exit_kind": "return",
+          "source_line": 208
+        }
+      ]
+    },
+    {
+      "caller": "nft_dynset_init",
+      "file": "net/netfilter/nft_dynset.c",
+      "line": 228,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&nft_net->commit_mutex)",
+          "source_line": 171
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(set)",
+          "source_line": 191
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~(NFT_DYNSET_F_INV | NFT_DYNSET_F_EXPR))",
+          "exit_kind": "return",
+          "source_line": 180,
+          "exit_line": 181
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_DYNSET_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 178
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(set))",
+          "exit_kind": "return",
+          "source_line": 191,
+          "exit_line": 192
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->flags & NFT_SET_OBJECT)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->ops->update == NULL)",
+          "exit_kind": "return",
+          "source_line": 197,
+          "exit_line": 198
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->flags & NFT_SET_CONSTANT)",
+          "exit_kind": "return",
+          "source_line": 200,
+          "exit_line": 201
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->op > NFT_DYNSET_OP_DELETE)",
+          "exit_kind": "return",
+          "source_line": 204,
+          "exit_line": 205
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(set->flags & NFT_SET_TIMEOUT))",
+          "exit_kind": "return",
+          "source_line": 209,
+          "exit_line": 210
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 213,
+          "exit_line": 214
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_DYNSET_TIMEOUT] != NULL)",
+          "exit_kind": "return",
+          "source_line": 208
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 219,
+          "exit_line": 220
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(set->flags & NFT_SET_MAP))",
+          "exit_kind": "return",
+          "source_line": 223,
+          "exit_line": 224
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->dtype == NFT_DATA_VERDICT)",
+          "exit_kind": "return",
+          "source_line": 225,
+          "exit_line": 226
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_DYNSET_SREG_DATA] != NULL",
+          "polarity": "in_true_branch",
+          "source_line": 222
+        }
+      ]
+    },
+    {
+      "caller": "nft_exthdr_tcp_set_init",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 592,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_EXTHDR_DREG] || tb[NFTA_EXTHDR_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 561,
+          "exit_line": 562
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 565,
+          "exit_line": 566
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 569,
+          "exit_line": 570
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(offset < 2)",
+          "exit_kind": "return",
+          "source_line": 572,
+          "exit_line": 573
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 583,
+          "exit_line": 584
+        }
+      ]
+    },
+    {
+      "caller": "nft_fwd_netdev_init",
+      "file": "net/netfilter/nft_fwd_netdev.c",
+      "line": 55,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_FWD_SREG_DEV] == NULL)",
+          "exit_kind": "return",
+          "source_line": 52,
+          "exit_line": 53
+        }
+      ]
+    },
+    {
+      "caller": "nft_fwd_neigh_init",
+      "file": "net/netfilter/nft_fwd_netdev.c",
+      "line": 180,
+      "guards": []
+    },
+    {
+      "caller": "nft_fwd_neigh_init",
+      "file": "net/netfilter/nft_fwd_netdev.c",
+      "line": 185,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 182,
+          "exit_line": 183
+        }
+      ]
+    },
+    {
+      "caller": "nft_jhash_init",
+      "file": "net/netfilter/nft_hash.c",
+      "line": 94,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 87,
+          "exit_line": 88
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(len == 0)",
+          "exit_kind": "return",
+          "source_line": 89,
+          "exit_line": 90
+        }
+      ]
+    },
+    {
+      "caller": "nft_lookup_init",
+      "file": "net/netfilter/nft_lookup.c",
+      "line": 114,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(set)",
+          "source_line": 111
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(set))",
+          "exit_kind": "return",
+          "source_line": 111,
+          "exit_line": 112
+        }
+      ]
+    },
+    {
+      "caller": "nft_masq_init",
+      "file": "net/netfilter/nft_masq.c",
+      "line": 57,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->flags & ~NF_NAT_RANGE_MASK)",
+          "exit_kind": "return",
+          "source_line": 52,
+          "exit_line": 53
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_MASQ_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 50
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_MASQ_REG_PROTO_MIN]",
+          "polarity": "in_true_branch",
+          "source_line": 56
+        }
+      ]
+    },
+    {
+      "caller": "nft_masq_init",
+      "file": "net/netfilter/nft_masq.c",
+      "line": 63,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->flags & ~NF_NAT_RANGE_MASK)",
+          "exit_kind": "return",
+          "source_line": 52,
+          "exit_line": 53
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_MASQ_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 50
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 59,
+          "exit_line": 60
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_MASQ_REG_PROTO_MIN]",
+          "polarity": "in_true_branch",
+          "source_line": 56
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_MASQ_REG_PROTO_MAX]",
+          "polarity": "in_true_branch",
+          "source_line": 62
+        }
+      ]
+    },
+    {
+      "caller": "nft_meta_set_init",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 660,
+      "guards": []
+    },
+    {
+      "caller": "nft_nat_init",
+      "file": "net/netfilter/nft_nat.c",
+      "line": 211,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_FAMILY] == NULL)",
+          "exit_kind": "return",
+          "source_line": 189,
+          "exit_line": 190
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->family != NFPROTO_INET && ctx->family != family)",
+          "exit_kind": "return",
+          "source_line": 193,
+          "exit_line": 194
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_REG_ADDR_MIN])",
+          "exit_kind": "return",
+          "source_line": 204,
+          "exit_line": 205
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_NAT_REG_ADDR_MIN]",
+          "polarity": "in_true_branch",
+          "source_line": 210
+        }
+      ]
+    },
+    {
+      "caller": "nft_nat_init",
+      "file": "net/netfilter/nft_nat.c",
+      "line": 217,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_FAMILY] == NULL)",
+          "exit_kind": "return",
+          "source_line": 189,
+          "exit_line": 190
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->family != NFPROTO_INET && ctx->family != family)",
+          "exit_kind": "return",
+          "source_line": 193,
+          "exit_line": 194
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_REG_ADDR_MIN])",
+          "exit_kind": "return",
+          "source_line": 204,
+          "exit_line": 205
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 213,
+          "exit_line": 214
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_NAT_REG_ADDR_MIN]",
+          "polarity": "in_true_branch",
+          "source_line": 210
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_NAT_REG_ADDR_MAX]",
+          "polarity": "in_true_branch",
+          "source_line": 216
+        }
+      ]
+    },
+    {
+      "caller": "nft_nat_init",
+      "file": "net/netfilter/nft_nat.c",
+      "line": 231,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_FAMILY] == NULL)",
+          "exit_kind": "return",
+          "source_line": 189,
+          "exit_line": 190
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->family != NFPROTO_INET && ctx->family != family)",
+          "exit_kind": "return",
+          "source_line": 193,
+          "exit_line": 194
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_REG_ADDR_MIN])",
+          "exit_kind": "return",
+          "source_line": 204,
+          "exit_line": 205
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 213,
+          "exit_line": 214
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 220,
+          "exit_line": 221
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_REG_ADDR_MAX])",
+          "exit_kind": "return",
+          "source_line": 216
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_REG_ADDR_MIN])",
+          "exit_kind": "return",
+          "source_line": 210
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_NAT_REG_PROTO_MIN]",
+          "polarity": "in_true_branch",
+          "source_line": 230
+        }
+      ]
+    },
+    {
+      "caller": "nft_nat_init",
+      "file": "net/netfilter/nft_nat.c",
+      "line": 237,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_FAMILY] == NULL)",
+          "exit_kind": "return",
+          "source_line": 189,
+          "exit_line": 190
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->family != NFPROTO_INET && ctx->family != family)",
+          "exit_kind": "return",
+          "source_line": 193,
+          "exit_line": 194
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_REG_ADDR_MIN])",
+          "exit_kind": "return",
+          "source_line": 204,
+          "exit_line": 205
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 213,
+          "exit_line": 214
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 220,
+          "exit_line": 221
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_REG_ADDR_MAX])",
+          "exit_kind": "return",
+          "source_line": 216
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_NAT_REG_ADDR_MIN])",
+          "exit_kind": "return",
+          "source_line": 210
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 233,
+          "exit_line": 234
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_NAT_REG_PROTO_MIN]",
+          "polarity": "in_true_branch",
+          "source_line": 230
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_NAT_REG_PROTO_MAX]",
+          "polarity": "in_true_branch",
+          "source_line": 236
+        }
+      ]
+    },
+    {
+      "caller": "nft_objref_map_init",
+      "file": "net/netfilter/nft_objref.c",
+      "line": 146,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(set)",
+          "source_line": 140
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(set))",
+          "exit_kind": "return",
+          "source_line": 140,
+          "exit_line": 141
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(set->flags & NFT_SET_OBJECT))",
+          "exit_kind": "return",
+          "source_line": 143,
+          "exit_line": 144
+        }
+      ]
+    },
+    {
+      "caller": "nft_payload_set_init",
+      "file": "net/netfilter/nft_payload.c",
+      "line": 786,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 755,
+          "exit_line": 756
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_PAYLOAD_CSUM_OFFSET])",
+          "exit_kind": "return",
+          "source_line": 752
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~NFT_PAYLOAD_L4CSUM_PSEUDOHDR)",
+          "exit_kind": "return",
+          "source_line": 764,
+          "exit_line": 765
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_PAYLOAD_CSUM_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 760
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->base != NFT_PAYLOAD_TRANSPORT_HEADER)",
+          "exit_kind": "return",
+          "source_line": 775,
+          "exit_line": 776
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->csum_offset != offsetof(struct sctphdr, checksum))",
+          "exit_kind": "return",
+          "source_line": 778,
+          "exit_line": 779
+        }
+      ]
+    },
+    {
+      "caller": "nft_queue_sreg_init",
+      "file": "net/netfilter/nft_queue.c",
+      "line": 139,
+      "guards": []
+    },
+    {
+      "caller": "nft_range_init",
+      "file": "net/netfilter/nft_range.c",
+      "line": 86,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 73,
+          "exit_line": 74
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 78,
+          "exit_line": 79
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(desc_from.len != desc_to.len)",
+          "exit_kind": "goto",
+          "source_line": 81
+        }
+      ]
+    },
+    {
+      "caller": "nft_redir_init",
+      "file": "net/netfilter/nft_redir.c",
+      "line": 53,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_REDIR_REG_PROTO_MIN]",
+          "polarity": "in_true_branch",
+          "source_line": 52
+        }
+      ]
+    },
+    {
+      "caller": "nft_redir_init",
+      "file": "net/netfilter/nft_redir.c",
+      "line": 59,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 55,
+          "exit_line": 56
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_REDIR_REG_PROTO_MIN]",
+          "polarity": "in_true_branch",
+          "source_line": 52
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_REDIR_REG_PROTO_MAX]",
+          "polarity": "in_true_branch",
+          "source_line": 58
+        }
+      ]
+    },
+    {
+      "caller": "nft_tproxy_init",
+      "file": "net/netfilter/nft_tproxy.c",
+      "line": 257,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->family != NFPROTO_IPV4)",
+          "exit_kind": "return",
+          "source_line": 207,
+          "exit_line": 208
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->family != NFPROTO_IPV6)",
+          "exit_kind": "return",
+          "source_line": 212,
+          "exit_line": 213
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->family == NFPROTO_UNSPEC && tb[NFTA_TPROXY_REG_ADDR])",
+          "exit_kind": "return",
+          "source_line": 223,
+          "exit_line": 224
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 230,
+          "exit_line": 231
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 237,
+          "exit_line": 238
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 244,
+          "exit_line": 245
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 248,
+          "exit_line": 249
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_TPROXY_REG_ADDR]",
+          "polarity": "in_true_branch",
+          "source_line": 256
+        }
+      ]
+    },
+    {
+      "caller": "nft_tproxy_init",
+      "file": "net/netfilter/nft_tproxy.c",
+      "line": 264,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->family != NFPROTO_IPV4)",
+          "exit_kind": "return",
+          "source_line": 207,
+          "exit_line": 208
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->family != NFPROTO_IPV6)",
+          "exit_kind": "return",
+          "source_line": 212,
+          "exit_line": 213
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->family == NFPROTO_UNSPEC && tb[NFTA_TPROXY_REG_ADDR])",
+          "exit_kind": "return",
+          "source_line": 223,
+          "exit_line": 224
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 230,
+          "exit_line": 231
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 237,
+          "exit_line": 238
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 244,
+          "exit_line": 245
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 248,
+          "exit_line": 249
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 259,
+          "exit_line": 260
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_TPROXY_REG_ADDR])",
+          "exit_kind": "return",
+          "source_line": 256
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFTA_TPROXY_REG_PORT]",
+          "polarity": "in_true_branch",
+          "source_line": 263
+        }
+      ]
+    }
+  ]
+}

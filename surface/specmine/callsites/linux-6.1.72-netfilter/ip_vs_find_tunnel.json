@@ -1,0 +1,101 @@
+{
+  "callee": "ip_vs_find_tunnel",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ctl.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ipvs_udp_decap",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 1521,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "udph != NULL",
+          "source_line": 1518
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!udph)",
+          "exit_kind": "goto",
+          "source_line": 1518,
+          "exit_line": 1519
+        }
+      ]
+    },
+    {
+      "caller": "ipvs_gre_decap",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 1555,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "greh != NULL",
+          "source_line": 1553
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!greh)",
+          "exit_kind": "goto",
+          "source_line": 1553,
+          "exit_line": 1554
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_in_icmp",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 1647,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_gather_frags(ipvs, skb, ip_vs_defrag_user(hooknum)))",
+          "exit_kind": "return",
+          "source_line": 1602,
+          "exit_line": 1603
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_is_fragment(ip_hdr(skb)))",
+          "exit_kind": "return",
+          "source_line": 1601
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ic == NULL)",
+          "exit_kind": "return",
+          "source_line": 1609,
+          "exit_line": 1610
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cih == NULL)",
+          "exit_kind": "return",
+          "source_line": 1633,
+          "exit_line": 1634
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(cih->frag_off & htons(IP_OFFSET)))",
+          "exit_kind": "return",
+          "source_line": 1642,
+          "exit_line": 1643
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(skb_rtable(skb)->rt_flags & RTCF_LOCAL))",
+          "exit_kind": "return",
+          "source_line": 1645,
+          "exit_line": 1646
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cih->protocol == IPPROTO_IPIP",
+          "polarity": "in_true_branch",
+          "source_line": 1639
+        }
+      ]
+    }
+  ]
+}

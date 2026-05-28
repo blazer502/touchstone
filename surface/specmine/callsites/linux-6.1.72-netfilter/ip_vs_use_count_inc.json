@@ -1,0 +1,63 @@
+{
+  "callee": "ip_vs_use_count_inc",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ctl.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "register_ip_vs_app",
+      "file": "net/netfilter/ipvs/ip_vs_app.c",
+      "line": 197,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 194
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_add_service",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1294,
+      "guards": []
+    },
+    {
+      "caller": "register_ip_vs_pe",
+      "file": "net/netfilter/ipvs/ip_vs_pe.c",
+      "line": 71,
+      "guards": []
+    },
+    {
+      "caller": "register_ip_vs_scheduler",
+      "file": "net/netfilter/ipvs/ip_vs_sched.c",
+      "line": 182,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "scheduler != NULL",
+          "source_line": 171
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!scheduler)",
+          "exit_kind": "return",
+          "source_line": 171
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!scheduler->name)",
+          "exit_kind": "return",
+          "source_line": 176
+        }
+      ]
+    },
+    {
+      "caller": "start_sync_thread",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 1767,
+      "guards": []
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "contracts": [],
+  "generated_at": 1779926552,
+  "min_support": 3,
+  "stats": {
+    "by_kind_class": {},
+    "callees_examined": 2,
+    "callees_with_contracts": 0,
+    "mined_contracts": 0,
+    "total_callsites": 7,
+    "wall_seconds": 0.0
+  },
+  "target": "smoke",
+  "tau": 0.85
+}

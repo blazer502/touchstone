@@ -1,0 +1,95 @@
+{
+  "callee": "nf_ct_expect_find_get",
+  "defined_in": "net/netfilter/nf_conntrack_expect.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "ctnetlink_get_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3337,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_EXPECT_MASTER])",
+          "exit_kind": "return",
+          "source_line": 3308,
+          "exit_line": 3309
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 3307
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3322,
+          "exit_line": 3323
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3334,
+          "exit_line": 3335
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_del_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3412,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3403,
+          "exit_line": 3404
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3408,
+          "exit_line": 3409
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_EXPECT_TUPLE]",
+          "polarity": "in_true_branch",
+          "source_line": 3400
+        }
+      ]
+    },
+    {
+      "caller": "pptp_expectfn",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 115,
+      "guards": []
+    },
+    {
+      "caller": "destroy_sibling_or_exp",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 149,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(h)",
+          "exit_kind": "return",
+          "source_line": 140
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "h",
+          "polarity": "in_false_branch",
+          "source_line": 148
+        }
+      ]
+    }
+  ]
+}

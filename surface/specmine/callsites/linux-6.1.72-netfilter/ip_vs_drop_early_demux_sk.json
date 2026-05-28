@@ -1,0 +1,34 @@
+{
+  "callee": "ip_vs_drop_early_demux_sk",
+  "defined_in": "net/netfilter/ipvs/ip_vs_xmit.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_nat_send_or_cont",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 650,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_send_or_cont",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 674,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!local",
+          "polarity": "in_true_branch",
+          "source_line": 673
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_prepare_tunneled_skb",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 959,
+      "guards": []
+    }
+  ]
+}

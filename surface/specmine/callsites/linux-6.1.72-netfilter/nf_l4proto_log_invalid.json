@@ -1,0 +1,197 @@
+{
+  "callee": "nf_l4proto_log_invalid",
+  "defined_in": "net/netfilter/nf_conntrack_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 10,
+  "callsites": [
+    {
+      "caller": "nf_ct_l4proto_log_invalid",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 90,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(likely(net->ct.sysctl_log_invalid == 0))",
+          "exit_kind": "return",
+          "source_line": 83,
+          "exit_line": 84
+        }
+      ]
+    },
+    {
+      "caller": "dccp_error",
+      "file": "net/netfilter/nf_conntrack_proto_dccp.c",
+      "line": 485,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cscov > dccp_len)",
+          "exit_kind": "goto",
+          "source_line": 458
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(type >= DCCP_PKT_INVALID)",
+          "exit_kind": "goto",
+          "source_line": 473
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(test_bit(type, &require_seq48) && !dh->dccph_x)",
+          "exit_kind": "goto",
+          "source_line": 478
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_inet_error",
+      "file": "net/netfilter/nf_conntrack_proto_icmp.c",
+      "line": 173,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "h != NULL",
+          "source_line": 134
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(skb_nfct(skb))",
+          "macro": "WARN_ON",
+          "source_line": 120
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_invert_tuple(&innertuple, &origtuple))",
+          "exit_kind": "return",
+          "source_line": 130,
+          "exit_line": 131
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!h)",
+          "exit_kind": "return",
+          "source_line": 134,
+          "exit_line": 135
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nf_inet_addr_cmp(outer_daddr, ct_daddr)",
+          "polarity": "in_true_branch",
+          "source_line": 171
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "state->pf == AF_INET",
+          "polarity": "in_true_branch",
+          "source_line": 172
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_inet_error",
+      "file": "net/netfilter/nf_conntrack_proto_icmp.c",
+      "line": 178,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "h != NULL",
+          "source_line": 134
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(skb_nfct(skb))",
+          "macro": "WARN_ON",
+          "source_line": 120
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_invert_tuple(&innertuple, &origtuple))",
+          "exit_kind": "return",
+          "source_line": 130,
+          "exit_line": 131
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!h)",
+          "exit_kind": "return",
+          "source_line": 134,
+          "exit_line": 135
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nf_inet_addr_cmp(outer_daddr, ct_daddr)",
+          "polarity": "in_true_branch",
+          "source_line": 171
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "state->pf == AF_INET",
+          "polarity": "in_false_branch",
+          "source_line": 177
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "state->pf == AF_INET6",
+          "polarity": "in_true_branch",
+          "source_line": 177
+        }
+      ]
+    },
+    {
+      "caller": "icmp_error_log",
+      "file": "net/netfilter/nf_conntrack_proto_icmp.c",
+      "line": 200,
+      "guards": []
+    },
+    {
+      "caller": "icmpv6_error_log",
+      "file": "net/netfilter/nf_conntrack_proto_icmpv6.c",
+      "line": 129,
+      "guards": []
+    },
+    {
+      "caller": "sctp_error",
+      "file": "net/netfilter/nf_conntrack_proto_sctp.c",
+      "line": 343,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb->len < dataoff + sizeof(struct sctphdr))",
+          "exit_kind": "goto",
+          "source_line": 323
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, dataoff + sizeof(*sh)))",
+          "exit_kind": "goto",
+          "source_line": 330
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(sh->checksum != sctp_compute_cksum(skb, dataoff))",
+          "exit_kind": "goto",
+          "source_line": 335
+        }
+      ]
+    },
+    {
+      "caller": "tcp_error_log",
+      "file": "net/netfilter/nf_conntrack_proto_tcp.c",
+      "line": 796,
+      "guards": []
+    },
+    {
+      "caller": "udp_error_log",
+      "file": "net/netfilter/nf_conntrack_proto_udp.c",
+      "line": 41,
+      "guards": []
+    },
+    {
+      "caller": "udplite_error_log",
+      "file": "net/netfilter/nf_conntrack_proto_udp.c",
+      "line": 135,
+      "guards": []
+    }
+  ]
+}

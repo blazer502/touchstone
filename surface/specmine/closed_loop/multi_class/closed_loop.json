@@ -1,0 +1,90 @@
+{
+  "generated_at": 1779931894,
+  "min_suspicion": 0.5,
+  "records": [
+    {
+      "agent_disposition": "candidate",
+      "agent_reason": "Tier-3 cbmc unsafe at line 47 [__specmine_wrap_lookup_thing.assertion.1] (bounded-sound witness; runtime PoV needs Tier-1 wrap)",
+      "disposition": "confirmed",
+      "harness_path": "/home/chanyoung/veri-agent/surface/specmine/closed_loop/multi_class/harnesses/lookup_thing_caller_buggy_lock_lock.c",
+      "outlier": {
+        "callee": "lookup_thing",
+        "caller": "caller_buggy_lock",
+        "callsite_count": 11,
+        "contract_kind_class": "lock",
+        "contract_kind_label": "lock_held",
+        "file": "fixture.c",
+        "line": 126,
+        "local_establishment": 0.0,
+        "missing_contract": "rcu_read_lock_held",
+        "support_count": 10,
+        "support_pct": 0.9091,
+        "suspicion": 0.9091
+      },
+      "post_refine_disposition": "confirmed",
+      "refinement": null,
+      "router_verdict": "bmc_unsafe",
+      "total_wall_ms": 573,
+      "witness_path": "/tmp/tier3-cbmc-eby0opkn/lookup_thing_caller_buggy_lock_lock.cbmc-pov.json"
+    },
+    {
+      "agent_disposition": "candidate",
+      "agent_reason": "Tier-3 cbmc unsafe at line 57 [__specmine_wrap_process_item.assertion.1] (bounded-sound witness; runtime PoV needs Tier-1 wrap)",
+      "disposition": "confirmed",
+      "harness_path": "/home/chanyoung/veri-agent/surface/specmine/closed_loop/multi_class/harnesses/process_item_caller_buggy_null_null.c",
+      "outlier": {
+        "callee": "process_item",
+        "caller": "caller_buggy_null",
+        "callsite_count": 7,
+        "contract_kind_class": "null",
+        "contract_kind_label": "null_check",
+        "file": "fixture.c",
+        "line": 182,
+        "local_establishment": 0.0,
+        "missing_contract": "!IS_ERR_OR_NULL(item)",
+        "support_count": 6,
+        "support_pct": 0.8571,
+        "suspicion": 0.8571
+      },
+      "post_refine_disposition": "confirmed",
+      "refinement": null,
+      "router_verdict": "bmc_unsafe",
+      "total_wall_ms": 584,
+      "witness_path": "/tmp/tier3-cbmc-o7oil5ie/process_item_caller_buggy_null_null.cbmc-pov.json"
+    }
+  ],
+  "refine_unwind": 8,
+  "stats": {
+    "by_class_confirmed": {
+      "lock": 1,
+      "null": 1
+    },
+    "by_class_post_refine_confirmed": {
+      "lock": 1,
+      "null": 1
+    },
+    "by_disposition_post_refine": {
+      "confirmed": 2
+    },
+    "by_disposition_pre_refine": {
+      "confirmed": 2
+    },
+    "classes_with_confirmed_leads": 2,
+    "confirmed_post_refine": 2,
+    "confirmed_pre_refine": 2,
+    "false_confirmations": 0,
+    "inconclusive": 0,
+    "outliers_dispatched": 2,
+    "outliers_total": 3,
+    "refined_flips": 0,
+    "refuted": 0,
+    "skipped": {
+      "unsupported_contract_class": 1
+    },
+    "wall_seconds": 1.2
+  },
+  "target": "multi_class",
+  "timeout_s": 30,
+  "unwind": 4,
+  "use_llm_refine": true
+}

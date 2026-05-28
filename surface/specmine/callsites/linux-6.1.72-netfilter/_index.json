@@ -1,0 +1,1914 @@
+{
+  "target": "linux-6.1.72-netfilter",
+  "source_root": "/home/chanyoung/veri-agent/eval/kernelctf/linux/source",
+  "scope": "net/netfilter",
+  "generated_at": 1779926153,
+  "stats": {
+    "defined_callees": 3886,
+    "mining_callees": 3029,
+    "callers_scanned": 3921,
+    "callees_with_callsites": 1856,
+    "callees_emitted": 474,
+    "total_callsites": 2950,
+    "total_guards": 10621,
+    "wall_seconds": 10.37
+  },
+  "callees": {
+    "bpf_nf_ct_tuple_parse": {
+      "callsite_count": 3,
+      "out_file": "bpf_nf_ct_tuple_parse.json"
+    },
+    "nf_conntrack_find_get": {
+      "callsite_count": 16,
+      "out_file": "nf_conntrack_find_get.json"
+    },
+    "nf_conntrack_free": {
+      "callsite_count": 5,
+      "out_file": "nf_conntrack_free.json"
+    },
+    "nf_ct_change_status_common": {
+      "callsite_count": 3,
+      "out_file": "nf_ct_change_status_common.json"
+    },
+    "nf_h323_error_boundary": {
+      "callsite_count": 42,
+      "out_file": "nf_h323_error_boundary.json"
+    },
+    "get_bits": {
+      "callsite_count": 8,
+      "out_file": "get_bits.json"
+    },
+    "get_len": {
+      "callsite_count": 10,
+      "out_file": "get_len.json"
+    },
+    "get_bit": {
+      "callsite_count": 3,
+      "out_file": "get_bit.json"
+    },
+    "nf_conntrack_lock": {
+      "callsite_count": 4,
+      "out_file": "nf_conntrack_lock.json"
+    },
+    "nf_conntrack_double_unlock": {
+      "callsite_count": 7,
+      "out_file": "nf_conntrack_double_unlock.json"
+    },
+    "hash_conntrack_raw": {
+      "callsite_count": 6,
+      "out_file": "hash_conntrack_raw.json"
+    },
+    "get_l4proto": {
+      "callsite_count": 3,
+      "out_file": "get_l4proto.json"
+    },
+    "nf_ct_get_tuple": {
+      "callsite_count": 3,
+      "out_file": "nf_ct_get_tuple.json"
+    },
+    "nf_ct_remove_expectations": {
+      "callsite_count": 4,
+      "out_file": "nf_ct_remove_expectations.json"
+    },
+    "nf_ct_gre_keymap_destroy": {
+      "callsite_count": 3,
+      "out_file": "nf_ct_gre_keymap_destroy.json"
+    },
+    "nf_ct_tmpl_free": {
+      "callsite_count": 3,
+      "out_file": "nf_ct_tmpl_free.json"
+    },
+    "hash_conntrack": {
+      "callsite_count": 5,
+      "out_file": "hash_conntrack.json"
+    },
+    "nf_conntrack_double_lock": {
+      "callsite_count": 3,
+      "out_file": "nf_conntrack_double_lock.json"
+    },
+    "nf_ct_gc_expired": {
+      "callsite_count": 4,
+      "out_file": "nf_ct_gc_expired.json"
+    },
+    "nf_ct_key_equal": {
+      "callsite_count": 8,
+      "out_file": "nf_ct_key_equal.json"
+    },
+    "__nf_conntrack_find_get": {
+      "callsite_count": 4,
+      "out_file": "__nf_conntrack_find_get.json"
+    },
+    "nf_ct_l4proto_find": {
+      "callsite_count": 15,
+      "out_file": "nf_ct_l4proto_find.json"
+    },
+    "nf_ct_delete": {
+      "callsite_count": 4,
+      "out_file": "nf_ct_delete.json"
+    },
+    "nf_ct_invert_tuple": {
+      "callsite_count": 10,
+      "out_file": "nf_ct_invert_tuple.json"
+    },
+    "nf_ct_ecache_ext_add": {
+      "callsite_count": 4,
+      "out_file": "nf_ct_ecache_ext_add.json"
+    },
+    "nf_ct_helper_ext_add": {
+      "callsite_count": 6,
+      "out_file": "nf_ct_helper_ext_add.json"
+    },
+    "nf_ct_expect_put": {
+      "callsite_count": 42,
+      "out_file": "nf_ct_expect_put.json"
+    },
+    "nf_ct_get_tuplepr": {
+      "callsite_count": 4,
+      "out_file": "nf_ct_get_tuplepr.json"
+    },
+    "nf_ct_iterate_cleanup_net": {
+      "callsite_count": 5,
+      "out_file": "nf_ct_iterate_cleanup_net.json"
+    },
+    "nf_ct_alloc_hashtable": {
+      "callsite_count": 5,
+      "out_file": "nf_ct_alloc_hashtable.json"
+    },
+    "instance_hashfn": {
+      "callsite_count": 4,
+      "out_file": "instance_hashfn.json"
+    },
+    "nfnl_log_pernet": {
+      "callsite_count": 8,
+      "out_file": "nfnl_log_pernet.json"
+    },
+    "__nfulnl_flush": {
+      "callsite_count": 4,
+      "out_file": "__nfulnl_flush.json"
+    },
+    "instance_put": {
+      "callsite_count": 5,
+      "out_file": "instance_put.json"
+    },
+    "__instance_destroy": {
+      "callsite_count": 4,
+      "out_file": "__instance_destroy.json"
+    },
+    "nfnetlink_unicast": {
+      "callsite_count": 24,
+      "out_file": "nfnetlink_unicast.json"
+    },
+    "nfnl_unlock": {
+      "callsite_count": 32,
+      "out_file": "nfnl_unlock.json"
+    },
+    "nfnl_lock": {
+      "callsite_count": 28,
+      "out_file": "nfnl_lock.json"
+    },
+    "get_next": {
+      "callsite_count": 4,
+      "out_file": "get_next.json"
+    },
+    "nf_log_unset": {
+      "callsite_count": 10,
+      "out_file": "nf_log_unset.json"
+    },
+    "ctnetlink_dump_tuples": {
+      "callsite_count": 8,
+      "out_file": "ctnetlink_dump_tuples.json"
+    },
+    "nf_ct_get_id": {
+      "callsite_count": 3,
+      "out_file": "nf_ct_get_id.json"
+    },
+    "ctnetlink_dump_acct": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_dump_acct.json"
+    },
+    "ctnetlink_dump_timestamp": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_dump_timestamp.json"
+    },
+    "ctnetlink_dump_helpinfo": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_dump_helpinfo.json"
+    },
+    "ctnetlink_dump_labels": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_dump_labels.json"
+    },
+    "ctnetlink_dump_ct_seq_adj": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_dump_ct_seq_adj.json"
+    },
+    "ctnetlink_dump_ct_synproxy": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_dump_ct_synproxy.json"
+    },
+    "ctnetlink_dump_status": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_dump_status.json"
+    },
+    "ctnetlink_dump_mark": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_dump_mark.json"
+    },
+    "ctnetlink_dump_secctx": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_dump_secctx.json"
+    },
+    "ctnetlink_dump_id": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_dump_id.json"
+    },
+    "ctnetlink_dump_master": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_dump_master.json"
+    },
+    "ctnetlink_dump_timeout": {
+      "callsite_count": 4,
+      "out_file": "ctnetlink_dump_timeout.json"
+    },
+    "ctnetlink_dump_protoinfo": {
+      "callsite_count": 4,
+      "out_file": "ctnetlink_dump_protoinfo.json"
+    },
+    "ctnetlink_dump_zone_id": {
+      "callsite_count": 9,
+      "out_file": "ctnetlink_dump_zone_id.json"
+    },
+    "nfnetlink_has_listeners": {
+      "callsite_count": 12,
+      "out_file": "nfnetlink_has_listeners.json"
+    },
+    "nfnetlink_send": {
+      "callsite_count": 6,
+      "out_file": "nfnetlink_send.json"
+    },
+    "nfnetlink_set_err": {
+      "callsite_count": 10,
+      "out_file": "nfnetlink_set_err.json"
+    },
+    "ctnetlink_parse_zone": {
+      "callsite_count": 10,
+      "out_file": "ctnetlink_parse_zone.json"
+    },
+    "ctnetlink_parse_tuple_filter": {
+      "callsite_count": 4,
+      "out_file": "ctnetlink_parse_tuple_filter.json"
+    },
+    "ctnetlink_fill_info": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_fill_info.json"
+    },
+    "ctnetlink_parse_tuple": {
+      "callsite_count": 18,
+      "out_file": "ctnetlink_parse_tuple.json"
+    },
+    "__nf_conntrack_helper_find": {
+      "callsite_count": 9,
+      "out_file": "__nf_conntrack_helper_find.json"
+    },
+    "ctnetlink_change_mark": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_change_mark.json"
+    },
+    "ctnetlink_attach_labels": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_attach_labels.json"
+    },
+    "ctnetlink_alloc_expect": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_alloc_expect.json"
+    },
+    "ctnetlink_exp_dump_tuple": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_exp_dump_tuple.json"
+    },
+    "ctnetlink_exp_fill_info": {
+      "callsite_count": 3,
+      "out_file": "ctnetlink_exp_fill_info.json"
+    },
+    "nf_ct_expect_find_get": {
+      "callsite_count": 4,
+      "out_file": "nf_ct_expect_find_get.json"
+    },
+    "nf_ct_expect_alloc": {
+      "callsite_count": 23,
+      "out_file": "nf_ct_expect_alloc.json"
+    },
+    "__nf_ct_expect_find": {
+      "callsite_count": 4,
+      "out_file": "__nf_ct_expect_find.json"
+    },
+    "instance_lookup": {
+      "callsite_count": 4,
+      "out_file": "instance_lookup.json"
+    },
+    "nfqnl_flush": {
+      "callsite_count": 4,
+      "out_file": "nfqnl_flush.json"
+    },
+    "nfqnl_reinject": {
+      "callsite_count": 4,
+      "out_file": "nfqnl_reinject.json"
+    },
+    "__nfqnl_enqueue_packet": {
+      "callsite_count": 3,
+      "out_file": "__nfqnl_enqueue_packet.json"
+    },
+    "nf_queue_entry_free": {
+      "callsite_count": 5,
+      "out_file": "nf_queue_entry_free.json"
+    },
+    "nfnl_queue_pernet": {
+      "callsite_count": 15,
+      "out_file": "nfnl_queue_pernet.json"
+    },
+    "nf_logger_put": {
+      "callsite_count": 5,
+      "out_file": "nf_logger_put.json"
+    },
+    "lockdep_nfnl_is_held": {
+      "callsite_count": 3,
+      "out_file": "lockdep_nfnl_is_held.json"
+    },
+    "flag_nested": {
+      "callsite_count": 7,
+      "out_file": "flag_nested.json"
+    },
+    "ip_set_pernet": {
+      "callsite_count": 20,
+      "out_file": "ip_set_pernet.json"
+    },
+    "ip_set_rcu_get": {
+      "callsite_count": 4,
+      "out_file": "ip_set_rcu_get.json"
+    },
+    "ip_set_lock": {
+      "callsite_count": 5,
+      "out_file": "ip_set_lock.json"
+    },
+    "ip_set_unlock": {
+      "callsite_count": 5,
+      "out_file": "ip_set_unlock.json"
+    },
+    "protocol": {
+      "callsite_count": 6,
+      "out_file": "protocol.json"
+    },
+    "find_set_and_id": {
+      "callsite_count": 8,
+      "out_file": "find_set_and_id.json"
+    },
+    "flag_exist": {
+      "callsite_count": 3,
+      "out_file": "flag_exist.json"
+    },
+    "protocol_min_failed": {
+      "callsite_count": 10,
+      "out_file": "protocol_min_failed.json"
+    },
+    "ip_set_destroy_set": {
+      "callsite_count": 3,
+      "out_file": "ip_set_destroy_set.json"
+    },
+    "find_set": {
+      "callsite_count": 5,
+      "out_file": "find_set.json"
+    },
+    "__ip_set_put_netlink": {
+      "callsite_count": 3,
+      "out_file": "__ip_set_put_netlink.json"
+    },
+    "start_msg": {
+      "callsite_count": 6,
+      "out_file": "start_msg.json"
+    },
+    "__idletimer_tg_find_by_label": {
+      "callsite_count": 3,
+      "out_file": "__idletimer_tg_find_by_label.json"
+    },
+    "xt_check_proc_name": {
+      "callsite_count": 5,
+      "out_file": "xt_check_proc_name.json"
+    },
+    "__ip_vs_svc_fwm_find": {
+      "callsite_count": 5,
+      "out_file": "__ip_vs_svc_fwm_find.json"
+    },
+    "__ip_vs_service_find": {
+      "callsite_count": 7,
+      "out_file": "__ip_vs_service_find.json"
+    },
+    "ip_vs_proto_name": {
+      "callsite_count": 19,
+      "out_file": "ip_vs_proto_name.json"
+    },
+    "ip_vs_service_free": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_service_free.json"
+    },
+    "ip_vs_rs_hashkey": {
+      "callsite_count": 4,
+      "out_file": "ip_vs_rs_hashkey.json"
+    },
+    "ip_vs_service_find": {
+      "callsite_count": 7,
+      "out_file": "ip_vs_service_find.json"
+    },
+    "ip_vs_lookup_dest": {
+      "callsite_count": 5,
+      "out_file": "ip_vs_lookup_dest.json"
+    },
+    "__ip_vs_dst_cache_reset": {
+      "callsite_count": 3,
+      "out_file": "__ip_vs_dst_cache_reset.json"
+    },
+    "__ip_vs_svc_put": {
+      "callsite_count": 3,
+      "out_file": "__ip_vs_svc_put.json"
+    },
+    "ip_vs_zero_stats": {
+      "callsite_count": 4,
+      "out_file": "ip_vs_zero_stats.json"
+    },
+    "__ip_vs_update_dest": {
+      "callsite_count": 3,
+      "out_file": "__ip_vs_update_dest.json"
+    },
+    "ip_vs_use_count_inc": {
+      "callsite_count": 5,
+      "out_file": "ip_vs_use_count_inc.json"
+    },
+    "ip_vs_unregister_hooks": {
+      "callsite_count": 5,
+      "out_file": "ip_vs_unregister_hooks.json"
+    },
+    "ip_vs_unbind_scheduler": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_unbind_scheduler.json"
+    },
+    "ip_vs_scheduler_put": {
+      "callsite_count": 4,
+      "out_file": "ip_vs_scheduler_put.json"
+    },
+    "ip_vs_use_count_dec": {
+      "callsite_count": 13,
+      "out_file": "ip_vs_use_count_dec.json"
+    },
+    "ip_vs_unlink_service": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_unlink_service.json"
+    },
+    "ip_vs_flush": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_flush.json"
+    },
+    "ip_vs_forget_dev": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_forget_dev.json"
+    },
+    "ip_vs_zero_service": {
+      "callsite_count": 4,
+      "out_file": "ip_vs_zero_service.json"
+    },
+    "ip_vs_copy_stats": {
+      "callsite_count": 6,
+      "out_file": "ip_vs_copy_stats.json"
+    },
+    "ip_vs_proto_data_get": {
+      "callsite_count": 19,
+      "out_file": "ip_vs_proto_data_get.json"
+    },
+    "stop_sync_thread": {
+      "callsite_count": 4,
+      "out_file": "stop_sync_thread.json"
+    },
+    "ip_vs_copy_service": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_copy_service.json"
+    },
+    "__ip_vs_get_timeouts": {
+      "callsite_count": 3,
+      "out_file": "__ip_vs_get_timeouts.json"
+    },
+    "ip_vs_ct_in_get": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_ct_in_get.json"
+    },
+    "ip_vs_conn_new": {
+      "callsite_count": 9,
+      "out_file": "ip_vs_conn_new.json"
+    },
+    "ip_vs_conn_put": {
+      "callsite_count": 14,
+      "out_file": "ip_vs_conn_put.json"
+    },
+    "ip_vs_conn_stats": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_conn_stats.json"
+    },
+    "ip_vs_in_stats": {
+      "callsite_count": 4,
+      "out_file": "ip_vs_in_stats.json"
+    },
+    "ip_vs_set_state": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_set_state.json"
+    },
+    "ip_vs_checksum_complete": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_checksum_complete.json"
+    },
+    "ip_vs_out_stats": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_out_stats.json"
+    },
+    "ip_vs_update_conntrack": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_update_conntrack.json"
+    },
+    "ip_vs_gather_frags": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_gather_frags.json"
+    },
+    "ip_vs_defrag_user": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_defrag_user.json"
+    },
+    "ip_vs_proto_get": {
+      "callsite_count": 10,
+      "out_file": "ip_vs_proto_get.json"
+    },
+    "ip_vs_find_tunnel": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_find_tunnel.json"
+    },
+    "ip_vs_try_to_schedule": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_try_to_schedule.json"
+    },
+    "ip_vs_conn_expire_now": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_conn_expire_now.json"
+    },
+    "ip_vs_sync_conn": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_sync_conn.json"
+    },
+    "nf_register_net_hooks": {
+      "callsite_count": 7,
+      "out_file": "nf_register_net_hooks.json"
+    },
+    "nf_unregister_net_hooks": {
+      "callsite_count": 8,
+      "out_file": "nf_unregister_net_hooks.json"
+    },
+    "ip_vs_protocol_net_cleanup": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_protocol_net_cleanup.json"
+    },
+    "ip_vs_conn_expire": {
+      "callsite_count": 4,
+      "out_file": "ip_vs_conn_expire.json"
+    },
+    "ip_vs_conn_hashkey_param": {
+      "callsite_count": 4,
+      "out_file": "ip_vs_conn_hashkey_param.json"
+    },
+    "ip_vs_conn_hashkey_conn": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_conn_hashkey_conn.json"
+    },
+    "ct_write_lock_bh": {
+      "callsite_count": 3,
+      "out_file": "ct_write_lock_bh.json"
+    },
+    "ct_write_unlock_bh": {
+      "callsite_count": 3,
+      "out_file": "ct_write_unlock_bh.json"
+    },
+    "ip_vs_conn_in_get": {
+      "callsite_count": 5,
+      "out_file": "ip_vs_conn_in_get.json"
+    },
+    "ip_vs_conn_out_get": {
+      "callsite_count": 4,
+      "out_file": "ip_vs_conn_out_get.json"
+    },
+    "ip_vs_conn_hash": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_conn_hash.json"
+    },
+    "ip_vs_dest_totalconns": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_dest_totalconns.json"
+    },
+    "ip_vs_state_name": {
+      "callsite_count": 4,
+      "out_file": "ip_vs_state_name.json"
+    },
+    "todrop_entry": {
+      "callsite_count": 3,
+      "out_file": "todrop_entry.json"
+    },
+    "ip_vs_conn_del": {
+      "callsite_count": 5,
+      "out_file": "ip_vs_conn_del.json"
+    },
+    "check": {
+      "callsite_count": 3,
+      "out_file": "check.json"
+    },
+    "__ip_vs_dst_set": {
+      "callsite_count": 6,
+      "out_file": "__ip_vs_dst_set.json"
+    },
+    "ip_vs_drop_early_demux_sk": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_drop_early_demux_sk.json"
+    },
+    "__ip_vs_get_out_rt": {
+      "callsite_count": 5,
+      "out_file": "__ip_vs_get_out_rt.json"
+    },
+    "__ip_vs_get_out_rt_v6": {
+      "callsite_count": 5,
+      "out_file": "__ip_vs_get_out_rt_v6.json"
+    },
+    "ip_vs_nat_send_or_cont": {
+      "callsite_count": 4,
+      "out_file": "ip_vs_nat_send_or_cont.json"
+    },
+    "ip_vs_ftp_data_ptr": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_ftp_data_ptr.json"
+    },
+    "ip_vs_ftp_get_addrport": {
+      "callsite_count": 4,
+      "out_file": "ip_vs_ftp_get_addrport.json"
+    },
+    "unregister_ip_vs_app": {
+      "callsite_count": 3,
+      "out_file": "unregister_ip_vs_app.json"
+    },
+    "ip_vs_lblc_del": {
+      "callsite_count": 4,
+      "out_file": "ip_vs_lblc_del.json"
+    },
+    "is_overloaded": {
+      "callsite_count": 3,
+      "out_file": "is_overloaded.json"
+    },
+    "ip_vs_scheduler_err": {
+      "callsite_count": 15,
+      "out_file": "ip_vs_scheduler_err.json"
+    },
+    "ip_vs_dest_set_insert": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_dest_set_insert.json"
+    },
+    "ip_vs_lblcr_free": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_lblcr_free.json"
+    },
+    "__ip_vs_pe_getbyname": {
+      "callsite_count": 3,
+      "out_file": "__ip_vs_pe_getbyname.json"
+    },
+    "ip_vs_schedule": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_schedule.json"
+    },
+    "ip_vs_leave": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_leave.json"
+    },
+    "ip_vs_app_pkt_out": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_app_pkt_out.json"
+    },
+    "ip_vs_app_pkt_in": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_app_pkt_in.json"
+    },
+    "ip_vs_app_inc_get": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_app_inc_get.json"
+    },
+    "ip_vs_init_hash_table": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_init_hash_table.json"
+    },
+    "ip_vs_create_timeout_table": {
+      "callsite_count": 4,
+      "out_file": "ip_vs_create_timeout_table.json"
+    },
+    "ip_set_add": {
+      "callsite_count": 5,
+      "out_file": "ip_set_add.json"
+    },
+    "ip_set_del": {
+      "callsite_count": 5,
+      "out_file": "ip_set_del.json"
+    },
+    "ip_set_put_byindex": {
+      "callsite_count": 6,
+      "out_file": "ip_set_put_byindex.json"
+    },
+    "list_set_del": {
+      "callsite_count": 3,
+      "out_file": "list_set_del.json"
+    },
+    "ip_set_get_extensions": {
+      "callsite_count": 27,
+      "out_file": "ip_set_get_extensions.json"
+    },
+    "ip_set_elem_len": {
+      "callsite_count": 4,
+      "out_file": "ip_set_elem_len.json"
+    },
+    "hooks_validate": {
+      "callsite_count": 3,
+      "out_file": "hooks_validate.json"
+    },
+    "nf_hook_entries_free": {
+      "callsite_count": 4,
+      "out_file": "nf_hook_entries_free.json"
+    },
+    "__nf_unregister_net_hook": {
+      "callsite_count": 5,
+      "out_file": "__nf_unregister_net_hook.json"
+    },
+    "__nf_register_net_hook": {
+      "callsite_count": 4,
+      "out_file": "__nf_register_net_hook.json"
+    },
+    "nf_register_net_hook": {
+      "callsite_count": 4,
+      "out_file": "nf_register_net_hook.json"
+    },
+    "nf_unregister_net_hook": {
+      "callsite_count": 7,
+      "out_file": "nf_unregister_net_hook.json"
+    },
+    "__netfilter_net_init": {
+      "callsite_count": 4,
+      "out_file": "__netfilter_net_init.json"
+    },
+    "conn_free": {
+      "callsite_count": 3,
+      "out_file": "conn_free.json"
+    },
+    "tree_nodes_free": {
+      "callsite_count": 4,
+      "out_file": "tree_nodes_free.json"
+    },
+    "nf_conncount_gc_list": {
+      "callsite_count": 4,
+      "out_file": "nf_conncount_gc_list.json"
+    },
+    "nf_conncount_list_init": {
+      "callsite_count": 3,
+      "out_file": "nf_conncount_list_init.json"
+    },
+    "nf_ct_netns_get": {
+      "callsite_count": 31,
+      "out_file": "nf_ct_netns_get.json"
+    },
+    "nf_conncount_cache_free": {
+      "callsite_count": 3,
+      "out_file": "nf_conncount_cache_free.json"
+    },
+    "nf_ct_netns_put": {
+      "callsite_count": 36,
+      "out_file": "nf_ct_netns_put.json"
+    },
+    "nf_ct_ext_add": {
+      "callsite_count": 4,
+      "out_file": "nf_ct_ext_add.json"
+    },
+    "nf_log_packet": {
+      "callsite_count": 7,
+      "out_file": "nf_log_packet.json"
+    },
+    "nf_ct_iterate_destroy": {
+      "callsite_count": 3,
+      "out_file": "nf_ct_iterate_destroy.json"
+    },
+    "nf_conntrack_helper_register": {
+      "callsite_count": 6,
+      "out_file": "nf_conntrack_helper_register.json"
+    },
+    "nf_conntrack_helper_unregister": {
+      "callsite_count": 8,
+      "out_file": "nf_conntrack_helper_unregister.json"
+    },
+    "nf_ct_expect_dst_hash": {
+      "callsite_count": 4,
+      "out_file": "nf_ct_expect_dst_hash.json"
+    },
+    "nf_ct_remove_expect": {
+      "callsite_count": 5,
+      "out_file": "nf_ct_remove_expect.json"
+    },
+    "print_tuple": {
+      "callsite_count": 3,
+      "out_file": "print_tuple.json"
+    },
+    "flow_action_entry_next": {
+      "callsite_count": 15,
+      "out_file": "flow_action_entry_next.json"
+    },
+    "flow_offload_mangle": {
+      "callsite_count": 9,
+      "out_file": "flow_offload_mangle.json"
+    },
+    "flow_offload_get_timeout": {
+      "callsite_count": 4,
+      "out_file": "flow_offload_get_timeout.json"
+    },
+    "nf_flow_offload_work_alloc": {
+      "callsite_count": 3,
+      "out_file": "nf_flow_offload_work_alloc.json"
+    },
+    "flow_offload_queue_work": {
+      "callsite_count": 3,
+      "out_file": "flow_offload_queue_work.json"
+    },
+    "nf_flow_table_gc_run": {
+      "callsite_count": 3,
+      "out_file": "nf_flow_table_gc_run.json"
+    },
+    "hash_by_src": {
+      "callsite_count": 3,
+      "out_file": "hash_by_src.json"
+    },
+    "nf_nat_used_tuple": {
+      "callsite_count": 5,
+      "out_file": "nf_nat_used_tuple.json"
+    },
+    "nf_conntrack_alter_reply": {
+      "callsite_count": 3,
+      "out_file": "nf_conntrack_alter_reply.json"
+    },
+    "nf_nat_setup_info": {
+      "callsite_count": 18,
+      "out_file": "nf_nat_setup_info.json"
+    },
+    "in_vrf_postrouting": {
+      "callsite_count": 3,
+      "out_file": "in_vrf_postrouting.json"
+    },
+    "nf_ct_kill_acct": {
+      "callsite_count": 3,
+      "out_file": "nf_ct_kill_acct.json"
+    },
+    "nf_ct_seqadj_set": {
+      "callsite_count": 3,
+      "out_file": "nf_ct_seqadj_set.json"
+    },
+    "nft_trans_alloc_gfp": {
+      "callsite_count": 3,
+      "out_file": "nft_trans_alloc_gfp.json"
+    },
+    "nft_trans_list_del": {
+      "callsite_count": 3,
+      "out_file": "nft_trans_list_del.json"
+    },
+    "nft_trans_alloc": {
+      "callsite_count": 12,
+      "out_file": "nft_trans_alloc.json"
+    },
+    "nft_trans_commit_list_add_tail": {
+      "callsite_count": 15,
+      "out_file": "nft_trans_commit_list_add_tail.json"
+    },
+    "nft_trans_rule_add": {
+      "callsite_count": 3,
+      "out_file": "nft_trans_rule_add.json"
+    },
+    "nft_trans_destroy": {
+      "callsite_count": 28,
+      "out_file": "nft_trans_destroy.json"
+    },
+    "nft_rule_expr_deactivate": {
+      "callsite_count": 6,
+      "out_file": "nft_rule_expr_deactivate.json"
+    },
+    "nft_delrule": {
+      "callsite_count": 5,
+      "out_file": "nft_delrule.json"
+    },
+    "nft_setelem_data_deactivate": {
+      "callsite_count": 9,
+      "out_file": "nft_setelem_data_deactivate.json"
+    },
+    "nft_map_deactivate": {
+      "callsite_count": 4,
+      "out_file": "nft_map_deactivate.json"
+    },
+    "__nft_reg_track_cancel": {
+      "callsite_count": 5,
+      "out_file": "__nft_reg_track_cancel.json"
+    },
+    "__nft_chain_type_get": {
+      "callsite_count": 3,
+      "out_file": "__nft_chain_type_get.json"
+    },
+    "lockdep_nfnl_nft_mutex_not_held": {
+      "callsite_count": 6,
+      "out_file": "lockdep_nfnl_nft_mutex_not_held.json"
+    },
+    "nft_request_module": {
+      "callsite_count": 8,
+      "out_file": "nft_request_module.json"
+    },
+    "nft_base_seq": {
+      "callsite_count": 9,
+      "out_file": "nft_base_seq.json"
+    },
+    "nf_tables_fill_table_info": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_fill_table_info.json"
+    },
+    "nft_notify_enqueue": {
+      "callsite_count": 7,
+      "out_file": "nft_notify_enqueue.json"
+    },
+    "nft_netlink_dump_start_rcu": {
+      "callsite_count": 7,
+      "out_file": "nft_netlink_dump_start_rcu.json"
+    },
+    "nft_table_lookup": {
+      "callsite_count": 21,
+      "out_file": "nft_table_lookup.json"
+    },
+    "nf_tables_unregister_hook": {
+      "callsite_count": 5,
+      "out_file": "nf_tables_unregister_hook.json"
+    },
+    "nft_ctx_init": {
+      "callsite_count": 19,
+      "out_file": "nft_ctx_init.json"
+    },
+    "nft_delrule_by_chain": {
+      "callsite_count": 3,
+      "out_file": "nft_delrule_by_chain.json"
+    },
+    "lockdep_commit_lock_is_held": {
+      "callsite_count": 9,
+      "out_file": "lockdep_commit_lock_is_held.json"
+    },
+    "nf_tables_fill_chain_info": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_fill_chain_info.json"
+    },
+    "nft_chain_lookup": {
+      "callsite_count": 8,
+      "out_file": "nft_chain_lookup.json"
+    },
+    "nft_hook_list_find": {
+      "callsite_count": 4,
+      "out_file": "nft_hook_list_find.json"
+    },
+    "nft_chain_release_hook": {
+      "callsite_count": 7,
+      "out_file": "nft_chain_release_hook.json"
+    },
+    "nf_tables_alloc_handle": {
+      "callsite_count": 5,
+      "out_file": "nf_tables_alloc_handle.json"
+    },
+    "nf_tables_chain_destroy": {
+      "callsite_count": 6,
+      "out_file": "nf_tables_chain_destroy.json"
+    },
+    "nf_tables_expr_destroy": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_expr_destroy.json"
+    },
+    "__nft_rule_lookup": {
+      "callsite_count": 3,
+      "out_file": "__nft_rule_lookup.json"
+    },
+    "nft_expr_dump": {
+      "callsite_count": 6,
+      "out_file": "nft_expr_dump.json"
+    },
+    "nf_tables_fill_rule_info": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_fill_rule_info.json"
+    },
+    "nf_tables_rule_destroy": {
+      "callsite_count": 5,
+      "out_file": "nf_tables_rule_destroy.json"
+    },
+    "nft_chain_validate": {
+      "callsite_count": 3,
+      "out_file": "nft_chain_validate.json"
+    },
+    "nft_rule_lookup_byid": {
+      "callsite_count": 3,
+      "out_file": "nft_rule_lookup_byid.json"
+    },
+    "nft_validate_state_update": {
+      "callsite_count": 4,
+      "out_file": "nft_validate_state_update.json"
+    },
+    "nft_table_validate": {
+      "callsite_count": 3,
+      "out_file": "nft_table_validate.json"
+    },
+    "nft_flow_rule_destroy": {
+      "callsite_count": 6,
+      "out_file": "nft_flow_rule_destroy.json"
+    },
+    "nft_set_lookup": {
+      "callsite_count": 6,
+      "out_file": "nft_set_lookup.json"
+    },
+    "nf_jiffies64_to_msecs": {
+      "callsite_count": 5,
+      "out_file": "nf_jiffies64_to_msecs.json"
+    },
+    "nf_tables_fill_set": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_fill_set.json"
+    },
+    "nft_set_elem_expr_alloc": {
+      "callsite_count": 5,
+      "out_file": "nft_set_elem_expr_alloc.json"
+    },
+    "nft_expr_destroy": {
+      "callsite_count": 12,
+      "out_file": "nft_expr_destroy.json"
+    },
+    "nf_msecs_to_jiffies64": {
+      "callsite_count": 5,
+      "out_file": "nf_msecs_to_jiffies64.json"
+    },
+    "nf_tables_set_elem_destroy": {
+      "callsite_count": 9,
+      "out_file": "nf_tables_set_elem_destroy.json"
+    },
+    "nft_validate_register_store": {
+      "callsite_count": 4,
+      "out_file": "nft_validate_register_store.json"
+    },
+    "nf_tables_set_notify": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_set_notify.json"
+    },
+    "nft_setelem_data_activate": {
+      "callsite_count": 4,
+      "out_file": "nft_setelem_data_activate.json"
+    },
+    "nft_set_destroy": {
+      "callsite_count": 4,
+      "out_file": "nft_set_destroy.json"
+    },
+    "nft_data_dump": {
+      "callsite_count": 14,
+      "out_file": "nft_data_dump.json"
+    },
+    "nf_tables_fill_setelem": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_fill_setelem.json"
+    },
+    "nft_data_init": {
+      "callsite_count": 13,
+      "out_file": "nft_data_init.json"
+    },
+    "nft_setelem_parse_flags": {
+      "callsite_count": 3,
+      "out_file": "nft_setelem_parse_flags.json"
+    },
+    "nft_setelem_parse_key": {
+      "callsite_count": 6,
+      "out_file": "nft_setelem_parse_key.json"
+    },
+    "nft_set_ext_check": {
+      "callsite_count": 3,
+      "out_file": "nft_set_ext_check.json"
+    },
+    "nft_set_ext_memcpy": {
+      "callsite_count": 3,
+      "out_file": "nft_set_ext_memcpy.json"
+    },
+    "nft_data_release": {
+      "callsite_count": 14,
+      "out_file": "nft_data_release.json"
+    },
+    "nft_expr_clone": {
+      "callsite_count": 3,
+      "out_file": "nft_expr_clone.json"
+    },
+    "nft_setelem_is_catchall": {
+      "callsite_count": 6,
+      "out_file": "nft_setelem_is_catchall.json"
+    },
+    "nft_obj_lookup": {
+      "callsite_count": 5,
+      "out_file": "nft_obj_lookup.json"
+    },
+    "nft_set_elem_init": {
+      "callsite_count": 3,
+      "out_file": "nft_set_elem_init.json"
+    },
+    "nft_setelem_remove": {
+      "callsite_count": 4,
+      "out_file": "nft_setelem_remove.json"
+    },
+    "nft_set_lookup_global": {
+      "callsite_count": 4,
+      "out_file": "nft_set_lookup_global.json"
+    },
+    "nf_tables_fill_obj_info": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_fill_obj_info.json"
+    },
+    "nft_unregister_flowtable_hook": {
+      "callsite_count": 4,
+      "out_file": "nft_unregister_flowtable_hook.json"
+    },
+    "nft_flowtable_parse_hook": {
+      "callsite_count": 3,
+      "out_file": "nft_flowtable_parse_hook.json"
+    },
+    "nft_flowtable_lookup": {
+      "callsite_count": 4,
+      "out_file": "nft_flowtable_lookup.json"
+    },
+    "nft_flowtable_hooks_destroy": {
+      "callsite_count": 3,
+      "out_file": "nft_flowtable_hooks_destroy.json"
+    },
+    "nf_tables_fill_flowtable_info": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_fill_flowtable_info.json"
+    },
+    "nft_obj_destroy": {
+      "callsite_count": 5,
+      "out_file": "nft_obj_destroy.json"
+    },
+    "nf_tables_table_destroy": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_table_destroy.json"
+    },
+    "nf_tables_flowtable_destroy": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_flowtable_destroy.json"
+    },
+    "nf_tables_commit_chain_free_rules_old": {
+      "callsite_count": 4,
+      "out_file": "nf_tables_commit_chain_free_rules_old.json"
+    },
+    "nft_trans_gc_destroy": {
+      "callsite_count": 7,
+      "out_file": "nft_trans_gc_destroy.json"
+    },
+    "nft_trans_gc_alloc": {
+      "callsite_count": 6,
+      "out_file": "nft_trans_gc_alloc.json"
+    },
+    "nft_trans_gc_elem_add": {
+      "callsite_count": 8,
+      "out_file": "nft_trans_gc_elem_add.json"
+    },
+    "nft_trans_gc_queue_sync": {
+      "callsite_count": 4,
+      "out_file": "nft_trans_gc_queue_sync.json"
+    },
+    "nf_tables_module_autoload_cleanup": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_module_autoload_cleanup.json"
+    },
+    "nft_gc_seq_begin": {
+      "callsite_count": 4,
+      "out_file": "nft_gc_seq_begin.json"
+    },
+    "nf_tables_chain_notify": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_chain_notify.json"
+    },
+    "nft_chain_del": {
+      "callsite_count": 5,
+      "out_file": "nft_chain_del.json"
+    },
+    "nf_tables_obj_notify": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_obj_notify.json"
+    },
+    "nft_obj_del": {
+      "callsite_count": 3,
+      "out_file": "nft_obj_del.json"
+    },
+    "nf_tables_flowtable_notify": {
+      "callsite_count": 4,
+      "out_file": "nf_tables_flowtable_notify.json"
+    },
+    "nft_unregister_flowtable_net_hooks": {
+      "callsite_count": 4,
+      "out_file": "nft_unregister_flowtable_net_hooks.json"
+    },
+    "nft_gc_seq_end": {
+      "callsite_count": 4,
+      "out_file": "nft_gc_seq_end.json"
+    },
+    "nft_set_elem_destroy": {
+      "callsite_count": 4,
+      "out_file": "nft_set_elem_destroy.json"
+    },
+    "nf_tables_check_loops": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_check_loops.json"
+    },
+    "nft_parse_register_load": {
+      "callsite_count": 31,
+      "out_file": "nft_parse_register_load.json"
+    },
+    "nft_dump_register": {
+      "callsite_count": 49,
+      "out_file": "nft_dump_register.json"
+    },
+    "__nft_cmp_offload": {
+      "callsite_count": 3,
+      "out_file": "__nft_cmp_offload.json"
+    },
+    "nft_ct_get_eval_counter": {
+      "callsite_count": 3,
+      "out_file": "nft_ct_get_eval_counter.json"
+    },
+    "nf_ct_tmpl_alloc": {
+      "callsite_count": 4,
+      "out_file": "nf_ct_tmpl_alloc.json"
+    },
+    "nft_parse_register_store": {
+      "callsite_count": 19,
+      "out_file": "nft_parse_register_store.json"
+    },
+    "nft_reg_track_update": {
+      "callsite_count": 21,
+      "out_file": "nft_reg_track_update.json"
+    },
+    "nft_expr_reduce_bitwise": {
+      "callsite_count": 6,
+      "out_file": "nft_expr_reduce_bitwise.json"
+    },
+    "nf_ct_untimeout": {
+      "callsite_count": 3,
+      "out_file": "nf_ct_untimeout.json"
+    },
+    "nf_conntrack_helper_try_module_get": {
+      "callsite_count": 5,
+      "out_file": "nf_conntrack_helper_try_module_get.json"
+    },
+    "nf_conntrack_helper_put": {
+      "callsite_count": 6,
+      "out_file": "nf_conntrack_helper_put.json"
+    },
+    "nf_ct_expect_init": {
+      "callsite_count": 21,
+      "out_file": "nf_ct_expect_init.json"
+    },
+    "nft_flow_block_offload_init": {
+      "callsite_count": 3,
+      "out_file": "nft_flow_block_offload_init.json"
+    },
+    "nft_flow_offload_chain": {
+      "callsite_count": 4,
+      "out_file": "nft_flow_offload_chain.json"
+    },
+    "nft_flow_offload_rule": {
+      "callsite_count": 4,
+      "out_file": "nft_flow_offload_rule.json"
+    },
+    "nft_payload_offload_mask": {
+      "callsite_count": 17,
+      "out_file": "nft_payload_offload_mask.json"
+    },
+    "nft_offload_set_dependency": {
+      "callsite_count": 7,
+      "out_file": "nft_offload_set_dependency.json"
+    },
+    "nft_flow_rule_set_addr_type": {
+      "callsite_count": 4,
+      "out_file": "nft_flow_rule_set_addr_type.json"
+    },
+    "nft_parse_u32_check": {
+      "callsite_count": 16,
+      "out_file": "nft_parse_u32_check.json"
+    },
+    "nft_rbtree_interval_end": {
+      "callsite_count": 21,
+      "out_file": "nft_rbtree_interval_end.json"
+    },
+    "nft_rbtree_cmp": {
+      "callsite_count": 8,
+      "out_file": "nft_rbtree_cmp.json"
+    },
+    "nft_rbtree_interval_start": {
+      "callsite_count": 10,
+      "out_file": "nft_rbtree_interval_start.json"
+    },
+    "nf_csum_update": {
+      "callsite_count": 4,
+      "out_file": "nf_csum_update.json"
+    },
+    "nf_nat_ipv6_manip_pkt": {
+      "callsite_count": 3,
+      "out_file": "nf_nat_ipv6_manip_pkt.json"
+    },
+    "nf_nat_ipv4_manip_pkt": {
+      "callsite_count": 3,
+      "out_file": "nf_nat_ipv4_manip_pkt.json"
+    },
+    "nf_ip_checksum": {
+      "callsite_count": 5,
+      "out_file": "nf_ip_checksum.json"
+    },
+    "nf_nat_ipv4_fn": {
+      "callsite_count": 4,
+      "out_file": "nf_nat_ipv4_fn.json"
+    },
+    "nf_xfrm_me_harder": {
+      "callsite_count": 4,
+      "out_file": "nf_xfrm_me_harder.json"
+    },
+    "nf_nat_register_fn": {
+      "callsite_count": 4,
+      "out_file": "nf_nat_register_fn.json"
+    },
+    "nf_nat_unregister_fn": {
+      "callsite_count": 5,
+      "out_file": "nf_nat_unregister_fn.json"
+    },
+    "nf_ip6_checksum": {
+      "callsite_count": 4,
+      "out_file": "nf_ip6_checksum.json"
+    },
+    "nf_nat_ipv6_fn": {
+      "callsite_count": 3,
+      "out_file": "nf_nat_ipv6_fn.json"
+    },
+    "xt_rateest_put": {
+      "callsite_count": 5,
+      "out_file": "xt_rateest_put.json"
+    },
+    "match_type": {
+      "callsite_count": 4,
+      "out_file": "match_type.json"
+    },
+    "nf_ct_helper_log": {
+      "callsite_count": 50,
+      "out_file": "nf_ct_helper_log.json"
+    },
+    "audit_ip4": {
+      "callsite_count": 4,
+      "out_file": "audit_ip4.json"
+    },
+    "audit_ip6": {
+      "callsite_count": 4,
+      "out_file": "audit_ip6.json"
+    },
+    "nf_logger_find_get": {
+      "callsite_count": 6,
+      "out_file": "nf_logger_find_get.json"
+    },
+    "ip_vs_sync_buff_release": {
+      "callsite_count": 5,
+      "out_file": "ip_vs_sync_buff_release.json"
+    },
+    "ip_vs_proc_conn": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_proc_conn.json"
+    },
+    "ip_set_alloc": {
+      "callsite_count": 3,
+      "out_file": "ip_set_alloc.json"
+    },
+    "ip_set_free": {
+      "callsite_count": 3,
+      "out_file": "ip_set_free.json"
+    },
+    "nf_ct_unexpect_related": {
+      "callsite_count": 14,
+      "out_file": "nf_ct_unexpect_related.json"
+    },
+    "expect_rtp_rtcp": {
+      "callsite_count": 4,
+      "out_file": "expect_rtp_rtcp.json"
+    },
+    "process_h245_channel": {
+      "callsite_count": 3,
+      "out_file": "process_h245_channel.json"
+    },
+    "process_olc": {
+      "callsite_count": 7,
+      "out_file": "process_olc.json"
+    },
+    "get_h225_addr": {
+      "callsite_count": 10,
+      "out_file": "get_h225_addr.json"
+    },
+    "expect_h245": {
+      "callsite_count": 6,
+      "out_file": "expect_h245.json"
+    },
+    "sip_parse_addr": {
+      "callsite_count": 4,
+      "out_file": "sip_parse_addr.json"
+    },
+    "ct_sip_header_search": {
+      "callsite_count": 10,
+      "out_file": "ct_sip_header_search.json"
+    },
+    "ct_sip_get_header": {
+      "callsite_count": 8,
+      "out_file": "ct_sip_get_header.json"
+    },
+    "ct_sip_get_sdp_header": {
+      "callsite_count": 5,
+      "out_file": "ct_sip_get_sdp_header.json"
+    },
+    "process_sdp": {
+      "callsite_count": 4,
+      "out_file": "process_sdp.json"
+    },
+    "flush_expectations": {
+      "callsite_count": 6,
+      "out_file": "flush_expectations.json"
+    },
+    "ct_sip_parse_header_uri": {
+      "callsite_count": 6,
+      "out_file": "ct_sip_parse_header_uri.json"
+    },
+    "ct_sip_parse_numerical_param": {
+      "callsite_count": 3,
+      "out_file": "ct_sip_parse_numerical_param.json"
+    },
+    "hashlimit_pernet": {
+      "callsite_count": 6,
+      "out_file": "hashlimit_pernet.json"
+    },
+    "cfg_copy": {
+      "callsite_count": 5,
+      "out_file": "cfg_copy.json"
+    },
+    "user2credits": {
+      "callsite_count": 8,
+      "out_file": "user2credits.json"
+    },
+    "maskl": {
+      "callsite_count": 6,
+      "out_file": "maskl.json"
+    },
+    "rateinfo_recalc": {
+      "callsite_count": 5,
+      "out_file": "rateinfo_recalc.json"
+    },
+    "hashlimit_mt_common": {
+      "callsite_count": 3,
+      "out_file": "hashlimit_mt_common.json"
+    },
+    "hashlimit_mt_check_common": {
+      "callsite_count": 3,
+      "out_file": "hashlimit_mt_check_common.json"
+    },
+    "htable_put": {
+      "callsite_count": 3,
+      "out_file": "htable_put.json"
+    },
+    "dl_seq_print": {
+      "callsite_count": 3,
+      "out_file": "dl_seq_print.json"
+    },
+    "match_set": {
+      "callsite_count": 5,
+      "out_file": "match_set.json"
+    },
+    "ip_set_nfnl_get_byindex": {
+      "callsite_count": 9,
+      "out_file": "ip_set_nfnl_get_byindex.json"
+    },
+    "ip_set_nfnl_put": {
+      "callsite_count": 20,
+      "out_file": "ip_set_nfnl_put.json"
+    },
+    "compat_flags": {
+      "callsite_count": 3,
+      "out_file": "compat_flags.json"
+    },
+    "conntrack_addrcmp": {
+      "callsite_count": 4,
+      "out_file": "conntrack_addrcmp.json"
+    },
+    "port_match": {
+      "callsite_count": 8,
+      "out_file": "port_match.json"
+    },
+    "conntrack_mt": {
+      "callsite_count": 3,
+      "out_file": "conntrack_mt.json"
+    },
+    "pptp_msg_name": {
+      "callsite_count": 10,
+      "out_file": "pptp_msg_name.json"
+    },
+    "ct_show_zone": {
+      "callsite_count": 3,
+      "out_file": "ct_show_zone.json"
+    },
+    "nfct_timeout_pernet": {
+      "callsite_count": 8,
+      "out_file": "nfct_timeout_pernet.json"
+    },
+    "ctnl_timeout_parse_policy": {
+      "callsite_count": 3,
+      "out_file": "ctnl_timeout_parse_policy.json"
+    },
+    "nf_ct_l4proto_log_invalid": {
+      "callsite_count": 9,
+      "out_file": "nf_ct_l4proto_log_invalid.json"
+    },
+    "nf_l4proto_log_invalid": {
+      "callsite_count": 10,
+      "out_file": "nf_l4proto_log_invalid.json"
+    },
+    "nf_nat_masq_schedule": {
+      "callsite_count": 3,
+      "out_file": "nf_nat_masq_schedule.json"
+    },
+    "nf_log_buf_add": {
+      "callsite_count": 101,
+      "out_file": "nf_log_buf_add.json"
+    },
+    "nf_log_allowed": {
+      "callsite_count": 4,
+      "out_file": "nf_log_allowed.json"
+    },
+    "nf_log_buf_open": {
+      "callsite_count": 4,
+      "out_file": "nf_log_buf_open.json"
+    },
+    "nf_log_dump_packet_common": {
+      "callsite_count": 4,
+      "out_file": "nf_log_dump_packet_common.json"
+    },
+    "nf_log_buf_close": {
+      "callsite_count": 4,
+      "out_file": "nf_log_buf_close.json"
+    },
+    "dump_mac_header": {
+      "callsite_count": 3,
+      "out_file": "dump_mac_header.json"
+    },
+    "nf_log_set": {
+      "callsite_count": 5,
+      "out_file": "nf_log_set.json"
+    },
+    "xt_mttg_seq_next": {
+      "callsite_count": 3,
+      "out_file": "xt_mttg_seq_next.json"
+    },
+    "get_port": {
+      "callsite_count": 4,
+      "out_file": "get_port.json"
+    },
+    "nf_route": {
+      "callsite_count": 3,
+      "out_file": "nf_route.json"
+    },
+    "optlen": {
+      "callsite_count": 5,
+      "out_file": "optlen.json"
+    },
+    "nft_flow_dst_release": {
+      "callsite_count": 3,
+      "out_file": "nft_flow_dst_release.json"
+    },
+    "flow_offload_teardown": {
+      "callsite_count": 8,
+      "out_file": "flow_offload_teardown.json"
+    },
+    "nf_flow_table_iterate": {
+      "callsite_count": 3,
+      "out_file": "nf_flow_table_iterate.json"
+    },
+    "nft_chain_validate_hooks": {
+      "callsite_count": 20,
+      "out_file": "nft_chain_validate_hooks.json"
+    },
+    "ip_vs_mh_hashkey": {
+      "callsite_count": 5,
+      "out_file": "ip_vs_mh_hashkey.json"
+    },
+    "ip_vs_mh_reset": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_mh_reset.json"
+    },
+    "is_unavailable": {
+      "callsite_count": 6,
+      "out_file": "is_unavailable.json"
+    },
+    "tcp_options": {
+      "callsite_count": 3,
+      "out_file": "tcp_options.json"
+    },
+    "segment_seq_plus_len": {
+      "callsite_count": 4,
+      "out_file": "segment_seq_plus_len.json"
+    },
+    "nf_tcp_log_invalid": {
+      "callsite_count": 5,
+      "out_file": "nf_tcp_log_invalid.json"
+    },
+    "tcp_error_log": {
+      "callsite_count": 3,
+      "out_file": "tcp_error_log.json"
+    },
+    "hmark_addr6_mask": {
+      "callsite_count": 3,
+      "out_file": "hmark_addr6_mask.json"
+    },
+    "nf_conntrack_in": {
+      "callsite_count": 4,
+      "out_file": "nf_conntrack_in.json"
+    },
+    "nf_ct_netns_do_get": {
+      "callsite_count": 4,
+      "out_file": "nf_ct_netns_do_get.json"
+    },
+    "nf_ct_netns_do_put": {
+      "callsite_count": 4,
+      "out_file": "nf_ct_netns_do_put.json"
+    },
+    "gre_pernet": {
+      "callsite_count": 5,
+      "out_file": "gre_pernet.json"
+    },
+    "nf_nat_exp_find_port": {
+      "callsite_count": 4,
+      "out_file": "nf_nat_exp_find_port.json"
+    },
+    "nf_nat_mangle_udp_packet": {
+      "callsite_count": 3,
+      "out_file": "nf_nat_mangle_udp_packet.json"
+    },
+    "icmp_error_log": {
+      "callsite_count": 3,
+      "out_file": "icmp_error_log.json"
+    },
+    "nf_conntrack_inet_error": {
+      "callsite_count": 3,
+      "out_file": "nf_conntrack_inet_error.json"
+    },
+    "icmpv6_error_log": {
+      "callsite_count": 5,
+      "out_file": "icmpv6_error_log.json"
+    },
+    "ip_vs_sh_hashkey": {
+      "callsite_count": 3,
+      "out_file": "ip_vs_sh_hashkey.json"
+    },
+    "iprange_ipv6_lt": {
+      "callsite_count": 4,
+      "out_file": "iprange_ipv6_lt.json"
+    },
+    "nft_skb_copy_to_reg": {
+      "callsite_count": 3,
+      "out_file": "nft_skb_copy_to_reg.json"
+    },
+    "nft_tcp_header_pointer": {
+      "callsite_count": 3,
+      "out_file": "nft_tcp_header_pointer.json"
+    },
+    "nft_exthdr_dump_common": {
+      "callsite_count": 3,
+      "out_file": "nft_exthdr_dump_common.json"
+    },
+    "synproxy_options_size": {
+      "callsite_count": 8,
+      "out_file": "synproxy_options_size.json"
+    },
+    "synproxy_build_ip": {
+      "callsite_count": 4,
+      "out_file": "synproxy_build_ip.json"
+    },
+    "synproxy_build_options": {
+      "callsite_count": 8,
+      "out_file": "synproxy_build_options.json"
+    },
+    "synproxy_send_tcp": {
+      "callsite_count": 4,
+      "out_file": "synproxy_send_tcp.json"
+    },
+    "nf_ct_seqadj_init": {
+      "callsite_count": 6,
+      "out_file": "nf_ct_seqadj_init.json"
+    },
+    "synproxy_parse_options": {
+      "callsite_count": 5,
+      "out_file": "synproxy_parse_options.json"
+    },
+    "synproxy_build_ip_ipv6": {
+      "callsite_count": 4,
+      "out_file": "synproxy_build_ip_ipv6.json"
+    },
+    "synproxy_send_tcp_ipv6": {
+      "callsite_count": 4,
+      "out_file": "synproxy_send_tcp_ipv6.json"
+    },
+    "nfnl_pernet": {
+      "callsite_count": 9,
+      "out_file": "nfnl_pernet.json"
+    },
+    "nfnetlink_get_subsys": {
+      "callsite_count": 3,
+      "out_file": "nfnetlink_get_subsys.json"
+    },
+    "nfnetlink_find_client": {
+      "callsite_count": 3,
+      "out_file": "nfnetlink_find_client.json"
+    },
+    "nfnl_err_reset": {
+      "callsite_count": 6,
+      "out_file": "nfnl_err_reset.json"
+    },
+    "mangle_packet": {
+      "callsite_count": 8,
+      "out_file": "mangle_packet.json"
+    },
+    "map_addr": {
+      "callsite_count": 4,
+      "out_file": "map_addr.json"
+    },
+    "sip_sprintf_addr": {
+      "callsite_count": 4,
+      "out_file": "sip_sprintf_addr.json"
+    },
+    "mangle_sdp_packet": {
+      "callsite_count": 3,
+      "out_file": "mangle_sdp_packet.json"
+    },
+    "mangle_content_len": {
+      "callsite_count": 3,
+      "out_file": "mangle_content_len.json"
+    },
+    "match_flags": {
+      "callsite_count": 3,
+      "out_file": "match_flags.json"
+    },
+    "udp_error_log": {
+      "callsite_count": 3,
+      "out_file": "udp_error_log.json"
+    },
+    "udplite_error_log": {
+      "callsite_count": 4,
+      "out_file": "udplite_error_log.json"
+    },
+    "nft_do_chain": {
+      "callsite_count": 11,
+      "out_file": "nft_do_chain.json"
+    },
+    "trace_fill_header": {
+      "callsite_count": 3,
+      "out_file": "trace_fill_header.json"
+    },
+    "nfnl_acct_pernet": {
+      "callsite_count": 7,
+      "out_file": "nfnl_acct_pernet.json"
+    },
+    "nfnl_acct_fill_info": {
+      "callsite_count": 3,
+      "out_file": "nfnl_acct_fill_info.json"
+    },
+    "nfnl_cthelper_parse_tuple": {
+      "callsite_count": 3,
+      "out_file": "nfnl_cthelper_parse_tuple.json"
+    },
+    "nft_bitmap_location": {
+      "callsite_count": 6,
+      "out_file": "nft_bitmap_location.json"
+    },
+    "nft_reg_track_cancel": {
+      "callsite_count": 8,
+      "out_file": "nft_reg_track_cancel.json"
+    },
+    "nf_tables_bind_set": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_bind_set.json"
+    },
+    "nf_tables_deactivate_set": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_deactivate_set.json"
+    },
+    "nf_tables_activate_set": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_activate_set.json"
+    },
+    "nf_tables_destroy_set": {
+      "callsite_count": 3,
+      "out_file": "nf_tables_destroy_set.json"
+    },
+    "nft_hash_buckets": {
+      "callsite_count": 4,
+      "out_file": "nft_hash_buckets.json"
+    },
+    "nft_limit_eval": {
+      "callsite_count": 4,
+      "out_file": "nft_limit_eval.json"
+    },
+    "nft_limit_init": {
+      "callsite_count": 4,
+      "out_file": "nft_limit_init.json"
+    },
+    "nft_limit_dump": {
+      "callsite_count": 4,
+      "out_file": "nft_limit_dump.json"
+    },
+    "nft_limit_destroy": {
+      "callsite_count": 4,
+      "out_file": "nft_limit_destroy.json"
+    },
+    "nft_chain_validate_dependency": {
+      "callsite_count": 3,
+      "out_file": "nft_chain_validate_dependency.json"
+    },
+    "nft_meta_store_ifname": {
+      "callsite_count": 3,
+      "out_file": "nft_meta_store_ifname.json"
+    },
+    "nft_meta_store_iftype": {
+      "callsite_count": 3,
+      "out_file": "nft_meta_store_iftype.json"
+    },
+    "pipapo_refill": {
+      "callsite_count": 3,
+      "out_file": "pipapo_refill.json"
+    },
+    "pipapo_get": {
+      "callsite_count": 4,
+      "out_file": "pipapo_get.json"
+    },
+    "pipapo_bucket_set": {
+      "callsite_count": 3,
+      "out_file": "pipapo_bucket_set.json"
+    },
+    "pipapo_insert": {
+      "callsite_count": 3,
+      "out_file": "pipapo_insert.json"
+    },
+    "pipapo_free_fields": {
+      "callsite_count": 3,
+      "out_file": "pipapo_free_fields.json"
+    },
+    "pipapo_clone": {
+      "callsite_count": 3,
+      "out_file": "pipapo_clone.json"
+    },
+    "nft_pipapo_avx2_refill": {
+      "callsite_count": 10,
+      "out_file": "nft_pipapo_avx2_refill.json"
+    },
+    "nft_reject_queue_xmit": {
+      "callsite_count": 4,
+      "out_file": "nft_reject_queue_xmit.json"
+    },
+    "nf_synproxy_ipv4_fini": {
+      "callsite_count": 3,
+      "out_file": "nf_synproxy_ipv4_fini.json"
+    },
+    "xt_ct_tg_check": {
+      "callsite_count": 3,
+      "out_file": "xt_ct_tg_check.json"
+    },
+    "recent_entry_remove": {
+      "callsite_count": 5,
+      "out_file": "recent_entry_remove.json"
+    },
+    "recent_pernet": {
+      "callsite_count": 4,
+      "out_file": "recent_pernet.json"
+    },
+    "recent_table_lookup": {
+      "callsite_count": 3,
+      "out_file": "recent_table_lookup.json"
+    },
+    "recent_table_flush": {
+      "callsite_count": 3,
+      "out_file": "recent_table_flush.json"
+    },
+    "recent_table_free": {
+      "callsite_count": 3,
+      "out_file": "recent_table_free.json"
+    },
+    "socket_mt_enable_defrag": {
+      "callsite_count": 3,
+      "out_file": "socket_mt_enable_defrag.json"
+    }
+  }
+}

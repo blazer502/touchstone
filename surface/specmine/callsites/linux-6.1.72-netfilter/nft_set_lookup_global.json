@@ -1,0 +1,71 @@
+{
+  "callee": "nft_set_lookup_global",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_tables_newsetelem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6642,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 6637
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_LIST_ELEMENTS] == NULL)",
+          "exit_kind": "return",
+          "source_line": 6632,
+          "exit_line": 6633
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 6637
+        }
+      ]
+    },
+    {
+      "caller": "nft_dynset_init",
+      "file": "net/netfilter/nft_dynset.c",
+      "line": 188,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&nft_net->commit_mutex)",
+          "source_line": 171
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~(NFT_DYNSET_F_INV | NFT_DYNSET_F_EXPR))",
+          "exit_kind": "return",
+          "source_line": 180,
+          "exit_line": 181
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_DYNSET_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 178
+        }
+      ]
+    },
+    {
+      "caller": "nft_lookup_init",
+      "file": "net/netfilter/nft_lookup.c",
+      "line": 109,
+      "guards": []
+    },
+    {
+      "caller": "nft_objref_map_init",
+      "file": "net/netfilter/nft_objref.c",
+      "line": 137,
+      "guards": []
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "callee": "port_match",
+  "defined_in": "net/netfilter/xt_conntrack.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "ct_proto_port_check_v3",
+      "file": "net/netfilter/xt_conntrack.c",
+      "line": 133,
+      "guards": []
+    },
+    {
+      "caller": "ct_proto_port_check_v3",
+      "file": "net/netfilter/xt_conntrack.c",
+      "line": 139,
+      "guards": []
+    },
+    {
+      "caller": "ct_proto_port_check_v3",
+      "file": "net/netfilter/xt_conntrack.c",
+      "line": 147,
+      "guards": []
+    },
+    {
+      "caller": "ct_proto_port_check_v3",
+      "file": "net/netfilter/xt_conntrack.c",
+      "line": 153,
+      "guards": []
+    },
+    {
+      "caller": "tcp_mt",
+      "file": "net/netfilter/xt_tcpudp.c",
+      "line": 96,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(par->fragoff != 0)",
+          "exit_kind": "return",
+          "source_line": 72
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th == NULL)",
+          "exit_kind": "return",
+          "source_line": 88
+        }
+      ]
+    },
+    {
+      "caller": "tcp_mt",
+      "file": "net/netfilter/xt_tcpudp.c",
+      "line": 100,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(par->fragoff != 0)",
+          "exit_kind": "return",
+          "source_line": 72
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th == NULL)",
+          "exit_kind": "return",
+          "source_line": 88
+        }
+      ]
+    },
+    {
+      "caller": "udp_mt",
+      "file": "net/netfilter/xt_tcpudp.c",
+      "line": 148,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(par->fragoff != 0)",
+          "exit_kind": "return",
+          "source_line": 136,
+          "exit_line": 137
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(uh == NULL)",
+          "exit_kind": "return",
+          "source_line": 140
+        }
+      ]
+    },
+    {
+      "caller": "udp_mt",
+      "file": "net/netfilter/xt_tcpudp.c",
+      "line": 151,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(par->fragoff != 0)",
+          "exit_kind": "return",
+          "source_line": 136,
+          "exit_line": 137
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(uh == NULL)",
+          "exit_kind": "return",
+          "source_line": 140
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "callee": "pipapo_insert",
+  "defined_in": "net/netfilter/nft_set_pipapo.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "pipapo_expand",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 1057,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(pipapo_step_after_end(base, end, step, bytes))",
+          "exit_kind": "break",
+          "source_line": 1051,
+          "exit_line": 1052
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "memcmp(base, end, bytes) <= 0",
+          "polarity": "in_true_branch",
+          "source_line": 1046
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "pipapo_step_diff(base, step, bytes)",
+          "polarity": "in_true_branch",
+          "source_line": 1050
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "step >= len",
+          "polarity": "in_true_branch",
+          "source_line": 1055
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!masks",
+          "polarity": "in_true_branch",
+          "source_line": 1056
+        }
+      ]
+    },
+    {
+      "caller": "pipapo_expand",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 1066,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "masks != NULL",
+          "source_line": 1056
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(pipapo_step_after_end(base, end, step, bytes))",
+          "exit_kind": "break",
+          "source_line": 1051,
+          "exit_line": 1052
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1058,
+          "exit_line": 1059
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!masks)",
+          "exit_kind": "return",
+          "source_line": 1056
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(step >= len)",
+          "exit_kind": "goto",
+          "source_line": 1055
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "memcmp(base, end, bytes) <= 0",
+          "polarity": "in_true_branch",
+          "source_line": 1046
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_insert",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 1238,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(dup)",
+          "source_line": 1179
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(dup)",
+          "source_line": 1204
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!IS_ERR(dup))",
+          "exit_kind": "return",
+          "source_line": 1179
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(dup))",
+          "exit_kind": "return",
+          "source_line": 1204,
+          "exit_line": 1205
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(PTR_ERR(dup) != -ENOENT)",
+          "exit_kind": "return",
+          "source_line": 1203
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(f->rules >= (unsigned long)NFT_PIPAPO_RULE0_MAX)",
+          "exit_kind": "return",
+          "source_line": 1214,
+          "exit_line": 1215
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ret",
+          "polarity": "in_true_branch",
+          "source_line": 1237
+        }
+      ]
+    }
+  ]
+}

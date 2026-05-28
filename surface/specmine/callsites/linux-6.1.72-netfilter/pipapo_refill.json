@@ -1,0 +1,70 @@
+{
+  "callee": "pipapo_refill",
+  "defined_in": "net/netfilter/nft_set_pipapo.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_pipapo_lookup",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 460,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "bh_disabled",
+          "source_line": 423
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!m || !*raw_cpu_ptr(m->scratch)))",
+          "exit_kind": "goto",
+          "source_line": 429,
+          "exit_line": 430
+        }
+      ]
+    },
+    {
+      "caller": "pipapo_get",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 563,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "res_map != NULL",
+          "source_line": 526
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fill_map != NULL",
+          "source_line": 532
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!res_map)",
+          "exit_kind": "goto",
+          "source_line": 526
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fill_map)",
+          "exit_kind": "goto",
+          "source_line": 532
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_avx2_lookup_slow",
+      "file": "net/netfilter/nft_set_pipapo_avx2.c",
+      "line": 1064,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = offset; i < bsize; i++",
+          "polarity": "in_true_branch",
+          "source_line": 1057
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "callee": "nft_skb_copy_to_reg",
+  "defined_in": "net/netfilter/nft_exthdr.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_exthdr_ipv6_eval",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 68,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(pkt->skb->protocol != htons(ETH_P_IPV6))",
+          "exit_kind": "goto",
+          "source_line": 56,
+          "exit_line": 57
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->flags & NFT_EXTHDR_F_PRESENT)",
+          "exit_kind": "return",
+          "source_line": 60
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 63,
+          "exit_line": 64
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 63
+        }
+      ]
+    },
+    {
+      "caller": "nft_exthdr_ipv4_eval",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 164,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb->protocol != htons(ETH_P_IP))",
+          "exit_kind": "goto",
+          "source_line": 152,
+          "exit_line": 153
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->flags & NFT_EXTHDR_F_PRESENT)",
+          "exit_kind": "return",
+          "source_line": 156
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 159,
+          "exit_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 159
+        }
+      ]
+    },
+    {
+      "caller": "nft_exthdr_sctp_eval",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 399,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(pkt->tprot != IPPROTO_SCTP)",
+          "exit_kind": "goto",
+          "source_line": 382,
+          "exit_line": 383
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!sch || !sch->length)",
+          "exit_kind": "break",
+          "source_line": 387,
+          "exit_line": 388
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->flags & NFT_EXTHDR_F_PRESENT)",
+          "exit_kind": "return",
+          "source_line": 391
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "sch->type == priv->type",
+          "polarity": "in_true_branch",
+          "source_line": 390
+        }
+      ]
+    }
+  ]
+}

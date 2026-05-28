@@ -1,0 +1,47 @@
+{
+  "callee": "ip_vs_conn_expire",
+  "defined_in": "net/netfilter/ipvs/ip_vs_conn.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "ct_write_unlock_bh",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 102,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_conn_put",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 483,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_conn_del",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 829,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "del_timer(&cp->timer)",
+          "polarity": "in_true_branch",
+          "source_line": 825
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_conn_del_put",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 841,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "del_timer(&cp->timer)",
+          "polarity": "in_true_branch",
+          "source_line": 836
+        }
+      ]
+    }
+  ]
+}

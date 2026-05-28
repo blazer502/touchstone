@@ -1,0 +1,85 @@
+{
+  "callee": "nft_reject_queue_xmit",
+  "defined_in": "net/netfilter/nft_reject_netdev.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nft_reject_netdev_send_v4_tcp_reset",
+      "file": "net/netfilter/nft_reject_netdev.c",
+      "line": 38,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 35
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 35,
+          "exit_line": 36
+        }
+      ]
+    },
+    {
+      "caller": "nft_reject_netdev_send_v4_unreach",
+      "file": "net/netfilter/nft_reject_netdev.c",
+      "line": 52,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 49
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 49,
+          "exit_line": 50
+        }
+      ]
+    },
+    {
+      "caller": "nft_reject_netdev_send_v6_tcp_reset",
+      "file": "net/netfilter/nft_reject_netdev.c",
+      "line": 66,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 63
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 63,
+          "exit_line": 64
+        }
+      ]
+    },
+    {
+      "caller": "nft_reject_netdev_send_v6_unreach",
+      "file": "net/netfilter/nft_reject_netdev.c",
+      "line": 81,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nskb != NULL",
+          "source_line": 78
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nskb)",
+          "exit_kind": "return",
+          "source_line": 78,
+          "exit_line": 79
+        }
+      ]
+    }
+  ]
+}

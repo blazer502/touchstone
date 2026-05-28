@@ -1,0 +1,67 @@
+{
+  "callee": "__ip_vs_dst_cache_reset",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ctl.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_dest_free",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 787,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected(dest->svc, 1)",
+          "source_line": 785
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_update_dest",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 941,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 940
+        },
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected(dest->svc, 1)",
+          "source_line": 919
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!add && udest->af != dest->af)",
+          "macro": "BUG_ON",
+          "source_line": 880
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_forget_dev",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1677,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 1669
+        },
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected(dest->dest_dst, 1)",
+          "source_line": 1670
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dest_dst && dest_dst->dst_cache->dev == dev",
+          "polarity": "in_true_branch",
+          "source_line": 1671
+        }
+      ]
+    }
+  ]
+}

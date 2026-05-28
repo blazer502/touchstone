@@ -1,0 +1,26 @@
+{
+  "target": "smoke",
+  "source_root": "/home/chanyoung/veri-agent/surface/specmine/smoke",
+  "scope": ".",
+  "generated_at": 1779926128,
+  "stats": {
+    "defined_callees": 7,
+    "mining_callees": 2,
+    "callers_scanned": 7,
+    "callees_with_callsites": 2,
+    "callees_emitted": 2,
+    "total_callsites": 7,
+    "total_guards": 9,
+    "wall_seconds": 0.0
+  },
+  "callees": {
+    "worker": {
+      "callsite_count": 6,
+      "out_file": "worker.json"
+    },
+    "do_thing": {
+      "callsite_count": 1,
+      "out_file": "do_thing.json"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "callee": "pipapo_free_fields",
+  "defined_in": "net/netfilter/nft_set_pipapo.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "pipapo_free_match",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 1648,
+      "guards": []
+    },
+    {
+      "caller": "nft_pipapo_destroy",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 2245,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected(priv->match, true)",
+          "source_line": 2233
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "m",
+          "polarity": "in_true_branch",
+          "source_line": 2234
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_destroy",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 2263,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected(priv->match, true)",
+          "source_line": 2233
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "priv->clone",
+          "polarity": "in_true_branch",
+          "source_line": 2250
+        }
+      ]
+    }
+  ]
+}

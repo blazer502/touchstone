@@ -1,0 +1,209 @@
+{
+  "callee": "ip_vs_nat_send_or_cont",
+  "defined_in": "net/netfilter/ipvs/ip_vs_xmit.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "ip_vs_nat_xmit",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 840,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(p == NULL)",
+          "exit_kind": "goto",
+          "source_line": 778,
+          "exit_line": 779
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(cp->flags & IP_VS_CONN_F_NO_CPORT))",
+          "exit_kind": "goto",
+          "source_line": 774
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(local < 0)",
+          "exit_kind": "goto",
+          "source_line": 789,
+          "exit_line": 790
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct)",
+          "exit_kind": "goto",
+          "source_line": 801
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(local && ipv4_is_loopback(cp->daddr.ip) && was_input)",
+          "exit_kind": "goto",
+          "source_line": 811
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, sizeof(struct iphdr)))",
+          "exit_kind": "goto",
+          "source_line": 819,
+          "exit_line": 820
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_cow(skb, rt->dst.dev->hard_header_len))",
+          "exit_kind": "goto",
+          "source_line": 822,
+          "exit_line": 823
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(pp->dnat_handler && !pp->dnat_handler(skb, pp, cp, ipvsh))",
+          "exit_kind": "goto",
+          "source_line": 826,
+          "exit_line": 827
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_nat_xmit_v6",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 928,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(p == NULL)",
+          "exit_kind": "goto",
+          "source_line": 865,
+          "exit_line": 866
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(cp->flags & IP_VS_CONN_F_NO_CPORT && !ipvsh->fragoffs))",
+          "exit_kind": "goto",
+          "source_line": 862
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(local < 0)",
+          "exit_kind": "goto",
+          "source_line": 877,
+          "exit_line": 878
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct)",
+          "exit_kind": "goto",
+          "source_line": 889
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, sizeof(struct ipv6hdr)))",
+          "exit_kind": "goto",
+          "source_line": 908,
+          "exit_line": 909
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_cow(skb, rt->dst.dev->hard_header_len))",
+          "exit_kind": "goto",
+          "source_line": 911,
+          "exit_line": 912
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(pp->dnat_handler && !pp->dnat_handler(skb, pp, cp, ipvsh))",
+          "exit_kind": "goto",
+          "source_line": 915,
+          "exit_line": 916
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_icmp_xmit",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 1587,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(IP_VS_FWD_METHOD(cp) != IP_VS_CONN_F_MASQ)",
+          "exit_kind": "goto",
+          "source_line": 1524
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(local < 0)",
+          "exit_kind": "goto",
+          "source_line": 1545,
+          "exit_line": 1546
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct)",
+          "exit_kind": "goto",
+          "source_line": 1558
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(local && ipv4_is_loopback(cp->daddr.ip) && was_input)",
+          "exit_kind": "goto",
+          "source_line": 1568
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, offset))",
+          "exit_kind": "goto",
+          "source_line": 1576,
+          "exit_line": 1577
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_cow(skb, rt->dst.dev->hard_header_len))",
+          "exit_kind": "goto",
+          "source_line": 1579,
+          "exit_line": 1580
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_icmp_xmit_v6",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 1676,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(IP_VS_FWD_METHOD(cp) != IP_VS_CONN_F_MASQ)",
+          "exit_kind": "goto",
+          "source_line": 1614
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(local < 0)",
+          "exit_kind": "goto",
+          "source_line": 1634,
+          "exit_line": 1635
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct)",
+          "exit_kind": "goto",
+          "source_line": 1646
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, offset))",
+          "exit_kind": "goto",
+          "source_line": 1665,
+          "exit_line": 1666
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_cow(skb, rt->dst.dev->hard_header_len))",
+          "exit_kind": "goto",
+          "source_line": 1668,
+          "exit_line": 1669
+        }
+      ]
+    }
+  ]
+}

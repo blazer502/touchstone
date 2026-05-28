@@ -1,0 +1,95 @@
+{
+  "callee": "nf_ct_get_id",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ctnetlink_dump_id",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 516,
+      "guards": []
+    },
+    {
+      "caller": "ctnetlink_del_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1634,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "h != NULL",
+          "source_line": 1626
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1605,
+          "exit_line": 1606
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1622,
+          "exit_line": 1623
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!h)",
+          "exit_kind": "return",
+          "source_line": 1626,
+          "exit_line": 1627
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_ID]",
+          "polarity": "in_true_branch",
+          "source_line": 1631
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_get_eval",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 182,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct == NULL)",
+          "exit_kind": "goto",
+          "source_line": 89,
+          "exit_line": 90
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->master == NULL)",
+          "exit_kind": "goto",
+          "source_line": 113,
+          "exit_line": 114
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(help == NULL)",
+          "exit_kind": "goto",
+          "source_line": 116,
+          "exit_line": 117
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(helper == NULL)",
+          "exit_kind": "goto",
+          "source_line": 119,
+          "exit_line": 120
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->key",
+          "polarity": "in_true_branch",
+          "source_line": 92
+        }
+      ]
+    }
+  ]
+}

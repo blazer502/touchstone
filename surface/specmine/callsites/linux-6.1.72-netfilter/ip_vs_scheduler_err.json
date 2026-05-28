@@ -1,0 +1,237 @@
+{
+  "callee": "ip_vs_scheduler_err",
+  "defined_in": "net/netfilter/ipvs/ip_vs_sched.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 15,
+  "callsites": [
+    {
+      "caller": "ip_vs_dh_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_dh.c",
+      "line": 227,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_fo_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_fo.c",
+      "line": 49,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(hweight)",
+          "exit_kind": "return",
+          "source_line": 40
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_lblc_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_lblc.c",
+      "line": 514,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(en)",
+          "exit_kind": "goto",
+          "source_line": 492
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!dest",
+          "polarity": "in_true_branch",
+          "source_line": 513
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_lblcr_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_lblcr.c",
+      "line": 684,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(dest && !is_overloaded(dest, svc))",
+          "exit_kind": "goto",
+          "source_line": 678,
+          "exit_line": 679
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "en",
+          "polarity": "in_true_branch",
+          "source_line": 656
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!dest",
+          "polarity": "in_true_branch",
+          "source_line": 683
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_lc_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_lc.c",
+      "line": 53,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!least",
+          "polarity": "in_true_branch",
+          "source_line": 52
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_mh_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_mh.c",
+      "line": 497,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!dest",
+          "polarity": "in_true_branch",
+          "source_line": 496
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_nq_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_nq.c",
+      "line": 98,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(atomic_read(&dest->activeconns) == 0)",
+          "exit_kind": "goto",
+          "source_line": 83
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!least",
+          "polarity": "in_true_branch",
+          "source_line": 97
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_ovf_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_ovf.c",
+      "line": 56,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(h)",
+          "exit_kind": "return",
+          "source_line": 47
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_rr_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_rr.c",
+      "line": 85,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(dest == last)",
+          "exit_kind": "goto",
+          "source_line": 74,
+          "exit_line": 75
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_sed_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_sed.c",
+      "line": 86,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_sh_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_sh.c",
+      "line": 332,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!dest",
+          "polarity": "in_true_branch",
+          "source_line": 331
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_twos_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_twos.c",
+      "line": 66,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!choice1",
+          "polarity": "in_true_branch",
+          "source_line": 65
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_wlc_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_wlc.c",
+      "line": 58,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_wrr_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_wrr.c",
+      "line": 227,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(mark->mw == 0)",
+          "exit_kind": "goto",
+          "source_line": 172,
+          "exit_line": 173
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dest == stop)",
+          "exit_kind": "goto",
+          "source_line": 183,
+          "exit_line": 184
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(mark->cw <= 0)",
+          "exit_kind": "goto",
+          "source_line": 187
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_wrr_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_wrr.c",
+      "line": 233,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(mark->mw == 0)",
+          "exit_kind": "goto",
+          "source_line": 172,
+          "exit_line": 173
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dest == stop)",
+          "exit_kind": "goto",
+          "source_line": 183,
+          "exit_line": 184
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(mark->cw <= 0)",
+          "exit_kind": "goto",
+          "source_line": 187
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "callee": "ip_vs_protocol_net_cleanup",
+  "defined_in": "net/netfilter/ipvs/ip_vs_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "__ip_vs_init",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 2335,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ipvs == NULL)",
+          "exit_kind": "return",
+          "source_line": 2296,
+          "exit_line": 2297
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_estimator_net_init(ipvs) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2307,
+          "exit_line": 2308
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_control_net_init(ipvs) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2310,
+          "exit_line": 2311
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_protocol_net_init(ipvs) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2313,
+          "exit_line": 2314
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_app_net_init(ipvs) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2316,
+          "exit_line": 2317
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_conn_net_init(ipvs) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2319,
+          "exit_line": 2320
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_sync_net_init(ipvs) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2322,
+          "exit_line": 2323
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_cleanup_batch",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 2355,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_protocol_net_init",
+      "file": "net/netfilter/ipvs/ip_vs_proto.c",
+      "line": 325,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 319,
+          "exit_line": 320
+        }
+      ]
+    }
+  ]
+}

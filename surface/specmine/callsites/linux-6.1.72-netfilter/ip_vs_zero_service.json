@@ -1,0 +1,212 @@
+{
+  "callee": "ip_vs_zero_service",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ctl.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "ip_vs_zero_all",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1753,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < IP_VS_SVC_TAB_SIZE; idx++",
+          "polarity": "in_true_branch",
+          "source_line": 1750
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc->ipvs == ipvs",
+          "polarity": "in_true_branch",
+          "source_line": 1752
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_zero_all",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1760,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < IP_VS_SVC_TAB_SIZE; idx++",
+          "polarity": "in_true_branch",
+          "source_line": 1757
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc->ipvs == ipvs",
+          "polarity": "in_true_branch",
+          "source_line": 1759
+        }
+      ]
+    },
+    {
+      "caller": "do_ip_vs_set_ctl",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 2586,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 2507
+        },
+        {
+          "kind": "capability_check",
+          "predicate": "ns_capable(sock_net(sk)->user_ns, CAP_NET_ADMIN)",
+          "source_line": 2472
+        },
+        {
+          "kind": "null_check",
+          "predicate": "len != NULL",
+          "source_line": 2516
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ret != NULL",
+          "source_line": 2582
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ns_capable(sock_net(sk)->user_ns, CAP_NET_ADMIN))",
+          "exit_kind": "return",
+          "source_line": 2472,
+          "exit_line": 2473
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd < IP_VS_BASE_CTL || cmd > IP_VS_SO_SET_MAX)",
+          "exit_kind": "return",
+          "source_line": 2475,
+          "exit_line": 2476
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(len != set_arglen[CMDID(cmd)])",
+          "exit_kind": "return",
+          "source_line": 2477
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_from_sockptr(arg, ptr, len) != 0)",
+          "exit_kind": "return",
+          "source_line": 2483,
+          "exit_line": 2484
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd == IP_VS_SO_SET_STARTDAEMON)",
+          "exit_kind": "return",
+          "source_line": 2491
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd == IP_VS_SO_SET_FLUSH)",
+          "exit_kind": "goto",
+          "source_line": 2508
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd == IP_VS_SO_SET_TIMEOUT)",
+          "exit_kind": "goto",
+          "source_line": 2512
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!len)",
+          "exit_kind": "goto",
+          "source_line": 2516
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!usvc.fwmark && !usvc.addr.ip && !usvc.port)",
+          "exit_kind": "goto",
+          "source_line": 2532
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ret)",
+          "exit_kind": "goto",
+          "source_line": 2582,
+          "exit_line": 2583
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "cmd",
+          "polarity": "in_true_branch",
+          "source_line": 2570
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_genl_set_cmd",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 3790,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 3685
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd == IPVS_CMD_FLUSH)",
+          "exit_kind": "goto",
+          "source_line": 3687
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd == IPVS_CMD_SET_CONFIG)",
+          "exit_kind": "goto",
+          "source_line": 3690
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 3708,
+          "exit_line": 3709
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((cmd != IPVS_CMD_NEW_SERVICE) && (svc == NULL))",
+          "exit_kind": "goto",
+          "source_line": 3712
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 3728,
+          "exit_line": 3729
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ip_vs_is_af_valid(udest.af))",
+          "exit_kind": "goto",
+          "source_line": 3740
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ipvs->sync_state)",
+          "exit_kind": "goto",
+          "source_line": 3749
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(udest.af != svc->af && cmd != IPVS_CMD_DEL_DEST)",
+          "exit_kind": "break",
+          "source_line": 3745
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "cmd",
+          "polarity": "in_true_branch",
+          "source_line": 3766
+        }
+      ]
+    }
+  ]
+}

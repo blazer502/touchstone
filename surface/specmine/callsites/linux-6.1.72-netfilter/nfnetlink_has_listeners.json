@@ -1,0 +1,101 @@
+{
+  "callee": "nfnetlink_has_listeners",
+  "defined_in": "net/netfilter/nfnetlink.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 12,
+  "callsites": [
+    {
+      "caller": "ctnetlink_conntrack_event",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 752,
+      "guards": []
+    },
+    {
+      "caller": "ctnetlink_expect_event",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3119,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_table_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1010,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_chain_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1827,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_rule_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3229,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_set_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4329,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_setelem_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5802,
+      "guards": []
+    },
+    {
+      "caller": "__nft_obj_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7597,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_flowtable_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8450,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_gen_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8570,
+      "guards": []
+    },
+    {
+      "caller": "nft_trace_notify",
+      "file": "net/netfilter/nf_tables_trace.c",
+      "line": 176,
+      "guards": []
+    },
+    {
+      "caller": "nfnetlink_unbind",
+      "file": "net/netfilter/nfnetlink.c",
+      "line": 746,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 745
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(group <= NFNLGRP_NONE || group > NFNLGRP_MAX)",
+          "exit_kind": "return",
+          "source_line": 725,
+          "exit_line": 726
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(group >= 8)",
+          "exit_kind": "return",
+          "source_line": 740,
+          "exit_line": 741
+        }
+      ]
+    }
+  ]
+}

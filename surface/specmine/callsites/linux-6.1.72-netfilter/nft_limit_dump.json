@@ -1,0 +1,33 @@
+{
+  "callee": "nft_limit_dump",
+  "defined_in": "net/netfilter/nft_limit.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nft_limit_pkts_dump",
+      "file": "net/netfilter/nft_limit.c",
+      "line": 200,
+      "guards": []
+    },
+    {
+      "caller": "nft_limit_bytes_dump",
+      "file": "net/netfilter/nft_limit.c",
+      "line": 258,
+      "guards": []
+    },
+    {
+      "caller": "nft_limit_obj_pkts_dump",
+      "file": "net/netfilter/nft_limit.c",
+      "line": 344,
+      "guards": []
+    },
+    {
+      "caller": "nft_limit_obj_bytes_dump",
+      "file": "net/netfilter/nft_limit.c",
+      "line": 391,
+      "guards": []
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "engine": "cbmc",
+  "source": "/home/chanyoung/veri-agent/surface/specmine/verified/multi_class/harnesses/lookup_thing_caller_buggy_lock.c",
+  "function": "main",
+  "property": "assertion",
+  "unwind": 4,
+  "target_location": "line 47 [__specmine_wrap_lookup_thing.assertion.1]",
+  "assignment": {
+    "return_value_nondet_int": "0",
+    "arg0": "0",
+    "x": "0",
+    "r": "0",
+    "a0": "0"
+  }
+}

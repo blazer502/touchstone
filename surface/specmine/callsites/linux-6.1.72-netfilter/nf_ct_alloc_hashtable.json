@@ -1,0 +1,65 @@
+{
+  "callee": "nf_ct_alloc_hashtable",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "nf_conntrack_hash_resize",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 2621,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "hashsize != NULL",
+          "source_line": 2618
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hashsize)",
+          "exit_kind": "return",
+          "source_line": 2618,
+          "exit_line": 2619
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_init_start",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 2727,
+      "guards": []
+    },
+    {
+      "caller": "nf_conntrack_expect_init",
+      "file": "net/netfilter/nf_conntrack_expect.c",
+      "line": 731,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nf_ct_expect_cachep != NULL",
+          "source_line": 728
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_expect_cachep)",
+          "exit_kind": "return",
+          "source_line": 728,
+          "exit_line": 729
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_helper_init",
+      "file": "net/netfilter/nf_conntrack_helper.c",
+      "line": 508,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_init",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 1137,
+      "guards": []
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "callee": "nft_flow_rule_set_addr_type",
+  "defined_in": "net/netfilter/nf_tables_offload.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nft_payload_offload_ip",
+      "file": "net/netfilter/nft_payload.c",
+      "line": 349,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->offset",
+          "polarity": "in_true_branch",
+          "source_line": 341
+        }
+      ]
+    },
+    {
+      "caller": "nft_payload_offload_ip",
+      "file": "net/netfilter/nft_payload.c",
+      "line": 358,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->offset",
+          "polarity": "in_true_branch",
+          "source_line": 341
+        }
+      ]
+    },
+    {
+      "caller": "nft_payload_offload_ip6",
+      "file": "net/netfilter/nft_payload.c",
+      "line": 389,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->offset",
+          "polarity": "in_true_branch",
+          "source_line": 381
+        }
+      ]
+    },
+    {
+      "caller": "nft_payload_offload_ip6",
+      "file": "net/netfilter/nft_payload.c",
+      "line": 398,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->offset",
+          "polarity": "in_true_branch",
+          "source_line": 381
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "contracts": [
+    {
+      "callee": "lookup_thing",
+      "callsite_count": 11,
+      "kind_class": "lock",
+      "kind_label": "lock_held",
+      "outlier_count": 1,
+      "predicate": "rcu_read_lock_held",
+      "support_count": 10,
+      "support_pct": 0.9091
+    },
+    {
+      "callee": "process_item",
+      "callsite_count": 7,
+      "kind_class": "early",
+      "kind_label": "early_return",
+      "outlier_count": 1,
+      "predicate": "!(IS_ERR(item))",
+      "support_count": 6,
+      "support_pct": 0.8571
+    },
+    {
+      "callee": "process_item",
+      "callsite_count": 7,
+      "kind_class": "null",
+      "kind_label": "null_check",
+      "outlier_count": 1,
+      "predicate": "!IS_ERR_OR_NULL(item)",
+      "support_count": 6,
+      "support_pct": 0.8571
+    }
+  ],
+  "generated_at": 1779931746,
+  "min_support": 2,
+  "stats": {
+    "by_kind_class": {
+      "early": 1,
+      "lock": 1,
+      "null": 1
+    },
+    "callees_examined": 2,
+    "callees_with_contracts": 2,
+    "mined_contracts": 3,
+    "total_callsites": 18,
+    "wall_seconds": 0.0
+  },
+  "target": "multi_class",
+  "tau": 0.83
+}

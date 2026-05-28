@@ -1,0 +1,91 @@
+{
+  "callee": "nfnl_cthelper_parse_tuple",
+  "defined_in": "net/netfilter/nfnetlink_cthelper.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nfnl_cthelper_new",
+      "file": "net/netfilter/nfnetlink_cthelper.c",
+      "line": 436,
+      "guards": [
+        {
+          "kind": "capability_check",
+          "predicate": "capable(CAP_NET_ADMIN)",
+          "source_line": 428
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!capable(CAP_NET_ADMIN))",
+          "exit_kind": "return",
+          "source_line": 428,
+          "exit_line": 429
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[NFCTH_NAME] || !tb[NFCTH_TUPLE])",
+          "exit_kind": "return",
+          "source_line": 431,
+          "exit_line": 432
+        }
+      ]
+    },
+    {
+      "caller": "nfnl_cthelper_get",
+      "file": "net/netfilter/nfnetlink_cthelper.c",
+      "line": 641,
+      "guards": [
+        {
+          "kind": "capability_check",
+          "predicate": "capable(CAP_NET_ADMIN)",
+          "source_line": 627
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!capable(CAP_NET_ADMIN))",
+          "exit_kind": "return",
+          "source_line": 627,
+          "exit_line": 628
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 630
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFCTH_TUPLE]",
+          "polarity": "in_true_branch",
+          "source_line": 640
+        }
+      ]
+    },
+    {
+      "caller": "nfnl_cthelper_del",
+      "file": "net/netfilter/nfnetlink_cthelper.c",
+      "line": 698,
+      "guards": [
+        {
+          "kind": "capability_check",
+          "predicate": "capable(CAP_NET_ADMIN)",
+          "source_line": 691
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!capable(CAP_NET_ADMIN))",
+          "exit_kind": "return",
+          "source_line": 691,
+          "exit_line": 692
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tb[NFCTH_TUPLE]",
+          "polarity": "in_true_branch",
+          "source_line": 697
+        }
+      ]
+    }
+  ]
+}

@@ -1,9 +1,10 @@
 {
   "phase": "0.5",
-  "rows": 78,
+  "rows": 87,
   "by_status": {
-    "success": 71,
-    "not_setup": 7
+    "success": 79,
+    "not_setup": 7,
+    "partial": 1
   },
   "out_jsonl": "run-logs/phase0.5-baseline.jsonl",
   "adapters": [
@@ -22,6 +23,7 @@
     "precision",
     "router",
     "router_llm",
+    "specmine",
     "sv-comp",
     "tier1_oracle",
     "tier2_oracle",

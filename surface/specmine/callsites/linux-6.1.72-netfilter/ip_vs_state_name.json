@@ -1,0 +1,65 @@
+{
+  "callee": "ip_vs_state_name",
+  "defined_in": "net/netfilter/ipvs/ip_vs_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "ip_vs_conn_seq_show",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1160,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!net_eq(cp->ipvs->net, net))",
+          "exit_kind": "return",
+          "source_line": 1132,
+          "exit_line": 1133
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_conn_seq_show",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1173,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!net_eq(cp->ipvs->net, net))",
+          "exit_kind": "return",
+          "source_line": 1132,
+          "exit_line": 1133
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_conn_sync_seq_show",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1226,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!net_eq(cp->ipvs->net, net))",
+          "exit_kind": "return",
+          "source_line": 1207,
+          "exit_line": 1208
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_conn_sync_seq_show",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1239,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!net_eq(cp->ipvs->net, net))",
+          "exit_kind": "return",
+          "source_line": 1207,
+          "exit_line": 1208
+        }
+      ]
+    }
+  ]
+}

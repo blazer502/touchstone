@@ -1,0 +1,130 @@
+{
+  "callee": "recent_entry_remove",
+  "defined_in": "net/netfilter/xt_recent.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "recent_entry_reap",
+      "file": "net/netfilter/xt_recent.c",
+      "line": 175,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(e == working && update)",
+          "exit_kind": "return",
+          "source_line": 168,
+          "exit_line": 169
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "time_after(time, e->stamps[e->index-1])",
+          "polarity": "in_true_branch",
+          "source_line": 174
+        }
+      ]
+    },
+    {
+      "caller": "recent_entry_init",
+      "file": "net/netfilter/xt_recent.c",
+      "line": 187,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "t->entries >= ip_list_tot",
+          "polarity": "in_true_branch",
+          "source_line": 185
+        }
+      ]
+    },
+    {
+      "caller": "recent_table_flush",
+      "file": "net/netfilter/xt_recent.c",
+      "line": 236,
+      "guards": []
+    },
+    {
+      "caller": "recent_mt",
+      "file": "net/netfilter/xt_recent.c",
+      "line": 296,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 276
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(info->check_set & XT_RECENT_SET))",
+          "exit_kind": "goto",
+          "source_line": 284,
+          "exit_line": 285
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(e == NULL)",
+          "exit_kind": "goto",
+          "source_line": 283
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->check_set & XT_RECENT_REMOVE",
+          "polarity": "in_true_branch",
+          "source_line": 295
+        }
+      ]
+    },
+    {
+      "caller": "recent_mt_proc_write",
+      "file": "net/netfilter/xt_recent.c",
+      "line": 619,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 610
+        },
+        {
+          "kind": "null_check",
+          "predicate": "succ != NULL",
+          "source_line": 607
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(size == 0)",
+          "exit_kind": "return",
+          "source_line": 570,
+          "exit_line": 571
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_from_user(buf, input, size) != 0)",
+          "exit_kind": "return",
+          "source_line": 574,
+          "exit_line": 575
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*loff != 0)",
+          "exit_kind": "return",
+          "source_line": 578,
+          "exit_line": 579
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!succ)",
+          "exit_kind": "return",
+          "source_line": 607,
+          "exit_line": 608
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "e == NULL",
+          "polarity": "in_false_branch",
+          "source_line": 615
+        }
+      ]
+    }
+  ]
+}

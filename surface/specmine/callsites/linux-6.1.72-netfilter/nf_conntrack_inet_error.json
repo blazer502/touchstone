@@ -1,0 +1,106 @@
+{
+  "callee": "nf_conntrack_inet_error",
+  "defined_in": "net/netfilter/nf_conntrack_proto_icmp.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_conntrack_icmpv4_error",
+      "file": "net/netfilter/nf_conntrack_proto_icmp.c",
+      "line": 246,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(icmph == NULL)",
+          "exit_kind": "return",
+          "source_line": 214
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(icmph->type > NR_ICMP_TYPES)",
+          "exit_kind": "return",
+          "source_line": 233
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!icmp_is_err(icmph->type))",
+          "exit_kind": "return",
+          "source_line": 239,
+          "exit_line": 240
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_icmpv6_redirect",
+      "file": "net/netfilter/nf_conntrack_proto_icmpv6.c",
+      "line": 178,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "rd_msg != NULL",
+          "source_line": 147
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rd_msg)",
+          "exit_kind": "return",
+          "source_line": 147
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(rd_msg->icmph.icmp6_code != 0)",
+          "exit_kind": "return",
+          "source_line": 152,
+          "exit_line": 153
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(hl != 255 || !(ipv6_addr_type(&ipv6_hdr(skb)->saddr) & IPV6_ADDR_LINKLOCAL))",
+          "exit_kind": "return",
+          "source_line": 155
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nd_opt || nd_opt->nd_opt_len == 0)",
+          "exit_kind": "return",
+          "source_line": 164
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nd_opt->nd_opt_type != ND_OPT_REDIRECT_HDR)",
+          "exit_kind": "return",
+          "source_line": 172,
+          "exit_line": 173
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_icmpv6_error",
+      "file": "net/netfilter/nf_conntrack_proto_icmpv6.c",
+      "line": 222,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(icmp6h == NULL)",
+          "exit_kind": "return",
+          "source_line": 193
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(icmp6h->icmp6_type == NDISC_REDIRECT)",
+          "exit_kind": "return",
+          "source_line": 212,
+          "exit_line": 213
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(icmp6h->icmp6_type >= 128)",
+          "exit_kind": "return",
+          "source_line": 216,
+          "exit_line": 217
+        }
+      ]
+    }
+  ]
+}

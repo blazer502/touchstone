@@ -1,0 +1,423 @@
+{
+  "callee": "nf_ct_seqadj_init",
+  "defined_in": "net/netfilter/nf_conntrack_seqadj.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "ipv4_synproxy_hook",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 673,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ct != NULL",
+          "source_line": 653
+        },
+        {
+          "kind": "null_check",
+          "predicate": "synproxy != NULL",
+          "source_line": 657
+        },
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 666
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ct)",
+          "exit_kind": "return",
+          "source_line": 653,
+          "exit_line": 654
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!synproxy)",
+          "exit_kind": "return",
+          "source_line": 657,
+          "exit_line": 658
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 666,
+          "exit_line": 667
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "state->state",
+          "polarity": "in_true_branch",
+          "source_line": 670
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "th->rst && CTINFO2DIR(ctinfo) != IP_CT_DIR_ORIGINAL",
+          "polarity": "in_true_branch",
+          "source_line": 672
+        }
+      ]
+    },
+    {
+      "caller": "ipv4_synproxy_hook",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 686,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ct != NULL",
+          "source_line": 653
+        },
+        {
+          "kind": "null_check",
+          "predicate": "synproxy != NULL",
+          "source_line": 657
+        },
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 666
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ct)",
+          "exit_kind": "return",
+          "source_line": 653,
+          "exit_line": 654
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!synproxy)",
+          "exit_kind": "return",
+          "source_line": 657,
+          "exit_line": 658
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 666,
+          "exit_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th->rst && CTINFO2DIR(ctinfo) != IP_CT_DIR_ORIGINAL)",
+          "exit_kind": "break",
+          "source_line": 672
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "state->state",
+          "polarity": "in_true_branch",
+          "source_line": 670
+        }
+      ]
+    },
+    {
+      "caller": "ipv4_synproxy_hook",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 735,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ct != NULL",
+          "source_line": 653
+        },
+        {
+          "kind": "null_check",
+          "predicate": "synproxy != NULL",
+          "source_line": 657
+        },
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 666
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ct)",
+          "exit_kind": "return",
+          "source_line": 653,
+          "exit_line": 654
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!synproxy)",
+          "exit_kind": "return",
+          "source_line": 657,
+          "exit_line": 658
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 666,
+          "exit_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th->rst && CTINFO2DIR(ctinfo) != IP_CT_DIR_ORIGINAL)",
+          "exit_kind": "break",
+          "source_line": 672
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!synproxy_parse_options(skb, thoff, th, &opts))",
+          "exit_kind": "return",
+          "source_line": 691,
+          "exit_line": 692
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th->syn || !th->ack)",
+          "exit_kind": "break",
+          "source_line": 717,
+          "exit_line": 718
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!synproxy_parse_options(skb, thoff, th, &opts))",
+          "exit_kind": "return",
+          "source_line": 720,
+          "exit_line": 721
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "state->state",
+          "polarity": "in_true_branch",
+          "source_line": 670
+        }
+      ]
+    },
+    {
+      "caller": "ipv6_synproxy_hook",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 1096,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ct != NULL",
+          "source_line": 1072
+        },
+        {
+          "kind": "null_check",
+          "predicate": "synproxy != NULL",
+          "source_line": 1076
+        },
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 1089
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ct)",
+          "exit_kind": "return",
+          "source_line": 1072,
+          "exit_line": 1073
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!synproxy)",
+          "exit_kind": "return",
+          "source_line": 1076,
+          "exit_line": 1077
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_is_loopback_packet(skb))",
+          "exit_kind": "return",
+          "source_line": 1079,
+          "exit_line": 1080
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(thoff < 0 || nexthdr != IPPROTO_TCP)",
+          "exit_kind": "return",
+          "source_line": 1085,
+          "exit_line": 1086
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 1089,
+          "exit_line": 1090
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "state->state",
+          "polarity": "in_true_branch",
+          "source_line": 1093
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "th->rst && CTINFO2DIR(ctinfo) != IP_CT_DIR_ORIGINAL",
+          "polarity": "in_true_branch",
+          "source_line": 1095
+        }
+      ]
+    },
+    {
+      "caller": "ipv6_synproxy_hook",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 1109,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ct != NULL",
+          "source_line": 1072
+        },
+        {
+          "kind": "null_check",
+          "predicate": "synproxy != NULL",
+          "source_line": 1076
+        },
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 1089
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ct)",
+          "exit_kind": "return",
+          "source_line": 1072,
+          "exit_line": 1073
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!synproxy)",
+          "exit_kind": "return",
+          "source_line": 1076,
+          "exit_line": 1077
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_is_loopback_packet(skb))",
+          "exit_kind": "return",
+          "source_line": 1079,
+          "exit_line": 1080
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(thoff < 0 || nexthdr != IPPROTO_TCP)",
+          "exit_kind": "return",
+          "source_line": 1085,
+          "exit_line": 1086
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 1089,
+          "exit_line": 1090
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th->rst && CTINFO2DIR(ctinfo) != IP_CT_DIR_ORIGINAL)",
+          "exit_kind": "break",
+          "source_line": 1095
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "state->state",
+          "polarity": "in_true_branch",
+          "source_line": 1093
+        }
+      ]
+    },
+    {
+      "caller": "ipv6_synproxy_hook",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 1158,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ct != NULL",
+          "source_line": 1072
+        },
+        {
+          "kind": "null_check",
+          "predicate": "synproxy != NULL",
+          "source_line": 1076
+        },
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 1089
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ct)",
+          "exit_kind": "return",
+          "source_line": 1072,
+          "exit_line": 1073
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!synproxy)",
+          "exit_kind": "return",
+          "source_line": 1076,
+          "exit_line": 1077
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_is_loopback_packet(skb))",
+          "exit_kind": "return",
+          "source_line": 1079,
+          "exit_line": 1080
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(thoff < 0 || nexthdr != IPPROTO_TCP)",
+          "exit_kind": "return",
+          "source_line": 1085,
+          "exit_line": 1086
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 1089,
+          "exit_line": 1090
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th->rst && CTINFO2DIR(ctinfo) != IP_CT_DIR_ORIGINAL)",
+          "exit_kind": "break",
+          "source_line": 1095
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!synproxy_parse_options(skb, thoff, th, &opts))",
+          "exit_kind": "return",
+          "source_line": 1114,
+          "exit_line": 1115
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th->syn || !th->ack)",
+          "exit_kind": "break",
+          "source_line": 1140,
+          "exit_line": 1141
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!synproxy_parse_options(skb, thoff, th, &opts))",
+          "exit_kind": "return",
+          "source_line": 1143,
+          "exit_line": 1144
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "state->state",
+          "polarity": "in_true_branch",
+          "source_line": 1093
+        }
+      ]
+    }
+  ]
+}

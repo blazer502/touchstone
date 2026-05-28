@@ -1,0 +1,111 @@
+{
+  "callee": "pipapo_bucket_set",
+  "defined_in": "net/netfilter/nft_set_pipapo.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "pipapo_insert",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 926,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 908,
+          "exit_line": 909
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "group = 0; group < f->groups; group++",
+          "polarity": "in_true_branch",
+          "source_line": 913
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "mask_bits >= (group + 1) * f->bb",
+          "polarity": "in_true_branch",
+          "source_line": 924
+        }
+      ]
+    },
+    {
+      "caller": "pipapo_insert",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 930,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 908,
+          "exit_line": 909
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "group = 0; group < f->groups; group++",
+          "polarity": "in_true_branch",
+          "source_line": 913
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "mask_bits >= (group + 1) * f->bb",
+          "polarity": "in_false_branch",
+          "source_line": 927
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "mask_bits <= group * f->bb",
+          "polarity": "in_true_branch",
+          "source_line": 927
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < NFT_PIPAPO_BUCKETS(f->bb); i++",
+          "polarity": "in_true_branch",
+          "source_line": 929
+        }
+      ]
+    },
+    {
+      "caller": "pipapo_insert",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 937,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 908,
+          "exit_line": 909
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "group = 0; group < f->groups; group++",
+          "polarity": "in_true_branch",
+          "source_line": 913
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "mask_bits <= group * f->bb",
+          "polarity": "in_false_branch",
+          "source_line": 931
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < NFT_PIPAPO_BUCKETS(f->bb); i++",
+          "polarity": "in_true_branch",
+          "source_line": 935
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "(i & ~mask) == (v & ~mask)",
+          "polarity": "in_true_branch",
+          "source_line": 936
+        }
+      ]
+    }
+  ]
+}

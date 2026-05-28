@@ -1,0 +1,40 @@
+{
+  "callee": "check",
+  "defined_in": "net/netfilter/xt_multiport.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "__ip_vs_dst_check",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 101,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest_dst != NULL",
+          "source_line": 97
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest_dst)",
+          "exit_kind": "return",
+          "source_line": 97,
+          "exit_line": 98
+        }
+      ]
+    },
+    {
+      "caller": "multiport_mt_check",
+      "file": "net/netfilter/xt_multiport.c",
+      "line": 130,
+      "guards": []
+    },
+    {
+      "caller": "multiport_mt6_check",
+      "file": "net/netfilter/xt_multiport.c",
+      "line": 139,
+      "guards": []
+    }
+  ]
+}

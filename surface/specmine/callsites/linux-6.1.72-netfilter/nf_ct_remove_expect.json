@@ -1,0 +1,95 @@
+{
+  "callee": "nf_ct_remove_expect",
+  "defined_in": "net/netfilter/nf_conntrack_expect.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "nf_ct_remove_expectations",
+      "file": "net/netfilter/nf_conntrack_expect.c",
+      "line": 240,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 238
+        },
+        {
+          "kind": "null_check",
+          "predicate": "help != NULL",
+          "source_line": 235
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!help)",
+          "exit_kind": "return",
+          "source_line": 235,
+          "exit_line": 236
+        }
+      ]
+    },
+    {
+      "caller": "nf_ct_unexpect_related",
+      "file": "net/netfilter/nf_conntrack_expect.c",
+      "line": 290,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 289
+        }
+      ]
+    },
+    {
+      "caller": "evict_oldest_expect",
+      "file": "net/netfilter/nf_conntrack_expect.c",
+      "line": 428,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "last",
+          "polarity": "in_true_branch",
+          "source_line": 427
+        }
+      ]
+    },
+    {
+      "caller": "__nf_ct_expect_check",
+      "file": "net/netfilter/nf_conntrack_expect.c",
+      "line": 457,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "master_help != NULL",
+          "source_line": 445
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!master_help)",
+          "exit_kind": "goto",
+          "source_line": 445
+        }
+      ]
+    },
+    {
+      "caller": "flush_expectations",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 838,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 834
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((exp->class != SIP_EXPECT_SIGNALLING) ^ media)",
+          "exit_kind": "continue",
+          "source_line": 836,
+          "exit_line": 837
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "callee": "conntrack_addrcmp",
+  "defined_in": "net/netfilter/xt_conntrack.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "conntrack_mt_origsrc",
+      "file": "net/netfilter/xt_conntrack.c",
+      "line": 44,
+      "guards": []
+    },
+    {
+      "caller": "conntrack_mt_origdst",
+      "file": "net/netfilter/xt_conntrack.c",
+      "line": 53,
+      "guards": []
+    },
+    {
+      "caller": "conntrack_mt_replsrc",
+      "file": "net/netfilter/xt_conntrack.c",
+      "line": 62,
+      "guards": []
+    },
+    {
+      "caller": "conntrack_mt_repldst",
+      "file": "net/netfilter/xt_conntrack.c",
+      "line": 71,
+      "guards": []
+    }
+  ]
+}

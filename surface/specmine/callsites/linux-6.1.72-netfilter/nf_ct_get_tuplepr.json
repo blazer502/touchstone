@@ -1,0 +1,61 @@
+{
+  "callee": "nf_ct_get_tuplepr",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_conntrack_get_tuple_skb",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 2356,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct)",
+          "exit_kind": "return",
+          "source_line": 2350
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_inet_error",
+      "file": "net/netfilter/nf_conntrack_proto_icmp.c",
+      "line": 124,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(skb_nfct(skb))",
+          "macro": "WARN_ON",
+          "source_line": 120
+        }
+      ]
+    },
+    {
+      "caller": "nft_connlimit_do_eval",
+      "file": "net/netfilter/nft_connlimit.c",
+      "line": 40,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "ct != NULL",
+          "polarity": "in_true_branch",
+          "source_line": 37
+        }
+      ]
+    },
+    {
+      "caller": "connlimit_mt",
+      "file": "net/netfilter/xt_connlimit.c",
+      "line": 46,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "ct != NULL",
+          "polarity": "in_true_branch",
+          "source_line": 43
+        }
+      ]
+    }
+  ]
+}

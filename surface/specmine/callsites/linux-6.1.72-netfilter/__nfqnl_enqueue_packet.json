@@ -1,0 +1,80 @@
+{
+  "callee": "__nfqnl_enqueue_packet",
+  "defined_in": "net/netfilter/nfnetlink_queue.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "__nfqnl_enqueue_packet_gso",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 764,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "skb->next == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 761
+        }
+      ]
+    },
+    {
+      "caller": "__nfqnl_enqueue_packet_gso",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 775,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb->next == NULL)",
+          "exit_kind": "return",
+          "source_line": 761
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "entry_seg",
+          "polarity": "in_true_branch",
+          "source_line": 773
+        }
+      ]
+    },
+    {
+      "caller": "nfqnl_enqueue_packet",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 812,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "queue != NULL",
+          "source_line": 794
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!queue)",
+          "exit_kind": "return",
+          "source_line": 794,
+          "exit_line": 795
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(queue->copy_mode == NFQNL_COPY_NONE)",
+          "exit_kind": "return",
+          "source_line": 797,
+          "exit_line": 798
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((queue->flags & NFQA_CFG_F_GSO) || !skb_is_gso(skb))",
+          "exit_kind": "return",
+          "source_line": 811,
+          "exit_line": 812
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "(queue->flags & NFQA_CFG_F_GSO) || !skb_is_gso(skb)",
+          "polarity": "in_true_branch",
+          "source_line": 811
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "callee": "pipapo_get",
+  "defined_in": "net/netfilter/nft_set_pipapo.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nft_pipapo_get",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 605,
+      "guards": []
+    },
+    {
+      "caller": "nft_pipapo_insert",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 1178,
+      "guards": []
+    },
+    {
+      "caller": "nft_pipapo_insert",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 1200,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(dup)",
+          "source_line": 1179
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!IS_ERR(dup))",
+          "exit_kind": "return",
+          "source_line": 1179
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "PTR_ERR(dup) == -ENOENT",
+          "polarity": "in_true_branch",
+          "source_line": 1198
+        }
+      ]
+    },
+    {
+      "caller": "pipapo_deactivate",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 1770,
+      "guards": []
+    }
+  ]
+}

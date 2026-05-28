@@ -1,0 +1,59 @@
+{
+  "callee": "xt_check_proc_name",
+  "defined_in": "net/netfilter/x_tables.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "idletimer_check_sysfs_name",
+      "file": "net/netfilter/xt_IDLETIMER.c",
+      "line": 124,
+      "guards": []
+    },
+    {
+      "caller": "hashlimit_mt_check_v1",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 916,
+      "guards": []
+    },
+    {
+      "caller": "hashlimit_mt_check_v2",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 934,
+      "guards": []
+    },
+    {
+      "caller": "hashlimit_mt_check",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 951,
+      "guards": []
+    },
+    {
+      "caller": "recent_mt_check",
+      "file": "net/netfilter/xt_recent.c",
+      "line": 368,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->check_set & ~XT_RECENT_VALID_FLAGS)",
+          "exit_kind": "return",
+          "source_line": 348
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((info->check_set & XT_RECENT_REAP) && !info->seconds)",
+          "exit_kind": "return",
+          "source_line": 361,
+          "exit_line": 362
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->hit_count >= XT_RECENT_MAX_NSTAMPS)",
+          "exit_kind": "return",
+          "source_line": 363
+        }
+      ]
+    }
+  ]
+}

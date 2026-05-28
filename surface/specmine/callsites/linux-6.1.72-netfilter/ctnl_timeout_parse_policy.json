@@ -1,0 +1,100 @@
+{
+  "callee": "ctnl_timeout_parse_policy",
+  "defined_in": "net/netfilter/nfnetlink_cttimeout.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "cttimeout_new_timeout",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 140,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncmp(timeout->name, name, CTNL_TIMEOUT_NAME_MAX) != 0)",
+          "exit_kind": "continue",
+          "source_line": 121,
+          "exit_line": 122
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_EXCL)",
+          "exit_kind": "return",
+          "source_line": 124,
+          "exit_line": 125
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "matching",
+          "polarity": "in_true_branch",
+          "source_line": 131
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->nlh->nlmsg_flags & NLM_F_REPLACE",
+          "polarity": "in_true_branch",
+          "source_line": 132
+        }
+      ]
+    },
+    {
+      "caller": "cttimeout_new_timeout",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 164,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncmp(timeout->name, name, CTNL_TIMEOUT_NAME_MAX) != 0)",
+          "exit_kind": "continue",
+          "source_line": 121,
+          "exit_line": 122
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_EXCL)",
+          "exit_kind": "return",
+          "source_line": 124,
+          "exit_line": 125
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_REPLACE)",
+          "exit_kind": "return",
+          "source_line": 132
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(matching)",
+          "exit_kind": "return",
+          "source_line": 131
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(l4proto->l4proto != l4num)",
+          "exit_kind": "goto",
+          "source_line": 152
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(timeout == NULL)",
+          "exit_kind": "goto",
+          "source_line": 159
+        }
+      ]
+    },
+    {
+      "caller": "cttimeout_default_set",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 383,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(l4proto->l4proto != l4num)",
+          "exit_kind": "goto",
+          "source_line": 378
+        }
+      ]
+    }
+  ]
+}

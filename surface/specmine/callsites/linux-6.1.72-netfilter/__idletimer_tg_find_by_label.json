@@ -1,0 +1,58 @@
+{
+  "callee": "__idletimer_tg_find_by_label",
+  "defined_in": "net/netfilter/xt_IDLETIMER.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "idletimer_tg_show",
+      "file": "net/netfilter/xt_IDLETIMER.c",
+      "line": 73,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 71
+        }
+      ]
+    },
+    {
+      "caller": "idletimer_tg_checkentry",
+      "file": "net/netfilter/xt_IDLETIMER.c",
+      "line": 321,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 319
+        }
+      ]
+    },
+    {
+      "caller": "idletimer_tg_checkentry_v1",
+      "file": "net/netfilter/xt_IDLETIMER.c",
+      "line": 366,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 364
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->send_nl_msg)",
+          "exit_kind": "return",
+          "source_line": 349,
+          "exit_line": 350
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->timer_type > XT_IDLETIMER_ALARM)",
+          "exit_kind": "return",
+          "source_line": 359
+        }
+      ]
+    }
+  ]
+}

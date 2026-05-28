@@ -1,0 +1,76 @@
+{
+  "callee": "flag_nested",
+  "defined_in": "net/netfilter/ipset/ip_set_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "ip_set_get_ipaddr4",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 284,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_get_ipaddr6",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 302,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_create",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1063,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_ad",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1788,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_ad",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1790,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_ad",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1811,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "set != NULL",
+          "source_line": 1795
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!set)",
+          "exit_kind": "return",
+          "source_line": 1795,
+          "exit_line": 1796
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(attr[IPSET_ATTR_DATA])",
+          "exit_kind": "return",
+          "source_line": 1799
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "attr[IPSET_ATTR_DATA]",
+          "polarity": "in_false_branch",
+          "source_line": 1806
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_utest",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1850,
+      "guards": []
+    }
+  ]
+}

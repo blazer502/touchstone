@@ -1,0 +1,539 @@
+{
+  "callee": "nft_rbtree_interval_start",
+  "defined_in": "net/netfilter/nft_set_rbtree.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 10,
+  "callsites": [
+    {
+      "caller": "__nft_rbtree_lookup",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 78,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(read_seqcount_retry(&priv->count, seq))",
+          "exit_kind": "return",
+          "source_line": 67,
+          "exit_line": 68
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "parent != NULL",
+          "polarity": "in_true_branch",
+          "source_line": 66
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "d < 0",
+          "polarity": "in_true_branch",
+          "source_line": 73
+        }
+      ]
+    },
+    {
+      "caller": "__nft_rbtree_lookup",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 108,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(read_seqcount_retry(&priv->count, seq))",
+          "exit_kind": "return",
+          "source_line": 67,
+          "exit_line": 68
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d < 0)",
+          "exit_kind": "continue",
+          "source_line": 73
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_active(&rbe->ext, genmask))",
+          "exit_kind": "continue",
+          "source_line": 84
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_elem_expired(rbe))",
+          "exit_kind": "return",
+          "source_line": 89,
+          "exit_line": 90
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_is_anonymous(set))",
+          "exit_kind": "return",
+          "source_line": 93,
+          "exit_line": 94
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_interval_end(rbe))",
+          "exit_kind": "return",
+          "source_line": 92
+        }
+      ]
+    },
+    {
+      "caller": "__nft_rbtree_insert",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 404,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(removed_end)",
+          "source_line": 369
+        },
+        {
+          "kind": "null_check",
+          "predicate": "rbe_ge != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_active(&rbe->ext, genmask))",
+          "exit_kind": "continue",
+          "source_line": 358,
+          "exit_line": 359
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(removed_end))",
+          "exit_kind": "return",
+          "source_line": 369,
+          "exit_line": 370
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(removed_end == rbe_le || removed_end == rbe_ge)",
+          "exit_kind": "return",
+          "source_line": 372,
+          "exit_line": 373
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_interval_end(rbe))",
+          "exit_kind": "break",
+          "source_line": 383
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rbe_ge)",
+          "exit_kind": "continue",
+          "source_line": 389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_cmp(set, rbe_ge, new) != 0)",
+          "exit_kind": "continue",
+          "source_line": 395
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "node = first; node != NULL; node = next",
+          "polarity": "in_true_branch",
+          "source_line": 353
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "d == 0",
+          "polarity": "in_true_branch",
+          "source_line": 379
+        }
+      ]
+    },
+    {
+      "caller": "__nft_rbtree_insert",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 405,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(removed_end)",
+          "source_line": 369
+        },
+        {
+          "kind": "null_check",
+          "predicate": "rbe_ge != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_active(&rbe->ext, genmask))",
+          "exit_kind": "continue",
+          "source_line": 358,
+          "exit_line": 359
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(removed_end))",
+          "exit_kind": "return",
+          "source_line": 369,
+          "exit_line": 370
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(removed_end == rbe_le || removed_end == rbe_ge)",
+          "exit_kind": "return",
+          "source_line": 372,
+          "exit_line": 373
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_interval_end(rbe))",
+          "exit_kind": "break",
+          "source_line": 383
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rbe_ge)",
+          "exit_kind": "continue",
+          "source_line": 389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_cmp(set, rbe_ge, new) != 0)",
+          "exit_kind": "continue",
+          "source_line": 395
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "node = first; node != NULL; node = next",
+          "polarity": "in_true_branch",
+          "source_line": 353
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "d == 0",
+          "polarity": "in_true_branch",
+          "source_line": 379
+        }
+      ]
+    },
+    {
+      "caller": "__nft_rbtree_insert",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 426,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(removed_end)",
+          "source_line": 369
+        },
+        {
+          "kind": "null_check",
+          "predicate": "rbe_ge != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_active(&rbe->ext, genmask))",
+          "exit_kind": "continue",
+          "source_line": 358,
+          "exit_line": 359
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(removed_end))",
+          "exit_kind": "return",
+          "source_line": 369,
+          "exit_line": 370
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(removed_end == rbe_le || removed_end == rbe_ge)",
+          "exit_kind": "return",
+          "source_line": 372,
+          "exit_line": 373
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_interval_end(rbe))",
+          "exit_kind": "break",
+          "source_line": 383
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rbe_ge)",
+          "exit_kind": "continue",
+          "source_line": 389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_cmp(set, rbe_ge, new) != 0)",
+          "exit_kind": "continue",
+          "source_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d == 0)",
+          "exit_kind": "continue",
+          "source_line": 379
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d > 0)",
+          "exit_kind": "continue",
+          "source_line": 411
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d < 0)",
+          "exit_kind": "break",
+          "source_line": 415
+        }
+      ]
+    },
+    {
+      "caller": "__nft_rbtree_insert",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 426,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(removed_end)",
+          "source_line": 369
+        },
+        {
+          "kind": "null_check",
+          "predicate": "rbe_ge != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_active(&rbe->ext, genmask))",
+          "exit_kind": "continue",
+          "source_line": 358,
+          "exit_line": 359
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(removed_end))",
+          "exit_kind": "return",
+          "source_line": 369,
+          "exit_line": 370
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(removed_end == rbe_le || removed_end == rbe_ge)",
+          "exit_kind": "return",
+          "source_line": 372,
+          "exit_line": 373
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_interval_end(rbe))",
+          "exit_kind": "break",
+          "source_line": 383
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rbe_ge)",
+          "exit_kind": "continue",
+          "source_line": 389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_cmp(set, rbe_ge, new) != 0)",
+          "exit_kind": "continue",
+          "source_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d == 0)",
+          "exit_kind": "continue",
+          "source_line": 379
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d > 0)",
+          "exit_kind": "continue",
+          "source_line": 411
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d < 0)",
+          "exit_kind": "break",
+          "source_line": 415
+        }
+      ]
+    },
+    {
+      "caller": "__nft_rbtree_insert",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 446,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(removed_end)",
+          "source_line": 369
+        },
+        {
+          "kind": "null_check",
+          "predicate": "rbe_ge != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_active(&rbe->ext, genmask))",
+          "exit_kind": "continue",
+          "source_line": 358,
+          "exit_line": 359
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(removed_end))",
+          "exit_kind": "return",
+          "source_line": 369,
+          "exit_line": 370
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(removed_end == rbe_le || removed_end == rbe_ge)",
+          "exit_kind": "return",
+          "source_line": 372,
+          "exit_line": 373
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_interval_end(rbe))",
+          "exit_kind": "break",
+          "source_line": 383
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rbe_ge)",
+          "exit_kind": "continue",
+          "source_line": 389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_cmp(set, rbe_ge, new) != 0)",
+          "exit_kind": "continue",
+          "source_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d == 0)",
+          "exit_kind": "continue",
+          "source_line": 379
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d > 0)",
+          "exit_kind": "continue",
+          "source_line": 411
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d < 0)",
+          "exit_kind": "break",
+          "source_line": 415
+        }
+      ]
+    },
+    {
+      "caller": "__nft_rbtree_insert",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 446,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(removed_end)",
+          "source_line": 369
+        },
+        {
+          "kind": "null_check",
+          "predicate": "rbe_ge != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_active(&rbe->ext, genmask))",
+          "exit_kind": "continue",
+          "source_line": 358,
+          "exit_line": 359
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(removed_end))",
+          "exit_kind": "return",
+          "source_line": 369,
+          "exit_line": 370
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(removed_end == rbe_le || removed_end == rbe_ge)",
+          "exit_kind": "return",
+          "source_line": 372,
+          "exit_line": 373
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_interval_end(rbe))",
+          "exit_kind": "break",
+          "source_line": 383
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rbe_ge)",
+          "exit_kind": "continue",
+          "source_line": 389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_cmp(set, rbe_ge, new) != 0)",
+          "exit_kind": "continue",
+          "source_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d == 0)",
+          "exit_kind": "continue",
+          "source_line": 379
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d > 0)",
+          "exit_kind": "continue",
+          "source_line": 411
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(d < 0)",
+          "exit_kind": "break",
+          "source_line": 415
+        }
+      ]
+    },
+    {
+      "caller": "nft_rbtree_deactivate",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 564,
+      "guards": [
+        {
+          "kind": "enclosing_while",
+          "predicate": "parent != NULL",
+          "polarity": "in_true_branch",
+          "source_line": 553
+        }
+      ]
+    },
+    {
+      "caller": "nft_rbtree_deactivate",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 567,
+      "guards": [
+        {
+          "kind": "enclosing_while",
+          "predicate": "parent != NULL",
+          "polarity": "in_true_branch",
+          "source_line": 553
+        }
+      ]
+    }
+  ]
+}

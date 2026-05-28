@@ -1,0 +1,101 @@
+{
+  "callee": "nf_conntrack_alter_reply",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_update_conntrack",
+      "file": "net/netfilter/ipvs/ip_vs_nfct.c",
+      "line": 127,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(IP_VS_FWD_METHOD(cp) != IP_VS_CONN_F_MASQ)",
+          "exit_kind": "return",
+          "source_line": 82,
+          "exit_line": 83
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->flags & IP_VS_CONN_F_ONE_PACKET)",
+          "exit_kind": "return",
+          "source_line": 86,
+          "exit_line": 87
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(CTINFO2DIR(ctinfo) != IP_CT_DIR_ORIGINAL)",
+          "exit_kind": "return",
+          "source_line": 90,
+          "exit_line": 91
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_nfct_expect_callback",
+      "file": "net/netfilter/ipvs/ip_vs_nfct.c",
+      "line": 200,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp)",
+          "exit_kind": "goto",
+          "source_line": 162
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp)",
+          "exit_kind": "goto",
+          "source_line": 178
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "IP_VS_FWD_METHOD(cp) == IP_VS_CONN_F_MASQ",
+          "polarity": "in_true_branch",
+          "source_line": 199
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_setup_info",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 612,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON",
+          "source_line": 591
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(nf_nat_initialized(ct, maniptype))",
+          "macro": "WARN_ON",
+          "source_line": 594
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_is_confirmed(ct))",
+          "exit_kind": "return",
+          "source_line": 588,
+          "exit_line": 589
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON(nf_nat_initialized(ct, maniptype)))",
+          "exit_kind": "return",
+          "source_line": 594,
+          "exit_line": 595
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nf_ct_tuple_equal(&new_tuple, &curr_tuple)",
+          "polarity": "in_true_branch",
+          "source_line": 607
+        }
+      ]
+    }
+  ]
+}

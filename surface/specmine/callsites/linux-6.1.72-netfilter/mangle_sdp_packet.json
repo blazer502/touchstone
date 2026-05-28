@@ -1,0 +1,27 @@
+{
+  "callee": "mangle_sdp_packet",
+  "defined_in": "net/netfilter/nf_nat_sip.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_nat_sdp_addr",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 495,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_sdp_session",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 533,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_sdp_session",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 537,
+      "guards": []
+    }
+  ]
+}

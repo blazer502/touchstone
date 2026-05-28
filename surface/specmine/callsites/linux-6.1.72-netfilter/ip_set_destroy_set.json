@@ -1,0 +1,109 @@
+{
+  "callee": "ip_set_destroy_set",
+  "defined_in": "net/netfilter/ipset/ip_set_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_set_destroy",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1226,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(protocol_min_failed(attr)))",
+          "exit_kind": "return",
+          "source_line": 1195,
+          "exit_line": 1196
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(s && (s->ref || s->ref_netlink))",
+          "exit_kind": "goto",
+          "source_line": 1215
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!attr[IPSET_ATTR_SETNAME]",
+          "polarity": "in_true_branch",
+          "source_line": 1212
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < inst->ip_set_max; i++",
+          "polarity": "in_true_branch",
+          "source_line": 1222
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "s",
+          "polarity": "in_true_branch",
+          "source_line": 1224
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_destroy",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1246,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "s != NULL",
+          "source_line": 1235
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(protocol_min_failed(attr)))",
+          "exit_kind": "return",
+          "source_line": 1195,
+          "exit_line": 1196
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(s && (s->ref || s->ref_netlink))",
+          "exit_kind": "goto",
+          "source_line": 1215
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!s)",
+          "exit_kind": "goto",
+          "source_line": 1235
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(s->ref || s->ref_netlink)",
+          "exit_kind": "goto",
+          "source_line": 1239
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!attr[IPSET_ATTR_SETNAME]",
+          "polarity": "in_false_branch",
+          "source_line": 1231
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_net_exit",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 2367,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < inst->ip_set_max; i++",
+          "polarity": "in_true_branch",
+          "source_line": 2363
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "set",
+          "polarity": "in_true_branch",
+          "source_line": 2365
+        }
+      ]
+    }
+  ]
+}

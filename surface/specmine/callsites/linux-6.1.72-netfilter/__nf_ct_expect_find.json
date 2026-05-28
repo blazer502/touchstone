@@ -1,0 +1,92 @@
+{
+  "callee": "__nf_ct_expect_find",
+  "defined_in": "net/netfilter/nf_conntrack_expect.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_ct_expect_find_get",
+      "file": "net/netfilter/nf_conntrack_expect.c",
+      "line": 160,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 159
+        }
+      ]
+    },
+    {
+      "caller": "find_expect",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1197,
+      "guards": []
+    },
+    {
+      "caller": "ctnetlink_new_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3668,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 3667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3659,
+          "exit_line": 3660
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3664,
+          "exit_line": 3665
+        }
+      ]
+    },
+    {
+      "caller": "set_expected_rtp_rtcp",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 924,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_inet_addr_cmp(daddr, &ct->tuplehash[dir].tuple.src.u3))",
+          "exit_kind": "return",
+          "source_line": 867,
+          "exit_line": 868
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(sip_direct_media)",
+          "exit_kind": "return",
+          "source_line": 866
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(external_media)",
+          "exit_kind": "return",
+          "source_line": 897,
+          "exit_line": 898
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dst)",
+          "exit_kind": "return",
+          "source_line": 893
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(sip_external_media)",
+          "exit_kind": "break",
+          "source_line": 870
+        }
+      ]
+    }
+  ]
+}

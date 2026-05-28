@@ -1,0 +1,73 @@
+{
+  "callee": "flow_offload_queue_work",
+  "defined_in": "net/netfilter/nf_flow_table_offload.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_flow_offload_add",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 1048,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "offload != NULL",
+          "source_line": 1045
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!offload)",
+          "exit_kind": "return",
+          "source_line": 1045,
+          "exit_line": 1046
+        }
+      ]
+    },
+    {
+      "caller": "nf_flow_offload_del",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 1061,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "offload != NULL",
+          "source_line": 1057
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!offload)",
+          "exit_kind": "return",
+          "source_line": 1057,
+          "exit_line": 1058
+        }
+      ]
+    },
+    {
+      "caller": "nf_flow_offload_stats",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 1078,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "offload != NULL",
+          "source_line": 1075
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((delta >= (9 * flow_offload_get_timeout(flow)) / 10))",
+          "exit_kind": "return",
+          "source_line": 1071,
+          "exit_line": 1072
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!offload)",
+          "exit_kind": "return",
+          "source_line": 1075,
+          "exit_line": 1076
+        }
+      ]
+    }
+  ]
+}

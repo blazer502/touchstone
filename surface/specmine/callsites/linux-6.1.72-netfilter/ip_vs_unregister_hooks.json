@@ -1,0 +1,153 @@
+{
+  "callee": "ip_vs_unregister_hooks",
+  "defined_in": "net/netfilter/ipvs/ip_vs_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "__ip_vs_dev_cleanup_batch",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 2371,
+      "guards": []
+    },
+    {
+      "caller": "__ip_vs_dev_cleanup_batch",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 2372,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_add_service",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1416,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "sched != NULL",
+          "source_line": 1300
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ip_vs_use_count_inc())",
+          "exit_kind": "return",
+          "source_line": 1294,
+          "exit_line": 1295
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!sched)",
+          "exit_kind": "goto",
+          "source_line": 1300
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(pe == NULL)",
+          "exit_kind": "goto",
+          "source_line": 1310
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(plen < 1 || plen > 128)",
+          "exit_kind": "goto",
+          "source_line": 1322
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 1328,
+          "exit_line": 1329
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(u->af == AF_INET6)",
+          "exit_kind": "goto",
+          "source_line": 1319
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 1336,
+          "exit_line": 1337
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(svc == NULL)",
+          "exit_kind": "goto",
+          "source_line": 1342
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!svc->stats.cpustats)",
+          "exit_kind": "goto",
+          "source_line": 1348
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 1380,
+          "exit_line": 1381
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(sched)",
+          "exit_kind": "goto",
+          "source_line": 1378
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret_hooks >= 0",
+          "polarity": "in_true_branch",
+          "source_line": 1415
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_del_service",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1535,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc->af == AF_INET",
+          "polarity": "in_true_branch",
+          "source_line": 1532
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ipvs->num_services",
+          "polarity": "in_true_branch",
+          "source_line": 1534
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_del_service",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1539,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc->af == AF_INET",
+          "polarity": "in_false_branch",
+          "source_line": 1536
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc->af == AF_INET6",
+          "polarity": "in_true_branch",
+          "source_line": 1536
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ipvs->num_services6",
+          "polarity": "in_true_branch",
+          "source_line": 1538
+        }
+      ]
+    }
+  ]
+}

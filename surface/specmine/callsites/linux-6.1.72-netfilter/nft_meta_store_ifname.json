@@ -1,0 +1,41 @@
+{
+  "callee": "nft_meta_store_ifname",
+  "defined_in": "net/netfilter/nft_meta.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_meta_get_eval_ifname",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 235,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "key",
+          "polarity": "in_true_branch",
+          "source_line": 233
+        }
+      ]
+    },
+    {
+      "caller": "nft_meta_get_eval_ifname",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 238,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "key",
+          "polarity": "in_true_branch",
+          "source_line": 233
+        }
+      ]
+    },
+    {
+      "caller": "nft_meta_get_eval_sdifname",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 306,
+      "guards": []
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "callee": "icmpv6_error_log",
+  "defined_in": "net/netfilter/nf_conntrack_proto_icmpv6.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "nf_conntrack_icmpv6_redirect",
+      "file": "net/netfilter/nf_conntrack_proto_icmpv6.c",
+      "line": 148,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!rd_msg",
+          "polarity": "in_true_branch",
+          "source_line": 147
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_icmpv6_redirect",
+      "file": "net/netfilter/nf_conntrack_proto_icmpv6.c",
+      "line": 156,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "rd_msg != NULL",
+          "source_line": 147
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rd_msg)",
+          "exit_kind": "return",
+          "source_line": 147
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(rd_msg->icmph.icmp6_code != 0)",
+          "exit_kind": "return",
+          "source_line": 152,
+          "exit_line": 153
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "hl != 255 || !(ipv6_addr_type(&ipv6_hdr(skb)->saddr) & IPV6_ADDR_LINKLOCAL)",
+          "polarity": "in_true_branch",
+          "source_line": 155
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_icmpv6_redirect",
+      "file": "net/netfilter/nf_conntrack_proto_icmpv6.c",
+      "line": 165,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "rd_msg != NULL",
+          "source_line": 147
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rd_msg)",
+          "exit_kind": "return",
+          "source_line": 147
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(rd_msg->icmph.icmp6_code != 0)",
+          "exit_kind": "return",
+          "source_line": 152,
+          "exit_line": 153
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(hl != 255 || !(ipv6_addr_type(&ipv6_hdr(skb)->saddr) & IPV6_ADDR_LINKLOCAL))",
+          "exit_kind": "return",
+          "source_line": 155
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nd_opt || nd_opt->nd_opt_len == 0",
+          "polarity": "in_true_branch",
+          "source_line": 164
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_icmpv6_error",
+      "file": "net/netfilter/nf_conntrack_proto_icmpv6.c",
+      "line": 194,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "icmp6h == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 193
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_icmpv6_error",
+      "file": "net/netfilter/nf_conntrack_proto_icmpv6.c",
+      "line": 201,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(icmp6h == NULL)",
+          "exit_kind": "return",
+          "source_line": 193
+        }
+      ]
+    }
+  ]
+}

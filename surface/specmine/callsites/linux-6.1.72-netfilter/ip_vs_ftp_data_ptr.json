@@ -1,0 +1,103 @@
+{
+  "callee": "ip_vs_ftp_data_ptr",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ftp.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_ftp_out",
+      "file": "net/netfilter/ipvs/ip_vs_ftp.c",
+      "line": 274,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->state != IP_VS_TCP_S_ESTABLISHED)",
+          "exit_kind": "return",
+          "source_line": 266,
+          "exit_line": 267
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, skb->len))",
+          "exit_kind": "return",
+          "source_line": 270,
+          "exit_line": 271
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cp->app_data == (void *) IP_VS_FTP_PASV",
+          "polarity": "in_true_branch",
+          "source_line": 273
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_ftp_out",
+      "file": "net/netfilter/ipvs/ip_vs_ftp.c",
+      "line": 291,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->state != IP_VS_TCP_S_ESTABLISHED)",
+          "exit_kind": "return",
+          "source_line": 266,
+          "exit_line": 267
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, skb->len))",
+          "exit_kind": "return",
+          "source_line": 270,
+          "exit_line": 271
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!data || data >= data_limit)",
+          "exit_kind": "return",
+          "source_line": 277,
+          "exit_line": 278
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->app_data == (void *) IP_VS_FTP_PASV)",
+          "exit_kind": "return",
+          "source_line": 273
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cp->app_data == (void *) IP_VS_FTP_PASV",
+          "polarity": "in_false_branch",
+          "source_line": 290
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cp->app_data == (void *) IP_VS_FTP_EPSV",
+          "polarity": "in_true_branch",
+          "source_line": 290
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_ftp_in",
+      "file": "net/netfilter/ipvs/ip_vs_ftp.c",
+      "line": 439,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->state != IP_VS_TCP_S_ESTABLISHED)",
+          "exit_kind": "return",
+          "source_line": 432,
+          "exit_line": 433
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, skb->len))",
+          "exit_kind": "return",
+          "source_line": 436,
+          "exit_line": 437
+        }
+      ]
+    }
+  ]
+}

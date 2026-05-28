@@ -1,0 +1,82 @@
+{
+  "callee": "tcp_options",
+  "defined_in": "net/netfilter/nf_conntrack_proto_tcp.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "tcp_init_sender",
+      "file": "net/netfilter/nf_conntrack_proto_tcp.c",
+      "line": 469,
+      "guards": []
+    },
+    {
+      "caller": "tcp_new",
+      "file": "net/netfilter/nf_conntrack_proto_tcp.c",
+      "line": 865,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(new_state >= TCP_CONNTRACK_MAX)",
+          "exit_kind": "return",
+          "source_line": 848
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "new_state == TCP_CONNTRACK_SYN_SENT",
+          "polarity": "in_true_branch",
+          "source_line": 853
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_tcp_packet",
+      "file": "net/netfilter/nf_conntrack_proto_tcp.c",
+      "line": 1053,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(th == NULL)",
+          "exit_kind": "return",
+          "source_line": 943,
+          "exit_line": 944
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tcp_error(th, skb, dataoff, state))",
+          "exit_kind": "return",
+          "source_line": 946,
+          "exit_line": 947
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_is_confirmed(ct) && !tcp_new(ct, skb, dataoff, th))",
+          "exit_kind": "return",
+          "source_line": 949,
+          "exit_line": 950
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(old_state < TCP_CONNTRACK_TIME_WAIT)",
+          "exit_kind": "break",
+          "source_line": 961,
+          "exit_line": 962
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_kill(ct))",
+          "exit_kind": "return",
+          "source_line": 988,
+          "exit_line": 989
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "new_state",
+          "polarity": "in_true_branch",
+          "source_line": 959
+        }
+      ]
+    }
+  ]
+}

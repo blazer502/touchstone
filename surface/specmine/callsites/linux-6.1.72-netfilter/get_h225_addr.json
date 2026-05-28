@@ -1,0 +1,137 @@
+{
+  "callee": "get_h225_addr",
+  "defined_in": "net/netfilter/nf_conntrack_h323_main.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 10,
+  "callsites": [
+    {
+      "caller": "expect_h245",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 633,
+      "guards": []
+    },
+    {
+      "caller": "expect_callforwarding",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 750,
+      "guards": []
+    },
+    {
+      "caller": "process_setup",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 821,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 813,
+          "exit_line": 814
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(setup->options & eSetup_UUIE_h245Address)",
+          "exit_kind": "return",
+          "source_line": 810
+        }
+      ]
+    },
+    {
+      "caller": "process_setup",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 838,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 813,
+          "exit_line": 814
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(setup->options & eSetup_UUIE_h245Address)",
+          "exit_kind": "return",
+          "source_line": 810
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 831,
+          "exit_line": 832
+        }
+      ]
+    },
+    {
+      "caller": "expect_q931",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1219,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < count; i++",
+          "polarity": "in_true_branch",
+          "source_line": 1218
+        }
+      ]
+    },
+    {
+      "caller": "process_gcf",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1290,
+      "guards": []
+    },
+    {
+      "caller": "process_arq",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1459,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nathook != NULL",
+          "source_line": 1455
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nathook)",
+          "exit_kind": "return",
+          "source_line": 1455,
+          "exit_line": 1456
+        }
+      ]
+    },
+    {
+      "caller": "process_arq",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1473,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nathook != NULL",
+          "source_line": 1455
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nathook)",
+          "exit_kind": "return",
+          "source_line": 1455,
+          "exit_line": 1456
+        }
+      ]
+    },
+    {
+      "caller": "process_acf",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1501,
+      "guards": []
+    },
+    {
+      "caller": "process_lcf",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1568,
+      "guards": []
+    }
+  ]
+}

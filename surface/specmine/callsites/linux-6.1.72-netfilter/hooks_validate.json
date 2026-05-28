@@ -1,0 +1,139 @@
+{
+  "callee": "hooks_validate",
+  "defined_in": "net/netfilter/core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_hook_entries_insert_raw",
+      "file": "net/netfilter/core.c",
+      "line": 196,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(new_hooks)",
+          "source_line": 193
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(new_hooks))",
+          "exit_kind": "return",
+          "source_line": 193,
+          "exit_line": 194
+        }
+      ]
+    },
+    {
+      "caller": "__nf_hook_entries_try_shrink",
+      "file": "net/netfilter/core.c",
+      "line": 260,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "new != NULL",
+          "source_line": 249
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!old)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 230
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(!old))",
+          "exit_kind": "return",
+          "source_line": 230,
+          "exit_line": 231
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skip == hook_entries)",
+          "exit_kind": "goto",
+          "source_line": 241,
+          "exit_line": 242
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skip == 0)",
+          "exit_kind": "return",
+          "source_line": 244,
+          "exit_line": 245
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!new)",
+          "exit_kind": "return",
+          "source_line": 249,
+          "exit_line": 250
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(orig_ops[i] == &dummy_ops)",
+          "exit_kind": "continue",
+          "source_line": 254,
+          "exit_line": 255
+        }
+      ]
+    },
+    {
+      "caller": "__nf_register_net_hook",
+      "file": "net/netfilter/core.c",
+      "line": 426,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 420
+        },
+        {
+          "kind": "null_check",
+          "predicate": "pp != NULL",
+          "source_line": 417
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(reg->hooknum == NF_NETDEV_INGRESS)",
+          "exit_kind": "return",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(reg->hooknum == NF_NETDEV_EGRESS)",
+          "exit_kind": "return",
+          "source_line": 398,
+          "exit_line": 399
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(reg->hooknum != NF_INET_INGRESS)",
+          "exit_kind": "break",
+          "source_line": 407,
+          "exit_line": 408
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 411,
+          "exit_line": 412
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!pp)",
+          "exit_kind": "return",
+          "source_line": 417,
+          "exit_line": 418
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!IS_ERR(new_hooks)",
+          "polarity": "in_true_branch",
+          "source_line": 425
+        }
+      ]
+    }
+  ]
+}

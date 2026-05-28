@@ -1,0 +1,27 @@
+{
+  "callee": "htable_put",
+  "defined_in": "net/netfilter/xt_hashlimit.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "hashlimit_mt_destroy_v2",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 963,
+      "guards": []
+    },
+    {
+      "caller": "hashlimit_mt_destroy_v1",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 970,
+      "guards": []
+    },
+    {
+      "caller": "hashlimit_mt_destroy",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 977,
+      "guards": []
+    }
+  ]
+}

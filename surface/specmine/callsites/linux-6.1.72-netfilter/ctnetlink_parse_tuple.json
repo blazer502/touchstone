@@ -1,0 +1,470 @@
+{
+  "callee": "ctnetlink_parse_tuple",
+  "defined_in": "net/netfilter/nf_conntrack_netlink.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 18,
+  "callsites": [
+    {
+      "caller": "ctnetlink_del_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1609,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1605,
+          "exit_line": 1606
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_TUPLE_ORIG]",
+          "polarity": "in_true_branch",
+          "source_line": 1608
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_del_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1612,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1605,
+          "exit_line": 1606
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_TUPLE_REPLY]",
+          "polarity": "in_true_branch",
+          "source_line": 1611
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_get_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1674,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 1658
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1670,
+          "exit_line": 1671
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_TUPLE_ORIG]",
+          "polarity": "in_true_branch",
+          "source_line": 1673
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_get_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1677,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 1658
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1670,
+          "exit_line": 1671
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_TUPLE_REPLY]",
+          "polarity": "in_true_branch",
+          "source_line": 1676
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_create_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2355,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(ct)",
+          "source_line": 2247
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(ct))",
+          "exit_kind": "return",
+          "source_line": 2247,
+          "exit_line": 2248
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cda[CTA_TIMEOUT])",
+          "exit_kind": "goto",
+          "source_line": 2250,
+          "exit_line": 2251
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 2259,
+          "exit_line": 2260
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request_module(\"nfct-helper-%s\", helpname) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2267
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(helper)",
+          "exit_kind": "goto",
+          "source_line": 2276
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(helper == NULL)",
+          "exit_kind": "goto",
+          "source_line": 2264
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(help == NULL)",
+          "exit_kind": "goto",
+          "source_line": 2288
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_HELP])",
+          "exit_kind": "goto",
+          "source_line": 2254
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 2303,
+          "exit_line": 2304
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 2321,
+          "exit_line": 2322
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_STATUS])",
+          "exit_kind": "goto",
+          "source_line": 2319
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 2327,
+          "exit_line": 2328
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_SEQ_ADJ_ORIG] || cda[CTA_SEQ_ADJ_REPLY])",
+          "exit_kind": "goto",
+          "source_line": 2325
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 2334,
+          "exit_line": 2335
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_PROTOINFO])",
+          "exit_kind": "goto",
+          "source_line": 2332
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 2340,
+          "exit_line": 2341
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_SYNPROXY])",
+          "exit_kind": "goto",
+          "source_line": 2338
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_TUPLE_MASTER]",
+          "polarity": "in_true_branch",
+          "source_line": 2350
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_new_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2407,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2403,
+          "exit_line": 2404
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_TUPLE_ORIG]",
+          "polarity": "in_true_branch",
+          "source_line": 2406
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_new_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2414,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2403,
+          "exit_line": 2404
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2409,
+          "exit_line": 2410
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_TUPLE_ORIG])",
+          "exit_kind": "return",
+          "source_line": 2406
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_TUPLE_REPLY]",
+          "polarity": "in_true_branch",
+          "source_line": 2413
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_glue_exp_parse",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2852,
+      "guards": []
+    },
+    {
+      "caller": "ctnetlink_glue_exp_parse",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2857,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2854,
+          "exit_line": 2855
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_dump_exp_ct",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3268,
+      "guards": []
+    },
+    {
+      "caller": "ctnetlink_get_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3326,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_EXPECT_MASTER])",
+          "exit_kind": "return",
+          "source_line": 3308,
+          "exit_line": 3309
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 3307
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3322,
+          "exit_line": 3323
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_EXPECT_TUPLE]",
+          "polarity": "in_true_branch",
+          "source_line": 3325
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_get_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3329,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_EXPECT_MASTER])",
+          "exit_kind": "return",
+          "source_line": 3308,
+          "exit_line": 3309
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 3307
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3322,
+          "exit_line": 3323
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_EXPECT_MASTER]",
+          "polarity": "in_true_branch",
+          "source_line": 3328
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_del_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3406,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3403,
+          "exit_line": 3404
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_EXPECT_TUPLE]",
+          "polarity": "in_true_branch",
+          "source_line": 3400
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_parse_expect_nat",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3490,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3484,
+          "exit_line": 3485
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[CTA_EXPECT_NAT_DIR] || !tb[CTA_EXPECT_NAT_TUPLE])",
+          "exit_kind": "return",
+          "source_line": 3487,
+          "exit_line": 3488
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_create_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3582,
+      "guards": []
+    },
+    {
+      "caller": "ctnetlink_create_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3586,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3584,
+          "exit_line": 3585
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_create_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3590,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3584,
+          "exit_line": 3585
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3588,
+          "exit_line": 3589
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_new_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3662,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3659,
+          "exit_line": 3660
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "callee": "nft_trans_list_del",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_trans_destroy",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 182,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_trans_destroy_work",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8898,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(list_empty(&head))",
+          "exit_kind": "return",
+          "source_line": 8892,
+          "exit_line": 8893
+        }
+      ]
+    },
+    {
+      "caller": "__nf_tables_abort",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 10025,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(trans->ctx.table->flags & __NFT_TABLE_F_UPDATE))",
+          "exit_kind": "break",
+          "source_line": 9866
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_chain_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9892
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_rule_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9909
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_set_update(trans))",
+          "exit_kind": "break",
+          "source_line": 9931
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_set_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9936
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_elem_set_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9951
+        }
+      ]
+    }
+  ]
+}

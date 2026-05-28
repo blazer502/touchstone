@@ -1,0 +1,329 @@
+{
+  "callee": "__nf_conntrack_helper_find",
+  "defined_in": "net/netfilter/nf_conntrack_helper.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 9,
+  "callsites": [
+    {
+      "caller": "nf_conntrack_helper_try_module_get",
+      "file": "net/netfilter/nf_conntrack_helper.c",
+      "line": 79,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 77
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_helper_try_module_get",
+      "file": "net/netfilter/nf_conntrack_helper.c",
+      "line": 85,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 84
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "h == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 81
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "request_module(\"nfct-helper-%s\", name) == 0",
+          "polarity": "in_true_branch",
+          "source_line": 83
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_helper_try_module_get",
+      "file": "net/netfilter/nf_conntrack_helper.c",
+      "line": 135,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 134
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_change_helper",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1967,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1966
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1935,
+          "exit_line": 1936
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->master)",
+          "exit_kind": "return",
+          "source_line": 1939
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!strcmp(helpname, \"\"))",
+          "exit_kind": "return",
+          "source_line": 1956
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_create_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2262,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 2253
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(ct)",
+          "source_line": 2247
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(ct))",
+          "exit_kind": "return",
+          "source_line": 2247,
+          "exit_line": 2248
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cda[CTA_TIMEOUT])",
+          "exit_kind": "goto",
+          "source_line": 2250,
+          "exit_line": 2251
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 2259,
+          "exit_line": 2260
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_HELP]",
+          "polarity": "in_true_branch",
+          "source_line": 2254
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_create_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2273,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 2272
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(ct)",
+          "source_line": 2247
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(ct))",
+          "exit_kind": "return",
+          "source_line": 2247,
+          "exit_line": 2248
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cda[CTA_TIMEOUT])",
+          "exit_kind": "goto",
+          "source_line": 2250,
+          "exit_line": 2251
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 2259,
+          "exit_line": 2260
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request_module(\"nfct-helper-%s\", helpname) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2267
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_HELP]",
+          "polarity": "in_true_branch",
+          "source_line": 2254
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "helper == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 2264
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_glue_attach_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2884,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2873,
+          "exit_line": 2874
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2878,
+          "exit_line": 2879
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_EXPECT_HELP_NAME]",
+          "polarity": "in_true_branch",
+          "source_line": 2881
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_create_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3605,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 3601
+        },
+        {
+          "kind": "null_check",
+          "predicate": "h != NULL",
+          "source_line": 3597
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3584,
+          "exit_line": 3585
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3588,
+          "exit_line": 3589
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3592,
+          "exit_line": 3593
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!h)",
+          "exit_kind": "return",
+          "source_line": 3597,
+          "exit_line": 3598
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_EXPECT_HELP_NAME]",
+          "polarity": "in_true_branch",
+          "source_line": 3602
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_create_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3615,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 3614
+        },
+        {
+          "kind": "null_check",
+          "predicate": "h != NULL",
+          "source_line": 3597
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3584,
+          "exit_line": 3585
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3588,
+          "exit_line": 3589
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3592,
+          "exit_line": 3593
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!h)",
+          "exit_kind": "return",
+          "source_line": 3597,
+          "exit_line": 3598
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request_module(\"nfct-helper-%s\", helpname) < 0)",
+          "exit_kind": "goto",
+          "source_line": 3610
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_EXPECT_HELP_NAME]",
+          "polarity": "in_true_branch",
+          "source_line": 3602
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "helper == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 3607
+        }
+      ]
+    }
+  ]
+}

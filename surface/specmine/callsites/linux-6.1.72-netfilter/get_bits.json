@@ -1,0 +1,297 @@
+{
+  "callee": "get_bits",
+  "defined_in": "net/netfilter/nf_conntrack_h323_asn1.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "decode_int",
+      "file": "net/netfilter/nf_conntrack_h323_asn1.c",
+      "line": 333,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, 2))",
+          "exit_kind": "return",
+          "source_line": 331,
+          "exit_line": 332
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "f->sz",
+          "polarity": "in_true_branch",
+          "source_line": 321
+        }
+      ]
+    },
+    {
+      "caller": "decode_numstr",
+      "file": "net/netfilter/nf_conntrack_h323_asn1.c",
+      "line": 423,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, f->sz))",
+          "exit_kind": "return",
+          "source_line": 421,
+          "exit_line": 422
+        }
+      ]
+    },
+    {
+      "caller": "decode_octstr",
+      "file": "net/netfilter/nf_conntrack_h323_asn1.c",
+      "line": 472,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 1, 0))",
+          "exit_kind": "return",
+          "source_line": 459,
+          "exit_line": 460
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 2, 0))",
+          "exit_kind": "return",
+          "source_line": 465,
+          "exit_line": 466
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, f->sz))",
+          "exit_kind": "return",
+          "source_line": 470,
+          "exit_line": 471
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "f->sz",
+          "polarity": "in_true_branch",
+          "source_line": 440
+        }
+      ]
+    },
+    {
+      "caller": "decode_bmpstr",
+      "file": "net/netfilter/nf_conntrack_h323_asn1.c",
+      "line": 503,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 1, 0))",
+          "exit_kind": "return",
+          "source_line": 496,
+          "exit_line": 497
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, f->sz))",
+          "exit_kind": "return",
+          "source_line": 501,
+          "exit_line": 502
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "f->sz",
+          "polarity": "in_true_branch",
+          "source_line": 493
+        }
+      ]
+    },
+    {
+      "caller": "decode_seq",
+      "file": "net/netfilter/nf_conntrack_h323_asn1.c",
+      "line": 589,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ext != NULL",
+          "source_line": 583
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, 1))",
+          "exit_kind": "return",
+          "source_line": 529,
+          "exit_line": 530
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, f->sz))",
+          "exit_kind": "return",
+          "source_line": 534,
+          "exit_line": 535
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(son->attr & STOP)",
+          "exit_kind": "return",
+          "source_line": 542
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!((0x80000000U >> (opt++)) & bmp))",
+          "exit_kind": "continue",
+          "source_line": 549,
+          "exit_line": 550
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(son->attr & OPT)",
+          "exit_kind": "continue",
+          "source_line": 548
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 2, 0))",
+          "exit_kind": "return",
+          "source_line": 555,
+          "exit_line": 556
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, len, 0))",
+          "exit_kind": "return",
+          "source_line": 558,
+          "exit_line": 559
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!base || !(son->attr & DECODE))",
+          "exit_kind": "continue",
+          "source_line": 560
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(son->attr & OPEN)",
+          "exit_kind": "return",
+          "source_line": 554
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ext)",
+          "exit_kind": "return",
+          "source_line": 583,
+          "exit_line": 584
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, 7))",
+          "exit_kind": "return",
+          "source_line": 587,
+          "exit_line": 588
+        }
+      ]
+    },
+    {
+      "caller": "decode_seqof",
+      "file": "net/netfilter/nf_conntrack_h323_asn1.c",
+      "line": 682,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 1, 0))",
+          "exit_kind": "return",
+          "source_line": 661,
+          "exit_line": 662
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 2, 0))",
+          "exit_kind": "return",
+          "source_line": 667,
+          "exit_line": 668
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 2, 0))",
+          "exit_kind": "return",
+          "source_line": 675,
+          "exit_line": 676
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, f->sz))",
+          "exit_kind": "return",
+          "source_line": 680,
+          "exit_line": 681
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "f->sz",
+          "polarity": "in_true_branch",
+          "source_line": 658
+        }
+      ]
+    },
+    {
+      "caller": "decode_choice",
+      "file": "net/netfilter/nf_conntrack_h323_asn1.c",
+      "line": 760,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, 1))",
+          "exit_kind": "return",
+          "source_line": 754,
+          "exit_line": 755
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, 7))",
+          "exit_kind": "return",
+          "source_line": 758,
+          "exit_line": 759
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "(f->attr & EXT) && get_bit(bs)",
+          "polarity": "in_true_branch",
+          "source_line": 756
+        }
+      ]
+    },
+    {
+      "caller": "decode_choice",
+      "file": "net/netfilter/nf_conntrack_h323_asn1.c",
+      "line": 765,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, 1))",
+          "exit_kind": "return",
+          "source_line": 754,
+          "exit_line": 755
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, 7))",
+          "exit_kind": "return",
+          "source_line": 758,
+          "exit_line": 759
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((f->attr & EXT) && get_bit(bs))",
+          "exit_kind": "return",
+          "source_line": 756
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_h323_error_boundary(bs, 0, f->sz))",
+          "exit_kind": "return",
+          "source_line": 763,
+          "exit_line": 764
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "(f->attr & EXT) && get_bit(bs)",
+          "polarity": "in_false_branch",
+          "source_line": 761
+        }
+      ]
+    }
+  ]
+}

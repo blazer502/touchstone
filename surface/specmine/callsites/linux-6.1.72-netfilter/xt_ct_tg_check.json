@@ -1,0 +1,51 @@
+{
+  "callee": "xt_ct_tg_check",
+  "defined_in": "net/netfilter/xt_CT.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "xt_ct_tg_check_v0",
+      "file": "net/netfilter/xt_CT.c",
+      "line": 250,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->flags & ~XT_CT_NOTRACK)",
+          "exit_kind": "return",
+          "source_line": 245,
+          "exit_line": 246
+        }
+      ]
+    },
+    {
+      "caller": "xt_ct_tg_check_v1",
+      "file": "net/netfilter/xt_CT.c",
+      "line": 266,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->flags & ~XT_CT_NOTRACK)",
+          "exit_kind": "return",
+          "source_line": 263,
+          "exit_line": 264
+        }
+      ]
+    },
+    {
+      "caller": "xt_ct_tg_check_v2",
+      "file": "net/netfilter/xt_CT.c",
+      "line": 276,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->flags & ~XT_CT_MASK)",
+          "exit_kind": "return",
+          "source_line": 273,
+          "exit_line": 274
+        }
+      ]
+    }
+  ]
+}

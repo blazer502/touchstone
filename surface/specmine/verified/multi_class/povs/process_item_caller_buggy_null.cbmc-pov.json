@@ -1,0 +1,16 @@
+{
+  "engine": "cbmc",
+  "source": "/home/chanyoung/veri-agent/surface/specmine/verified/multi_class/harnesses/process_item_caller_buggy_null.c",
+  "function": "main",
+  "property": "assertion",
+  "unwind": 4,
+  "target_location": "line 57 [__specmine_wrap_process_item.assertion.1]",
+  "assignment": {
+    "return_value_nondet_int": "0",
+    "arg0": "0",
+    "__specmine_arg_is_err": "64",
+    "__specmine_arg_is_null": "256",
+    "item": "0",
+    "a0": "0"
+  }
+}

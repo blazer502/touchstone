@@ -1,0 +1,161 @@
+{
+  "callee": "ctnetlink_exp_fill_info",
+  "defined_in": "net/netfilter/nf_conntrack_netlink.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ctnetlink_exp_dump_table",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3180,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 3163
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(l3proto && exp->tuple.src.l3num != l3proto)",
+          "exit_kind": "continue",
+          "source_line": 3169,
+          "exit_line": 3170
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!net_eq(nf_ct_net(exp->master), net))",
+          "exit_kind": "continue",
+          "source_line": 3172,
+          "exit_line": 3173
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(exp != last)",
+          "exit_kind": "continue",
+          "source_line": 3176,
+          "exit_line": 3177
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cb->args[1])",
+          "exit_kind": "continue",
+          "source_line": 3175
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "; cb->args[0] < nf_ct_expect_hsize; cb->args[0]++",
+          "polarity": "in_true_branch",
+          "source_line": 3165
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_exp_ct_dump_table",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3227,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 3216
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cb->args[0])",
+          "exit_kind": "return",
+          "source_line": 3213,
+          "exit_line": 3214
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(l3proto && exp->tuple.src.l3num != l3proto)",
+          "exit_kind": "continue",
+          "source_line": 3220,
+          "exit_line": 3221
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(exp != last)",
+          "exit_kind": "continue",
+          "source_line": 3223,
+          "exit_line": 3224
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cb->args[1])",
+          "exit_kind": "continue",
+          "source_line": 3222
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_get_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3357,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 3356
+        },
+        {
+          "kind": "null_check",
+          "predicate": "exp != NULL",
+          "source_line": 3338
+        },
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 3351
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_EXPECT_MASTER])",
+          "exit_kind": "return",
+          "source_line": 3308,
+          "exit_line": 3309
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 3307
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3322,
+          "exit_line": 3323
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3334,
+          "exit_line": 3335
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!exp)",
+          "exit_kind": "return",
+          "source_line": 3338,
+          "exit_line": 3339
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(id != nf_expect_get_id(exp))",
+          "exit_kind": "return",
+          "source_line": 3344
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 3351
+        }
+      ]
+    }
+  ]
+}

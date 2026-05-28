@@ -1,0 +1,138 @@
+{
+  "callee": "__nf_register_net_hook",
+  "defined_in": "net/netfilter/core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_register_net_hook",
+      "file": "net/netfilter/core.c",
+      "line": 551,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "reg->pf == NFPROTO_INET",
+          "polarity": "in_true_branch",
+          "source_line": 549
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "reg->hooknum == NF_INET_INGRESS",
+          "polarity": "in_true_branch",
+          "source_line": 550
+        }
+      ]
+    },
+    {
+      "caller": "nf_register_net_hook",
+      "file": "net/netfilter/core.c",
+      "line": 555,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 552,
+          "exit_line": 553
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(reg->hooknum == NF_INET_INGRESS)",
+          "exit_kind": "return",
+          "source_line": 550
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "reg->pf == NFPROTO_INET",
+          "polarity": "in_true_branch",
+          "source_line": 549
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "reg->hooknum == NF_INET_INGRESS",
+          "polarity": "in_false_branch",
+          "source_line": 554
+        }
+      ]
+    },
+    {
+      "caller": "nf_register_net_hook",
+      "file": "net/netfilter/core.c",
+      "line": 559,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 552,
+          "exit_line": 553
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(reg->hooknum == NF_INET_INGRESS)",
+          "exit_kind": "return",
+          "source_line": 550
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 556,
+          "exit_line": 557
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "reg->pf == NFPROTO_INET",
+          "polarity": "in_true_branch",
+          "source_line": 549
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "reg->hooknum == NF_INET_INGRESS",
+          "polarity": "in_false_branch",
+          "source_line": 554
+        }
+      ]
+    },
+    {
+      "caller": "nf_register_net_hook",
+      "file": "net/netfilter/core.c",
+      "line": 566,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 552,
+          "exit_line": 553
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(reg->hooknum == NF_INET_INGRESS)",
+          "exit_kind": "return",
+          "source_line": 550
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 556,
+          "exit_line": 557
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 560
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "reg->pf == NFPROTO_INET",
+          "polarity": "in_false_branch",
+          "source_line": 565
+        }
+      ]
+    }
+  ]
+}

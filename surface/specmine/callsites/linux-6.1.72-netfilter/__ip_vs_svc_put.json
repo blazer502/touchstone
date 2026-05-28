@@ -1,0 +1,68 @@
+{
+  "callee": "__ip_vs_svc_put",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ctl.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_dest_free",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 788,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected(dest->svc, 1)",
+          "source_line": 785
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_update_dest",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 926,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected(dest->svc, 1)",
+          "source_line": 919
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!add && udest->af != dest->af)",
+          "macro": "BUG_ON",
+          "source_line": 880
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!old_svc",
+          "polarity": "in_false_branch",
+          "source_line": 922
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "old_svc != svc",
+          "polarity": "in_true_branch",
+          "source_line": 923
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_del_service",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1574,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected(svc->scheduler, 1)",
+          "source_line": 1545
+        },
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected(svc->pe, 1)",
+          "source_line": 1550
+        }
+      ]
+    }
+  ]
+}

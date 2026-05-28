@@ -1,0 +1,113 @@
+{
+  "callee": "nf_log_set",
+  "defined_in": "net/netfilter/nf_log.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "nf_log_syslog_net_init",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 968,
+      "guards": []
+    },
+    {
+      "caller": "nf_log_syslog_net_init",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 973,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 970,
+          "exit_line": 971
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_syslog_net_init",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 977,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 970,
+          "exit_line": 971
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 974,
+          "exit_line": 975
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_syslog_net_init",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 981,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 970,
+          "exit_line": 971
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 974,
+          "exit_line": 975
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 978,
+          "exit_line": 979
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_syslog_net_init",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 985,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 970,
+          "exit_line": 971
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 974,
+          "exit_line": 975
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 978,
+          "exit_line": 979
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 982,
+          "exit_line": 983
+        }
+      ]
+    }
+  ]
+}

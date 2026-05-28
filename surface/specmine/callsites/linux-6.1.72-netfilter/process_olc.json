@@ -1,0 +1,241 @@
+{
+  "callee": "process_olc",
+  "defined_in": "net/netfilter/nf_conntrack_h323_main.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "process_h245",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 499,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "mscm->choice",
+          "polarity": "in_true_branch",
+          "source_line": 495
+        }
+      ]
+    },
+    {
+      "caller": "process_setup",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 854,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 813,
+          "exit_line": 814
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(setup->options & eSetup_UUIE_h245Address)",
+          "exit_kind": "return",
+          "source_line": 810
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 831,
+          "exit_line": 832
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 848,
+          "exit_line": 849
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "setup->options & eSetup_UUIE_fastStart",
+          "polarity": "in_true_branch",
+          "source_line": 852
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < setup->fastStart.count; i++",
+          "polarity": "in_true_branch",
+          "source_line": 853
+        }
+      ]
+    },
+    {
+      "caller": "process_callproceeding",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 886,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 880,
+          "exit_line": 881
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(callproc->options & eCallProceeding_UUIE_h245Address)",
+          "exit_kind": "return",
+          "source_line": 877
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "callproc->options & eCallProceeding_UUIE_fastStart",
+          "polarity": "in_true_branch",
+          "source_line": 884
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < callproc->fastStart.count; i++",
+          "polarity": "in_true_branch",
+          "source_line": 885
+        }
+      ]
+    },
+    {
+      "caller": "process_connect",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 917,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 911,
+          "exit_line": 912
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(connect->options & eConnect_UUIE_h245Address)",
+          "exit_kind": "return",
+          "source_line": 908
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "connect->options & eConnect_UUIE_fastStart",
+          "polarity": "in_true_branch",
+          "source_line": 915
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < connect->fastStart.count; i++",
+          "polarity": "in_true_branch",
+          "source_line": 916
+        }
+      ]
+    },
+    {
+      "caller": "process_alerting",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 948,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 942,
+          "exit_line": 943
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(alert->options & eAlerting_UUIE_h245Address)",
+          "exit_kind": "return",
+          "source_line": 939
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "alert->options & eAlerting_UUIE_fastStart",
+          "polarity": "in_true_branch",
+          "source_line": 946
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < alert->fastStart.count; i++",
+          "polarity": "in_true_branch",
+          "source_line": 947
+        }
+      ]
+    },
+    {
+      "caller": "process_facility",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 988,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(facility->options & eFacility_UUIE_alternativeAddress)",
+          "exit_kind": "return",
+          "source_line": 971,
+          "exit_line": 972
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(facility->reason.choice == eFacilityReason_callForwarded)",
+          "exit_kind": "return",
+          "source_line": 970
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 982,
+          "exit_line": 983
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(facility->options & eFacility_UUIE_h245Address)",
+          "exit_kind": "return",
+          "source_line": 979
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "facility->options & eFacility_UUIE_fastStart",
+          "polarity": "in_true_branch",
+          "source_line": 986
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < facility->fastStart.count; i++",
+          "polarity": "in_true_branch",
+          "source_line": 987
+        }
+      ]
+    },
+    {
+      "caller": "process_progress",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1019,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 1013,
+          "exit_line": 1014
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(progress->options & eProgress_UUIE_h245Address)",
+          "exit_kind": "return",
+          "source_line": 1010
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "progress->options & eProgress_UUIE_fastStart",
+          "polarity": "in_true_branch",
+          "source_line": 1017
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < progress->fastStart.count; i++",
+          "polarity": "in_true_branch",
+          "source_line": 1018
+        }
+      ]
+    }
+  ]
+}

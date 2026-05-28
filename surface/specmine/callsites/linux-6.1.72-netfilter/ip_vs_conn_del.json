@@ -1,0 +1,248 @@
+{
+  "callee": "ip_vs_conn_del",
+  "defined_in": "net/netfilter/ipvs/ip_vs_conn.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "ip_vs_random_dropentry",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1360,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1306
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->ipvs != ipvs)",
+          "exit_kind": "continue",
+          "source_line": 1314,
+          "exit_line": 1315
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(atomic_read(&cp->n_control))",
+          "exit_kind": "continue",
+          "source_line": 1316,
+          "exit_line": 1317
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_conn_ops_mode(cp))",
+          "exit_kind": "goto",
+          "source_line": 1320,
+          "exit_line": 1321
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(cp->state & IP_VS_CTPL_S_ASSURED))",
+          "exit_kind": "goto",
+          "source_line": 1322,
+          "exit_line": 1323
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->flags & IP_VS_CONN_F_TEMPLATE)",
+          "exit_kind": "goto",
+          "source_line": 1318
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(todrop_entry(cp))",
+          "exit_kind": "break",
+          "source_line": 1333,
+          "exit_line": 1334
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->protocol == IPPROTO_TCP)",
+          "exit_kind": "break",
+          "source_line": 1326
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(todrop_entry(cp))",
+          "exit_kind": "break",
+          "source_line": 1346,
+          "exit_line": 1347
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->protocol == IPPROTO_SCTP)",
+          "exit_kind": "break",
+          "source_line": 1340
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!todrop_entry(cp))",
+          "exit_kind": "continue",
+          "source_line": 1354,
+          "exit_line": 1355
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < (ip_vs_conn_tab_size>>5); idx++",
+          "polarity": "in_true_branch",
+          "source_line": 1310
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_conn_flush",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1387,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1377
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->ipvs != ipvs)",
+          "exit_kind": "continue",
+          "source_line": 1381,
+          "exit_line": 1382
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(atomic_read(&cp->n_control))",
+          "exit_kind": "continue",
+          "source_line": 1383,
+          "exit_line": 1384
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < ip_vs_conn_tab_size; idx++",
+          "polarity": "in_true_branch",
+          "source_line": 1378
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_conn_flush",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1390,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1377
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->ipvs != ipvs)",
+          "exit_kind": "continue",
+          "source_line": 1381,
+          "exit_line": 1382
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(atomic_read(&cp->n_control))",
+          "exit_kind": "continue",
+          "source_line": 1383,
+          "exit_line": 1384
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < ip_vs_conn_tab_size; idx++",
+          "polarity": "in_true_branch",
+          "source_line": 1378
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cp_c && !atomic_read(&cp_c->n_control)",
+          "polarity": "in_true_branch",
+          "source_line": 1388
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_expire_nodest_conn_flush",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1427,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1412
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->ipvs != ipvs)",
+          "exit_kind": "continue",
+          "source_line": 1415,
+          "exit_line": 1416
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest || (dest->flags & IP_VS_DEST_F_AVAILABLE))",
+          "exit_kind": "continue",
+          "source_line": 1419,
+          "exit_line": 1420
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(atomic_read(&cp->n_control))",
+          "exit_kind": "continue",
+          "source_line": 1422,
+          "exit_line": 1423
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < ip_vs_conn_tab_size; idx++",
+          "polarity": "in_true_branch",
+          "source_line": 1413
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_expire_nodest_conn_flush",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1430,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1412
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->ipvs != ipvs)",
+          "exit_kind": "continue",
+          "source_line": 1415,
+          "exit_line": 1416
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest || (dest->flags & IP_VS_DEST_F_AVAILABLE))",
+          "exit_kind": "continue",
+          "source_line": 1419,
+          "exit_line": 1420
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(atomic_read(&cp->n_control))",
+          "exit_kind": "continue",
+          "source_line": 1422,
+          "exit_line": 1423
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < ip_vs_conn_tab_size; idx++",
+          "polarity": "in_true_branch",
+          "source_line": 1413
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cp_c && !atomic_read(&cp_c->n_control)",
+          "polarity": "in_true_branch",
+          "source_line": 1428
+        }
+      ]
+    }
+  ]
+}

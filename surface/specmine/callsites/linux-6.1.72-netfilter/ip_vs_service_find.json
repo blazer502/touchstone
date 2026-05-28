@@ -1,0 +1,179 @@
+{
+  "callee": "ip_vs_service_find",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ctl.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "ip_vs_find_dest",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 700,
+      "guards": []
+    },
+    {
+      "caller": "sctp_conn_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_proto_sctp.c",
+      "line": 50,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ports != NULL",
+          "source_line": 44
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(sch)",
+          "exit_kind": "return",
+          "source_line": 31
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ports)",
+          "exit_kind": "return",
+          "source_line": 44
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "likely(!ip_vs_iph_inverse(iph))",
+          "polarity": "in_true_branch",
+          "source_line": 49
+        }
+      ]
+    },
+    {
+      "caller": "sctp_conn_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_proto_sctp.c",
+      "line": 53,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ports != NULL",
+          "source_line": 44
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(sch)",
+          "exit_kind": "return",
+          "source_line": 31
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ports)",
+          "exit_kind": "return",
+          "source_line": 44
+        }
+      ]
+    },
+    {
+      "caller": "tcp_conn_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_proto_tcp.c",
+      "line": 68,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ports != NULL",
+          "source_line": 60
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th->rst || !(sysctl_sloppy_tcp(ipvs) || th->syn))",
+          "exit_kind": "return",
+          "source_line": 51,
+          "exit_line": 52
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th)",
+          "exit_kind": "return",
+          "source_line": 50
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ports)",
+          "exit_kind": "return",
+          "source_line": 60
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "likely(!ip_vs_iph_inverse(iph))",
+          "polarity": "in_true_branch",
+          "source_line": 67
+        }
+      ]
+    },
+    {
+      "caller": "tcp_conn_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_proto_tcp.c",
+      "line": 71,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ports != NULL",
+          "source_line": 60
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th->rst || !(sysctl_sloppy_tcp(ipvs) || th->syn))",
+          "exit_kind": "return",
+          "source_line": 51,
+          "exit_line": 52
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th)",
+          "exit_kind": "return",
+          "source_line": 50
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ports)",
+          "exit_kind": "return",
+          "source_line": 60
+        }
+      ]
+    },
+    {
+      "caller": "udp_conn_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_proto_udp.c",
+      "line": 56,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ports != NULL",
+          "source_line": 50
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ports)",
+          "exit_kind": "return",
+          "source_line": 50
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "likely(!ip_vs_iph_inverse(iph))",
+          "polarity": "in_true_branch",
+          "source_line": 55
+        }
+      ]
+    },
+    {
+      "caller": "udp_conn_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_proto_udp.c",
+      "line": 59,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ports != NULL",
+          "source_line": 50
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ports)",
+          "exit_kind": "return",
+          "source_line": 50
+        }
+      ]
+    }
+  ]
+}

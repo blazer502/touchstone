@@ -1,0 +1,138 @@
+{
+  "callee": "nft_flowtable_hooks_destroy",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_tables_newflowtable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8101,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 8022
+        },
+        {
+          "kind": "null_check",
+          "predicate": "flowtable != NULL",
+          "source_line": 8052
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(type)",
+          "source_line": 8068
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 8022
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err != -ENOENT)",
+          "exit_kind": "return",
+          "source_line": 8031
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_EXCL)",
+          "exit_kind": "return",
+          "source_line": 8036
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_use_inc(&table->use))",
+          "exit_kind": "return",
+          "source_line": 8048,
+          "exit_line": 8049
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!flowtable)",
+          "exit_kind": "goto",
+          "source_line": 8052
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!flowtable->name)",
+          "exit_kind": "goto",
+          "source_line": 8062
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(type))",
+          "exit_kind": "goto",
+          "source_line": 8068
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flowtable->data.flags & ~NFT_FLOWTABLE_MASK)",
+          "exit_kind": "goto",
+          "source_line": 8076
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 8085,
+          "exit_line": 8086
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 8090,
+          "exit_line": 8091
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "err < 0",
+          "polarity": "in_true_branch",
+          "source_line": 8100
+        }
+      ]
+    },
+    {
+      "caller": "nft_commit_release",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8871,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "trans->msg_type",
+          "polarity": "in_true_branch",
+          "source_line": 8844
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nft_trans_flowtable_update(trans)",
+          "polarity": "in_true_branch",
+          "source_line": 8870
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_abort_release",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9828,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "trans->msg_type",
+          "polarity": "in_true_branch",
+          "source_line": 9806
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nft_trans_flowtable_update(trans)",
+          "polarity": "in_true_branch",
+          "source_line": 9827
+        }
+      ]
+    }
+  ]
+}

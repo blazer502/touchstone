@@ -1,0 +1,33 @@
+{
+  "callee": "flow_offload_get_timeout",
+  "defined_in": "net/netfilter/nf_flow_table_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "flow_offload_add",
+      "file": "net/netfilter/nf_flow_table_core.c",
+      "line": 287,
+      "guards": []
+    },
+    {
+      "caller": "flow_offload_refresh",
+      "file": "net/netfilter/nf_flow_table_core.c",
+      "line": 321,
+      "guards": []
+    },
+    {
+      "caller": "flow_offload_work_stats",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 957,
+      "guards": []
+    },
+    {
+      "caller": "nf_flow_offload_stats",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 1071,
+      "guards": []
+    }
+  ]
+}

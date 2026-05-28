@@ -1,0 +1,188 @@
+{
+  "callee": "nft_chain_validate_hooks",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 20,
+  "callsites": [
+    {
+      "caller": "nft_fib_validate",
+      "file": "net/netfilter/nft_fib.c",
+      "line": 64,
+      "guards": []
+    },
+    {
+      "caller": "nft_flow_offload_validate",
+      "file": "net/netfilter/nft_flow_offload.c",
+      "line": 383,
+      "guards": []
+    },
+    {
+      "caller": "nft_fwd_validate",
+      "file": "net/netfilter/nft_fwd_netdev.c",
+      "line": 208,
+      "guards": []
+    },
+    {
+      "caller": "nft_masq_validate",
+      "file": "net/netfilter/nft_masq.c",
+      "line": 38,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 35,
+          "exit_line": 36
+        }
+      ]
+    },
+    {
+      "caller": "nft_meta_get_validate_sdif",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 554,
+      "guards": []
+    },
+    {
+      "caller": "nft_meta_get_validate_xfrm",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 577,
+      "guards": []
+    },
+    {
+      "caller": "nft_meta_set_validate",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 628,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(priv->key != NFT_META_PKTTYPE)",
+          "exit_kind": "return",
+          "source_line": 609,
+          "exit_line": 610
+        }
+      ]
+    },
+    {
+      "caller": "nft_nat_validate",
+      "file": "net/netfilter/nft_nat.c",
+      "line": 151,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 146,
+          "exit_line": 147
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->type",
+          "polarity": "in_true_branch",
+          "source_line": 149
+        }
+      ]
+    },
+    {
+      "caller": "nft_nat_validate",
+      "file": "net/netfilter/nft_nat.c",
+      "line": 156,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 146,
+          "exit_line": 147
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->type",
+          "polarity": "in_true_branch",
+          "source_line": 149
+        }
+      ]
+    },
+    {
+      "caller": "nft_osf_validate",
+      "file": "net/netfilter/nft_osf.c",
+      "line": 132,
+      "guards": []
+    },
+    {
+      "caller": "nft_queue_validate",
+      "file": "net/netfilter/nft_queue.c",
+      "line": 93,
+      "guards": []
+    },
+    {
+      "caller": "nft_redir_validate",
+      "file": "net/netfilter/nft_redir.c",
+      "line": 38,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 35,
+          "exit_line": 36
+        }
+      ]
+    },
+    {
+      "caller": "nft_reject_validate",
+      "file": "net/netfilter/nft_reject.c",
+      "line": 30,
+      "guards": []
+    },
+    {
+      "caller": "nft_reject_inet_validate",
+      "file": "net/netfilter/nft_reject_inet.c",
+      "line": 67,
+      "guards": []
+    },
+    {
+      "caller": "nft_reject_netdev_validate",
+      "file": "net/netfilter/nft_reject_netdev.c",
+      "line": 151,
+      "guards": []
+    },
+    {
+      "caller": "nft_rt_validate",
+      "file": "net/netfilter/nft_rt.c",
+      "line": 184,
+      "guards": []
+    },
+    {
+      "caller": "nft_socket_validate",
+      "file": "net/netfilter/nft_socket.c",
+      "line": 245,
+      "guards": []
+    },
+    {
+      "caller": "nft_synproxy_validate",
+      "file": "net/netfilter/nft_synproxy.c",
+      "line": 256,
+      "guards": []
+    },
+    {
+      "caller": "nft_tproxy_validate",
+      "file": "net/netfilter/nft_tproxy.c",
+      "line": 319,
+      "guards": []
+    },
+    {
+      "caller": "nft_xfrm_validate",
+      "file": "net/netfilter/nft_xfrm.c",
+      "line": 254,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(1)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 250
+        }
+      ]
+    }
+  ]
+}

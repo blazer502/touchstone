@@ -1,0 +1,136 @@
+{
+  "callee": "flow_offload_mangle",
+  "defined_in": "net/netfilter/nf_flow_table_offload.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 9,
+  "callsites": [
+    {
+      "caller": "flow_offload_eth_src",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 257,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dev != NULL",
+          "source_line": 245
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dev)",
+          "exit_kind": "return",
+          "source_line": 245,
+          "exit_line": 246
+        }
+      ]
+    },
+    {
+      "caller": "flow_offload_eth_src",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 262,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dev != NULL",
+          "source_line": 245
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dev)",
+          "exit_kind": "return",
+          "source_line": 245,
+          "exit_line": 246
+        }
+      ]
+    },
+    {
+      "caller": "flow_offload_eth_dst",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 315,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "n != NULL",
+          "source_line": 297
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!n)",
+          "exit_kind": "return",
+          "source_line": 297,
+          "exit_line": 298
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(nud_state & NUD_VALID))",
+          "exit_kind": "return",
+          "source_line": 306,
+          "exit_line": 307
+        }
+      ]
+    },
+    {
+      "caller": "flow_offload_eth_dst",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 321,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "n != NULL",
+          "source_line": 297
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!n)",
+          "exit_kind": "return",
+          "source_line": 297,
+          "exit_line": 298
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(nud_state & NUD_VALID))",
+          "exit_kind": "return",
+          "source_line": 306,
+          "exit_line": 307
+        }
+      ]
+    },
+    {
+      "caller": "flow_offload_ipv4_snat",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 350,
+      "guards": []
+    },
+    {
+      "caller": "flow_offload_ipv4_dnat",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 377,
+      "guards": []
+    },
+    {
+      "caller": "flow_offload_ipv6_mangle",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 390,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < sizeof(struct in6_addr) / sizeof(u32); i++",
+          "polarity": "in_true_branch",
+          "source_line": 388
+        }
+      ]
+    },
+    {
+      "caller": "flow_offload_port_snat",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 490,
+      "guards": []
+    },
+    {
+      "caller": "flow_offload_port_dnat",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 520,
+      "guards": []
+    }
+  ]
+}

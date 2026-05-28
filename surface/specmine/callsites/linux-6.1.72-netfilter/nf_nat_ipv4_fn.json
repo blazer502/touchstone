@@ -1,0 +1,33 @@
+{
+  "callee": "nf_nat_ipv4_fn",
+  "defined_in": "net/netfilter/nf_nat_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_nat_ipv4_pre_routing",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 655,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_ipv4_local_in",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 708,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_ipv4_out",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 728,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_ipv4_local_fn",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 763,
+      "guards": []
+    }
+  ]
+}

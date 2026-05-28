@@ -1,0 +1,109 @@
+{
+  "callee": "rateinfo_recalc",
+  "defined_in": "net/netfilter/xt_hashlimit.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "hashlimit_mt_common",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 748,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(hashlimit_init_dst(hinfo, &dst, skb, par->thoff) < 0)",
+          "exit_kind": "goto",
+          "source_line": 735,
+          "exit_line": 736
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dh == NULL)",
+          "exit_kind": "goto",
+          "source_line": 742
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dh == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 740
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dh == NULL",
+          "polarity": "in_false_branch",
+          "source_line": 745
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "race",
+          "polarity": "in_true_branch",
+          "source_line": 745
+        }
+      ]
+    },
+    {
+      "caller": "hashlimit_mt_common",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 756,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(hashlimit_init_dst(hinfo, &dst, skb, par->thoff) < 0)",
+          "exit_kind": "goto",
+          "source_line": 735,
+          "exit_line": 736
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dh == NULL)",
+          "exit_kind": "goto",
+          "source_line": 742
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dh == NULL",
+          "polarity": "in_false_branch",
+          "source_line": 753
+        }
+      ]
+    },
+    {
+      "caller": "dl_seq_real_show_v2",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 1132,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 1130
+        }
+      ]
+    },
+    {
+      "caller": "dl_seq_real_show_v1",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 1147,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 1145
+        }
+      ]
+    },
+    {
+      "caller": "dl_seq_real_show",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 1162,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 1160
+        }
+      ]
+    }
+  ]
+}

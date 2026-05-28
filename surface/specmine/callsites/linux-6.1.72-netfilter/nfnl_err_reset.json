@@ -1,0 +1,657 @@
+{
+  "callee": "nfnl_err_reset",
+  "defined_in": "net/netfilter/nfnetlink.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "nfnetlink_rcv_batch",
+      "file": "net/netfilter/nfnetlink.c",
+      "line": 434,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "skb != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ss != NULL",
+          "source_line": 394
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(subsys_id >= NFNL_SUBSYS_COUNT)",
+          "exit_kind": "return",
+          "source_line": 383,
+          "exit_line": 384
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb)",
+          "exit_kind": "return",
+          "source_line": 389,
+          "exit_line": 390
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss)",
+          "exit_kind": "return",
+          "source_line": 394
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss->valid_genid || !ss->commit || !ss->abort)",
+          "exit_kind": "return",
+          "source_line": 409
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!try_module_get(ss->owner))",
+          "exit_kind": "return",
+          "source_line": 415
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss->valid_genid(net, genid))",
+          "exit_kind": "return",
+          "source_line": 421
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "skb->len >= nlmsg_total_size(0)",
+          "polarity": "in_true_branch",
+          "source_line": 430
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "fatal_signal_pending(current)",
+          "polarity": "in_true_branch",
+          "source_line": 433
+        }
+      ]
+    },
+    {
+      "caller": "nfnetlink_rcv_batch",
+      "file": "net/netfilter/nfnetlink.c",
+      "line": 447,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "skb != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ss != NULL",
+          "source_line": 394
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(subsys_id >= NFNL_SUBSYS_COUNT)",
+          "exit_kind": "return",
+          "source_line": 383,
+          "exit_line": 384
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb)",
+          "exit_kind": "return",
+          "source_line": 389,
+          "exit_line": 390
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss)",
+          "exit_kind": "return",
+          "source_line": 394
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss->valid_genid || !ss->commit || !ss->abort)",
+          "exit_kind": "return",
+          "source_line": 409
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!try_module_get(ss->owner))",
+          "exit_kind": "return",
+          "source_line": 415
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss->valid_genid(net, genid))",
+          "exit_kind": "return",
+          "source_line": 421
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fatal_signal_pending(current))",
+          "exit_kind": "goto",
+          "source_line": 433
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "skb->len >= nlmsg_total_size(0)",
+          "polarity": "in_true_branch",
+          "source_line": 430
+        }
+      ]
+    },
+    {
+      "caller": "nfnetlink_rcv_batch",
+      "file": "net/netfilter/nfnetlink.c",
+      "line": 461,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "skb != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ss != NULL",
+          "source_line": 394
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(subsys_id >= NFNL_SUBSYS_COUNT)",
+          "exit_kind": "return",
+          "source_line": 383,
+          "exit_line": 384
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb)",
+          "exit_kind": "return",
+          "source_line": 389,
+          "exit_line": 390
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss)",
+          "exit_kind": "return",
+          "source_line": 394
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss->valid_genid || !ss->commit || !ss->abort)",
+          "exit_kind": "return",
+          "source_line": 409
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!try_module_get(ss->owner))",
+          "exit_kind": "return",
+          "source_line": 415
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss->valid_genid(net, genid))",
+          "exit_kind": "return",
+          "source_line": 421
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fatal_signal_pending(current))",
+          "exit_kind": "goto",
+          "source_line": 433
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(nlh->nlmsg_flags & NLM_F_REQUEST))",
+          "exit_kind": "goto",
+          "source_line": 453
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "skb->len >= nlmsg_total_size(0)",
+          "polarity": "in_true_branch",
+          "source_line": 430
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "type == NFNL_MSG_BATCH_BEGIN",
+          "polarity": "in_true_branch",
+          "source_line": 459
+        }
+      ]
+    },
+    {
+      "caller": "nfnetlink_rcv_batch",
+      "file": "net/netfilter/nfnetlink.c",
+      "line": 542,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "skb != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ss != NULL",
+          "source_line": 394
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nc != NULL",
+          "source_line": 481
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(subsys_id >= NFNL_SUBSYS_COUNT)",
+          "exit_kind": "return",
+          "source_line": 383,
+          "exit_line": 384
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb)",
+          "exit_kind": "return",
+          "source_line": 389,
+          "exit_line": 390
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss)",
+          "exit_kind": "return",
+          "source_line": 394
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss->valid_genid || !ss->commit || !ss->abort)",
+          "exit_kind": "return",
+          "source_line": 409
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!try_module_get(ss->owner))",
+          "exit_kind": "return",
+          "source_line": 415
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss->valid_genid(net, genid))",
+          "exit_kind": "return",
+          "source_line": 421
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fatal_signal_pending(current))",
+          "exit_kind": "goto",
+          "source_line": 433
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(nlh->nlmsg_flags & NLM_F_REQUEST))",
+          "exit_kind": "goto",
+          "source_line": 453
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(type == NFNL_MSG_BATCH_BEGIN)",
+          "exit_kind": "goto",
+          "source_line": 459
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(type == NFNL_MSG_BATCH_END)",
+          "exit_kind": "goto",
+          "source_line": 464
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(type < NLMSG_MIN_TYPE)",
+          "exit_kind": "goto",
+          "source_line": 467
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(NFNL_SUBSYS_ID(type) != subsys_id)",
+          "exit_kind": "goto",
+          "source_line": 475
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nc)",
+          "exit_kind": "goto",
+          "source_line": 481
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nc->type != NFNL_CB_BATCH)",
+          "exit_kind": "goto",
+          "source_line": 486
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ss->cb[cb_id].attr_count > NFNL_MAX_ATTR_COUNT)",
+          "exit_kind": "goto",
+          "source_line": 507
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 516,
+          "exit_line": 517
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err == -EAGAIN)",
+          "exit_kind": "goto",
+          "source_line": 525
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "skb->len >= nlmsg_total_size(0)",
+          "polarity": "in_true_branch",
+          "source_line": 430
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nlh->nlmsg_flags & NLM_F_ACK || err",
+          "polarity": "in_true_branch",
+          "source_line": 531
+        }
+      ]
+    },
+    {
+      "caller": "nfnetlink_rcv_batch",
+      "file": "net/netfilter/nfnetlink.c",
+      "line": 564,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "skb != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ss != NULL",
+          "source_line": 394
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nc != NULL",
+          "source_line": 481
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(subsys_id >= NFNL_SUBSYS_COUNT)",
+          "exit_kind": "return",
+          "source_line": 383,
+          "exit_line": 384
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb)",
+          "exit_kind": "return",
+          "source_line": 389,
+          "exit_line": 390
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss)",
+          "exit_kind": "return",
+          "source_line": 394
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss->valid_genid || !ss->commit || !ss->abort)",
+          "exit_kind": "return",
+          "source_line": 409
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!try_module_get(ss->owner))",
+          "exit_kind": "return",
+          "source_line": 415
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss->valid_genid(net, genid))",
+          "exit_kind": "return",
+          "source_line": 421
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fatal_signal_pending(current))",
+          "exit_kind": "goto",
+          "source_line": 433
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(nlh->nlmsg_flags & NLM_F_REQUEST))",
+          "exit_kind": "goto",
+          "source_line": 453
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(type == NFNL_MSG_BATCH_BEGIN)",
+          "exit_kind": "goto",
+          "source_line": 459
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(type == NFNL_MSG_BATCH_END)",
+          "exit_kind": "goto",
+          "source_line": 464
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(type < NLMSG_MIN_TYPE)",
+          "exit_kind": "goto",
+          "source_line": 467
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(NFNL_SUBSYS_ID(type) != subsys_id)",
+          "exit_kind": "goto",
+          "source_line": 475
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nc)",
+          "exit_kind": "goto",
+          "source_line": 481
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nc->type != NFNL_CB_BATCH)",
+          "exit_kind": "goto",
+          "source_line": 486
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ss->cb[cb_id].attr_count > NFNL_MAX_ATTR_COUNT)",
+          "exit_kind": "goto",
+          "source_line": 507
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 516,
+          "exit_line": 517
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err == -EAGAIN)",
+          "exit_kind": "goto",
+          "source_line": 525
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nlh->nlmsg_flags & NLM_F_ACK || err)",
+          "exit_kind": "goto",
+          "source_line": 531
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "status & NFNL_BATCH_REPLAY",
+          "polarity": "in_true_branch",
+          "source_line": 562
+        }
+      ]
+    },
+    {
+      "caller": "nfnetlink_rcv_batch",
+      "file": "net/netfilter/nfnetlink.c",
+      "line": 587,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "skb != NULL",
+          "source_line": 389
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ss != NULL",
+          "source_line": 394
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nc != NULL",
+          "source_line": 481
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(subsys_id >= NFNL_SUBSYS_COUNT)",
+          "exit_kind": "return",
+          "source_line": 383,
+          "exit_line": 384
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb)",
+          "exit_kind": "return",
+          "source_line": 389,
+          "exit_line": 390
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss)",
+          "exit_kind": "return",
+          "source_line": 394
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss->valid_genid || !ss->commit || !ss->abort)",
+          "exit_kind": "return",
+          "source_line": 409
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!try_module_get(ss->owner))",
+          "exit_kind": "return",
+          "source_line": 415
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ss->valid_genid(net, genid))",
+          "exit_kind": "return",
+          "source_line": 421
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fatal_signal_pending(current))",
+          "exit_kind": "goto",
+          "source_line": 433
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(nlh->nlmsg_flags & NLM_F_REQUEST))",
+          "exit_kind": "goto",
+          "source_line": 453
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(type == NFNL_MSG_BATCH_BEGIN)",
+          "exit_kind": "goto",
+          "source_line": 459
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(type == NFNL_MSG_BATCH_END)",
+          "exit_kind": "goto",
+          "source_line": 464
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(type < NLMSG_MIN_TYPE)",
+          "exit_kind": "goto",
+          "source_line": 467
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(NFNL_SUBSYS_ID(type) != subsys_id)",
+          "exit_kind": "goto",
+          "source_line": 475
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nc)",
+          "exit_kind": "goto",
+          "source_line": 481
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nc->type != NFNL_CB_BATCH)",
+          "exit_kind": "goto",
+          "source_line": 486
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ss->cb[cb_id].attr_count > NFNL_MAX_ATTR_COUNT)",
+          "exit_kind": "goto",
+          "source_line": 507
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 516,
+          "exit_line": 517
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err == -EAGAIN)",
+          "exit_kind": "goto",
+          "source_line": 525
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nlh->nlmsg_flags & NLM_F_ACK || err)",
+          "exit_kind": "goto",
+          "source_line": 531
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(status & NFNL_BATCH_REPLAY)",
+          "exit_kind": "goto",
+          "source_line": 562
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err == -EAGAIN)",
+          "exit_kind": "goto",
+          "source_line": 570
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "status == NFNL_BATCH_DONE",
+          "polarity": "in_false_branch",
+          "source_line": 577
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "err == -EAGAIN",
+          "polarity": "in_true_branch",
+          "source_line": 586
+        }
+      ]
+    }
+  ]
+}

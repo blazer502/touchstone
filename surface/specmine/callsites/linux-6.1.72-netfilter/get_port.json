@@ -1,0 +1,77 @@
+{
+  "callee": "get_port",
+  "defined_in": "net/netfilter/nf_conntrack_ftp.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "ip_set_get_ip4_port",
+      "file": "net/netfilter/ipset/ip_set_getport.c",
+      "line": 126,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(protocol <= 0)",
+          "exit_kind": "return",
+          "source_line": 106,
+          "exit_line": 107
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_get_ip6_port",
+      "file": "net/netfilter/ipset/ip_set_getport.c",
+      "line": 147,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(protoff < 0 || (frag_off & htons(~0x7)) != 0)",
+          "exit_kind": "return",
+          "source_line": 144,
+          "exit_line": 145
+        }
+      ]
+    },
+    {
+      "caller": "try_eprt",
+      "file": "net/netfilter/nf_conntrack_ftp.c",
+      "line": 265,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(dlen <= 3)",
+          "exit_kind": "return",
+          "source_line": 229
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(isdigit(delim) || delim < 33 || delim > 126 || data[2] != delim)",
+          "exit_kind": "return",
+          "source_line": 234
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(length == 0)",
+          "exit_kind": "return",
+          "source_line": 261,
+          "exit_line": 262
+        }
+      ]
+    },
+    {
+      "caller": "try_epsv_response",
+      "file": "net/netfilter/nf_conntrack_ftp.c",
+      "line": 282,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(dlen <= 3)",
+          "exit_kind": "return",
+          "source_line": 276,
+          "exit_line": 276
+        }
+      ]
+    }
+  ]
+}

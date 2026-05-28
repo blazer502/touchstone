@@ -1,0 +1,240 @@
+{
+  "callee": "todrop_entry",
+  "defined_in": "net/netfilter/ipvs/ip_vs_conn.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_random_dropentry",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1333,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1306
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->ipvs != ipvs)",
+          "exit_kind": "continue",
+          "source_line": 1314,
+          "exit_line": 1315
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(atomic_read(&cp->n_control))",
+          "exit_kind": "continue",
+          "source_line": 1316,
+          "exit_line": 1317
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_conn_ops_mode(cp))",
+          "exit_kind": "goto",
+          "source_line": 1320,
+          "exit_line": 1321
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(cp->state & IP_VS_CTPL_S_ASSURED))",
+          "exit_kind": "goto",
+          "source_line": 1322,
+          "exit_line": 1323
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->flags & IP_VS_CONN_F_TEMPLATE)",
+          "exit_kind": "goto",
+          "source_line": 1318
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < (ip_vs_conn_tab_size>>5); idx++",
+          "polarity": "in_true_branch",
+          "source_line": 1310
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cp->protocol == IPPROTO_TCP",
+          "polarity": "in_true_branch",
+          "source_line": 1326
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "cp->state",
+          "polarity": "in_true_branch",
+          "source_line": 1327
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_random_dropentry",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1346,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1306
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->ipvs != ipvs)",
+          "exit_kind": "continue",
+          "source_line": 1314,
+          "exit_line": 1315
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(atomic_read(&cp->n_control))",
+          "exit_kind": "continue",
+          "source_line": 1316,
+          "exit_line": 1317
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_conn_ops_mode(cp))",
+          "exit_kind": "goto",
+          "source_line": 1320,
+          "exit_line": 1321
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(cp->state & IP_VS_CTPL_S_ASSURED))",
+          "exit_kind": "goto",
+          "source_line": 1322,
+          "exit_line": 1323
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->flags & IP_VS_CONN_F_TEMPLATE)",
+          "exit_kind": "goto",
+          "source_line": 1318
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(todrop_entry(cp))",
+          "exit_kind": "break",
+          "source_line": 1333,
+          "exit_line": 1334
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->protocol == IPPROTO_TCP)",
+          "exit_kind": "break",
+          "source_line": 1326
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < (ip_vs_conn_tab_size>>5); idx++",
+          "polarity": "in_true_branch",
+          "source_line": 1310
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cp->protocol == IPPROTO_TCP",
+          "polarity": "in_false_branch",
+          "source_line": 1340
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cp->protocol == IPPROTO_SCTP",
+          "polarity": "in_true_branch",
+          "source_line": 1340
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "cp->state",
+          "polarity": "in_true_branch",
+          "source_line": 1341
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_random_dropentry",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1354,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1306
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->ipvs != ipvs)",
+          "exit_kind": "continue",
+          "source_line": 1314,
+          "exit_line": 1315
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(atomic_read(&cp->n_control))",
+          "exit_kind": "continue",
+          "source_line": 1316,
+          "exit_line": 1317
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_conn_ops_mode(cp))",
+          "exit_kind": "goto",
+          "source_line": 1320,
+          "exit_line": 1321
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(cp->state & IP_VS_CTPL_S_ASSURED))",
+          "exit_kind": "goto",
+          "source_line": 1322,
+          "exit_line": 1323
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->flags & IP_VS_CONN_F_TEMPLATE)",
+          "exit_kind": "goto",
+          "source_line": 1318
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(todrop_entry(cp))",
+          "exit_kind": "break",
+          "source_line": 1333,
+          "exit_line": 1334
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->protocol == IPPROTO_TCP)",
+          "exit_kind": "break",
+          "source_line": 1326
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(todrop_entry(cp))",
+          "exit_kind": "break",
+          "source_line": 1346,
+          "exit_line": 1347
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->protocol == IPPROTO_SCTP)",
+          "exit_kind": "break",
+          "source_line": 1340
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < (ip_vs_conn_tab_size>>5); idx++",
+          "polarity": "in_true_branch",
+          "source_line": 1310
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cp->protocol == IPPROTO_SCTP",
+          "polarity": "in_false_branch",
+          "source_line": 1352
+        }
+      ]
+    }
+  ]
+}

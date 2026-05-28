@@ -1,0 +1,59 @@
+{
+  "callee": "ip_vs_mh_reset",
+  "defined_in": "net/netfilter/ipvs/ip_vs_mh.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_mh_populate",
+      "file": "net/netfilter/ipvs/ip_vs_mh.c",
+      "line": 173,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "s->gcd < 1",
+          "polarity": "in_true_branch",
+          "source_line": 172
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_mh_init_svc",
+      "file": "net/netfilter/ipvs/ip_vs_mh.c",
+      "line": 409,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "s != NULL",
+          "source_line": 388
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!s)",
+          "exit_kind": "return",
+          "source_line": 388,
+          "exit_line": 389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!s->lookup)",
+          "exit_kind": "return",
+          "source_line": 393
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret < 0",
+          "polarity": "in_true_branch",
+          "source_line": 408
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_mh_done_svc",
+      "file": "net/netfilter/ipvs/ip_vs_mh.c",
+      "line": 424,
+      "guards": []
+    }
+  ]
+}

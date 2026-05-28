@@ -1,0 +1,260 @@
+{
+  "callee": "find_set_and_id",
+  "defined_in": "net/netfilter/ipset/ip_set_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "find_set",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1011,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_destroy",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1233,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(protocol_min_failed(attr)))",
+          "exit_kind": "return",
+          "source_line": 1195,
+          "exit_line": 1196
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(s && (s->ref || s->ref_netlink))",
+          "exit_kind": "goto",
+          "source_line": 1215
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!attr[IPSET_ATTR_SETNAME]",
+          "polarity": "in_false_branch",
+          "source_line": 1231
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_swap",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1365,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_swap",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1370,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "from != NULL",
+          "source_line": 1367
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!from)",
+          "exit_kind": "return",
+          "source_line": 1367,
+          "exit_line": 1368
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_dump_start",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1499,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 1491,
+          "exit_line": 1492
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[IPSET_ATTR_SETNAME]",
+          "polarity": "in_true_branch",
+          "source_line": 1495
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_byname",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 2023,
+      "guards": []
+    },
+    {
+      "caller": "ip_set_sockfn_get",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 2269,
+      "guards": [
+        {
+          "kind": "capability_check",
+          "predicate": "ns_capable(net->user_ns, CAP_NET_ADMIN)",
+          "source_line": 2213
+        },
+        {
+          "kind": "null_check",
+          "predicate": "data != NULL",
+          "source_line": 2221
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ns_capable(net->user_ns, CAP_NET_ADMIN))",
+          "exit_kind": "return",
+          "source_line": 2213,
+          "exit_line": 2214
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(optval != SO_IP_SET)",
+          "exit_kind": "return",
+          "source_line": 2215,
+          "exit_line": 2216
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*len < sizeof(unsigned int))",
+          "exit_kind": "return",
+          "source_line": 2217,
+          "exit_line": 2218
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!data)",
+          "exit_kind": "return",
+          "source_line": 2221,
+          "exit_line": 2222
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_from_user(data, user, *len) != 0)",
+          "exit_kind": "goto",
+          "source_line": 2223
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*len < sizeof(struct ip_set_req_version))",
+          "exit_kind": "goto",
+          "source_line": 2233
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(req_version->version < IPSET_PROTOCOL_MIN)",
+          "exit_kind": "goto",
+          "source_line": 2238
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*len != sizeof(struct ip_set_req_version))",
+          "exit_kind": "goto",
+          "source_line": 2248
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*len != sizeof(struct ip_set_req_get_set))",
+          "exit_kind": "goto",
+          "source_line": 2263
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "*op",
+          "polarity": "in_true_branch",
+          "source_line": 2244
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_sockfn_get",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 2284,
+      "guards": [
+        {
+          "kind": "capability_check",
+          "predicate": "ns_capable(net->user_ns, CAP_NET_ADMIN)",
+          "source_line": 2213
+        },
+        {
+          "kind": "null_check",
+          "predicate": "data != NULL",
+          "source_line": 2221
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ns_capable(net->user_ns, CAP_NET_ADMIN))",
+          "exit_kind": "return",
+          "source_line": 2213,
+          "exit_line": 2214
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(optval != SO_IP_SET)",
+          "exit_kind": "return",
+          "source_line": 2215,
+          "exit_line": 2216
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*len < sizeof(unsigned int))",
+          "exit_kind": "return",
+          "source_line": 2217,
+          "exit_line": 2218
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!data)",
+          "exit_kind": "return",
+          "source_line": 2221,
+          "exit_line": 2222
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_from_user(data, user, *len) != 0)",
+          "exit_kind": "goto",
+          "source_line": 2223
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*len < sizeof(struct ip_set_req_version))",
+          "exit_kind": "goto",
+          "source_line": 2233
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(req_version->version < IPSET_PROTOCOL_MIN)",
+          "exit_kind": "goto",
+          "source_line": 2238
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*len != sizeof(struct ip_set_req_version))",
+          "exit_kind": "goto",
+          "source_line": 2248
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*len != sizeof(struct ip_set_req_get_set))",
+          "exit_kind": "goto",
+          "source_line": 2263
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*len != sizeof(struct ip_set_req_get_set_family))",
+          "exit_kind": "goto",
+          "source_line": 2278
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "*op",
+          "polarity": "in_true_branch",
+          "source_line": 2244
+        }
+      ]
+    }
+  ]
+}

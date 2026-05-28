@@ -1,0 +1,69 @@
+{
+  "callee": "nf_tables_fill_setelem",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_tables_dump_setelem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5413,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_elem_expired(ext))",
+          "exit_kind": "return",
+          "source_line": 5409,
+          "exit_line": 5410
+        }
+      ]
+    },
+    {
+      "caller": "nft_set_catchall_dump",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5437,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_fill_setelem_info",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5571,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nlh != NULL",
+          "source_line": 5559
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh)",
+          "exit_kind": "goto",
+          "source_line": 5559,
+          "exit_line": 5560
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_SET_TABLE, ctx->table->name))",
+          "exit_kind": "goto",
+          "source_line": 5562,
+          "exit_line": 5563
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_SET_NAME, set->name))",
+          "exit_kind": "goto",
+          "source_line": 5564,
+          "exit_line": 5565
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nest == NULL)",
+          "exit_kind": "goto",
+          "source_line": 5568,
+          "exit_line": 5569
+        }
+      ]
+    }
+  ]
+}

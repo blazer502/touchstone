@@ -1,0 +1,99 @@
+{
+  "callee": "nft_flowtable_parse_hook",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_flowtable_update",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7937,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_newflowtable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8088,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 8022
+        },
+        {
+          "kind": "null_check",
+          "predicate": "flowtable != NULL",
+          "source_line": 8052
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(type)",
+          "source_line": 8068
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 8022
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err != -ENOENT)",
+          "exit_kind": "return",
+          "source_line": 8031
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_EXCL)",
+          "exit_kind": "return",
+          "source_line": 8036
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_use_inc(&table->use))",
+          "exit_kind": "return",
+          "source_line": 8048,
+          "exit_line": 8049
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!flowtable)",
+          "exit_kind": "goto",
+          "source_line": 8052
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!flowtable->name)",
+          "exit_kind": "goto",
+          "source_line": 8062
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(type))",
+          "exit_kind": "goto",
+          "source_line": 8068
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flowtable->data.flags & ~NFT_FLOWTABLE_MASK)",
+          "exit_kind": "goto",
+          "source_line": 8076
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 8085,
+          "exit_line": 8086
+        }
+      ]
+    },
+    {
+      "caller": "nft_delflowtable_hook",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8152,
+      "guards": []
+    }
+  ]
+}

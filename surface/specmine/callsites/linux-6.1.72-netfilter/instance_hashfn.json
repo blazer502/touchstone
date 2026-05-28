@@ -1,0 +1,91 @@
+{
+  "callee": "instance_hashfn",
+  "defined_in": "net/netfilter/nfnetlink_log.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "__instance_lookup",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 111,
+      "guards": []
+    },
+    {
+      "caller": "instance_create",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 203,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 166
+        },
+        {
+          "kind": "null_check",
+          "predicate": "inst != NULL",
+          "source_line": 173
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(__instance_lookup(log, group_num))",
+          "exit_kind": "goto",
+          "source_line": 167
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!inst)",
+          "exit_kind": "goto",
+          "source_line": 173
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!try_module_get(THIS_MODULE))",
+          "exit_kind": "goto",
+          "source_line": 178
+        }
+      ]
+    },
+    {
+      "caller": "instance_lookup",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 107,
+      "guards": []
+    },
+    {
+      "caller": "instance_create",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 147,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 122
+        },
+        {
+          "kind": "null_check",
+          "predicate": "inst != NULL",
+          "source_line": 129
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(instance_lookup(q, queue_num))",
+          "exit_kind": "goto",
+          "source_line": 123
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!inst)",
+          "exit_kind": "goto",
+          "source_line": 129
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!try_module_get(THIS_MODULE))",
+          "exit_kind": "goto",
+          "source_line": 142
+        }
+      ]
+    }
+  ]
+}

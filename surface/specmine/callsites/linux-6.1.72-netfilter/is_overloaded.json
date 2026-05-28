@@ -1,0 +1,41 @@
+{
+  "callee": "is_overloaded",
+  "defined_in": "net/netfilter/ipvs/ip_vs_lblc.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_dh_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_dh.c",
+      "line": 226,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_lblc_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_lblc.c",
+      "line": 507,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "en",
+          "polarity": "in_true_branch",
+          "source_line": 492
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_lblcr_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_lblcr.c",
+      "line": 678,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "en",
+          "polarity": "in_true_branch",
+          "source_line": 656
+        }
+      ]
+    }
+  ]
+}

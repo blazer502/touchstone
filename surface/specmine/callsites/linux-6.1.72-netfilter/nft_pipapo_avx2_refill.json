@@ -1,0 +1,139 @@
+{
+  "callee": "nft_pipapo_avx2_refill",
+  "defined_in": "net/netfilter/nft_set_pipapo_avx2.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 10,
+  "callsites": [
+    {
+      "caller": "nft_pipapo_avx2_lookup_4b_2",
+      "file": "net/netfilter/nft_set_pipapo_avx2.c",
+      "line": 245,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = offset; i < m256_size; i++, lt += NFT_PIPAPO_LONGS_PER_M256",
+          "polarity": "in_true_branch",
+          "source_line": 226
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_avx2_lookup_4b_4",
+      "file": "net/netfilter/nft_set_pipapo_avx2.c",
+      "line": 321,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = offset; i < m256_size; i++, lt += NFT_PIPAPO_LONGS_PER_M256",
+          "polarity": "in_true_branch",
+          "source_line": 288
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_avx2_lookup_4b_8",
+      "file": "net/netfilter/nft_set_pipapo_avx2.c",
+      "line": 415,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = offset; i < m256_size; i++, lt += NFT_PIPAPO_LONGS_PER_M256",
+          "polarity": "in_true_branch",
+          "source_line": 366
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_avx2_lookup_4b_12",
+      "file": "net/netfilter/nft_set_pipapo_avx2.c",
+      "line": 505,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = offset; i < m256_size; i++, lt += NFT_PIPAPO_LONGS_PER_M256",
+          "polarity": "in_true_branch",
+          "source_line": 462
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_avx2_lookup_4b_32",
+      "file": "net/netfilter/nft_set_pipapo_avx2.c",
+      "line": 640,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = offset; i < m256_size; i++, lt += NFT_PIPAPO_LONGS_PER_M256",
+          "polarity": "in_true_branch",
+          "source_line": 556
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_avx2_lookup_8b_1",
+      "file": "net/netfilter/nft_set_pipapo_avx2.c",
+      "line": 697,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = offset; i < m256_size; i++, lt += NFT_PIPAPO_LONGS_PER_M256",
+          "polarity": "in_true_branch",
+          "source_line": 682
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_avx2_lookup_8b_2",
+      "file": "net/netfilter/nft_set_pipapo_avx2.c",
+      "line": 761,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = offset; i < m256_size; i++, lt += NFT_PIPAPO_LONGS_PER_M256",
+          "polarity": "in_true_branch",
+          "source_line": 739
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_avx2_lookup_8b_4",
+      "file": "net/netfilter/nft_set_pipapo_avx2.c",
+      "line": 835,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = offset; i < m256_size; i++, lt += NFT_PIPAPO_LONGS_PER_M256",
+          "polarity": "in_true_branch",
+          "source_line": 803
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_avx2_lookup_8b_6",
+      "file": "net/netfilter/nft_set_pipapo_avx2.c",
+      "line": 920,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = offset; i < m256_size; i++, lt += NFT_PIPAPO_LONGS_PER_M256",
+          "polarity": "in_true_branch",
+          "source_line": 878
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_avx2_lookup_8b_16",
+      "file": "net/netfilter/nft_set_pipapo_avx2.c",
+      "line": 1012,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = offset; i < m256_size; i++, lt += NFT_PIPAPO_LONGS_PER_M256",
+          "polarity": "in_true_branch",
+          "source_line": 963
+        }
+      ]
+    }
+  ]
+}

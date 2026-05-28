@@ -34,6 +34,7 @@ from eval.harness.adapters import (  # noqa: E402
     precision,
     router as router_adapter,
     router_llm as router_llm_adapter,
+    specmine,
     svcomp,
     tier1_oracle,
     tier2_oracle,
@@ -60,6 +61,7 @@ ADAPTERS = [
     ("cybergym-ablation", cybergym_ablation.baseline_rows),
     ("agent-loop", agent_loop.baseline_rows),
     ("kernelctf-live", kernelctf_live.baseline_rows),
+    ("specmine", specmine.baseline_rows),
     ("end-to-end", e2e_adapter.baseline_rows),
 ]
 

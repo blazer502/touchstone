@@ -1,0 +1,67 @@
+{
+  "callee": "nft_hook_list_find",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_tables_parse_netdev_hooks",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2117,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(hook)",
+          "source_line": 2113
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_type(tmp) != NFTA_DEVICE_NAME)",
+          "exit_kind": "goto",
+          "source_line": 2107
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(hook))",
+          "exit_kind": "goto",
+          "source_line": 2113
+        }
+      ]
+    },
+    {
+      "caller": "nft_hook_list_equal",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2505,
+      "guards": []
+    },
+    {
+      "caller": "nft_flowtable_update",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7943,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 7939,
+          "exit_line": 7940
+        }
+      ]
+    },
+    {
+      "caller": "nft_delflowtable_hook",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8158,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 8154,
+          "exit_line": 8155
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "callee": "nf_nat_used_tuple",
+  "defined_in": "net/netfilter/nf_nat_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "nf_nat_l4proto_unique_tuple",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 486,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!ct->master)",
+          "exit_kind": "return",
+          "source_line": 408,
+          "exit_line": 409
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(maniptype == NF_NAT_MANIP_DST)",
+          "exit_kind": "return",
+          "source_line": 443,
+          "exit_line": 444
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(range->flags & NF_NAT_RANGE_PROTO_SPECIFIED))",
+          "exit_kind": "return",
+          "source_line": 441
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < attempts; i++, off++",
+          "polarity": "in_true_branch",
+          "source_line": 484
+        }
+      ]
+    },
+    {
+      "caller": "get_unique_tuple",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 527,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "in_range(orig_tuple, range)",
+          "polarity": "in_true_branch",
+          "source_line": 526
+        }
+      ]
+    },
+    {
+      "caller": "get_unique_tuple",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 534,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_nat_used_tuple(orig_tuple, ct))",
+          "exit_kind": "return",
+          "source_line": 527
+        }
+      ]
+    },
+    {
+      "caller": "get_unique_tuple",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 555,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_nat_used_tuple(orig_tuple, ct))",
+          "exit_kind": "return",
+          "source_line": 527
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_nat_used_tuple(tuple, ct))",
+          "exit_kind": "return",
+          "source_line": 534,
+          "exit_line": 535
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!(range->flags & NF_NAT_RANGE_PROTO_RANDOM_ALL)",
+          "polarity": "in_true_branch",
+          "source_line": 548
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "range->flags & NF_NAT_RANGE_PROTO_SPECIFIED",
+          "polarity": "in_true_branch",
+          "source_line": 549
+        }
+      ]
+    },
+    {
+      "caller": "get_unique_tuple",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 557,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_nat_used_tuple(orig_tuple, ct))",
+          "exit_kind": "return",
+          "source_line": 527
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_nat_used_tuple(tuple, ct))",
+          "exit_kind": "return",
+          "source_line": 534,
+          "exit_line": 535
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!(range->flags & NF_NAT_RANGE_PROTO_RANDOM_ALL)",
+          "polarity": "in_true_branch",
+          "source_line": 548
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "range->flags & NF_NAT_RANGE_PROTO_SPECIFIED",
+          "polarity": "in_true_branch",
+          "source_line": 549
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "callee": "nf_ct_gc_expired",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "____nf_conntrack_find",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 765,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "nf_ct_is_expired(ct)",
+          "polarity": "in_true_branch",
+          "source_line": 764
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_tuple_taken",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1331,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1319
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct == ignored_conntrack)",
+          "exit_kind": "continue",
+          "source_line": 1327,
+          "exit_line": 1328
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nf_ct_is_expired(ct)",
+          "polarity": "in_true_branch",
+          "source_line": 1330
+        }
+      ]
+    },
+    {
+      "caller": "early_drop_list",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1389,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(test_bit(IPS_OFFLOAD_BIT, &tmp->status))",
+          "exit_kind": "continue",
+          "source_line": 1385,
+          "exit_line": 1386
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nf_ct_is_expired(tmp)",
+          "polarity": "in_true_branch",
+          "source_line": 1388
+        }
+      ]
+    },
+    {
+      "caller": "gc_worker",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1536,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(i >= hashsz)",
+          "exit_kind": "break",
+          "source_line": 1504
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(test_bit(IPS_OFFLOAD_BIT, &tmp->status))",
+          "exit_kind": "continue",
+          "source_line": 1516
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(expired_count > GC_SCAN_EXPIRED_MAX)",
+          "exit_kind": "goto",
+          "source_line": 1521
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nf_ct_is_expired(tmp)",
+          "polarity": "in_true_branch",
+          "source_line": 1535
+        }
+      ]
+    }
+  ]
+}

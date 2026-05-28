@@ -1,0 +1,69 @@
+{
+  "callee": "ip_vs_app_inc_get",
+  "defined_in": "net/netfilter/ipvs/ip_vs_app.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "sctp_app_conn_bind",
+      "file": "net/netfilter/ipvs/ip_vs_proto_sctp.c",
+      "line": 534,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(IP_VS_FWD_METHOD(cp) != IP_VS_CONN_F_MASQ)",
+          "exit_kind": "return",
+          "source_line": 527,
+          "exit_line": 528
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "inc->port == cp->vport",
+          "polarity": "in_true_branch",
+          "source_line": 533
+        }
+      ]
+    },
+    {
+      "caller": "tcp_app_conn_bind",
+      "file": "net/netfilter/ipvs/ip_vs_proto_tcp.c",
+      "line": 667,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(IP_VS_FWD_METHOD(cp) != IP_VS_CONN_F_MASQ)",
+          "exit_kind": "return",
+          "source_line": 659,
+          "exit_line": 660
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "inc->port == cp->vport",
+          "polarity": "in_true_branch",
+          "source_line": 666
+        }
+      ]
+    },
+    {
+      "caller": "udp_app_conn_bind",
+      "file": "net/netfilter/ipvs/ip_vs_proto_udp.c",
+      "line": 411,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(IP_VS_FWD_METHOD(cp) != IP_VS_CONN_F_MASQ)",
+          "exit_kind": "return",
+          "source_line": 403,
+          "exit_line": 404
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "inc->port == cp->vport",
+          "polarity": "in_true_branch",
+          "source_line": 410
+        }
+      ]
+    }
+  ]
+}

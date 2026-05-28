@@ -1,0 +1,71 @@
+{
+  "engine": "cbmc",
+  "generated_at": 1779927308,
+  "min_support": 2,
+  "min_suspicion": 0.5,
+  "stats": {
+    "by_disposition": {
+      "confirmed": 1,
+      "proposer_deprioritized": 1
+    },
+    "confirmed": 1,
+    "false_confirmations": 0,
+    "inconclusive": 0,
+    "infrastructure_pending": 0,
+    "outliers_examined": 2,
+    "proposer_deprioritized": 1,
+    "refuted": 0,
+    "wall_seconds": 0.59
+  },
+  "target": "mining_smoke",
+  "tau": 0.83,
+  "timeout_s": 60,
+  "unwind": 4,
+  "verified_outliers": [
+    {
+      "callee": "lookup_thing",
+      "caller": "caller_buggy",
+      "callsite_count": 12,
+      "contract_kind_class": "lock",
+      "contract_kind_label": "lock_held",
+      "disposition": "confirmed",
+      "engine": "cbmc",
+      "engine_verdict": "unsafe",
+      "engine_wall_ms": 563,
+      "evidence_excerpt": "CBMC version 6.4.0 (cbmc-6.4.0) 64-bit x86_64 linux\nType-checking lookup_thing_caller_buggy\nGenerating GOTO Program\nAdding CPROVER library (x86_64)\nRemoval of function pointers and virtual functions\nGeneric Property Instrumentation\nStarting Bounded Model Checking\nPassing problem to propositional reduction\nconverting SSA\nRunning propositional reduction\nSAT checker: instance is SATISFIABLE\nBuilding error trace\n** Results:\nlookup_thing_caller_buggy.c function __specmine_wrap_lookup_thing\n[__specmine_wrap_looku",
+      "file": "fixture.c",
+      "guards_present": [],
+      "harness_path": "/home/chanyoung/veri-agent/surface/specmine/verified/mining_smoke/harnesses/lookup_thing_caller_buggy.c",
+      "line": 126,
+      "local_establishment": 0.0,
+      "missing_contract": "rcu_read_lock_held",
+      "soundness_note": "CBMC produced a counterexample within the unwind bound. The cex assignment is a sound witness *for the harness as specified*; wrap it through the Tier-1 harness/replay path to obtain a runtime PoV.",
+      "support_count": 10,
+      "support_pct": 0.8333,
+      "suspicion": 0.8333,
+      "witness_path": "/home/chanyoung/veri-agent/surface/specmine/verified/mining_smoke/povs/lookup_thing_caller_buggy.cbmc-pov.json"
+    },
+    {
+      "callee": "lookup_thing",
+      "caller": "safe_wrapper",
+      "callsite_count": 12,
+      "contract_kind_class": "lock",
+      "contract_kind_label": "lock_held",
+      "disposition": "proposer_deprioritized",
+      "engine": null,
+      "engine_verdict": null,
+      "engine_wall_ms": null,
+      "evidence_excerpt": null,
+      "file": "fixture.c",
+      "guards_present": [],
+      "line": 29,
+      "local_establishment": 1.0,
+      "missing_contract": "rcu_read_lock_held",
+      "soundness_note": "suspicion=0.000 < --min-suspicion=0.5 (funnel economics \u2014 sound engine not invoked).",
+      "support_count": 10,
+      "support_pct": 0.8333,
+      "suspicion": 0.0,
+      "witness_path": null
+    }
+  ]
+}

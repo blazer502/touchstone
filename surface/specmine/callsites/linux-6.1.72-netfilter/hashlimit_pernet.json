@@ -1,0 +1,45 @@
+{
+  "callee": "hashlimit_pernet",
+  "defined_in": "net/netfilter/xt_hashlimit.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "htable_create",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 280,
+      "guards": []
+    },
+    {
+      "caller": "htable_remove_proc_entry",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 393,
+      "guards": []
+    },
+    {
+      "caller": "htable_find_get",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 409,
+      "guards": []
+    },
+    {
+      "caller": "hashlimit_proc_net_init",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 1235,
+      "guards": []
+    },
+    {
+      "caller": "hashlimit_proc_net_exit",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 1253,
+      "guards": []
+    },
+    {
+      "caller": "hashlimit_net_init",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 1274,
+      "guards": []
+    }
+  ]
+}

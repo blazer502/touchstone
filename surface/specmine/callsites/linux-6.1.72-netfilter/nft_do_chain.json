@@ -1,0 +1,90 @@
+{
+  "callee": "nft_do_chain",
+  "defined_in": "net/netfilter/nf_tables_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 11,
+  "callsites": [
+    {
+      "caller": "nft_do_chain_ipv4",
+      "file": "net/netfilter/nft_chain_filter.c",
+      "line": 23,
+      "guards": []
+    },
+    {
+      "caller": "nft_do_chain_arp",
+      "file": "net/netfilter/nft_chain_filter.c",
+      "line": 67,
+      "guards": []
+    },
+    {
+      "caller": "nft_do_chain_ipv6",
+      "file": "net/netfilter/nft_chain_filter.c",
+      "line": 107,
+      "guards": []
+    },
+    {
+      "caller": "nft_do_chain_inet",
+      "file": "net/netfilter/nft_chain_filter.c",
+      "line": 161,
+      "guards": []
+    },
+    {
+      "caller": "nft_do_chain_inet_ingress",
+      "file": "net/netfilter/nft_chain_filter.c",
+      "line": 192,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_pktinfo_ipv4_ingress(&pkt) < 0)",
+          "exit_kind": "return",
+          "source_line": 177,
+          "exit_line": 178
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_pktinfo_ipv6_ingress(&pkt) < 0)",
+          "exit_kind": "return",
+          "source_line": 185,
+          "exit_line": 186
+        }
+      ]
+    },
+    {
+      "caller": "nft_do_chain_bridge",
+      "file": "net/netfilter/nft_chain_filter.c",
+      "line": 251,
+      "guards": []
+    },
+    {
+      "caller": "nft_do_chain_netdev",
+      "file": "net/netfilter/nft_chain_filter.c",
+      "line": 306,
+      "guards": []
+    },
+    {
+      "caller": "nft_nat_do_chain",
+      "file": "net/netfilter/nft_chain_nat.c",
+      "line": 32,
+      "guards": []
+    },
+    {
+      "caller": "nf_route_table_hook4",
+      "file": "net/netfilter/nft_chain_route.c",
+      "line": 37,
+      "guards": []
+    },
+    {
+      "caller": "nf_route_table_hook6",
+      "file": "net/netfilter/nft_chain_route.c",
+      "line": 88,
+      "guards": []
+    },
+    {
+      "caller": "nf_route_table_inet",
+      "file": "net/netfilter/nft_chain_route.c",
+      "line": 131,
+      "guards": []
+    }
+  ]
+}

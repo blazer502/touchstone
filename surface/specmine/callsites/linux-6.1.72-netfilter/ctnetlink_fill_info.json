@@ -1,0 +1,150 @@
+{
+  "callee": "ctnetlink_fill_info",
+  "defined_in": "net/netfilter/nf_conntrack_netlink.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ctnetlink_dump_table",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1238,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "bh_disabled",
+          "source_line": 1196
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cb->args[0] >= nf_conntrack_htable_size)",
+          "exit_kind": "goto",
+          "source_line": 1208
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_is_expired(ct))",
+          "exit_kind": "continue",
+          "source_line": 1215
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!net_eq(net, nf_ct_net(ct)))",
+          "exit_kind": "continue",
+          "source_line": 1223,
+          "exit_line": 1224
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(NF_CT_DIRECTION(h) != IP_CT_DIR_ORIGINAL)",
+          "exit_kind": "continue",
+          "source_line": 1226,
+          "exit_line": 1227
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct != last)",
+          "exit_kind": "continue",
+          "source_line": 1230,
+          "exit_line": 1231
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cb->args[1])",
+          "exit_kind": "continue",
+          "source_line": 1229
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ctnetlink_filter_match(ct, cb->data))",
+          "exit_kind": "continue",
+          "source_line": 1234,
+          "exit_line": 1235
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "; cb->args[0] < nf_conntrack_htable_size; cb->args[0]++",
+          "polarity": "in_true_branch",
+          "source_line": 1197
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_get_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1697,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "h != NULL",
+          "source_line": 1686
+        },
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 1692
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 1658
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1670,
+          "exit_line": 1671
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1682,
+          "exit_line": 1683
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!h)",
+          "exit_kind": "return",
+          "source_line": 1686,
+          "exit_line": 1687
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 1692
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_dump_one_entry",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1748,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(l3proto && nf_ct_l3num(ct) != l3proto)",
+          "exit_kind": "return",
+          "source_line": 1731,
+          "exit_line": 1732
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct != ctx->last)",
+          "exit_kind": "return",
+          "source_line": 1735,
+          "exit_line": 1736
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->last)",
+          "exit_kind": "return",
+          "source_line": 1734
+        }
+      ]
+    }
+  ]
+}

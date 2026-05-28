@@ -1,0 +1,233 @@
+{
+  "callee": "nft_unregister_flowtable_net_hooks",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_tables_commit",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9761,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(list_empty(&nft_net->commit_list))",
+          "exit_kind": "return",
+          "source_line": 9518
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_tables_validate(net) < 0)",
+          "exit_kind": "return",
+          "source_line": 9545,
+          "exit_line": 9546
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 9549,
+          "exit_line": 9550
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 9557
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 9567
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(trans->ctx.table->flags & __NFT_TABLE_F_UPDATE))",
+          "exit_kind": "break",
+          "source_line": 9602
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "trans->msg_type",
+          "polarity": "in_true_branch",
+          "source_line": 9599
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nft_trans_flowtable_update(trans)",
+          "polarity": "in_true_branch",
+          "source_line": 9756
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_commit",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9769,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(list_empty(&nft_net->commit_list))",
+          "exit_kind": "return",
+          "source_line": 9518
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_tables_validate(net) < 0)",
+          "exit_kind": "return",
+          "source_line": 9545,
+          "exit_line": 9546
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 9549,
+          "exit_line": 9550
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 9557
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 9567
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(trans->ctx.table->flags & __NFT_TABLE_F_UPDATE))",
+          "exit_kind": "break",
+          "source_line": 9602
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "trans->msg_type",
+          "polarity": "in_true_branch",
+          "source_line": 9599
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nft_trans_flowtable_update(trans)",
+          "polarity": "in_false_branch",
+          "source_line": 9763
+        }
+      ]
+    },
+    {
+      "caller": "__nf_tables_abort",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9997,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(trans->ctx.table->flags & __NFT_TABLE_F_UPDATE))",
+          "exit_kind": "break",
+          "source_line": 9866
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_chain_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9892
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_rule_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9909
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_set_update(trans))",
+          "exit_kind": "break",
+          "source_line": 9931
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_set_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9936
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_elem_set_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9951
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "trans->msg_type",
+          "polarity": "in_true_branch",
+          "source_line": 9863
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nft_trans_flowtable_update(trans)",
+          "polarity": "in_true_branch",
+          "source_line": 9996
+        }
+      ]
+    },
+    {
+      "caller": "__nf_tables_abort",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 10002,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(trans->ctx.table->flags & __NFT_TABLE_F_UPDATE))",
+          "exit_kind": "break",
+          "source_line": 9866
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_chain_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9892
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_rule_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9909
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_set_update(trans))",
+          "exit_kind": "break",
+          "source_line": 9931
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_set_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9936
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_elem_set_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9951
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "trans->msg_type",
+          "polarity": "in_true_branch",
+          "source_line": 9863
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nft_trans_flowtable_update(trans)",
+          "polarity": "in_false_branch",
+          "source_line": 9999
+        }
+      ]
+    }
+  ]
+}

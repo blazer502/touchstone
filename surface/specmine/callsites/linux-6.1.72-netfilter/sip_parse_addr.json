@@ -1,0 +1,100 @@
+{
+  "callee": "sip_parse_addr",
+  "defined_in": "net/netfilter/nf_conntrack_sip.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "epaddr_len",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 191,
+      "guards": []
+    },
+    {
+      "caller": "ct_sip_parse_request",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 268,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "mlen != NULL",
+          "source_line": 249
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!mlen)",
+          "exit_kind": "return",
+          "source_line": 249,
+          "exit_line": 250
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(++dptr >= limit)",
+          "exit_kind": "return",
+          "source_line": 252,
+          "exit_line": 253
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*dptr == '\\r' || *dptr == '\\n')",
+          "exit_kind": "return",
+          "source_line": 257,
+          "exit_line": 258
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(dptr, \"sip:\", strlen(\"sip:\")) == 0)",
+          "exit_kind": "break",
+          "source_line": 259
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skp_epaddr_len(ct, dptr, limit, &shift))",
+          "exit_kind": "return",
+          "source_line": 264,
+          "exit_line": 265
+        }
+      ]
+    },
+    {
+      "caller": "ct_sip_parse_header_uri",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 521,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ret < 0)",
+          "macro": "WARN_ON",
+          "source_line": 517
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == 0)",
+          "exit_kind": "return",
+          "source_line": 518,
+          "exit_line": 519
+        }
+      ]
+    },
+    {
+      "caller": "ct_sip_parse_address_param",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 584,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "start != NULL",
+          "source_line": 580
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!start)",
+          "exit_kind": "return",
+          "source_line": 580,
+          "exit_line": 581
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "callee": "process_item",
+  "defined_in": "fixture.c",
+  "target": "multi_class",
+  "scope": ".",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "caller_n_a",
+      "file": "fixture.c",
+      "line": 141,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(item)",
+          "source_line": 139
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(item))",
+          "exit_kind": "return",
+          "source_line": 139,
+          "exit_line": 140
+        }
+      ]
+    },
+    {
+      "caller": "caller_n_b",
+      "file": "fixture.c",
+      "line": 148,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(item)",
+          "source_line": 146
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(item))",
+          "exit_kind": "return",
+          "source_line": 146,
+          "exit_line": 147
+        }
+      ]
+    },
+    {
+      "caller": "caller_n_c",
+      "file": "fixture.c",
+      "line": 155,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(item)",
+          "source_line": 153
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(item))",
+          "exit_kind": "return",
+          "source_line": 153,
+          "exit_line": 154
+        }
+      ]
+    },
+    {
+      "caller": "caller_n_d",
+      "file": "fixture.c",
+      "line": 162,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(item)",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(item))",
+          "exit_kind": "return",
+          "source_line": 160,
+          "exit_line": 161
+        }
+      ]
+    },
+    {
+      "caller": "caller_n_e",
+      "file": "fixture.c",
+      "line": 169,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(item)",
+          "source_line": 167
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(item))",
+          "exit_kind": "return",
+          "source_line": 167,
+          "exit_line": 168
+        }
+      ]
+    },
+    {
+      "caller": "caller_n_f",
+      "file": "fixture.c",
+      "line": 176,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(item)",
+          "source_line": 174
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(item))",
+          "exit_kind": "return",
+          "source_line": 174,
+          "exit_line": 175
+        }
+      ]
+    },
+    {
+      "caller": "caller_buggy_null",
+      "file": "fixture.c",
+      "line": 182,
+      "guards": []
+    }
+  ]
+}

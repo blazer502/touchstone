@@ -1,0 +1,102 @@
+{
+  "callee": "nf_tables_fill_rule_info",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_tables_rule_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3247,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 3233,
+          "exit_line": 3234
+        }
+      ]
+    },
+    {
+      "caller": "__nf_tables_dump_rules",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3288,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_is_active(net, rule))",
+          "exit_kind": "goto",
+          "source_line": 3279,
+          "exit_line": 3280
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*idx < s_idx)",
+          "exit_kind": "goto",
+          "source_line": 3281,
+          "exit_line": 3282
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getrule",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3454,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 3433
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(chain)",
+          "source_line": 3439
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(rule)",
+          "source_line": 3445
+        },
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 3451
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 3420
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 3433
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(chain))",
+          "exit_kind": "return",
+          "source_line": 3439
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(rule))",
+          "exit_kind": "return",
+          "source_line": 3445
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 3451,
+          "exit_line": 3452
+        }
+      ]
+    }
+  ]
+}

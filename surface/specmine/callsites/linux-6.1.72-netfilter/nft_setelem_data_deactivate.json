@@ -1,0 +1,238 @@
+{
+  "callee": "nft_setelem_data_deactivate",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 9,
+  "callsites": [
+    {
+      "caller": "nft_mapelem_deactivate",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 596,
+      "guards": []
+    },
+    {
+      "caller": "nft_map_catchall_deactivate",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 621,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_active(ext, genmask))",
+          "exit_kind": "continue",
+          "source_line": 617,
+          "exit_line": 618
+        }
+      ]
+    },
+    {
+      "caller": "nft_del_setelem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6794,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 6730,
+          "exit_line": 6731
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 6734,
+          "exit_line": 6735
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nla[NFTA_SET_ELEM_KEY] && !(flags & NFT_SET_ELEM_CATCHALL))",
+          "exit_kind": "return",
+          "source_line": 6737,
+          "exit_line": 6738
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_setelem_valid_key_end(set, nla, flags))",
+          "exit_kind": "return",
+          "source_line": 6740,
+          "exit_line": 6741
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 6747,
+          "exit_line": 6748
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags != 0)",
+          "exit_kind": "return",
+          "source_line": 6745
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 6754,
+          "exit_line": 6755
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 6758,
+          "exit_line": 6759
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_KEY])",
+          "exit_kind": "return",
+          "source_line": 6751
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 6765,
+          "exit_line": 6766
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 6769,
+          "exit_line": 6770
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_KEY_END])",
+          "exit_kind": "goto",
+          "source_line": 6762
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(elem.priv))",
+          "exit_kind": "goto",
+          "source_line": 6777
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(trans == NULL)",
+          "exit_kind": "goto",
+          "source_line": 6787,
+          "exit_line": 6788
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 6791,
+          "exit_line": 6792
+        }
+      ]
+    },
+    {
+      "caller": "nft_setelem_flush",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6830,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "trans != NULL",
+          "source_line": 6821
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!trans)",
+          "exit_kind": "return",
+          "source_line": 6821,
+          "exit_line": 6822
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!set->ops->flush(ctx->net, set, elem->priv))",
+          "exit_kind": "goto",
+          "source_line": 6824
+        }
+      ]
+    },
+    {
+      "caller": "__nft_set_catchall_flush",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6852,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "trans != NULL",
+          "source_line": 6849
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!trans)",
+          "exit_kind": "return",
+          "source_line": 6849,
+          "exit_line": 6850
+        }
+      ]
+    },
+    {
+      "caller": "nft_trans_gc_setelem_remove",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9101,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < trans->count; i++",
+          "polarity": "in_true_branch",
+          "source_line": 9096
+        }
+      ]
+    },
+    {
+      "caller": "nft_trans_gc_catchall_sync",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9324,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 9318
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!lockdep_commit_lock_is_held(gc->net))",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 9309
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_expired(ext))",
+          "exit_kind": "continue",
+          "source_line": 9314,
+          "exit_line": 9315
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "return",
+          "source_line": 9318,
+          "exit_line": 9319
+        }
+      ]
+    },
+    {
+      "caller": "nft_pipapo_gc_deactivate",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 1548,
+      "guards": []
+    },
+    {
+      "caller": "nft_rbtree_gc_remove",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 232,
+      "guards": []
+    }
+  ]
+}

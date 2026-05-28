@@ -1,0 +1,167 @@
+{
+  "callee": "ip_vs_set_state",
+  "defined_in": "net/netfilter/ipvs/ip_vs_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_leave",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 628,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "pptr != NULL",
+          "source_line": 593
+        },
+        {
+          "kind": "null_check",
+          "predicate": "cp != NULL",
+          "source_line": 620
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!pptr)",
+          "exit_kind": "return",
+          "source_line": 593,
+          "exit_line": 594
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cp)",
+          "exit_kind": "return",
+          "source_line": 620,
+          "exit_line": 621
+        }
+      ]
+    },
+    {
+      "caller": "handle_response",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 1311,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(IP_VS_FWD_METHOD(cp) != IP_VS_CONN_F_MASQ)",
+          "exit_kind": "goto",
+          "source_line": 1266,
+          "exit_line": 1267
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, iph->len))",
+          "exit_kind": "goto",
+          "source_line": 1271,
+          "exit_line": 1272
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_route_me_harder(cp->ipvs, af, skb, hooknum))",
+          "exit_kind": "goto",
+          "source_line": 1304,
+          "exit_line": 1305
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_in_hook",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 2063,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb->ipvs_property)",
+          "exit_kind": "return",
+          "source_line": 1926,
+          "exit_line": 1927
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(sysctl_backup_only(ipvs) || !ipvs->enable))",
+          "exit_kind": "return",
+          "source_line": 1945,
+          "exit_line": 1946
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(sk->sk_family == PF_INET && inet_sk(sk)->nodefrag)",
+          "exit_kind": "return",
+          "source_line": 1955,
+          "exit_line": 1956
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(related)",
+          "exit_kind": "return",
+          "source_line": 1966,
+          "exit_line": 1967
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(iph.protocol == IPPROTO_ICMPV6))",
+          "exit_kind": "return",
+          "source_line": 1961
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(related)",
+          "exit_kind": "return",
+          "source_line": 1976,
+          "exit_line": 1977
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(iph.protocol == IPPROTO_ICMP))",
+          "exit_kind": "return",
+          "source_line": 1971
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!pd))",
+          "exit_kind": "return",
+          "source_line": 1982
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(old_ct)",
+          "exit_kind": "return",
+          "source_line": 2027,
+          "exit_line": 2028
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(resched)",
+          "exit_kind": "return",
+          "source_line": 2021
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(old_ct)",
+          "exit_kind": "return",
+          "source_line": 2044,
+          "exit_line": 2045
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(sysctl_expire_nodest_conn(ipvs))",
+          "exit_kind": "return",
+          "source_line": 2036
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ip_vs_try_to_schedule(ipvs, af, skb, pd, &v, &cp, &iph))",
+          "exit_kind": "return",
+          "source_line": 2056,
+          "exit_line": 2057
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!cp))",
+          "exit_kind": "return",
+          "source_line": 2053
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "callee": "nf_xfrm_me_harder",
+  "defined_in": "net/netfilter/nf_nat_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_nat_ipv4_out",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 745,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret != NF_ACCEPT)",
+          "exit_kind": "return",
+          "source_line": 730,
+          "exit_line": 731
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IPCB(skb)->flags & IPSKB_XFRM_TRANSFORMED)",
+          "exit_kind": "return",
+          "source_line": 733,
+          "exit_line": 734
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ct",
+          "polarity": "in_true_branch",
+          "source_line": 737
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_ipv4_local_fn",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 782,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret != NF_ACCEPT)",
+          "exit_kind": "return",
+          "source_line": 764,
+          "exit_line": 765
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ct",
+          "polarity": "in_true_branch",
+          "source_line": 768
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_ipv6_out",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 982,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret != NF_ACCEPT)",
+          "exit_kind": "return",
+          "source_line": 968,
+          "exit_line": 969
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IP6CB(skb)->flags & IP6SKB_XFRM_TRANSFORMED)",
+          "exit_kind": "return",
+          "source_line": 971,
+          "exit_line": 972
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ct",
+          "polarity": "in_true_branch",
+          "source_line": 974
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_ipv6_local_fn",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 1020,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret != NF_ACCEPT)",
+          "exit_kind": "return",
+          "source_line": 1002,
+          "exit_line": 1003
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ct",
+          "polarity": "in_true_branch",
+          "source_line": 1006
+        }
+      ]
+    }
+  ]
+}

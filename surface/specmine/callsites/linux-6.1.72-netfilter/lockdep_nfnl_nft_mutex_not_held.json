@@ -1,0 +1,96 @@
+{
+  "callee": "lockdep_nfnl_nft_mutex_not_held",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "nf_tables_chain_type_lookup",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 926,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(type != NULL)",
+          "exit_kind": "return",
+          "source_line": 923,
+          "exit_line": 924
+        }
+      ]
+    },
+    {
+      "caller": "nft_chain_parse_hook",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2187,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&nft_net->commit_mutex)",
+          "source_line": 2186
+        }
+      ]
+    },
+    {
+      "caller": "nft_expr_type_get",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2905,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nla == NULL)",
+          "exit_kind": "return",
+          "source_line": 2898,
+          "exit_line": 2899
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(type != NULL && try_module_get(type->owner))",
+          "exit_kind": "return",
+          "source_line": 2902,
+          "exit_line": 2903
+        }
+      ]
+    },
+    {
+      "caller": "nft_select_set_ops",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3967,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&nft_net->commit_mutex)",
+          "source_line": 3966
+        }
+      ]
+    },
+    {
+      "caller": "nft_obj_type_get",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7132,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(type != NULL && try_module_get(type->owner))",
+          "exit_kind": "return",
+          "source_line": 7129,
+          "exit_line": 7130
+        }
+      ]
+    },
+    {
+      "caller": "nft_flowtable_type_get",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7820,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(type != NULL && try_module_get(type->owner))",
+          "exit_kind": "return",
+          "source_line": 7817,
+          "exit_line": 7818
+        }
+      ]
+    }
+  ]
+}

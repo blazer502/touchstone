@@ -1,0 +1,157 @@
+{
+  "callee": "ip_vs_copy_service",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ctl.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "__ip_vs_get_service_entries",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 2645,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(svc->af != AF_INET || (svc->ipvs != ipvs))",
+          "exit_kind": "continue",
+          "source_line": 2639,
+          "exit_line": 2640
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(count >= get->num_services)",
+          "exit_kind": "goto",
+          "source_line": 2642,
+          "exit_line": 2643
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < IP_VS_SVC_TAB_SIZE; idx++",
+          "polarity": "in_true_branch",
+          "source_line": 2636
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_get_service_entries",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 2664,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(svc->af != AF_INET || (svc->ipvs != ipvs))",
+          "exit_kind": "continue",
+          "source_line": 2639,
+          "exit_line": 2640
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(count >= get->num_services)",
+          "exit_kind": "goto",
+          "source_line": 2642,
+          "exit_line": 2643
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(svc->af != AF_INET || (svc->ipvs != ipvs))",
+          "exit_kind": "continue",
+          "source_line": 2658,
+          "exit_line": 2659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(count >= get->num_services)",
+          "exit_kind": "goto",
+          "source_line": 2661,
+          "exit_line": 2662
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < IP_VS_SVC_TAB_SIZE; idx++",
+          "polarity": "in_true_branch",
+          "source_line": 2655
+        }
+      ]
+    },
+    {
+      "caller": "do_ip_vs_get_ctl",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 2887,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 2827
+        },
+        {
+          "kind": "capability_check",
+          "predicate": "ns_capable(sock_net(sk)->user_ns, CAP_NET_ADMIN)",
+          "source_line": 2787
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!net)",
+          "macro": "BUG_ON",
+          "source_line": 2785
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ns_capable(sock_net(sk)->user_ns, CAP_NET_ADMIN))",
+          "exit_kind": "return",
+          "source_line": 2787,
+          "exit_line": 2788
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd < IP_VS_BASE_CTL || cmd > IP_VS_SO_GET_MAX)",
+          "exit_kind": "return",
+          "source_line": 2790,
+          "exit_line": 2791
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*len < (int) copylen)",
+          "exit_kind": "return",
+          "source_line": 2794
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_from_user(arg, user, copylen) != 0)",
+          "exit_kind": "return",
+          "source_line": 2799,
+          "exit_line": 2800
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd == IP_VS_SO_GET_DAEMON)",
+          "exit_kind": "return",
+          "source_line": 2804
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_to_user(user, buf, strlen(buf)+1) != 0)",
+          "exit_kind": "goto",
+          "source_line": 2835
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*len != size)",
+          "exit_kind": "goto",
+          "source_line": 2861
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "cmd",
+          "polarity": "in_true_branch",
+          "source_line": 2828
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc",
+          "polarity": "in_true_branch",
+          "source_line": 2886
+        }
+      ]
+    }
+  ]
+}

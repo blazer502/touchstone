@@ -1,0 +1,78 @@
+{
+  "callee": "instance_lookup",
+  "defined_in": "net/netfilter/nfnetlink_queue.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "instance_create",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 123,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 122
+        }
+      ]
+    },
+    {
+      "caller": "nfqnl_enqueue_packet",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 793,
+      "guards": []
+    },
+    {
+      "caller": "verdict_instance_lookup",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1049,
+      "guards": []
+    },
+    {
+      "caller": "nfqnl_recv_config",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1332,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1331
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nfqa[NFQA_CFG_MASK])",
+          "exit_kind": "return",
+          "source_line": 1301
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags >= NFQA_CFG_F_MAX)",
+          "exit_kind": "return",
+          "source_line": 1311,
+          "exit_line": 1312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & mask & NFQA_CFG_F_SECCTX)",
+          "exit_kind": "return",
+          "source_line": 1315,
+          "exit_line": 1316
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(rcu_access_pointer(nfnl_ct_hook))",
+          "exit_kind": "return",
+          "source_line": 1324,
+          "exit_line": 1325
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nfqa[NFQA_CFG_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 1300
+        }
+      ]
+    }
+  ]
+}

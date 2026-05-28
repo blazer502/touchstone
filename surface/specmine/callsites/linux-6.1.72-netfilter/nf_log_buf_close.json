@@ -1,0 +1,65 @@
+{
+  "callee": "nf_log_buf_close",
+  "defined_in": "net/netfilter/nf_log.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_log_arp_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 154,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_log_allowed(net))",
+          "exit_kind": "return",
+          "source_line": 142,
+          "exit_line": 143
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_ip_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 855,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_log_allowed(net))",
+          "exit_kind": "return",
+          "source_line": 839,
+          "exit_line": 840
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_ip6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 890,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_log_allowed(net))",
+          "exit_kind": "return",
+          "source_line": 874,
+          "exit_line": 875
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_unknown_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 923,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_log_allowed(net))",
+          "exit_kind": "return",
+          "source_line": 910,
+          "exit_line": 911
+        }
+      ]
+    }
+  ]
+}

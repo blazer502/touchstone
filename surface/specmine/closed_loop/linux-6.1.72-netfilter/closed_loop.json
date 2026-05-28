@@ -1,0 +1,94 @@
+{
+  "generated_at": 1779931934,
+  "min_suspicion": 0.5,
+  "records": [
+    {
+      "disposition": "infrastructure_pending",
+      "outlier": {
+        "callee": "nft_ctx_init",
+        "caller": "nf_tables_deltable",
+        "callsite_count": 19,
+        "contract_kind_class": "null",
+        "contract_kind_label": "null_check",
+        "file": "net/netfilter/nf_tables_api.c",
+        "line": 1534,
+        "local_establishment": 0.0,
+        "missing_contract": "!IS_ERR_OR_NULL(table)",
+        "support_count": 18,
+        "support_pct": 0.9474,
+        "suspicion": 0.9474
+      },
+      "post_refine_disposition": "infrastructure_pending",
+      "reason": "harness synthesis returned no source (kernel path, missing caller body, or unsupported contract class).",
+      "router_verdict": null
+    },
+    {
+      "disposition": "infrastructure_pending",
+      "outlier": {
+        "callee": "__nf_conntrack_helper_find",
+        "caller": "ctnetlink_glue_attach_expect",
+        "callsite_count": 9,
+        "contract_kind_class": "lock",
+        "contract_kind_label": "lock_held",
+        "file": "net/netfilter/nf_conntrack_netlink.c",
+        "line": 2884,
+        "local_establishment": 0.0,
+        "missing_contract": "rcu_read_lock_held",
+        "support_count": 8,
+        "support_pct": 0.8889,
+        "suspicion": 0.8889
+      },
+      "post_refine_disposition": "infrastructure_pending",
+      "reason": "harness synthesis returned no source (kernel path, missing caller body, or unsupported contract class).",
+      "router_verdict": null
+    },
+    {
+      "disposition": "infrastructure_pending",
+      "outlier": {
+        "callee": "ip_vs_service_find",
+        "caller": "ip_vs_find_dest",
+        "callsite_count": 7,
+        "contract_kind_class": "null",
+        "contract_kind_label": "null_check",
+        "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+        "line": 700,
+        "local_establishment": 0.0,
+        "missing_contract": "ports != NULL",
+        "support_count": 6,
+        "support_pct": 0.8571,
+        "suspicion": 0.8571
+      },
+      "post_refine_disposition": "infrastructure_pending",
+      "reason": "harness synthesis returned no source (kernel path, missing caller body, or unsupported contract class).",
+      "router_verdict": null
+    }
+  ],
+  "refine_unwind": 8,
+  "stats": {
+    "by_class_confirmed": {},
+    "by_class_post_refine_confirmed": {},
+    "by_disposition_post_refine": {
+      "infrastructure_pending": 3
+    },
+    "by_disposition_pre_refine": {
+      "infrastructure_pending": 3
+    },
+    "classes_with_confirmed_leads": 0,
+    "confirmed_post_refine": 0,
+    "confirmed_pre_refine": 0,
+    "false_confirmations": 0,
+    "inconclusive": 0,
+    "outliers_dispatched": 3,
+    "outliers_total": 11,
+    "refined_flips": 0,
+    "refuted": 0,
+    "skipped": {
+      "unsupported_contract_class": 8
+    },
+    "wall_seconds": 0.0
+  },
+  "target": "linux-6.1.72-netfilter",
+  "timeout_s": 30,
+  "unwind": 4,
+  "use_llm_refine": true
+}

@@ -1,0 +1,69 @@
+{
+  "callee": "trace_fill_header",
+  "defined_in": "net/netfilter/nf_tables_trace.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_trace_fill_pkt_info",
+      "file": "net/netfilter/nf_tables_trace.c",
+      "line": 103,
+      "guards": []
+    },
+    {
+      "caller": "nf_trace_fill_pkt_info",
+      "file": "net/netfilter/nf_tables_trace.c",
+      "line": 109,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(trace_fill_header(nlskb, NFTA_TRACE_NETWORK_HEADER, skb, off, len))",
+          "exit_kind": "return",
+          "source_line": 103,
+          "exit_line": 104
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "pkt->flags & NFT_PKTINFO_L4PROTO",
+          "polarity": "in_true_branch",
+          "source_line": 106
+        }
+      ]
+    },
+    {
+      "caller": "nf_trace_fill_pkt_info",
+      "file": "net/netfilter/nf_tables_trace.c",
+      "line": 122,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(trace_fill_header(nlskb, NFTA_TRACE_NETWORK_HEADER, skb, off, len))",
+          "exit_kind": "return",
+          "source_line": 103,
+          "exit_line": 104
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(pkt->flags & NFT_PKTINFO_L4PROTO)",
+          "exit_kind": "return",
+          "source_line": 106
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb_mac_header_was_set(skb))",
+          "exit_kind": "return",
+          "source_line": 114,
+          "exit_line": 115
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_vlan_tag_get(skb))",
+          "exit_kind": "return",
+          "source_line": 117,
+          "exit_line": 118
+        }
+      ]
+    }
+  ]
+}

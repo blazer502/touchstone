@@ -1,0 +1,125 @@
+{
+  "callee": "__ip_set_put_netlink",
+  "defined_in": "net/netfilter/ipset/ip_set_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_set_dump_done",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1451,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "cb->args[IPSET_CB_ARG0]",
+          "polarity": "in_true_branch",
+          "source_line": 1442
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_dump_do",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1655,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nlh != NULL",
+          "source_line": 1591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cb->args[IPSET_CB_DUMP])",
+          "exit_kind": "return",
+          "source_line": 1541,
+          "exit_line": 1542
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cb->args[IPSET_CB_INDEX] >= inst->ip_set_max)",
+          "exit_kind": "goto",
+          "source_line": 1544,
+          "exit_line": 1545
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dump_type == DUMP_ONE)",
+          "exit_kind": "goto",
+          "source_line": 1561
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(is_destroyed)",
+          "exit_kind": "goto",
+          "source_line": 1565
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!set || is_destroyed)",
+          "exit_kind": "continue",
+          "source_line": 1559
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh)",
+          "exit_kind": "goto",
+          "source_line": 1591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dump_flags & IPSET_FLAG_LIST_SETNAME)",
+          "exit_kind": "goto",
+          "source_line": 1599,
+          "exit_line": 1600
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 1615,
+          "exit_line": 1616
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dump_flags & IPSET_FLAG_LIST_HEADER)",
+          "exit_kind": "goto",
+          "source_line": 1617,
+          "exit_line": 1618
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cb->args[IPSET_CB_ARG0])",
+          "exit_kind": "goto",
+          "source_line": 1624,
+          "exit_line": 1626
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dump_type == DUMP_ALL)",
+          "exit_kind": "goto",
+          "source_line": 1631
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret || !cb->args[IPSET_CB_ARG0]",
+          "polarity": "in_true_branch",
+          "source_line": 1650
+        }
+      ]
+    },
+    {
+      "caller": "call_ad",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1710,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "retried",
+          "polarity": "in_true_branch",
+          "source_line": 1705
+        }
+      ]
+    }
+  ]
+}

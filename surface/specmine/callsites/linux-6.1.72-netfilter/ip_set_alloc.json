@@ -1,0 +1,122 @@
+{
+  "callee": "ip_set_alloc",
+  "defined_in": "net/netfilter/ipset/ip_set_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "bitmap_ip_create",
+      "file": "net/netfilter/ipset/ip_set_bitmap_ip.c",
+      "line": 321,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 268,
+          "exit_line": 269
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 273,
+          "exit_line": 274
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[IPSET_ATTR_IP_TO])",
+          "exit_kind": "return",
+          "source_line": 271
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cidr >= HOST_MASK)",
+          "exit_kind": "return",
+          "source_line": 280,
+          "exit_line": 281
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[IPSET_ATTR_CIDR])",
+          "exit_kind": "return",
+          "source_line": 277
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(netmask > HOST_MASK)",
+          "exit_kind": "return",
+          "source_line": 290,
+          "exit_line": 291
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[IPSET_ATTR_NETMASK])",
+          "exit_kind": "return",
+          "source_line": 287
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(elements > IPSET_BITMAP_MAX_RANGE + 1)",
+          "exit_kind": "return",
+          "source_line": 314,
+          "exit_line": 315
+        }
+      ]
+    },
+    {
+      "caller": "bitmap_ipmac_create",
+      "file": "net/netfilter/ipset/ip_set_bitmap_ipmac.c",
+      "line": 359,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 332,
+          "exit_line": 333
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 337,
+          "exit_line": 338
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[IPSET_ATTR_IP_TO])",
+          "exit_kind": "return",
+          "source_line": 335
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cidr >= HOST_MASK)",
+          "exit_kind": "return",
+          "source_line": 344,
+          "exit_line": 345
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[IPSET_ATTR_CIDR])",
+          "exit_kind": "return",
+          "source_line": 341
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(elements > IPSET_BITMAP_MAX_RANGE + 1)",
+          "exit_kind": "return",
+          "source_line": 353,
+          "exit_line": 354
+        }
+      ]
+    },
+    {
+      "caller": "bitmap_port_create",
+      "file": "net/netfilter/ipset/ip_set_bitmap_port.c",
+      "line": 269,
+      "guards": []
+    }
+  ]
+}

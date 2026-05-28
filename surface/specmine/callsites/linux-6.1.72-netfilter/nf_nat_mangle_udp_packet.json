@@ -1,0 +1,72 @@
+{
+  "callee": "nf_nat_mangle_udp_packet",
+  "defined_in": "net/netfilter/nf_nat_helper.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_nat_amanda.c",
+      "line": 54,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(port == 0)",
+          "exit_kind": "return",
+          "source_line": 48
+        }
+      ]
+    },
+    {
+      "caller": "mangle_packet",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 58,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_protonum(ct) == IPPROTO_TCP)",
+          "exit_kind": "return",
+          "source_line": 45
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nf_ct_protonum(ct) == IPPROTO_TCP",
+          "polarity": "in_false_branch",
+          "source_line": 54
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 293,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request)",
+          "exit_kind": "goto",
+          "source_line": 187
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, skb->len))",
+          "exit_kind": "return",
+          "source_line": 285
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dir == IP_CT_DIR_REPLY && ct_sip_info->forced_dport",
+          "polarity": "in_true_branch",
+          "source_line": 282
+        }
+      ]
+    }
+  ]
+}

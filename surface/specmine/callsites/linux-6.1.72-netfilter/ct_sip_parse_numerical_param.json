@@ -1,0 +1,116 @@
+{
+  "callee": "ct_sip_parse_numerical_param",
+  "defined_in": "net/netfilter/nf_conntrack_sip.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "process_register_request",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1271,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->status & IPS_EXPECTED)",
+          "exit_kind": "return",
+          "source_line": 1239,
+          "exit_line": 1240
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 1257
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == 0)",
+          "exit_kind": "return",
+          "source_line": 1260,
+          "exit_line": 1261
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_inet_addr_cmp(&ct->tuplehash[dir].tuple.src.u3, &daddr))",
+          "exit_kind": "return",
+          "source_line": 1264,
+          "exit_line": 1265
+        }
+      ]
+    },
+    {
+      "caller": "process_register_response",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1379,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct_sip_info->register_cseq != cseq)",
+          "exit_kind": "return",
+          "source_line": 1346,
+          "exit_line": 1347
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(code >= 100 && code <= 199)",
+          "exit_kind": "return",
+          "source_line": 1349,
+          "exit_line": 1350
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(code < 200 || code > 299)",
+          "exit_kind": "goto",
+          "source_line": 1351,
+          "exit_line": 1352
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 1365
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == 0)",
+          "exit_kind": "break",
+          "source_line": 1368,
+          "exit_line": 1369
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_inet_addr_cmp(&ct->tuplehash[dir].tuple.dst.u3, &addr))",
+          "exit_kind": "continue",
+          "source_line": 1372,
+          "exit_line": 1373
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "1",
+          "polarity": "in_true_branch",
+          "source_line": 1358
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 244,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request)",
+          "exit_kind": "goto",
+          "source_line": 187
+        }
+      ]
+    }
+  ]
+}

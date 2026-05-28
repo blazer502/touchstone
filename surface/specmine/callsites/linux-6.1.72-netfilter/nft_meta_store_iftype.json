@@ -1,0 +1,69 @@
+{
+  "callee": "nft_meta_store_iftype",
+  "defined_in": "net/netfilter/nft_meta.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_meta_get_eval_ifname",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 247,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "key",
+          "polarity": "in_true_branch",
+          "source_line": 233
+        }
+      ]
+    },
+    {
+      "caller": "nft_meta_get_eval_ifname",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 251,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_meta_store_iftype(dest, pkt->skb->dev))",
+          "exit_kind": "return",
+          "source_line": 247,
+          "exit_line": 248
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "key",
+          "polarity": "in_true_branch",
+          "source_line": 233
+        }
+      ]
+    },
+    {
+      "caller": "nft_meta_get_eval_ifname",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 255,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_meta_store_iftype(dest, pkt->skb->dev))",
+          "exit_kind": "return",
+          "source_line": 247,
+          "exit_line": 248
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_meta_store_iftype(dest, nft_in(pkt)))",
+          "exit_kind": "return",
+          "source_line": 251,
+          "exit_line": 252
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "key",
+          "polarity": "in_true_branch",
+          "source_line": 233
+        }
+      ]
+    }
+  ]
+}

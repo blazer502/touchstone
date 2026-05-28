@@ -1,0 +1,173 @@
+{
+  "callee": "nf_ct_ecache_ext_add",
+  "defined_in": "net/netfilter/nf_conntrack_ecache.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "init_conntrack",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1762,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(ct)",
+          "source_line": 1740
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_invert_tuple(&repl_tuple, tuple))",
+          "exit_kind": "return",
+          "source_line": 1732
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(ct))",
+          "exit_kind": "return",
+          "source_line": 1740,
+          "exit_line": 1741
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_add_synproxy(ct, tmpl))",
+          "exit_kind": "return",
+          "source_line": 1743
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_create_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2308,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(ct)",
+          "source_line": 2247
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(ct))",
+          "exit_kind": "return",
+          "source_line": 2247,
+          "exit_line": 2248
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cda[CTA_TIMEOUT])",
+          "exit_kind": "goto",
+          "source_line": 2250,
+          "exit_line": 2251
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 2259,
+          "exit_line": 2260
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request_module(\"nfct-helper-%s\", helpname) < 0)",
+          "exit_kind": "goto",
+          "source_line": 2267
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(helper)",
+          "exit_kind": "goto",
+          "source_line": 2276
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(helper == NULL)",
+          "exit_kind": "goto",
+          "source_line": 2264
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(help == NULL)",
+          "exit_kind": "goto",
+          "source_line": 2288
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_HELP])",
+          "exit_kind": "goto",
+          "source_line": 2254
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 2303,
+          "exit_line": 2304
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_set_eval",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 334,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct == NULL || nf_ct_is_template(ct))",
+          "exit_kind": "return",
+          "source_line": 294,
+          "exit_line": 295
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(e)",
+          "exit_kind": "break",
+          "source_line": 327
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "priv->key",
+          "polarity": "in_true_branch",
+          "source_line": 297
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ctmask && !nf_ct_is_confirmed(ct)",
+          "polarity": "in_true_branch",
+          "source_line": 333
+        }
+      ]
+    },
+    {
+      "caller": "xt_ct_tg_check",
+      "file": "net/netfilter/xt_CT.c",
+      "line": 191,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ct != NULL",
+          "source_line": 185
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->flags & XT_CT_NOTRACK)",
+          "exit_kind": "goto",
+          "source_line": 162
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 175,
+          "exit_line": 176
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ct)",
+          "exit_kind": "goto",
+          "source_line": 185
+        }
+      ]
+    }
+  ]
+}

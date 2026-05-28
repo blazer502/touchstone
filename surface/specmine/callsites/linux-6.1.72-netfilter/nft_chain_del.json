@@ -1,0 +1,157 @@
+{
+  "callee": "nft_chain_del",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "nf_tables_commit",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9633,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(list_empty(&nft_net->commit_list))",
+          "exit_kind": "return",
+          "source_line": 9518
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_tables_validate(net) < 0)",
+          "exit_kind": "return",
+          "source_line": 9545,
+          "exit_line": 9546
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 9549,
+          "exit_line": 9550
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 9557
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 9567
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(trans->ctx.table->flags & __NFT_TABLE_F_UPDATE))",
+          "exit_kind": "break",
+          "source_line": 9602
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "trans->msg_type",
+          "polarity": "in_true_branch",
+          "source_line": 9599
+        }
+      ]
+    },
+    {
+      "caller": "__nf_tables_abort",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9897,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(trans->ctx.table->flags & __NFT_TABLE_F_UPDATE))",
+          "exit_kind": "break",
+          "source_line": 9866
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_chain_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9892
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "trans->msg_type",
+          "polarity": "in_true_branch",
+          "source_line": 9863
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nft_trans_chain_update(trans)",
+          "polarity": "in_false_branch",
+          "source_line": 9891
+        }
+      ]
+    },
+    {
+      "caller": "__nft_release_basechain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 10661,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!nft_is_base_chain(ctx->chain))",
+          "macro": "WARN_ON",
+          "source_line": 10652
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON(!nft_is_base_chain(ctx->chain)))",
+          "exit_kind": "return",
+          "source_line": 10652,
+          "exit_line": 10653
+        }
+      ]
+    },
+    {
+      "caller": "__nft_release_table",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 10739,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_chain_binding(chain))",
+          "exit_kind": "continue",
+          "source_line": 10709,
+          "exit_line": 10710
+        }
+      ]
+    },
+    {
+      "caller": "nft_immediate_deactivate",
+      "file": "net/netfilter/nft_immediate.c",
+      "line": 169,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_chain_binding(chain))",
+          "exit_kind": "break",
+          "source_line": 155,
+          "exit_line": 156
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "priv->dreg == NFT_REG_VERDICT",
+          "polarity": "in_true_branch",
+          "source_line": 150
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "data->verdict.code",
+          "polarity": "in_true_branch",
+          "source_line": 151
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "phase",
+          "polarity": "in_true_branch",
+          "source_line": 158
+        }
+      ]
+    }
+  ]
+}

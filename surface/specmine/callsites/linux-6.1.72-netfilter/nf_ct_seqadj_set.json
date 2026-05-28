@@ -1,0 +1,57 @@
+{
+  "callee": "nf_ct_seqadj_set",
+  "defined_in": "net/netfilter/nf_conntrack_seqadj.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_ct_tcp_seqadj_set",
+      "file": "net/netfilter/nf_conntrack_seqadj.c",
+      "line": 70,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_protonum(ct) != IPPROTO_TCP)",
+          "exit_kind": "return",
+          "source_line": 66,
+          "exit_line": 67
+        }
+      ]
+    },
+    {
+      "caller": "__nf_nat_mangle_tcp_packet",
+      "file": "net/netfilter/nf_nat_helper.c",
+      "line": 118,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, skb->len))",
+          "exit_kind": "return",
+          "source_line": 98,
+          "exit_line": 99
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "adjust && rep_len != match_len",
+          "polarity": "in_true_branch",
+          "source_line": 117
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip_seq_adjust",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 314,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_protonum(ct) != IPPROTO_TCP || off == 0)",
+          "exit_kind": "return",
+          "source_line": 310,
+          "exit_line": 311
+        }
+      ]
+    }
+  ]
+}

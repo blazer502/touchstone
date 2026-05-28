@@ -1,0 +1,81 @@
+{
+  "callee": "nf_ip6_checksum",
+  "defined_in": "net/netfilter/utils.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_conntrack_icmpv6_error",
+      "file": "net/netfilter/nf_conntrack_proto_icmpv6.c",
+      "line": 200,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(icmp6h == NULL)",
+          "exit_kind": "return",
+          "source_line": 193
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_icmpv6_reply_translation",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 855,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ctinfo != IP_CT_RELATED && ctinfo != IP_CT_RELATED_REPLY)",
+          "macro": "WARN_ON",
+          "source_line": 851
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, hdrlen + sizeof(*inside)))",
+          "exit_kind": "return",
+          "source_line": 853,
+          "exit_line": 854
+        }
+      ]
+    },
+    {
+      "caller": "nf_ip6_checksum_partial",
+      "file": "net/netfilter/utils.c",
+      "line": 108,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(len == skb->len - dataoff)",
+          "exit_kind": "return",
+          "source_line": 107,
+          "exit_line": 108
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "skb->ip_summed",
+          "polarity": "in_true_branch",
+          "source_line": 105
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "len == skb->len - dataoff",
+          "polarity": "in_true_branch",
+          "source_line": 107
+        }
+      ]
+    },
+    {
+      "caller": "nf_checksum",
+      "file": "net/netfilter/utils.c",
+      "line": 134,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "family",
+          "polarity": "in_true_branch",
+          "source_line": 129
+        }
+      ]
+    }
+  ]
+}

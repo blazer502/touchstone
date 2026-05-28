@@ -1,0 +1,111 @@
+{
+  "callee": "conn_free",
+  "defined_in": "net/netfilter/nf_conncount.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "find_or_evict",
+      "file": "net/netfilter/nf_conncount.c",
+      "line": 118,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(found)",
+          "exit_kind": "return",
+          "source_line": 106,
+          "exit_line": 107
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "conn->cpu == cpu || age >= 2",
+          "polarity": "in_true_branch",
+          "source_line": 117
+        }
+      ]
+    },
+    {
+      "caller": "__nf_conncount_add",
+      "file": "net/netfilter/nf_conncount.c",
+      "line": 175,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(found)",
+          "source_line": 144
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(time_is_after_eq_jiffies((unsigned long)list->last_gc))",
+          "exit_kind": "goto",
+          "source_line": 135,
+          "exit_line": 136
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(collect > CONNCOUNT_GC_MAX_NODES)",
+          "exit_kind": "break",
+          "source_line": 140,
+          "exit_line": 141
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(PTR_ERR(found) == -EAGAIN)",
+          "exit_kind": "return",
+          "source_line": 146
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(found))",
+          "exit_kind": "continue",
+          "source_line": 144
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "already_closed(found_ct)",
+          "polarity": "in_true_branch",
+          "source_line": 169
+        }
+      ]
+    },
+    {
+      "caller": "nf_conncount_gc_list",
+      "file": "net/netfilter/nf_conncount.c",
+      "line": 259,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(found)",
+          "source_line": 246
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(time_is_after_eq_jiffies((unsigned long)READ_ONCE(list->last_gc)))",
+          "exit_kind": "return",
+          "source_line": 237,
+          "exit_line": 238
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!spin_trylock(&list->list_lock))",
+          "exit_kind": "return",
+          "source_line": 241,
+          "exit_line": 242
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(found))",
+          "exit_kind": "continue",
+          "source_line": 246
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "already_closed(found_ct)",
+          "polarity": "in_true_branch",
+          "source_line": 253
+        }
+      ]
+    }
+  ]
+}

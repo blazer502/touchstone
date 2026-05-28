@@ -1,0 +1,100 @@
+{
+  "callee": "expect_h245",
+  "defined_in": "net/netfilter/nf_conntrack_h323_main.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "process_setup",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 811,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "setup->options & eSetup_UUIE_h245Address",
+          "polarity": "in_true_branch",
+          "source_line": 810
+        }
+      ]
+    },
+    {
+      "caller": "process_callproceeding",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 878,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "callproc->options & eCallProceeding_UUIE_h245Address",
+          "polarity": "in_true_branch",
+          "source_line": 877
+        }
+      ]
+    },
+    {
+      "caller": "process_connect",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 909,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "connect->options & eConnect_UUIE_h245Address",
+          "polarity": "in_true_branch",
+          "source_line": 908
+        }
+      ]
+    },
+    {
+      "caller": "process_alerting",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 940,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "alert->options & eAlerting_UUIE_h245Address",
+          "polarity": "in_true_branch",
+          "source_line": 939
+        }
+      ]
+    },
+    {
+      "caller": "process_facility",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 980,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(facility->options & eFacility_UUIE_alternativeAddress)",
+          "exit_kind": "return",
+          "source_line": 971,
+          "exit_line": 972
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(facility->reason.choice == eFacilityReason_callForwarded)",
+          "exit_kind": "return",
+          "source_line": 970
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "facility->options & eFacility_UUIE_h245Address",
+          "polarity": "in_true_branch",
+          "source_line": 979
+        }
+      ]
+    },
+    {
+      "caller": "process_progress",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1011,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "progress->options & eProgress_UUIE_h245Address",
+          "polarity": "in_true_branch",
+          "source_line": 1010
+        }
+      ]
+    }
+  ]
+}

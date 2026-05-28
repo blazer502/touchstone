@@ -1,0 +1,27 @@
+{
+  "callee": "nf_flow_table_iterate",
+  "defined_in": "net/netfilter/nf_flow_table_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_flow_table_gc_run",
+      "file": "net/netfilter/nf_flow_table_core.c",
+      "line": 449,
+      "guards": []
+    },
+    {
+      "caller": "nf_flow_table_gc_cleanup",
+      "file": "net/netfilter/nf_flow_table_core.c",
+      "line": 592,
+      "guards": []
+    },
+    {
+      "caller": "nf_flow_table_free",
+      "file": "net/netfilter/nf_flow_table_core.c",
+      "line": 617,
+      "guards": []
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "callee": "ct_sip_get_header",
+  "defined_in": "net/netfilter/nf_conntrack_sip.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "get_callid",
+      "file": "net/netfilter/ipvs/ip_vs_pe_sip.c",
+      "line": 36,
+      "guards": [
+        {
+          "kind": "enclosing_while",
+          "predicate": "1",
+          "polarity": "in_true_branch",
+          "source_line": 35
+        }
+      ]
+    },
+    {
+      "caller": "ct_sip_walk_headers",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 486,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret > 0)",
+          "exit_kind": "return",
+          "source_line": 476,
+          "exit_line": 477
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == 0)",
+          "exit_kind": "break",
+          "source_line": 478,
+          "exit_line": 479
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(in_header && *in_header)",
+          "exit_kind": "return",
+          "source_line": 472
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "1",
+          "polarity": "in_true_branch",
+          "source_line": 485
+        }
+      ]
+    },
+    {
+      "caller": "process_register_request",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1250,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->status & IPS_EXPECTED)",
+          "exit_kind": "return",
+          "source_line": 1239,
+          "exit_line": 1240
+        }
+      ]
+    },
+    {
+      "caller": "process_register_response",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1354,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct_sip_info->register_cseq != cseq)",
+          "exit_kind": "return",
+          "source_line": 1346,
+          "exit_line": 1347
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(code >= 100 && code <= 199)",
+          "exit_kind": "return",
+          "source_line": 1349,
+          "exit_line": 1350
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(code < 200 || code > 299)",
+          "exit_kind": "goto",
+          "source_line": 1351,
+          "exit_line": 1352
+        }
+      ]
+    },
+    {
+      "caller": "process_sip_response",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1425,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "code != NULL",
+          "source_line": 1420
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*datalen < strlen(\"SIP/2.0 200\"))",
+          "exit_kind": "return",
+          "source_line": 1417,
+          "exit_line": 1418
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!code)",
+          "exit_kind": "return",
+          "source_line": 1420
+        }
+      ]
+    },
+    {
+      "caller": "process_sip_request",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1491,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(handler->request == NULL)",
+          "exit_kind": "continue",
+          "source_line": 1482,
+          "exit_line": 1483
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < ARRAY_SIZE(sip_handlers); i++",
+          "polarity": "in_true_branch",
+          "source_line": 1478
+        }
+      ]
+    },
+    {
+      "caller": "sip_help_tcp",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1567,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(th == NULL)",
+          "exit_kind": "return",
+          "source_line": 1550,
+          "exit_line": 1551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dataoff >= skb->len)",
+          "exit_kind": "return",
+          "source_line": 1553,
+          "exit_line": 1554
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(skb_linearize(skb)))",
+          "exit_kind": "return",
+          "source_line": 1558,
+          "exit_line": 1559
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(datalen < strlen(\"SIP/2.0 200\"))",
+          "exit_kind": "return",
+          "source_line": 1563,
+          "exit_line": 1564
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "1",
+          "polarity": "in_true_branch",
+          "source_line": 1566
+        }
+      ]
+    },
+    {
+      "caller": "mangle_content_len",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 453,
+      "guards": []
+    }
+  ]
+}

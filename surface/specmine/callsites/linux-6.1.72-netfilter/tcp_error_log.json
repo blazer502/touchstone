@@ -1,0 +1,54 @@
+{
+  "callee": "tcp_error_log",
+  "defined_in": "net/netfilter/nf_conntrack_proto_tcp.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "tcp_error",
+      "file": "net/netfilter/nf_conntrack_proto_tcp.c",
+      "line": 810,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "th->doff*4 < sizeof(struct tcphdr) || tcplen < th->doff*4",
+          "polarity": "in_true_branch",
+          "source_line": 809
+        }
+      ]
+    },
+    {
+      "caller": "tcp_error",
+      "file": "net/netfilter/nf_conntrack_proto_tcp.c",
+      "line": 822,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(th->doff*4 < sizeof(struct tcphdr) || tcplen < th->doff*4)",
+          "exit_kind": "return",
+          "source_line": 809
+        }
+      ]
+    },
+    {
+      "caller": "tcp_error",
+      "file": "net/netfilter/nf_conntrack_proto_tcp.c",
+      "line": 829,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(th->doff*4 < sizeof(struct tcphdr) || tcplen < th->doff*4)",
+          "exit_kind": "return",
+          "source_line": 809
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!tcp_valid_flags[tcpflags]",
+          "polarity": "in_true_branch",
+          "source_line": 828
+        }
+      ]
+    }
+  ]
+}

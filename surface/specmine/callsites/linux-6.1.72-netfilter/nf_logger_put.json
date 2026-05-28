@@ -1,0 +1,67 @@
+{
+  "callee": "nf_logger_put",
+  "defined_in": "net/netfilter/nf_log.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "nf_logger_find_get",
+      "file": "net/netfilter/nf_log.c",
+      "line": 166,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 161,
+          "exit_line": 162
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "pf == NFPROTO_INET",
+          "polarity": "in_true_branch",
+          "source_line": 159
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret < 0",
+          "polarity": "in_true_branch",
+          "source_line": 165
+        }
+      ]
+    },
+    {
+      "caller": "nft_log_destroy",
+      "file": "net/netfilter/nft_log.c",
+      "line": 241,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(li->u.log.level == NFT_LOGLEVEL_AUDIT)",
+          "exit_kind": "return",
+          "source_line": 238,
+          "exit_line": 239
+        }
+      ]
+    },
+    {
+      "caller": "log_tg_destroy",
+      "file": "net/netfilter/xt_LOG.c",
+      "line": 74,
+      "guards": []
+    },
+    {
+      "caller": "nflog_tg_destroy",
+      "file": "net/netfilter/xt_NFLOG.c",
+      "line": 64,
+      "guards": []
+    },
+    {
+      "caller": "trace_tg_destroy",
+      "file": "net/netfilter/xt_TRACE.c",
+      "line": 22,
+      "guards": []
+    }
+  ]
+}

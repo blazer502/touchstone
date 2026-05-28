@@ -1,0 +1,154 @@
+{
+  "callee": "ip_vs_leave",
+  "defined_in": "net/netfilter/ipvs/ip_vs_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "sctp_conn_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_proto_sctp.c",
+      "line": 73,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ports != NULL",
+          "source_line": 44
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(sch)",
+          "exit_kind": "return",
+          "source_line": 31
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ports)",
+          "exit_kind": "return",
+          "source_line": 44
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_todrop(ipvs))",
+          "exit_kind": "return",
+          "source_line": 58
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc",
+          "polarity": "in_true_branch",
+          "source_line": 55
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!*cpp && ignored <= 0",
+          "polarity": "in_true_branch",
+          "source_line": 71
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ignored",
+          "polarity": "in_true_branch",
+          "source_line": 72
+        }
+      ]
+    },
+    {
+      "caller": "tcp_conn_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_proto_tcp.c",
+      "line": 93,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ports != NULL",
+          "source_line": 60
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th->rst || !(sysctl_sloppy_tcp(ipvs) || th->syn))",
+          "exit_kind": "return",
+          "source_line": 51,
+          "exit_line": 52
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th)",
+          "exit_kind": "return",
+          "source_line": 50
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ports)",
+          "exit_kind": "return",
+          "source_line": 60
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_todrop(ipvs))",
+          "exit_kind": "return",
+          "source_line": 77
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc",
+          "polarity": "in_true_branch",
+          "source_line": 74
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!*cpp && ignored <= 0",
+          "polarity": "in_true_branch",
+          "source_line": 91
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ignored",
+          "polarity": "in_true_branch",
+          "source_line": 92
+        }
+      ]
+    },
+    {
+      "caller": "udp_conn_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_proto_udp.c",
+      "line": 81,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ports != NULL",
+          "source_line": 50
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ports)",
+          "exit_kind": "return",
+          "source_line": 50
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_todrop(ipvs))",
+          "exit_kind": "return",
+          "source_line": 65
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc",
+          "polarity": "in_true_branch",
+          "source_line": 62
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!*cpp && ignored <= 0",
+          "polarity": "in_true_branch",
+          "source_line": 79
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ignored",
+          "polarity": "in_true_branch",
+          "source_line": 80
+        }
+      ]
+    }
+  ]
+}

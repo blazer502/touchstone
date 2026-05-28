@@ -1,0 +1,374 @@
+{
+  "callee": "ip_vs_proto_name",
+  "defined_in": "net/netfilter/ipvs/ip_vs_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 19,
+  "callsites": [
+    {
+      "caller": "ip_vs_app_seq_show",
+      "file": "net/netfilter/ipvs/ip_vs_app.c",
+      "line": 583,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_conn_in_get",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 305,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_ct_in_get",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 389,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->ipvs != p->ipvs)",
+          "exit_kind": "continue",
+          "source_line": 360,
+          "exit_line": 361
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(__ip_vs_conn_get(cp))",
+          "exit_kind": "goto",
+          "source_line": 363,
+          "exit_line": 364
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(p->pe == cp->pe && p->pe->ct_match(p, cp))",
+          "exit_kind": "goto",
+          "source_line": 362
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(p->pe_data && p->pe->ct_match))",
+          "exit_kind": "continue",
+          "source_line": 359
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(__ip_vs_conn_get(cp))",
+          "exit_kind": "goto",
+          "source_line": 379,
+          "exit_line": 380
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_conn_out_get",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 443,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(p->vport != cp->cport)",
+          "exit_kind": "continue",
+          "source_line": 416,
+          "exit_line": 417
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!__ip_vs_conn_get(cp))",
+          "exit_kind": "continue",
+          "source_line": 432,
+          "exit_line": 433
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_bind_dest",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 617,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest != NULL",
+          "source_line": 590
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest)",
+          "exit_kind": "return",
+          "source_line": 590,
+          "exit_line": 591
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_unbind_dest",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 714,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest != NULL",
+          "source_line": 708
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest)",
+          "exit_kind": "return",
+          "source_line": 708,
+          "exit_line": 709
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_check_template",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 782,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_conn_seq_show",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1156,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!net_eq(cp->ipvs->net, net))",
+          "exit_kind": "return",
+          "source_line": 1132,
+          "exit_line": 1133
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_conn_seq_show",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1169,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!net_eq(cp->ipvs->net, net))",
+          "exit_kind": "return",
+          "source_line": 1132,
+          "exit_line": 1133
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_conn_sync_seq_show",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1222,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!net_eq(cp->ipvs->net, net))",
+          "exit_kind": "return",
+          "source_line": 1207,
+          "exit_line": 1208
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_conn_sync_seq_show",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 1235,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!net_eq(cp->ipvs->net, net))",
+          "exit_kind": "return",
+          "source_line": 1207,
+          "exit_line": 1208
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_service_find",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 457,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(svc)",
+          "exit_kind": "goto",
+          "source_line": 427,
+          "exit_line": 428
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fwmark)",
+          "exit_kind": "goto",
+          "source_line": 425
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_info_seq_show",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 2189,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(svc->ipvs != ipvs)",
+          "exit_kind": "return",
+          "source_line": 2183,
+          "exit_line": 2184
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "v == SEQ_START_TOKEN",
+          "polarity": "in_false_branch",
+          "source_line": 2174
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "iter->table == ip_vs_svc_table",
+          "polarity": "in_true_branch",
+          "source_line": 2185
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_info_seq_show",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 2196,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(svc->ipvs != ipvs)",
+          "exit_kind": "return",
+          "source_line": 2183,
+          "exit_line": 2184
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "v == SEQ_START_TOKEN",
+          "polarity": "in_false_branch",
+          "source_line": 2174
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "iter->table == ip_vs_svc_table",
+          "polarity": "in_true_branch",
+          "source_line": 2185
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_ftp_in",
+      "file": "net/netfilter/ipvs/ip_vs_ftp.c",
+      "line": 503,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->state != IP_VS_TCP_S_ESTABLISHED)",
+          "exit_kind": "return",
+          "source_line": 432,
+          "exit_line": 433
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, skb->len))",
+          "exit_kind": "return",
+          "source_line": 436,
+          "exit_line": 437
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!data || data >= data_limit)",
+          "exit_kind": "return",
+          "source_line": 441,
+          "exit_line": 442
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(data > data_limit - 7 || data[6] != '\\r')",
+          "exit_kind": "return",
+          "source_line": 461,
+          "exit_line": 462
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(data[4] == ' ')",
+          "exit_kind": "return",
+          "source_line": 458
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_ftp_in",
+      "file": "net/netfilter/ipvs/ip_vs_ftp.c",
+      "line": 518,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->state != IP_VS_TCP_S_ESTABLISHED)",
+          "exit_kind": "return",
+          "source_line": 432,
+          "exit_line": 433
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, skb->len))",
+          "exit_kind": "return",
+          "source_line": 436,
+          "exit_line": 437
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!data || data >= data_limit)",
+          "exit_kind": "return",
+          "source_line": 441,
+          "exit_line": 442
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(data > data_limit - 7 || data[6] != '\\r')",
+          "exit_kind": "return",
+          "source_line": 461,
+          "exit_line": 462
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(data[4] == ' ')",
+          "exit_kind": "return",
+          "source_line": 458
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_sip_ct_match",
+      "file": "net/netfilter/ipvs/ip_vs_pe_sip.c",
+      "line": 127,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_scheduler_err",
+      "file": "net/netfilter/ipvs/ip_vs_sched.c",
+      "line": 154,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc->fwmark",
+          "polarity": "in_false_branch",
+          "source_line": 152
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc->af == AF_INET6",
+          "polarity": "in_true_branch",
+          "source_line": 152
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_scheduler_err",
+      "file": "net/netfilter/ipvs/ip_vs_sched.c",
+      "line": 159,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc->af == AF_INET6",
+          "polarity": "in_false_branch",
+          "source_line": 157
+        }
+      ]
+    }
+  ]
+}

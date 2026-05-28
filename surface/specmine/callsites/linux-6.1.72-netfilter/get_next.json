@@ -1,0 +1,47 @@
+{
+  "callee": "get_next",
+  "defined_in": "net/netfilter/nfnetlink_log.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "get_idx",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 1063,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "head",
+          "polarity": "in_true_branch",
+          "source_line": 1062
+        }
+      ]
+    },
+    {
+      "caller": "seq_next",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 1078,
+      "guards": []
+    },
+    {
+      "caller": "get_idx",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1482,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "head",
+          "polarity": "in_true_branch",
+          "source_line": 1481
+        }
+      ]
+    },
+    {
+      "caller": "seq_next",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1497,
+      "guards": []
+    }
+  ]
+}

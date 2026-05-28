@@ -1,0 +1,307 @@
+{
+  "callee": "nft_reg_track_update",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 21,
+  "callsites": [
+    {
+      "caller": "nft_bitwise_reduce",
+      "file": "net/netfilter/nft_bitwise.c",
+      "line": 318,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!track->regs[priv->sreg].selector)",
+          "exit_kind": "return",
+          "source_line": 292,
+          "exit_line": 293
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "priv->sreg != priv->dreg",
+          "polarity": "in_true_branch",
+          "source_line": 317
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_get_reduce",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 690,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nft_reg_track_cmp(track, expr, priv->dreg)",
+          "polarity": "in_true_branch",
+          "source_line": 689
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_get_reduce",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 696,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_reg_track_cmp(track, expr, priv->dreg))",
+          "exit_kind": "return",
+          "source_line": 689
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "priv->key != ct->key",
+          "polarity": "in_true_branch",
+          "source_line": 695
+        }
+      ]
+    },
+    {
+      "caller": "nft_exthdr_reduce",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 708,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nft_reg_track_cmp(track, expr, priv->dreg)",
+          "polarity": "in_true_branch",
+          "source_line": 707
+        }
+      ]
+    },
+    {
+      "caller": "nft_exthdr_reduce",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 718,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_reg_track_cmp(track, expr, priv->dreg))",
+          "exit_kind": "return",
+          "source_line": 707
+        }
+      ]
+    },
+    {
+      "caller": "nft_fib_reduce",
+      "file": "net/netfilter/nft_fib.c",
+      "line": 191,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(1)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 186
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nft_reg_track_cmp(track, expr, priv->dreg)",
+          "polarity": "in_true_branch",
+          "source_line": 190
+        }
+      ]
+    },
+    {
+      "caller": "nft_fib_reduce",
+      "file": "net/netfilter/nft_fib.c",
+      "line": 198,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(1)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 186
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_reg_track_cmp(track, expr, priv->dreg))",
+          "exit_kind": "return",
+          "source_line": 190
+        }
+      ]
+    },
+    {
+      "caller": "nft_symhash_reduce",
+      "file": "net/netfilter/nft_hash.c",
+      "line": 205,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nft_reg_track_cmp(track, expr, priv->dreg)",
+          "polarity": "in_true_branch",
+          "source_line": 204
+        }
+      ]
+    },
+    {
+      "caller": "nft_symhash_reduce",
+      "file": "net/netfilter/nft_hash.c",
+      "line": 212,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_reg_track_cmp(track, expr, priv->dreg))",
+          "exit_kind": "return",
+          "source_line": 204
+        }
+      ]
+    },
+    {
+      "caller": "nft_meta_get_reduce",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 753,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nft_reg_track_cmp(track, expr, priv->dreg)",
+          "polarity": "in_true_branch",
+          "source_line": 752
+        }
+      ]
+    },
+    {
+      "caller": "nft_meta_get_reduce",
+      "file": "net/netfilter/nft_meta.c",
+      "line": 760,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_reg_track_cmp(track, expr, priv->dreg))",
+          "exit_kind": "return",
+          "source_line": 752
+        }
+      ]
+    },
+    {
+      "caller": "nft_osf_reduce",
+      "file": "net/netfilter/nft_osf.c",
+      "line": 142,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nft_reg_track_cmp(track, expr, priv->dreg)",
+          "polarity": "in_true_branch",
+          "source_line": 141
+        }
+      ]
+    },
+    {
+      "caller": "nft_osf_reduce",
+      "file": "net/netfilter/nft_osf.c",
+      "line": 149,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_reg_track_cmp(track, expr, priv->dreg))",
+          "exit_kind": "return",
+          "source_line": 141
+        }
+      ]
+    },
+    {
+      "caller": "nft_payload_reduce",
+      "file": "net/netfilter/nft_payload.c",
+      "line": 220,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nft_reg_track_cmp(track, expr, priv->dreg)",
+          "polarity": "in_true_branch",
+          "source_line": 219
+        }
+      ]
+    },
+    {
+      "caller": "nft_payload_reduce",
+      "file": "net/netfilter/nft_payload.c",
+      "line": 228,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_reg_track_cmp(track, expr, priv->dreg))",
+          "exit_kind": "return",
+          "source_line": 219
+        }
+      ]
+    },
+    {
+      "caller": "nft_socket_reduce",
+      "file": "net/netfilter/nft_socket.c",
+      "line": 223,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nft_reg_track_cmp(track, expr, priv->dreg)",
+          "polarity": "in_true_branch",
+          "source_line": 222
+        }
+      ]
+    },
+    {
+      "caller": "nft_socket_reduce",
+      "file": "net/netfilter/nft_socket.c",
+      "line": 231,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_reg_track_cmp(track, expr, priv->dreg))",
+          "exit_kind": "return",
+          "source_line": 222
+        }
+      ]
+    },
+    {
+      "caller": "nft_tunnel_get_reduce",
+      "file": "net/netfilter/nft_tunnel.c",
+      "line": 134,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nft_reg_track_cmp(track, expr, priv->dreg)",
+          "polarity": "in_true_branch",
+          "source_line": 133
+        }
+      ]
+    },
+    {
+      "caller": "nft_tunnel_get_reduce",
+      "file": "net/netfilter/nft_tunnel.c",
+      "line": 142,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_reg_track_cmp(track, expr, priv->dreg))",
+          "exit_kind": "return",
+          "source_line": 133
+        }
+      ]
+    },
+    {
+      "caller": "nft_xfrm_reduce",
+      "file": "net/netfilter/nft_xfrm.c",
+      "line": 264,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nft_reg_track_cmp(track, expr, priv->dreg)",
+          "polarity": "in_true_branch",
+          "source_line": 263
+        }
+      ]
+    },
+    {
+      "caller": "nft_xfrm_reduce",
+      "file": "net/netfilter/nft_xfrm.c",
+      "line": 273,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_reg_track_cmp(track, expr, priv->dreg))",
+          "exit_kind": "return",
+          "source_line": 263
+        }
+      ]
+    }
+  ]
+}

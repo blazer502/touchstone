@@ -1,0 +1,67 @@
+{
+  "callee": "ip_set_del",
+  "defined_in": "net/netfilter/ipset/ip_set_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "list_set_kdel",
+      "file": "net/netfilter/ipset/ip_set_list_set.c",
+      "line": 106,
+      "guards": []
+    },
+    {
+      "caller": "set_target_v0",
+      "file": "net/netfilter/xt_set.c",
+      "line": 226,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->del_set.index != IPSET_INVALID_ID",
+          "polarity": "in_true_branch",
+          "source_line": 225
+        }
+      ]
+    },
+    {
+      "caller": "set_target_v1",
+      "file": "net/netfilter/xt_set.c",
+      "line": 301,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->del_set.index != IPSET_INVALID_ID",
+          "polarity": "in_true_branch",
+          "source_line": 300
+        }
+      ]
+    },
+    {
+      "caller": "set_target_v2",
+      "file": "net/netfilter/xt_set.c",
+      "line": 376,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->del_set.index != IPSET_INVALID_ID",
+          "polarity": "in_true_branch",
+          "source_line": 375
+        }
+      ]
+    },
+    {
+      "caller": "set_target_v3",
+      "file": "net/netfilter/xt_set.c",
+      "line": 411,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->del_set.index != IPSET_INVALID_ID",
+          "polarity": "in_true_branch",
+          "source_line": 410
+        }
+      ]
+    }
+  ]
+}

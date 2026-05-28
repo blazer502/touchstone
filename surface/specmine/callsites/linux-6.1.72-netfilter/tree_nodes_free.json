@@ -1,0 +1,122 @@
+{
+  "callee": "tree_nodes_free",
+  "defined_in": "net/netfilter/nf_conncount.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "insert_tree",
+      "file": "net/netfilter/nf_conncount.c",
+      "line": 349,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 327
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "*rbnode",
+          "polarity": "in_true_branch",
+          "source_line": 331
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "diff > 0",
+          "polarity": "in_false_branch",
+          "source_line": 341
+        }
+      ]
+    },
+    {
+      "caller": "insert_tree",
+      "file": "net/netfilter/nf_conncount.c",
+      "line": 361,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 327
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(gc_count >= ARRAY_SIZE(gc_nodes))",
+          "exit_kind": "continue",
+          "source_line": 353,
+          "exit_line": 354
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "gc_count",
+          "polarity": "in_true_branch",
+          "source_line": 360
+        }
+      ]
+    },
+    {
+      "caller": "tree_gc_worker",
+      "file": "net/netfilter/nf_conncount.c",
+      "line": 493,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 478
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(gc_count < ARRAY_SIZE(gc_nodes))",
+          "exit_kind": "goto",
+          "source_line": 479,
+          "exit_line": 480
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(rbconn->list.count > 0)",
+          "exit_kind": "continue",
+          "source_line": 488,
+          "exit_line": 489
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "node != NULL",
+          "polarity": "in_true_branch",
+          "source_line": 484
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "gc_count >= ARRAY_SIZE(gc_nodes)",
+          "polarity": "in_true_branch",
+          "source_line": 492
+        }
+      ]
+    },
+    {
+      "caller": "tree_gc_worker",
+      "file": "net/netfilter/nf_conncount.c",
+      "line": 498,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 478
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(gc_count < ARRAY_SIZE(gc_nodes))",
+          "exit_kind": "goto",
+          "source_line": 479,
+          "exit_line": 480
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(rbconn->list.count > 0)",
+          "exit_kind": "continue",
+          "source_line": 488,
+          "exit_line": 489
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "callee": "match_type",
+  "defined_in": "net/netfilter/xt_addrtype.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "addrtype_mt_v0",
+      "file": "net/netfilter/xt_addrtype.c",
+      "line": 119,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->source",
+          "polarity": "in_true_branch",
+          "source_line": 118
+        }
+      ]
+    },
+    {
+      "caller": "addrtype_mt_v0",
+      "file": "net/netfilter/xt_addrtype.c",
+      "line": 122,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->dest",
+          "polarity": "in_true_branch",
+          "source_line": 121
+        }
+      ]
+    },
+    {
+      "caller": "addrtype_mt_v1",
+      "file": "net/netfilter/xt_addrtype.c",
+      "line": 148,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(xt_family(par) == NFPROTO_IPV6)",
+          "exit_kind": "return",
+          "source_line": 143,
+          "exit_line": 144
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->source",
+          "polarity": "in_true_branch",
+          "source_line": 147
+        }
+      ]
+    },
+    {
+      "caller": "addrtype_mt_v1",
+      "file": "net/netfilter/xt_addrtype.c",
+      "line": 151,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(xt_family(par) == NFPROTO_IPV6)",
+          "exit_kind": "return",
+          "source_line": 143,
+          "exit_line": 144
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret && info->dest",
+          "polarity": "in_true_branch",
+          "source_line": 150
+        }
+      ]
+    }
+  ]
+}

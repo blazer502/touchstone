@@ -1,0 +1,47 @@
+{
+  "callee": "__ip_vs_pe_getbyname",
+  "defined_in": "net/netfilter/ipvs/ip_vs_pe.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_pe_getbyname",
+      "file": "net/netfilter/ipvs/ip_vs_pe.c",
+      "line": 54,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_pe_getbyname",
+      "file": "net/netfilter/ipvs/ip_vs_pe.c",
+      "line": 59,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!pe",
+          "polarity": "in_true_branch",
+          "source_line": 57
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_conn_fill_param_sync",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 815,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "pe_data_len",
+          "polarity": "in_true_branch",
+          "source_line": 809
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "pe_name_len",
+          "polarity": "in_true_branch",
+          "source_line": 810
+        }
+      ]
+    }
+  ]
+}

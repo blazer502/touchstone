@@ -1,0 +1,70 @@
+{
+  "callee": "nf_register_net_hook",
+  "defined_in": "net/netfilter/core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_register_net_hooks",
+      "file": "net/netfilter/core.c",
+      "line": 582,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < n; i++",
+          "polarity": "in_true_branch",
+          "source_line": 581
+        }
+      ]
+    },
+    {
+      "caller": "nft_netdev_register_hooks",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 285,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_register_hook",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 338,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(basechain->type->ops_register)",
+          "exit_kind": "return",
+          "source_line": 332,
+          "exit_line": 333
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_base_chain_netdev(table->family, basechain->ops.hooknum))",
+          "exit_kind": "return",
+          "source_line": 335,
+          "exit_line": 336
+        }
+      ]
+    },
+    {
+      "caller": "nft_register_flowtable_net_hooks",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7890,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_is_active_next(net, ft))",
+          "exit_kind": "continue",
+          "source_line": 7872,
+          "exit_line": 7873
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 7887,
+          "exit_line": 7888
+        }
+      ]
+    }
+  ]
+}

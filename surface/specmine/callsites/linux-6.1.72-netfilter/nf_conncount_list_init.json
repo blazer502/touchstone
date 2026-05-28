@@ -1,0 +1,95 @@
+{
+  "callee": "nf_conncount_list_init",
+  "defined_in": "net/netfilter/nf_conncount.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "insert_tree",
+      "file": "net/netfilter/nf_conncount.c",
+      "line": 383,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 327
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(gc_count >= ARRAY_SIZE(gc_nodes))",
+          "exit_kind": "continue",
+          "source_line": 353,
+          "exit_line": 354
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(gc_count)",
+          "exit_kind": "goto",
+          "source_line": 360
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(rbconn == NULL)",
+          "exit_kind": "goto",
+          "source_line": 370,
+          "exit_line": 371
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(conn == NULL)",
+          "exit_kind": "goto",
+          "source_line": 374
+        }
+      ]
+    },
+    {
+      "caller": "nft_connlimit_do_init",
+      "file": "net/netfilter/nft_connlimit.c",
+      "line": 84,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[NFTA_CONNLIMIT_COUNT])",
+          "exit_kind": "return",
+          "source_line": 67,
+          "exit_line": 68
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~NFT_CONNLIMIT_F_INV)",
+          "exit_kind": "return",
+          "source_line": 74,
+          "exit_line": 75
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_CONNLIMIT_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 72
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!priv->list)",
+          "exit_kind": "return",
+          "source_line": 81,
+          "exit_line": 82
+        }
+      ]
+    },
+    {
+      "caller": "nft_connlimit_clone",
+      "file": "net/netfilter/nft_connlimit.c",
+      "line": 221,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!priv_dst->list)",
+          "exit_kind": "return",
+          "source_line": 218,
+          "exit_line": 219
+        }
+      ]
+    }
+  ]
+}

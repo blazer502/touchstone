@@ -1,0 +1,84 @@
+{
+  "callee": "ip_vs_dest_totalconns",
+  "defined_in": "net/netfilter/ipvs/ip_vs_conn.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_bind_dest",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 642,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest != NULL",
+          "source_line": 590
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest)",
+          "exit_kind": "return",
+          "source_line": 590,
+          "exit_line": 591
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_unbind_dest",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 738,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest != NULL",
+          "source_line": 708
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest)",
+          "exit_kind": "return",
+          "source_line": 708,
+          "exit_line": 709
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dest->l_threshold != 0",
+          "polarity": "in_true_branch",
+          "source_line": 737
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_unbind_dest",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 741,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest != NULL",
+          "source_line": 708
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest)",
+          "exit_kind": "return",
+          "source_line": 708,
+          "exit_line": 709
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dest->l_threshold != 0",
+          "polarity": "in_false_branch",
+          "source_line": 740
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dest->u_threshold != 0",
+          "polarity": "in_true_branch",
+          "source_line": 740
+        }
+      ]
+    }
+  ]
+}

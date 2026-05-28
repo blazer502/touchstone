@@ -1,0 +1,187 @@
+{
+  "callee": "__ip_vs_dst_set",
+  "defined_in": "net/netfilter/ipvs/ip_vs_xmit.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "__ip_vs_get_out_rt",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 326,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 324
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dest",
+          "polarity": "in_true_branch",
+          "source_line": 318
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!dest_dst",
+          "polarity": "in_true_branch",
+          "source_line": 325
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_get_out_rt",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 333,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest_dst != NULL",
+          "source_line": 325
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest_dst)",
+          "exit_kind": "goto",
+          "source_line": 325
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dest",
+          "polarity": "in_true_branch",
+          "source_line": 318
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!rt",
+          "polarity": "in_true_branch",
+          "source_line": 332
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_get_out_rt",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 338,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest_dst != NULL",
+          "source_line": 325
+        },
+        {
+          "kind": "null_check",
+          "predicate": "rt != NULL",
+          "source_line": 332
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest_dst)",
+          "exit_kind": "goto",
+          "source_line": 325
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rt)",
+          "exit_kind": "goto",
+          "source_line": 332
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dest",
+          "polarity": "in_true_branch",
+          "source_line": 318
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_get_out_rt_v6",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 491,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 489
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dest",
+          "polarity": "in_true_branch",
+          "source_line": 481
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!dest_dst",
+          "polarity": "in_true_branch",
+          "source_line": 490
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_get_out_rt_v6",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 499,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest_dst != NULL",
+          "source_line": 490
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest_dst)",
+          "exit_kind": "goto",
+          "source_line": 490
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dest",
+          "polarity": "in_true_branch",
+          "source_line": 481
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!dst",
+          "polarity": "in_true_branch",
+          "source_line": 498
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_get_out_rt_v6",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 506,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest_dst != NULL",
+          "source_line": 490
+        },
+        {
+          "kind": "null_check",
+          "predicate": "dst != NULL",
+          "source_line": 498
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest_dst)",
+          "exit_kind": "goto",
+          "source_line": 490
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dst)",
+          "exit_kind": "goto",
+          "source_line": 498
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dest",
+          "polarity": "in_true_branch",
+          "source_line": 481
+        }
+      ]
+    }
+  ]
+}

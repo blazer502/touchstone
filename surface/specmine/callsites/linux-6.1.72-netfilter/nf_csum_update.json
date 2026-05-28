@@ -1,0 +1,78 @@
+{
+  "callee": "nf_csum_update",
+  "defined_in": "net/netfilter/nf_nat_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "__udp_manip_pkt",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 56,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "do_csum",
+          "polarity": "in_true_branch",
+          "source_line": 55
+        }
+      ]
+    },
+    {
+      "caller": "tcp_manip_pkt",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 177,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, hdroff + hdrsize))",
+          "exit_kind": "return",
+          "source_line": 156,
+          "exit_line": 157
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(hdrsize < sizeof(*hdr))",
+          "exit_kind": "return",
+          "source_line": 174,
+          "exit_line": 175
+        }
+      ]
+    },
+    {
+      "caller": "dccp_manip_pkt",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 215,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, hdroff + hdrsize))",
+          "exit_kind": "return",
+          "source_line": 196,
+          "exit_line": 197
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(hdrsize < sizeof(*hdr))",
+          "exit_kind": "return",
+          "source_line": 212,
+          "exit_line": 213
+        }
+      ]
+    },
+    {
+      "caller": "icmpv6_manip_pkt",
+      "file": "net/netfilter/nf_nat_proto.c",
+      "line": 265,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, hdroff + sizeof(*hdr)))",
+          "exit_kind": "return",
+          "source_line": 261,
+          "exit_line": 262
+        }
+      ]
+    }
+  ]
+}

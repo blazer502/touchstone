@@ -1,0 +1,60 @@
+{
+  "callee": "__ip_vs_get_out_rt",
+  "defined_in": "net/netfilter/ipvs/ip_vs_xmit.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "ip_vs_bypass_xmit",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 711,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_nat_xmit",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 785,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(p == NULL)",
+          "exit_kind": "goto",
+          "source_line": 778,
+          "exit_line": 779
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(cp->flags & IP_VS_CONN_F_NO_CPORT))",
+          "exit_kind": "goto",
+          "source_line": 774
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_tunnel_xmit",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 1154,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_dr_xmit",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 1444,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_icmp_xmit",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 1543,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(IP_VS_FWD_METHOD(cp) != IP_VS_CONN_F_MASQ)",
+          "exit_kind": "goto",
+          "source_line": 1524
+        }
+      ]
+    }
+  ]
+}

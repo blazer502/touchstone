@@ -1,0 +1,183 @@
+{
+  "callee": "ctnetlink_parse_zone",
+  "defined_in": "net/netfilter/nf_conntrack_netlink.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 10,
+  "callsites": [
+    {
+      "caller": "ctnetlink_parse_filter",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 921,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 903,
+          "exit_line": 904
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(filter->orig_flags & ~CTA_FILTER_F_ALL)",
+          "exit_kind": "return",
+          "source_line": 908,
+          "exit_line": 909
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[CTA_FILTER_ORIG_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 906
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(filter->reply_flags & ~CTA_FILTER_F_ALL)",
+          "exit_kind": "return",
+          "source_line": 914,
+          "exit_line": 915
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[CTA_FILTER_REPLY_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 912
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_alloc_filter",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 997,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_MARK] || cda[CTA_MARK_MASK])",
+          "exit_kind": "return",
+          "source_line": 976,
+          "exit_line": 977
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(filter == NULL)",
+          "exit_kind": "return",
+          "source_line": 981,
+          "exit_line": 982
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 987,
+          "exit_line": 988
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 991,
+          "exit_line": 992
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cda[CTA_FILTER])",
+          "exit_kind": "return",
+          "source_line": 994,
+          "exit_line": 995
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_parse_tuple_zone",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1411,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(zone->id != NF_CT_DEFAULT_ZONE_ID)",
+          "exit_kind": "return",
+          "source_line": 1408,
+          "exit_line": 1409
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_del_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1604,
+      "guards": []
+    },
+    {
+      "caller": "ctnetlink_get_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1669,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 1658
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_new_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 2402,
+      "guards": []
+    },
+    {
+      "caller": "ctnetlink_dump_exp_ct",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3273,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 3270,
+          "exit_line": 3271
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_get_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3321,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cda[CTA_EXPECT_MASTER])",
+          "exit_kind": "return",
+          "source_line": 3308,
+          "exit_line": 3309
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 3307
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_del_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3402,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "cda[CTA_EXPECT_TUPLE]",
+          "polarity": "in_true_branch",
+          "source_line": 3400
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_new_expect",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3658,
+      "guards": []
+    }
+  ]
+}

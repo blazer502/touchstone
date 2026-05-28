@@ -1,0 +1,66 @@
+{
+  "callee": "ip_vs_create_timeout_table",
+  "defined_in": "net/netfilter/ipvs/ip_vs_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "ip_vs_app_inc_new",
+      "file": "net/netfilter/ipvs/ip_vs_app.c",
+      "line": 97,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "inc != NULL",
+          "source_line": 87
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(pp = ip_vs_proto_get(proto)))",
+          "exit_kind": "return",
+          "source_line": 80,
+          "exit_line": 81
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!pp->unregister_app)",
+          "exit_kind": "return",
+          "source_line": 83,
+          "exit_line": 84
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!inc)",
+          "exit_kind": "return",
+          "source_line": 87,
+          "exit_line": 88
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "app->timeouts",
+          "polarity": "in_true_branch",
+          "source_line": 95
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_sctp_init",
+      "file": "net/netfilter/ipvs/ip_vs_proto_sctp.c",
+      "line": 562,
+      "guards": []
+    },
+    {
+      "caller": "__ip_vs_tcp_init",
+      "file": "net/netfilter/ipvs/ip_vs_proto_tcp.c",
+      "line": 711,
+      "guards": []
+    },
+    {
+      "caller": "__udp_init",
+      "file": "net/netfilter/ipvs/ip_vs_proto_udp.c",
+      "line": 469,
+      "guards": []
+    }
+  ]
+}

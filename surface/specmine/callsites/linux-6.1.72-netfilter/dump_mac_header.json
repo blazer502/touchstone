@@ -1,0 +1,63 @@
+{
+  "callee": "dump_mac_header",
+  "defined_in": "net/netfilter/nf_log_syslog.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_log_ip_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 851,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_log_allowed(net))",
+          "exit_kind": "return",
+          "source_line": 839,
+          "exit_line": 840
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "in",
+          "polarity": "in_true_branch",
+          "source_line": 850
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_ip6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 886,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_log_allowed(net))",
+          "exit_kind": "return",
+          "source_line": 874,
+          "exit_line": 875
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "in",
+          "polarity": "in_true_branch",
+          "source_line": 885
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_unknown_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 921,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_log_allowed(net))",
+          "exit_kind": "return",
+          "source_line": 910,
+          "exit_line": 911
+        }
+      ]
+    }
+  ]
+}

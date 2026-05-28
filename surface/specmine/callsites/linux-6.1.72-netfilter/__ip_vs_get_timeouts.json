@@ -1,0 +1,156 @@
+{
+  "callee": "__ip_vs_get_timeouts",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ctl.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "do_ip_vs_get_ctl",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 2915,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 2827
+        },
+        {
+          "kind": "capability_check",
+          "predicate": "ns_capable(sock_net(sk)->user_ns, CAP_NET_ADMIN)",
+          "source_line": 2787
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!net)",
+          "macro": "BUG_ON",
+          "source_line": 2785
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ns_capable(sock_net(sk)->user_ns, CAP_NET_ADMIN))",
+          "exit_kind": "return",
+          "source_line": 2787,
+          "exit_line": 2788
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd < IP_VS_BASE_CTL || cmd > IP_VS_SO_GET_MAX)",
+          "exit_kind": "return",
+          "source_line": 2790,
+          "exit_line": 2791
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*len < (int) copylen)",
+          "exit_kind": "return",
+          "source_line": 2794
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_from_user(arg, user, copylen) != 0)",
+          "exit_kind": "return",
+          "source_line": 2799,
+          "exit_line": 2800
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd == IP_VS_SO_GET_DAEMON)",
+          "exit_kind": "return",
+          "source_line": 2804
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_to_user(user, buf, strlen(buf)+1) != 0)",
+          "exit_kind": "goto",
+          "source_line": 2835
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*len != size)",
+          "exit_kind": "goto",
+          "source_line": 2861
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*len != size)",
+          "exit_kind": "goto",
+          "source_line": 2902
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "cmd",
+          "polarity": "in_true_branch",
+          "source_line": 2828
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_genl_set_config",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 3633,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_genl_get_cmd",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 3859,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 3827
+        },
+        {
+          "kind": "null_check",
+          "predicate": "msg != NULL",
+          "source_line": 3824
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(svc)",
+          "source_line": 3840
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!msg)",
+          "exit_kind": "return",
+          "source_line": 3824,
+          "exit_line": 3825
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(reply == NULL)",
+          "exit_kind": "goto",
+          "source_line": 3830,
+          "exit_line": 3831
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(svc))",
+          "exit_kind": "goto",
+          "source_line": 3840
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 3845,
+          "exit_line": 3846
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(svc)",
+          "exit_kind": "goto",
+          "source_line": 3843
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "cmd",
+          "polarity": "in_true_branch",
+          "source_line": 3833
+        }
+      ]
+    }
+  ]
+}

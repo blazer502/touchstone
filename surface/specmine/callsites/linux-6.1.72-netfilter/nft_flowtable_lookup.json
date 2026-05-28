@@ -1,0 +1,97 @@
+{
+  "callee": "nft_flowtable_lookup",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_tables_newflowtable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8027,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 8022
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 8022
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_delflowtable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8220,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 8210
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 8210
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_FLOWTABLE_HANDLE]",
+          "polarity": "in_false_branch",
+          "source_line": 8218
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getflowtable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8416,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 8413
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 8396
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nla[NFTA_FLOWTABLE_NAME])",
+          "exit_kind": "return",
+          "source_line": 8408,
+          "exit_line": 8409
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 8413,
+          "exit_line": 8414
+        }
+      ]
+    },
+    {
+      "caller": "nft_flow_offload_init",
+      "file": "net/netfilter/nft_flow_offload.c",
+      "line": 402,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[NFTA_FLOW_TABLE_NAME])",
+          "exit_kind": "return",
+          "source_line": 399,
+          "exit_line": 400
+        }
+      ]
+    }
+  ]
+}

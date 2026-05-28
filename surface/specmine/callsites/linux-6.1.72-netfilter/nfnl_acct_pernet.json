@@ -1,0 +1,51 @@
+{
+  "callee": "nfnl_acct_pernet",
+  "defined_in": "net/netfilter/nfnetlink_acct.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "nfnl_acct_new",
+      "file": "net/netfilter/nfnetlink_acct.c",
+      "line": 62,
+      "guards": []
+    },
+    {
+      "caller": "nfnl_acct_dump",
+      "file": "net/netfilter/nfnetlink_acct.c",
+      "line": 197,
+      "guards": []
+    },
+    {
+      "caller": "nfnl_acct_get",
+      "file": "net/netfilter/nfnetlink_acct.c",
+      "line": 277,
+      "guards": []
+    },
+    {
+      "caller": "nfnl_acct_del",
+      "file": "net/netfilter/nfnetlink_acct.c",
+      "line": 346,
+      "guards": []
+    },
+    {
+      "caller": "nfnl_acct_find_get",
+      "file": "net/netfilter/nfnetlink_acct.c",
+      "line": 419,
+      "guards": []
+    },
+    {
+      "caller": "nfnl_acct_net_init",
+      "file": "net/netfilter/nfnetlink_acct.c",
+      "line": 505,
+      "guards": []
+    },
+    {
+      "caller": "nfnl_acct_net_exit",
+      "file": "net/netfilter/nfnetlink_acct.c",
+      "line": 512,
+      "guards": []
+    }
+  ]
+}

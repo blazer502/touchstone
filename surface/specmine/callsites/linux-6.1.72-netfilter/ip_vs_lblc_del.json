@@ -1,0 +1,102 @@
+{
+  "callee": "ip_vs_lblc_del",
+  "defined_in": "net/netfilter/ipvs/ip_vs_lblc.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "ip_vs_lblc_new",
+      "file": "net/netfilter/ipvs/ip_vs_lblc.c",
+      "line": 207,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(en->dest == dest)",
+          "exit_kind": "return",
+          "source_line": 205,
+          "exit_line": 206
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "en",
+          "polarity": "in_true_branch",
+          "source_line": 204
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_lblc_flush",
+      "file": "net/netfilter/ipvs/ip_vs_lblc.c",
+      "line": 240,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 236
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < IP_VS_LBLC_TAB_SIZE; i++",
+          "polarity": "in_true_branch",
+          "source_line": 238
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_lblc_full_check",
+      "file": "net/netfilter/ipvs/ip_vs_lblc.c",
+      "line": 274,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 267
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0, j = tbl->rover; i < IP_VS_LBLC_TAB_SIZE; i++",
+          "polarity": "in_true_branch",
+          "source_line": 264
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_lblc_check_expire",
+      "file": "net/netfilter/ipvs/ip_vs_lblc.c",
+      "line": 328,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 323
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((tbl->counter % COUNT_FOR_FULL_EXPIRATION) == 0)",
+          "exit_kind": "goto",
+          "source_line": 304
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(atomic_read(&tbl->entries) <= tbl->max_size)",
+          "exit_kind": "goto",
+          "source_line": 311
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(time_before(now, en->lastuse + ENTRY_TIMEOUT))",
+          "exit_kind": "continue",
+          "source_line": 325,
+          "exit_line": 326
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0, j = tbl->rover; i < IP_VS_LBLC_TAB_SIZE; i++",
+          "polarity": "in_true_branch",
+          "source_line": 320
+        }
+      ]
+    }
+  ]
+}

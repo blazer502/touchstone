@@ -1,0 +1,53 @@
+{
+  "callee": "ip_vs_sh_hashkey",
+  "defined_in": "net/netfilter/ipvs/ip_vs_sh.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_sh_get",
+      "file": "net/netfilter/ipvs/ip_vs_sh.c",
+      "line": 107,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_sh_get_fallback",
+      "file": "net/netfilter/ipvs/ip_vs_sh.c",
+      "line": 129,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_sh_get_fallback",
+      "file": "net/netfilter/ipvs/ip_vs_sh.c",
+      "line": 144,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest != NULL",
+          "source_line": 131
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest)",
+          "exit_kind": "return",
+          "source_line": 131,
+          "exit_line": 132
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!is_unavailable(dest))",
+          "exit_kind": "return",
+          "source_line": 133,
+          "exit_line": 134
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "offset = 0; offset < IP_VS_SH_TAB_SIZE; offset++",
+          "polarity": "in_true_branch",
+          "source_line": 142
+        }
+      ]
+    }
+  ]
+}

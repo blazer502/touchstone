@@ -1,0 +1,43 @@
+{
+  "callee": "ip_vs_conn_hashkey_conn",
+  "defined_in": "net/netfilter/ipvs/ip_vs_conn.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_conn_hash",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 172,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->flags & IP_VS_CONN_F_ONE_PACKET)",
+          "exit_kind": "return",
+          "source_line": 168,
+          "exit_line": 169
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_conn_unhash",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 205,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_conn_unlink",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 235,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->flags & IP_VS_CONN_F_ONE_PACKET)",
+          "exit_kind": "return",
+          "source_line": 232,
+          "exit_line": 233
+        }
+      ]
+    }
+  ]
+}

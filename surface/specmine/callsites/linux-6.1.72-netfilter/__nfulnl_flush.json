@@ -1,0 +1,130 @@
+{
+  "callee": "__nfulnl_flush",
+  "defined_in": "net/netfilter/nfnetlink_log.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "instance_create",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 215,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "inst != NULL",
+          "source_line": 173
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(__instance_lookup(log, group_num))",
+          "exit_kind": "goto",
+          "source_line": 167
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!inst)",
+          "exit_kind": "goto",
+          "source_line": 173
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!try_module_get(THIS_MODULE))",
+          "exit_kind": "goto",
+          "source_line": 178
+        }
+      ]
+    },
+    {
+      "caller": "__instance_destroy",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 232,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 226
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "inst->skb",
+          "polarity": "in_true_branch",
+          "source_line": 231
+        }
+      ]
+    },
+    {
+      "caller": "nfulnl_log_packet",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 785,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 733
+        },
+        {
+          "kind": "null_check",
+          "predicate": "inst != NULL",
+          "source_line": 702
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!inst)",
+          "exit_kind": "return",
+          "source_line": 702,
+          "exit_line": 703
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "inst->skb && size > skb_tailroom(inst->skb)",
+          "polarity": "in_true_branch",
+          "source_line": 782
+        }
+      ]
+    },
+    {
+      "caller": "nfulnl_log_packet",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 802,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 733
+        },
+        {
+          "kind": "null_check",
+          "predicate": "inst != NULL",
+          "source_line": 702
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!inst)",
+          "exit_kind": "return",
+          "source_line": 702,
+          "exit_line": 703
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!inst->skb)",
+          "exit_kind": "goto",
+          "source_line": 791,
+          "exit_line": 792
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!inst->skb)",
+          "exit_kind": "goto",
+          "source_line": 788
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "inst->qlen >= qthreshold",
+          "polarity": "in_true_branch",
+          "source_line": 801
+        }
+      ]
+    }
+  ]
+}

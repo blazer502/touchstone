@@ -1,0 +1,95 @@
+{
+  "callee": "ip_vs_flush",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ctl.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_service_nets_cleanup",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1657,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 1654
+        }
+      ]
+    },
+    {
+      "caller": "do_ip_vs_set_ctl",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 2510,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 2507
+        },
+        {
+          "kind": "capability_check",
+          "predicate": "ns_capable(sock_net(sk)->user_ns, CAP_NET_ADMIN)",
+          "source_line": 2472
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ns_capable(sock_net(sk)->user_ns, CAP_NET_ADMIN))",
+          "exit_kind": "return",
+          "source_line": 2472,
+          "exit_line": 2473
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd < IP_VS_BASE_CTL || cmd > IP_VS_SO_SET_MAX)",
+          "exit_kind": "return",
+          "source_line": 2475,
+          "exit_line": 2476
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(len != set_arglen[CMDID(cmd)])",
+          "exit_kind": "return",
+          "source_line": 2477
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_from_sockptr(arg, ptr, len) != 0)",
+          "exit_kind": "return",
+          "source_line": 2483,
+          "exit_line": 2484
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd == IP_VS_SO_SET_STARTDAEMON)",
+          "exit_kind": "return",
+          "source_line": 2491
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cmd == IP_VS_SO_SET_FLUSH",
+          "polarity": "in_true_branch",
+          "source_line": 2508
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_genl_set_cmd",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 3688,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 3685
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cmd == IPVS_CMD_FLUSH",
+          "polarity": "in_true_branch",
+          "source_line": 3687
+        }
+      ]
+    }
+  ]
+}

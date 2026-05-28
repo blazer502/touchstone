@@ -1,0 +1,83 @@
+{
+  "callee": "nf_conntrack_lock",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_conntrack_double_lock",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 145,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "h1 <= h2",
+          "polarity": "in_true_branch",
+          "source_line": 144
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_double_lock",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 150,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 147
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "h1 <= h2",
+          "polarity": "in_false_branch",
+          "source_line": 149
+        }
+      ]
+    },
+    {
+      "caller": "get_next_corpse",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 2393,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "bh_disabled",
+          "source_line": 2392
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(hlist_nulls_empty(hslot))",
+          "exit_kind": "continue",
+          "source_line": 2388,
+          "exit_line": 2389
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "; *bucket < nf_conntrack_htable_size; (*bucket)++",
+          "polarity": "in_true_branch",
+          "source_line": 2385
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_dump_table",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1207,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "bh_disabled",
+          "source_line": 1196
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "; cb->args[0] < nf_conntrack_htable_size; cb->args[0]++",
+          "polarity": "in_true_branch",
+          "source_line": 1197
+        }
+      ]
+    }
+  ]
+}

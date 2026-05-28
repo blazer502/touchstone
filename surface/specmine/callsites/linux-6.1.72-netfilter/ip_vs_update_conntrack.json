@@ -1,0 +1,77 @@
+{
+  "callee": "ip_vs_update_conntrack",
+  "defined_in": "net/netfilter/ipvs/ip_vs_nfct.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "handle_response_icmp",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 900,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(IP_VS_FWD_METHOD(cp) != IP_VS_CONN_F_MASQ)",
+          "exit_kind": "goto",
+          "source_line": 865,
+          "exit_line": 866
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb_csum_unnecessary(skb) && ip_vs_checksum_complete(skb, ihl))",
+          "exit_kind": "goto",
+          "source_line": 869
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, offset))",
+          "exit_kind": "goto",
+          "source_line": 879,
+          "exit_line": 880
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_route_me_harder(cp->ipvs, af, skb, hooknum))",
+          "exit_kind": "goto",
+          "source_line": 889,
+          "exit_line": 890
+        }
+      ]
+    },
+    {
+      "caller": "handle_response",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 1316,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(IP_VS_FWD_METHOD(cp) != IP_VS_CONN_F_MASQ)",
+          "exit_kind": "goto",
+          "source_line": 1266,
+          "exit_line": 1267
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, iph->len))",
+          "exit_kind": "goto",
+          "source_line": 1271,
+          "exit_line": 1272
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_route_me_harder(cp->ipvs, af, skb, hooknum))",
+          "exit_kind": "goto",
+          "source_line": 1304,
+          "exit_line": 1305
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_nat_send_or_cont",
+      "file": "net/netfilter/ipvs/ip_vs_xmit.c",
+      "line": 643,
+      "guards": []
+    }
+  ]
+}

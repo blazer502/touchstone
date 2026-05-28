@@ -1,0 +1,126 @@
+{
+  "callee": "nfnl_queue_pernet",
+  "defined_in": "net/netfilter/nfnetlink_queue.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 15,
+  "callsites": [
+    {
+      "caller": "nfqnl_enqueue_packet",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 790,
+      "guards": []
+    },
+    {
+      "caller": "nfqnl_dev_drop",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 937,
+      "guards": []
+    },
+    {
+      "caller": "nfqnl_nf_hook_drop",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 970,
+      "guards": []
+    },
+    {
+      "caller": "nfqnl_rcv_nl_event",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 997,
+      "guards": []
+    },
+    {
+      "caller": "nfqnl_recv_verdict_batch",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1084,
+      "guards": []
+    },
+    {
+      "caller": "nfqnl_recv_verdict",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1195,
+      "guards": []
+    },
+    {
+      "caller": "nfqnl_recv_config",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1280,
+      "guards": []
+    },
+    {
+      "caller": "get_first",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1450,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "st != NULL",
+          "source_line": 1446
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!st)",
+          "exit_kind": "return",
+          "source_line": 1446,
+          "exit_line": 1447
+        }
+      ]
+    },
+    {
+      "caller": "get_next",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1470,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(++st->bucket >= INSTANCE_BUCKETS)",
+          "exit_kind": "return",
+          "source_line": 1467,
+          "exit_line": 1468
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "!h",
+          "polarity": "in_true_branch",
+          "source_line": 1464
+        }
+      ]
+    },
+    {
+      "caller": "seq_start",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1488,
+      "guards": []
+    },
+    {
+      "caller": "seq_start",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1490,
+      "guards": []
+    },
+    {
+      "caller": "seq_stop",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1501,
+      "guards": []
+    },
+    {
+      "caller": "seq_stop",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1503,
+      "guards": []
+    },
+    {
+      "caller": "nfnl_queue_net_init",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1530,
+      "guards": []
+    },
+    {
+      "caller": "nfnl_queue_net_exit",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1547,
+      "guards": []
+    }
+  ]
+}

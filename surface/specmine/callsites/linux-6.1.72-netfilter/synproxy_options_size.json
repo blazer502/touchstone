@@ -1,0 +1,57 @@
+{
+  "callee": "synproxy_options_size",
+  "defined_in": "net/netfilter/nf_synproxy_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "synproxy_send_client_synack",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 459,
+      "guards": []
+    },
+    {
+      "caller": "synproxy_send_server_syn",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 502,
+      "guards": []
+    },
+    {
+      "caller": "synproxy_send_server_ack",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 547,
+      "guards": []
+    },
+    {
+      "caller": "synproxy_send_client_ack",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 585,
+      "guards": []
+    },
+    {
+      "caller": "synproxy_send_client_synack_ipv6",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 872,
+      "guards": []
+    },
+    {
+      "caller": "synproxy_send_server_syn_ipv6",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 916,
+      "guards": []
+    },
+    {
+      "caller": "synproxy_send_server_ack_ipv6",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 961,
+      "guards": []
+    },
+    {
+      "caller": "synproxy_send_client_ack_ipv6",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 1000,
+      "guards": []
+    }
+  ]
+}

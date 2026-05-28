@@ -1,0 +1,51 @@
+{
+  "callee": "lockdep_nfnl_is_held",
+  "defined_in": "net/netfilter/nfnetlink.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_set_pernet",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 58,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected()",
+          "source_line": 57
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_pernet",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 65,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected()",
+          "source_line": 57
+        },
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_is_held(&ip_set_ref_lock)",
+          "source_line": 59
+        }
+      ]
+    },
+    {
+      "caller": "lockdep_nfnl_nft_mutex_not_held",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 912,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "debug_locks",
+          "polarity": "in_true_branch",
+          "source_line": 911
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "callee": "nft_chain_validate_dependency",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_masq_validate",
+      "file": "net/netfilter/nft_masq.c",
+      "line": 34,
+      "guards": []
+    },
+    {
+      "caller": "nft_nat_validate",
+      "file": "net/netfilter/nft_nat.c",
+      "line": 145,
+      "guards": []
+    },
+    {
+      "caller": "nft_redir_validate",
+      "file": "net/netfilter/nft_redir.c",
+      "line": 34,
+      "guards": []
+    }
+  ]
+}

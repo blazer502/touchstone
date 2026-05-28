@@ -1,0 +1,404 @@
+{
+  "callee": "nf_ct_netns_put",
+  "defined_in": "net/netfilter/nf_conntrack_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 36,
+  "callsites": [
+    {
+      "caller": "nf_conncount_destroy",
+      "file": "net/netfilter/nf_conncount.c",
+      "line": 592,
+      "guards": []
+    },
+    {
+      "caller": "nf_ct_netns_inet_get",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 601,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 593,
+          "exit_line": 594
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 596,
+          "exit_line": 597
+        }
+      ]
+    },
+    {
+      "caller": "nf_ct_netns_get",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 622,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 617,
+          "exit_line": 618
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "nfproto",
+          "polarity": "in_true_branch",
+          "source_line": 611
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "err < 0",
+          "polarity": "in_true_branch",
+          "source_line": 621
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_fini_net",
+      "file": "net/netfilter/nf_conntrack_standalone.c",
+      "line": 1147,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "enable_hooks",
+          "polarity": "in_true_branch",
+          "source_line": 1146
+        }
+      ]
+    },
+    {
+      "caller": "nft_connlimit_do_destroy",
+      "file": "net/netfilter/nft_connlimit.c",
+      "line": 102,
+      "guards": []
+    },
+    {
+      "caller": "nft_ct_get_destroy",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 632,
+      "guards": []
+    },
+    {
+      "caller": "nft_ct_set_destroy",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 641,
+      "guards": []
+    },
+    {
+      "caller": "nft_ct_timeout_obj_destroy",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 976,
+      "guards": []
+    },
+    {
+      "caller": "nft_ct_helper_obj_destroy",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 1112,
+      "guards": []
+    },
+    {
+      "caller": "nft_ct_expect_obj_destroy",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 1245,
+      "guards": []
+    },
+    {
+      "caller": "nft_flow_offload_destroy",
+      "file": "net/netfilter/nft_flow_offload.c",
+      "line": 435,
+      "guards": []
+    },
+    {
+      "caller": "nft_masq_ipv4_destroy",
+      "file": "net/netfilter/nft_masq.c",
+      "line": 120,
+      "guards": []
+    },
+    {
+      "caller": "nft_masq_ipv6_destroy",
+      "file": "net/netfilter/nft_masq.c",
+      "line": 167,
+      "guards": []
+    },
+    {
+      "caller": "nft_masq_inet_destroy",
+      "file": "net/netfilter/nft_masq.c",
+      "line": 223,
+      "guards": []
+    },
+    {
+      "caller": "nft_nat_destroy",
+      "file": "net/netfilter/nft_nat.c",
+      "line": 308,
+      "guards": []
+    },
+    {
+      "caller": "nft_redir_ipv4_destroy",
+      "file": "net/netfilter/nft_redir.c",
+      "line": 139,
+      "guards": []
+    },
+    {
+      "caller": "nft_redir_ipv6_destroy",
+      "file": "net/netfilter/nft_redir.c",
+      "line": 167,
+      "guards": []
+    },
+    {
+      "caller": "nft_redir_inet_destroy",
+      "file": "net/netfilter/nft_redir.c",
+      "line": 196,
+      "guards": []
+    },
+    {
+      "caller": "nft_synproxy_do_init",
+      "file": "net/netfilter/nft_synproxy.c",
+      "line": 204,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & ~NF_SYNPROXY_OPT_MASK)",
+          "exit_kind": "return",
+          "source_line": 166,
+          "exit_line": 167
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tb[NFTA_SYNPROXY_FLAGS])",
+          "exit_kind": "return",
+          "source_line": 164
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 172,
+          "exit_line": 173
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 178,
+          "exit_line": 179
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 184,
+          "exit_line": 185
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 191,
+          "exit_line": 192
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 194
+        }
+      ]
+    },
+    {
+      "caller": "nft_synproxy_do_destroy",
+      "file": "net/netfilter/nft_synproxy.c",
+      "line": 227,
+      "guards": []
+    },
+    {
+      "caller": "connsecmark_tg_destroy",
+      "file": "net/netfilter/xt_CONNSECMARK.c",
+      "line": 114,
+      "guards": []
+    },
+    {
+      "caller": "xt_ct_tg_check",
+      "file": "net/netfilter/xt_CT.c",
+      "line": 229,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ct != NULL",
+          "source_line": 185
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->flags & XT_CT_NOTRACK)",
+          "exit_kind": "goto",
+          "source_line": 162
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 175,
+          "exit_line": 176
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ct)",
+          "exit_kind": "goto",
+          "source_line": 185
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(strnlen(info->helper, sizeof(info->helper)) == sizeof(info->helper))",
+          "exit_kind": "goto",
+          "source_line": 198
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 204,
+          "exit_line": 205
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->helper[0])",
+          "exit_kind": "goto",
+          "source_line": 197
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(strnlen(info->timeout, sizeof(info->timeout)) == sizeof(info->timeout))",
+          "exit_kind": "goto",
+          "source_line": 209
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 215,
+          "exit_line": 216
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->timeout[0])",
+          "exit_kind": "goto",
+          "source_line": 208
+        }
+      ]
+    },
+    {
+      "caller": "xt_ct_tg_destroy",
+      "file": "net/netfilter/xt_CT.c",
+      "line": 289,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "ct",
+          "polarity": "in_true_branch",
+          "source_line": 285
+        }
+      ]
+    },
+    {
+      "caller": "masquerade_tg_destroy",
+      "file": "net/netfilter/xt_MASQUERADE.c",
+      "line": 51,
+      "guards": []
+    },
+    {
+      "caller": "netmap_tg_destroy",
+      "file": "net/netfilter/xt_NETMAP.c",
+      "line": 65,
+      "guards": []
+    },
+    {
+      "caller": "redirect_tg_destroy",
+      "file": "net/netfilter/xt_REDIRECT.c",
+      "line": 46,
+      "guards": []
+    },
+    {
+      "caller": "xt_cluster_mt_destroy",
+      "file": "net/netfilter/xt_cluster.c",
+      "line": 146,
+      "guards": []
+    },
+    {
+      "caller": "connbytes_mt_destroy",
+      "file": "net/netfilter/xt_connbytes.c",
+      "line": 132,
+      "guards": []
+    },
+    {
+      "caller": "connlabel_mt_check",
+      "file": "net/netfilter/xt_connlabel.c",
+      "line": 71,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->options & ~options)",
+          "exit_kind": "return",
+          "source_line": 56
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 63
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret < 0",
+          "polarity": "in_true_branch",
+          "source_line": 70
+        }
+      ]
+    },
+    {
+      "caller": "connlabel_mt_destroy",
+      "file": "net/netfilter/xt_connlabel.c",
+      "line": 78,
+      "guards": []
+    },
+    {
+      "caller": "connmark_tg_destroy",
+      "file": "net/netfilter/xt_connmark.c",
+      "line": 117,
+      "guards": []
+    },
+    {
+      "caller": "connmark_mt_destroy",
+      "file": "net/netfilter/xt_connmark.c",
+      "line": 147,
+      "guards": []
+    },
+    {
+      "caller": "conntrack_mt_destroy",
+      "file": "net/netfilter/xt_conntrack.c",
+      "line": 279,
+      "guards": []
+    },
+    {
+      "caller": "helper_mt_destroy",
+      "file": "net/netfilter/xt_helper.c",
+      "line": 71,
+      "guards": []
+    },
+    {
+      "caller": "xt_nat_destroy",
+      "file": "net/netfilter/xt_nat.c",
+      "line": 34,
+      "guards": []
+    },
+    {
+      "caller": "state_mt_destroy",
+      "file": "net/netfilter/xt_state.c",
+      "line": 51,
+      "guards": []
+    }
+  ]
+}

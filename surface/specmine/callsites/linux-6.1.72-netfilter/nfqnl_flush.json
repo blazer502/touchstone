@@ -1,0 +1,88 @@
+{
+  "callee": "nfqnl_flush",
+  "defined_in": "net/netfilter/nfnetlink_queue.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "instance_create",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 161,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "inst != NULL",
+          "source_line": 129
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(instance_lookup(q, queue_num))",
+          "exit_kind": "goto",
+          "source_line": 123
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!inst)",
+          "exit_kind": "goto",
+          "source_line": 129
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!try_module_get(THIS_MODULE))",
+          "exit_kind": "goto",
+          "source_line": 142
+        }
+      ]
+    },
+    {
+      "caller": "instance_destroy_rcu",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 170,
+      "guards": []
+    },
+    {
+      "caller": "nfqnl_dev_drop",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 946,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 939
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < INSTANCE_BUCKETS; i++",
+          "polarity": "in_true_branch",
+          "source_line": 941
+        }
+      ]
+    },
+    {
+      "caller": "nfqnl_nf_hook_drop",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 988,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "q != NULL",
+          "source_line": 980
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!q)",
+          "exit_kind": "return",
+          "source_line": 980,
+          "exit_line": 981
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < INSTANCE_BUCKETS; i++",
+          "polarity": "in_true_branch",
+          "source_line": 983
+        }
+      ]
+    }
+  ]
+}

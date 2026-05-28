@@ -1,0 +1,125 @@
+{
+  "callee": "ip_vs_lookup_dest",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ctl.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "ip_vs_find_dest",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 705,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "svc != NULL",
+          "source_line": 701
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!svc)",
+          "exit_kind": "return",
+          "source_line": 701,
+          "exit_line": 702
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_find_dest",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 707,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "svc != NULL",
+          "source_line": 701
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!svc)",
+          "exit_kind": "return",
+          "source_line": 701,
+          "exit_line": 702
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!dest",
+          "polarity": "in_true_branch",
+          "source_line": 706
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_add_dest",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1067,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1066
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(udest->weight < 0)",
+          "exit_kind": "return",
+          "source_line": 1045
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(udest->l_threshold > udest->u_threshold)",
+          "exit_kind": "return",
+          "source_line": 1050
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(udest->tun_port == 0)",
+          "exit_kind": "return",
+          "source_line": 1057
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_edit_dest",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1138,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1137
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(udest->weight < 0)",
+          "exit_kind": "return",
+          "source_line": 1116
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(udest->l_threshold > udest->u_threshold)",
+          "exit_kind": "return",
+          "source_line": 1121
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(udest->tun_port == 0)",
+          "exit_kind": "return",
+          "source_line": 1128
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_del_dest",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1226,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1225
+        }
+      ]
+    }
+  ]
+}

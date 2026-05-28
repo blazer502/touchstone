@@ -1,0 +1,103 @@
+{
+  "callee": "nft_flow_offload_chain",
+  "defined_in": "net/netfilter/nf_tables_offload.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nft_flow_rule_offload_abort",
+      "file": "net/netfilter/nf_tables_offload.c",
+      "line": 524,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(trans->ctx.family != NFPROTO_NETDEV)",
+          "exit_kind": "continue",
+          "source_line": 515,
+          "exit_line": 516
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "trans->msg_type",
+          "polarity": "in_true_branch",
+          "source_line": 518
+        }
+      ]
+    },
+    {
+      "caller": "nft_flow_rule_offload_abort",
+      "file": "net/netfilter/nf_tables_offload.c",
+      "line": 531,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(trans->ctx.family != NFPROTO_NETDEV)",
+          "exit_kind": "continue",
+          "source_line": 515,
+          "exit_line": 516
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(trans->ctx.chain->flags & NFT_CHAIN_HW_OFFLOAD))",
+          "exit_kind": "continue",
+          "source_line": 528,
+          "exit_line": 529
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "trans->msg_type",
+          "polarity": "in_true_branch",
+          "source_line": 518
+        }
+      ]
+    },
+    {
+      "caller": "nft_flow_rule_offload_commit",
+      "file": "net/netfilter/nf_tables_offload.c",
+      "line": 576,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(trans->ctx.family != NFPROTO_NETDEV)",
+          "exit_kind": "continue",
+          "source_line": 566,
+          "exit_line": 567
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "trans->msg_type",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        }
+      ]
+    },
+    {
+      "caller": "nft_flow_rule_offload_commit",
+      "file": "net/netfilter/nf_tables_offload.c",
+      "line": 584,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(trans->ctx.family != NFPROTO_NETDEV)",
+          "exit_kind": "continue",
+          "source_line": 566,
+          "exit_line": 567
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(trans->ctx.chain->flags & NFT_CHAIN_HW_OFFLOAD))",
+          "exit_kind": "continue",
+          "source_line": 580,
+          "exit_line": 581
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "trans->msg_type",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        }
+      ]
+    }
+  ]
+}

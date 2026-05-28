@@ -1,0 +1,41 @@
+{
+  "callee": "nf_tables_expr_destroy",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_expr_destroy",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3113,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_rule_destroy",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 3478,
+      "guards": [
+        {
+          "kind": "enclosing_while",
+          "predicate": "nft_expr_more(rule, expr)",
+          "polarity": "in_true_branch",
+          "source_line": 3476
+        }
+      ]
+    },
+    {
+      "caller": "__nft_set_elem_expr_destroy",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5941,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "expr->ops->destroy_clone",
+          "polarity": "in_false_branch",
+          "source_line": 5940
+        }
+      ]
+    }
+  ]
+}

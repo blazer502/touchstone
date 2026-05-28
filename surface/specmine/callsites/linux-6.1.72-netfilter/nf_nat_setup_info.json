@@ -1,0 +1,252 @@
+{
+  "callee": "nf_nat_setup_info",
+  "defined_in": "net/netfilter/nf_nat_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 18,
+  "callsites": [
+    {
+      "caller": "bpf_ct_set_nat_info",
+      "file": "net/netfilter/nf_nat_bpf.c",
+      "line": 54,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(proto != NFPROTO_IPV4 && proto != NFPROTO_IPV6)",
+          "exit_kind": "return",
+          "source_line": 41,
+          "exit_line": 42
+        }
+      ]
+    },
+    {
+      "caller": "__nf_nat_alloc_null_binding",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 664,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_follow_master",
+      "file": "net/netfilter/nf_nat_helper.c",
+      "line": 191,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ct->status & IPS_NAT_DONE_MASK)",
+          "macro": "BUG_ON",
+          "source_line": 185
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_follow_master",
+      "file": "net/netfilter/nf_nat_helper.c",
+      "line": 198,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ct->status & IPS_NAT_DONE_MASK)",
+          "macro": "BUG_ON",
+          "source_line": 185
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_masquerade_ipv4",
+      "file": "net/netfilter/nf_nat_masquerade.c",
+      "line": 74,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "newsrc != NULL",
+          "source_line": 55
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(hooknum != NF_INET_POST_ROUTING)",
+          "macro": "WARN_ON",
+          "source_line": 39
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON",
+          "source_line": 43
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->tuplehash[IP_CT_DIR_ORIGINAL].tuple.src.u3.ip == 0)",
+          "exit_kind": "return",
+          "source_line": 49,
+          "exit_line": 50
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!newsrc)",
+          "exit_kind": "return",
+          "source_line": 55
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_masquerade_ipv6",
+      "file": "net/netfilter/nf_nat_masquerade.c",
+      "line": 268,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON",
+          "source_line": 251
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_redirect",
+      "file": "net/netfilter/nf_nat_redirect.c",
+      "line": 46,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_sip_expected",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 333,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ct->status & IPS_NAT_DONE_MASK)",
+          "macro": "BUG_ON",
+          "source_line": 327
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip_expected",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 370,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(ct->status & IPS_NAT_DONE_MASK)",
+          "macro": "BUG_ON",
+          "source_line": 327
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(exp->class != SIP_EXPECT_SIGNALLING)",
+          "exit_kind": "break",
+          "source_line": 338
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "range_set_for_snat",
+          "polarity": "in_true_branch",
+          "source_line": 369
+        }
+      ]
+    },
+    {
+      "caller": "nft_nat_eval",
+      "file": "net/netfilter/nft_nat.c",
+      "line": 125,
+      "guards": []
+    },
+    {
+      "caller": "netmap_tg6",
+      "file": "net/netfilter/xt_NETMAP.c",
+      "line": 51,
+      "guards": []
+    },
+    {
+      "caller": "netmap_tg4",
+      "file": "net/netfilter/xt_NETMAP.c",
+      "line": 101,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON",
+          "source_line": 77
+        }
+      ]
+    },
+    {
+      "caller": "xt_snat_target_v0",
+      "file": "net/netfilter/xt_nat.c",
+      "line": 65,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON",
+          "source_line": 60
+        }
+      ]
+    },
+    {
+      "caller": "xt_dnat_target_v0",
+      "file": "net/netfilter/xt_nat.c",
+      "line": 81,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON",
+          "source_line": 77
+        }
+      ]
+    },
+    {
+      "caller": "xt_snat_target_v1",
+      "file": "net/netfilter/xt_nat.c",
+      "line": 100,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON",
+          "source_line": 93
+        }
+      ]
+    },
+    {
+      "caller": "xt_dnat_target_v1",
+      "file": "net/netfilter/xt_nat.c",
+      "line": 118,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON",
+          "source_line": 112
+        }
+      ]
+    },
+    {
+      "caller": "xt_snat_target_v2",
+      "file": "net/netfilter/xt_nat.c",
+      "line": 133,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON",
+          "source_line": 129
+        }
+      ]
+    },
+    {
+      "caller": "xt_dnat_target_v2",
+      "file": "net/netfilter/xt_nat.c",
+      "line": 147,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON",
+          "source_line": 144
+        }
+      ]
+    }
+  ]
+}

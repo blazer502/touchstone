@@ -1,0 +1,93 @@
+{
+  "callee": "ip_vs_mh_hashkey",
+  "defined_in": "net/netfilter/ipvs/ip_vs_mh.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "ip_vs_mh_permutate",
+      "file": "net/netfilter/ipvs/ip_vs_mh.c",
+      "line": 143,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(s->gcd < 1)",
+          "exit_kind": "return",
+          "source_line": 134,
+          "exit_line": 135
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "(p = p->next) != &svc->destinations",
+          "polarity": "in_true_branch",
+          "source_line": 140
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_mh_permutate",
+      "file": "net/netfilter/ipvs/ip_vs_mh.c",
+      "line": 146,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(s->gcd < 1)",
+          "exit_kind": "return",
+          "source_line": 134,
+          "exit_line": 135
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "(p = p->next) != &svc->destinations",
+          "polarity": "in_true_branch",
+          "source_line": 140
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_mh_get",
+      "file": "net/netfilter/ipvs/ip_vs_mh.c",
+      "line": 238,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_mh_get_fallback",
+      "file": "net/netfilter/ipvs/ip_vs_mh.c",
+      "line": 255,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_mh_get_fallback",
+      "file": "net/netfilter/ipvs/ip_vs_mh.c",
+      "line": 271,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest != NULL",
+          "source_line": 258
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest)",
+          "exit_kind": "return",
+          "source_line": 258,
+          "exit_line": 259
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!is_unavailable(dest))",
+          "exit_kind": "return",
+          "source_line": 260,
+          "exit_line": 261
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "offset = 0; offset < IP_VS_MH_TAB_SIZE; offset++",
+          "polarity": "in_true_branch",
+          "source_line": 269
+        }
+      ]
+    }
+  ]
+}

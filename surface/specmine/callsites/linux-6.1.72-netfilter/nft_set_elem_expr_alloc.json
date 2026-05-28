@@ -1,0 +1,352 @@
+{
+  "callee": "nft_set_elem_expr_alloc",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "nft_set_expr_alloc",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4576,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_SET_EXPR]",
+          "polarity": "in_true_branch",
+          "source_line": 4575
+        }
+      ]
+    },
+    {
+      "caller": "nft_set_expr_alloc",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4601,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(expr)",
+          "source_line": 4577
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(expr))",
+          "exit_kind": "goto",
+          "source_line": 4577
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(flags & NFT_SET_EXPR))",
+          "exit_kind": "goto",
+          "source_line": 4587
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(i == NFT_SET_EXPR_MAX)",
+          "exit_kind": "goto",
+          "source_line": 4593
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_type(tmp) != NFTA_LIST_ELEM)",
+          "exit_kind": "goto",
+          "source_line": 4597
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_SET_EXPR]",
+          "polarity": "in_false_branch",
+          "source_line": 4583
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_SET_EXPRESSIONS]",
+          "polarity": "in_true_branch",
+          "source_line": 4583
+        }
+      ]
+    },
+    {
+      "caller": "nft_add_set_elem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6350,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 6270,
+          "exit_line": 6271
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 6276,
+          "exit_line": 6277
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 6285,
+          "exit_line": 6286
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags != 0)",
+          "exit_kind": "return",
+          "source_line": 6283
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->flags & NFT_SET_MAP)",
+          "exit_kind": "return",
+          "source_line": 6289
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_DATA] != NULL)",
+          "exit_kind": "return",
+          "source_line": 6294,
+          "exit_line": 6295
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->flags & NFT_SET_OBJECT)",
+          "exit_kind": "return",
+          "source_line": 6298
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_OBJREF])",
+          "exit_kind": "return",
+          "source_line": 6303,
+          "exit_line": 6304
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_setelem_valid_key_end(set, nla, flags))",
+          "exit_kind": "return",
+          "source_line": 6307,
+          "exit_line": 6308
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(set->flags & NFT_SET_TIMEOUT))",
+          "exit_kind": "return",
+          "source_line": 6323,
+          "exit_line": 6324
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 6327,
+          "exit_line": 6328
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_TIMEOUT] != NULL)",
+          "exit_kind": "return",
+          "source_line": 6322
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(set->flags & NFT_SET_TIMEOUT))",
+          "exit_kind": "return",
+          "source_line": 6336,
+          "exit_line": 6337
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 6340,
+          "exit_line": 6341
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_EXPIRATION] != NULL)",
+          "exit_kind": "return",
+          "source_line": 6335
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->num_exprs && set->num_exprs != 1)",
+          "exit_kind": "return",
+          "source_line": 6347,
+          "exit_line": 6348
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_SET_ELEM_EXPR]",
+          "polarity": "in_true_branch",
+          "source_line": 6344
+        }
+      ]
+    },
+    {
+      "caller": "nft_add_set_elem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6378,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(expr)",
+          "source_line": 6352
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 6270,
+          "exit_line": 6271
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 6276,
+          "exit_line": 6277
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 6285,
+          "exit_line": 6286
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags != 0)",
+          "exit_kind": "return",
+          "source_line": 6283
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->flags & NFT_SET_MAP)",
+          "exit_kind": "return",
+          "source_line": 6289
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_DATA] != NULL)",
+          "exit_kind": "return",
+          "source_line": 6294,
+          "exit_line": 6295
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->flags & NFT_SET_OBJECT)",
+          "exit_kind": "return",
+          "source_line": 6298
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_OBJREF])",
+          "exit_kind": "return",
+          "source_line": 6303,
+          "exit_line": 6304
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_setelem_valid_key_end(set, nla, flags))",
+          "exit_kind": "return",
+          "source_line": 6307,
+          "exit_line": 6308
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(set->flags & NFT_SET_TIMEOUT))",
+          "exit_kind": "return",
+          "source_line": 6323,
+          "exit_line": 6324
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 6327,
+          "exit_line": 6328
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_TIMEOUT] != NULL)",
+          "exit_kind": "return",
+          "source_line": 6322
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(set->flags & NFT_SET_TIMEOUT))",
+          "exit_kind": "return",
+          "source_line": 6336,
+          "exit_line": 6337
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 6340,
+          "exit_line": 6341
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_EXPIRATION] != NULL)",
+          "exit_kind": "return",
+          "source_line": 6335
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->num_exprs && set->num_exprs != 1)",
+          "exit_kind": "return",
+          "source_line": 6347,
+          "exit_line": 6348
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(expr))",
+          "exit_kind": "return",
+          "source_line": 6352,
+          "exit_line": 6353
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->num_exprs && set->exprs[0]->ops != expr->ops)",
+          "exit_kind": "goto",
+          "source_line": 6358
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_ELEM_EXPR])",
+          "exit_kind": "return",
+          "source_line": 6344
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_type(tmp) != NFTA_LIST_ELEM)",
+          "exit_kind": "goto",
+          "source_line": 6374
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_SET_ELEM_EXPR]",
+          "polarity": "in_false_branch",
+          "source_line": 6362
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_SET_ELEM_EXPRESSIONS]",
+          "polarity": "in_true_branch",
+          "source_line": 6362
+        }
+      ]
+    },
+    {
+      "caller": "nft_dynset_expr_alloc",
+      "file": "net/netfilter/nft_dynset.c",
+      "line": 131,
+      "guards": []
+    }
+  ]
+}

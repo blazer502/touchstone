@@ -1,0 +1,95 @@
+{
+  "callee": "nfnl_acct_fill_info",
+  "defined_in": "net/netfilter/nfnetlink_acct.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nfnl_acct_dump",
+      "file": "net/netfilter/nfnetlink_acct.c",
+      "line": 220,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 208
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cb->args[2])",
+          "exit_kind": "return",
+          "source_line": 201,
+          "exit_line": 202
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cur != last)",
+          "exit_kind": "continue",
+          "source_line": 211,
+          "exit_line": 212
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(last)",
+          "exit_kind": "continue",
+          "source_line": 210
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(filter && (cur->flags & filter->mask) != filter->value)",
+          "exit_kind": "continue",
+          "source_line": 217,
+          "exit_line": 218
+        }
+      ]
+    },
+    {
+      "caller": "nfnl_acct_get",
+      "file": "net/netfilter/nfnetlink_acct.c",
+      "line": 309,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 282
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[NFACCT_NAME])",
+          "exit_kind": "return",
+          "source_line": 293,
+          "exit_line": 294
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(strncmp(cur->name, acct_name, NFACCT_NAME_MAX)!= 0)",
+          "exit_kind": "continue",
+          "source_line": 300,
+          "exit_line": 301
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb2 == NULL)",
+          "exit_kind": "break",
+          "source_line": 304
+        }
+      ]
+    },
+    {
+      "caller": "nfnl_overquota_report",
+      "file": "net/netfilter/nfnetlink_acct.c",
+      "line": 469,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "return",
+          "source_line": 466,
+          "exit_line": 467
+        }
+      ]
+    }
+  ]
+}

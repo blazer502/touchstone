@@ -1,0 +1,349 @@
+{
+  "callee": "nfnetlink_send",
+  "defined_in": "net/netfilter/nfnetlink.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "ctnetlink_conntrack_event",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 844,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nlh != NULL",
+          "source_line": 762
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nest_parms != NULL",
+          "source_line": 768
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nest_parms != NULL",
+          "source_line": 778
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!item->report && !nfnetlink_has_listeners(net, group))",
+          "exit_kind": "return",
+          "source_line": 752,
+          "exit_line": 753
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 756,
+          "exit_line": 757
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh)",
+          "exit_kind": "goto",
+          "source_line": 762,
+          "exit_line": 763
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nest_parms)",
+          "exit_kind": "goto",
+          "source_line": 768,
+          "exit_line": 769
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_tuples(skb, nf_ct_tuple(ct, IP_CT_DIR_ORIGINAL)) < 0)",
+          "exit_kind": "goto",
+          "source_line": 770,
+          "exit_line": 771
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nest_parms)",
+          "exit_kind": "goto",
+          "source_line": 778,
+          "exit_line": 779
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_tuples(skb, nf_ct_tuple(ct, IP_CT_DIR_REPLY)) < 0)",
+          "exit_kind": "goto",
+          "source_line": 780,
+          "exit_line": 781
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_id(skb, ct) < 0)",
+          "exit_kind": "goto",
+          "source_line": 791,
+          "exit_line": 792
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_status(skb, ct) < 0)",
+          "exit_kind": "goto",
+          "source_line": 794,
+          "exit_line": 795
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_timeout(skb, ct, true) < 0)",
+          "exit_kind": "goto",
+          "source_line": 798,
+          "exit_line": 799
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(events & (1 << IPCT_DESTROY))",
+          "exit_kind": "goto",
+          "source_line": 797
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_timeout(skb, ct, false) < 0)",
+          "exit_kind": "goto",
+          "source_line": 806,
+          "exit_line": 807
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_dump_mark(skb, ct, events & (1 << IPCT_MARK)))",
+          "exit_kind": "goto",
+          "source_line": 840,
+          "exit_line": 841
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_expect_event",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 3136,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nlh != NULL",
+          "source_line": 3129
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!item->report && !nfnetlink_has_listeners(net, group))",
+          "exit_kind": "return",
+          "source_line": 3119,
+          "exit_line": 3120
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 3123,
+          "exit_line": 3124
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh)",
+          "exit_kind": "goto",
+          "source_line": 3129,
+          "exit_line": 3130
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctnetlink_exp_dump_expect(skb, exp) < 0)",
+          "exit_kind": "goto",
+          "source_line": 3132,
+          "exit_line": 3133
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_gen_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8584,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb2 == NULL)",
+          "exit_kind": "goto",
+          "source_line": 8574,
+          "exit_line": 8575
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 8579
+        }
+      ]
+    },
+    {
+      "caller": "nft_commit_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9402,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "batch_skb != NULL",
+          "source_line": 9387
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!batch_skb)",
+          "exit_kind": "continue",
+          "source_line": 9387
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(len > 0 && NFT_CB(skb).report == NFT_CB(batch_skb).report)",
+          "exit_kind": "continue",
+          "source_line": 9395
+        }
+      ]
+    },
+    {
+      "caller": "nft_commit_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9408,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "batch_skb != NULL",
+          "source_line": 9387
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!batch_skb)",
+          "exit_kind": "continue",
+          "source_line": 9387
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(len > 0 && NFT_CB(skb).report == NFT_CB(batch_skb).report)",
+          "exit_kind": "continue",
+          "source_line": 9395
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "batch_skb",
+          "polarity": "in_true_branch",
+          "source_line": 9407
+        }
+      ]
+    },
+    {
+      "caller": "nft_trace_notify",
+      "file": "net/netfilter/nf_tables_trace.c",
+      "line": 267,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "skb != NULL",
+          "source_line": 202
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nlh != NULL",
+          "source_line": 208
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nfnetlink_has_listeners(nft_net(pkt), NFNLGRP_NFTRACE))",
+          "exit_kind": "return",
+          "source_line": 176,
+          "exit_line": 177
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb)",
+          "exit_kind": "return",
+          "source_line": 202,
+          "exit_line": 203
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh)",
+          "exit_kind": "goto",
+          "source_line": 208,
+          "exit_line": 209
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_TRACE_NFPROTO, htonl(nft_pf(pkt))))",
+          "exit_kind": "goto",
+          "source_line": 211,
+          "exit_line": 212
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_TRACE_TYPE, htonl(info->type)))",
+          "exit_kind": "goto",
+          "source_line": 214,
+          "exit_line": 215
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_u32(skb, NFTA_TRACE_ID, info->skbid))",
+          "exit_kind": "goto",
+          "source_line": 217,
+          "exit_line": 218
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_TRACE_CHAIN, info->chain->name))",
+          "exit_kind": "goto",
+          "source_line": 220,
+          "exit_line": 221
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_TRACE_TABLE, info->chain->table->name))",
+          "exit_kind": "goto",
+          "source_line": 223,
+          "exit_line": 224
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_trace_fill_rule_info(skb, info))",
+          "exit_kind": "goto",
+          "source_line": 226,
+          "exit_line": 227
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_verdict_dump(skb, NFTA_TRACE_VERDICT, info->verdict))",
+          "exit_kind": "goto",
+          "source_line": 235,
+          "exit_line": 236
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(mark && nla_put_be32(skb, NFTA_TRACE_MARK, htonl(mark)))",
+          "exit_kind": "goto",
+          "source_line": 254,
+          "exit_line": 255
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_trace_fill_dev_info(skb, nft_in(pkt), nft_out(pkt)))",
+          "exit_kind": "goto",
+          "source_line": 258,
+          "exit_line": 259
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_trace_fill_pkt_info(skb, pkt))",
+          "exit_kind": "goto",
+          "source_line": 261,
+          "exit_line": 262
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!info->packet_dumped)",
+          "exit_kind": "goto",
+          "source_line": 257
+        }
+      ]
+    }
+  ]
+}

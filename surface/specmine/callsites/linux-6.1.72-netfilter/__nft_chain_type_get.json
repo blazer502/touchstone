@@ -1,0 +1,47 @@
+{
+  "callee": "__nft_chain_type_get",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "__nf_tables_chain_type_lookup",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 853,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < NFT_CHAIN_T_MAX; i++",
+          "polarity": "in_true_branch",
+          "source_line": 852
+        }
+      ]
+    },
+    {
+      "caller": "nft_register_chain_type",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1578,
+      "guards": []
+    },
+    {
+      "caller": "nft_chain_parse_hook",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2202,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "lockdep_assert_held(&nft_net->commit_mutex)",
+          "source_line": 2186
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2192,
+          "exit_line": 2193
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,400 @@
+{
+  "callee": "pptp_msg_name",
+  "defined_in": "net/netfilter/nf_conntrack_pptp.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 10,
+  "callsites": [
+    {
+      "caller": "pptp_inbound_pkt",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 265,
+      "guards": []
+    },
+    {
+      "caller": "pptp_inbound_pkt",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 300,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate < PPTP_SESSION_REQUESTED)",
+          "exit_kind": "goto",
+          "source_line": 270,
+          "exit_line": 271
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate > PPTP_SESSION_STOPREQ)",
+          "exit_kind": "goto",
+          "source_line": 280,
+          "exit_line": 281
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 290,
+          "exit_line": 291
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->pns_call_id != pcid)",
+          "exit_kind": "goto",
+          "source_line": 298,
+          "exit_line": 299
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "msg",
+          "polarity": "in_true_branch",
+          "source_line": 267
+        }
+      ]
+    },
+    {
+      "caller": "pptp_inbound_pkt",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 317,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate < PPTP_SESSION_REQUESTED)",
+          "exit_kind": "goto",
+          "source_line": 270,
+          "exit_line": 271
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate > PPTP_SESSION_STOPREQ)",
+          "exit_kind": "goto",
+          "source_line": 280,
+          "exit_line": 281
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 290,
+          "exit_line": 291
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->pns_call_id != pcid)",
+          "exit_kind": "goto",
+          "source_line": 298,
+          "exit_line": 299
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 313,
+          "exit_line": 314
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "msg",
+          "polarity": "in_true_branch",
+          "source_line": 267
+        }
+      ]
+    },
+    {
+      "caller": "pptp_inbound_pkt",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 336,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate < PPTP_SESSION_REQUESTED)",
+          "exit_kind": "goto",
+          "source_line": 270,
+          "exit_line": 271
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate > PPTP_SESSION_STOPREQ)",
+          "exit_kind": "goto",
+          "source_line": 280,
+          "exit_line": 281
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 290,
+          "exit_line": 291
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->pns_call_id != pcid)",
+          "exit_kind": "goto",
+          "source_line": 298,
+          "exit_line": 299
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 313,
+          "exit_line": 314
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 324,
+          "exit_line": 325
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->pns_call_id != pcid)",
+          "exit_kind": "goto",
+          "source_line": 333,
+          "exit_line": 334
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "msg",
+          "polarity": "in_true_branch",
+          "source_line": 267
+        }
+      ]
+    },
+    {
+      "caller": "pptp_inbound_pkt",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 346,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate < PPTP_SESSION_REQUESTED)",
+          "exit_kind": "goto",
+          "source_line": 270,
+          "exit_line": 271
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate > PPTP_SESSION_STOPREQ)",
+          "exit_kind": "goto",
+          "source_line": 280,
+          "exit_line": 281
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 290,
+          "exit_line": 291
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->pns_call_id != pcid)",
+          "exit_kind": "goto",
+          "source_line": 298,
+          "exit_line": 299
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 313,
+          "exit_line": 314
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 324,
+          "exit_line": 325
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->pns_call_id != pcid)",
+          "exit_kind": "goto",
+          "source_line": 333,
+          "exit_line": 334
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "msg",
+          "polarity": "in_true_branch",
+          "source_line": 267
+        }
+      ]
+    },
+    {
+      "caller": "pptp_inbound_pkt",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 372,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate < PPTP_SESSION_REQUESTED)",
+          "exit_kind": "goto",
+          "source_line": 270,
+          "exit_line": 271
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate > PPTP_SESSION_STOPREQ)",
+          "exit_kind": "goto",
+          "source_line": 280,
+          "exit_line": 281
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 290,
+          "exit_line": 291
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->pns_call_id != pcid)",
+          "exit_kind": "goto",
+          "source_line": 298,
+          "exit_line": 299
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 313,
+          "exit_line": 314
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 324,
+          "exit_line": 325
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->pns_call_id != pcid)",
+          "exit_kind": "goto",
+          "source_line": 333,
+          "exit_line": 334
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(hook && ct->status & IPS_NAT_MASK)",
+          "exit_kind": "return",
+          "source_line": 365,
+          "exit_line": 366
+        }
+      ]
+    },
+    {
+      "caller": "pptp_outbound_pkt",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 392,
+      "guards": []
+    },
+    {
+      "caller": "pptp_outbound_pkt",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 414,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_NONE)",
+          "exit_kind": "goto",
+          "source_line": 397,
+          "exit_line": 398
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 409,
+          "exit_line": 410
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "msg",
+          "polarity": "in_true_branch",
+          "source_line": 394
+        }
+      ]
+    },
+    {
+      "caller": "pptp_outbound_pkt",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 428,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_NONE)",
+          "exit_kind": "goto",
+          "source_line": 397,
+          "exit_line": 398
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 409,
+          "exit_line": 410
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->pac_call_id != pcid)",
+          "exit_kind": "goto",
+          "source_line": 426,
+          "exit_line": 427
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "msg",
+          "polarity": "in_true_branch",
+          "source_line": 394
+        }
+      ]
+    },
+    {
+      "caller": "pptp_outbound_pkt",
+      "file": "net/netfilter/nf_conntrack_pptp.c",
+      "line": 467,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_NONE)",
+          "exit_kind": "goto",
+          "source_line": 397,
+          "exit_line": 398
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 409,
+          "exit_line": 410
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->pac_call_id != pcid)",
+          "exit_kind": "goto",
+          "source_line": 426,
+          "exit_line": 427
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->sstate != PPTP_SESSION_CONFIRMED)",
+          "exit_kind": "goto",
+          "source_line": 441,
+          "exit_line": 442
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(hook && ct->status & IPS_NAT_MASK)",
+          "exit_kind": "return",
+          "source_line": 460,
+          "exit_line": 461
+        }
+      ]
+    }
+  ]
+}

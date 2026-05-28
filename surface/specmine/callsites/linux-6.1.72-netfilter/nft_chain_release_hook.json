@@ -1,0 +1,317 @@
+{
+  "callee": "nft_chain_release_hook",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "nf_tables_addchain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2382,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & NFT_CHAIN_BINDING)",
+          "exit_kind": "return",
+          "source_line": 2372,
+          "exit_line": 2373
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2377,
+          "exit_line": 2378
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_CHAIN_HOOK]",
+          "polarity": "in_true_branch",
+          "source_line": 2368
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "basechain == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 2381
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_addchain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2390,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & NFT_CHAIN_BINDING)",
+          "exit_kind": "return",
+          "source_line": 2372,
+          "exit_line": 2373
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2377,
+          "exit_line": 2378
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(basechain == NULL)",
+          "exit_kind": "return",
+          "source_line": 2381
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_CHAIN_HOOK]",
+          "polarity": "in_true_branch",
+          "source_line": 2368
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_CHAIN_COUNTERS]",
+          "polarity": "in_true_branch",
+          "source_line": 2387
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "IS_ERR(stats)",
+          "polarity": "in_true_branch",
+          "source_line": 2389
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_addchain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2399,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(stats)",
+          "source_line": 2389
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & NFT_CHAIN_BINDING)",
+          "exit_kind": "return",
+          "source_line": 2372,
+          "exit_line": 2373
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2377,
+          "exit_line": 2378
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(basechain == NULL)",
+          "exit_kind": "return",
+          "source_line": 2381
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(stats))",
+          "exit_kind": "return",
+          "source_line": 2389
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_CHAIN_HOOK]",
+          "polarity": "in_true_branch",
+          "source_line": 2368
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "err < 0",
+          "polarity": "in_true_branch",
+          "source_line": 2398
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_updchain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2545,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(chain->flags ^ flags)",
+          "exit_kind": "return",
+          "source_line": 2530,
+          "exit_line": 2531
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_is_base_chain(chain))",
+          "exit_kind": "return",
+          "source_line": 2534
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2540,
+          "exit_line": 2541
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_CHAIN_HOOK]",
+          "polarity": "in_true_branch",
+          "source_line": 2533
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "basechain->type != hook.type",
+          "polarity": "in_true_branch",
+          "source_line": 2544
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_updchain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2553,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(chain->flags ^ flags)",
+          "exit_kind": "return",
+          "source_line": 2530,
+          "exit_line": 2531
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_is_base_chain(chain))",
+          "exit_kind": "return",
+          "source_line": 2534
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2540,
+          "exit_line": 2541
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(basechain->type != hook.type)",
+          "exit_kind": "return",
+          "source_line": 2544
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_CHAIN_HOOK]",
+          "polarity": "in_true_branch",
+          "source_line": 2533
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nft_base_chain_netdev(ctx->family, hook.num)",
+          "polarity": "in_true_branch",
+          "source_line": 2550
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_updchain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2561,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(chain->flags ^ flags)",
+          "exit_kind": "return",
+          "source_line": 2530,
+          "exit_line": 2531
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_is_base_chain(chain))",
+          "exit_kind": "return",
+          "source_line": 2534
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2540,
+          "exit_line": 2541
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(basechain->type != hook.type)",
+          "exit_kind": "return",
+          "source_line": 2544
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_base_chain_netdev(ctx->family, hook.num))",
+          "exit_kind": "return",
+          "source_line": 2550
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_CHAIN_HOOK]",
+          "polarity": "in_true_branch",
+          "source_line": 2533
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nft_base_chain_netdev(ctx->family, hook.num)",
+          "polarity": "in_false_branch",
+          "source_line": 2557
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_updchain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2566,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(chain->flags ^ flags)",
+          "exit_kind": "return",
+          "source_line": 2530,
+          "exit_line": 2531
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_is_base_chain(chain))",
+          "exit_kind": "return",
+          "source_line": 2534
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 2540,
+          "exit_line": 2541
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(basechain->type != hook.type)",
+          "exit_kind": "return",
+          "source_line": 2544
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_base_chain_netdev(ctx->family, hook.num))",
+          "exit_kind": "return",
+          "source_line": 2550
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_CHAIN_HOOK]",
+          "polarity": "in_true_branch",
+          "source_line": 2533
+        }
+      ]
+    }
+  ]
+}

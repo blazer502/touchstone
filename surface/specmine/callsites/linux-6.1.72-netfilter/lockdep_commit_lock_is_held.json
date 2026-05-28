@@ -1,0 +1,166 @@
+{
+  "callee": "lockdep_commit_lock_is_held",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 9,
+  "callsites": [
+    {
+      "caller": "nft_chain_lookup",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1638,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_read_lock_held()",
+          "source_line": 1637
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON",
+          "source_line": 1637
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla == NULL)",
+          "exit_kind": "return",
+          "source_line": 1632,
+          "exit_line": 1633
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_fill_chain_info",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1795,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nlh != NULL",
+          "source_line": 1769
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh)",
+          "exit_kind": "goto",
+          "source_line": 1769,
+          "exit_line": 1770
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_CHAIN_TABLE, table->name))",
+          "exit_kind": "goto",
+          "source_line": 1772,
+          "exit_line": 1773
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_CHAIN_NAME, chain->name))",
+          "exit_kind": "goto",
+          "source_line": 1777,
+          "exit_line": 1778
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_dump_basechain_hook(skb, family, basechain))",
+          "exit_kind": "goto",
+          "source_line": 1784,
+          "exit_line": 1785
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_CHAIN_TYPE, basechain->type->name))",
+          "exit_kind": "goto",
+          "source_line": 1791,
+          "exit_line": 1792
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nft_is_base_chain(chain)",
+          "polarity": "in_true_branch",
+          "source_line": 1780
+        }
+      ]
+    },
+    {
+      "caller": "nft_chain_stats_replace",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 1995,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_trans_chain_stats(trans))",
+          "exit_kind": "return",
+          "source_line": 1990,
+          "exit_line": 1991
+        }
+      ]
+    },
+    {
+      "caller": "nft_obj_lookup",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6995,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_read_lock_held()",
+          "source_line": 6994
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 6994
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_commit_chain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9035,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected()",
+          "source_line": 9034
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_commit_chain",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9037,
+      "guards": [
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected()",
+          "source_line": 9034
+        },
+        {
+          "kind": "lock_assert",
+          "predicate": "rcu_dereference_protected()",
+          "source_line": 9036
+        }
+      ]
+    },
+    {
+      "caller": "nft_trans_gc_queue_sync",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9251,
+      "guards": []
+    },
+    {
+      "caller": "nft_trans_gc_queue_sync_done",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9265,
+      "guards": []
+    },
+    {
+      "caller": "nft_trans_gc_catchall_sync",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9309,
+      "guards": []
+    }
+  ]
+}

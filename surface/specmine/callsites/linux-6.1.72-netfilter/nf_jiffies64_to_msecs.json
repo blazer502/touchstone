@@ -1,0 +1,158 @@
+{
+  "callee": "nf_jiffies64_to_msecs",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "nf_tables_fill_set",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4262,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nlh != NULL",
+          "source_line": 4232
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nlh)",
+          "exit_kind": "goto",
+          "source_line": 4232,
+          "exit_line": 4233
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_SET_TABLE, ctx->table->name))",
+          "exit_kind": "goto",
+          "source_line": 4235,
+          "exit_line": 4236
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_SET_NAME, set->name))",
+          "exit_kind": "goto",
+          "source_line": 4237,
+          "exit_line": 4238
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_SET_FLAGS, htonl(set->flags)))",
+          "exit_kind": "goto",
+          "source_line": 4243,
+          "exit_line": 4244
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_SET_KEY_TYPE, htonl(set->ktype)))",
+          "exit_kind": "goto",
+          "source_line": 4246,
+          "exit_line": 4247
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_SET_KEY_LEN, htonl(set->klen)))",
+          "exit_kind": "goto",
+          "source_line": 4248,
+          "exit_line": 4249
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_SET_DATA_TYPE, htonl(set->dtype)))",
+          "exit_kind": "goto",
+          "source_line": 4251,
+          "exit_line": 4252
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_SET_DATA_LEN, htonl(set->dlen)))",
+          "exit_kind": "goto",
+          "source_line": 4253,
+          "exit_line": 4254
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(set->flags & NFT_SET_MAP)",
+          "exit_kind": "goto",
+          "source_line": 4250
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_fill_setelem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5359,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nest == NULL)",
+          "exit_kind": "goto",
+          "source_line": 5324,
+          "exit_line": 5325
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_fill_setelem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5373,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nest == NULL)",
+          "exit_kind": "goto",
+          "source_line": 5324,
+          "exit_line": 5325
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nft_set_ext_exists(ext, NFT_SET_EXT_EXPIRATION)",
+          "polarity": "in_true_branch",
+          "source_line": 5363
+        }
+      ]
+    },
+    {
+      "caller": "nft_dynset_dump",
+      "file": "net/netfilter/nft_dynset.c",
+      "line": 384,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_dump_register(skb, NFTA_DYNSET_SREG_KEY, priv->sreg_key))",
+          "exit_kind": "goto",
+          "source_line": 374,
+          "exit_line": 375
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_be32(skb, NFTA_DYNSET_OP, htonl(priv->op)))",
+          "exit_kind": "goto",
+          "source_line": 379,
+          "exit_line": 380
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla_put_string(skb, NFTA_DYNSET_SET_NAME, priv->set->name))",
+          "exit_kind": "goto",
+          "source_line": 381,
+          "exit_line": 382
+        }
+      ]
+    },
+    {
+      "caller": "nft_last_dump",
+      "file": "net/netfilter/nft_last.c",
+      "line": 82,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "last_set",
+          "polarity": "in_true_branch",
+          "source_line": 81
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "callee": "safe_wrapper",
+  "defined_in": "fixture.c",
+  "target": "mining_smoke",
+  "scope": ".",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "caller_o",
+      "file": "fixture.c",
+      "line": 135,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 134
+        }
+      ]
+    },
+    {
+      "caller": "caller_p",
+      "file": "fixture.c",
+      "line": 144,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 143
+        }
+      ]
+    },
+    {
+      "caller": "caller_q",
+      "file": "fixture.c",
+      "line": 153,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 152
+        }
+      ]
+    },
+    {
+      "caller": "caller_r",
+      "file": "fixture.c",
+      "line": 162,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 161
+        }
+      ]
+    }
+  ]
+}

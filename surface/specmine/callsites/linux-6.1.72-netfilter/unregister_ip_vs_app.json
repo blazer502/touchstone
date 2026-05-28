@@ -1,0 +1,79 @@
+{
+  "callee": "unregister_ip_vs_app",
+  "defined_in": "net/netfilter/ipvs/ip_vs_app.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_app_net_cleanup",
+      "file": "net/netfilter/ipvs/ip_vs_app.c",
+      "line": 613,
+      "guards": []
+    },
+    {
+      "caller": "__ip_vs_ftp_init",
+      "file": "net/netfilter/ipvs/ip_vs_ftp.c",
+      "line": 598,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ipvs != NULL",
+          "source_line": 581
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(app)",
+          "source_line": 585
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ipvs)",
+          "exit_kind": "return",
+          "source_line": 581,
+          "exit_line": 582
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(app))",
+          "exit_kind": "return",
+          "source_line": 585,
+          "exit_line": 586
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ports[i])",
+          "exit_kind": "continue",
+          "source_line": 589,
+          "exit_line": 590
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 592,
+          "exit_line": 593
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_ftp_exit",
+      "file": "net/netfilter/ipvs/ip_vs_ftp.c",
+      "line": 611,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ipvs != NULL",
+          "source_line": 608
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ipvs)",
+          "exit_kind": "return",
+          "source_line": 608,
+          "exit_line": 609
+        }
+      ]
+    }
+  ]
+}

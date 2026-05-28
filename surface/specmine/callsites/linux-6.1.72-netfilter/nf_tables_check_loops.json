@@ -1,0 +1,62 @@
+{
+  "callee": "nf_tables_check_loops",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_chain_validate_hooks",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 10120,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!((1 << basechain->ops.hooknum) & hook_flags)",
+          "exit_kind": "return",
+          "source_line": 10101,
+          "exit_line": 10102
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_is_base_chain(chain))",
+          "exit_kind": "return",
+          "source_line": 10098
+        }
+      ]
+    },
+    {
+      "caller": "nft_check_loops",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 10133,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "data->verdict.code",
+          "polarity": "in_true_branch",
+          "source_line": 10130
+        }
+      ]
+    },
+    {
+      "caller": "nft_validate_register_store",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 10360,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(type != NFT_DATA_VERDICT)",
+          "exit_kind": "return",
+          "source_line": 10354,
+          "exit_line": 10355
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "reg",
+          "polarity": "in_true_branch",
+          "source_line": 10352
+        }
+      ]
+    }
+  ]
+}

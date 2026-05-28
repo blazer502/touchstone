@@ -1,0 +1,42 @@
+{
+  "callee": "nf_ct_untimeout",
+  "defined_in": "net/netfilter/nf_conntrack_timeout.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ctnl_timeout_try_del",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 322,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "refcount_dec_if_one(&timeout->refcnt)",
+          "polarity": "in_true_branch",
+          "source_line": 319
+        }
+      ]
+    },
+    {
+      "caller": "cttimeout_net_exit",
+      "file": "net/netfilter/nfnetlink_cttimeout.c",
+      "line": 615,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(list_empty(&pernet->nfct_timeout_freelist))",
+          "exit_kind": "return",
+          "source_line": 612,
+          "exit_line": 613
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_timeout_obj_destroy",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 975,
+      "guards": []
+    }
+  ]
+}

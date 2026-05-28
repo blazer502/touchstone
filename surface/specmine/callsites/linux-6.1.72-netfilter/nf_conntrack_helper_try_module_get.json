@@ -1,0 +1,184 @@
+{
+  "callee": "nf_conntrack_helper_try_module_get",
+  "defined_in": "net/netfilter/nf_conntrack_helper.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "nft_ct_helper_obj_init",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 1059,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[NFTA_CT_HELPER_NAME] || !tb[NFTA_CT_HELPER_L4PROTO])",
+          "exit_kind": "return",
+          "source_line": 1039,
+          "exit_line": 1040
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!priv->l4proto)",
+          "exit_kind": "return",
+          "source_line": 1043,
+          "exit_line": 1044
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->family == NFPROTO_IPV6)",
+          "exit_kind": "return",
+          "source_line": 1056,
+          "exit_line": 1057
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "family",
+          "polarity": "in_true_branch",
+          "source_line": 1054
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_helper_obj_init",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 1066,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[NFTA_CT_HELPER_NAME] || !tb[NFTA_CT_HELPER_L4PROTO])",
+          "exit_kind": "return",
+          "source_line": 1039,
+          "exit_line": 1040
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!priv->l4proto)",
+          "exit_kind": "return",
+          "source_line": 1043,
+          "exit_line": 1044
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->family == NFPROTO_IPV6)",
+          "exit_kind": "return",
+          "source_line": 1056,
+          "exit_line": 1057
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->family == NFPROTO_IPV4)",
+          "exit_kind": "return",
+          "source_line": 1063,
+          "exit_line": 1064
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "family",
+          "polarity": "in_true_branch",
+          "source_line": 1054
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_helper_obj_init",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 1072,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[NFTA_CT_HELPER_NAME] || !tb[NFTA_CT_HELPER_L4PROTO])",
+          "exit_kind": "return",
+          "source_line": 1039,
+          "exit_line": 1040
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!priv->l4proto)",
+          "exit_kind": "return",
+          "source_line": 1043,
+          "exit_line": 1044
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->family == NFPROTO_IPV6)",
+          "exit_kind": "return",
+          "source_line": 1056,
+          "exit_line": 1057
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->family == NFPROTO_IPV4)",
+          "exit_kind": "return",
+          "source_line": 1063,
+          "exit_line": 1064
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "family",
+          "polarity": "in_true_branch",
+          "source_line": 1054
+        }
+      ]
+    },
+    {
+      "caller": "nft_ct_helper_obj_init",
+      "file": "net/netfilter/nft_ct.c",
+      "line": 1074,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!tb[NFTA_CT_HELPER_NAME] || !tb[NFTA_CT_HELPER_L4PROTO])",
+          "exit_kind": "return",
+          "source_line": 1039,
+          "exit_line": 1040
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!priv->l4proto)",
+          "exit_kind": "return",
+          "source_line": 1043,
+          "exit_line": 1044
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->family == NFPROTO_IPV6)",
+          "exit_kind": "return",
+          "source_line": 1056,
+          "exit_line": 1057
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->family == NFPROTO_IPV4)",
+          "exit_kind": "return",
+          "source_line": 1063,
+          "exit_line": 1064
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "family",
+          "polarity": "in_true_branch",
+          "source_line": 1054
+        }
+      ]
+    },
+    {
+      "caller": "xt_ct_set_helper",
+      "file": "net/netfilter/xt_CT.c",
+      "line": 86,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "proto != NULL",
+          "source_line": 81
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!proto)",
+          "exit_kind": "return",
+          "source_line": 81
+        }
+      ]
+    }
+  ]
+}

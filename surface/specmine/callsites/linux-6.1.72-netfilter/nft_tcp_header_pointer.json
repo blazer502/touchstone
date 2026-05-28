@@ -1,0 +1,27 @@
+{
+  "callee": "nft_tcp_header_pointer",
+  "defined_in": "net/netfilter/nft_exthdr.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_exthdr_tcp_eval",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 202,
+      "guards": []
+    },
+    {
+      "caller": "nft_exthdr_tcp_set_eval",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 245,
+      "guards": []
+    },
+    {
+      "caller": "nft_exthdr_tcp_strip_eval",
+      "file": "net/netfilter/nft_exthdr.c",
+      "line": 325,
+      "guards": []
+    }
+  ]
+}

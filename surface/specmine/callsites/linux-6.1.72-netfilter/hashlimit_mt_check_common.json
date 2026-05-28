@@ -1,0 +1,65 @@
+{
+  "callee": "hashlimit_mt_check_common",
+  "defined_in": "net/netfilter/xt_hashlimit.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "hashlimit_mt_check_v1",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 924,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 917,
+          "exit_line": 918
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 921,
+          "exit_line": 922
+        }
+      ]
+    },
+    {
+      "caller": "hashlimit_mt_check_v2",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 942,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 935,
+          "exit_line": 936
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 939,
+          "exit_line": 940
+        }
+      ]
+    },
+    {
+      "caller": "hashlimit_mt_check",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 955,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 952,
+          "exit_line": 953
+        }
+      ]
+    }
+  ]
+}

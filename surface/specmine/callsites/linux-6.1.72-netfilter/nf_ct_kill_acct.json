@@ -1,0 +1,195 @@
+{
+  "callee": "nf_ct_kill_acct",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_conntrack_dccp_packet",
+      "file": "net/netfilter/nf_conntrack_proto_dccp.c",
+      "line": 543,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dh != NULL",
+          "source_line": 525
+        },
+        {
+          "kind": "null_check",
+          "predicate": "dh != NULL",
+          "source_line": 533
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dh)",
+          "exit_kind": "return",
+          "source_line": 525,
+          "exit_line": 526
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dccp_error(dh, skb, dataoff, state))",
+          "exit_kind": "return",
+          "source_line": 528,
+          "exit_line": 529
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dh)",
+          "exit_kind": "return",
+          "source_line": 533,
+          "exit_line": 534
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_is_confirmed(ct) && !dccp_new(ct, skb, dh, state))",
+          "exit_kind": "return",
+          "source_line": 537,
+          "exit_line": 538
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_tcp_packet",
+      "file": "net/netfilter/nf_conntrack_proto_tcp.c",
+      "line": 1276,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(th == NULL)",
+          "exit_kind": "return",
+          "source_line": 943,
+          "exit_line": 944
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tcp_error(th, skb, dataoff, state))",
+          "exit_kind": "return",
+          "source_line": 946,
+          "exit_line": 947
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_is_confirmed(ct) && !tcp_new(ct, skb, dataoff, th))",
+          "exit_kind": "return",
+          "source_line": 949,
+          "exit_line": 950
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(old_state < TCP_CONNTRACK_TIME_WAIT)",
+          "exit_kind": "break",
+          "source_line": 961,
+          "exit_line": 962
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_kill(ct))",
+          "exit_kind": "return",
+          "source_line": 988,
+          "exit_line": 989
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(index != TCP_RST_SET)",
+          "exit_kind": "break",
+          "source_line": 1136,
+          "exit_line": 1137
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tcp_can_early_drop(ct))",
+          "exit_kind": "goto",
+          "source_line": 1146,
+          "exit_line": 1147
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(seq == 0 && !nf_conntrack_tcp_established(ct))",
+          "exit_kind": "break",
+          "source_line": 1158,
+          "exit_line": 1159
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!test_bit(IPS_SEEN_REPLY_BIT, &ct->status)",
+          "polarity": "in_true_branch",
+          "source_line": 1270
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "th->rst",
+          "polarity": "in_true_branch",
+          "source_line": 1275
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_inet_fn",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 782,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "e != NULL",
+          "source_line": 747
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!()",
+          "macro": "WARN_ON",
+          "source_line": 773
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ct || in_vrf_postrouting(state))",
+          "exit_kind": "return",
+          "source_line": 728,
+          "exit_line": 729
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!e)",
+          "exit_kind": "goto",
+          "source_line": 747,
+          "exit_line": 748
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret != NF_ACCEPT)",
+          "exit_kind": "return",
+          "source_line": 753,
+          "exit_line": 754
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_nat_initialized(ct, maniptype))",
+          "exit_kind": "goto",
+          "source_line": 755,
+          "exit_line": 756
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret != NF_ACCEPT)",
+          "exit_kind": "return",
+          "source_line": 760,
+          "exit_line": 761
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_nat_initialized(ct, maniptype))",
+          "exit_kind": "goto",
+          "source_line": 741
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_nat_oif_changed(state->hook, ctinfo, nat, state->out))",
+          "exit_kind": "goto",
+          "source_line": 775,
+          "exit_line": 776
+        }
+      ]
+    }
+  ]
+}

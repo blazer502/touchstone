@@ -1,0 +1,142 @@
+{
+  "callee": "instance_put",
+  "defined_in": "net/netfilter/nfnetlink_log.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "__instance_destroy",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 236,
+      "guards": []
+    },
+    {
+      "caller": "__nfulnl_flush",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 375,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "del_timer(&inst->timer)",
+          "polarity": "in_true_branch",
+          "source_line": 374
+        }
+      ]
+    },
+    {
+      "caller": "nfulnl_timer",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 389,
+      "guards": []
+    },
+    {
+      "caller": "nfulnl_log_packet",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 813,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "inst != NULL",
+          "source_line": 702
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!inst)",
+          "exit_kind": "return",
+          "source_line": 702,
+          "exit_line": 703
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!inst->skb)",
+          "exit_kind": "goto",
+          "source_line": 791,
+          "exit_line": 792
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!inst->skb)",
+          "exit_kind": "goto",
+          "source_line": 788
+        }
+      ]
+    },
+    {
+      "caller": "nfulnl_recv_config",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 989,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(inst)",
+          "source_line": 937
+        },
+        {
+          "kind": "null_check",
+          "predicate": "inst != NULL",
+          "source_line": 943
+        },
+        {
+          "kind": "null_check",
+          "predicate": "inst != NULL",
+          "source_line": 954
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nfula[NFULA_CFG_CMD])",
+          "exit_kind": "return",
+          "source_line": 884
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(inst && inst->peer_portid != NETLINK_CB(skb).portid)",
+          "exit_kind": "goto",
+          "source_line": 899
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(rcu_access_pointer(nfnl_ct_hook))",
+          "exit_kind": "goto",
+          "source_line": 916
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nfula[NFULA_CFG_FLAGS])",
+          "exit_kind": "goto",
+          "source_line": 907
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(inst)",
+          "exit_kind": "goto",
+          "source_line": 929
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(inst))",
+          "exit_kind": "goto",
+          "source_line": 937
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!inst)",
+          "exit_kind": "goto",
+          "source_line": 943
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cmd != NULL)",
+          "exit_kind": "break",
+          "source_line": 926
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!inst)",
+          "exit_kind": "goto",
+          "source_line": 954
+        }
+      ]
+    }
+  ]
+}

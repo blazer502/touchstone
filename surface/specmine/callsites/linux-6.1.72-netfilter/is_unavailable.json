@@ -1,0 +1,147 @@
+{
+  "callee": "is_unavailable",
+  "defined_in": "net/netfilter/ipvs/ip_vs_mh.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "ip_vs_mh_get",
+      "file": "net/netfilter/ipvs/ip_vs_mh.c",
+      "line": 242,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_mh_get_fallback",
+      "file": "net/netfilter/ipvs/ip_vs_mh.c",
+      "line": 260,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest != NULL",
+          "source_line": 258
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest)",
+          "exit_kind": "return",
+          "source_line": 258,
+          "exit_line": 259
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_mh_get_fallback",
+      "file": "net/netfilter/ipvs/ip_vs_mh.c",
+      "line": 276,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest != NULL",
+          "source_line": 258
+        },
+        {
+          "kind": "null_check",
+          "predicate": "dest != NULL",
+          "source_line": 274
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest)",
+          "exit_kind": "return",
+          "source_line": 258,
+          "exit_line": 259
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!is_unavailable(dest))",
+          "exit_kind": "return",
+          "source_line": 260,
+          "exit_line": 261
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest)",
+          "exit_kind": "break",
+          "source_line": 274,
+          "exit_line": 275
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "offset = 0; offset < IP_VS_MH_TAB_SIZE; offset++",
+          "polarity": "in_true_branch",
+          "source_line": 269
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_sh_get",
+      "file": "net/netfilter/ipvs/ip_vs_sh.c",
+      "line": 110,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_sh_get_fallback",
+      "file": "net/netfilter/ipvs/ip_vs_sh.c",
+      "line": 133,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest != NULL",
+          "source_line": 131
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest)",
+          "exit_kind": "return",
+          "source_line": 131,
+          "exit_line": 132
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_sh_get_fallback",
+      "file": "net/netfilter/ipvs/ip_vs_sh.c",
+      "line": 148,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dest != NULL",
+          "source_line": 131
+        },
+        {
+          "kind": "null_check",
+          "predicate": "dest != NULL",
+          "source_line": 146
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest)",
+          "exit_kind": "return",
+          "source_line": 131,
+          "exit_line": 132
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!is_unavailable(dest))",
+          "exit_kind": "return",
+          "source_line": 133,
+          "exit_line": 134
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest)",
+          "exit_kind": "break",
+          "source_line": 146,
+          "exit_line": 147
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "offset = 0; offset < IP_VS_SH_TAB_SIZE; offset++",
+          "polarity": "in_true_branch",
+          "source_line": 142
+        }
+      ]
+    }
+  ]
+}

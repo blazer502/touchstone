@@ -1,0 +1,27 @@
+{
+  "callee": "ip_vs_init_hash_table",
+  "defined_in": "net/netfilter/ipvs/ip_vs_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "__ip_vs_sctp_init",
+      "file": "net/netfilter/ipvs/ip_vs_proto_sctp.c",
+      "line": 561,
+      "guards": []
+    },
+    {
+      "caller": "__ip_vs_tcp_init",
+      "file": "net/netfilter/ipvs/ip_vs_proto_tcp.c",
+      "line": 710,
+      "guards": []
+    },
+    {
+      "caller": "__udp_init",
+      "file": "net/netfilter/ipvs/ip_vs_proto_udp.c",
+      "line": 468,
+      "guards": []
+    }
+  ]
+}

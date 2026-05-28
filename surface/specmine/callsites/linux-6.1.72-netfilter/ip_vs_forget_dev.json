@@ -1,0 +1,95 @@
+{
+  "callee": "ip_vs_forget_dev",
+  "defined_in": "net/netfilter/ipvs/ip_vs_ctl.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_dst_event",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1705,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 1699
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event != NETDEV_DOWN || !ipvs)",
+          "exit_kind": "return",
+          "source_line": 1695,
+          "exit_line": 1696
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < IP_VS_SVC_TAB_SIZE; idx++",
+          "polarity": "in_true_branch",
+          "source_line": 1700
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc->ipvs == ipvs",
+          "polarity": "in_true_branch",
+          "source_line": 1702
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_dst_event",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1714,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 1699
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event != NETDEV_DOWN || !ipvs)",
+          "exit_kind": "return",
+          "source_line": 1695,
+          "exit_line": 1696
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "idx = 0; idx < IP_VS_SVC_TAB_SIZE; idx++",
+          "polarity": "in_true_branch",
+          "source_line": 1700
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "svc->ipvs == ipvs",
+          "polarity": "in_true_branch",
+          "source_line": 1711
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_dst_event",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 1723,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 1699
+        },
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 1721
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(event != NETDEV_DOWN || !ipvs)",
+          "exit_kind": "return",
+          "source_line": 1695,
+          "exit_line": 1696
+        }
+      ]
+    }
+  ]
+}

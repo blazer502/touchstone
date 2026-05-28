@@ -1,0 +1,35 @@
+{
+  "callee": "process_h245_channel",
+  "defined_in": "net/netfilter/nf_conntrack_h323_main.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "process_olc",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 373,
+      "guards": []
+    },
+    {
+      "caller": "process_olc",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 392,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 379,
+          "exit_line": 380
+        }
+      ]
+    },
+    {
+      "caller": "process_olca",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 439,
+      "guards": []
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "callee": "nf_ct_expect_dst_hash",
+  "defined_in": "net/netfilter/nf_conntrack_expect.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "__nf_ct_expect_find",
+      "file": "net/netfilter/nf_conntrack_expect.c",
+      "line": 142,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!cnet->expect_count)",
+          "exit_kind": "return",
+          "source_line": 139,
+          "exit_line": 140
+        }
+      ]
+    },
+    {
+      "caller": "nf_ct_find_expectation",
+      "file": "net/netfilter/nf_conntrack_expect.c",
+      "line": 183,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!cnet->expect_count)",
+          "exit_kind": "return",
+          "source_line": 180,
+          "exit_line": 181
+        }
+      ]
+    },
+    {
+      "caller": "nf_ct_expect_insert",
+      "file": "net/netfilter/nf_conntrack_expect.c",
+      "line": 391,
+      "guards": []
+    },
+    {
+      "caller": "__nf_ct_expect_check",
+      "file": "net/netfilter/nf_conntrack_expect.c",
+      "line": 449,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "master_help != NULL",
+          "source_line": 445
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!master_help)",
+          "exit_kind": "goto",
+          "source_line": 445
+        }
+      ]
+    }
+  ]
+}

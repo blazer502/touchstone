@@ -1,0 +1,43 @@
+{
+  "callee": "hashlimit_mt_common",
+  "defined_in": "net/netfilter/xt_hashlimit.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "hashlimit_mt_v1",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 809,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 806,
+          "exit_line": 807
+        }
+      ]
+    },
+    {
+      "caller": "hashlimit_mt_v2",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 824,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 821,
+          "exit_line": 822
+        }
+      ]
+    },
+    {
+      "caller": "hashlimit_mt",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 833,
+      "guards": []
+    }
+  ]
+}

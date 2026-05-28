@@ -1,0 +1,4816 @@
+{
+  "callee": "nf_log_buf_add",
+  "defined_in": "net/netfilter/nf_log.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 101,
+  "callsites": [
+    {
+      "caller": "nf_log_dump_vlan",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 57,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb_vlan_tag_present(skb))",
+          "exit_kind": "return",
+          "source_line": 53,
+          "exit_line": 54
+        }
+      ]
+    },
+    {
+      "caller": "dump_arp_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 72,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ah",
+          "polarity": "in_true_branch",
+          "source_line": 71
+        }
+      ]
+    },
+    {
+      "caller": "dump_arp_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 82,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 71
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 71
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "logflags & NF_LOG_MACDECODE",
+          "polarity": "in_true_branch",
+          "source_line": 81
+        }
+      ]
+    },
+    {
+      "caller": "dump_arp_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 85,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 71
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 71
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "logflags & NF_LOG_MACDECODE",
+          "polarity": "in_true_branch",
+          "source_line": 81
+        }
+      ]
+    },
+    {
+      "caller": "dump_arp_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 89,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 71
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 71
+        }
+      ]
+    },
+    {
+      "caller": "dump_arp_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 101,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 71
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 71
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ap",
+          "polarity": "in_true_branch",
+          "source_line": 100
+        }
+      ]
+    },
+    {
+      "caller": "dump_arp_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 105,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 71
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ap != NULL",
+          "source_line": 100
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 71
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ap)",
+          "exit_kind": "return",
+          "source_line": 100
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_packet_common",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 119,
+      "guards": []
+    },
+    {
+      "caller": "nf_log_dump_packet_common",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 126,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "physindev && in != physindev",
+          "polarity": "in_true_branch",
+          "source_line": 125
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_packet_common",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 129,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "physoutdev && out != physoutdev",
+          "polarity": "in_true_branch",
+          "source_line": 128
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_sk_uid_gid",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 174,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "read_lock_held",
+          "source_line": 170
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!sk || !sk_fullsock(sk) || !net_eq(net, sock_net(sk)))",
+          "exit_kind": "return",
+          "source_line": 167,
+          "exit_line": 168
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "sk->sk_socket && sk->sk_socket->file",
+          "polarity": "in_true_branch",
+          "source_line": 171
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 192,
+      "guards": []
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 200,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!th",
+          "polarity": "in_true_branch",
+          "source_line": 199
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 205,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 209,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "logflags & NF_LOG_TCPSEQ",
+          "polarity": "in_true_branch",
+          "source_line": 208
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 214,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 216,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 220,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "th->cwr",
+          "polarity": "in_true_branch",
+          "source_line": 219
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 222,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "th->ece",
+          "polarity": "in_true_branch",
+          "source_line": 221
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 224,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "th->urg",
+          "polarity": "in_true_branch",
+          "source_line": 223
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 226,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "th->ack",
+          "polarity": "in_true_branch",
+          "source_line": 225
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 228,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "th->psh",
+          "polarity": "in_true_branch",
+          "source_line": 227
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 230,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "th->rst",
+          "polarity": "in_true_branch",
+          "source_line": 229
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 232,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "th->syn",
+          "polarity": "in_true_branch",
+          "source_line": 231
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 234,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "th->fin",
+          "polarity": "in_true_branch",
+          "source_line": 233
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 236,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 247,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "(logflags & NF_LOG_TCPOPT) && th->doff * 4 > sizeof(struct tcphdr)",
+          "polarity": "in_true_branch",
+          "source_line": 238
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!op",
+          "polarity": "in_true_branch",
+          "source_line": 246
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 252,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 246
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 246
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "(logflags & NF_LOG_TCPOPT) && th->doff * 4 > sizeof(struct tcphdr)",
+          "polarity": "in_true_branch",
+          "source_line": 238
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 254,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 246
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 246
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "(logflags & NF_LOG_TCPOPT) && th->doff * 4 > sizeof(struct tcphdr)",
+          "polarity": "in_true_branch",
+          "source_line": 238
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < optsize; i++",
+          "polarity": "in_true_branch",
+          "source_line": 253
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_tcp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 256,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "th != NULL",
+          "source_line": 199
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 246
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 194,
+          "exit_line": 195
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!th)",
+          "exit_kind": "return",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 246
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "(logflags & NF_LOG_TCPOPT) && th->doff * 4 > sizeof(struct tcphdr)",
+          "polarity": "in_true_branch",
+          "source_line": 238
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_udp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 273,
+      "guards": []
+    },
+    {
+      "caller": "nf_log_dump_udp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 275,
+      "guards": []
+    },
+    {
+      "caller": "nf_log_dump_udp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 283,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "goto",
+          "source_line": 277,
+          "exit_line": 278
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!uh",
+          "polarity": "in_true_branch",
+          "source_line": 282
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_dump_udp_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 289,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "uh != NULL",
+          "source_line": 282
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "goto",
+          "source_line": 277,
+          "exit_line": 278
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!uh)",
+          "exit_kind": "return",
+          "source_line": 282
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 313,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ih",
+          "polarity": "in_true_branch",
+          "source_line": 312
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 321,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 324,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 330,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ntohs(ih->frag_off) & IP_CE",
+          "polarity": "in_true_branch",
+          "source_line": 329
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 332,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ntohs(ih->frag_off) & IP_DF",
+          "polarity": "in_true_branch",
+          "source_line": 331
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 334,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ntohs(ih->frag_off) & IP_MF",
+          "polarity": "in_true_branch",
+          "source_line": 333
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 338,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ntohs(ih->frag_off) & IP_OFFSET",
+          "polarity": "in_true_branch",
+          "source_line": 337
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 350,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!op",
+          "polarity": "in_true_branch",
+          "source_line": 349
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 355,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 357,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < optsize; i++",
+          "polarity": "in_true_branch",
+          "source_line": 356
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 358,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 392,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 401,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ich",
+          "polarity": "in_true_branch",
+          "source_line": 400
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 407,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 413,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 422,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ich->type",
+          "polarity": "in_true_branch",
+          "source_line": 418
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 429,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ich->type",
+          "polarity": "in_true_branch",
+          "source_line": 418
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 434,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ich->type",
+          "polarity": "in_true_branch",
+          "source_line": 418
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 441,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ich->type",
+          "polarity": "in_true_branch",
+          "source_line": 418
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!iphoff",
+          "polarity": "in_true_branch",
+          "source_line": 440
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 444,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ich->type",
+          "polarity": "in_true_branch",
+          "source_line": 418
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!iphoff",
+          "polarity": "in_true_branch",
+          "source_line": 440
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 450,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ich->type",
+          "polarity": "in_true_branch",
+          "source_line": 418
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 465,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 461,
+          "exit_line": 462
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 471,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 461,
+          "exit_line": 462
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ah",
+          "polarity": "in_true_branch",
+          "source_line": 470
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 477,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 470
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 461,
+          "exit_line": 462
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "break",
+          "source_line": 470
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 485,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 470
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 461,
+          "exit_line": 462
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "break",
+          "source_line": 470
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 494,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 470
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 461,
+          "exit_line": 462
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "break",
+          "source_line": 470
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 487,
+          "exit_line": 488
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!eh",
+          "polarity": "in_true_branch",
+          "source_line": 493
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 500,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 470
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 493
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 461,
+          "exit_line": 462
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "break",
+          "source_line": 470
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 487,
+          "exit_line": 488
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "break",
+          "source_line": 493
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 505,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 470
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 493
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 461,
+          "exit_line": 462
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "break",
+          "source_line": 470
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 487,
+          "exit_line": 488
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "break",
+          "source_line": 493
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ih->protocol",
+          "polarity": "in_true_branch",
+          "source_line": 361
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv4_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 514,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 312
+        },
+        {
+          "kind": "null_check",
+          "predicate": "op != NULL",
+          "source_line": 349
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ich != NULL",
+          "source_line": 400
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 470
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 493
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!op)",
+          "exit_kind": "return",
+          "source_line": 349
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 394,
+          "exit_line": 395
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ich)",
+          "exit_kind": "break",
+          "source_line": 400
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 461,
+          "exit_line": 462
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "break",
+          "source_line": 470
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ntohs(ih->frag_off) & IP_OFFSET)",
+          "exit_kind": "break",
+          "source_line": 487,
+          "exit_line": 488
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "break",
+          "source_line": 493
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!iphoff && skb->mark",
+          "polarity": "in_true_branch",
+          "source_line": 513
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 552,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ih",
+          "polarity": "in_true_branch",
+          "source_line": 551
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 557,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 560,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 575,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!hp",
+          "polarity": "in_true_branch",
+          "source_line": 574
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 581,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "logflags & NF_LOG_IPOPT",
+          "polarity": "in_true_branch",
+          "source_line": 580
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 588,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 592,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!fh",
+          "polarity": "in_true_branch",
+          "source_line": 591
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 597,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 601,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "fh->frag_off & htons(0x0001)",
+          "polarity": "in_true_branch",
+          "source_line": 600
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 603,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 617,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "fragment",
+          "polarity": "in_true_branch",
+          "source_line": 615
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "logflags & NF_LOG_IPOPT",
+          "polarity": "in_true_branch",
+          "source_line": 616
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 629,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "logflags & NF_LOG_IPOPT",
+          "polarity": "in_true_branch",
+          "source_line": 624
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 632,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "logflags & NF_LOG_IPOPT",
+          "polarity": "in_true_branch",
+          "source_line": 624
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "fragment",
+          "polarity": "in_true_branch",
+          "source_line": 631
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 640,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "logflags & NF_LOG_IPOPT",
+          "polarity": "in_true_branch",
+          "source_line": 624
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ah",
+          "polarity": "in_true_branch",
+          "source_line": 638
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 646,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "logflags & NF_LOG_IPOPT",
+          "polarity": "in_true_branch",
+          "source_line": 624
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 657,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "logflags & NF_LOG_IPOPT",
+          "polarity": "in_true_branch",
+          "source_line": 652
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 660,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "logflags & NF_LOG_IPOPT",
+          "polarity": "in_true_branch",
+          "source_line": 652
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "fragment",
+          "polarity": "in_true_branch",
+          "source_line": 659
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 668,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 659
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "logflags & NF_LOG_IPOPT",
+          "polarity": "in_true_branch",
+          "source_line": 652
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!eh",
+          "polarity": "in_true_branch",
+          "source_line": 667
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 674,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "return",
+          "source_line": 667
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "logflags & NF_LOG_IPOPT",
+          "polarity": "in_true_branch",
+          "source_line": 652
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 680,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "return",
+          "source_line": 667
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 583
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 684,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "return",
+          "source_line": 667
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "currenthdr != NEXTHDR_NONE && nf_ip6_ext_hdr(currenthdr)",
+          "polarity": "in_true_branch",
+          "source_line": 569
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "logflags & NF_LOG_IPOPT",
+          "polarity": "in_true_branch",
+          "source_line": 683
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 706,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "return",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_log_dump_udp_header(m, skb, currenthdr, fragment, ptr))",
+          "exit_kind": "return",
+          "source_line": 698,
+          "exit_line": 699
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 690
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 714,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "return",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_log_dump_udp_header(m, skb, currenthdr, fragment, ptr))",
+          "exit_kind": "return",
+          "source_line": 698,
+          "exit_line": 699
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "break",
+          "source_line": 708,
+          "exit_line": 709
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 690
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!ic",
+          "polarity": "in_true_branch",
+          "source_line": 713
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 720,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ic != NULL",
+          "source_line": 713
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "return",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_log_dump_udp_header(m, skb, currenthdr, fragment, ptr))",
+          "exit_kind": "return",
+          "source_line": 698,
+          "exit_line": 699
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "break",
+          "source_line": 708,
+          "exit_line": 709
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ic)",
+          "exit_kind": "return",
+          "source_line": 713
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 690
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 727,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ic != NULL",
+          "source_line": 713
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "return",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_log_dump_udp_header(m, skb, currenthdr, fragment, ptr))",
+          "exit_kind": "return",
+          "source_line": 698,
+          "exit_line": 699
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "break",
+          "source_line": 708,
+          "exit_line": 709
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ic)",
+          "exit_kind": "return",
+          "source_line": 713
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 690
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ic->icmp6_type",
+          "polarity": "in_true_branch",
+          "source_line": 723
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 738,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ic != NULL",
+          "source_line": 713
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "return",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_log_dump_udp_header(m, skb, currenthdr, fragment, ptr))",
+          "exit_kind": "return",
+          "source_line": 698,
+          "exit_line": 699
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "break",
+          "source_line": 708,
+          "exit_line": 709
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ic)",
+          "exit_kind": "return",
+          "source_line": 713
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 690
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ic->icmp6_type",
+          "polarity": "in_true_branch",
+          "source_line": 723
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 746,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ic != NULL",
+          "source_line": 713
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "return",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_log_dump_udp_header(m, skb, currenthdr, fragment, ptr))",
+          "exit_kind": "return",
+          "source_line": 698,
+          "exit_line": 699
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "break",
+          "source_line": 708,
+          "exit_line": 709
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ic)",
+          "exit_kind": "return",
+          "source_line": 713
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 690
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ic->icmp6_type",
+          "polarity": "in_true_branch",
+          "source_line": 723
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "recurse",
+          "polarity": "in_true_branch",
+          "source_line": 745
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 749,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ic != NULL",
+          "source_line": 713
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "return",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_log_dump_udp_header(m, skb, currenthdr, fragment, ptr))",
+          "exit_kind": "return",
+          "source_line": 698,
+          "exit_line": 699
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "break",
+          "source_line": 708,
+          "exit_line": 709
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ic)",
+          "exit_kind": "return",
+          "source_line": 713
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 690
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ic->icmp6_type",
+          "polarity": "in_true_branch",
+          "source_line": 723
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "recurse",
+          "polarity": "in_true_branch",
+          "source_line": 745
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 754,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ic != NULL",
+          "source_line": 713
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "return",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_log_dump_udp_header(m, skb, currenthdr, fragment, ptr))",
+          "exit_kind": "return",
+          "source_line": 698,
+          "exit_line": 699
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "break",
+          "source_line": 708,
+          "exit_line": 709
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ic)",
+          "exit_kind": "return",
+          "source_line": 713
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 690
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ic->icmp6_type",
+          "polarity": "in_true_branch",
+          "source_line": 723
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ic->icmp6_type == ICMPV6_PKT_TOOBIG",
+          "polarity": "in_true_branch",
+          "source_line": 753
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 762,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ic != NULL",
+          "source_line": 713
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "return",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_log_dump_udp_header(m, skb, currenthdr, fragment, ptr))",
+          "exit_kind": "return",
+          "source_line": 698,
+          "exit_line": 699
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "break",
+          "source_line": 708,
+          "exit_line": 709
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ic)",
+          "exit_kind": "return",
+          "source_line": 713
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "currenthdr",
+          "polarity": "in_true_branch",
+          "source_line": 690
+        }
+      ]
+    },
+    {
+      "caller": "dump_ipv6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 771,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ih != NULL",
+          "source_line": 551
+        },
+        {
+          "kind": "null_check",
+          "predicate": "hp != NULL",
+          "source_line": 574
+        },
+        {
+          "kind": "null_check",
+          "predicate": "fh != NULL",
+          "source_line": 591
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ah != NULL",
+          "source_line": 638
+        },
+        {
+          "kind": "null_check",
+          "predicate": "eh != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ic != NULL",
+          "source_line": 713
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ih)",
+          "exit_kind": "return",
+          "source_line": 551
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!hp)",
+          "exit_kind": "return",
+          "source_line": 574
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!fh)",
+          "exit_kind": "return",
+          "source_line": 591
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 615
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 631
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ah)",
+          "exit_kind": "return",
+          "source_line": 638
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "return",
+          "source_line": 659
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!eh)",
+          "exit_kind": "return",
+          "source_line": 667
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_log_dump_udp_header(m, skb, currenthdr, fragment, ptr))",
+          "exit_kind": "return",
+          "source_line": 698,
+          "exit_line": 699
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(fragment)",
+          "exit_kind": "break",
+          "source_line": 708,
+          "exit_line": 709
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ic)",
+          "exit_kind": "return",
+          "source_line": 713
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "recurse && skb->mark",
+          "polarity": "in_true_branch",
+          "source_line": 770
+        }
+      ]
+    },
+    {
+      "caller": "dump_mac_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 789,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(logflags & NF_LOG_MACDECODE))",
+          "exit_kind": "goto",
+          "source_line": 784,
+          "exit_line": 785
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "dev->type",
+          "polarity": "in_true_branch",
+          "source_line": 787
+        }
+      ]
+    },
+    {
+      "caller": "dump_mac_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 792,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(logflags & NF_LOG_MACDECODE))",
+          "exit_kind": "goto",
+          "source_line": 784,
+          "exit_line": 785
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "dev->type",
+          "polarity": "in_true_branch",
+          "source_line": 787
+        }
+      ]
+    },
+    {
+      "caller": "dump_mac_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 800,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(logflags & NF_LOG_MACDECODE))",
+          "exit_kind": "goto",
+          "source_line": 784,
+          "exit_line": 785
+        }
+      ]
+    },
+    {
+      "caller": "dump_mac_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 814,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(logflags & NF_LOG_MACDECODE))",
+          "exit_kind": "goto",
+          "source_line": 784,
+          "exit_line": 785
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "p",
+          "polarity": "in_true_branch",
+          "source_line": 813
+        }
+      ]
+    },
+    {
+      "caller": "dump_mac_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 816,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(logflags & NF_LOG_MACDECODE))",
+          "exit_kind": "goto",
+          "source_line": 784,
+          "exit_line": 785
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "p",
+          "polarity": "in_true_branch",
+          "source_line": 813
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 1; i < dev->hard_header_len; i++",
+          "polarity": "in_true_branch",
+          "source_line": 815
+        }
+      ]
+    },
+    {
+      "caller": "dump_mac_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 823,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(logflags & NF_LOG_MACDECODE))",
+          "exit_kind": "goto",
+          "source_line": 784,
+          "exit_line": 785
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dev->type == ARPHRD_SIT",
+          "polarity": "in_true_branch",
+          "source_line": 819
+        }
+      ]
+    },
+    {
+      "caller": "dump_mac_header",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 827,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(logflags & NF_LOG_MACDECODE))",
+          "exit_kind": "goto",
+          "source_line": 784,
+          "exit_line": 785
+        }
+      ]
+    }
+  ]
+}

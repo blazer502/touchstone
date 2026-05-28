@@ -1,0 +1,171 @@
+{
+  "callee": "ct_show_zone",
+  "defined_in": "net/netfilter/nf_conntrack_standalone.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ct_seq_show",
+      "file": "net/netfilter/nf_conntrack_standalone.c",
+      "line": 340,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!ct)",
+          "macro": "WARN_ON",
+          "source_line": 305
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!refcount_inc_not_zero(&ct->ct_general.use)))",
+          "exit_kind": "return",
+          "source_line": 306,
+          "exit_line": 307
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_should_gc(ct))",
+          "exit_kind": "goto",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(NF_CT_DIRECTION(hash))",
+          "exit_kind": "goto",
+          "source_line": 318,
+          "exit_line": 319
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!net_eq(nf_ct_net(ct), net))",
+          "exit_kind": "goto",
+          "source_line": 321,
+          "exit_line": 322
+        }
+      ]
+    },
+    {
+      "caller": "ct_seq_show",
+      "file": "net/netfilter/nf_conntrack_standalone.c",
+      "line": 353,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!ct)",
+          "macro": "WARN_ON",
+          "source_line": 305
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!refcount_inc_not_zero(&ct->ct_general.use)))",
+          "exit_kind": "return",
+          "source_line": 306,
+          "exit_line": 307
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_should_gc(ct))",
+          "exit_kind": "goto",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(NF_CT_DIRECTION(hash))",
+          "exit_kind": "goto",
+          "source_line": 318,
+          "exit_line": 319
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!net_eq(nf_ct_net(ct), net))",
+          "exit_kind": "goto",
+          "source_line": 321,
+          "exit_line": 322
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(seq_has_overflowed(s))",
+          "exit_kind": "goto",
+          "source_line": 342,
+          "exit_line": 343
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(seq_print_acct(s, ct, IP_CT_DIR_ORIGINAL))",
+          "exit_kind": "goto",
+          "source_line": 345,
+          "exit_line": 346
+        }
+      ]
+    },
+    {
+      "caller": "ct_seq_show",
+      "file": "net/netfilter/nf_conntrack_standalone.c",
+      "line": 373,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!ct)",
+          "macro": "WARN_ON",
+          "source_line": 305
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!refcount_inc_not_zero(&ct->ct_general.use)))",
+          "exit_kind": "return",
+          "source_line": 306,
+          "exit_line": 307
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_should_gc(ct))",
+          "exit_kind": "goto",
+          "source_line": 312
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(NF_CT_DIRECTION(hash))",
+          "exit_kind": "goto",
+          "source_line": 318,
+          "exit_line": 319
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!net_eq(nf_ct_net(ct), net))",
+          "exit_kind": "goto",
+          "source_line": 321,
+          "exit_line": 322
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(seq_has_overflowed(s))",
+          "exit_kind": "goto",
+          "source_line": 342,
+          "exit_line": 343
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(seq_print_acct(s, ct, IP_CT_DIR_ORIGINAL))",
+          "exit_kind": "goto",
+          "source_line": 345,
+          "exit_line": 346
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(seq_print_acct(s, ct, IP_CT_DIR_REPLY))",
+          "exit_kind": "goto",
+          "source_line": 355,
+          "exit_line": 356
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(seq_has_overflowed(s))",
+          "exit_kind": "goto",
+          "source_line": 365,
+          "exit_line": 366
+        }
+      ]
+    }
+  ]
+}

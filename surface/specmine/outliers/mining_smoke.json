@@ -1,0 +1,46 @@
+{
+  "generated_at": 1779927167,
+  "min_support": 2,
+  "outliers": [
+    {
+      "callee": "lookup_thing",
+      "caller": "caller_buggy",
+      "callsite_count": 12,
+      "contract_kind_class": "lock",
+      "contract_kind_label": "lock_held",
+      "file": "fixture.c",
+      "guards_present": [],
+      "line": 126,
+      "local_establishment": 0.0,
+      "missing_contract": "rcu_read_lock_held",
+      "support_count": 10,
+      "support_pct": 0.8333,
+      "suspicion": 0.8333
+    },
+    {
+      "callee": "lookup_thing",
+      "caller": "safe_wrapper",
+      "callsite_count": 12,
+      "contract_kind_class": "lock",
+      "contract_kind_label": "lock_held",
+      "file": "fixture.c",
+      "guards_present": [],
+      "line": 29,
+      "local_establishment": 1.0,
+      "missing_contract": "rcu_read_lock_held",
+      "support_count": 10,
+      "support_pct": 0.8333,
+      "suspicion": 0.0
+    }
+  ],
+  "stats": {
+    "by_kind_class": {
+      "lock": 2
+    },
+    "outliers_with_local_establishment": 1,
+    "total_outliers": 2,
+    "wall_seconds": 0.0
+  },
+  "target": "mining_smoke",
+  "tau": 0.83
+}

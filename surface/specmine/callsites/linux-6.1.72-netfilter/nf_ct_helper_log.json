@@ -1,0 +1,1880 @@
+{
+  "callee": "nf_ct_helper_log",
+  "defined_in": "net/netfilter/nf_conntrack_helper.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 50,
+  "callsites": [
+    {
+      "caller": "amanda_help",
+      "file": "net/netfilter/nf_conntrack_amanda.c",
+      "line": 148,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(CTINFO2DIR(ctinfo) == IP_CT_DIR_ORIGINAL)",
+          "exit_kind": "return",
+          "source_line": 104,
+          "exit_line": 105
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dataoff >= skb->len)",
+          "exit_kind": "return",
+          "source_line": 113
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(start == UINT_MAX)",
+          "exit_kind": "goto",
+          "source_line": 120,
+          "exit_line": 121
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(stop == UINT_MAX)",
+          "exit_kind": "goto",
+          "source_line": 126,
+          "exit_line": 127
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(off == UINT_MAX)",
+          "exit_kind": "continue",
+          "source_line": 132,
+          "exit_line": 133
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_copy_bits(skb, off, pbuf, len))",
+          "exit_kind": "break",
+          "source_line": 137,
+          "exit_line": 138
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(port == 0 || len > 5)",
+          "exit_kind": "break",
+          "source_line": 143,
+          "exit_line": 144
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = SEARCH_DATA; i <= SEARCH_STATE; i++",
+          "polarity": "in_true_branch",
+          "source_line": 130
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "exp == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 147
+        }
+      ]
+    },
+    {
+      "caller": "amanda_help",
+      "file": "net/netfilter/nf_conntrack_amanda.c",
+      "line": 163,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(CTINFO2DIR(ctinfo) == IP_CT_DIR_ORIGINAL)",
+          "exit_kind": "return",
+          "source_line": 104,
+          "exit_line": 105
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dataoff >= skb->len)",
+          "exit_kind": "return",
+          "source_line": 113
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(start == UINT_MAX)",
+          "exit_kind": "goto",
+          "source_line": 120,
+          "exit_line": 121
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(stop == UINT_MAX)",
+          "exit_kind": "goto",
+          "source_line": 126,
+          "exit_line": 127
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(off == UINT_MAX)",
+          "exit_kind": "continue",
+          "source_line": 132,
+          "exit_line": 133
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_copy_bits(skb, off, pbuf, len))",
+          "exit_kind": "break",
+          "source_line": 137,
+          "exit_line": 138
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(port == 0 || len > 5)",
+          "exit_kind": "break",
+          "source_line": 143,
+          "exit_line": 144
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(exp == NULL)",
+          "exit_kind": "goto",
+          "source_line": 147
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = SEARCH_DATA; i <= SEARCH_STATE; i++",
+          "polarity": "in_true_branch",
+          "source_line": 130
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nf_ct_expect_related(exp, 0) != 0",
+          "polarity": "in_true_branch",
+          "source_line": 162
+        }
+      ]
+    },
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_conntrack_ftp.c",
+      "line": 461,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 414
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(skb_linearize(skb)))",
+          "exit_kind": "return",
+          "source_line": 397,
+          "exit_line": 398
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th == NULL)",
+          "exit_kind": "return",
+          "source_line": 401,
+          "exit_line": 402
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dataoff >= skb->len)",
+          "exit_kind": "return",
+          "source_line": 406
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(ct_ftp_info->flags[dir] & NF_CT_FTP_SEQ_PICKUP))",
+          "exit_kind": "goto",
+          "source_line": 423
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!find_nl_seq(ntohl(th->seq), ct_ftp_info, dir))",
+          "exit_kind": "goto",
+          "source_line": 421
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(found)",
+          "exit_kind": "break",
+          "source_line": 454,
+          "exit_line": 454
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "found == -1",
+          "polarity": "in_true_branch",
+          "source_line": 456
+        }
+      ]
+    },
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_conntrack_ftp.c",
+      "line": 476,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 414
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(skb_linearize(skb)))",
+          "exit_kind": "return",
+          "source_line": 397,
+          "exit_line": 398
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th == NULL)",
+          "exit_kind": "return",
+          "source_line": 401,
+          "exit_line": 402
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dataoff >= skb->len)",
+          "exit_kind": "return",
+          "source_line": 406
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(ct_ftp_info->flags[dir] & NF_CT_FTP_SEQ_PICKUP))",
+          "exit_kind": "goto",
+          "source_line": 423
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!find_nl_seq(ntohl(th->seq), ct_ftp_info, dir))",
+          "exit_kind": "goto",
+          "source_line": 421
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(found)",
+          "exit_kind": "break",
+          "source_line": 454,
+          "exit_line": 454
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(found == -1)",
+          "exit_kind": "goto",
+          "source_line": 456
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(found == 0)",
+          "exit_kind": "goto",
+          "source_line": 465
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "exp == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 475
+        }
+      ]
+    },
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_conntrack_ftp.c",
+      "line": 528,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 414
+        },
+        {
+          "kind": "null_check",
+          "predicate": "loose != NULL",
+          "source_line": 508
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(skb_linearize(skb)))",
+          "exit_kind": "return",
+          "source_line": 397,
+          "exit_line": 398
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th == NULL)",
+          "exit_kind": "return",
+          "source_line": 401,
+          "exit_line": 402
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dataoff >= skb->len)",
+          "exit_kind": "return",
+          "source_line": 406
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(ct_ftp_info->flags[dir] & NF_CT_FTP_SEQ_PICKUP))",
+          "exit_kind": "goto",
+          "source_line": 423
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!find_nl_seq(ntohl(th->seq), ct_ftp_info, dir))",
+          "exit_kind": "goto",
+          "source_line": 421
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(found)",
+          "exit_kind": "break",
+          "source_line": 454,
+          "exit_line": 454
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(found == -1)",
+          "exit_kind": "goto",
+          "source_line": 456
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(found == 0)",
+          "exit_kind": "goto",
+          "source_line": 465
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(exp == NULL)",
+          "exit_kind": "goto",
+          "source_line": 475
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!loose)",
+          "exit_kind": "goto",
+          "source_line": 508
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nf_ct_expect_related(exp, 0) != 0",
+          "polarity": "in_true_branch",
+          "source_line": 527
+        }
+      ]
+    },
+    {
+      "caller": "h245_help",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 570,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ctinfo != IP_CT_ESTABLISHED && ctinfo != IP_CT_ESTABLISHED_REPLY)",
+          "exit_kind": "return",
+          "source_line": 535,
+          "exit_line": 536
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "break",
+          "source_line": 551
+        }
+      ]
+    },
+    {
+      "caller": "q931_help",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1132,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ctinfo != IP_CT_ESTABLISHED && ctinfo != IP_CT_ESTABLISHED_REPLY)",
+          "exit_kind": "return",
+          "source_line": 1098,
+          "exit_line": 1099
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "break",
+          "source_line": 1113
+        }
+      ]
+    },
+    {
+      "caller": "ras_help",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1704,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(data == NULL)",
+          "exit_kind": "goto",
+          "source_line": 1680,
+          "exit_line": 1681
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "goto",
+          "source_line": 1687
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(process_ras(skb, ct, ctinfo, protoff, &data, &ras) < 0)",
+          "exit_kind": "goto",
+          "source_line": 1695,
+          "exit_line": 1696
+        }
+      ]
+    },
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_conntrack_irc.c",
+      "line": 230,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ib_ptr != NULL",
+          "source_line": 152
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dir == IP_CT_DIR_REPLY)",
+          "exit_kind": "return",
+          "source_line": 128,
+          "exit_line": 129
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctinfo != IP_CT_ESTABLISHED && ctinfo != IP_CT_ESTABLISHED_REPLY)",
+          "exit_kind": "return",
+          "source_line": 132,
+          "exit_line": 133
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th == NULL)",
+          "exit_kind": "return",
+          "source_line": 137,
+          "exit_line": 138
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dataoff >= skb->len)",
+          "exit_kind": "return",
+          "source_line": 142,
+          "exit_line": 143
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ib_ptr)",
+          "exit_kind": "return",
+          "source_line": 152
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(\"PRIVMSG \", data, 8))",
+          "exit_kind": "goto",
+          "source_line": 170,
+          "exit_line": 171
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(data < data_limit - 10)",
+          "exit_kind": "goto",
+          "source_line": 169
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(memcmp(data, \" :\", 2))",
+          "exit_kind": "continue",
+          "source_line": 180
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(memcmp(data, \"\\1DCC \", 5))",
+          "exit_kind": "goto",
+          "source_line": 187,
+          "exit_line": 188
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(memcmp(data, dccprotos[i], strlen(dccprotos[i])))",
+          "exit_kind": "continue",
+          "source_line": 198,
+          "exit_line": 200
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(memcmp(data, dccprotos[i], strlen(dccprotos[i])))",
+          "exit_kind": "continue",
+          "source_line": 198
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "data < data_limit - (21 + MINMATCHLEN)",
+          "polarity": "in_true_branch",
+          "source_line": 178
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < ARRAY_SIZE(dccprotos); i++",
+          "polarity": "in_true_branch",
+          "source_line": 197
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "exp == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 229
+        }
+      ]
+    },
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_conntrack_irc.c",
+      "line": 249,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "ib_ptr != NULL",
+          "source_line": 152
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dir == IP_CT_DIR_REPLY)",
+          "exit_kind": "return",
+          "source_line": 128,
+          "exit_line": 129
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctinfo != IP_CT_ESTABLISHED && ctinfo != IP_CT_ESTABLISHED_REPLY)",
+          "exit_kind": "return",
+          "source_line": 132,
+          "exit_line": 133
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th == NULL)",
+          "exit_kind": "return",
+          "source_line": 137,
+          "exit_line": 138
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dataoff >= skb->len)",
+          "exit_kind": "return",
+          "source_line": 142,
+          "exit_line": 143
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ib_ptr)",
+          "exit_kind": "return",
+          "source_line": 152
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(\"PRIVMSG \", data, 8))",
+          "exit_kind": "goto",
+          "source_line": 170,
+          "exit_line": 171
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(data < data_limit - 10)",
+          "exit_kind": "goto",
+          "source_line": 169
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(memcmp(data, \" :\", 2))",
+          "exit_kind": "continue",
+          "source_line": 180
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(memcmp(data, \"\\1DCC \", 5))",
+          "exit_kind": "goto",
+          "source_line": 187,
+          "exit_line": 188
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(memcmp(data, dccprotos[i], strlen(dccprotos[i])))",
+          "exit_kind": "continue",
+          "source_line": 198,
+          "exit_line": 200
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(memcmp(data, dccprotos[i], strlen(dccprotos[i])))",
+          "exit_kind": "continue",
+          "source_line": 198
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(exp == NULL)",
+          "exit_kind": "goto",
+          "source_line": 229
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "data < data_limit - (21 + MINMATCHLEN)",
+          "polarity": "in_true_branch",
+          "source_line": 178
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < ARRAY_SIZE(dccprotos); i++",
+          "polarity": "in_true_branch",
+          "source_line": 197
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nf_ct_expect_related(exp, 0) != 0",
+          "polarity": "in_true_branch",
+          "source_line": 248
+        }
+      ]
+    },
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_conntrack_sane.c",
+      "line": 147,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "req != NULL",
+          "source_line": 100
+        },
+        {
+          "kind": "null_check",
+          "predicate": "reply != NULL",
+          "source_line": 131
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th == NULL)",
+          "exit_kind": "return",
+          "source_line": 84,
+          "exit_line": 85
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dataoff >= skb->len)",
+          "exit_kind": "return",
+          "source_line": 89,
+          "exit_line": 90
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(datalen != sizeof(struct sane_request))",
+          "exit_kind": "return",
+          "source_line": 96,
+          "exit_line": 97
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!req)",
+          "exit_kind": "return",
+          "source_line": 100,
+          "exit_line": 101
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(req->RPC_code != htonl(SANE_NET_START))",
+          "exit_kind": "return",
+          "source_line": 103
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dir == IP_CT_DIR_ORIGINAL)",
+          "exit_kind": "return",
+          "source_line": 93
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(READ_ONCE(ct_sane_info->state) != SANE_STATE_START_REQUESTED)",
+          "exit_kind": "return",
+          "source_line": 117,
+          "exit_line": 118
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(datalen < sizeof(struct sane_reply_net_start))",
+          "exit_kind": "return",
+          "source_line": 123
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!reply)",
+          "exit_kind": "return",
+          "source_line": 131,
+          "exit_line": 132
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(reply->status != htonl(SANE_STATUS_SUCCESS))",
+          "exit_kind": "return",
+          "source_line": 134
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(reply->zero != 0)",
+          "exit_kind": "return",
+          "source_line": 142,
+          "exit_line": 143
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "exp == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 146
+        }
+      ]
+    },
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_conntrack_sane.c",
+      "line": 161,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "req != NULL",
+          "source_line": 100
+        },
+        {
+          "kind": "null_check",
+          "predicate": "reply != NULL",
+          "source_line": 131
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(th == NULL)",
+          "exit_kind": "return",
+          "source_line": 84,
+          "exit_line": 85
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dataoff >= skb->len)",
+          "exit_kind": "return",
+          "source_line": 89,
+          "exit_line": 90
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(datalen != sizeof(struct sane_request))",
+          "exit_kind": "return",
+          "source_line": 96,
+          "exit_line": 97
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!req)",
+          "exit_kind": "return",
+          "source_line": 100,
+          "exit_line": 101
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(req->RPC_code != htonl(SANE_NET_START))",
+          "exit_kind": "return",
+          "source_line": 103
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dir == IP_CT_DIR_ORIGINAL)",
+          "exit_kind": "return",
+          "source_line": 93
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(READ_ONCE(ct_sane_info->state) != SANE_STATE_START_REQUESTED)",
+          "exit_kind": "return",
+          "source_line": 117,
+          "exit_line": 118
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(datalen < sizeof(struct sane_reply_net_start))",
+          "exit_kind": "return",
+          "source_line": 123
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!reply)",
+          "exit_kind": "return",
+          "source_line": 131,
+          "exit_line": 132
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(reply->status != htonl(SANE_STATUS_SUCCESS))",
+          "exit_kind": "return",
+          "source_line": 134
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(reply->zero != 0)",
+          "exit_kind": "return",
+          "source_line": 142,
+          "exit_line": 143
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(exp == NULL)",
+          "exit_kind": "return",
+          "source_line": 146
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nf_ct_expect_related(exp, 0) != 0",
+          "polarity": "in_true_branch",
+          "source_line": 160
+        }
+      ]
+    },
+    {
+      "caller": "process_sdp",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1083,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "t != NULL",
+          "source_line": 1072
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!t)",
+          "exit_kind": "continue",
+          "source_line": 1072
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(port == 0)",
+          "exit_kind": "continue",
+          "source_line": 1080,
+          "exit_line": 1081
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < ARRAY_SIZE(sdp_media_types);",
+          "polarity": "in_true_branch",
+          "source_line": 1063
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "port < 1024 || port > 65535",
+          "polarity": "in_true_branch",
+          "source_line": 1082
+        }
+      ]
+    },
+    {
+      "caller": "process_sdp",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1097,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "t != NULL",
+          "source_line": 1072
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!t)",
+          "exit_kind": "continue",
+          "source_line": 1072
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(port == 0)",
+          "exit_kind": "continue",
+          "source_line": 1080,
+          "exit_line": 1081
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(port < 1024 || port > 65535)",
+          "exit_kind": "return",
+          "source_line": 1082
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < ARRAY_SIZE(sdp_media_types);",
+          "polarity": "in_true_branch",
+          "source_line": 1063
+        }
+      ]
+    },
+    {
+      "caller": "process_sdp",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1106,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "t != NULL",
+          "source_line": 1072
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!t)",
+          "exit_kind": "continue",
+          "source_line": 1072
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(port == 0)",
+          "exit_kind": "continue",
+          "source_line": 1080,
+          "exit_line": 1081
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(port < 1024 || port > 65535)",
+          "exit_kind": "return",
+          "source_line": 1082
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < ARRAY_SIZE(sdp_media_types);",
+          "polarity": "in_true_branch",
+          "source_line": 1063
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret != NF_ACCEPT",
+          "polarity": "in_true_branch",
+          "source_line": 1105
+        }
+      ]
+    },
+    {
+      "caller": "process_sdp",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1119,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "t != NULL",
+          "source_line": 1072
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!t)",
+          "exit_kind": "continue",
+          "source_line": 1072
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(port == 0)",
+          "exit_kind": "continue",
+          "source_line": 1080,
+          "exit_line": 1081
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(port < 1024 || port > 65535)",
+          "exit_kind": "return",
+          "source_line": 1082
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret != NF_ACCEPT)",
+          "exit_kind": "return",
+          "source_line": 1105
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < ARRAY_SIZE(sdp_media_types);",
+          "polarity": "in_true_branch",
+          "source_line": 1063
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "maddr_len && hooks && ct->status & IPS_NAT_MASK",
+          "polarity": "in_true_branch",
+          "source_line": 1112
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret != NF_ACCEPT",
+          "polarity": "in_true_branch",
+          "source_line": 1118
+        }
+      ]
+    },
+    {
+      "caller": "process_register_request",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1258,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->status & IPS_EXPECTED)",
+          "exit_kind": "return",
+          "source_line": 1239,
+          "exit_line": 1240
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret < 0",
+          "polarity": "in_true_branch",
+          "source_line": 1257
+        }
+      ]
+    },
+    {
+      "caller": "process_register_request",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1274,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->status & IPS_EXPECTED)",
+          "exit_kind": "return",
+          "source_line": 1239,
+          "exit_line": 1240
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 1257
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == 0)",
+          "exit_kind": "return",
+          "source_line": 1260,
+          "exit_line": 1261
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_inet_addr_cmp(&ct->tuplehash[dir].tuple.src.u3, &daddr))",
+          "exit_kind": "return",
+          "source_line": 1264,
+          "exit_line": 1265
+        }
+      ]
+    },
+    {
+      "caller": "process_register_request",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1285,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->status & IPS_EXPECTED)",
+          "exit_kind": "return",
+          "source_line": 1239,
+          "exit_line": 1240
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 1257
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == 0)",
+          "exit_kind": "return",
+          "source_line": 1260,
+          "exit_line": 1261
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_inet_addr_cmp(&ct->tuplehash[dir].tuple.src.u3, &daddr))",
+          "exit_kind": "return",
+          "source_line": 1264,
+          "exit_line": 1265
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(expires == 0)",
+          "exit_kind": "goto",
+          "source_line": 1278
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!exp",
+          "polarity": "in_true_branch",
+          "source_line": 1284
+        }
+      ]
+    },
+    {
+      "caller": "process_register_request",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1309,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "exp != NULL",
+          "source_line": 1284
+        },
+        {
+          "kind": "null_check",
+          "predicate": "helper != NULL",
+          "source_line": 1294
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->status & IPS_EXPECTED)",
+          "exit_kind": "return",
+          "source_line": 1239,
+          "exit_line": 1240
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 1257
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == 0)",
+          "exit_kind": "return",
+          "source_line": 1260,
+          "exit_line": 1261
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_inet_addr_cmp(&ct->tuplehash[dir].tuple.src.u3, &daddr))",
+          "exit_kind": "return",
+          "source_line": 1264,
+          "exit_line": 1265
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(expires == 0)",
+          "exit_kind": "goto",
+          "source_line": 1278
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!exp)",
+          "exit_kind": "return",
+          "source_line": 1284
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!helper)",
+          "exit_kind": "return",
+          "source_line": 1294,
+          "exit_line": 1295
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nf_ct_expect_related(exp, 0) != 0",
+          "polarity": "in_true_branch",
+          "source_line": 1308
+        }
+      ]
+    },
+    {
+      "caller": "process_register_response",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1366,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct_sip_info->register_cseq != cseq)",
+          "exit_kind": "return",
+          "source_line": 1346,
+          "exit_line": 1347
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(code >= 100 && code <= 199)",
+          "exit_kind": "return",
+          "source_line": 1349,
+          "exit_line": 1350
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(code < 200 || code > 299)",
+          "exit_kind": "goto",
+          "source_line": 1351,
+          "exit_line": 1352
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "1",
+          "polarity": "in_true_branch",
+          "source_line": 1358
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret < 0",
+          "polarity": "in_true_branch",
+          "source_line": 1365
+        }
+      ]
+    },
+    {
+      "caller": "process_register_response",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1384,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ct_sip_info->register_cseq != cseq)",
+          "exit_kind": "return",
+          "source_line": 1346,
+          "exit_line": 1347
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(code >= 100 && code <= 199)",
+          "exit_kind": "return",
+          "source_line": 1349,
+          "exit_line": 1350
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(code < 200 || code > 299)",
+          "exit_kind": "goto",
+          "source_line": 1351,
+          "exit_line": 1352
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 1365
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == 0)",
+          "exit_kind": "break",
+          "source_line": 1368,
+          "exit_line": 1369
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_inet_addr_cmp(&ct->tuplehash[dir].tuple.dst.u3, &addr))",
+          "exit_kind": "continue",
+          "source_line": 1372,
+          "exit_line": 1373
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "1",
+          "polarity": "in_true_branch",
+          "source_line": 1358
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret < 0",
+          "polarity": "in_true_branch",
+          "source_line": 1383
+        }
+      ]
+    },
+    {
+      "caller": "process_sip_response",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1421,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(*datalen < strlen(\"SIP/2.0 200\"))",
+          "exit_kind": "return",
+          "source_line": 1417,
+          "exit_line": 1418
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!code",
+          "polarity": "in_true_branch",
+          "source_line": 1420
+        }
+      ]
+    },
+    {
+      "caller": "process_sip_response",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1427,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "code != NULL",
+          "source_line": 1420
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*datalen < strlen(\"SIP/2.0 200\"))",
+          "exit_kind": "return",
+          "source_line": 1417,
+          "exit_line": 1418
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!code)",
+          "exit_kind": "return",
+          "source_line": 1420
+        }
+      ]
+    },
+    {
+      "caller": "process_sip_response",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1432,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "code != NULL",
+          "source_line": 1420
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*datalen < strlen(\"SIP/2.0 200\"))",
+          "exit_kind": "return",
+          "source_line": 1417,
+          "exit_line": 1418
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!code)",
+          "exit_kind": "return",
+          "source_line": 1420
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!cseq && *(*dptr + matchoff) != '0'",
+          "polarity": "in_true_branch",
+          "source_line": 1431
+        }
+      ]
+    },
+    {
+      "caller": "process_sip_request",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1493,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(handler->request == NULL)",
+          "exit_kind": "continue",
+          "source_line": 1482,
+          "exit_line": 1483
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < ARRAY_SIZE(sip_handlers); i++",
+          "polarity": "in_true_branch",
+          "source_line": 1478
+        }
+      ]
+    },
+    {
+      "caller": "process_sip_request",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1498,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(handler->request == NULL)",
+          "exit_kind": "continue",
+          "source_line": 1482,
+          "exit_line": 1483
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < ARRAY_SIZE(sip_handlers); i++",
+          "polarity": "in_true_branch",
+          "source_line": 1478
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!cseq && *(*dptr + matchoff) != '0'",
+          "polarity": "in_true_branch",
+          "source_line": 1497
+        }
+      ]
+    },
+    {
+      "caller": "process_sip_msg",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1524,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret == NF_ACCEPT && ct->status & IPS_NAT_MASK",
+          "polarity": "in_true_branch",
+          "source_line": 1520
+        }
+      ]
+    },
+    {
+      "caller": "tftp_help",
+      "file": "net/netfilter/nf_conntrack_tftp.c",
+      "line": 66,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tfh == NULL)",
+          "exit_kind": "return",
+          "source_line": 54,
+          "exit_line": 55
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ntohs(tfh->opcode)",
+          "polarity": "in_true_branch",
+          "source_line": 57
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "exp == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 65
+        }
+      ]
+    },
+    {
+      "caller": "tftp_help",
+      "file": "net/netfilter/nf_conntrack_tftp.c",
+      "line": 82,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tfh == NULL)",
+          "exit_kind": "return",
+          "source_line": 54,
+          "exit_line": 55
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(exp == NULL)",
+          "exit_kind": "return",
+          "source_line": 65
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "ntohs(tfh->opcode)",
+          "polarity": "in_true_branch",
+          "source_line": 57
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nf_ct_expect_related(exp, 0) != 0",
+          "polarity": "in_true_branch",
+          "source_line": 81
+        }
+      ]
+    },
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_nat_amanda.c",
+      "line": 49,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "port == 0",
+          "polarity": "in_true_branch",
+          "source_line": 48
+        }
+      ]
+    },
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_nat_amanda.c",
+      "line": 57,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(port == 0)",
+          "exit_kind": "return",
+          "source_line": 48
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_ftp",
+      "file": "net/netfilter/nf_nat_ftp.c",
+      "line": 91,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "port == 0",
+          "polarity": "in_true_branch",
+          "source_line": 90
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_ftp",
+      "file": "net/netfilter/nf_nat_ftp.c",
+      "line": 109,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "buflen != NULL",
+          "source_line": 97
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(port == 0)",
+          "exit_kind": "return",
+          "source_line": 90
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!buflen)",
+          "exit_kind": "goto",
+          "source_line": 97,
+          "exit_line": 98
+        }
+      ]
+    },
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_nat_irc.c",
+      "line": 54,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "port == 0",
+          "polarity": "in_true_branch",
+          "source_line": 53
+        }
+      ]
+    },
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_nat_irc.c",
+      "line": 78,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(port == 0)",
+          "exit_kind": "return",
+          "source_line": 53
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 166,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0",
+          "polarity": "in_true_branch",
+          "source_line": 160
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 202,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request)",
+          "exit_kind": "goto",
+          "source_line": 187
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 220,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request)",
+          "exit_kind": "goto",
+          "source_line": 187
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 237,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request)",
+          "exit_kind": "goto",
+          "source_line": 187
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 253,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request)",
+          "exit_kind": "goto",
+          "source_line": 187
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 270,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request)",
+          "exit_kind": "goto",
+          "source_line": 187
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 277,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request)",
+          "exit_kind": "goto",
+          "source_line": 187
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 286,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request)",
+          "exit_kind": "goto",
+          "source_line": 187
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dir == IP_CT_DIR_REPLY && ct_sip_info->forced_dport",
+          "polarity": "in_true_branch",
+          "source_line": 282
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "skb_ensure_writable(skb, skb->len)",
+          "polarity": "in_true_branch",
+          "source_line": 285
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 295,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request)",
+          "exit_kind": "goto",
+          "source_line": 187
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, skb->len))",
+          "exit_kind": "return",
+          "source_line": 285
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dir == IP_CT_DIR_REPLY && ct_sip_info->forced_dport",
+          "polarity": "in_true_branch",
+          "source_line": 282
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip_expect",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 415,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "port == 0",
+          "polarity": "in_true_branch",
+          "source_line": 414
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip_expect",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 424,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(port == 0)",
+          "exit_kind": "return",
+          "source_line": 414
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sdp_media",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 622,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == -EBUSY)",
+          "exit_kind": "continue",
+          "source_line": 600,
+          "exit_line": 601
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "break",
+          "source_line": 602
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == 0)",
+          "exit_kind": "break",
+          "source_line": 609,
+          "exit_line": 610
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == -EBUSY)",
+          "exit_kind": "continue",
+          "source_line": 611
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "break",
+          "source_line": 614
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "port == 0",
+          "polarity": "in_true_branch",
+          "source_line": 621
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sdp_media",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 630,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == -EBUSY)",
+          "exit_kind": "continue",
+          "source_line": 600,
+          "exit_line": 601
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "break",
+          "source_line": 602
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == 0)",
+          "exit_kind": "break",
+          "source_line": 609,
+          "exit_line": 610
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret == -EBUSY)",
+          "exit_kind": "continue",
+          "source_line": 611
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "break",
+          "source_line": 614
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(port == 0)",
+          "exit_kind": "goto",
+          "source_line": 621
+        }
+      ]
+    },
+    {
+      "caller": "help",
+      "file": "net/netfilter/nf_nat_tftp.c",
+      "line": 34,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "nf_ct_expect_related(exp, 0) != 0",
+          "polarity": "in_true_branch",
+          "source_line": 33
+        }
+      ]
+    }
+  ]
+}

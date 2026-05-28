@@ -1,0 +1,161 @@
+{
+  "callee": "nfqnl_reinject",
+  "defined_in": "net/netfilter/nfnetlink_queue.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nfqnl_flush",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 256,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 251
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!cmpfn || cmpfn(entry, data)",
+          "polarity": "in_true_branch",
+          "source_line": 253
+        }
+      ]
+    },
+    {
+      "caller": "__nfqnl_enqueue_packet",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 711,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nskb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 666
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_drop_unconfirmed(entry))",
+          "exit_kind": "goto",
+          "source_line": 672,
+          "exit_line": 673
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(queue->queue_total >= queue->queue_maxlen)",
+          "exit_kind": "goto",
+          "source_line": 675
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 691
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "failopen",
+          "polarity": "in_true_branch",
+          "source_line": 710
+        }
+      ]
+    },
+    {
+      "caller": "nfqnl_recv_verdict_batch",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1125,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(queue)",
+          "source_line": 1094
+        },
+        {
+          "kind": "null_check",
+          "predicate": "vhdr != NULL",
+          "source_line": 1098
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(queue))",
+          "exit_kind": "return",
+          "source_line": 1094,
+          "exit_line": 1095
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!vhdr)",
+          "exit_kind": "return",
+          "source_line": 1098,
+          "exit_line": 1099
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nfq_id_after(entry->id, maxid))",
+          "exit_kind": "break",
+          "source_line": 1107,
+          "exit_line": 1108
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(list_empty(&batch_list))",
+          "exit_kind": "return",
+          "source_line": 1115,
+          "exit_line": 1116
+        }
+      ]
+    },
+    {
+      "caller": "nfqnl_recv_verdict",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 1254,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(queue)",
+          "source_line": 1208
+        },
+        {
+          "kind": "null_check",
+          "predicate": "vhdr != NULL",
+          "source_line": 1212
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(queue))",
+          "exit_kind": "return",
+          "source_line": 1208,
+          "exit_line": 1209
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!vhdr)",
+          "exit_kind": "return",
+          "source_line": 1212,
+          "exit_line": 1213
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(entry == NULL)",
+          "exit_kind": "return",
+          "source_line": 1218,
+          "exit_line": 1219
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1232,
+          "exit_line": 1233
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(entry->state.pf == PF_BRIDGE)",
+          "exit_kind": "return",
+          "source_line": 1230
+        }
+      ]
+    }
+  ]
+}

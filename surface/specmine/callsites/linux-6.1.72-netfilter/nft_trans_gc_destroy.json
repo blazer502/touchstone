@@ -1,0 +1,190 @@
+{
+  "callee": "nft_trans_gc_destroy",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "nft_trans_gc_trans_free",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9131,
+      "guards": []
+    },
+    {
+      "caller": "nft_trans_gc_work",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9174,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nft_trans_gc_work_done(trans)",
+          "polarity": "in_true_branch",
+          "source_line": 9173
+        }
+      ]
+    },
+    {
+      "caller": "nft_trans_gc_queue_async_done",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9240,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "trans->count == 0",
+          "polarity": "in_true_branch",
+          "source_line": 9239
+        }
+      ]
+    },
+    {
+      "caller": "nft_trans_gc_queue_sync_done",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9268,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!lockdep_commit_lock_is_held(trans->net))",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 9265
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "trans->count == 0",
+          "polarity": "in_true_branch",
+          "source_line": 9267
+        }
+      ]
+    },
+    {
+      "caller": "nft_rhash_gc",
+      "file": "net/netfilter/nft_set_hash.c",
+      "line": 341,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 333
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_gc_is_pending(set))",
+          "exit_kind": "goto",
+          "source_line": 329,
+          "exit_line": 330
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "goto",
+          "source_line": 333,
+          "exit_line": 334
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "(he = rhashtable_walk_next(&hti))",
+          "polarity": "in_true_branch",
+          "source_line": 339
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "IS_ERR(he)",
+          "polarity": "in_true_branch",
+          "source_line": 340
+        }
+      ]
+    },
+    {
+      "caller": "nft_rhash_gc",
+      "file": "net/netfilter/nft_set_hash.c",
+      "line": 348,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 333
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(he)",
+          "source_line": 340
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_gc_is_pending(set))",
+          "exit_kind": "goto",
+          "source_line": 329,
+          "exit_line": 330
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "goto",
+          "source_line": 333,
+          "exit_line": 334
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(he))",
+          "exit_kind": "goto",
+          "source_line": 340
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "(he = rhashtable_walk_next(&hti))",
+          "polarity": "in_true_branch",
+          "source_line": 339
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "READ_ONCE(nft_net->gc_seq) != gc_seq",
+          "polarity": "in_true_branch",
+          "source_line": 347
+        }
+      ]
+    },
+    {
+      "caller": "nft_rbtree_gc",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 644,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "read_lock_held",
+          "source_line": 639
+        },
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 636
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_gc_is_pending(set))",
+          "exit_kind": "goto",
+          "source_line": 632,
+          "exit_line": 633
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "goto",
+          "source_line": 636,
+          "exit_line": 637
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "node = rb_first(&priv->root); node != NULL; node = rb_next(node)",
+          "polarity": "in_true_branch",
+          "source_line": 640
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "READ_ONCE(nft_net->gc_seq) != gc_seq",
+          "polarity": "in_true_branch",
+          "source_line": 643
+        }
+      ]
+    }
+  ]
+}

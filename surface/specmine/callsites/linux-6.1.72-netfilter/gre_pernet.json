@@ -1,0 +1,39 @@
+{
+  "callee": "gre_pernet",
+  "defined_in": "net/netfilter/nf_conntrack_proto_gre.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "gre_keymap_lookup",
+      "file": "net/netfilter/nf_conntrack_proto_gre.c",
+      "line": 71,
+      "guards": []
+    },
+    {
+      "caller": "nf_ct_gre_keymap_add",
+      "file": "net/netfilter/nf_conntrack_proto_gre.c",
+      "line": 93,
+      "guards": []
+    },
+    {
+      "caller": "gre_get_timeouts",
+      "file": "net/netfilter/nf_conntrack_proto_gre.c",
+      "line": 198,
+      "guards": []
+    },
+    {
+      "caller": "gre_timeout_nlattr_to_obj",
+      "file": "net/netfilter/nf_conntrack_proto_gre.c",
+      "line": 244,
+      "guards": []
+    },
+    {
+      "caller": "nf_conntrack_gre_init_net",
+      "file": "net/netfilter/nf_conntrack_proto_gre.c",
+      "line": 288,
+      "guards": []
+    }
+  ]
+}

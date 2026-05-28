@@ -1,0 +1,90 @@
+{
+  "callee": "worker",
+  "defined_in": "sample.c",
+  "target": "smoke",
+  "scope": ".",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "caller_holds_lock",
+      "file": "sample.c",
+      "line": 26,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "p != NULL",
+          "source_line": 18
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!p)",
+          "exit_kind": "return",
+          "source_line": 18
+        }
+      ]
+    },
+    {
+      "caller": "caller_in_if",
+      "file": "sample.c",
+      "line": 47,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "n > 0",
+          "polarity": "in_true_branch",
+          "source_line": 45
+        }
+      ]
+    },
+    {
+      "caller": "caller_in_if",
+      "file": "sample.c",
+      "line": 50,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "n > 0",
+          "polarity": "in_false_branch",
+          "source_line": 48
+        }
+      ]
+    },
+    {
+      "caller": "caller_rcu",
+      "file": "sample.c",
+      "line": 60,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 57
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!arr)",
+          "macro": "BUG_ON",
+          "source_line": 58
+        }
+      ]
+    },
+    {
+      "caller": "caller_rcu",
+      "file": "sample.c",
+      "line": 63,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!arr)",
+          "macro": "BUG_ON",
+          "source_line": 58
+        }
+      ]
+    },
+    {
+      "caller": "caller_no_guards",
+      "file": "sample.c",
+      "line": 70,
+      "guards": []
+    }
+  ]
+}

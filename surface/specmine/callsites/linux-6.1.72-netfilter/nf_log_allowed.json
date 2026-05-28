@@ -1,0 +1,33 @@
+{
+  "callee": "nf_log_allowed",
+  "defined_in": "net/netfilter/nf_log_syslog.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_log_arp_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 142,
+      "guards": []
+    },
+    {
+      "caller": "nf_log_ip_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 839,
+      "guards": []
+    },
+    {
+      "caller": "nf_log_ip6_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 874,
+      "guards": []
+    },
+    {
+      "caller": "nf_log_unknown_packet",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 910,
+      "guards": []
+    }
+  ]
+}

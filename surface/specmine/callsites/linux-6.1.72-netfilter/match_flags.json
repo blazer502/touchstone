@@ -1,0 +1,84 @@
+{
+  "callee": "match_flags",
+  "defined_in": "net/netfilter/xt_sctp.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "match_packet",
+      "file": "net/netfilter/xt_sctp.c",
+      "line": 79,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(sch == NULL || sch->length == 0)",
+          "exit_kind": "return",
+          "source_line": 61
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "SCTP_CHUNKMAP_IS_SET(info->chunkmap, sch->type)",
+          "polarity": "in_true_branch",
+          "source_line": 76
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "chunk_match_type",
+          "polarity": "in_true_branch",
+          "source_line": 77
+        }
+      ]
+    },
+    {
+      "caller": "match_packet",
+      "file": "net/netfilter/xt_sctp.c",
+      "line": 86,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(sch == NULL || sch->length == 0)",
+          "exit_kind": "return",
+          "source_line": 61
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "SCTP_CHUNKMAP_IS_SET(info->chunkmap, sch->type)",
+          "polarity": "in_true_branch",
+          "source_line": 76
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "chunk_match_type",
+          "polarity": "in_true_branch",
+          "source_line": 77
+        }
+      ]
+    },
+    {
+      "caller": "match_packet",
+      "file": "net/netfilter/xt_sctp.c",
+      "line": 92,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(sch == NULL || sch->length == 0)",
+          "exit_kind": "return",
+          "source_line": 61
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "SCTP_CHUNKMAP_IS_SET(info->chunkmap, sch->type)",
+          "polarity": "in_true_branch",
+          "source_line": 76
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "chunk_match_type",
+          "polarity": "in_true_branch",
+          "source_line": 77
+        }
+      ]
+    }
+  ]
+}

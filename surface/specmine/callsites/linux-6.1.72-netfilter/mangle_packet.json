@@ -1,0 +1,111 @@
+{
+  "callee": "mangle_packet",
+  "defined_in": "net/netfilter/nf_nat_sip.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "map_addr",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 123,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_inet_addr_cmp(&newaddr, addr) && newport == port)",
+          "exit_kind": "return",
+          "source_line": 119,
+          "exit_line": 120
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 218,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request)",
+          "exit_kind": "goto",
+          "source_line": 187
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 235,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request)",
+          "exit_kind": "goto",
+          "source_line": 187
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 251,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(strncasecmp(*dptr, \"SIP/2.0\", strlen(\"SIP/2.0\")) != 0)",
+          "exit_kind": "return",
+          "source_line": 160
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(request)",
+          "exit_kind": "goto",
+          "source_line": 187
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_sip_expect",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 422,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(port == 0)",
+          "exit_kind": "return",
+          "source_line": 414
+        }
+      ]
+    },
+    {
+      "caller": "mangle_content_len",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 458,
+      "guards": []
+    },
+    {
+      "caller": "mangle_sdp_packet",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 477,
+      "guards": []
+    },
+    {
+      "caller": "nf_nat_sdp_port",
+      "file": "net/netfilter/nf_nat_sip.c",
+      "line": 513,
+      "guards": []
+    }
+  ]
+}

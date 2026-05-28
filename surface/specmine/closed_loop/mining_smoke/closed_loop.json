@@ -1,0 +1,63 @@
+{
+  "generated_at": 1779931935,
+  "min_suspicion": 0.5,
+  "records": [
+    {
+      "agent_disposition": "candidate",
+      "agent_reason": "Tier-3 cbmc unsafe at line 47 [__specmine_wrap_lookup_thing.assertion.1] (bounded-sound witness; runtime PoV needs Tier-1 wrap)",
+      "disposition": "confirmed",
+      "harness_path": "/home/chanyoung/veri-agent/surface/specmine/closed_loop/mining_smoke/harnesses/lookup_thing_caller_buggy_lock.c",
+      "outlier": {
+        "callee": "lookup_thing",
+        "caller": "caller_buggy",
+        "callsite_count": 12,
+        "contract_kind_class": "lock",
+        "contract_kind_label": "lock_held",
+        "file": "fixture.c",
+        "line": 126,
+        "local_establishment": 0.0,
+        "missing_contract": "rcu_read_lock_held",
+        "support_count": 10,
+        "support_pct": 0.8333,
+        "suspicion": 0.8333
+      },
+      "post_refine_disposition": "confirmed",
+      "refinement": null,
+      "router_verdict": "bmc_unsafe",
+      "total_wall_ms": 551,
+      "witness_path": "/tmp/tier3-cbmc-6k02q8xy/lookup_thing_caller_buggy_lock.cbmc-pov.json"
+    }
+  ],
+  "refine_unwind": 8,
+  "stats": {
+    "by_class_confirmed": {
+      "lock": 1
+    },
+    "by_class_post_refine_confirmed": {
+      "lock": 1
+    },
+    "by_disposition_post_refine": {
+      "confirmed": 1
+    },
+    "by_disposition_pre_refine": {
+      "confirmed": 1
+    },
+    "classes_with_confirmed_leads": 1,
+    "confirmed_post_refine": 1,
+    "confirmed_pre_refine": 1,
+    "false_confirmations": 0,
+    "inconclusive": 0,
+    "outliers_dispatched": 1,
+    "outliers_total": 2,
+    "refined_flips": 0,
+    "refuted": 0,
+    "skipped": {
+      "proposer_deprioritized": 1
+    },
+    "wall_seconds": 0.57
+  },
+  "target": "mining_smoke",
+  "timeout_s": 30,
+  "unwind": 4,
+  "use_llm_refine": true
+}

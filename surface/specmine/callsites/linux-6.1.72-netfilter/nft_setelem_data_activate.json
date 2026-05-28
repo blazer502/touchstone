@@ -1,0 +1,84 @@
+{
+  "callee": "nft_setelem_data_activate",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nf_tables_unbind_set",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5111,
+      "guards": []
+    },
+    {
+      "caller": "nft_mapelem_activate",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5120,
+      "guards": []
+    },
+    {
+      "caller": "nft_map_catchall_activate",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5139,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_active(ext, genmask))",
+          "exit_kind": "continue",
+          "source_line": 5135,
+          "exit_line": 5136
+        }
+      ]
+    },
+    {
+      "caller": "__nf_tables_abort",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9969,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(!(trans->ctx.table->flags & __NFT_TABLE_F_UPDATE))",
+          "exit_kind": "break",
+          "source_line": 9866
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_chain_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9892
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_rule_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9909
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_set_update(trans))",
+          "exit_kind": "break",
+          "source_line": 9931
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_set_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9936
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_trans_elem_set_bound(trans))",
+          "exit_kind": "break",
+          "source_line": 9951
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "trans->msg_type",
+          "polarity": "in_true_branch",
+          "source_line": 9863
+        }
+      ]
+    }
+  ]
+}

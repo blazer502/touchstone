@@ -1,0 +1,106 @@
+{
+  "callee": "ip_vs_dest_set_insert",
+  "defined_in": "net/netfilter/ipvs/ip_vs_lblcr.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_lblcr_new",
+      "file": "net/netfilter/ipvs/ip_vs_lblcr.c",
+      "line": 380,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "en != NULL",
+          "source_line": 369
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!en)",
+          "exit_kind": "return",
+          "source_line": 369,
+          "exit_line": 370
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!en",
+          "polarity": "in_true_branch",
+          "source_line": 367
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_lblcr_new",
+      "file": "net/netfilter/ipvs/ip_vs_lblcr.c",
+      "line": 386,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "en != NULL",
+          "source_line": 369
+        },
+        {
+          "kind": "null_check",
+          "predicate": "en != NULL",
+          "source_line": 367
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!en)",
+          "exit_kind": "return",
+          "source_line": 369,
+          "exit_line": 370
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!en)",
+          "exit_kind": "return",
+          "source_line": 367
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_lblcr_schedule",
+      "file": "net/netfilter/ipvs/ip_vs_lblcr.c",
+      "line": 691,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 689
+        },
+        {
+          "kind": "null_check",
+          "predicate": "dest != NULL",
+          "source_line": 683
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(dest && !is_overloaded(dest, svc))",
+          "exit_kind": "goto",
+          "source_line": 678,
+          "exit_line": 679
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest)",
+          "exit_kind": "return",
+          "source_line": 683
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "en",
+          "polarity": "in_true_branch",
+          "source_line": 656
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!tbl->dead",
+          "polarity": "in_true_branch",
+          "source_line": 690
+        }
+      ]
+    }
+  ]
+}

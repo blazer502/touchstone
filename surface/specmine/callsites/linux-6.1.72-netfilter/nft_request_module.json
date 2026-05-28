@@ -1,0 +1,167 @@
+{
+  "callee": "nft_request_module",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "nf_tables_chain_type_lookup",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 929,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(type != NULL)",
+          "exit_kind": "return",
+          "source_line": 923,
+          "exit_line": 924
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "autoload",
+          "polarity": "in_true_branch",
+          "source_line": 928
+        }
+      ]
+    },
+    {
+      "caller": "nft_expr_type_request_module",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2884,
+      "guards": []
+    },
+    {
+      "caller": "nft_expr_type_get",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 2911,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nla == NULL)",
+          "exit_kind": "return",
+          "source_line": 2898,
+          "exit_line": 2899
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(type != NULL && try_module_get(type->owner))",
+          "exit_kind": "return",
+          "source_line": 2902,
+          "exit_line": 2903
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_expr_type_request_module(net, family, nla) == -EAGAIN)",
+          "exit_kind": "return",
+          "source_line": 2908,
+          "exit_line": 2909
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "type == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 2907
+        }
+      ]
+    },
+    {
+      "caller": "nft_obj_type_get",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7135,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(type != NULL && try_module_get(type->owner))",
+          "exit_kind": "return",
+          "source_line": 7129,
+          "exit_line": 7130
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "type == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 7134
+        }
+      ]
+    },
+    {
+      "caller": "nft_flowtable_type_get",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 7823,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(type != NULL && try_module_get(type->owner))",
+          "exit_kind": "return",
+          "source_line": 7817,
+          "exit_line": 7818
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "type == NULL",
+          "polarity": "in_true_branch",
+          "source_line": 7822
+        }
+      ]
+    },
+    {
+      "caller": "nft_target_init",
+      "file": "net/netfilter/nft_compat.c",
+      "line": 271,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 252,
+          "exit_line": 253
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ctx->nla[NFTA_RULE_COMPAT])",
+          "exit_kind": "return",
+          "source_line": 250
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret < 0",
+          "polarity": "in_true_branch",
+          "source_line": 261
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret == -ENOENT",
+          "polarity": "in_true_branch",
+          "source_line": 262
+        }
+      ]
+    },
+    {
+      "caller": "nft_log_modprobe",
+      "file": "net/netfilter/nft_log.c",
+      "line": 135,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "t",
+          "polarity": "in_true_branch",
+          "source_line": 133
+        }
+      ]
+    },
+    {
+      "caller": "nft_log_modprobe",
+      "file": "net/netfilter/nft_log.c",
+      "line": 137,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "t",
+          "polarity": "in_true_branch",
+          "source_line": 133
+        }
+      ]
+    }
+  ]
+}

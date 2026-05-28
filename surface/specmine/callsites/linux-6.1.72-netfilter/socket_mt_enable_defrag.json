@@ -1,0 +1,27 @@
+{
+  "callee": "socket_mt_enable_defrag",
+  "defined_in": "net/netfilter/xt_socket.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "socket_mt_v1_check",
+      "file": "net/netfilter/xt_socket.c",
+      "line": 173,
+      "guards": []
+    },
+    {
+      "caller": "socket_mt_v2_check",
+      "file": "net/netfilter/xt_socket.c",
+      "line": 190,
+      "guards": []
+    },
+    {
+      "caller": "socket_mt_v3_check",
+      "file": "net/netfilter/xt_socket.c",
+      "line": 208,
+      "guards": []
+    }
+  ]
+}

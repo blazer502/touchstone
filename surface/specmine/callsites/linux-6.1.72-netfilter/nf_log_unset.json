@@ -1,0 +1,213 @@
+{
+  "callee": "nf_log_unset",
+  "defined_in": "net/netfilter/nf_log.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 10,
+  "callsites": [
+    {
+      "caller": "nf_log_syslog_net_init",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 990,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 970,
+          "exit_line": 971
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 974,
+          "exit_line": 975
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 978,
+          "exit_line": 979
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 982,
+          "exit_line": 983
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 986,
+          "exit_line": 987
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_syslog_net_init",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 992,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 970,
+          "exit_line": 971
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 974,
+          "exit_line": 975
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 978,
+          "exit_line": 979
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 982,
+          "exit_line": 983
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 986,
+          "exit_line": 987
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_syslog_net_init",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 994,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 970,
+          "exit_line": 971
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 974,
+          "exit_line": 975
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 978,
+          "exit_line": 979
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 982,
+          "exit_line": 983
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 986,
+          "exit_line": 987
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_syslog_net_init",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 996,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 970,
+          "exit_line": 971
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 974,
+          "exit_line": 975
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 978,
+          "exit_line": 979
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 982,
+          "exit_line": 983
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "goto",
+          "source_line": 986,
+          "exit_line": 987
+        }
+      ]
+    },
+    {
+      "caller": "nf_log_syslog_net_exit",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 1002,
+      "guards": []
+    },
+    {
+      "caller": "nf_log_syslog_net_exit",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 1003,
+      "guards": []
+    },
+    {
+      "caller": "nf_log_syslog_net_exit",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 1004,
+      "guards": []
+    },
+    {
+      "caller": "nf_log_syslog_net_exit",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 1005,
+      "guards": []
+    },
+    {
+      "caller": "nf_log_syslog_net_exit",
+      "file": "net/netfilter/nf_log_syslog.c",
+      "line": 1006,
+      "guards": []
+    },
+    {
+      "caller": "nfnl_log_net_exit",
+      "file": "net/netfilter/nfnetlink_log.c",
+      "line": 1144,
+      "guards": []
+    }
+  ]
+}

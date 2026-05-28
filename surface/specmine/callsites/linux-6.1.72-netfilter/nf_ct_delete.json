@@ -1,0 +1,99 @@
+{
+  "callee": "nf_ct_delete",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "early_drop_list",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1413,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(test_bit(IPS_OFFLOAD_BIT, &tmp->status))",
+          "exit_kind": "continue",
+          "source_line": 1385,
+          "exit_line": 1386
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_is_expired(tmp))",
+          "exit_kind": "continue",
+          "source_line": 1388
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!refcount_inc_not_zero(&tmp->ct_general.use))",
+          "exit_kind": "continue",
+          "source_line": 1398,
+          "exit_line": 1399
+        }
+      ]
+    },
+    {
+      "caller": "nf_ct_kill_acct",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 2115,
+      "guards": []
+    },
+    {
+      "caller": "nf_ct_iterate_cleanup",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 2442,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 2438
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "(ct = get_next_corpse(iter, iter_data, &bucket)) != NULL",
+          "polarity": "in_true_branch",
+          "source_line": 2439
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_del_conntrack",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1640,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "h != NULL",
+          "source_line": 1626
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1605,
+          "exit_line": 1606
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1622,
+          "exit_line": 1623
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!h)",
+          "exit_kind": "return",
+          "source_line": 1626,
+          "exit_line": 1627
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(id != (__force __be32)nf_ct_get_id(ct))",
+          "exit_kind": "return",
+          "source_line": 1634
+        }
+      ]
+    }
+  ]
+}

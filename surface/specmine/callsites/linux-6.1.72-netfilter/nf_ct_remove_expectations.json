@@ -1,0 +1,80 @@
+{
+  "callee": "nf_ct_remove_expectations",
+  "defined_in": "net/netfilter/nf_conntrack_expect.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "clean_from_lists",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 526,
+      "guards": []
+    },
+    {
+      "caller": "nf_ct_destroy",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 605,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(refcount_read(&nfct->use) != 0)",
+          "macro": "WARN_ON",
+          "source_line": 590
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(nf_ct_is_template(ct)))",
+          "exit_kind": "return",
+          "source_line": 592
+        }
+      ]
+    },
+    {
+      "caller": "process_urq",
+      "file": "net/netfilter/nf_conntrack_h323_main.c",
+      "line": 1431,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ret < 0)",
+          "exit_kind": "return",
+          "source_line": 1426,
+          "exit_line": 1427
+        }
+      ]
+    },
+    {
+      "caller": "ctnetlink_change_helper",
+      "file": "net/netfilter/nf_conntrack_netlink.c",
+      "line": 1959,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 1935,
+          "exit_line": 1936
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct->master)",
+          "exit_kind": "return",
+          "source_line": 1939
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!strcmp(helpname, \"\")",
+          "polarity": "in_true_branch",
+          "source_line": 1956
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "help && help->helper",
+          "polarity": "in_true_branch",
+          "source_line": 1957
+        }
+      ]
+    }
+  ]
+}

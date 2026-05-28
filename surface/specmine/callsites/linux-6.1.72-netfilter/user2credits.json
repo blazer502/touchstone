@@ -1,0 +1,203 @@
+{
+  "callee": "user2credits",
+  "defined_in": "net/netfilter/xt_hashlimit.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "rateinfo_init",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 599,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "hinfo->cfg.mode & XT_HASHLIMIT_BYTES",
+          "polarity": "in_false_branch",
+          "source_line": 598
+        }
+      ]
+    },
+    {
+      "caller": "rateinfo_init",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 601,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "hinfo->cfg.mode & XT_HASHLIMIT_BYTES",
+          "polarity": "in_false_branch",
+          "source_line": 598
+        }
+      ]
+    },
+    {
+      "caller": "hashlimit_mt_check_common",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 888,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cfg->gc_interval == 0 || cfg->expire == 0)",
+          "exit_kind": "return",
+          "source_line": 846,
+          "exit_line": 847
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cfg->srcmask > 32 || cfg->dstmask > 32)",
+          "exit_kind": "return",
+          "source_line": 857,
+          "exit_line": 858
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(par->family == NFPROTO_IPV4)",
+          "exit_kind": "return",
+          "source_line": 856
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cfg->srcmask > 128 || cfg->dstmask > 128)",
+          "exit_kind": "return",
+          "source_line": 860,
+          "exit_line": 861
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cfg->mode & ~XT_HASHLIMIT_ALL)",
+          "exit_kind": "return",
+          "source_line": 864
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cfg->avg == 0 || cfg->avg > U32_MAX)",
+          "exit_kind": "return",
+          "source_line": 872
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cfg->interval == 0)",
+          "exit_kind": "return",
+          "source_line": 877
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(user2credits_byte(cfg->avg) == 0)",
+          "exit_kind": "return",
+          "source_line": 882
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "cfg->mode & XT_HASHLIMIT_BYTES",
+          "polarity": "in_false_branch",
+          "source_line": 887
+        }
+      ]
+    },
+    {
+      "caller": "hashlimit_mt_check_common",
+      "file": "net/netfilter/xt_hashlimit.c",
+      "line": 889,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cfg->gc_interval == 0 || cfg->expire == 0)",
+          "exit_kind": "return",
+          "source_line": 846,
+          "exit_line": 847
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cfg->srcmask > 32 || cfg->dstmask > 32)",
+          "exit_kind": "return",
+          "source_line": 857,
+          "exit_line": 858
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(par->family == NFPROTO_IPV4)",
+          "exit_kind": "return",
+          "source_line": 856
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cfg->srcmask > 128 || cfg->dstmask > 128)",
+          "exit_kind": "return",
+          "source_line": 860,
+          "exit_line": 861
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cfg->mode & ~XT_HASHLIMIT_ALL)",
+          "exit_kind": "return",
+          "source_line": 864
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cfg->avg == 0 || cfg->avg > U32_MAX)",
+          "exit_kind": "return",
+          "source_line": 872
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cfg->interval == 0)",
+          "exit_kind": "return",
+          "source_line": 877
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(user2credits_byte(cfg->avg) == 0)",
+          "exit_kind": "return",
+          "source_line": 882
+        }
+      ]
+    },
+    {
+      "caller": "limit_mt_check",
+      "file": "net/netfilter/xt_limit.c",
+      "line": 112,
+      "guards": []
+    },
+    {
+      "caller": "limit_mt_check",
+      "file": "net/netfilter/xt_limit.c",
+      "line": 112,
+      "guards": []
+    },
+    {
+      "caller": "limit_mt_check",
+      "file": "net/netfilter/xt_limit.c",
+      "line": 127,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(priv == NULL)",
+          "exit_kind": "return",
+          "source_line": 119,
+          "exit_line": 120
+        }
+      ]
+    },
+    {
+      "caller": "limit_mt_check",
+      "file": "net/netfilter/xt_limit.c",
+      "line": 130,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(priv == NULL)",
+          "exit_kind": "return",
+          "source_line": 119,
+          "exit_line": 120
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "r->cost == 0",
+          "polarity": "in_true_branch",
+          "source_line": 128
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "callee": "ip_vs_app_pkt_out",
+  "defined_in": "net/netfilter/ipvs/ip_vs_app.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "sctp_snat_handler",
+      "file": "net/netfilter/ipvs/ip_vs_proto_sctp.c",
+      "line": 115,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->af == AF_INET6 && iph->fragoffs)",
+          "exit_kind": "return",
+          "source_line": 99,
+          "exit_line": 100
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, sctphoff + sizeof(*sctph)))",
+          "exit_kind": "return",
+          "source_line": 104,
+          "exit_line": 105
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!sctp_csum_check(cp->af, skb, pp))",
+          "exit_kind": "return",
+          "source_line": 111,
+          "exit_line": 112
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "unlikely(cp->app != NULL)",
+          "polarity": "in_true_branch",
+          "source_line": 107
+        }
+      ]
+    },
+    {
+      "caller": "tcp_snat_handler",
+      "file": "net/netfilter/ipvs/ip_vs_proto_tcp.c",
+      "line": 173,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->af == AF_INET6 && iph->fragoffs)",
+          "exit_kind": "return",
+          "source_line": 156,
+          "exit_line": 157
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, tcphoff + sizeof(*tcph)))",
+          "exit_kind": "return",
+          "source_line": 162,
+          "exit_line": 163
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tcp_csum_check(cp->af, skb, pp))",
+          "exit_kind": "return",
+          "source_line": 169,
+          "exit_line": 170
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "unlikely(cp->app != NULL)",
+          "polarity": "in_true_branch",
+          "source_line": 165
+        }
+      ]
+    },
+    {
+      "caller": "udp_snat_handler",
+      "file": "net/netfilter/ipvs/ip_vs_proto_udp.c",
+      "line": 164,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->af == AF_INET6 && iph->fragoffs)",
+          "exit_kind": "return",
+          "source_line": 145,
+          "exit_line": 146
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, udphoff + sizeof(*udph)))",
+          "exit_kind": "return",
+          "source_line": 151,
+          "exit_line": 152
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!udp_csum_check(cp->af, skb, pp))",
+          "exit_kind": "return",
+          "source_line": 158,
+          "exit_line": 159
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "unlikely(cp->app != NULL)",
+          "polarity": "in_true_branch",
+          "source_line": 154
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,280 @@
+{
+  "callee": "flow_offload_teardown",
+  "defined_in": "net/netfilter/nf_flow_table_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "nf_flow_offload_gc_step",
+      "file": "net/netfilter/nf_flow_table_core.c",
+      "line": 431,
+      "guards": []
+    },
+    {
+      "caller": "nf_flow_table_do_cleanup",
+      "file": "net/netfilter/nf_flow_table_core.c",
+      "line": 579,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!dev",
+          "polarity": "in_true_branch",
+          "source_line": 578
+        }
+      ]
+    },
+    {
+      "caller": "nf_flow_table_do_cleanup",
+      "file": "net/netfilter/nf_flow_table_core.c",
+      "line": 586,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dev != NULL",
+          "source_line": 578
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dev)",
+          "exit_kind": "return",
+          "source_line": 578
+        }
+      ]
+    },
+    {
+      "caller": "nf_flow_state_check",
+      "file": "net/netfilter/nf_flow_table_ip.c",
+      "line": 31,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(proto != IPPROTO_TCP)",
+          "exit_kind": "return",
+          "source_line": 26,
+          "exit_line": 27
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "unlikely(tcph->fin || tcph->rst)",
+          "polarity": "in_true_branch",
+          "source_line": 30
+        }
+      ]
+    },
+    {
+      "caller": "nf_flow_offload_ip_hook",
+      "file": "net/netfilter/nf_flow_table_ip.c",
+      "line": 380,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_flow_tuple_ip(skb, state->in, &tuple, &hdrsize, offset) < 0)",
+          "exit_kind": "return",
+          "source_line": 360,
+          "exit_line": 361
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tuplehash == NULL)",
+          "exit_kind": "return",
+          "source_line": 364,
+          "exit_line": 365
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(nf_flow_exceeds_mtu(skb, mtu)))",
+          "exit_kind": "return",
+          "source_line": 371,
+          "exit_line": 372
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_flow_state_check(flow, iph->protocol, skb, thoff))",
+          "exit_kind": "return",
+          "source_line": 376,
+          "exit_line": 377
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nf_flow_dst_check(&tuplehash->tuple)",
+          "polarity": "in_true_branch",
+          "source_line": 379
+        }
+      ]
+    },
+    {
+      "caller": "nf_flow_offload_ip_hook",
+      "file": "net/netfilter/nf_flow_table_ip.c",
+      "line": 422,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_flow_tuple_ip(skb, state->in, &tuple, &hdrsize, offset) < 0)",
+          "exit_kind": "return",
+          "source_line": 360,
+          "exit_line": 361
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tuplehash == NULL)",
+          "exit_kind": "return",
+          "source_line": 364,
+          "exit_line": 365
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(nf_flow_exceeds_mtu(skb, mtu)))",
+          "exit_kind": "return",
+          "source_line": 371,
+          "exit_line": 372
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_flow_state_check(flow, iph->protocol, skb, thoff))",
+          "exit_kind": "return",
+          "source_line": 376,
+          "exit_line": 377
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_flow_dst_check(&tuplehash->tuple))",
+          "exit_kind": "return",
+          "source_line": 379
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_try_make_writable(skb, thoff + hdrsize))",
+          "exit_kind": "return",
+          "source_line": 384,
+          "exit_line": 385
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tuplehash->tuple.xmit_type == FLOW_OFFLOAD_XMIT_XFRM))",
+          "exit_kind": "return",
+          "source_line": 401
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "tuplehash->tuple.xmit_type",
+          "polarity": "in_true_branch",
+          "source_line": 409
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret == NF_DROP",
+          "polarity": "in_true_branch",
+          "source_line": 421
+        }
+      ]
+    },
+    {
+      "caller": "nf_flow_offload_ipv6_hook",
+      "file": "net/netfilter/nf_flow_table_ip.c",
+      "line": 642,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_flow_tuple_ipv6(skb, state->in, &tuple, &hdrsize, offset) < 0)",
+          "exit_kind": "return",
+          "source_line": 622,
+          "exit_line": 623
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tuplehash == NULL)",
+          "exit_kind": "return",
+          "source_line": 626,
+          "exit_line": 627
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(nf_flow_exceeds_mtu(skb, mtu)))",
+          "exit_kind": "return",
+          "source_line": 633,
+          "exit_line": 634
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_flow_state_check(flow, ip6h->nexthdr, skb, thoff))",
+          "exit_kind": "return",
+          "source_line": 638,
+          "exit_line": 639
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nf_flow_dst_check(&tuplehash->tuple)",
+          "polarity": "in_true_branch",
+          "source_line": 641
+        }
+      ]
+    },
+    {
+      "caller": "nf_flow_offload_ipv6_hook",
+      "file": "net/netfilter/nf_flow_table_ip.c",
+      "line": 683,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_flow_tuple_ipv6(skb, state->in, &tuple, &hdrsize, offset) < 0)",
+          "exit_kind": "return",
+          "source_line": 622,
+          "exit_line": 623
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(tuplehash == NULL)",
+          "exit_kind": "return",
+          "source_line": 626,
+          "exit_line": 627
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(nf_flow_exceeds_mtu(skb, mtu)))",
+          "exit_kind": "return",
+          "source_line": 633,
+          "exit_line": 634
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_flow_state_check(flow, ip6h->nexthdr, skb, thoff))",
+          "exit_kind": "return",
+          "source_line": 638,
+          "exit_line": 639
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_flow_dst_check(&tuplehash->tuple))",
+          "exit_kind": "return",
+          "source_line": 641
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_try_make_writable(skb, thoff + hdrsize))",
+          "exit_kind": "return",
+          "source_line": 646,
+          "exit_line": 647
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(tuplehash->tuple.xmit_type == FLOW_OFFLOAD_XMIT_XFRM))",
+          "exit_kind": "return",
+          "source_line": 662
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "tuplehash->tuple.xmit_type",
+          "polarity": "in_true_branch",
+          "source_line": 670
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret == NF_DROP",
+          "polarity": "in_true_branch",
+          "source_line": 682
+        }
+      ]
+    }
+  ]
+}

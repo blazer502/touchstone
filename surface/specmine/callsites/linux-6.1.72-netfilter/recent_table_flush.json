@@ -1,0 +1,121 @@
+{
+  "callee": "recent_table_flush",
+  "defined_in": "net/netfilter/xt_recent.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "recent_mt_check",
+      "file": "net/netfilter/xt_recent.c",
+      "line": 384,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 379
+        },
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 383
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->check_set & ~XT_RECENT_VALID_FLAGS)",
+          "exit_kind": "return",
+          "source_line": 348
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((info->check_set & XT_RECENT_REAP) && !info->seconds)",
+          "exit_kind": "return",
+          "source_line": 361,
+          "exit_line": 362
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->hit_count >= XT_RECENT_MAX_NSTAMPS)",
+          "exit_kind": "return",
+          "source_line": 363
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ret)",
+          "exit_kind": "return",
+          "source_line": 369,
+          "exit_line": 370
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "t != NULL",
+          "polarity": "in_true_branch",
+          "source_line": 381
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nstamp_mask > t->nstamps_max_mask",
+          "polarity": "in_true_branch",
+          "source_line": 382
+        }
+      ]
+    },
+    {
+      "caller": "recent_mt_destroy",
+      "file": "net/netfilter/xt_recent.c",
+      "line": 467,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 457
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "--t->refcnt == 0",
+          "polarity": "in_true_branch",
+          "source_line": 459
+        }
+      ]
+    },
+    {
+      "caller": "recent_mt_proc_write",
+      "file": "net/netfilter/xt_recent.c",
+      "line": 583,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 582
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(size == 0)",
+          "exit_kind": "return",
+          "source_line": 570,
+          "exit_line": 571
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(copy_from_user(buf, input, size) != 0)",
+          "exit_kind": "return",
+          "source_line": 574,
+          "exit_line": 575
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(*loff != 0)",
+          "exit_kind": "return",
+          "source_line": 578,
+          "exit_line": 579
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "*c",
+          "polarity": "in_true_branch",
+          "source_line": 580
+        }
+      ]
+    }
+  ]
+}

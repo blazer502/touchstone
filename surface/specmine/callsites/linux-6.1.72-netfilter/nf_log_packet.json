@@ -1,0 +1,117 @@
+{
+  "callee": "nf_log_packet",
+  "defined_in": "net/netfilter/nf_log.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "nf_ct_helper_log",
+      "file": "net/netfilter/nf_conntrack_helper.c",
+      "line": 343,
+      "guards": []
+    },
+    {
+      "caller": "nf_l4proto_log_invalid",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 66,
+      "guards": []
+    },
+    {
+      "caller": "nf_osf_match",
+      "file": "net/netfilter/nfnetlink_osf.c",
+      "line": 235,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "tcp != NULL",
+          "source_line": 215
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tcp)",
+          "exit_kind": "return",
+          "source_line": 215,
+          "exit_line": 216
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(info->flags & NF_OSF_LOG) && strcmp(info->genre, f->genre))",
+          "exit_kind": "continue",
+          "source_line": 224,
+          "exit_line": 225
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_osf_match_one(skb, f, ttl_check, &ctx))",
+          "exit_kind": "continue",
+          "source_line": 227,
+          "exit_line": 228
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "info->flags & NF_OSF_LOG",
+          "polarity": "in_true_branch",
+          "source_line": 234
+        }
+      ]
+    },
+    {
+      "caller": "nf_osf_match",
+      "file": "net/netfilter/nfnetlink_osf.c",
+      "line": 249,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "tcp != NULL",
+          "source_line": 215
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!tcp)",
+          "exit_kind": "return",
+          "source_line": 215,
+          "exit_line": 216
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(info->flags & NF_OSF_LOG) && strcmp(info->genre, f->genre))",
+          "exit_kind": "continue",
+          "source_line": 224,
+          "exit_line": 225
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_osf_match_one(skb, f, ttl_check, &ctx))",
+          "exit_kind": "continue",
+          "source_line": 227,
+          "exit_line": 228
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!fcount && (info->flags & NF_OSF_LOG)",
+          "polarity": "in_true_branch",
+          "source_line": 248
+        }
+      ]
+    },
+    {
+      "caller": "nft_log_eval",
+      "file": "net/netfilter/nft_log.c",
+      "line": 116,
+      "guards": []
+    },
+    {
+      "caller": "log_tg",
+      "file": "net/netfilter/xt_LOG.c",
+      "line": 39,
+      "guards": []
+    },
+    {
+      "caller": "nflog_tg",
+      "file": "net/netfilter/xt_NFLOG.c",
+      "line": 36,
+      "guards": []
+    }
+  ]
+}

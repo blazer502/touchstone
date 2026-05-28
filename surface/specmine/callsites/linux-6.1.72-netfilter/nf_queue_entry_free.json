@@ -1,0 +1,198 @@
+{
+  "callee": "nf_queue_entry_free",
+  "defined_in": "net/netfilter/nf_queue.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "__nf_queue",
+      "file": "net/netfilter/nf_queue.c",
+      "line": 229,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "qh != NULL",
+          "source_line": 168
+        },
+        {
+          "kind": "null_check",
+          "predicate": "entry != NULL",
+          "source_line": 196
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!qh)",
+          "exit_kind": "return",
+          "source_line": 168,
+          "exit_line": 169
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!refcount_inc_not_zero(&sk->sk_refcnt))",
+          "exit_kind": "return",
+          "source_line": 187,
+          "exit_line": 188
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!sk_is_refcounted(sk))",
+          "exit_kind": "return",
+          "source_line": 186
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!entry)",
+          "exit_kind": "return",
+          "source_line": 196,
+          "exit_line": 197
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_dst(skb) && !skb_dst_force(skb))",
+          "exit_kind": "return",
+          "source_line": 199
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_queue_entry_get_refs(entry))",
+          "exit_kind": "return",
+          "source_line": 213
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "status < 0",
+          "polarity": "in_true_branch",
+          "source_line": 228
+        }
+      ]
+    },
+    {
+      "caller": "nf_reinject",
+      "file": "net/netfilter/nf_queue.c",
+      "line": 317,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!hooks || i >= hooks->num_hook_entries)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 315
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "WARN_ON_ONCE(!hooks || i >= hooks->num_hook_entries)",
+          "polarity": "in_true_branch",
+          "source_line": 315
+        }
+      ]
+    },
+    {
+      "caller": "nf_reinject",
+      "file": "net/netfilter/nf_queue.c",
+      "line": 356,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!hooks || i >= hooks->num_hook_entries)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 315
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(!hooks || i >= hooks->num_hook_entries))",
+          "exit_kind": "return",
+          "source_line": 315
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err == 1)",
+          "exit_kind": "goto",
+          "source_line": 347,
+          "exit_line": 348
+        }
+      ]
+    },
+    {
+      "caller": "__nfqnl_enqueue_packet_gso",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 777,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb->next == NULL)",
+          "exit_kind": "return",
+          "source_line": 761
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "entry_seg",
+          "polarity": "in_true_branch",
+          "source_line": 773
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret",
+          "polarity": "in_true_branch",
+          "source_line": 776
+        }
+      ]
+    },
+    {
+      "caller": "nfqnl_enqueue_packet",
+      "file": "net/netfilter/nfnetlink_queue.c",
+      "line": 836,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "queue != NULL",
+          "source_line": 794
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(segs)",
+          "source_line": 820
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!queue)",
+          "exit_kind": "return",
+          "source_line": 794,
+          "exit_line": 795
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(queue->copy_mode == NFQNL_COPY_NONE)",
+          "exit_kind": "return",
+          "source_line": 797,
+          "exit_line": 798
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((queue->flags & NFQA_CFG_F_GSO) || !skb_is_gso(skb))",
+          "exit_kind": "return",
+          "source_line": 811,
+          "exit_line": 812
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR_OR_NULL(segs))",
+          "exit_kind": "goto",
+          "source_line": 820,
+          "exit_line": 821
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "queued",
+          "polarity": "in_true_branch",
+          "source_line": 834
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "err",
+          "polarity": "in_true_branch",
+          "source_line": 835
+        }
+      ]
+    }
+  ]
+}

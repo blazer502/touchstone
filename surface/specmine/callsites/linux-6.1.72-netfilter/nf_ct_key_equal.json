@@ -1,0 +1,205 @@
+{
+  "callee": "nf_ct_key_equal",
+  "defined_in": "net/netfilter/nf_conntrack_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "____nf_conntrack_find",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 769,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_is_expired(ct))",
+          "exit_kind": "continue",
+          "source_line": 764
+        }
+      ]
+    },
+    {
+      "caller": "__nf_conntrack_find_get",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 805,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 793
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "h",
+          "polarity": "in_true_branch",
+          "source_line": 796
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "likely(refcount_inc_not_zero(&ct->ct_general.use))",
+          "polarity": "in_true_branch",
+          "source_line": 801
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_hash_check_insert",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 911,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "bh_disabled",
+          "source_line": 896
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_ext_valid_pre(ct->ext))",
+          "exit_kind": "return",
+          "source_line": 893,
+          "exit_line": 894
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_hash_check_insert",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 922,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "bh_disabled",
+          "source_line": 896
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_ext_valid_pre(ct->ext))",
+          "exit_kind": "return",
+          "source_line": 893,
+          "exit_line": 894
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(chainlen++ > max_chainlen)",
+          "exit_kind": "goto",
+          "source_line": 915,
+          "exit_line": 916
+        }
+      ]
+    },
+    {
+      "caller": "nf_ct_resolve_clash_harder",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1064,
+      "guards": []
+    },
+    {
+      "caller": "__nf_conntrack_confirm",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1239,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(1)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 1210
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(CTINFO2DIR(ctinfo) != IP_CT_DIR_ORIGINAL)",
+          "exit_kind": "return",
+          "source_line": 1183,
+          "exit_line": 1184
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(nf_ct_is_confirmed(ct)))",
+          "exit_kind": "return",
+          "source_line": 1209
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_ext_valid_pre(ct->ext))",
+          "exit_kind": "goto",
+          "source_line": 1216
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(nf_ct_is_dying(ct)))",
+          "exit_kind": "goto",
+          "source_line": 1229
+        }
+      ]
+    },
+    {
+      "caller": "__nf_conntrack_confirm",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1248,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(1)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 1210
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(CTINFO2DIR(ctinfo) != IP_CT_DIR_ORIGINAL)",
+          "exit_kind": "return",
+          "source_line": 1183,
+          "exit_line": 1184
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(nf_ct_is_confirmed(ct)))",
+          "exit_kind": "return",
+          "source_line": 1209
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_ext_valid_pre(ct->ext))",
+          "exit_kind": "goto",
+          "source_line": 1216
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(nf_ct_is_dying(ct)))",
+          "exit_kind": "goto",
+          "source_line": 1229
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(chainlen++ > max_chainlen)",
+          "exit_kind": "goto",
+          "source_line": 1242,
+          "exit_line": 1243
+        }
+      ]
+    },
+    {
+      "caller": "nf_conntrack_tuple_taken",
+      "file": "net/netfilter/nf_conntrack_core.c",
+      "line": 1335,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 1319
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ct == ignored_conntrack)",
+          "exit_kind": "continue",
+          "source_line": 1327,
+          "exit_line": 1328
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nf_ct_is_expired(ct))",
+          "exit_kind": "continue",
+          "source_line": 1330
+        }
+      ]
+    }
+  ]
+}

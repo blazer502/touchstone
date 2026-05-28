@@ -1,0 +1,82 @@
+{
+  "callee": "ip_vs_lblcr_free",
+  "defined_in": "net/netfilter/ipvs/ip_vs_lblcr.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "ip_vs_lblcr_flush",
+      "file": "net/netfilter/ipvs/ip_vs_lblcr.c",
+      "line": 406,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 402
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < IP_VS_LBLCR_TAB_SIZE; i++",
+          "polarity": "in_true_branch",
+          "source_line": 404
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_lblcr_full_check",
+      "file": "net/netfilter/ipvs/ip_vs_lblcr.c",
+      "line": 438,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 432
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0, j = tbl->rover; i < IP_VS_LBLCR_TAB_SIZE; i++",
+          "polarity": "in_true_branch",
+          "source_line": 429
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_lblcr_check_expire",
+      "file": "net/netfilter/ipvs/ip_vs_lblcr.c",
+      "line": 492,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 487
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((tbl->counter % COUNT_FOR_FULL_EXPIRATION) == 0)",
+          "exit_kind": "goto",
+          "source_line": 468
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(atomic_read(&tbl->entries) <= tbl->max_size)",
+          "exit_kind": "goto",
+          "source_line": 475
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(time_before(now, en->lastuse+ENTRY_TIMEOUT))",
+          "exit_kind": "continue",
+          "source_line": 489,
+          "exit_line": 490
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0, j = tbl->rover; i < IP_VS_LBLCR_TAB_SIZE; i++",
+          "polarity": "in_true_branch",
+          "source_line": 484
+        }
+      ]
+    }
+  ]
+}

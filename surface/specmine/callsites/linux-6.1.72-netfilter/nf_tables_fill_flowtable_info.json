@@ -1,0 +1,112 @@
+{
+  "callee": "nf_tables_fill_flowtable_info",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nf_tables_dump_flowtable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8327,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "rcu_read_lock_held",
+          "source_line": 8307
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(family != NFPROTO_UNSPEC && family != table->family)",
+          "exit_kind": "continue",
+          "source_line": 8312,
+          "exit_line": 8313
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_is_active(net, flowtable))",
+          "exit_kind": "goto",
+          "source_line": 8316,
+          "exit_line": 8317
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(idx < s_idx)",
+          "exit_kind": "goto",
+          "source_line": 8318,
+          "exit_line": 8319
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getflowtable",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8425,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 8413
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(flowtable)",
+          "source_line": 8418
+        },
+        {
+          "kind": "null_check",
+          "predicate": "skb2 != NULL",
+          "source_line": 8422
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 8396
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nla[NFTA_FLOWTABLE_NAME])",
+          "exit_kind": "return",
+          "source_line": 8408,
+          "exit_line": 8409
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 8413,
+          "exit_line": 8414
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(flowtable))",
+          "exit_kind": "return",
+          "source_line": 8418,
+          "exit_line": 8419
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!skb2)",
+          "exit_kind": "return",
+          "source_line": 8422,
+          "exit_line": 8423
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_flowtable_notify",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 8460,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb == NULL)",
+          "exit_kind": "goto",
+          "source_line": 8454,
+          "exit_line": 8455
+        }
+      ]
+    }
+  ]
+}

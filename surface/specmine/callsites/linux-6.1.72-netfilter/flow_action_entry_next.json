@@ -1,0 +1,200 @@
+{
+  "callee": "flow_action_entry_next",
+  "defined_in": "net/netfilter/nf_flow_table_offload.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 15,
+  "callsites": [
+    {
+      "caller": "flow_offload_eth_src",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 228,
+      "guards": []
+    },
+    {
+      "caller": "flow_offload_eth_src",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 229,
+      "guards": []
+    },
+    {
+      "caller": "flow_offload_eth_dst",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 275,
+      "guards": []
+    },
+    {
+      "caller": "flow_offload_eth_dst",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 276,
+      "guards": []
+    },
+    {
+      "caller": "flow_offload_ipv4_snat",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 332,
+      "guards": []
+    },
+    {
+      "caller": "flow_offload_ipv4_dnat",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 359,
+      "guards": []
+    },
+    {
+      "caller": "flow_offload_ipv6_mangle",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 389,
+      "guards": [
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < sizeof(struct in6_addr) / sizeof(u32); i++",
+          "polarity": "in_true_branch",
+          "source_line": 388
+        }
+      ]
+    },
+    {
+      "caller": "flow_offload_port_snat",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 469,
+      "guards": []
+    },
+    {
+      "caller": "flow_offload_port_dnat",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 499,
+      "guards": []
+    },
+    {
+      "caller": "flow_offload_ipv4_checksum",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 529,
+      "guards": []
+    },
+    {
+      "caller": "flow_offload_redirect",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 572,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "dev != NULL",
+          "source_line": 569
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dev)",
+          "exit_kind": "return",
+          "source_line": 569,
+          "exit_line": 570
+        }
+      ]
+    },
+    {
+      "caller": "flow_offload_encap_tunnel",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 595,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(this_tuple->xmit_type == FLOW_OFFLOAD_XMIT_DIRECT)",
+          "exit_kind": "return",
+          "source_line": 586,
+          "exit_line": 587
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dst && dst->lwtstate",
+          "polarity": "in_true_branch",
+          "source_line": 590
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tun_info && (tun_info->mode & IP_TUNNEL_INFO_TX)",
+          "polarity": "in_true_branch",
+          "source_line": 594
+        }
+      ]
+    },
+    {
+      "caller": "flow_offload_decap_tunnel",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 620,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(other_tuple->xmit_type == FLOW_OFFLOAD_XMIT_DIRECT)",
+          "exit_kind": "return",
+          "source_line": 611,
+          "exit_line": 612
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dst && dst->lwtstate",
+          "polarity": "in_true_branch",
+          "source_line": 615
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tun_info && (tun_info->mode & IP_TUNNEL_INFO_TX)",
+          "polarity": "in_true_branch",
+          "source_line": 619
+        }
+      ]
+    },
+    {
+      "caller": "nf_flow_rule_route_common",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 651,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tuple->in_vlan_ingress & BIT(i))",
+          "exit_kind": "continue",
+          "source_line": 647,
+          "exit_line": 648
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < tuple->encap_num; i++",
+          "polarity": "in_true_branch",
+          "source_line": 644
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "tuple->encap[i].proto == htons(ETH_P_8021Q)",
+          "polarity": "in_true_branch",
+          "source_line": 650
+        }
+      ]
+    },
+    {
+      "caller": "nf_flow_rule_route_common",
+      "file": "net/netfilter/nf_flow_table_offload.c",
+      "line": 664,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(tuple->in_vlan_ingress & BIT(i))",
+          "exit_kind": "continue",
+          "source_line": 647,
+          "exit_line": 648
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(other_tuple->in_vlan_ingress & BIT(i))",
+          "exit_kind": "continue",
+          "source_line": 661,
+          "exit_line": 662
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "i = 0; i < other_tuple->encap_num; i++",
+          "polarity": "in_true_branch",
+          "source_line": 658
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,402 @@
+{
+  "callee": "ip_vs_proto_data_get",
+  "defined_in": "net/netfilter/ipvs/ip_vs_proto.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 19,
+  "callsites": [
+    {
+      "caller": "ip_vs_try_bind_dest",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 692,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->dest)",
+          "exit_kind": "return",
+          "source_line": 669
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "dest",
+          "polarity": "in_true_branch",
+          "source_line": 665
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_conn_new",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 947,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_out_hook",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 1386,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb->ipvs_property)",
+          "exit_kind": "return",
+          "source_line": 1347,
+          "exit_line": 1348
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(sk->sk_family == PF_INET && inet_sk(sk)->nodefrag)",
+          "exit_kind": "return",
+          "source_line": 1355,
+          "exit_line": 1356
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(!skb_dst(skb)))",
+          "exit_kind": "return",
+          "source_line": 1359,
+          "exit_line": 1360
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ipvs->enable)",
+          "exit_kind": "return",
+          "source_line": 1362,
+          "exit_line": 1363
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(related)",
+          "exit_kind": "return",
+          "source_line": 1373,
+          "exit_line": 1374
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(iph.protocol == IPPROTO_ICMPV6))",
+          "exit_kind": "return",
+          "source_line": 1368
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(related)",
+          "exit_kind": "return",
+          "source_line": 1382,
+          "exit_line": 1383
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(iph.protocol == IPPROTO_ICMP))",
+          "exit_kind": "return",
+          "source_line": 1378
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_in_icmp",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 1690,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_gather_frags(ipvs, skb, ip_vs_defrag_user(hooknum)))",
+          "exit_kind": "return",
+          "source_line": 1602,
+          "exit_line": 1603
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_is_fragment(ip_hdr(skb)))",
+          "exit_kind": "return",
+          "source_line": 1601
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ic == NULL)",
+          "exit_kind": "return",
+          "source_line": 1609,
+          "exit_line": 1610
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cih == NULL)",
+          "exit_kind": "return",
+          "source_line": 1633,
+          "exit_line": 1634
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(cih->frag_off & htons(IP_OFFSET)))",
+          "exit_kind": "return",
+          "source_line": 1642,
+          "exit_line": 1643
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(skb_rtable(skb)->rt_flags & RTCF_LOCAL))",
+          "exit_kind": "return",
+          "source_line": 1645,
+          "exit_line": 1646
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!dest || dest->tun_type != IP_VS_CONN_F_TUNNEL_TYPE_IPIP)",
+          "exit_kind": "return",
+          "source_line": 1649,
+          "exit_line": 1650
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cih == NULL)",
+          "exit_kind": "return",
+          "source_line": 1653,
+          "exit_line": 1654
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cih->protocol == IPPROTO_IPIP)",
+          "exit_kind": "return",
+          "source_line": 1639
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(cih->frag_off & htons(IP_OFFSET)))",
+          "exit_kind": "return",
+          "source_line": 1664,
+          "exit_line": 1665
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ulen > 0)",
+          "exit_kind": "return",
+          "source_line": 1676
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_in_icmp_v6",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 1849,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ic == NULL)",
+          "exit_kind": "return",
+          "source_line": 1821,
+          "exit_line": 1822
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ic->icmp6_type & ICMPV6_INFOMSG_MASK)",
+          "exit_kind": "return",
+          "source_line": 1831
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(iph->flags & IP6_FH_F_FRAG)",
+          "exit_kind": "return",
+          "source_line": 1838,
+          "exit_line": 1839
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ip_vs_fill_iph_skb_icmp(AF_INET6, skb, offset, true, &ciph))",
+          "exit_kind": "return",
+          "source_line": 1846,
+          "exit_line": 1847
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_in_hook",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 1981,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(skb->ipvs_property)",
+          "exit_kind": "return",
+          "source_line": 1926,
+          "exit_line": 1927
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(sysctl_backup_only(ipvs) || !ipvs->enable))",
+          "exit_kind": "return",
+          "source_line": 1945,
+          "exit_line": 1946
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(sk->sk_family == PF_INET && inet_sk(sk)->nodefrag)",
+          "exit_kind": "return",
+          "source_line": 1955,
+          "exit_line": 1956
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(related)",
+          "exit_kind": "return",
+          "source_line": 1966,
+          "exit_line": 1967
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(iph.protocol == IPPROTO_ICMPV6))",
+          "exit_kind": "return",
+          "source_line": 1961
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(related)",
+          "exit_kind": "return",
+          "source_line": 1976,
+          "exit_line": 1977
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(iph.protocol == IPPROTO_ICMP))",
+          "exit_kind": "return",
+          "source_line": 1971
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_set_timeout",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 2367,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(u->udp_timeout < 0 || u->udp_timeout > (INT_MAX / HZ))",
+          "exit_kind": "return",
+          "source_line": 2361,
+          "exit_line": 2362
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "u->tcp_timeout",
+          "polarity": "in_true_branch",
+          "source_line": 2366
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_set_timeout",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 2373,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(u->udp_timeout < 0 || u->udp_timeout > (INT_MAX / HZ))",
+          "exit_kind": "return",
+          "source_line": 2361,
+          "exit_line": 2362
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "u->tcp_fin_timeout",
+          "polarity": "in_true_branch",
+          "source_line": 2372
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_set_timeout",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 2381,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(u->udp_timeout < 0 || u->udp_timeout > (INT_MAX / HZ))",
+          "exit_kind": "return",
+          "source_line": 2361,
+          "exit_line": 2362
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "u->udp_timeout",
+          "polarity": "in_true_branch",
+          "source_line": 2380
+        }
+      ]
+    },
+    {
+      "caller": "__ip_vs_get_timeouts",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 2743,
+      "guards": []
+    },
+    {
+      "caller": "__ip_vs_get_timeouts",
+      "file": "net/netfilter/ipvs/ip_vs_ctl.c",
+      "line": 2748,
+      "guards": []
+    },
+    {
+      "caller": "sctp_register_app",
+      "file": "net/netfilter/ipvs/ip_vs_proto_sctp.c",
+      "line": 494,
+      "guards": []
+    },
+    {
+      "caller": "sctp_unregister_app",
+      "file": "net/netfilter/ipvs/ip_vs_proto_sctp.c",
+      "line": 513,
+      "guards": []
+    },
+    {
+      "caller": "tcp_register_app",
+      "file": "net/netfilter/ipvs/ip_vs_proto_tcp.c",
+      "line": 622,
+      "guards": []
+    },
+    {
+      "caller": "tcp_unregister_app",
+      "file": "net/netfilter/ipvs/ip_vs_proto_tcp.c",
+      "line": 643,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_tcp_conn_listen",
+      "file": "net/netfilter/ipvs/ip_vs_proto_tcp.c",
+      "line": 695,
+      "guards": []
+    },
+    {
+      "caller": "udp_register_app",
+      "file": "net/netfilter/ipvs/ip_vs_proto_udp.c",
+      "line": 367,
+      "guards": []
+    },
+    {
+      "caller": "udp_unregister_app",
+      "file": "net/netfilter/ipvs/ip_vs_proto_udp.c",
+      "line": 388,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_proc_conn",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 947,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "cp != NULL",
+          "source_line": 915
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!cp)",
+          "exit_kind": "return",
+          "source_line": 915
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "timeout",
+          "polarity": "in_false_branch",
+          "source_line": 944
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "callee": "__nft_cmp_offload",
+  "defined_in": "net/netfilter/nft_cmp.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "nft_cmp_offload",
+      "file": "net/netfilter/nft_cmp.c",
+      "line": 183,
+      "guards": []
+    },
+    {
+      "caller": "nft_cmp_fast_offload",
+      "file": "net/netfilter/nft_cmp.c",
+      "line": 253,
+      "guards": []
+    },
+    {
+      "caller": "nft_cmp16_fast_offload",
+      "file": "net/netfilter/nft_cmp.c",
+      "line": 347,
+      "guards": []
+    }
+  ]
+}

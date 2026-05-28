@@ -1,0 +1,467 @@
+{
+  "callee": "nft_trans_gc_elem_add",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 8,
+  "callsites": [
+    {
+      "caller": "nft_trans_gc_catchall_async",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9296,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 9293
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_expired(ext))",
+          "exit_kind": "continue",
+          "source_line": 9285,
+          "exit_line": 9286
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_elem_is_dead(ext))",
+          "exit_kind": "goto",
+          "source_line": 9287,
+          "exit_line": 9288
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "return",
+          "source_line": 9293,
+          "exit_line": 9294
+        }
+      ]
+    },
+    {
+      "caller": "nft_trans_gc_catchall_sync",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 9326,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 9318
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!lockdep_commit_lock_is_held(gc->net))",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 9309
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_expired(ext))",
+          "exit_kind": "continue",
+          "source_line": 9314,
+          "exit_line": 9315
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "return",
+          "source_line": 9318,
+          "exit_line": 9319
+        }
+      ]
+    },
+    {
+      "caller": "nft_rhash_gc",
+      "file": "net/netfilter/nft_set_hash.c",
+      "line": 369,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 333
+        },
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(he)",
+          "source_line": 340
+        },
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 366
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_gc_is_pending(set))",
+          "exit_kind": "goto",
+          "source_line": 329,
+          "exit_line": 330
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "goto",
+          "source_line": 333,
+          "exit_line": 334
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(he))",
+          "exit_kind": "goto",
+          "source_line": 340
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(READ_ONCE(nft_net->gc_seq) != gc_seq)",
+          "exit_kind": "goto",
+          "source_line": 347
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_elem_is_dead(&he->ext))",
+          "exit_kind": "goto",
+          "source_line": 353,
+          "exit_line": 354
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_expired(&he->ext))",
+          "exit_kind": "continue",
+          "source_line": 360,
+          "exit_line": 361
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "goto",
+          "source_line": 366,
+          "exit_line": 367
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "(he = rhashtable_walk_next(&hti))",
+          "polarity": "in_true_branch",
+          "source_line": 339
+        }
+      ]
+    },
+    {
+      "caller": "pipapo_gc",
+      "file": "net/netfilter/nft_set_pipapo.c",
+      "line": 1604,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 1566
+        },
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 1599
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "return",
+          "source_line": 1566,
+          "exit_line": 1567
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "return",
+          "source_line": 1599,
+          "exit_line": 1600
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "(rules_f0 = pipapo_rules_same_key(m->f, first_rule))",
+          "polarity": "in_true_branch",
+          "source_line": 1569
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nft_set_elem_expired(&e->ext)",
+          "polarity": "in_true_branch",
+          "source_line": 1595
+        }
+      ]
+    },
+    {
+      "caller": "nft_rbtree_gc_elem",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 277,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 247
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!gc)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 274
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "return",
+          "source_line": 247,
+          "exit_line": 248
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(!gc))",
+          "exit_kind": "return",
+          "source_line": 274,
+          "exit_line": 275
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "prev",
+          "polarity": "in_true_branch",
+          "source_line": 264
+        }
+      ]
+    },
+    {
+      "caller": "nft_rbtree_gc_elem",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 285,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 247
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!gc)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 274
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!gc)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 282
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "return",
+          "source_line": 247,
+          "exit_line": 248
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(!gc))",
+          "exit_kind": "return",
+          "source_line": 274,
+          "exit_line": 275
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(prev)",
+          "exit_kind": "return",
+          "source_line": 264
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(!gc))",
+          "exit_kind": "return",
+          "source_line": 282,
+          "exit_line": 283
+        }
+      ]
+    },
+    {
+      "caller": "nft_rbtree_gc",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 676,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "read_lock_held",
+          "source_line": 639
+        },
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 636
+        },
+        {
+          "kind": "null_check",
+          "predicate": "rbe_end != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 673
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_gc_is_pending(set))",
+          "exit_kind": "goto",
+          "source_line": 632,
+          "exit_line": 633
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "goto",
+          "source_line": 636,
+          "exit_line": 637
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(READ_ONCE(nft_net->gc_seq) != gc_seq)",
+          "exit_kind": "goto",
+          "source_line": 643
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_elem_is_dead(&rbe->ext))",
+          "exit_kind": "goto",
+          "source_line": 651,
+          "exit_line": 652
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_interval_end(rbe))",
+          "exit_kind": "continue",
+          "source_line": 658
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_expired(&rbe->ext))",
+          "exit_kind": "continue",
+          "source_line": 662,
+          "exit_line": 663
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rbe_end)",
+          "exit_kind": "continue",
+          "source_line": 667,
+          "exit_line": 668
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "goto",
+          "source_line": 673,
+          "exit_line": 674
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "node = rb_first(&priv->root); node != NULL; node = rb_next(node)",
+          "polarity": "in_true_branch",
+          "source_line": 640
+        }
+      ]
+    },
+    {
+      "caller": "nft_rbtree_gc",
+      "file": "net/netfilter/nft_set_rbtree.c",
+      "line": 683,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "read_lock_held",
+          "source_line": 639
+        },
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 636
+        },
+        {
+          "kind": "null_check",
+          "predicate": "rbe_end != NULL",
+          "source_line": 667
+        },
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 673
+        },
+        {
+          "kind": "null_check",
+          "predicate": "gc != NULL",
+          "source_line": 680
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_gc_is_pending(set))",
+          "exit_kind": "goto",
+          "source_line": 632,
+          "exit_line": 633
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "goto",
+          "source_line": 636,
+          "exit_line": 637
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(READ_ONCE(nft_net->gc_seq) != gc_seq)",
+          "exit_kind": "goto",
+          "source_line": 643
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_set_elem_is_dead(&rbe->ext))",
+          "exit_kind": "goto",
+          "source_line": 651,
+          "exit_line": 652
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_rbtree_interval_end(rbe))",
+          "exit_kind": "continue",
+          "source_line": 658
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nft_set_elem_expired(&rbe->ext))",
+          "exit_kind": "continue",
+          "source_line": 662,
+          "exit_line": 663
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!rbe_end)",
+          "exit_kind": "continue",
+          "source_line": 667,
+          "exit_line": 668
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "goto",
+          "source_line": 673,
+          "exit_line": 674
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!gc)",
+          "exit_kind": "goto",
+          "source_line": 680,
+          "exit_line": 681
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": "node = rb_first(&priv->root); node != NULL; node = rb_next(node)",
+          "polarity": "in_true_branch",
+          "source_line": 640
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "callee": "audit_ip4",
+  "defined_in": "net/netfilter/nft_log.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nft_log_eval_audit",
+      "file": "net/netfilter/nft_log.c",
+      "line": 83,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "audit_enabled != NULL",
+          "source_line": 70
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ab != NULL",
+          "source_line": 74
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!audit_enabled)",
+          "exit_kind": "return",
+          "source_line": 70,
+          "exit_line": 71
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ab)",
+          "exit_kind": "return",
+          "source_line": 74,
+          "exit_line": 75
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "nft_pf(pkt)",
+          "polarity": "in_true_branch",
+          "source_line": 79
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "eth_hdr(skb)->h_proto",
+          "polarity": "in_true_branch",
+          "source_line": 81
+        }
+      ]
+    },
+    {
+      "caller": "nft_log_eval_audit",
+      "file": "net/netfilter/nft_log.c",
+      "line": 91,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "audit_enabled != NULL",
+          "source_line": 70
+        },
+        {
+          "kind": "null_check",
+          "predicate": "ab != NULL",
+          "source_line": 74
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!audit_enabled)",
+          "exit_kind": "return",
+          "source_line": 70,
+          "exit_line": 71
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!ab)",
+          "exit_kind": "return",
+          "source_line": 74,
+          "exit_line": 75
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "nft_pf(pkt)",
+          "polarity": "in_true_branch",
+          "source_line": 79
+        }
+      ]
+    },
+    {
+      "caller": "audit_tg",
+      "file": "net/netfilter/xt_AUDIT.c",
+      "line": 84,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(audit_enabled == AUDIT_OFF)",
+          "exit_kind": "goto",
+          "source_line": 72,
+          "exit_line": 73
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ab == NULL)",
+          "exit_kind": "goto",
+          "source_line": 75,
+          "exit_line": 76
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "xt_family(par)",
+          "polarity": "in_true_branch",
+          "source_line": 80
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "eth_hdr(skb)->h_proto",
+          "polarity": "in_true_branch",
+          "source_line": 82
+        }
+      ]
+    },
+    {
+      "caller": "audit_tg",
+      "file": "net/netfilter/xt_AUDIT.c",
+      "line": 92,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(audit_enabled == AUDIT_OFF)",
+          "exit_kind": "goto",
+          "source_line": 72,
+          "exit_line": 73
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(ab == NULL)",
+          "exit_kind": "goto",
+          "source_line": 75,
+          "exit_line": 76
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "xt_family(par)",
+          "polarity": "in_true_branch",
+          "source_line": 80
+        }
+      ]
+    }
+  ]
+}

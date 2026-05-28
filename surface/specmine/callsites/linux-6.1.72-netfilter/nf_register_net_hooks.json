@@ -1,0 +1,271 @@
+{
+  "callee": "nf_register_net_hooks",
+  "defined_in": "net/netfilter/core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 7,
+  "callsites": [
+    {
+      "caller": "ip_vs_register_hooks",
+      "file": "net/netfilter/ipvs/ip_vs_core.c",
+      "line": 2255,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(af == AF_INET6)",
+          "exit_kind": "return",
+          "source_line": 2240
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!(ipvs->hooks_afmask & afmask)",
+          "polarity": "in_true_branch",
+          "source_line": 2254
+        }
+      ]
+    },
+    {
+      "caller": "nf_ct_netns_do_get",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 482,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 469
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cnet->users4 > 1)",
+          "exit_kind": "goto",
+          "source_line": 474,
+          "exit_line": 475
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 477
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "nfproto",
+          "polarity": "in_true_branch",
+          "source_line": 471
+        }
+      ]
+    },
+    {
+      "caller": "nf_ct_netns_do_get",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 500,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "mutex_held",
+          "source_line": 469
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cnet->users4 > 1)",
+          "exit_kind": "goto",
+          "source_line": 474,
+          "exit_line": 475
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 477
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cnet->users6 > 1)",
+          "exit_kind": "goto",
+          "source_line": 492,
+          "exit_line": 493
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 495
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "nfproto",
+          "polarity": "in_true_branch",
+          "source_line": 471
+        }
+      ]
+    },
+    {
+      "caller": "nf_ct_netns_do_get",
+      "file": "net/netfilter/nf_conntrack_proto.c",
+      "line": 527,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "retry != NULL",
+          "source_line": 510
+        },
+        {
+          "kind": "null_check",
+          "predicate": "nf_ct_bridge_info != NULL",
+          "source_line": 509
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cnet->users4 > 1)",
+          "exit_kind": "goto",
+          "source_line": 474,
+          "exit_line": 475
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "goto",
+          "source_line": 477
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cnet->users6 > 1)",
+          "exit_kind": "goto",
+          "source_line": 492,
+          "exit_line": 493
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "goto",
+          "source_line": 495
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!retry)",
+          "exit_kind": "goto",
+          "source_line": 510
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nf_ct_bridge_info)",
+          "exit_kind": "goto",
+          "source_line": 509
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!try_module_get(nf_ct_bridge_info->me))",
+          "exit_kind": "goto",
+          "source_line": 519
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(cnet->users_bridge > 1)",
+          "exit_kind": "goto",
+          "source_line": 524,
+          "exit_line": 525
+        },
+        {
+          "kind": "enclosing_switch",
+          "predicate": "nfproto",
+          "polarity": "in_true_branch",
+          "source_line": 471
+        }
+      ]
+    },
+    {
+      "caller": "nf_nat_register_fn",
+      "file": "net/netfilter/nf_nat_core.c",
+      "line": 1039,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "nat_ops != NULL",
+          "source_line": 1021
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(pf >= ARRAY_SIZE(nat_net->nat_proto_net))",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 1001
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(i == ops_count)",
+          "macro": "WARN_ON_ONCE",
+          "source_line": 1013
+        },
+        {
+          "kind": "assert_neg",
+          "predicate": "!(nat_proto_net->users != 0)",
+          "macro": "WARN_ON",
+          "source_line": 1018
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(pf >= ARRAY_SIZE(nat_net->nat_proto_net)))",
+          "exit_kind": "return",
+          "source_line": 1001,
+          "exit_line": 1002
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(orig_nat_ops[i].hooknum == hooknum)",
+          "exit_kind": "break",
+          "source_line": 1007
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(WARN_ON_ONCE(i == ops_count))",
+          "exit_kind": "return",
+          "source_line": 1013,
+          "exit_line": 1014
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nat_ops)",
+          "exit_kind": "return",
+          "source_line": 1021
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(priv)",
+          "exit_kind": "continue",
+          "source_line": 1028
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "!nat_proto_net->nat_hook_ops",
+          "polarity": "in_true_branch",
+          "source_line": 1017
+        }
+      ]
+    },
+    {
+      "caller": "nf_synproxy_ipv4_init",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 772,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "snet->hook_ref4 == 0",
+          "polarity": "in_true_branch",
+          "source_line": 771
+        }
+      ]
+    },
+    {
+      "caller": "nf_synproxy_ipv6_init",
+      "file": "net/netfilter/nf_synproxy_core.c",
+      "line": 1196,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "snet->hook_ref6 == 0",
+          "polarity": "in_true_branch",
+          "source_line": 1195
+        }
+      ]
+    }
+  ]
+}

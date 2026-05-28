@@ -1,0 +1,34 @@
+{
+  "callee": "nf_conncount_cache_free",
+  "defined_in": "net/netfilter/nf_conncount.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "destroy_tree",
+      "file": "net/netfilter/nf_conncount.c",
+      "line": 580,
+      "guards": [
+        {
+          "kind": "enclosing_while",
+          "predicate": "(node = rb_first(r)) != NULL",
+          "polarity": "in_true_branch",
+          "source_line": 575
+        }
+      ]
+    },
+    {
+      "caller": "nft_connlimit_do_destroy",
+      "file": "net/netfilter/nft_connlimit.c",
+      "line": 103,
+      "guards": []
+    },
+    {
+      "caller": "nft_connlimit_destroy_clone",
+      "file": "net/netfilter/nft_connlimit.c",
+      "line": 233,
+      "guards": []
+    }
+  ]
+}

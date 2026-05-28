@@ -1,0 +1,290 @@
+{
+  "callee": "nft_set_lookup",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 6,
+  "callsites": [
+    {
+      "caller": "nft_set_lookup_global",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4106,
+      "guards": []
+    },
+    {
+      "caller": "nf_tables_getset",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4473,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 4447
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 4447
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nlh->nlmsg_flags & NLM_F_DUMP)",
+          "exit_kind": "return",
+          "source_line": 4455
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nfmsg->nfgen_family == NFPROTO_UNSPEC)",
+          "exit_kind": "return",
+          "source_line": 4468,
+          "exit_line": 4469
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!nla[NFTA_SET_TABLE])",
+          "exit_kind": "return",
+          "source_line": 4470,
+          "exit_line": 4471
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_newset",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4782,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 4775
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!((desc.ktype & NFT_DATA_RESERVED_MASK) == NFT_DATA_RESERVED_MASK)",
+          "exit_kind": "return",
+          "source_line": 4680,
+          "exit_line": 4681
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_KEY_TYPE] != NULL)",
+          "exit_kind": "return",
+          "source_line": 4678
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(desc.klen == 0 || desc.klen > NFT_DATA_VALUE_MAXLEN)",
+          "exit_kind": "return",
+          "source_line": 4685,
+          "exit_line": 4686
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_FLAGS] != NULL)",
+          "exit_kind": "return",
+          "source_line": 4689
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(flags & NFT_SET_MAP))",
+          "exit_kind": "return",
+          "source_line": 4707,
+          "exit_line": 4708
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_DATA_LEN] == NULL)",
+          "exit_kind": "return",
+          "source_line": 4716,
+          "exit_line": 4717
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(desc.dlen == 0 || desc.dlen > NFT_DATA_VALUE_MAXLEN)",
+          "exit_kind": "return",
+          "source_line": 4719,
+          "exit_line": 4720
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(desc.dtype != NFT_DATA_VERDICT)",
+          "exit_kind": "return",
+          "source_line": 4715
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_DATA_TYPE] != NULL)",
+          "exit_kind": "return",
+          "source_line": 4706
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & NFT_SET_MAP)",
+          "exit_kind": "return",
+          "source_line": 4723,
+          "exit_line": 4724
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(flags & NFT_SET_OBJECT))",
+          "exit_kind": "return",
+          "source_line": 4727,
+          "exit_line": 4728
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_OBJ_TYPE] != NULL)",
+          "exit_kind": "return",
+          "source_line": 4726
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & NFT_SET_OBJECT)",
+          "exit_kind": "return",
+          "source_line": 4734,
+          "exit_line": 4735
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(flags & NFT_SET_TIMEOUT))",
+          "exit_kind": "return",
+          "source_line": 4741,
+          "exit_line": 4742
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err)",
+          "exit_kind": "return",
+          "source_line": 4745,
+          "exit_line": 4746
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_TIMEOUT] != NULL)",
+          "exit_kind": "return",
+          "source_line": 4740
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!(flags & NFT_SET_TIMEOUT))",
+          "exit_kind": "return",
+          "source_line": 4750,
+          "exit_line": 4751
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_GC_INTERVAL] != NULL)",
+          "exit_kind": "return",
+          "source_line": 4749
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 4761,
+          "exit_line": 4762
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(desc.field_count > 1 && !(flags & NFT_SET_CONCAT))",
+          "exit_kind": "return",
+          "source_line": 4764,
+          "exit_line": 4765
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(nla[NFTA_SET_DESC] != NULL)",
+          "exit_kind": "return",
+          "source_line": 4759
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & NFT_SET_CONCAT)",
+          "exit_kind": "return",
+          "source_line": 4766,
+          "exit_line": 4767
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(flags & NFT_SET_CONCAT)",
+          "exit_kind": "return",
+          "source_line": 4766
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 4775
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_delset",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 4984,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 4974
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(info->nfmsg->nfgen_family == NFPROTO_UNSPEC)",
+          "exit_kind": "return",
+          "source_line": 4969,
+          "exit_line": 4970
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 4974
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nla[NFTA_SET_HANDLE]",
+          "polarity": "in_false_branch",
+          "source_line": 4982
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_getsetelem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5754,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 5749
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 5749
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_delsetelem",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 6919,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "!IS_ERR_OR_NULL(table)",
+          "source_line": 6914
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(IS_ERR(table))",
+          "exit_kind": "return",
+          "source_line": 6914
+        }
+      ]
+    }
+  ]
+}

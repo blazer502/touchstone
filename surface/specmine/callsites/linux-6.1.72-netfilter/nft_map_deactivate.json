@@ -1,0 +1,87 @@
+{
+  "callee": "nft_map_deactivate",
+  "defined_in": "net/netfilter/nf_tables_api.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "nft_delset",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 648,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(err < 0)",
+          "exit_kind": "return",
+          "source_line": 644,
+          "exit_line": 645
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "set->flags & (NFT_SET_MAP | NFT_SET_OBJECT)",
+          "polarity": "in_true_branch",
+          "source_line": 647
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_deactivate_set",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5187,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "phase",
+          "polarity": "in_true_branch",
+          "source_line": 5174
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "nft_set_is_anonymous(set)",
+          "polarity": "in_true_branch",
+          "source_line": 5185
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "set->flags & (NFT_SET_MAP | NFT_SET_OBJECT)",
+          "polarity": "in_true_branch",
+          "source_line": 5186
+        }
+      ]
+    },
+    {
+      "caller": "nf_tables_deactivate_set",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 5197,
+      "guards": [
+        {
+          "kind": "enclosing_switch",
+          "predicate": "phase",
+          "polarity": "in_true_branch",
+          "source_line": 5174
+        }
+      ]
+    },
+    {
+      "caller": "__nft_release_table",
+      "file": "net/netfilter/nf_tables_api.c",
+      "line": 10728,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(nft_chain_binding(chain))",
+          "exit_kind": "continue",
+          "source_line": 10709,
+          "exit_line": 10710
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "set->flags & (NFT_SET_MAP | NFT_SET_OBJECT)",
+          "polarity": "in_true_branch",
+          "source_line": 10727
+        }
+      ]
+    }
+  ]
+}

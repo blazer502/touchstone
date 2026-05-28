@@ -1,0 +1,57 @@
+{
+  "callee": "nf_nat_masq_schedule",
+  "defined_in": "net/netfilter/nf_nat_masquerade.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 3,
+  "callsites": [
+    {
+      "caller": "masq_device_event",
+      "file": "net/netfilter/nf_nat_masquerade.c",
+      "line": 162,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "event == NETDEV_DOWN",
+          "polarity": "in_true_branch",
+          "source_line": 156
+        }
+      ]
+    },
+    {
+      "caller": "masq_inet_event",
+      "file": "net/netfilter/nf_nat_masquerade.c",
+      "line": 208,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event != NETDEV_DOWN)",
+          "exit_kind": "return",
+          "source_line": 191,
+          "exit_line": 192
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(idev->dead)",
+          "exit_kind": "return",
+          "source_line": 200,
+          "exit_line": 201
+        }
+      ]
+    },
+    {
+      "caller": "masq_inet6_event",
+      "file": "net/netfilter/nf_nat_masquerade.c",
+      "line": 295,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(event != NETDEV_DOWN)",
+          "exit_kind": "return",
+          "source_line": 286,
+          "exit_line": 287
+        }
+      ]
+    }
+  ]
+}

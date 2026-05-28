@@ -1,0 +1,173 @@
+{
+  "callee": "ip_vs_sync_buff_release",
+  "defined_in": "net/netfilter/ipvs/ip_vs_sync.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "sb_queue_tail",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 381,
+      "guards": [
+        {
+          "kind": "lock_acquire",
+          "predicate": "spin_held",
+          "source_line": 367
+        }
+      ]
+    },
+    {
+      "caller": "sync_thread_master",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 1691,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "sb != NULL",
+          "source_line": 1677
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(kthread_should_stop()))",
+          "exit_kind": "break",
+          "source_line": 1675,
+          "exit_line": 1676
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!sb)",
+          "exit_kind": "continue",
+          "source_line": 1677
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(kthread_should_stop()))",
+          "exit_kind": "goto",
+          "source_line": 1688,
+          "exit_line": 1689
+        },
+        {
+          "kind": "enclosing_for",
+          "predicate": ";;",
+          "polarity": "in_true_branch",
+          "source_line": 1673
+        }
+      ]
+    },
+    {
+      "caller": "sync_thread_master",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 1697,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "sb != NULL",
+          "source_line": 1677
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(kthread_should_stop()))",
+          "exit_kind": "break",
+          "source_line": 1675,
+          "exit_line": 1676
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!sb)",
+          "exit_kind": "continue",
+          "source_line": 1677
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(kthread_should_stop()))",
+          "exit_kind": "goto",
+          "source_line": 1688,
+          "exit_line": 1689
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "sb",
+          "polarity": "in_true_branch",
+          "source_line": 1696
+        }
+      ]
+    },
+    {
+      "caller": "sync_thread_master",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 1701,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "sb != NULL",
+          "source_line": 1677
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(kthread_should_stop()))",
+          "exit_kind": "break",
+          "source_line": 1675,
+          "exit_line": 1676
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!sb)",
+          "exit_kind": "continue",
+          "source_line": 1677
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(kthread_should_stop()))",
+          "exit_kind": "goto",
+          "source_line": 1688,
+          "exit_line": 1689
+        },
+        {
+          "kind": "enclosing_while",
+          "predicate": "(sb = sb_dequeue(ipvs, ms))",
+          "polarity": "in_true_branch",
+          "source_line": 1700
+        }
+      ]
+    },
+    {
+      "caller": "sync_thread_master",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 1707,
+      "guards": [
+        {
+          "kind": "null_check",
+          "predicate": "sb != NULL",
+          "source_line": 1677
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(kthread_should_stop()))",
+          "exit_kind": "break",
+          "source_line": 1675,
+          "exit_line": 1676
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!sb)",
+          "exit_kind": "continue",
+          "source_line": 1677
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(unlikely(kthread_should_stop()))",
+          "exit_kind": "goto",
+          "source_line": 1688,
+          "exit_line": 1689
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "sb",
+          "polarity": "in_true_branch",
+          "source_line": 1706
+        }
+      ]
+    }
+  ]
+}

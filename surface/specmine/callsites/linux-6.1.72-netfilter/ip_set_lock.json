@@ -1,0 +1,66 @@
+{
+  "callee": "ip_set_lock",
+  "defined_in": "net/netfilter/ipset/ip_set_core.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "ip_set_test",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 754,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!set)",
+          "macro": "BUG_ON",
+          "source_line": 740
+        },
+        {
+          "kind": "enclosing_if",
+          "predicate": "ret == -EAGAIN",
+          "polarity": "in_true_branch",
+          "source_line": 751
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_add",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 785,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!set)",
+          "macro": "BUG_ON",
+          "source_line": 778
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_del",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 807,
+      "guards": [
+        {
+          "kind": "assert_neg",
+          "predicate": "!(!set)",
+          "macro": "BUG_ON",
+          "source_line": 800
+        }
+      ]
+    },
+    {
+      "caller": "ip_set_flush_set",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1261,
+      "guards": []
+    },
+    {
+      "caller": "call_ad",
+      "file": "net/netfilter/ipset/ip_set_core.c",
+      "line": 1713,
+      "guards": []
+    }
+  ]
+}

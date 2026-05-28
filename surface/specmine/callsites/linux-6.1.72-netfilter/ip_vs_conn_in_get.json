@@ -1,0 +1,96 @@
+{
+  "callee": "ip_vs_conn_in_get",
+  "defined_in": "net/netfilter/ipvs/ip_vs_conn.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 5,
+  "callsites": [
+    {
+      "caller": "ip_vs_conn_in_get_proto",
+      "file": "net/netfilter/ipvs/ip_vs_conn.c",
+      "line": 344,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(ip_vs_conn_fill_param_proto(ipvs, af, skb, iph, &p))",
+          "exit_kind": "return",
+          "source_line": 341,
+          "exit_line": 342
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_ftp_in",
+      "file": "net/netfilter/ipvs/ip_vs_ftp.c",
+      "line": 534,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp->state != IP_VS_TCP_S_ESTABLISHED)",
+          "exit_kind": "return",
+          "source_line": 432,
+          "exit_line": 433
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(skb_ensure_writable(skb, skb->len))",
+          "exit_kind": "return",
+          "source_line": 436,
+          "exit_line": 437
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(!data || data >= data_limit)",
+          "exit_kind": "return",
+          "source_line": 441,
+          "exit_line": 442
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(data > data_limit - 7 || data[6] != '\\r')",
+          "exit_kind": "return",
+          "source_line": 461,
+          "exit_line": 462
+        },
+        {
+          "kind": "early_return",
+          "predicate": "!(data[4] == ' ')",
+          "exit_kind": "return",
+          "source_line": 458
+        }
+      ]
+    },
+    {
+      "caller": "ip_vs_nfct_expect_callback",
+      "file": "net/netfilter/ipvs/ip_vs_nfct.c",
+      "line": 177,
+      "guards": [
+        {
+          "kind": "early_return",
+          "predicate": "!(cp)",
+          "exit_kind": "goto",
+          "source_line": 162
+        }
+      ]
+    },
+    {
+      "caller": "ah_esp_conn_in_get",
+      "file": "net/netfilter/ipvs/ip_vs_proto_ah_esp.c",
+      "line": 62,
+      "guards": []
+    },
+    {
+      "caller": "ip_vs_proc_conn",
+      "file": "net/netfilter/ipvs/ip_vs_sync.c",
+      "line": 853,
+      "guards": [
+        {
+          "kind": "enclosing_if",
+          "predicate": "!(flags & IP_VS_CONN_F_TEMPLATE)",
+          "polarity": "in_true_branch",
+          "source_line": 852
+        }
+      ]
+    }
+  ]
+}

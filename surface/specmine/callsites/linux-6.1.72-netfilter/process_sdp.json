@@ -1,0 +1,33 @@
+{
+  "callee": "process_sdp",
+  "defined_in": "net/netfilter/nf_conntrack_sip.c",
+  "target": "linux-6.1.72-netfilter",
+  "scope": "net/netfilter",
+  "callsite_count": 4,
+  "callsites": [
+    {
+      "caller": "process_invite_response",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1146,
+      "guards": []
+    },
+    {
+      "caller": "process_update_response",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1163,
+      "guards": []
+    },
+    {
+      "caller": "process_prack_response",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1180,
+      "guards": []
+    },
+    {
+      "caller": "process_invite_request",
+      "file": "net/netfilter/nf_conntrack_sip.c",
+      "line": 1197,
+      "guards": []
+    }
+  ]
+}
