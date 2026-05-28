@@ -1,0 +1,58 @@
+{
+  "generated_at": 1779936381,
+  "ranking": [
+    {
+      "callee": "lookup_thing",
+      "caller": "caller_buggy_lock",
+      "contract_kind_class": "lock",
+      "file": "fixture.c",
+      "line": 126,
+      "missing_contract": "rcu_read_lock_held",
+      "rank": 0,
+      "reason": "Strong convention (91%) for security-relevant lock guard.",
+      "suspicion": 0.9091,
+      "tokens_used": 704,
+      "triage_score": 1.0,
+      "triage_source": "llm"
+    },
+    {
+      "callee": "process_item",
+      "caller": "caller_buggy_null",
+      "contract_kind_class": "early",
+      "file": "fixture.c",
+      "line": 182,
+      "missing_contract": "!(IS_ERR(item))",
+      "rank": 1,
+      "reason": "High convention strength and security-relevant guard.",
+      "suspicion": 0.8571,
+      "tokens_used": 766,
+      "triage_score": 0.9,
+      "triage_source": "llm"
+    },
+    {
+      "callee": "process_item",
+      "caller": "caller_buggy_null",
+      "contract_kind_class": "null",
+      "file": "fixture.c",
+      "line": 182,
+      "missing_contract": "!IS_ERR_OR_NULL(item)",
+      "rank": 2,
+      "reason": "Strong convention (86% of callsites) suggests a likely missing-guard bug.",
+      "suspicion": 0.8571,
+      "tokens_used": 789,
+      "triage_score": 0.9,
+      "triage_source": "llm"
+    }
+  ],
+  "stats": {
+    "by_source": {
+      "llm": 3,
+      "rule": 0
+    },
+    "outliers": 3,
+    "total_tokens": 2259,
+    "wall_seconds": 61.69
+  },
+  "target": "multi_class",
+  "use_llm": true
+}

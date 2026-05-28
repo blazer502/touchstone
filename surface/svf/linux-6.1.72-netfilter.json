@@ -1,0 +1,8 @@
+{
+  "status": "infrastructure_pending",
+  "engine": "svf",
+  "target": "linux-6.1.72-netfilter",
+  "reason": "image-missing: veri-agent/svf:latest (build via docker/svf.Dockerfile)",
+  "soundness_note": "SVF image not built; Stage A stays on the regex call graph (default, sound). SVF is an opt-in value-flow refinement.",
+  "wall_ms": 37
+}

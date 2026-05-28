@@ -1,0 +1,7 @@
+{
+  "source": "rule(template:nf_tables_cve_2024_1086)",
+  "tokens_used": 0,
+  "latency_s": 0.0,
+  "target_func": "nft_data_init",
+  "entry_surface": "sendmsg$nl_netfilter"
+}

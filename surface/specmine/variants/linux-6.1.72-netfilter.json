@@ -1,0 +1,13 @@
+{
+  "by_class": {},
+  "generated_at": 1779937402,
+  "seed": {
+    "callee": "nft_ctx_init",
+    "class": null,
+    "contract": "!(IS_ERR(table))",
+    "shape": "!(ID(ID))"
+  },
+  "sibling_count": 0,
+  "siblings": [],
+  "target": "linux-6.1.72-netfilter"
+}

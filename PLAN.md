@@ -557,6 +557,58 @@ output: poc_input_artifact          # bytes, conformant to fuzz_entrypoint ABI
   headline lead-confirmation in 5.6 lands across ≥2 vuln classes including ≥1 non-memory-safety
   class.
 
+- **Phase 6 — Precision + Reach (advanced program-analysis upgrades).** Address the precision
+  ceilings and reachability walls the Phase 1–5 MVP hit, grounded in 2024–2026 research. The
+  through-line: the regex/ctags substrate that got Components (1)/(3) working is the bottleneck for
+  *indirect calls* (the keep-set over-approximates by pulling all address-taken functions; spec
+  mining can't see indirectly-invoked callees), and the kernel runtime loop is unclosed (kernel
+  outliers stall at `infrastructure_pending`). Each sub-step swaps in a stronger analysis while
+  preserving the §8 guardrail (sound checker decides; new analyses only *propose / scope*).
+
+  - **6.1 LLM triage / false-positive reducer (LLift / BugLens pattern).** Today the LLM only
+    *proposes* (contracts, harnesses, refinements). Add a `triage` role (small router model through
+    the Phase-0.2 gateway) that scores each Phase-5 outlier / Stage-A hint for plausibility and
+    *reorders or defers* expensive sound verification — it NEVER refutes (the sound checker keeps
+    final-verdict authority). Rule-based fallback for gateway-down. *Done when:* verification budget
+    on the multi_class + netfilter outlier corpora drops measurably with **zero confirmed-bug loss**
+    (soundness gate intact).
+  - **6.2 MLTA-style indirect-call resolution (TypeDive / DeepType, source-level).** Replace
+    Stage-A's "any reachable function with indirect-call syntax pulls *all* address-taken functions"
+    over-approximation with multi-layer type analysis: parse struct function-pointer field *types* +
+    `.field = func` initializers, resolve `obj->field(...)` to the function set assigned to that
+    field across compatible struct types (and the reverse: an indirectly-registered function's
+    callers). Feed the resolved edges into the Phase-1.2 keep-set and the Phase-5.2 one-hop
+    establishment check. Source-level approximation of MLTA (full LLVM-bitcode TypeDive is a 6.2.x
+    hook). *Done when:* netfilter keep-set pruning rises above the Phase-1.2 baseline (22.05%) with
+    **zero true-bug pruned** (Juliet gate), and a previously-`infrastructure_pending` indirect-call
+    outlier (e.g. `nfnl_ct_hook.attach_expect` → `ctnetlink_glue_attach_expect`) becomes resolvable.
+  - **6.3 Kernel runtime loop: syzlang synthesis + directed fuzzing (KernelGPT + BEACON).** Wire the
+    long-deferred syzkaller fuzzer. LLM synthesizes syzlang for an outlier's syscall surface
+    (KernelGPT pattern; we already hand-wrote one for CVE-2024-1086 in
+    `oracle/tier1_fuzz/syzlang/`), and a reachability/distance scorer (BEACON/SelectFuzz pattern)
+    aims execution at the outlier callsite under KASAN. Honest `infrastructure_pending` when the
+    syzkaller image / QEMU instance isn't built. *Done when:* a kernel outlier flips from
+    `infrastructure_pending` toward a KASAN-confirmed runtime PoV on the historical target
+    (CVE-2024-1086 positive control), or the directed scorer + syzlang synthesis run end-to-end with
+    the runtime step cleanly deferred.
+  - **6.4 SVF value-flow Stage A + SymCC concolic Tier-2.** Swap the regex call graph for SVF
+    interprocedural value-flow taint (LLVM bitcode; image escape hatch) and activate the stubbed
+    SymCC compilation-based concolic Tier-2 driver (faster than KLEE; Docker image-missing hatch).
+    Both sit behind the existing Stage-A / Tier-2 verdict schemas. *Done when:* the drivers run
+    behind their schemas and return clean `image-missing`/`infrastructure_pending` until the images
+    are built, with at least the SymCC userspace path validated on one smoke if the image builds.
+  - **6.5 APP-Miner graph mining + variant analysis (Big Sleep).** Upgrade Component (3) from
+    regex-guard clustering to frequent-pattern mining over a code-property-graph-lite built from the
+    Phase-5.1 callsite ledgers, with variable-role normalization (the deferred 5.x.2 hook). Add a
+    Big-Sleep-style **variant-analysis** mode: given a known patched bug's pattern, mine structural
+    siblings across the tree. *Done when:* mining surfaces a multi-statement pattern the regex miner
+    can't, and variant mode finds ≥1 sibling of a seed pattern.
+
+  *Phase 6 done when:* indirect-call resolution measurably improves Stage-A pruning with the Juliet
+  soundness gate intact; the triage layer cuts verification budget with zero confirmed-bug loss; the
+  kernel runtime loop is wired end-to-end (runtime step may be infra-deferred); and Components (1)
+  and (3) run on the stronger analysis substrate without any Phase-1–5 soundness regression.
+
 ---
 
 ## 7. Budget & Funnel Economics (hard constraint)
@@ -593,6 +645,10 @@ expensive symbolic execution, BMC, and LLM contract-synthesis run only on the su
 | Stage A reachability/taint | Smatch, Coccinelle, Sparse, SVF, CodeQL |
 | Stage B sound proof | Frama-C/EVA (primary), CBMC, ESBMC |
 | Spec mining (Component 3) | libclang / tree-sitter (AST), Z3 (guard equivalence), reuses Stage B + Tier 2/3 engines for verification |
+| Indirect-call resolution (Phase 6) | MLTA / TypeDive (umnsec/mlta), DeepType (SMLTA), type+data-flow co-analysis — source-level MLTA approximation in-tree |
+| LLM-assisted static analysis (Phase 6) | LLift (OOPSLA'24), BugLens (ASE'25) FP-reduction / triage pattern; Big Sleep / Naptime (variant analysis) |
+| Kernel runtime reach (Phase 6) | KernelGPT (syzlang synthesis), BEACON / SelectFuzz (directed greybox fuzzing) |
+| Advanced spec mining (Phase 6) | APP-Miner (frequent API-path-pattern mining), SVF / Phasar (value-flow), SymCC / SymQEMU / SymSan (concolic) |
 | Oracle Tier 1 (fast) | syzkaller + KASAN/KMSAN/KCSAN/UBSAN/KCOV (kernel); AFL++/libFuzzer + ASan/MSan/UBSan (userspace) |
 | Oracle Tier 2 (symbolic) | S2E (kernel); KLEE, SymCC/SymQEMU (userspace); angr (binary) |
 | Oracle Tier 3 (BMC) | CBMC, ESBMC |

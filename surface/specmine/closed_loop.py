@@ -235,8 +235,20 @@ def run(
     refine_unwind: int,
     timeout_s: int,
     use_llm_refine: bool,
+    triage: bool = False,
+    budget: Optional[int] = None,
 ) -> dict:
-    """Run the closed-loop end-to-end for one target's outliers."""
+    """Run the closed-loop end-to-end for one target's outliers.
+
+    Phase 6.1 additions:
+      * `triage=True` runs the LLM triage layer (`surface.specmine.triage`) and
+        reorders dispatch so high-plausibility outliers are verified first. The
+        triage layer NEVER drops an outlier — it only reorders.
+      * `budget` caps the number of CBMC verifications; outliers beyond the cap
+        get disposition `deferred_by_budget` (NOT a verdict — re-run with a
+        bigger budget to verify them). With `budget=None` every outlier is
+        verified, so the confirmed-bug set is order-independent (zero loss).
+    """
     all_outliers = outliers_doc.get("outliers", [])
     dispatchable, skipped = _outliers_dispatchable(
         all_outliers, min_suspicion=min_suspicion
@@ -249,9 +261,29 @@ def run(
         except LLMUnavailable:
             llm = None
 
+    # Phase 6.1: triage-driven reordering (scoping only; never drops outliers).
+    triage_doc = None
+    if triage:
+        from surface.specmine import triage as triage_mod
+        triage_doc = triage_mod.triage(dispatchable, use_llm=True)
+        dispatchable = triage_mod.order_outliers(dispatchable, triage_doc)
+
     records: list[dict] = []
+    deferred: list[dict] = []
     t0 = time.time()
     for i, o in enumerate(dispatchable):
+        if budget is not None and i >= budget:
+            # Explicit budget deferral — NOT a verdict. Re-run with a larger
+            # budget (or no budget) to verify these.
+            deferred.append({
+                "outlier": _outlier_summary(o),
+                "disposition": "deferred_by_budget",
+                "post_refine_disposition": "deferred_by_budget",
+                "reason": f"beyond --budget={budget} under triage ordering.",
+                "router_verdict": None,
+                "witness_path": None,
+            })
+            continue
         cid = f"specmine-{outliers_doc.get('target', 'tgt')}-{i:04d}"
         records.append(_run_one(
             o, source_root, out_dir,
@@ -259,6 +291,7 @@ def run(
             timeout_s=timeout_s, refine_llm=llm,
         ))
     wall = time.time() - t0
+    records.extend(deferred)
 
     # Roll-ups.
     by_disp: Counter[str] = Counter(r["disposition"] for r in records)
@@ -286,6 +319,11 @@ def run(
         in ("confirmed", "refuted")
     )
 
+    verified_count = sum(
+        1 for r in records if r["disposition"] != "deferred_by_budget"
+    )
+    deferred_count = by_disp.get("deferred_by_budget", 0)
+
     return {
         "target": outliers_doc.get("target"),
         "generated_at": int(time.time()),
@@ -294,9 +332,14 @@ def run(
         "refine_unwind": refine_unwind,
         "timeout_s": timeout_s,
         "use_llm_refine": use_llm_refine,
+        "triage": triage,
+        "budget": budget,
+        "triage_stats": (triage_doc or {}).get("stats") if triage_doc else None,
         "stats": {
             "outliers_total": len(all_outliers),
             "outliers_dispatched": len(dispatchable),
+            "verifications_run": verified_count,   # CBMC spawns actually done
+            "deferred_by_budget": deferred_count,
             "skipped": skipped,
             "wall_seconds": round(wall, 2),
             "by_disposition_pre_refine": dict(by_disp),
@@ -328,6 +371,12 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--timeout-s", type=int, default=60)
     ap.add_argument("--no-llm-refine", action="store_true",
                     help="Force rule-based refinement only (gateway-down semantics).")
+    ap.add_argument("--triage", action="store_true",
+                    help="Phase 6.1: run LLM triage and dispatch in plausibility "
+                         "order (scoping only — never drops an outlier).")
+    ap.add_argument("--budget", type=int, default=None,
+                    help="Phase 6.1: cap CBMC verifications; outliers beyond the "
+                         "cap get `deferred_by_budget` (not a verdict).")
     args = ap.parse_args(argv)
 
     here = Path(__file__).resolve().parent
@@ -351,16 +400,19 @@ def main(argv: list[str] | None = None) -> int:
         refine_unwind=args.refine_unwind,
         timeout_s=args.timeout_s,
         use_llm_refine=not args.no_llm_refine,
+        triage=args.triage,
+        budget=args.budget,
     )
     out_path.write_text(json.dumps(doc, indent=2, sort_keys=True) + "\n")
     s = doc["stats"]
     print(
         f"[specmine] closed-loop: dispatched={s['outliers_dispatched']}/"
         f"{s['outliers_total']} "
+        f"verifications={s['verifications_run']} "
+        f"deferred_by_budget={s['deferred_by_budget']} "
         f"confirmed_post={s['confirmed_post_refine']} "
         f"refuted={s['refuted']} inconclusive={s['inconclusive']} "
         f"classes_confirmed={s['classes_with_confirmed_leads']} "
-        f"refined_flips={s['refined_flips']} "
         f"false_confirmations={s['false_confirmations']} "
         f"wall={s['wall_seconds']:.1f}s"
     )

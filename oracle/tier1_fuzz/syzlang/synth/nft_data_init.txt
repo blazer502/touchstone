@@ -1,0 +1,36 @@
+# Rule-based fallback for target `nft_data_init` via `sendmsg$nl_netfilter`.
+# Reuses the hand-written nf_tables descriptor as a starting point;
+# a syz-manager run would mutate from here toward the target.
+# Hand-written syzlang fragment for the nf_tables surface CVE-2024-1086 abused.
+#
+# Phase 2.1 wiring: this descriptor is what a future syz-manager-fuzz run (Phase 4.2)
+# would feed to grow coverage toward the nft_verdict_init / nft_immediate_eval path
+# that the CVE's double-free skb landed on. Used today by oracle/tier1_fuzz/kernel.py
+# as a wired-but-not-fuzzed artifact (it documents the syscall surface and proves the
+# Tier-1-kernel path is structurally complete).
+#
+# Reference: https://github.com/google/security-research/.../CVE-2024-1086
+
+include <linux/netfilter.h>
+include <linux/netfilter/nf_tables.h>
+include <linux/netlink.h>
+include <linux/socket.h>
+
+resource sock_nl_netfilter[sock_nl]
+
+socket$nl_netfilter(domain const[AF_NETLINK], type const[SOCK_RAW], proto const[NETLINK_NETFILTER]) sock_nl_netfilter
+
+# Generic netlink send for nfnetlink NFNL_SUBSYS_NFTABLES (10).
+sendmsg$nl_netfilter(fd sock_nl_netfilter, msg ptr[in, msghdr_netlink[netlink_msg_t[const[NFNL_SUBSYS_NFTABLES << 8], netlink_payload, nfgenmsg]]], f flags[send_flags])
+
+type nfgenmsg {
+    nfgen_family    int8
+    version         const[0, int8]
+    res_id          int16be
+}
+
+# Skeleton attribute blob — concrete nft_table/chain/rule subtypes get filled
+# during fuzzing. Kept abstract here so the descriptor is a starting point, not
+# a full syscall description set.
+type netlink_payload   array[int8, 0:4096]
+

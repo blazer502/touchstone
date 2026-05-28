@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -49,9 +50,69 @@ def run(source: Path, target_property: str = "klee-style-assert",
             soundness_note="SymCC image not built on this host; engine wired but inactive.",
             assumed=[f"image={SYMCC_IMAGE}", "image-missing path"],
         )
-    raise NotImplementedError(
-        "SymCC runner stub — image build is deferred to Phase 2.5 / 4 if KLEE+angr are insufficient."
-    )
+    # Phase 6.4: real concolic run path (active once the image is built).
+    # SymCC compiles the source into a binary that performs concolic execution
+    # at runtime, emitting new inputs that flip branches. We seed empty, run
+    # under a wall budget, and inspect the output for a sanitizer/assertion trip.
+    docker = os.environ.get("DOCKER", "sudo docker").split()
+    src_abs = source.resolve()
+    work = src_abs.parent
+    out_corpus = work / f".symcc-out-{src_abs.stem}"
+    out_corpus.mkdir(exist_ok=True)
+    compile_cmd = [
+        *docker, "run", "--rm", "-v", f"{work}:/work", "-w", "/work",
+        SYMCC_IMAGE, "sh", "-c",
+        f"symcc {src_abs.name} -o /work/{src_abs.stem}.symcc 2>&1",
+    ]
+    run_cmd = [
+        *docker, "run", "--rm", "-v", f"{work}:/work", "-w", "/work",
+        "-e", f"SYMCC_OUTPUT_DIR=/work/{out_corpus.name}",
+        SYMCC_IMAGE, "sh", "-c",
+        f"timeout {wall_seconds} ./{src_abs.stem}.symcc < /dev/null 2>&1; echo EXIT=$?",
+    ]
+    try:
+        cr = subprocess.run(compile_cmd, capture_output=True, text=True, timeout=120)
+        if cr.returncode != 0:
+            wall_ms = int((time.monotonic() - t0) * 1000)
+            return Tier2Verdict(
+                unit=unit, engine="symcc", verdict="inconclusive", wall_ms=wall_ms,
+                property=target_property,
+                evidence_excerpt=f"symcc compile failed: {cr.stdout[-300:]}",
+                soundness_note="compile error → no verdict.",
+                assumed=[f"image={SYMCC_IMAGE}"],
+            )
+        rr = subprocess.run(run_cmd, capture_output=True, text=True,
+                            timeout=wall_seconds + 30)
+        out = (rr.stdout or "") + (rr.stderr or "")
+        wall_ms = int((time.monotonic() - t0) * 1000)
+        if re.search(r"(ERROR: AddressSanitizer|runtime error:|SUMMARY: )", out):
+            return Tier2Verdict(
+                unit=unit, engine="symcc", verdict="sat", wall_ms=wall_ms,
+                property=target_property,
+                evidence_excerpt=out[-400:],
+                soundness_note=("SymCC reached a sanitizer trip under concolic "
+                                "exploration — candidate PoV, re-confirm in Tier-1."),
+                assumed=[f"image={SYMCC_IMAGE}", "under-approx concolic env"],
+            )
+        n_inputs = len(list(out_corpus.glob("*"))) if out_corpus.exists() else 0
+        return Tier2Verdict(
+            unit=unit, engine="symcc", verdict="inconclusive", wall_ms=wall_ms,
+            property=target_property,
+            evidence_excerpt=f"no sanitizer trip in {wall_seconds}s; "
+                             f"{n_inputs} inputs explored.",
+            soundness_note=("SymCC explored without tripping the property in the "
+                            "wall budget — inconclusive, not a safety proof."),
+            assumed=[f"image={SYMCC_IMAGE}"],
+        )
+    except subprocess.TimeoutExpired:
+        wall_ms = int((time.monotonic() - t0) * 1000)
+        return Tier2Verdict(
+            unit=unit, engine="symcc", verdict="inconclusive", wall_ms=wall_ms,
+            property=target_property,
+            evidence_excerpt="symcc wall budget exhausted.",
+            soundness_note="timeout → no verdict.",
+            assumed=[f"image={SYMCC_IMAGE}"],
+        )
 
 
 def _cli() -> int:

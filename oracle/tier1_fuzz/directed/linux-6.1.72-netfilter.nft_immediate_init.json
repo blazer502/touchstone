@@ -1,0 +1,20 @@
+{
+  "target_func": "nft_immediate_init",
+  "scope": "net/netfilter",
+  "defined_functions": 3886,
+  "reachable_callers_count": 0,
+  "selectfuzz_prune_set": 3885,
+  "selectfuzz_prune_pct": 99.97,
+  "entry_surfaces_reaching_target": 1,
+  "closest_entry_surfaces": [
+    {
+      "entry": "nft_immediate_init",
+      "distance": 0
+    }
+  ],
+  "max_distance": 0,
+  "_distance_to_target": {
+    "nft_immediate_init": 0
+  },
+  "wall_seconds": 0.43
+}
