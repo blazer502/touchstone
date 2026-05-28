@@ -1,0 +1,304 @@
+Soft offline: 0xacc6: page already poisoned
+netlink: 8 bytes leftover after parsing attributes in process `syz.9.5561'.
+tmpfs: Bad value for 'mpol'
+======================================================
+WARNING: possible circular locking dependency detected
+6.12.91 #3 Not tainted
+------------------------------------------------------
+syz.4.5581/29397 is trying to acquire lock:
+ffff8880101ced18 (&mm->mmap_lock){++++}-{3:3}, at: __might_fault+0xa6/0x120 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:6750
+
+but task is already holding lock:
+ffff88806c941108 (&cpuctx_mutex){+.+.}-{3:3}, at: perf_event_ctx_lock_nested+0x230/0x4f0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/events/core.c:1337
+
+which lock already depends on the new lock.
+
+
+the existing dependency chain (in reverse order) is:
+
+-> #10 (&cpuctx_mutex){+.+.}-{3:3}:
+       __mutex_lock_common home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:608 [inline]
+       __mutex_lock+0x16a/0x1720 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:752
+       perf_event_init_cpu+0x5e2/0x8d0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/events/core.c:14238
+       perf_event_init+0x746/0xa30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/events/core.c:14284
+       start_kernel+0x273/0x540 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/init/main.c:1036
+       x86_64_start_reservations+0x18/0x30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/head64.c:507
+       x86_64_start_kernel+0x87/0x90 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/head64.c:488
+       common_startup_64+0x13e/0x141
+
+-> #9 (pmus_lock){+.+.}-{3:3}:
+       __mutex_lock_common home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:608 [inline]
+       __mutex_lock+0x16a/0x1720 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:752
+       perf_event_init_cpu+0xe2/0x8d0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/events/core.c:14233
+       cpuhp_invoke_callback+0x3ee/0x1420 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/cpu.c:194
+       __cpuhp_invoke_callback_range+0xfe/0x210 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/cpu.c:965
+       cpuhp_invoke_callback_range home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/cpu.c:989 [inline]
+       cpuhp_up_callbacks home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/cpu.c:1020 [inline]
+       _cpu_up+0x3a8/0x760 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/cpu.c:1685
+       cpu_up+0x138/0x1b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/cpu.c:1717
+       cpuhp_bringup_mask+0x118/0x1d0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/cpu.c:1783
+       cpuhp_bringup_cpus_parallel home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/cpu.c:1873 [inline]
+       bringup_nonboot_cpus+0x198/0x1e0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/cpu.c:1887
+       smp_init+0x39/0x160 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/smp.c:1008
+       kernel_init_freeable+0x3ce/0xb50 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/init/main.c:1583
+       kernel_init+0x21/0x2b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/init/main.c:1480
+       ret_from_fork+0x4a/0x80 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/process.c:152
+       ret_from_fork_asm+0x1a/0x30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/entry_64.S:244
+
+-> #8 (cpu_hotplug_lock){++++}-{0:0}:
+       percpu_down_read home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/percpu-rwsem.h:51 [inline]
+       cpus_read_lock+0x31/0x120 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/cpu.c:490
+       __static_call_update+0xab/0x660 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/static_call_inline.c:139
+       tracepoint_update_call home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/tracepoint.c:317 [inline]
+       tracepoint_add_func+0xa9d/0x1150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/tracepoint.c:360
+       tracepoint_probe_register_prio home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/tracepoint.c:513 [inline]
+       tracepoint_probe_register+0xc5/0x110 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/tracepoint.c:533
+       register_trace_sched_wakeup home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/trace/events/sched.h:178 [inline]
+       tracing_sched_register home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/trace_sched_switch.c:56 [inline]
+       tracing_start_sched_switch+0xaf/0x1e0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/trace_sched_switch.c:110
+       __ftrace_event_enable_disable+0x66e/0x8a0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/trace_events.c:840
+       ftrace_event_enable_disable home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/trace_events.c:880 [inline]
+       __ftrace_set_clr_event_nolock+0x2a3/0x3a0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/trace_events.c:1212
+       __ftrace_set_clr_event home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/trace_events.c:1234 [inline]
+       trace_set_clr_event+0xec/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/trace_events.c:1299
+       __set_printk_clr_event+0x22/0x80 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/bpf_trace.c:416
+       process_one_work+0x8e3/0x1920 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/workqueue.c:3264
+       process_scheduled_works home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/workqueue.c:3345 [inline]
+       worker_thread+0x750/0x1070 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/workqueue.c:3426
+       kthread+0x2ca/0x3c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/kthread.c:389
+       ret_from_fork+0x4a/0x80 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/process.c:152
+       ret_from_fork_asm+0x1a/0x30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/entry_64.S:244
+
+-> #7 (tracepoints_mutex){+.+.}-{3:3}:
+       __mutex_lock_common home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:608 [inline]
+       __mutex_lock+0x16a/0x1720 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:752
+       tracepoint_probe_register_prio home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/tracepoint.c:509 [inline]
+       tracepoint_probe_register+0x9c/0x110 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/tracepoint.c:533
+       register_trace_block_rq_insert home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/trace/events/block.h:238 [inline]
+       blk_register_tracepoints+0x1b/0x3a0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/blktrace.c:1094
+       get_probe_ref home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/blktrace.c:337 [inline]
+       do_blk_trace_setup+0x92b/0xb40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/blktrace.c:611
+       __blk_trace_setup+0xd8/0x180 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/blktrace.c:630
+       blk_trace_ioctl+0x167/0x290 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/blktrace.c:740
+       blkdev_ioctl+0x368/0x6e0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/ioctl.c:688
+       vfs_ioctl home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:51 [inline]
+       __do_sys_ioctl home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:906 [inline]
+       __se_sys_ioctl home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:892 [inline]
+       __x64_sys_ioctl+0x198/0x210 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:892
+       do_syscall_x64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:47 [inline]
+       do_syscall_64+0x78/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:78
+       entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+-> #6 (blk_probe_mutex){+.+.}-{3:3}:
+       __mutex_lock_common home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:608 [inline]
+       __mutex_lock+0x16a/0x1720 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:752
+       get_probe_ref home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/blktrace.c:335 [inline]
+       do_blk_trace_setup+0x76d/0xb40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/blktrace.c:611
+       __blk_trace_setup+0xd8/0x180 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/blktrace.c:630
+       blk_trace_ioctl+0x167/0x290 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/trace/blktrace.c:740
+       blkdev_ioctl+0x368/0x6e0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/ioctl.c:688
+       vfs_ioctl home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:51 [inline]
+       __do_sys_ioctl home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:906 [inline]
+       __se_sys_ioctl home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:892 [inline]
+       __x64_sys_ioctl+0x198/0x210 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:892
+       do_syscall_x64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:47 [inline]
+       do_syscall_64+0x78/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:78
+       entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+-> #5 (&q->debugfs_mutex){+.+.}-{3:3}:
+       __mutex_lock_common home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:608 [inline]
+       __mutex_lock+0x16a/0x1720 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:752
+       blk_mq_init_sched+0x434/0x640 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/blk-mq-sched.c:473
+       elevator_init_mq+0x2d2/0x420 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/elevator.c:610
+       device_add_disk+0x113/0x12e0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/genhd.c:411
+       sd_probe+0xaec/0x1070 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/scsi/sd.c:4024
+       call_driver_probe home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/base/dd.c:639 [inline]
+       really_probe+0x238/0x820 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/base/dd.c:717
+       __driver_probe_device+0x221/0x400 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/base/dd.c:879
+       driver_probe_device+0x51/0x1b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/base/dd.c:909
+       __device_attach_driver+0x1de/0x2b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/base/dd.c:1037
+       bus_for_each_drv+0x15c/0x1e0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/base/bus.c:459
+       __device_attach_async_helper+0x1d8/0x270 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/base/dd.c:1066
+       async_run_entry_fn+0x9b/0x3b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/async.c:129
+       process_one_work+0x8e3/0x1920 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/workqueue.c:3264
+       process_scheduled_works home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/workqueue.c:3345 [inline]
+       worker_thread+0x750/0x1070 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/workqueue.c:3426
+       kthread+0x2ca/0x3c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/kthread.c:389
+       ret_from_fork+0x4a/0x80 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/process.c:152
+       ret_from_fork_asm+0x1a/0x30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/entry_64.S:244
+
+-> #4 (&q->q_usage_counter(queue)#17){++++}-{0:0}:
+       blk_queue_enter+0x50a/0x640 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/blk-core.c:328
+       blk_mq_alloc_request+0x510/0x970 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/blk-mq.c:681
+       scsi_alloc_request home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/scsi/scsi_lib.c:1238 [inline]
+       scsi_execute_cmd+0x1fe/0xf60 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/scsi/scsi_lib.c:307
+       read_capacity_16+0x218/0xe10 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/scsi/sd.c:2650
+       sd_read_capacity home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/scsi/sd.c:2819 [inline]
+       sd_revalidate_disk.isra.0+0x1322/0xa640 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/scsi/sd.c:3733
+       sd_probe+0x977/0x1070 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/scsi/sd.c:4010
+       call_driver_probe home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/base/dd.c:639 [inline]
+       really_probe+0x238/0x820 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/base/dd.c:717
+       __driver_probe_device+0x221/0x400 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/base/dd.c:879
+       driver_probe_device+0x51/0x1b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/base/dd.c:909
+       __device_attach_driver+0x1de/0x2b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/base/dd.c:1037
+       bus_for_each_drv+0x15c/0x1e0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/base/bus.c:459
+       __device_attach_async_helper+0x1d8/0x270 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/base/dd.c:1066
+       async_run_entry_fn+0x9b/0x3b0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/async.c:129
+       process_one_work+0x8e3/0x1920 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/workqueue.c:3264
+       process_scheduled_works home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/workqueue.c:3345 [inline]
+       worker_thread+0x750/0x1070 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/workqueue.c:3426
+       kthread+0x2ca/0x3c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/kthread.c:389
+       ret_from_fork+0x4a/0x80 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/process.c:152
+       ret_from_fork_asm+0x1a/0x30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/entry_64.S:244
+
+-> #3 (&q->limits_lock){+.+.}-{3:3}:
+       __mutex_lock_common home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:608 [inline]
+       __mutex_lock+0x16a/0x1720 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/mutex.c:752
+       queue_limits_start_update home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/blkdev.h:990 [inline]
+       __nbd_set_size+0x2d3/0x740 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/block/nbd.c:352
+       nbd_set_size home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/block/nbd.c:389 [inline]
+       nbd_start_device+0x8d5/0xd40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/block/nbd.c:1470
+       nbd_genl_connect+0x12ac/0x1bb0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/drivers/block/nbd.c:2170
+       genl_family_rcv_msg_doit+0x20c/0x300 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/netlink/genetlink.c:1115
+       genl_family_rcv_msg home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/netlink/genetlink.c:1195 [inline]
+       genl_rcv_msg+0x563/0x800 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/netlink/genetlink.c:1210
+       netlink_rcv_skb+0x173/0x450 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/netlink/af_netlink.c:2545
+       genl_rcv+0x2d/0x40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/netlink/genetlink.c:1219
+       netlink_unicast_kernel home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/netlink/af_netlink.c:1313 [inline]
+       netlink_unicast+0x6c4/0xa10 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/netlink/af_netlink.c:1339
+       netlink_sendmsg+0x8c7/0xd80 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/netlink/af_netlink.c:1889
+       sock_sendmsg_nosec home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:711 [inline]
+       __sock_sendmsg+0x1d5/0x220 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:726
+       ____sys_sendmsg+0x70e/0xa00 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2580
+       ___sys_sendmsg+0x13a/0x1e0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2634
+       __sys_sendmsg+0x173/0x220 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2666
+       do_syscall_x64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:47 [inline]
+       do_syscall_64+0x78/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:78
+       entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+-> #2 (&q->q_usage_counter(io)#21){++++}-{0:0}:
+       bio_queue_enter home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/blk.h:76 [inline]
+       blk_mq_submit_bio+0x1543/0x2120 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/blk-mq.c:3088
+       __submit_bio+0x1e5/0x6d0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/blk-core.c:629
+       __submit_bio_noacct_mq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/blk-core.c:716 [inline]
+       submit_bio_noacct_nocheck+0x55e/0xca0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/blk-core.c:745
+       submit_bio_noacct+0x5af/0x1820 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/blk-core.c:868
+       submit_bh home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/buffer.c:2849 [inline]
+       block_read_full_folio+0x77b/0x9e0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/buffer.c:2476
+       filemap_read_folio+0xbe/0x280 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/filemap.c:2380
+       filemap_update_page home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/filemap.c:2464 [inline]
+       filemap_get_pages+0x103c/0x19d0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/filemap.c:2585
+       filemap_read+0x38d/0xbc0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/filemap.c:2658
+       blkdev_read_iter+0x1b1/0x500 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/block/fops.c:784
+       new_sync_read home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/read_write.c:488 [inline]
+       vfs_read+0x82e/0xb30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/read_write.c:569
+       ksys_read+0x134/0x260 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/read_write.c:712
+       do_syscall_x64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:47 [inline]
+       do_syscall_64+0x78/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:78
+       entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+-> #1 (mapping.invalidate_lock){++++}-{3:3}:
+       down_read+0x8b/0x440 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/rwsem.c:1524
+       filemap_invalidate_lock_shared home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/fs.h:870 [inline]
+       filemap_fault+0x2c3/0x2b60 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/filemap.c:3344
+       __do_fault+0x10f/0x8c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:4882
+       do_read_fault home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:5320 [inline]
+       do_fault+0xbc2/0x1510 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:5454
+       do_pte_missing home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:3965 [inline]
+       handle_pte_fault home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:5789 [inline]
+       __handle_mm_fault+0x1173/0x1880 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:5932
+       handle_mm_fault+0x66c/0xe20 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:6100
+       faultin_page home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/gup.c:1196 [inline]
+       __get_user_pages+0x935/0x39d0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/gup.c:1497
+       populate_vma_page_range+0x1b4/0x280 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/gup.c:1935
+       __mm_populate+0x1ee/0x460 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/gup.c:2038
+       mm_populate home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/mm.h:3432 [inline]
+       vm_mmap_pgoff+0x359/0x4d0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/util.c:593
+       ksys_mmap_pgoff+0x3d8/0x540 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/mmap.c:546
+       __do_sys_mmap home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/sys_x86_64.c:86 [inline]
+       __se_sys_mmap home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/sys_x86_64.c:79 [inline]
+       __x64_sys_mmap+0x12a/0x190 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/sys_x86_64.c:79
+       do_syscall_x64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:47 [inline]
+       do_syscall_64+0x78/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:78
+       entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+-> #0 (&mm->mmap_lock){++++}-{3:3}:
+       check_prev_add home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:3161 [inline]
+       check_prevs_add home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:3280 [inline]
+       validate_chain home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:3904 [inline]
+       __lock_acquire+0x2f0b/0x5df0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:5202
+       lock_acquire home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:5825 [inline]
+       lock_acquire+0x1bb/0x4f0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:5790
+       __might_fault+0xbf/0x120 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:6750
+       perf_copy_attr+0x42/0x8f0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/events/core.c:12568
+       _perf_ioctl+0x7e7/0x2280 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/events/core.c:6153
+       perf_ioctl+0x76/0xb0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/events/core.c:6185
+       vfs_ioctl home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:51 [inline]
+       __do_sys_ioctl home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:906 [inline]
+       __se_sys_ioctl home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:892 [inline]
+       __x64_sys_ioctl+0x198/0x210 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:892
+       do_syscall_x64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:47 [inline]
+       do_syscall_64+0x78/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:78
+       entry_SYSCALL_64_after_hwframe+0x76/0x7e
+
+other info that might help us debug this:
+
+Chain exists of:
+  &mm->mmap_lock --> pmus_lock --> &cpuctx_mutex
+
+ Possible unsafe locking scenario:
+
+       CPU0                    CPU1
+       ----                    ----
+  lock(&cpuctx_mutex);
+                               lock(pmus_lock);
+                               lock(&cpuctx_mutex);
+  rlock(&mm->mmap_lock);
+
+ *** DEADLOCK ***
+
+1 lock held by syz.4.5581/29397:
+ #0: ffff88806c941108 (&cpuctx_mutex){+.+.}-{3:3}, at: perf_event_ctx_lock_nested+0x230/0x4f0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/events/core.c:1337
+
+stack backtrace:
+CPU: 1 UID: 0 PID: 29397 Comm: syz.4.5581 Not tainted 6.12.91 #3
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
+Call Trace:
+ <TASK>
+ __dump_stack home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/lib/dump_stack.c:94 [inline]
+ dump_stack_lvl+0xd7/0x130 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/lib/dump_stack.c:120
+ print_circular_bug+0x46a/0x720 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:2074
+ check_noncircular+0x306/0x3f0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:2206
+ check_prev_add home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:3161 [inline]
+ check_prevs_add home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:3280 [inline]
+ validate_chain home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:3904 [inline]
+ __lock_acquire+0x2f0b/0x5df0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:5202
+ lock_acquire home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:5825 [inline]
+ lock_acquire+0x1bb/0x4f0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:5790
+ __might_fault+0xbf/0x120 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:6750
+ perf_copy_attr+0x42/0x8f0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/events/core.c:12568
+ _perf_ioctl+0x7e7/0x2280 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/events/core.c:6153
+ perf_ioctl+0x76/0xb0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/events/core.c:6185
+ vfs_ioctl home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:51 [inline]
+ __do_sys_ioctl home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:906 [inline]
+ __se_sys_ioctl home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:892 [inline]
+ __x64_sys_ioctl+0x198/0x210 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/fs/ioctl.c:892
+ do_syscall_x64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:47 [inline]
+ do_syscall_64+0x78/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:78
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x795a981931a9
+Code: ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:0000795a9905d038 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 0000795a98405fa0 RCX: 0000795a981931a9
+RDX: 0000200000000000 RSI: 000000004008240b RDI: 0000000000000003
+RBP: 0000795a98218ce0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 0000795a98406038 R14: 0000795a98405fa0 R15: 00007ffd77b66e18
+ </TASK>
+block nbd6: Possible stuck request ffff8880210a5080: control (read@0,1024B). Runtime 120 seconds
+block nbd6: Possible stuck request ffff8880210a5240: control (read@1024,1024B). Runtime 120 seconds
+block nbd6: Possible stuck request ffff8880210a5400: control (read@2048,1024B). Runtime 120 seconds
+block nbd6: Possible stuck request ffff8880210a55c0: control (read@3072,1024B). Runtime 120 seconds
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+

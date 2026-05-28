@@ -1,0 +1,23 @@
+{
+	"Count": 0,
+	"Nodes": {
+		"INFO: task hung in corrupted": {
+			"Count": 6,
+			"Nodes": {
+				"SYZFAIL: failed to recv rpc": {
+					"Count": 6,
+					"Nodes": {
+						"INFO: task hung in bdev_open": {
+							"Count": 1,
+							"Nodes": null
+						},
+						"INFO: task hung in sync_bdevs": {
+							"Count": 3,
+							"Nodes": null
+						}
+					}
+				}
+			}
+		}
+	}
+}

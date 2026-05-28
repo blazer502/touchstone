@@ -1,0 +1,78 @@
+{
+	"Count": 0,
+	"Nodes": {
+		"INFO: task hung in bdev_open": {
+			"Count": 56,
+			"Nodes": {
+				"INFO: task hung in bdev_open": {
+					"Count": 5,
+					"Nodes": {
+						"INFO: task hung in bdev_open": {
+							"Count": 1,
+							"Nodes": null
+						}
+					}
+				},
+				"INFO: task hung in do_coredump": {
+					"Count": 1,
+					"Nodes": {
+						"SYZFAIL: failed to recv rpc": {
+							"Count": 1,
+							"Nodes": {
+								"INFO: task hung in sync_bdevs": {
+									"Count": 1,
+									"Nodes": null
+								}
+							}
+						}
+					}
+				},
+				"INFO: task hung in sync_bdevs": {
+					"Count": 13,
+					"Nodes": {
+						"INFO: task hung in bdev_open": {
+							"Count": 1,
+							"Nodes": null
+						},
+						"INFO: task hung in sync_bdevs": {
+							"Count": 4,
+							"Nodes": {
+								"SYZFAIL: failed to recv rpc": {
+									"Count": 1,
+									"Nodes": null
+								}
+							}
+						},
+						"SYZFAIL: failed to recv rpc": {
+							"Count": 1,
+							"Nodes": null
+						}
+					}
+				},
+				"SYZFAIL: failed to recv rpc": {
+					"Count": 6,
+					"Nodes": {
+						"INFO: task hung in bdev_open": {
+							"Count": 1,
+							"Nodes": null
+						},
+						"INFO: task hung in sync_bdevs": {
+							"Count": 1,
+							"Nodes": {
+								"INFO: task hung in sync_bdevs": {
+									"Count": 1,
+									"Nodes": {
+										"INFO: task hung in sync_bdevs": {
+											"Count": 1,
+											"Nodes": null
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

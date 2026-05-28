@@ -110,6 +110,20 @@ _KERN_BUG_PATTERNS = [
     (r"INFO:\s+task\s+\S+:\d+\s+blocked\s+for\s+more\s+than",          "kernel", "task-hung",                 None),
     (r"INFO:\s+rcu_sched\s+self-detected",                             "kernel", "rcu-stall",                 None),
     (r"INFO:\s+rcu_preempt\s+detected",                                "kernel", "rcu-stall",                 None),
+    (r"WARNING:\s+possible\s+circular\s+locking\s+dependency",         "kernel", "lockdep-deadlock",          None),
+    (r"WARNING:\s+suspicious\s+RCU\s+usage",                           "kernel", "lockdep-rcu",               None),
+    (r"WARNING:\s+possible\s+irq\s+lock\s+inversion",                  "kernel", "lockdep-irq-inversion",     None),
+    (r"WARNING:\s+possible\s+recursive\s+locking",                     "kernel", "lockdep-recursive",         None),
+    # rwsem magic-number corruption: lock object was freed/zeroed while in use.
+    # Strong memory-corruption indicator (UAF on the lock or its container struct).
+    (r"DEBUG_RWSEMS_WARN_ON\(sem->magic\s*!=\s*sem\)",                 "kernel", "rwsem-magic-corruption",    None),
+    # spinlock bad magic — same idea on spinlocks
+    (r"BUG:\s+spinlock\s+bad\s+magic",                                 "kernel", "spinlock-bad-magic",        None),
+    # list_head poison — corruption indicator
+    (r"list_(?:add|del)\s+corruption",                                 "kernel", "list-corruption",           None),
+    (r"WARNING.*?list_(?:add|del)\s+corruption",                       "kernel", "list-corruption",           None),
+    # refcount issues
+    (r"refcount_t:\s+(?:underflow|saturated|addition\s+on\s+0)",       "kernel", "refcount-corruption",       None),
     (r"WARNING:\s+CPU:",                                               "kernel", "warning",                   None),
     (r"WARNING:\s+",                                                   "kernel", "warning",                   None),
 ]
@@ -161,9 +175,17 @@ _CRASH_SEVERITY_BY_KCLASS = {
     "general-protection-fault": "crash",
     "kernel-bug": "crash",
     "oops": "crash",
+    "rwsem-magic-corruption": "crash",
+    "spinlock-bad-magic": "crash",
+    "list-corruption": "crash",
+    "refcount-corruption": "crash",
     "soft-lockup": "dos",
     "task-hung": "dos",
     "rcu-stall": "dos",
+    "lockdep-deadlock": "warn",
+    "lockdep-rcu": "warn",
+    "lockdep-irq-inversion": "warn",
+    "lockdep-recursive": "warn",
     "warning": "warn",
 }
 

@@ -1,0 +1,104 @@
+bridge0: port 1(bridge_slave_0) entered blocking state
+bridge0: port 1(bridge_slave_0) entered forwarding state
+bridge0: port 2(bridge_slave_1) entered blocking state
+bridge0: port 2(bridge_slave_1) entered forwarding state
+watchdog: BUG: soft lockup - CPU#1 stuck for 26s! [syz.7.2967:15026]
+Modules linked in:
+irq event stamp: 29574458
+hardirqs last  enabled at (29574457): [<ffffffff8648d6a2>] __raw_spin_unlock_irqrestore home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/spinlock_api_smp.h:151 [inline]
+hardirqs last  enabled at (29574457): [<ffffffff8648d6a2>] _raw_spin_unlock_irqrestore+0x42/0x50 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/spinlock.c:194
+hardirqs last disabled at (29574458): [<ffffffff8645ef8e>] sysvec_apic_timer_interrupt+0xe/0x90 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/kernel/apic/apic.c:1049
+softirqs last  enabled at (29573338): [<ffffffff8152e953>] __do_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:613 [inline]
+softirqs last  enabled at (29573338): [<ffffffff8152e953>] invoke_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:453 [inline]
+softirqs last  enabled at (29573338): [<ffffffff8152e953>] __irq_exit_rcu+0xc3/0x100 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:662
+softirqs last disabled at (29573329): [<ffffffff8152e953>] __do_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:613 [inline]
+softirqs last disabled at (29573329): [<ffffffff8152e953>] invoke_softirq home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:453 [inline]
+softirqs last disabled at (29573329): [<ffffffff8152e953>] __irq_exit_rcu+0xc3/0x100 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/softirq.c:662
+CPU: 1 UID: 0 PID: 15026 Comm: syz.7.2967 Not tainted 6.12.91 #3
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
+RIP: 0010:lock_acquire+0x1e0/0x4f0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:5793
+Code: e8 e5 8b ff ff b8 ff ff ff ff 48 83 c4 28 65 0f c1 05 9c 36 96 7e 83 f8 01 0f 85 9a 02 00 00 48 85 ed 74 06 fb 0f 1f 44 00 00 <48> b8 00 00 00 00 00 fc ff df 48 01 c3 48 c7 03 00 00 00 00 48 c7
+RSP: 0018:ffff88802f527930 EFLAGS: 00000206
+RAX: 0000000000000001 RBX: 1ffff11005ea4f27 RCX: ffffffff816c878a
+RDX: 0000000000000001 RSI: 0000000000000008 RDI: ffffffff8ade2478
+RBP: 0000000000000200 R08: 0000000000000000 R09: fffffbfff1682535
+R10: ffffffff8b4129af R11: 0000000000000000 R12: 0000000000000001
+R13: 0000000000000000 R14: ffff888010e06ff8 R15: 0000000000000000
+FS:  00007c3c683b56c0(0000) GS:ffff88806c900000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007c3c683b4f98 CR3: 0000000048c0c001 CR4: 0000000000772ef0
+PKRU: 80000000
+Call Trace:
+ <TASK>
+ __raw_spin_lock home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/spinlock_api_smp.h:133 [inline]
+ _raw_spin_lock+0x30/0x40 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/spinlock.c:154
+ spin_lock home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/spinlock.h:351 [inline]
+ unix_stream_read_generic+0xa0e/0x28e0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/unix/af_unix.c:2952
+ unix_stream_recvmsg+0x197/0x1c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/unix/af_unix.c:3013
+ sock_recvmsg_nosec home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:1033 [inline]
+ sock_recvmsg+0x1ce/0x210 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:1055
+ __sys_recvfrom+0x209/0x310 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2244
+ __do_sys_recvfrom home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2259 [inline]
+ __se_sys_recvfrom home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2255 [inline]
+ __x64_sys_recvfrom+0xe5/0x1c0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/net/socket.c:2255
+ do_syscall_x64 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:47 [inline]
+ do_syscall_64+0x78/0x150 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/entry/common.c:78
+ entry_SYSCALL_64_after_hwframe+0x76/0x7e
+RIP: 0033:0x7c3c699931a9
+Code: ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 a8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007c3c683b5038 EFLAGS: 00000246 ORIG_RAX: 000000000000002d
+RAX: ffffffffffffffda RBX: 00007c3c69c06180 RCX: 00007c3c699931a9
+RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000005
+RBP: 00007c3c69a18ce0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000040016002 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007c3c69c06218 R14: 00007c3c69c06180 R15: 00007ffeca046a48
+ </TASK>
+Sending NMI from CPU 1 to CPUs 0:
+NMI backtrace for cpu 0
+CPU: 0 UID: 0 PID: 16987 Comm: modprobe Not tainted 6.12.91 #3
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
+RIP: 0010:its_return_thunk+0x0/0x10 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/lib/retpoline.S:401
+Code: cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc <c3> cc 66 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 e9 ab b7 b7 fa cc
+RSP: 0000:ffff88802b4bfaa0 EFLAGS: 00000293
+RAX: 0000000000000000 RBX: ffffea00008c5dc0 RCX: ffffffff81c7a3ce
+RDX: ffff888020bb23c0 RSI: 00000000000000cf RDI: 0000000000000006
+RBP: ffff88802b4bfc00 R08: 0000000000000006 R09: 00000000000000cf
+R10: 0000000000000484 R11: 0000000000000000 R12: 0000000000000484
+R13: 00000000000000cf R14: dffffc0000000000 R15: 00000000000000d4
+FS:  000078abd259b040(0000) GS:ffff88806c800000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 000078abd20c5000 CR3: 00000000410e0006 CR4: 0000000000772ef0
+PKRU: 55555554
+Call Trace:
+ <TASK>
+ next_uptodate_folio+0x94e/0xb00 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/filemap.c:3532
+ filemap_map_pages+0x6c5/0x16f0 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/filemap.c:3714
+ do_fault_around home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:5278 [inline]
+ do_read_fault home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:5311 [inline]
+ do_fault+0xa6e/0x1510 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:5454
+ do_pte_missing home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:3965 [inline]
+ handle_pte_fault home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:5789 [inline]
+ __handle_mm_fault+0x1173/0x1880 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:5932
+ handle_mm_fault+0x66c/0xe20 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/mm/memory.c:6100
+ do_user_addr_fault+0x3e4/0x1120 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/mm/fault.c:1336
+ handle_page_fault home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/mm/fault.c:1479 [inline]
+ exc_page_fault+0x71/0x100 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/mm/fault.c:1534
+ asm_exc_page_fault+0x26/0x30 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/include/asm/idtentry.h:623
+RIP: 0033:0x78abd20c5000
+Code: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 <48> 83 ec 08 48 8b 05 75 cb 3b 00 48 85 c0 74 02 ff d0 e8 c9 b6 16
+RSP: 002b:00007fff19bd5a08 EFLAGS: 00010206
+RAX: 000078abd20c5000 RBX: 000078abd268ae90 RCX: 00007fff19bd5ac0
+RDX: 00007fff19bd5ac0 RSI: 00007fff19bd5a98 RDI: 0000000000000004
+RBP: 0000000000000004 R08: 0000000000000000 R09: 000000000000000c
+R10: 000078abd26927d0 R11: 0000000000000202 R12: 00007fff19bd5a98
+R13: 00007fff19bd5ac0 R14: 000078abd26c62e0 R15: 0000000000000000
+ </TASK>
+hpet: Lost 2 RTC interrupts
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+
+SYZFAIL: failed to recv rpc
+fd=3 want=4 recv=0 n=0 (errno 9: Bad file descriptor)
+
+<<<<<<<<<<<<<<< tail report >>>>>>>>>>>>>>>
+
