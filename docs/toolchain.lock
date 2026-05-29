@@ -47,7 +47,11 @@ SMATCH_COMMIT=ff8a2a7
 COCCINELLE_VERSION=1.1.1
 SPARSE_VERSION=0.6.4
 SVF_VERSION=2.8           # matches LLVM 14
-CODEQL_VERSION=2.18.4
+# CodeQL CLI+query-pack bundle (github/codeql-action release). Installed in-workspace
+# at tools/codeql/ (gitignored, ~2.5GB). Bumped from the aspirational 2.18.4 pin to
+# the current stable when first realized for the kernel interprocedural-taint lever.
+CODEQL_VERSION=2.25.5
+CODEQL_BUNDLE=codeql-bundle-v2.25.5  # codeql-bundle-linux64.tar.gz
 
 # --- Kernel sanitizers ---
 # These are kernel CONFIG_* options, not external tools — they ship with the

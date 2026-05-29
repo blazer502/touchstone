@@ -87,3 +87,7 @@ run-logs/seedgen/*-lora/
 *.safetensors
 # Per-task L1 eval traces (keep summary JSONs, drop the large trace JSONL)
 run-logs/l1-*-trace.jsonl
+
+# CodeQL CLI+query-pack bundle (in-workspace, ~2.5GB) + built kernel DBs — regenerable
+tools/codeql/
+run-logs/codeql-db/
