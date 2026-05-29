@@ -58,9 +58,64 @@ CRASHES, not exploits.** Stages:
 - Scaling blocked: ARVO gated on HF; GPUs shared (70B). Future: external
   OSS-Fuzz harness→seed data when GPU frees.
 
+## Track 4 — LLM-hypothesis × kernel-scale PA (design + built pieces)
+
+Thesis: the LLM is a **re-ranker/refiner of PA-grounded candidates, NOT a bug
+inventor**. Symbolic/concolic/BMC don't scale to the kernel; kernel-grade PA
+that does: Smatch, Coccinelle, CodeQL (static), directed/coverage syzkaller
+(dynamic), LOCKDEP/KASAN/KMSAN (oracles).
+
+**PA-scale router (built — `agent/pa_router.py`).** Decides the PA lane per
+target so each runs where it actually works:
+- **small** (single extracted fn, bounded property, bitcode obtainable) →
+  precise KLEE/CBMC (can decide exactly + emit cex).
+- **large** (kernel / whole-program / no bitcode) → scalable static analyzers
+  + reach-gate + (directed) coverage fuzzing.
+- **hybrid** (medium) → large to localize+reach a small gate, then small-scale
+  concolic on the extracted gate.
+`decide(TargetProfile)`; profile builders for kernel / extracted-fn / oss-fuzz.
+
+**Falsifiable hypothesis (built — `schemas/hypothesis.py`).**
+`KernelBugHypothesis{bug_class, site, falsifier(REQUIRED), evidence(REQUIRED),
+object, trigger_sketch, spray_hint, reachability, status, refutation}`.
+`is_valid_intake()` is the anti-hallucination gate (reject if no evidence /
+no falsifier). `classify_warning()` maps analyzer msgs → memory-corruption class.
+
+**The funnel (legs mostly exist):** static PA warnings → reach-gate
+(`reach.py`/`directed.py`, unprivileged) → LLM proposes falsifiable hypothesis
+*citing the warning* → directed fuzz (focused `enable_syscalls` + heap-spray via
+`run_syz_manager`) under **KASAN** → `oracle/repro/kernel.py` syz-repro →
+`exploit/triage.py` (drop dos-only). Routing table per bug_class in the design.
+
+**BUILT + validated (task #9):** `agent/hyp_loop.py` (propose→reach-gate→LLM
+rank/refine→directed-fuzz test-cfg) + `tools/cocci_candidates.py` (Coccinelle
+source). End-to-end validated on the 3 Smatch candidates: reach-gate keeps
+unprivileged-reachable sites, the open 70B re-ranks + adds trigger_sketch/spray
+with the **citation gate holding** (no invented sites), `directed_fuzz_cfg`
+emits a focused setuid syz-manager cfg (heap-spray + KASAN verdict-signal).
+
+**EMPIRICAL candidate-recall finding (the real bottleneck):** on this *patched*
+lts-6.12.91, static analyzers yield almost nothing — Smatch (style pass) = 3
+mem-corruption candidates / 994; **Coccinelle (kfree/use_after_iter/…) = 0** on
+net/netfilter. So the loop's value is gated by analyzer RECALL on hardened code,
+exactly as the 3-agent consensus predicted. The integration is sound; the input
+is thin. **Path to real value:** (a) richer analyzer — CodeQL interprocedural
+taint or a proper Smatch *security* cross-fn DB (the spammy/user-data checks),
+not the style pass; (b) point the loop at a *less-audited* target (older kernel,
+a fresh driver/subsystem) where memory-safety warnings actually exist.
+
+**Honest edge (3-agent consensus):** this *converts existing static warnings
+into reproduced crashes* (targeting), bounded by analyzer recall + reachability
+— not out-of-nowhere discovery. Milestone (unmet on patched LTS): ≥1 reproduced
+novel KASAN crash. Realistic next step = a CodeQL kernel DB for candidates.
+
 ## Immediate active task (this session)
 
-Kernel crash-hunt running (background, `run-logs/campaign.log`, http
-`127.0.0.1:50004`, crashes under `eval/kernelctf-latest/syzkaller/workdir-campaign/crashes/`).
-Monitor for non-suppressed buckets → synth → triage → reach-witness.
-Stop: `sudo docker stop veri-syz-campaign`.
+Kernel crash-hunt running — switched to the **broad full-surface** campaign
+(`manager-overnight.cfg`: all syscalls, 6 VMs, `sandbox=setuid`, io_uring
+disabled), container `veri-syz-broad`, crashes under
+`eval/kernelctf-latest/syzkaller/workdir-overnight/crashes/`. So far: ~85k PCs
+coverage, only **DoS soft-lockups** (`dos-only`, not kernelCTF-eligible),
+0 memory-corruption. A watcher fires only on a **KASAN/UAF/OOB** bucket →
+`oracle.repro.kernel synth` → `exploit.triage` → `exploit.reach` (10a).
+Stop: `sudo docker stop veri-syz-broad`.
