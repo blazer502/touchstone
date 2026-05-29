@@ -111,6 +111,21 @@ class BenchmarkTask(Protocol):
         (e.g. MAGIC for libmagic, dictionary paths). Default: empty."""
         return {}
 
+    def source_archive_path(self) -> Optional[Path]:
+        """Path to an archive (tar/zip) of the target's vulnerable source, if
+        the benchmark discloses one. Program-analysis steps (harness shape,
+        magic-constant dictionary, reachability slice) read from it. Returns
+        None when no source is disclosed."""
+        return None
+
+    def upstream_corpus_dir(self) -> Optional[Path]:
+        """Directory of the upstream project's own public test/seed corpus
+        for this fuzz target (e.g. the OSS-Fuzz public corpus), if available.
+        Seeding the fuzzer with it is standard practice and benchmark-agnostic
+        (it is the project's corpus, not the benchmark's hidden PoC). Returns
+        None when no upstream corpus is available."""
+        return None
+
     # --- F3 routing hooks (bug-class triage) -------------------------------
 
     def disclosed_error_text(self) -> Optional[str]:

@@ -85,10 +85,21 @@ class CyberGymTask:
     `agent/` code free of `eval/cybergym/` path/field references.
     """
 
-    def __init__(self, bundle: _legacy.TaskBundle):
+    def __init__(self, bundle: _legacy.TaskBundle, level: Optional[int] = None):
         self._bundle = bundle
         self.task_id: str = bundle.task_id
         self._harness_cache: Optional[LocalHarness] = None
+        # CyberGym difficulty level. Level 1 (the public leaderboard) discloses
+        # ONLY {repo-vul.tar.gz, description.txt}. error.txt is level>=2 and
+        # patch.diff is level==3 — gating them here makes a Level-1 run honest
+        # regardless of whether higher-level files happen to be on disk.
+        import os
+        if level is None:
+            try:
+                level = int(os.environ.get("CYBERGYM_LEVEL", "1"))
+            except ValueError:
+                level = 1
+        self.level: int = level
 
     # always required
     def description(self) -> str:
@@ -98,10 +109,17 @@ class CyberGymTask:
               vul_timeout: int = 30,
               fix_timeout: int = 30) -> ScoreResult:
         import time
+        from agent.local_oracle import score_native
         t0 = time.monotonic()
-        raw = _legacy.score_local(self._bundle, poc_bytes,
-                                  vul_timeout=vul_timeout,
-                                  fix_timeout=fix_timeout)
+        # Prefer the native server-data binaries (no docker, no server, byte-
+        # identical to the scoring server). Fall back to the legacy docker/
+        # server path only when a side's binary is not materialised locally.
+        raw = score_native(self.task_id, poc_bytes,
+                           vul_timeout=vul_timeout, fix_timeout=fix_timeout)
+        if raw is None:
+            raw = _legacy.score_local(self._bundle, poc_bytes,
+                                      vul_timeout=vul_timeout,
+                                      fix_timeout=fix_timeout)
         wall_ms = int((time.monotonic() - t0) * 1000)
         return ScoreResult.from_vul_fix(
             vul_crashed=(raw["vul_verdict"] == "crash"),
@@ -132,14 +150,41 @@ class CyberGymTask:
         h = self._harness()
         return dict(h.env_extra) if h is not None else {}
 
+    def source_archive_path(self) -> Optional[Path]:
+        # repo-vul.tar.gz is disclosed at every level (level0+).
+        tb = self._bundle.data_dir / "repo-vul.tar.gz"
+        return tb if tb.exists() else None
+
+    def upstream_corpus_dir(self) -> Optional[Path]:
+        # The project's public OSS-Fuzz corpus for this fuzz target. project
+        # name from tasks.json; fuzz-target = the harness binary's name.
+        h = self._harness()
+        if h is None:
+            return None
+        project = self.project_group()
+        fuzzer = Path(h.binary).name
+        try:
+            from eval.cybergym.oss_fuzz_corpus import corpus_dir
+            return corpus_dir(project, fuzzer)
+        except Exception:
+            return None
+
     # F3 routing hooks
     def disclosed_error_text(self) -> Optional[str]:
+        # error.txt is a level>=2 disclosure. At level 1 it is NOT available
+        # to the agent, so we return None even if the file is on disk.
+        if self.level < 2:
+            return None
         err = self._bundle.data_dir / "error.txt"
         if err.exists():
             try:
-                return err.read_text(errors="replace")
+                text = err.read_text(errors="replace")
             except Exception:
                 return None
+            # Guard against git-LFS pointer stubs (real content not pulled).
+            if text.startswith("version https://git-lfs"):
+                return None
+            return text
         return None
 
     def bug_class_hint(self) -> Optional[str]:
@@ -154,12 +199,18 @@ class CyberGymTask:
 
     # V3 patch-verify hook
     def disclosed_patch_diff(self) -> Optional[str]:
+        # patch.diff is a level==3 disclosure. Withheld below level 3.
+        if self.level < 3:
+            return None
         patch = self._bundle.data_dir / "patch.diff"
         if patch.exists():
             try:
-                return patch.read_text(errors="replace")
+                text = patch.read_text(errors="replace")
             except Exception:
                 return None
+            if text.startswith("version https://git-lfs"):
+                return None
+            return text
         return None
 
     # F4 corpus-sharing hook
