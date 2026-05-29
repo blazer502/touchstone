@@ -87,15 +87,27 @@ no falsifier). `classify_warning()` maps analyzer msgs → memory-corruption cla
 `run_syz_manager`) under **KASAN** → `oracle/repro/kernel.py` syz-repro →
 `exploit/triage.py` (drop dos-only). Routing table per bug_class in the design.
 
-**Remaining to build (task #9):** (a) proper Smatch **security** run for real
-candidates — the existing `smatch.out` is a *style pass* (only 3 mem-corruption
-candidates / 994); (b) the LLM rank/refine call (open model, citation-grounded);
-(c) the directed-fuzz test leg (focused cfg → `run_syz_manager`, KASAN verdict).
+**BUILT + validated (task #9):** `agent/hyp_loop.py` (propose→reach-gate→LLM
+rank/refine→directed-fuzz test-cfg) + `tools/cocci_candidates.py` (Coccinelle
+source). End-to-end validated on the 3 Smatch candidates: reach-gate keeps
+unprivileged-reachable sites, the open 70B re-ranks + adds trigger_sketch/spray
+with the **citation gate holding** (no invented sites), `directed_fuzz_cfg`
+emits a focused setuid syz-manager cfg (heap-spray + KASAN verdict-signal).
+
+**EMPIRICAL candidate-recall finding (the real bottleneck):** on this *patched*
+lts-6.12.91, static analyzers yield almost nothing — Smatch (style pass) = 3
+mem-corruption candidates / 994; **Coccinelle (kfree/use_after_iter/…) = 0** on
+net/netfilter. So the loop's value is gated by analyzer RECALL on hardened code,
+exactly as the 3-agent consensus predicted. The integration is sound; the input
+is thin. **Path to real value:** (a) richer analyzer — CodeQL interprocedural
+taint or a proper Smatch *security* cross-fn DB (the spammy/user-data checks),
+not the style pass; (b) point the loop at a *less-audited* target (older kernel,
+a fresh driver/subsystem) where memory-safety warnings actually exist.
 
 **Honest edge (3-agent consensus):** this *converts existing static warnings
 into reproduced crashes* (targeting), bounded by analyzer recall + reachability
-— not out-of-nowhere discovery. Milestone: ≥1 reproduced novel KASAN crash
-(= one more than the stock hunt's 0).
+— not out-of-nowhere discovery. Milestone (unmet on patched LTS): ≥1 reproduced
+novel KASAN crash. Realistic next step = a CodeQL kernel DB for candidates.
 
 ## Immediate active task (this session)
 
