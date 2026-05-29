@@ -1,6 +1,6 @@
 # SVF — LLVM-based pointer analysis / value flow. Built on top of our shared clang image.
 ARG LLVM_VERSION=14
-FROM veri-agent/clang:${LLVM_VERSION}
+FROM touchstone/clang:${LLVM_VERSION}
 
 ARG SVF_VERSION=2.8
 ENV DEBIAN_FRONTEND=noninteractive

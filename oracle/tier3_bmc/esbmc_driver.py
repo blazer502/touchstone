@@ -2,7 +2,7 @@
 
 ESBMC is the alternative BMC engine to CBMC (PLAN §3 Tier-3). At Phase 2.3 we
 ship the same dispatch surface as CBMC so the router (Phase 2.4) can pick
-either engine uniformly, but the heavy `veri-agent/esbmc` image is not built
+either engine uniformly, but the heavy `touchstone/esbmc` image is not built
 yet — it activates when CBMC's encoding is too slow on a specific Magma /
 Phase-2.5 case (the same reason ESBMC sits next to CBMC in `PLAN §9`).
 
@@ -42,7 +42,7 @@ def _read_lock() -> dict[str, str]:
 
 
 _LOCK = _read_lock()
-ESBMC_IMG = f"veri-agent/esbmc:{_LOCK.get('ESBMC_VERSION', 'v7.6.1')}"
+ESBMC_IMG = f"touchstone/esbmc:{_LOCK.get('ESBMC_VERSION', 'v7.6.1')}"
 DOCKER = os.environ.get("DOCKER", "sudo docker")
 
 

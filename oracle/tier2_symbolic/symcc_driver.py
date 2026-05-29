@@ -8,7 +8,7 @@ to SymCC the same way it dispatches to KLEE/angr, and we get a clean
 "image-missing → inconclusive" instead of a Python exception.
 
 When the image becomes available, swap `_run_symcc` to do:
-    docker run --rm -v <work>:/work veri-agent/symcc symcc <args>
+    docker run --rm -v <work>:/work touchstone/symcc symcc <args>
 
 No LLM in this module.
 """
@@ -27,7 +27,7 @@ from typing import Optional
 from .verdict import Tier2Verdict
 
 
-SYMCC_IMAGE = os.environ.get("SYMCC_IMAGE", "veri-agent/symcc:14")
+SYMCC_IMAGE = os.environ.get("SYMCC_IMAGE", "touchstone/symcc:14")
 
 
 def _image_present(image: str) -> bool:

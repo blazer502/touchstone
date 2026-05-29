@@ -139,7 +139,7 @@ If you add a new tool, append its assumptions here before relying on its verdict
 
 - **`Tier-3 CBMC` — cex → PoV scope.** The CBMC counterexample assignment that the driver extracts is a sound witness *for the harness as specified* (the inputs, the precondition `__CPROVER_assume`s, and the property `__CPROVER_assert`). It is NOT a runtime exploit on its own — to obtain a runtime PoV, wrap the assignment through the Tier-1 harness/replay path. The router treats Tier-3 `unsafe` as a definitive BMC bug-finding *for the harness*; promotion to a runtime exploit requires Tier-1 re-confirmation.
 
-- **`Tier-3 ESBMC` — image-missing dispatch.** Until `veri-agent/esbmc:<ver>` is built, `oracle/tier3_bmc/esbmc_driver.py` returns `inconclusive` with `image-missing:<tag>` evidence. CBMC covers all Phase 2.3 obligations; ESBMC is held until Phase 2.5 demands the alternate engine for a CBMC-slow case. The future ESBMC verdict MUST also use `--unwinding-assertions` to keep the soundness rule above.
+- **`Tier-3 ESBMC` — image-missing dispatch.** Until `touchstone/esbmc:<ver>` is built, `oracle/tier3_bmc/esbmc_driver.py` returns `inconclusive` with `image-missing:<tag>` evidence. CBMC covers all Phase 2.3 obligations; ESBMC is held until Phase 2.5 demands the alternate engine for a CBMC-slow case. The future ESBMC verdict MUST also use `--unwinding-assertions` to keep the soundness rule above.
 
 - **`Tier-3 harness` — nondet idiom.** `oracle/tier3_bmc/assertions.synthesize()` emits uninitialized locals (which CBMC treats as nondet) rather than `__CPROVER_nondet_*()`. Reason: CBMC requires extern declarations for the nondet builtins and the supported suffix set is not stable across versions; the uninitialized-locals idiom is equivalent and version-stable.
 

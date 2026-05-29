@@ -6,7 +6,7 @@ KLEE, libs2e and rebuilds them (~10 GB, ~30 minutes wall). That cost is only
 worth paying when Phase 4.2 (kernelCTF live LTS hunt) demands it, so this
 module is a *wired interface stub*:
 
-- If the `veri-agent/s2e:<ver>` image is built AND a project directory has
+- If the `touchstone/s2e:<ver>` image is built AND a project directory has
   been provisioned by `s2e-env init`, dispatch to S2E (TODO when image lands).
 - Otherwise return a clean "image-missing" inconclusive verdict so the router
   can fall back to syzkaller (Tier-1) / hand-crafted KASAN replay.
@@ -32,7 +32,7 @@ from typing import Optional
 from .verdict import Tier2Verdict
 
 
-S2E_IMAGE = os.environ.get("S2E_IMAGE", "veri-agent/s2e:2.0.0")
+S2E_IMAGE = os.environ.get("S2E_IMAGE", "touchstone/s2e:2.0.0")
 
 
 def _image_present(image: str) -> bool:

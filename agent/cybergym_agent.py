@@ -403,7 +403,7 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig(),
                     if hmodel.seeds:
                         seeds = list(seeds) + hmodel.seeds
                     if hmodel.dict_tokens:
-                        dp = (Path("/tmp") / "veri-agent-harness-cache" /
+                        dp = (Path("/tmp") / "touchstone-harness-cache" /
                               task_id.replace(":", "_") / "libfuzzer.dict")
                         dict_path = harness_model.write_libfuzzer_dict(
                             hmodel.dict_tokens, dp)
@@ -426,7 +426,7 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig(),
                     if it_dir is not None:
                         corpus_dirs.append(it_dir)
                     if it_dict and dict_path is None:
-                        dp2 = (Path("/tmp") / "veri-agent-harness-cache" /
+                        dp2 = (Path("/tmp") / "touchstone-harness-cache" /
                                task_id.replace(":", "_") / "intree.dict")
                         dict_path = harness_model.write_libfuzzer_dict(it_dict, dp2)
             except Exception as e:

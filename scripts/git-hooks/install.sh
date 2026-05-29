@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install the veri-agent pre-commit hook into .git/hooks/.
+# Install the touchstone pre-commit hook into .git/hooks/.
 #
 # Idempotent: re-running replaces the symlink. Original hook (if any) is
 # preserved as `.git/hooks/pre-commit.bak`.

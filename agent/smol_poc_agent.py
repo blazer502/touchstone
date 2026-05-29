@@ -443,7 +443,7 @@ def run_seedgen_fuzz(task_id: str, *, description: str, tarball: Path,
         seeds = [b"\x00"]
     dict_path = None
     if hmodel.dict_tokens:
-        dp = (Path("/tmp") / "veri-agent-harness-cache" /
+        dp = (Path("/tmp") / "touchstone-harness-cache" /
               task_id.replace(":", "_") / "seedgen.dict")
         dict_path = write_libfuzzer_dict(hmodel.dict_tokens, dp)
 

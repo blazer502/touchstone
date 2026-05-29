@@ -59,8 +59,8 @@ def _read_lock() -> dict[str, str]:
 
 
 LOCK = _read_lock()
-CBMC_IMG = f"veri-agent/cbmc:{LOCK.get('CBMC_VERSION', '6.4.0')}"
-FRAMAC_IMG = f"veri-agent/framac:{LOCK.get('FRAMAC_VERSION', '29.0')}"
+CBMC_IMG = f"touchstone/cbmc:{LOCK.get('CBMC_VERSION', '6.4.0')}"
+FRAMAC_IMG = f"touchstone/framac:{LOCK.get('FRAMAC_VERSION', '29.0')}"
 DOCKER = os.environ.get("DOCKER", "sudo docker")
 
 

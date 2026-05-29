@@ -68,7 +68,7 @@ class ReproSynthesisResult:
 # R2 — synthesis
 # ---------------------------------------------------------------------------
 
-_SYZ_IMAGE = os.environ.get("SYZKALLER_IMAGE", "veri-agent/syzkaller:master")
+_SYZ_IMAGE = os.environ.get("SYZKALLER_IMAGE", "touchstone/syzkaller:master")
 
 
 def _image_present(image: str) -> bool:
@@ -179,7 +179,7 @@ def synthesize_kernel_reproducer(*, bucket_dir: Optional[Path] = None,
 
     # 1b. syz program (supplied, or repro.prog in the bucket) -> standalone C
     #     via syz-prog2c. This leg needs NO VM — just the syzkaller tools (host
-    #     or the veri-agent/syzkaller image) — so it works on this host now.
+    #     or the touchstone/syzkaller image) — so it works on this host now.
     prog = prog_path
     if prog is None and bucket_dir is not None and (bucket_dir / "repro.prog").exists():
         prog = bucket_dir / "repro.prog"
@@ -230,7 +230,7 @@ def synthesize_kernel_reproducer(*, bucket_dir: Optional[Path] = None,
         status=SYNTH_PENDING, method="none", program_path=None,
         fingerprint=crash_class,
         reason=(f"no reproducer synthesizable: missing syzkaller tools {missing} "
-                "(set SYZKALLER_BIN or build veri-agent/syzkaller image) and no "
+                "(set SYZKALLER_BIN or build touchstone/syzkaller image) and no "
                 "bug-class template matched. Wired interface; pending infra."))
 
 

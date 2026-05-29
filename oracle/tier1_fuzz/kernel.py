@@ -104,7 +104,7 @@ def kasan_replay_from_log(log_path: Path, unit: str = "kernelctf-historical") ->
     )
 
 
-def syzkaller_smoke(image: str = "veri-agent/syzkaller:master",
+def syzkaller_smoke(image: str = "touchstone/syzkaller:master",
                     unit: str = "syzkaller-version-stamp") -> Tier1Verdict:
     """Stamp the pinned syzkaller image's version. Wired-but-not-fuzzed in 2.1."""
     docker = os.environ.get("DOCKER", "sudo docker").split()
@@ -153,7 +153,7 @@ def _cli() -> int:
     p_log.add_argument("--out", required=True)
 
     p_syz = sub.add_parser("syzkaller-smoke", help="Stamp syzkaller image version.")
-    p_syz.add_argument("--image", default="veri-agent/syzkaller:master")
+    p_syz.add_argument("--image", default="touchstone/syzkaller:master")
     p_syz.add_argument("--unit", default="syzkaller-version-stamp")
     p_syz.add_argument("--out", required=True)
 

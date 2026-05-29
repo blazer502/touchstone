@@ -340,7 +340,7 @@ def cache_verdict_dict(
 # Bundle export / import (P4) — portable verified-knowledge transfer
 # ---------------------------------------------------------------------------
 
-BUNDLE_HEADER = {"format": "veri-agent-proofcache-bundle", "version": 1}
+BUNDLE_HEADER = {"format": "touchstone-proofcache-bundle", "version": 1}
 
 
 def export_bundle(out_path: Path, *, root: Path = CACHE_ROOT) -> dict:

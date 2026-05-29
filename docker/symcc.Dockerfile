@@ -1,6 +1,6 @@
 # SymCC — compile-time concolic instrumentation over our shared clang.
 ARG LLVM_VERSION=14
-FROM veri-agent/clang:${LLVM_VERSION}
+FROM touchstone/clang:${LLVM_VERSION}
 
 ARG SYMCC_COMMIT=master
 ENV DEBIAN_FRONTEND=noninteractive

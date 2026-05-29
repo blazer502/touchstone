@@ -3,7 +3,7 @@
 CPU LLM to synthesize a CBMC harness, run Stage B contract refinement loop,
 log verdicts.
 
-This is the verifier-first arm of veri-agent applied to the
+This is the verifier-first arm of touchstone applied to the
 kernelctf-latest target. It does NOT fuzz — it builds modular proofs.
 
 For each kernel function in the input list:

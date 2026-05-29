@@ -6,7 +6,7 @@ This module reads the corresponding source out of the per-task tarball so
 the LLM-guided agent can reason against actual code, not just the bug
 description text.
 
-Cached: per-task extraction lands in `/tmp/veri-agent-source-cache/<task_id>/`
+Cached: per-task extraction lands in `/tmp/touchstone-source-cache/<task_id>/`
 so the (tar reads + line slice) doesn't repeat across multi-turn iterations.
 
 Usage:
@@ -44,7 +44,7 @@ class SourceSnippet:
     cache_path: Optional[str] = None
 
 
-CACHE_ROOT = Path("/tmp") / "veri-agent-source-cache"
+CACHE_ROOT = Path("/tmp") / "touchstone-source-cache"
 
 
 # Match a C function header at a top-level position. We're lenient: returns
@@ -164,7 +164,7 @@ def extract_function_around(
 
     The returned `text` is the source slice itself. `max_bytes` truncates very
     long functions so the LLM prompt stays bounded; `truncated=True` records
-    the cut. The result is cached under `/tmp/veri-agent-source-cache/<key>/`.
+    the cut. The result is cached under `/tmp/touchstone-source-cache/<key>/`.
     """
     cache_dir = CACHE_ROOT / (cache_key or tarball.stem)
     cache_dir.mkdir(parents=True, exist_ok=True)

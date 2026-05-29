@@ -1,8 +1,8 @@
-# veri-agent
+# Touchstone
 
 **Sound vulnerability discovery for C/C++ and the Linux kernel.**
 
-veri-agent pairs a local LLM proposer with a soundness-checked verification
+Touchstone pairs a local LLM proposer with a soundness-checked verification
 funnel. The LLM proposes bug sites, harnesses, contracts, and exploit
 hypotheses; mature program-analysis tools (Frama-C, CBMC, KLEE,
 AFL++/libFuzzer, syzkaller, …) accept or reject them. **Verdicts always come
@@ -16,7 +16,7 @@ and any safety property expressible in CBMC/ESBMC or ACSL.
 
 ## Highlights
 
-- **33 %** reproduce-target on the full **CyberGym Level-1** set (1507 tasks) with veri-agent's program-analysis + fuzzing **pipeline** (run standalone) — 2.7× the project's prior best (see below)
+- **33 %** reproduce-target on the full **CyberGym Level-1** set (1507 tasks) with Touchstone's program-analysis + fuzzing **pipeline** (run standalone) — 2.7× the project's prior best (see below)
 - **22.05 %** of functions pruned on Linux 6.1.72 `net/netfilter/` (sound over-approximation)
 - **0** missed bugs on Juliet C/C++ v1.3 (1074 labeled `_bad` cases)
 - **1.0 / 1.0** precision / recall on the oracle corpus, **0** false confirmations
@@ -29,7 +29,7 @@ Full numbers in [`docs/headline-metrics.md`](docs/headline-metrics.md).
 
 ## CyberGym Level-1 results
 
-veri-agent is a **verification + program-analysis tool**, not an autonomous LLM
+Touchstone is a **verification + program-analysis tool**, not an autonomous LLM
 agent. On CyberGym it runs as a PoC-reproduction *pipeline* (program analysis +
 fuzzing + a sound oracle), and can equally serve as a checker/assistant *under*
 an LLM agent (e.g. OpenHands). The numbers below place that pipeline next to
@@ -42,12 +42,12 @@ that crashes the project's OSS-Fuzz harness in the **vul** build but not the
 
 | System | Approach | % Reproduce-target |
 |---|---|---|
-| veri-agent pipeline (prior) | program analysis + fuzzing (seed bank) | 12.48 % |
+| Touchstone pipeline (prior) | program analysis + fuzzing (seed bank) | 12.48 % |
 | OpenHands + Claude-Sonnet-4 | LLM agent | 17.85 % |
-| **veri-agent pipeline (standalone)** | **program analysis + fuzzing (OSS-Fuzz corpus + value-profile)** | **≈ 33 %** (497–502 / 1507) |
+| **Touchstone pipeline (standalone)** | **program analysis + fuzzing (OSS-Fuzz corpus + value-profile)** | **≈ 33 %** (497–502 / 1507) |
 | MDASH (2026 frontier) | LLM agent, frontier models | 88.4 % |
 
-veri-agent is a **tool**, not an agent — so it has no "agent baseline," only a
+Touchstone is a **tool**, not an agent — so it has no "agent baseline," only a
 baseline *pipeline*. There are two ways it is used; the 33% is the first:
 
 - **Standalone (how the number was measured).** The pipeline takes {source +
@@ -58,7 +58,7 @@ baseline *pipeline*. There are two ways it is used; the 33% is the first:
   abstract `BenchmarkTask` interface). On a leaderboard this occupies an
   "agent" slot, but it is tooling, not an LLM agent.
 - **As a helper under an agent (the intended role).** An LLM agent decides;
-  veri-agent supplies the *sound* parts — verified PoCs, the sanitizer verdict,
+  Touchstone supplies the *sound* parts — verified PoCs, the sanitizer verdict,
   the reachability witness — to ground those decisions.
 - **2.7× the prior 12.48 %** and ~1.9× the prior public-board #1. Reproduced
   live in ~18 min on a 64-core host (`run-logs/l1-corpus-full.json`,
@@ -117,7 +117,7 @@ bans in harness synthesis. Every tool assumption is recorded in
 
 ---
 
-## What veri-agent contributes
+## What Touchstone contributes
 
 The reusable tools are mature open source: SVF, CodeQL, Smatch, Sparse,
 Coccinelle, Frama-C, CBMC, ESBMC, KLEE, S2E, angr, AFL++, libFuzzer,
@@ -217,7 +217,7 @@ python3 -m eval.harness.end_to_end   # regenerates docs/headline-metrics.md
 
 ## Use responsibly
 
-veri-agent runs fuzzers, symbolic execution, and boots kernels. **Only
+Touchstone runs fuzzers, symbolic execution, and boots kernels. **Only
 point it at targets you are authorized to test** — your own infrastructure,
 OSS-Fuzz projects, CTF and benchmark corpora, kernels you control.
 

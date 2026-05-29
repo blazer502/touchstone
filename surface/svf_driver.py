@@ -34,7 +34,7 @@ import time
 from pathlib import Path
 from typing import Optional
 
-SVF_IMAGE = os.environ.get("SVF_IMAGE", "veri-agent/svf:latest")
+SVF_IMAGE = os.environ.get("SVF_IMAGE", "touchstone/svf:latest")
 
 
 def _docker() -> list[str]:

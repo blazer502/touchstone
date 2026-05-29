@@ -33,7 +33,7 @@ log = logging.getLogger("harness_model")
 
 _SRC_EXT = (".c", ".cc", ".cpp", ".cxx", ".c++", ".h", ".hpp", ".hh", ".hxx",
             ".inc")
-_CACHE_ROOT = Path("/tmp") / "veri-agent-harness-cache"
+_CACHE_ROOT = Path("/tmp") / "touchstone-harness-cache"
 
 # Scan caps so a 40 MB tree doesn't blow the per-task budget.
 _MAX_SCAN_FILES = 4000

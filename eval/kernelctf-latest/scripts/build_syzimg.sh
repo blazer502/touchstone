@@ -13,7 +13,7 @@
 #     vm.network_device = virtio-net-pci (syz-manager defaults to e1000, which
 #     this kernel can't drive).
 #
-# Prereqs: host `debootstrap` + passwordless `sudo` + the veri-agent/syzkaller
+# Prereqs: host `debootstrap` + passwordless `sudo` + the touchstone/syzkaller
 # image (docker/syzkaller.Dockerfile). create-image.sh runs on the HOST because
 # it needs debootstrap, which is not in the syzkaller image.
 #
@@ -24,7 +24,7 @@
 set -euo pipefail
 
 SIZE_MB="${1:-8192}"
-IMAGE="${SYZKALLER_IMAGE:-veri-agent/syzkaller:master}"
+IMAGE="${SYZKALLER_IMAGE:-touchstone/syzkaller:master}"
 DOCKER="${DOCKER:-sudo docker}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD="${ROOT}/initramfs/build"

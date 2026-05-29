@@ -50,7 +50,7 @@ eval/kernelctf-latest/scripts/build_syzimg.sh 8192
 # 2. launch the directed campaign (setuid, virtio-net, 8GB):
 sudo docker run --rm --name veri-syz-campaign --device /dev/kvm \
   -p 127.0.0.1:50004:50004 \
-  -v "$(pwd)/eval/kernelctf-latest":/work veri-agent/syzkaller:master \
+  -v "$(pwd)/eval/kernelctf-latest":/work touchstone/syzkaller:master \
   syz-manager -config /work/syzkaller/manager-campaign.cfg > run-logs/campaign.log 2>&1 &
 # 3. monitor: run-logs/campaign.log, workdir-campaign/crashes/, http 127.0.0.1:50004
 # 4. on a REAL (non-suppressed) bucket <B>:
