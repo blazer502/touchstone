@@ -44,6 +44,11 @@ def iter_candidates(warns_path: Path, scope_any: list[str] | None):
             path = _strip_leading_dotslash(m.group("path"))
             if scope_any and not any(path.startswith(s) for s in scope_any):
                 continue
+            # user_rl= means smatch's cross-fn DB traced a USER-controlled value
+            # to the array index — the genuinely weaponizable shape, vs a
+            # bounded-enum/loop index it merely couldn't prove (a type-range FP).
+            low = msg.lower()
+            user_controlled = "user_rl=" in low or "user controlled" in low
             yield {
                 "tool": "smatch",
                 "path": path,
@@ -53,6 +58,7 @@ def iter_candidates(warns_path: Path, scope_any: list[str] | None):
                 "sev": m.group("sev"),
                 "bug_class": bug_class,
                 "write_capable": bug_class in WRITE_CAPABLE,
+                "user_controlled": user_controlled,
             }
 
 
@@ -66,6 +72,10 @@ def main(argv=None) -> int:
     ap.add_argument("--write-capable-only", action="store_true",
                     help="Keep only classes that can yield a write/control "
                          "primitive (uaf/double-free/oob-write/type-confusion/...).")
+    ap.add_argument("--user-controlled-only", action="store_true",
+                    help="Keep only candidates whose index smatch traced to a "
+                         "user-controlled value (user_rl=) — the weaponizable "
+                         "shape, filtering bounded-enum/loop type-range FPs.")
     ap.add_argument("--out", default="run-logs/smatch-candidates.json")
     args = ap.parse_args(argv)
 
@@ -79,15 +89,25 @@ def main(argv=None) -> int:
     for r in iter_candidates(warns, args.scope_any):
         if args.write_capable_only and not r["write_capable"]:
             continue
+        if args.user_controlled_only and not r["user_controlled"]:
+            continue
         rows.append(r)
         by_class[r["bug_class"]] += 1
         by_subsys[r["path"].split("/", 1)[0]] += 1
+
+    # rank so genuinely-weaponizable candidates float up: user-controlled index
+    # first, then write-capable, then by subsystem locality.
+    rows.sort(key=lambda r: (not r["user_controlled"], not r["write_capable"],
+                             r["path"]))
 
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_text(json.dumps(rows, indent=2))
 
     wc = sum(1 for r in rows if r["write_capable"])
-    print(f"smatch candidates: {len(rows)} ({wc} write-capable) -> {args.out}")
+    uc = sum(1 for r in rows if r["user_controlled"])
+    ucw = sum(1 for r in rows if r["user_controlled"] and r["write_capable"])
+    print(f"smatch candidates: {len(rows)} ({wc} write-capable, {uc} user-controlled, "
+          f"{ucw} user-controlled+write-capable) -> {args.out}")
     print("by bug_class:")
     for c in BUG_CLASSES:
         if by_class.get(c):

@@ -202,3 +202,23 @@ PHASE 9b COMPLETE (toolchain built; runtime loop validated end-to-end; live *nov
 
 - [DONE] 9b.5 Directed campaign vs Candidate A + image-sizing fix — `syzkaller/manager-campaign.cfg`: a long syz-manager run focused on Candidate A's surface (the directed scorer's perf fd entries `perf_event_open` + perf ioctls/`read`/`mmap`/`close`/`ppoll`, plus the `mmap`/`munmap`/`madvise`/`mremap` side of the perf↔mm lock-order cycle), 4 VMs × 4 procs, `reproduce:true`. **Operational lesson:** the first launch on a 1 GB `syzimg.img` STALLED after ~40 min — the guest filled (`No space left on device` ×100+ → `SYZFAIL: mkdtemp` → executor failures), coverage flatlined at ~18.6 k PCs, exec/sec halved. All crash buckets it produced were guest-ENOSPC executor artifacts (`SIGBUS`, `mkdtemp`), and the 9a triage layer correctly tagged **3/3 `not-a-bug`** (zero false confirmations on live data — the soundness gate held under a real run). Fix captured in `scripts/build_syzimg.sh`: rebuild the guest at **8 GB** (debootstrap minimal bookworm) + pin eth0 static `10.0.2.15/24` for QEMU user-net. Relaunched clean: **0 ENOSPC events**, coverage re-ramped to ~16 k PCs and climbing. Progress is auto-reported on a 30-min `/loop`; any *real* (non-suppressed) bucket flows through `syz-repro → R2 reproducer → R3 repro_rate → 9a triage`. A novel reproducible bug still needs the long campaign to actually surface one — wired, running, not yet landed.
 - [DONE] 9b.6 Unprivileged-user threat model (`sandbox: setuid`) — kernel exploitability is scoped to what an *unprivileged local user* can trigger (kernelCTF "local attacker → LPE"). Enforced at fuzz time: every `manager-*.cfg` (+ the template) switched from `sandbox: none` (runs as root → finds root-only crashes like the ineligible `MADV_HWPOISON`/`CAP_SYS_ADMIN` `rmap_walk_file` finding) to `sandbox: setuid` (drops to a fresh capless uid → any counted crash is unprivileged-reachable by construction). Campaign relaunched under setuid (connected, ~251 exec/sec). `docs/soundness-assumptions.md` gains a "Kernel threat model" section: setuid-sandbox provenance is what backs an unprivileged-reachability claim; a `sandbox:none`/historical-replay crash carries no such guarantee and must be re-checked under setuid. Triage `exploitable` on a setuid bucket = "unprivileged user reaches a corruption primitive" (still a proposer; the working LPE is proven by weaponization).
+
+## Track 4 — cross-fn Smatch DB candidate source (2026-05-29, overnight)
+
+- [DONE] Built whole-kernel Smatch cross-function security DB on the hunt kernel
+  (`build_kernel_data.sh`: `caller_info` 4.0M rows, `return_states` 2.96M,
+  `function_ptr` 77.7k; `smatch_db.sqlite` 1.9GB + `smatch_warns.txt` 700MB,
+  both gitignored). New tool `tools/smatch_candidates.py` streams the warns →
+  `classify_warning` → memory-corruption candidates JSON for `hyp_loop`, flagging
+  user-controlled (`user_rl=`) indices and ranking them above bounded-index FPs.
+- [DONE] RECALL solved: style pass 3 → cross-fn DB **689** mem-corruption
+  candidates (**96 write-capable**) whole-kernel; 67 in unprivileged subsystems.
+- [DONE] `hyp_loop` validated end-to-end on the rich candidates (689 → net/netfilter
+  7 → 6 reachable-unpriv → 7 LLM-refined, citation gate held, 83s).
+- PRECISION is the new wall: of 96 write-capable, **4 user-controlled-index** sites,
+  all 3 distinct ones source-verified guarded/privileged (ethtool genl dispatch
+  validation, nfsd COMPOUND, sch_prio CAP_NET_ADMIN). Root cause: guards live in
+  framework dispatch layers (different TU) → invisible to cross-fn Smatch on a
+  well-audited hardened LTS. Full write-up: `run-logs/smatch-xfn-db-hunt.md`.
+- [BLOCKED] Next deep lever needs a human call (see `BLOCKERS.md`): no reproduced
+  novel KASAN crash on patched LTS; milestone unmet, as expected.
