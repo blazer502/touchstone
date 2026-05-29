@@ -1,0 +1,672 @@
+[
+  {
+    "tool": "smatch",
+    "path": "fs/nfsd/nfs4xdr.c",
+    "line": 2493,
+    "func": "nfsd4_decode_compound",
+    "msg": "buffer overflow 'nfsd4_dec_ops' 76 <= u32max user_rl='3-u32max'",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "fs/squashfs/block.c",
+    "line": 348,
+    "func": "squashfs_read_data",
+    "msg": "double free of 'bio' (line 315)",
+    "sev": "error",
+    "bug_class": "double-free",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "fs/jbd2/journal.c",
+    "line": 392,
+    "func": "jbd2_journal_write_metadata_buffer",
+    "msg": "double free of 'new_bh' (line 391)",
+    "sev": "error",
+    "bug_class": "double-free",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "fs/btrfs/scrub.c",
+    "line": 1842,
+    "func": "submit_initial_group_read",
+    "msg": "buffer overflow 'sctx->stripes' 128 <= u32max",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "fs/btrfs/ctree.c",
+    "line": 2113,
+    "func": "btrfs_search_slot",
+    "msg": "buffer overflow 'p->nodes' 8 <= 9",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "fs/btrfs/ctree.c",
+    "line": 2125,
+    "func": "btrfs_search_slot",
+    "msg": "buffer overflow 'p->nodes' 8 <= 9",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "fs/btrfs/ctree.c",
+    "line": 2126,
+    "func": "btrfs_search_slot",
+    "msg": "buffer overflow 'p->slots' 8 <= 9",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "fs/xfs/libxfs/xfs_btree.c",
+    "line": 1997,
+    "func": "xfs_btree_lookup",
+    "msg": "buffer overflow '(null)' 217 <= u32max",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "fs/xfs/libxfs/xfs_btree.c",
+    "line": 1997,
+    "func": "xfs_btree_lookup",
+    "msg": "buffer overflow '(null)' 217 <= u32max",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "kernel/locking/lockdep.c",
+    "line": 3778,
+    "func": "add_chain_cache",
+    "msg": "buffer overflow 'chain_hlocks' 327680 <= 16777215",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "kernel/trace/fgraph.c",
+    "line": 648,
+    "func": "function_graph_enter",
+    "msg": "buffer overflow 'fgraph_array' 16 <= 63",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "kernel/trace/fgraph.c",
+    "line": 648,
+    "func": "function_graph_enter",
+    "msg": "buffer overflow 'fgraph_array' 16 <= 63",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "kernel/trace/fgraph.c",
+    "line": 648,
+    "func": "function_graph_enter",
+    "msg": "buffer overflow 'fgraph_array' 16 <= 63",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "kernel/trace/fgraph.c",
+    "line": 806,
+    "func": "__ftrace_return_to_handler",
+    "msg": "buffer overflow 'fgraph_array' 16 <= 63",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "kernel/trace/fgraph.c",
+    "line": 806,
+    "func": "__ftrace_return_to_handler",
+    "msg": "buffer overflow 'fgraph_array' 16 <= 63",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "kernel/trace/fgraph.c",
+    "line": 806,
+    "func": "__ftrace_return_to_handler",
+    "msg": "buffer overflow 'fgraph_array' 16 <= 63",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "kernel/trace/fgraph.c",
+    "line": 1228,
+    "func": "ftrace_graph_enable_direct",
+    "msg": "buffer overflow 'fgraph_array' 16 <= 63",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "kernel/trace/fgraph.c",
+    "line": 1229,
+    "func": "ftrace_graph_enable_direct",
+    "msg": "buffer overflow 'fgraph_array' 16 <= 63",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "kernel/trace/fgraph.c",
+    "line": 1230,
+    "func": "ftrace_graph_enable_direct",
+    "msg": "buffer overflow 'fgraph_array' 16 <= 63",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "kernel/bpf/verifier.c",
+    "line": 2617,
+    "func": "find_containing_subprog",
+    "msg": "buffer overflow 'vals' 258 <= s32max",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "kernel/bpf/verifier.c",
+    "line": 4449,
+    "func": "__mark_chain_precision",
+    "msg": "buffer overflow 'st->frame[0]->regs' 11 <= 31",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "kernel/bpf/verifier.c",
+    "line": 4508,
+    "func": "__mark_chain_precision",
+    "msg": "buffer overflow 'func->regs' 11 <= 31",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "kernel/bpf/verifier.c",
+    "line": 4689,
+    "func": "save_register_state",
+    "msg": "buffer overflow 'state->stack[spi]->slot_type' 8 <= s32max subtract",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "net/ethtool/netlink.c",
+    "line": 614,
+    "func": "ethnl_default_start",
+    "msg": "buffer overflow 'ethnl_default_requests' 46 <= 255 user_rl='0-255'",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "net/sched/sch_prio.c",
+    "line": 214,
+    "func": "prio_tune",
+    "msg": "buffer overflow 'q->queues' 16 <= 16 user_rl='2-16'",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "net/sched/sch_prio.c",
+    "line": 225,
+    "func": "prio_tune",
+    "msg": "buffer overflow 'q->queues' 16 <= 16 user_rl='2-16'",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "net/9p/trans_virtio.c",
+    "line": 279,
+    "func": "p9_virtio_request",
+    "msg": "buffer overflow 'sgs' 2 <= s32max",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "net/9p/trans_virtio.c",
+    "line": 500,
+    "func": "p9_virtio_zc_request",
+    "msg": "buffer overflow 'sgs' 4 <= s32max",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "net/9p/trans_virtio.c",
+    "line": 503,
+    "func": "p9_virtio_zc_request",
+    "msg": "buffer overflow 'sgs' 4 <= s32max",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 384,
+    "func": "lruvec_page_state",
+    "msg": "buffer overflow 'pn->lruvec_stats->state' 30 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 384,
+    "func": "lruvec_page_state",
+    "msg": "buffer overflow 'pn->lruvec_stats->state' 30 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 384,
+    "func": "lruvec_page_state",
+    "msg": "buffer overflow 'pn->lruvec_stats->state' 30 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 407,
+    "func": "lruvec_page_state_local",
+    "msg": "buffer overflow 'pn->lruvec_stats->state_local' 30 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 407,
+    "func": "lruvec_page_state_local",
+    "msg": "buffer overflow 'pn->lruvec_stats->state_local' 30 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 407,
+    "func": "lruvec_page_state_local",
+    "msg": "buffer overflow 'pn->lruvec_stats->state_local' 30 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 645,
+    "func": "memcg_page_state",
+    "msg": "buffer overflow 'memcg->vmstats->state' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 645,
+    "func": "memcg_page_state",
+    "msg": "buffer overflow 'memcg->vmstats->state' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 645,
+    "func": "memcg_page_state",
+    "msg": "buffer overflow 'memcg->vmstats->state' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 686,
+    "func": "__mod_memcg_state",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 686,
+    "func": "__mod_memcg_state",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 686,
+    "func": "__mod_memcg_state",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 686,
+    "func": "__mod_memcg_state",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 686,
+    "func": "__mod_memcg_state",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 699,
+    "func": "memcg_page_state_local",
+    "msg": "buffer overflow 'memcg->vmstats->state_local' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 699,
+    "func": "memcg_page_state_local",
+    "msg": "buffer overflow 'memcg->vmstats->state_local' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 699,
+    "func": "memcg_page_state_local",
+    "msg": "buffer overflow 'memcg->vmstats->state_local' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 741,
+    "func": "__mod_memcg_lruvec_state",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 741,
+    "func": "__mod_memcg_lruvec_state",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 741,
+    "func": "__mod_memcg_lruvec_state",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 741,
+    "func": "__mod_memcg_lruvec_state",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 741,
+    "func": "__mod_memcg_lruvec_state",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 744,
+    "func": "__mod_memcg_lruvec_state",
+    "msg": "buffer overflow 'pn->lruvec_stats_percpu->state' 30 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 744,
+    "func": "__mod_memcg_lruvec_state",
+    "msg": "buffer overflow 'pn->lruvec_stats_percpu->state' 30 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 744,
+    "func": "__mod_memcg_lruvec_state",
+    "msg": "buffer overflow 'pn->lruvec_stats_percpu->state' 30 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 744,
+    "func": "__mod_memcg_lruvec_state",
+    "msg": "buffer overflow 'pn->lruvec_stats_percpu->state' 30 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 744,
+    "func": "__mod_memcg_lruvec_state",
+    "msg": "buffer overflow 'pn->lruvec_stats_percpu->state' 30 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 835,
+    "func": "__count_memcg_events",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->events' 24 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 835,
+    "func": "__count_memcg_events",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->events' 24 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 835,
+    "func": "__count_memcg_events",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->events' 24 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 835,
+    "func": "__count_memcg_events",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->events' 24 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 835,
+    "func": "__count_memcg_events",
+    "msg": "buffer overflow 'memcg->vmstats_percpu->events' 24 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 847,
+    "func": "memcg_events",
+    "msg": "buffer overflow 'memcg->vmstats->events' 24 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 847,
+    "func": "memcg_events",
+    "msg": "buffer overflow 'memcg->vmstats->events' 24 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 847,
+    "func": "memcg_events",
+    "msg": "buffer overflow 'memcg->vmstats->events' 24 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 857,
+    "func": "memcg_events_local",
+    "msg": "buffer overflow 'memcg->vmstats->events_local' 24 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 857,
+    "func": "memcg_events_local",
+    "msg": "buffer overflow 'memcg->vmstats->events_local' 24 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  },
+  {
+    "tool": "smatch",
+    "path": "mm/memcontrol.c",
+    "line": 857,
+    "func": "memcg_events_local",
+    "msg": "buffer overflow 'memcg->vmstats->events_local' 24 <= 254",
+    "sev": "error",
+    "bug_class": "oob-write",
+    "write_capable": true
+  }
+]

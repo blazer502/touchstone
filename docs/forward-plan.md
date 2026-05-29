@@ -94,20 +94,37 @@ unprivileged-reachable sites, the open 70B re-ranks + adds trigger_sketch/spray
 with the **citation gate holding** (no invented sites), `directed_fuzz_cfg`
 emits a focused setuid syz-manager cfg (heap-spray + KASAN verdict-signal).
 
-**EMPIRICAL candidate-recall finding (the real bottleneck):** on this *patched*
-lts-6.12.91, static analyzers yield almost nothing — Smatch (style pass) = 3
-mem-corruption candidates / 994; **Coccinelle (kfree/use_after_iter/…) = 0** on
-net/netfilter. So the loop's value is gated by analyzer RECALL on hardened code,
-exactly as the 3-agent consensus predicted. The integration is sound; the input
-is thin. **Path to real value:** (a) richer analyzer — CodeQL interprocedural
-taint or a proper Smatch *security* cross-fn DB (the spammy/user-data checks),
-not the style pass; (b) point the loop at a *less-audited* target (older kernel,
-a fresh driver/subsystem) where memory-safety warnings actually exist.
+**RECALL — SOLVED by the cross-fn DB (2026-05-29, `run-logs/smatch-xfn-db-hunt.md`).**
+The style pass gave 3 candidates; the proper Smatch *cross-function security DB*
+(`build_kernel_data.sh`: `caller_info` 4.0M rows, `return_states` 2.96M,
+`sizeof_param`/`frees_argument`) gave **689 mem-corruption candidates whole-kernel,
+96 write-capable** (94 oob-write + 2 double-free), 67 in unprivileged-reachable
+subsystems. New tool `tools/smatch_candidates.py` streams the warns → classifies →
+candidates JSON for `hyp_loop`. `hyp_loop` validated end-to-end on these (689 →
+net/netfilter 7 → 6 reachable-unpriv → 7 LLM-refined, citation gate held, 83s).
+
+**PRECISION is now the wall (the sharpened bottleneck).** Of the 96 write-capable,
+**92 are bounded-index FPs** (enum/loop index smatch couldn't prove bounded →
+`'X' 30 <= 254`, no user range; e.g. mm/memcontrol.c ×38, bpf/verifier, fgraph).
+Only **4 warnings / 3 sites** carry a user-controlled index (`user_rl=`) — and all
+3 are **source-verified guarded/privileged**: `net/ethtool/netlink.c:614` (genetlink
+`genl_get_cmd` validates `cmd` to a registered op before `->start()` — FP, guard in
+a different TU); `fs/nfsd/nfs4xdr.c` (privileged NFS server + COMPOUND opnum check);
+`net/sched/sch_prio.c` (CAP_NET_ADMIN + band check). **Root cause:** on a well-audited
+hardened LTS, the guards defeating user-controlled-index candidates live in
+**framework dispatch layers** (genl op-table, syscall multiplexers, qdisc) in a
+different function than the indexed access — invisible even to cross-fn Smatch.
+
+**Path to real value (updated):** (a) model **dispatch-table / multiplexer bounds**
+(CodeQL interprocedural taint that follows the dispatch edge), or (b) point the loop
+at a **less-audited target** (older kernel / fresh driver subsystem) where the guards
+are genuinely missing — that's where static-warning → reproduced-crash pays off.
 
 **Honest edge (3-agent consensus):** this *converts existing static warnings
 into reproduced crashes* (targeting), bounded by analyzer recall + reachability
 — not out-of-nowhere discovery. Milestone (unmet on patched LTS): ≥1 reproduced
-novel KASAN crash. Realistic next step = a CodeQL kernel DB for candidates.
+novel KASAN crash. Recall is now solved; the remaining gap is precision on a
+hardened, well-audited tree — expected, and it points the loop at less-audited code.
 
 ## Immediate active task (this session)
 

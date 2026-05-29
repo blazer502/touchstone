@@ -1,0 +1,327 @@
+{
+  "ts": "2026-05-29T14:18:36Z",
+  "scope": "net/netfilter",
+  "warnings": 689,
+  "mem_corruption_candidates": 7,
+  "reachable_unprivileged": 6,
+  "hypotheses": [
+    {
+      "hid": "02d9baab1e",
+      "bug_class": "uninit",
+      "site": {
+        "file": "net/netfilter/nf_conntrack_core.c",
+        "line": 1479,
+        "fn": "early_drop"
+      },
+      "falsifier": "KASAN uninit fires at early_drop, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "net/netfilter/nf_conntrack_core.c",
+          "line": 1479,
+          "msg": "uninitialized symbol 'bucket'."
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Uninitialized 'bucket' used in early_drop function could lead to unpredictable behavior, potentially allowing arbitrary code execution if an attacker can influence the hash value."
+      ],
+      "spray_hint": {
+        "object": "bucket"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": true,
+        "entry_surfaces": 7,
+        "closest": [
+          {
+            "entry": "ctnetlink_new_conntrack",
+            "distance": 4
+          },
+          {
+            "entry": "ipv4_conntrack_in",
+            "distance": 5
+          },
+          {
+            "entry": "ipv4_conntrack_local",
+            "distance": 5
+          }
+        ]
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.9,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "f4e387ee0e",
+      "bug_class": "oob-read",
+      "site": {
+        "file": "net/netfilter/ipvs/ip_vs_core.c",
+        "line": 2057,
+        "fn": "ip_vs_in_hook"
+      },
+      "falsifier": "KASAN oob-read fires at ip_vs_in_hook, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "net/netfilter/ipvs/ip_vs_core.c",
+          "line": 2057,
+          "msg": "we previously assumed 'cp' could be null (see line 2048)"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Null 'cp' in ip_vs_in_hook could cause a crash or memory corruption when accessing 'cp' in ip_vs_in_stats."
+      ],
+      "spray_hint": {
+        "object": "cp"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": true,
+        "entry_surfaces": 1,
+        "closest": [
+          {
+            "entry": "ip_vs_in_hook",
+            "distance": 0
+          }
+        ]
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.8,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "0435bf6e14",
+      "bug_class": "oob-read",
+      "site": {
+        "file": "net/netfilter/nf_nat_masquerade.c",
+        "line": 49,
+        "fn": "nf_nat_masquerade_ipv4"
+      },
+      "falsifier": "KASAN oob-read fires at nf_nat_masquerade_ipv4, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "net/netfilter/nf_nat_masquerade.c",
+          "line": 49,
+          "msg": "we previously assumed 'ct' could be null (see line 43)"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Null 'ct' in nf_nat_masquerade_ipv4 could cause a crash when accessing ct->tuplehash."
+      ],
+      "spray_hint": {
+        "object": "ct"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": true,
+        "entry_surfaces": 4,
+        "closest": [
+          {
+            "entry": "nft_masq_eval",
+            "distance": 1
+          },
+          {
+            "entry": "masquerade_tg",
+            "distance": 1
+          },
+          {
+            "entry": "nft_objref_eval",
+            "distance": 2
+          }
+        ]
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.7,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "2901d2461d",
+      "bug_class": "oob-read",
+      "site": {
+        "file": "net/netfilter/ipvs/ip_vs_core.c",
+        "line": 1785,
+        "fn": "ip_vs_in_icmp"
+      },
+      "falsifier": "KASAN oob-read fires at ip_vs_in_icmp, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "net/netfilter/ipvs/ip_vs_core.c",
+          "line": 1785,
+          "msg": "we previously assumed 'cp' could be null (see line 1708)"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Null 'cp' in ip_vs_in_icmp could cause a crash or memory corruption when accessing 'cp' in ip_vs_in_stats."
+      ],
+      "spray_hint": {
+        "object": "cp"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": true,
+        "entry_surfaces": 2,
+        "closest": [
+          {
+            "entry": "ip_vs_in_hook",
+            "distance": 1
+          },
+          {
+            "entry": "ip_vs_forward_icmp",
+            "distance": 1
+          }
+        ]
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.7,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "261e59c6d8",
+      "bug_class": "oob-read",
+      "site": {
+        "file": "net/netfilter/nf_conntrack_expect.c",
+        "line": 63,
+        "fn": "nf_ct_unlink_expect_report"
+      },
+      "falsifier": "KASAN oob-read fires at nf_ct_unlink_expect_report, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "net/netfilter/nf_conntrack_expect.c",
+          "line": 63,
+          "msg": "we previously assumed 'master_help' could be null (see line 54)"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Null 'master_help' in nf_ct_unlink_expect_report could cause a crash when accessing master_help->expecting."
+      ],
+      "spray_hint": {
+        "object": "master_help"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": true,
+        "entry_surfaces": 1,
+        "closest": [
+          {
+            "entry": "ctnetlink_del_expect",
+            "distance": 1
+          }
+        ]
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.6,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "1f17267a84",
+      "bug_class": "oob-read",
+      "site": {
+        "file": "net/netfilter/nfnetlink_log.c",
+        "line": 585,
+        "fn": "__build_packet_message"
+      },
+      "falsifier": "KASAN oob-read fires at __build_packet_message, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "net/netfilter/nfnetlink_log.c",
+          "line": 585,
+          "msg": "we previously assumed 'skb->dev' could be null (see line 569)"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Null 'skb->dev' in __build_packet_message could cause a crash when accessing skb->dev->type."
+      ],
+      "spray_hint": {
+        "object": "skb->dev"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": true,
+        "entry_surfaces": 11,
+        "closest": [
+          {
+            "entry": "nft_log_eval",
+            "distance": 3
+          },
+          {
+            "entry": "log_tg",
+            "distance": 3
+          },
+          {
+            "entry": "nflog_tg",
+            "distance": 3
+          }
+        ]
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.5,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "47af98b370",
+      "bug_class": "oob-read",
+      "site": {
+        "file": "net/netfilter/nf_conntrack_standalone.c",
+        "line": 319,
+        "fn": "ct_seq_show"
+      },
+      "falsifier": "KASAN oob-read fires at ct_seq_show, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "net/netfilter/nf_conntrack_standalone.c",
+          "line": 319,
+          "msg": "we previously assumed 'ct' could be null (see line 300)"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Null 'ct' in ct_seq_show could cause a crash when accessing ct->status."
+      ],
+      "spray_hint": {
+        "object": "ct"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.4,
+      "status": "proposed",
+      "refutation": ""
+    }
+  ],
+  "wall_s": 83.0
+}
