@@ -128,7 +128,7 @@ def create_app(config_path: Path | None = None) -> FastAPI:
         data = []
         for role, reps in router.replicas.items():
             for model_id, _ in reps:
-                data.append({"id": role, "object": "model", "owned_by": "veri-agent",
+                data.append({"id": role, "object": "model", "owned_by": "touchstone",
                              "underlying": model_id})
                 break
         return {"object": "list", "data": data}

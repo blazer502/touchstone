@@ -35,6 +35,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Optional
 
+from agent import harness_model
 from agent.bug_class_seeds import augmented_seeds
 from agent.libfuzzer_phase import fuzz_collect, fuzz_collect_adaptive
 from agent.project_corpus import ProjectCorpus
@@ -268,6 +269,25 @@ class AgentConfig:
     libfuzzer_adaptive: bool = False
     libfuzzer_budget_max: int = 30
     libfuzzer_stagnation_window: int = 4
+    # Phase 1 PA core: mine a magic-constant dictionary + typed seeds from the
+    # disclosed source archive and feed libFuzzer. Benchmark-agnostic.
+    # Default OFF: the whole-tree dictionary measured neutral-to-negative
+    # (too noisy); it pays off only when focused to the reachability slice
+    # (Phase 2). Kept opt-in for that targeted use.
+    use_source_dict: bool = False
+    # Seed the libFuzzer phase with the upstream project's public OSS-Fuzz
+    # corpus (benchmark-agnostic — the project's own corpus). Biggest single
+    # lever for reproducing fuzzer-found bugs.
+    use_oss_fuzz_corpus: bool = False
+    # Agentic PoC phase (smolagents code-agent on the open model). Runs only
+    # on tasks the free bank+libFuzzer phase missed (cost-efficient hybrid).
+    smol_agent: bool = False
+    smol_mode: str = "agent"          # "agent" (tool loop) | "seedgen" (seeds+long fuzz)
+    smol_max_steps: int = 6
+    smol_use_analyst: bool = True
+    smol_wall_s: int = 240
+    smol_max_tokens: int = 3000
+    smol_fuzz_seconds: int = 180      # seedgen mode: long libFuzzer budget
 
 
 def _bank_iter() -> list[bytes]:
@@ -322,11 +342,12 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig(),
     # Benchmark-agnostic task facade (F2/V4) — agent calls go through this.
     task: BenchmarkTask = CyberGymTask(bundle)
 
-    # Source extraction (P2). Best-effort — many tasks don't have error.txt
-    # at level 1, in which case we just skip the source-grounded prompt half.
+    # Source extraction (P2). Best-effort — at level 1 the benchmark does NOT
+    # disclose error.txt (the Task interface returns None), so the frame-based
+    # source slice is simply skipped; Phase 1/2/3 ground on the harness source
+    # + description-named function instead.
     snippet = None
-    err_text = (bundle.data_dir / "error.txt").read_text(errors="replace") \
-        if (bundle.data_dir / "error.txt").exists() else ""
+    err_text = task.disclosed_error_text() or ""
     frame = first_user_frame(err_text) if err_text else None
     if frame is not None:
         tarball = bundle.data_dir / "repo-vul.tar.gz"
@@ -372,16 +393,57 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig(),
     # didn't crash on this binary (so the mutator starts from inputs that
     # at least don't trip an early hard failure).
     if cfg.libfuzzer_seconds > 0 and local_available and harness is not None:
+        seeds = _bank_for(task, project_corpus)
+        dict_path = None
+        if cfg.use_source_dict:
+            try:
+                src = task.source_archive_path()
+                if src is not None:
+                    hmodel = harness_model.build(task_id, src)
+                    if hmodel.seeds:
+                        seeds = list(seeds) + hmodel.seeds
+                    if hmodel.dict_tokens:
+                        dp = (Path("/tmp") / "touchstone-harness-cache" /
+                              task_id.replace(":", "_") / "libfuzzer.dict")
+                        dict_path = harness_model.write_libfuzzer_dict(
+                            hmodel.dict_tokens, dp)
+            except Exception as e:
+                log.warning("[%s] harness-model build failed: %s", task_id, e)
+        corpus_dirs = []
+        if cfg.use_oss_fuzz_corpus:
+            try:
+                cdir = task.upstream_corpus_dir()
+                if cdir is not None:
+                    corpus_dirs.append(cdir)
+            except Exception as e:
+                log.warning("[%s] corpus fetch failed: %s", task_id, e)
+            # In-tree project corpus + dictionary from the disclosed tarball
+            # (excludes crash-/poc- artifacts — see harness_model.harvest_intree).
+            try:
+                src_tb = task.source_archive_path()
+                if src_tb is not None:
+                    it_dir, it_dict = harness_model.harvest_intree(task_id, src_tb)
+                    if it_dir is not None:
+                        corpus_dirs.append(it_dir)
+                    if it_dict and dict_path is None:
+                        dp2 = (Path("/tmp") / "touchstone-harness-cache" /
+                               task_id.replace(":", "_") / "intree.dict")
+                        dict_path = harness_model.write_libfuzzer_dict(it_dict, dp2)
+            except Exception as e:
+                log.warning("[%s] intree harvest failed: %s", task_id, e)
         if cfg.libfuzzer_adaptive:
             fr = fuzz_collect_adaptive(
-                harness, _bank_for(task, project_corpus),
+                harness, seeds,
                 budget_min=cfg.libfuzzer_seconds,
                 budget_max=cfg.libfuzzer_budget_max,
                 stagnation_window=cfg.libfuzzer_stagnation_window,
+                dict_path=dict_path,
+                extra_corpus_dirs=corpus_dirs,
             )
         else:
-            fr = fuzz_collect(harness, _bank_for(task, project_corpus),
-                              budget_seconds=cfg.libfuzzer_seconds)
+            fr = fuzz_collect(harness, seeds,
+                              budget_seconds=cfg.libfuzzer_seconds,
+                              dict_path=dict_path)
         log.debug("[%s] libfuzzer: %d crashes, %d execs, %d ms",
                   task_id, len(fr.crash_payloads), fr.execs_total, fr.wall_ms)
         # Phase 1: locally re-verify every crash artifact; collect sanitizer
@@ -429,7 +491,54 @@ def run_agent(task_id: str, cfg: AgentConfig = AgentConfig(),
                 _auto_lift_witness(task, harness, cfg, res, project_corpus)
                 return res
 
-    # Multi-turn LLM phase.
+    # Agentic PoC phase (smolagents code-agent, open model). Opt-in; runs on
+    # bank+libFuzzer misses. The agent only sees the vulnerable source +
+    # description; the sound oracle still decides. When enabled, it REPLACES
+    # the legacy byte-guessing LLM loop below.
+    if cfg.smol_agent and harness is not None \
+            and not res.confirmed_reproduces_target:
+        try:
+            from agent.smol_poc_agent import (run_poc_agent, run_seedgen_fuzz,
+                                              make_default_model)
+            src = task.source_archive_path()
+            if src is not None:
+                model = make_default_model(max_tokens=cfg.smol_max_tokens)
+                if cfg.smol_mode == "seedgen":
+                    win = run_seedgen_fuzz(
+                        task_id, description=bundle.description, tarball=src,
+                        vul_harness=harness, model=model,
+                        fuzz_seconds=cfg.smol_fuzz_seconds,
+                        max_steps=cfg.smol_max_steps,
+                        local_timeout_s=cfg.local_timeout_s,
+                        use_analyst=cfg.smol_use_analyst,
+                    )
+                else:
+                    win = run_poc_agent(
+                        task_id, description=bundle.description, tarball=src,
+                        vul_harness=harness, model=model,
+                        max_steps=cfg.smol_max_steps,
+                        local_timeout_s=cfg.local_timeout_s,
+                        wall_budget_s=cfg.smol_wall_s,
+                        use_analyst=cfg.smol_use_analyst,
+                    )
+                if win:
+                    blob = bytes.fromhex(win)
+                    res.attempts.append(CandidateAttempt(
+                        turn=0, source="smol-agent", bytes_hex=win,
+                        local_verdict="crash", crash_class=None,
+                        location=None, wall_ms_local=0))
+                    _finalize_on_crash(
+                        res, task, blob, source="smol-agent", cfg=cfg,
+                        candidate_attempt=_EvalResult(
+                            local_verdict="crash", crash_class=None,
+                            location=None, confirmed_reproduces_target=False))
+        except Exception as e:
+            log.warning("[%s] smol agent phase failed: %s", task_id, e)
+        res.total_wall_ms = int((time.monotonic() - t0) * 1000)
+        _auto_lift_witness(task, harness, cfg, res, project_corpus)
+        return res
+
+    # Multi-turn LLM phase (legacy byte-guessing; used only when smol_agent off).
     try:
         client = LLMClient(default_role=cfg.role, timeout_s=600.0)
         client.healthz()

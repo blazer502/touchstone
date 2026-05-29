@@ -156,7 +156,7 @@ def run_syz_manager(
     *,
     syzlang_path: Path,
     kernel_image: Optional[Path],
-    syz_image_tag: str = "veri-agent/syzkaller:latest",
+    syz_image_tag: str = "touchstone/syzkaller:latest",
     wall_seconds: int = 60,
     unit: Optional[str] = None,
 ) -> Tier1Verdict:

@@ -11,19 +11,19 @@ DOCKER="${DOCKER:-docker}"
 declare -A TAG CMD
 register() { TAG[$1]="$2"; CMD[$1]="$3"; }
 
-register clang         "veri-agent/clang:${LLVM_VERSION}"         "clang --version"
-register cbmc          "veri-agent/cbmc:${CBMC_VERSION}"          "cbmc --version"
-register esbmc         "veri-agent/esbmc:${ESBMC_VERSION}"        "esbmc --version"
-register framac        "veri-agent/framac:${FRAMAC_VERSION}"      "frama-c -version"
-register klee          "veri-agent/klee:${KLEE_VERSION}"          "klee --version"
-register angr          "veri-agent/angr:${ANGR_VERSION}"          "python -c 'import angr; print(angr.__version__)'"
-register aflpp         "veri-agent/aflpp:${AFLPP_VERSION}"        "afl-fuzz -h 2>&1 | head -3"
-register syzkaller     "veri-agent/syzkaller:${SYZKALLER_COMMIT}" "syz-manager -version || ls /opt/syzkaller/bin"
-register kernel-static "veri-agent/kernel-static:latest"          "smatch --version; spatch --version | head -1; sparse --version"
-register codeql        "veri-agent/codeql:${CODEQL_VERSION}"      "codeql version"
-register svf           "veri-agent/svf:${SVF_VERSION}"            "wpa --version 2>&1 | head -5"
-register symcc         "veri-agent/symcc:${SYMCC_COMMIT}"         "symcc --version 2>&1 | head -3"
-register s2e           "veri-agent/s2e:${S2E_VERSION}"            "s2e --help 2>&1 | head -3"
+register clang         "touchstone/clang:${LLVM_VERSION}"         "clang --version"
+register cbmc          "touchstone/cbmc:${CBMC_VERSION}"          "cbmc --version"
+register esbmc         "touchstone/esbmc:${ESBMC_VERSION}"        "esbmc --version"
+register framac        "touchstone/framac:${FRAMAC_VERSION}"      "frama-c -version"
+register klee          "touchstone/klee:${KLEE_VERSION}"          "klee --version"
+register angr          "touchstone/angr:${ANGR_VERSION}"          "python -c 'import angr; print(angr.__version__)'"
+register aflpp         "touchstone/aflpp:${AFLPP_VERSION}"        "afl-fuzz -h 2>&1 | head -3"
+register syzkaller     "touchstone/syzkaller:${SYZKALLER_COMMIT}" "syz-manager -version || ls /opt/syzkaller/bin"
+register kernel-static "touchstone/kernel-static:latest"          "smatch --version; spatch --version | head -1; sparse --version"
+register codeql        "touchstone/codeql:${CODEQL_VERSION}"      "codeql version"
+register svf           "touchstone/svf:${SVF_VERSION}"            "wpa --version 2>&1 | head -5"
+register symcc         "touchstone/symcc:${SYMCC_COMMIT}"         "symcc --version 2>&1 | head -3"
+register s2e           "touchstone/s2e:${S2E_VERSION}"            "s2e --help 2>&1 | head -3"
 
 PASS=0; FAIL=0; MISS=0
 for t in "${!TAG[@]}"; do

@@ -1,8 +1,8 @@
-# veri-agent
+# Touchstone
 
 **Sound vulnerability discovery for C/C++ and the Linux kernel.**
 
-veri-agent pairs a local LLM proposer with a soundness-checked verification
+Touchstone pairs a local LLM proposer with a soundness-checked verification
 funnel. The LLM proposes bug sites, harnesses, contracts, and exploit
 hypotheses; mature program-analysis tools (Frama-C, CBMC, KLEE,
 AFL++/libFuzzer, syzkaller, …) accept or reject them. **Verdicts always come
@@ -16,6 +16,7 @@ and any safety property expressible in CBMC/ESBMC or ACSL.
 
 ## Highlights
 
+- **33 %** reproduce-target on the full **CyberGym Level-1** set (1507 tasks) with Touchstone's program-analysis + fuzzing **pipeline** (run standalone) — 2.7× the project's prior best (see below)
 - **22.05 %** of functions pruned on Linux 6.1.72 `net/netfilter/` (sound over-approximation)
 - **0** missed bugs on Juliet C/C++ v1.3 (1074 labeled `_bad` cases)
 - **1.0 / 1.0** precision / recall on the oracle corpus, **0** false confirmations
@@ -23,6 +24,69 @@ and any safety property expressible in CBMC/ESBMC or ACSL.
 - **5** reproducible field PoVs across CyberGym, kernelCTF, and live SQLite
 
 Full numbers in [`docs/headline-metrics.md`](docs/headline-metrics.md).
+
+---
+
+## CyberGym Level-1 results
+
+Touchstone is a **verification + program-analysis tool**, not an autonomous LLM
+agent. On CyberGym it runs as a PoC-reproduction *pipeline* (program analysis +
+fuzzing + a sound oracle), and can equally serve as a checker/assistant *under*
+an LLM agent (e.g. OpenHands). The numbers below place that pipeline next to
+LLM-agent systems on the same task and scoring — for **context**, not a claim
+of being a "better agent."
+
+Task: given the vulnerable source tree + a one-sentence description, emit a PoC
+that crashes the project's OSS-Fuzz harness in the **vul** build but not the
+**fix** build (`vul=crash ∧ fix=no_crash`). Full 1507-task universe.
+
+| System | Approach | % Reproduce-target |
+|---|---|---|
+| Touchstone pipeline (prior) | program analysis + fuzzing (seed bank) | 12.48 % |
+| OpenHands + Claude-Sonnet-4 | LLM agent | 17.85 % |
+| **Touchstone pipeline (standalone)** | **program analysis + fuzzing (OSS-Fuzz corpus + value-profile)** | **≈ 33 %** (497–502 / 1507) |
+| MDASH (2026 frontier) | LLM agent, frontier models | 88.4 % |
+
+Touchstone is a **tool**, not an agent — so it has no "agent baseline," only a
+baseline *pipeline*. There are two ways it is used; the 33% is the first:
+
+- **Standalone (how the number was measured).** The pipeline takes {source +
+  description}, emits a PoC, and is scored: the project's own public OSS-Fuzz
+  corpus → coverage-guided libFuzzer (value-profile + a source-mined
+  dictionary) → the sanitizer oracle as the sole verdict on native vul/fix
+  binaries. No LLM in the loop, no CyberGym-specific tuning (all via the
+  abstract `BenchmarkTask` interface). On a leaderboard this occupies an
+  "agent" slot, but it is tooling, not an LLM agent.
+- **As a helper under an agent (the intended role).** An LLM agent decides;
+  Touchstone supplies the *sound* parts — verified PoCs, the sanitizer verdict,
+  the reachability witness — to ground those decisions.
+- **2.7× the prior 12.48 %** and ~1.9× the prior public-board #1. Reproduced
+  live in ~18 min on a 64-core host (`run-logs/l1-corpus-full.json`,
+  `run-logs/l1-full-live.json`).
+- **Where the local model is used.** The baseline pipeline needs no LLM; where
+  a model *is* used it is a **local, open-weight** model running on the host's
+  GPUs (via vLLM) — never a frontier/API model — and always as a **proposer**
+  (the sound oracle still decides). Two uses:
+  - a **fine-tuned seed generator** — Qwen2.5-3B-Instruct + LoRA, trained on a
+    *disjoint* set of projects and evaluated **zero-shot** on held-out
+    projects' corpus-misses — proposes structurally-valid input seeds and adds
+    reproductions the corpus alone can't (+2/80 on a held-out sample);
+  - an optional **agent loop** (smolagents driving a local open model, e.g.
+    DeepSeek-R1-Distill-70B) for hard tasks — built and validated, but a minor
+    contributor (≈0 on the hardest sample), **not** part of the 33% headline.
+- **Honest ceiling.** Open-models-only tops out ~33–35 %; the 83–88 % 2026
+  frontier is a *frontier-model* result. The instrumented-rebuild path
+  (AFL++ `cmplog`/concolic, ~45–50 %) was de-risked to a build-at-scale wall —
+  see [`docs/forward-plan.md`](docs/forward-plan.md).
+
+Reproduce:
+
+```bash
+python3 -m eval.cybergym.run_level1 \
+  --subset eval/cybergym/subset_l1_full.json \
+  --workers 16 --libfuzzer-seconds 20 --libfuzzer-budget-max 60 \
+  --oss-fuzz-corpus --max-turns 0 --denominator 1507
+```
 
 ---
 
@@ -53,7 +117,7 @@ bans in harness synthesis. Every tool assumption is recorded in
 
 ---
 
-## What veri-agent contributes
+## What Touchstone contributes
 
 The reusable tools are mature open source: SVF, CodeQL, Smatch, Sparse,
 Coccinelle, Frama-C, CBMC, ESBMC, KLEE, S2E, angr, AFL++, libFuzzer,
@@ -153,7 +217,7 @@ python3 -m eval.harness.end_to_end   # regenerates docs/headline-metrics.md
 
 ## Use responsibly
 
-veri-agent runs fuzzers, symbolic execution, and boots kernels. **Only
+Touchstone runs fuzzers, symbolic execution, and boots kernels. **Only
 point it at targets you are authorized to test** — your own infrastructure,
 OSS-Fuzz projects, CTF and benchmark corpora, kernels you control.
 

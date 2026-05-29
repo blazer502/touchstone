@@ -55,7 +55,7 @@ def _read_lock() -> dict[str, str]:
 
 
 LOCK = _read_lock()
-CBMC_IMG = f"veri-agent/cbmc:{LOCK.get('CBMC_VERSION', '6.4.0')}"
+CBMC_IMG = f"touchstone/cbmc:{LOCK.get('CBMC_VERSION', '6.4.0')}"
 DOCKER = os.environ.get("DOCKER", "sudo docker")
 
 # CBMC text-output patterns (same as surface/stage_b.py).

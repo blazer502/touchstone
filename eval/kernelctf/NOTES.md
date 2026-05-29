@@ -60,5 +60,5 @@ soundness/coverage analysis runs as part of Stage A.
 | Source tree (depth-1 6.1.72 tag) | ~1.4 GB |
 | Build artifacts (KASAN debug) | 6–8 GB |
 | Initramfs | ~5 MB |
-| Static-scoping image (`veri-agent/kernel-static:latest`) | ~2.5 GB |
+| Static-scoping image (`touchstone/kernel-static:latest`) | ~2.5 GB |
 | **Total worst case** | **~12 GB** (host had 121 GB free at start) |

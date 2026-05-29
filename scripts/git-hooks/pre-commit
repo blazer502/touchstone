@@ -40,19 +40,19 @@ for target in "${TARGETS[@]}"; do
     matched=$(echo "$report_json" | python3 -c "import json,sys;d=json.load(sys.stdin);print(len(d.get('matched_clusters',[])))")
     units=$(echo "$report_json" | python3 -c "import json,sys;d=json.load(sys.stdin);print(len(d.get('impacted_units',[])))")
     if [[ "$matched" -gt 0 ]]; then
-        echo "[veri-agent] target=$target → matched_clusters=$matched, impacted_units=$units" >&2
+        echo "[touchstone] target=$target → matched_clusters=$matched, impacted_units=$units" >&2
         any_impacted=1
     fi
 done
 
 if [[ "$any_impacted" -eq 1 ]]; then
-    echo "[veri-agent] re-verify with:" >&2
+    echo "[touchstone] re-verify with:" >&2
     for target in "${TARGETS[@]}"; do
         echo "    python3 -m surface.incremental --target $target impacted-git \\" >&2
         echo "        --git-from HEAD --git-to <staged>  # or invalidate to mark cache stale" >&2
     done
     if [[ "$STRICT" == "1" ]]; then
-        echo "[veri-agent] VERI_AGENT_PRECOMMIT_STRICT=1 → blocking the commit." >&2
+        echo "[touchstone] VERI_AGENT_PRECOMMIT_STRICT=1 → blocking the commit." >&2
         exit 1
     fi
 fi

@@ -1,0 +1,23 @@
+{
+  "unit": "synthetic_heap_oob",
+  "signature": "",
+  "primitive": "oob-write",
+  "severity": "exploitable",
+  "access": "write",
+  "access_size": 1,
+  "sanitizer": "ASan",
+  "location": "/home/chanyoung/veri-agent/oracle/tier1_fuzz/harnesses/synthetic_heap_oob.c:22",
+  "controllability": {
+    "write_capable": true,
+    "access_size_known": true,
+    "size_attacker_controlled": "unknown",
+    "offset_attacker_controlled": "unknown",
+    "freed_obj_controllable": "n/a"
+  },
+  "rationale": "oob-write: attacker-influenced write of size 1 past/after the object \u2014 a memory-corruption primitive that typically escalates to control.",
+  "soundness_note": "triage is a proposer; severity is a heuristic exploit-potential ranking, not a proof. 'dos-only' = no write/leak primitive evident in the artifact, never 'provably unexploitable'. The primitive is proven only by the weaponization stage.",
+  "assumed": [
+    "primitive_from=sanitizer-artifact",
+    "sanitizer=ASan"
+  ]
+}

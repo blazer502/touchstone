@@ -258,7 +258,7 @@ def fuzz_aflpp(harness_src: Path, sanitizer: str = "ASan", wall_seconds: int = 6
         return Tier1Verdict(
             unit=unit or harness_src.stem, engine="aflpp", sanitizer=sanitizer,
             verdict="inconclusive", wall_ms=0,
-            evidence_excerpt="afl-clang-fast/afl-fuzz not in PATH; build veri-agent/aflpp image to enable.",
+            evidence_excerpt="afl-clang-fast/afl-fuzz not in PATH; build touchstone/aflpp image to enable.",
             soundness_note="AFL++ engine wired but image not built — Tier-1 default is libFuzzer.",
         )
     raise NotImplementedError("AFL++ runner stub — wired but not exercised in 2.1; libFuzzer is the default.")

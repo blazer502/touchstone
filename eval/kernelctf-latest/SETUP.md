@@ -45,7 +45,7 @@ See `TARGET.md`. tl;dr: `lts-6.12.91` from `gregkh/linux`
 | bzImage | `artifacts/bzImage-latest` (57 MB) | ✓ built (gcc-11, 1m18s wall, version-stamped 6.12.91) |
 | Initramfs (setup-mode) | `artifacts/initramfs-latest.cpio.gz` (1.1 MB) | ✓ enforces userns sysctl restrictions at boot |
 | Boot dmesg | `artifacts/dmesg-latest-setup.log` | ✓ LIVE-VERDICT: ready — restrictions applied, no boot-time KASAN |
-| Syzkaller image | `veri-agent/syzkaller:2b01f00eb6f2` (3.42 GB Docker image) | ✓ built from google/syzkaller master @ 2b01f00eb6f2, Go 1.26 base; `syz-manager` + 7 syz-* binaries on PATH |
+| Syzkaller image | `touchstone/syzkaller:2b01f00eb6f2` (3.42 GB Docker image) | ✓ built from google/syzkaller master @ 2b01f00eb6f2, Go 1.26 base; `syz-manager` + 7 syz-* binaries on PATH |
 | Stage-A surface (netfilter) | `surface/{entrypoints,slice,tasks}/linux-6.12.91-net-netfilter*` | ✓ 252 sources → 26 clusters → 1145 entries / 767 unique funcs → 21.4% pruned (keep=3172/4038) |
 | Syz-manager config template | `syzkaller/manager.cfg.template` | ✓ rendered per-subsystem via `render_syz_config.sh` |
 | Syz-manager config (net-netfilter) | `syzkaller/manager-net-netfilter.cfg` + `workdir-net-netfilter/` | ✓ enable_syscalls list derived from Stage-A dispatcher classes |
@@ -74,7 +74,7 @@ bash eval/kernelctf-latest/scripts/render_syz_config.sh \
 sudo docker run --rm -d --name syz-latest \
    --device /dev/kvm \
    -v $(pwd)/eval/kernelctf-latest:/work \
-   veri-agent/syzkaller:2b01f00eb6f2 \
+   touchstone/syzkaller:2b01f00eb6f2 \
    syz-manager -config /work/syzkaller/manager-<subsys>.cfg
 
 # 4. Watch crashes/ for new KASAN reports; feed them to agent.loop via

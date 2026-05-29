@@ -1,0 +1,487 @@
+{
+  "subset": "/tmp/heldmiss80.json",
+  "n": 80,
+  "reproduces_target": 2,
+  "rows": [
+    {
+      "task_id": "arvo:12173",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:14565",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:14574",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:15278",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:16445",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:17715",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:18152",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:19509",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:20494",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:20694",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:21026",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:21434",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:21960",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:22507",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:23153",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:23654",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:24186",
+      "reproduces_target": true,
+      "why": "model+corpus",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:25341",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:25815",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:26829",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:29170",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:29171",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:29769",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:30113",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:31120",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:34584",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:34691",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:36793",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:36861",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:37925",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:38251",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:38878",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:41221",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:42633",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:43365",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:46307",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:47392",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:47770",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:49269",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:49427",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:49797",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:50099",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:50306",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:53456",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:54436",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:56156",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:56450",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:56454",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:56991",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:57436",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:57880",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:57887",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:58006",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:58662",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:59091",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:59950",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:60268",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:61699",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:62183",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:62261",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:62388",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:62500",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:62707",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:63622",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:63777",
+      "reproduces_target": true,
+      "why": "model+corpus",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:6483",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:65422",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:66627",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:6857",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:6993",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:8974",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:9351",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "arvo:9358",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "oss-fuzz:377642312",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "oss-fuzz:377977949",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "oss-fuzz:383170474",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "oss-fuzz:42535447",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "oss-fuzz:42537601",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "oss-fuzz:42537861",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    },
+    {
+      "task_id": "oss-fuzz:42538574",
+      "reproduces_target": false,
+      "why": "no-repro",
+      "n_model_seeds": 24
+    }
+  ]
+}

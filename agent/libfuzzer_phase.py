@@ -62,7 +62,8 @@ def fuzz_collect(harness: LocalHarness,
                  budget_seconds: int = 10,
                  max_seed_bytes: int = 4096,
                  corpus_dir: Optional[Path] = None,
-                 artifact_dir: Optional[Path] = None) -> FuzzResult:
+                 artifact_dir: Optional[Path] = None,
+                 dict_path: Optional[Path] = None) -> FuzzResult:
     """Mutate around `seeds` for `budget_seconds`, return any crash payloads.
 
     libFuzzer writes one `crash-<sha>` file per crashing input it finds. We
@@ -112,6 +113,8 @@ def fuzz_collect(harness: LocalHarness,
         # one crash per fuzz_collect call is enough, then the caller can
         # decide whether to score / iterate / move on.
     ]
+    if dict_path is not None and Path(dict_path).exists():
+        cmd.append(f"-dict={dict_path}")
     t0 = time.monotonic()
     timed_out = False
     err_msg = None
@@ -177,7 +180,9 @@ def fuzz_collect_adaptive(harness: LocalHarness,
                           stagnation_window: int = 4,
                           max_seed_bytes: int = 4096,
                           corpus_dir: Optional[Path] = None,
-                          artifact_dir: Optional[Path] = None) -> FuzzResult:
+                          artifact_dir: Optional[Path] = None,
+                          dict_path: Optional[Path] = None,
+                          extra_corpus_dirs: Optional[list] = None) -> FuzzResult:
     """Adaptive-budget libFuzzer run.
 
     Streams libFuzzer's stderr and tracks `cov: N ft: M` updates. Behaviour:
@@ -214,15 +219,26 @@ def fuzz_collect_adaptive(harness: LocalHarness,
         env["LD_LIBRARY_PATH"] = (str(harness.libs_dir) +
                                   (":" + existing if existing else ""))
 
-    cmd = [
-        str(harness.binary),
-        str(corpus_dir),
+    cmd = [str(harness.binary), str(corpus_dir)]
+    # Additional read corpora (e.g. the upstream OSS-Fuzz public corpus).
+    # libFuzzer reads all positional dirs and writes new finds to the first.
+    for d in (extra_corpus_dirs or []):
+        if d is not None and Path(d).exists():
+            cmd.append(str(d))
+    cmd += [
         f"-max_total_time={budget_max}",        # hard cap
         f"-artifact_prefix={str(artifact_dir)}/",
         "-print_final_stats=1",
-        "-rss_limit_mb=2048",
+        "-rss_limit_mb=4096",
         "-timeout=5",
+        # Value-profile uses the trace-cmp instrumentation already compiled
+        # into -fsanitize=fuzzer binaries — the built-in cmplog/redqueen
+        # equivalent for cracking magic-byte / checksum / length gates. No
+        # rebuild required (the OSS-Fuzz build env is unavailable to us).
+        "-use_value_profile=1",
     ]
+    if dict_path is not None and Path(dict_path).exists():
+        cmd.append(f"-dict={dict_path}")
     t0 = time.monotonic()
     last_cov_update = t0
     last_cov_summary: tuple[Optional[int], Optional[int]] = (None, None)

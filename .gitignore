@@ -81,3 +81,9 @@ run-logs/llm-gateway.log
 
 # Pre-commit hook private state
 scripts/git-hooks/targets.txt
+
+# Fine-tuned LoRA adapters (large binaries, regenerable via tools/train_seedgen.py)
+run-logs/seedgen/*-lora/
+*.safetensors
+# Per-task L1 eval traces (keep summary JSONs, drop the large trace JSONL)
+run-logs/l1-*-trace.jsonl
