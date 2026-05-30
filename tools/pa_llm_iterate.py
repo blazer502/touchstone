@@ -105,8 +105,34 @@ _SYS = (
     "Output JSON only — no prose, no markdown fences."
 )
 
+# Self-critique pass — runs AFTER the proposer. Forces the model into an
+# adversarial stance to attack its own hypotheses, producing a confidence score
+# and a concrete counter-argument. Hypotheses with confidence < 0.3 are dropped
+# downstream. This is the agent's self-enhancement step: don't just propose,
+# *attack the proposal*.
+_CRITIC_SYS = (
+    "You are an adversarial reviewer. For EACH proposed kernel-security hypothesis, "
+    "play devil's advocate against your own prior claim. For each, output:\n"
+    "  - hid: the same id you proposed.\n"
+    "  - confidence (0.0-1.0): how strongly the cited source actually supports the "
+    "    claim. 1.0 = a kernel-reviewer would call this a likely bug; 0.5 = plausible "
+    "    pattern but no clear evidence; 0.2 = speculative pattern-matching; "
+    "    0.0 = the cited source contradicts the claim or doesn't support it.\n"
+    "  - counter_argument: the strongest specific reason the hypothesis might be "
+    "    WRONG, citing file:line from the provided source (e.g., a guard, a "
+    "    refcount, a lock that protects the access). One sentence.\n"
+    "  - refined_falsifier: a sharper sanitizer signal+location, OR `null` if the "
+    "    hypothesis should be dropped.\n"
+    "STRICT: cite ONLY file:lines from the provided source. If you cannot find a "
+    "guard/contradiction, set counter_argument='no obvious contradiction found' but "
+    "still rate confidence based on how concretely the source supports the claim "
+    "(speculation = low confidence even without counter-evidence).\n"
+    "Output JSON only: {\"reviews\":[{...}]}"
+)
 
-def build_prompt(bucket: dict, src: dict | None) -> str:
+
+def build_prompt(bucket: dict, src: dict | None,
+                 history: list[dict] | None = None) -> str:
     parts = [
         f"BUCKET: {bucket['description']}",
         "REPORT HEAD (top stack frames):",
@@ -120,6 +146,16 @@ def build_prompt(bucket: dict, src: dict | None) -> str:
         ]
     else:
         parts.append("SOURCE: function definition not located on disk.")
+    if history:
+        parts += ["",
+                  "PRIOR ITERATIONS (do not re-propose hypotheses already falsified;"
+                  " do learn from the patterns):"]
+        for h in history[:10]:
+            parts.append(
+                f"  - iter {h.get('iter','?')}: "
+                f"class={h.get('bug_class')} site={h.get('site')} "
+                f"outcome={h.get('outcome','untested')} "
+                f"reason={(h.get('reason') or '')[:120]}")
     parts += [
         "",
         "Return JSON like:",
@@ -130,6 +166,20 @@ def build_prompt(bucket: dict, src: dict | None) -> str:
         '"honest_finding":"..."}',
     ]
     return "\n".join(parts)
+
+
+def load_history(path: Path | None) -> list[dict]:
+    if not path or not path.exists():
+        return []
+    try:
+        d = json.loads(path.read_text())
+        if isinstance(d, list):
+            return d
+        if isinstance(d, dict) and "history" in d:
+            return d["history"]
+    except Exception:
+        pass
+    return []
 
 
 HEAP_SPRAY = [
@@ -157,7 +207,49 @@ def directed_cfg_for(hyp: dict, base_cfg: Path, hid: str) -> dict:
     return cfg
 
 
-def call_llm(prompt: str) -> str:
+def critique_hypotheses(hypotheses: list[dict], source_slice: str) -> dict:
+    """Self-enhancement: adversarial second pass over the proposer's output.
+    Returns {hid -> {confidence, counter_argument, refined_falsifier}}."""
+    if not hypotheses:
+        return {}
+    # assign stable hids if missing
+    for i, h in enumerate(hypotheses):
+        h.setdefault("hid", f"h{i}")
+    items = []
+    for h in hypotheses:
+        s = h.get("site", {})
+        items.append(
+            f"hid={h['hid']}  class={h.get('bug_class')}  site={s.get('file')}:"
+            f"{s.get('line')} fn={s.get('fn')}  "
+            f"falsifier={h.get('falsifier','')}  "
+            f"evidence={h.get('evidence')}"
+        )
+    prompt = (
+        "Provided source slice (the ONLY ground truth — cite only from here):\n"
+        + (source_slice[:6000] if source_slice else "(none)")
+        + "\n\nHypotheses to critique:\n  " + "\n  ".join(items)
+        + "\n\nReturn JSON only: "
+        '{"reviews":[{"hid":"...","confidence":0.0,"counter_argument":"...",'
+        '"refined_falsifier":"..."}]}'
+    )
+    raw = call_llm_with(_CRITIC_SYS, prompt)
+    parsed = parse_llm_json(raw)
+    out = {}
+    for r in parsed.get("reviews", []):
+        hid = r.get("hid")
+        if not hid:
+            continue
+        try:
+            conf = float(r.get("confidence", 0.0))
+        except (TypeError, ValueError):
+            conf = 0.0
+        out[hid] = {"confidence": conf,
+                    "counter_argument": r.get("counter_argument", ""),
+                    "refined_falsifier": r.get("refined_falsifier") or None}
+    return out
+
+
+def call_llm_with(system_prompt: str, user_prompt: str) -> str:
     try:
         from openai import OpenAI
     except Exception:
@@ -167,11 +259,15 @@ def call_llm(prompt: str) -> str:
     client = OpenAI(base_url=base, api_key=os.environ.get("OPENAI_API_KEY", "x"))
     resp = client.chat.completions.create(
         model=model,
-        messages=[{"role": "system", "content": _SYS},
-                  {"role": "user", "content": prompt}],
+        messages=[{"role": "system", "content": system_prompt},
+                  {"role": "user", "content": user_prompt}],
         temperature=0.0, max_tokens=2000,
     )
     return resp.choices[0].message.content or ""
+
+
+def call_llm(prompt: str) -> str:
+    return call_llm_with(_SYS, prompt)
 
 
 def parse_llm_json(text: str) -> dict:
@@ -194,18 +290,48 @@ def main(argv=None) -> int:
                     default="eval/kernelctf-latest/syzkaller/manager-campaign.cfg",
                     type=Path)
     ap.add_argument("--out", required=True, type=Path)
+    ap.add_argument("--history", type=Path, default=None,
+                    help="Prior iterations' outcomes — feeds the proposer.")
+    ap.add_argument("--min-confidence", type=float, default=0.3,
+                    help="Drop hypotheses the critic rates below this.")
+    ap.add_argument("--no-critic", action="store_true",
+                    help="Skip the adversarial critic pass (debug only).")
     args = ap.parse_args(argv)
 
     bucket = parse_bucket(args.bucket)
     src = (find_function_source(args.source_root, bucket["lockup_fn"])
            if bucket["lockup_fn"] else None)
-    prompt = build_prompt(bucket, src)
+    history = load_history(args.history)
+    prompt = build_prompt(bucket, src, history)
     raw = call_llm(prompt)
     parsed = parse_llm_json(raw)
+    hyps = parsed.get("hypotheses") or []
 
-    # build a directed-fuzz cfg per hypothesis (the next-iter test)
+    # SELF-ENHANCEMENT: adversarial critic pass over the proposer's output
+    critic_results: dict[str, dict] = {}
+    if hyps and not args.no_critic:
+        try:
+            critic_results = critique_hypotheses(hyps, (src or {}).get("slice", ""))
+        except Exception as e:
+            print(f"[critic] skipped: {e}", file=sys.stderr)
+    # attach + filter
+    kept = []
+    for i, hyp in enumerate(hyps):
+        hyp.setdefault("hid", f"h{i}")
+        rev = critic_results.get(hyp["hid"], {})
+        hyp["confidence"] = rev.get("confidence", 0.0) if critic_results else None
+        hyp["counter_argument"] = rev.get("counter_argument", "")
+        if rev.get("refined_falsifier"):
+            hyp["falsifier"] = rev["refined_falsifier"]
+        if critic_results and hyp["confidence"] is not None and \
+                hyp["confidence"] < args.min_confidence:
+            hyp["status"] = "rejected-by-critic"
+        else:
+            kept.append(hyp)
+
+    # build a directed-fuzz cfg per KEPT hypothesis (the next-iter test)
     cfgs = []
-    for i, hyp in enumerate(parsed.get("hypotheses") or []):
+    for i, hyp in enumerate(kept):
         hid = f"{args.bucket.name[:8]}-h{i}"
         try:
             cfg = directed_cfg_for(hyp, args.base_cfg, hid)
@@ -220,13 +346,18 @@ def main(argv=None) -> int:
         except Exception as e:
             cfgs.append(f"cfg-error: {e}")
 
+    rejected = [h for h in hyps if h.get("status") == "rejected-by-critic"]
     out = {
         "iter": 2,
         "bucket": str(args.bucket),
         "lockup_fn": bucket["lockup_fn"],
         "source_located": bool(src),
         "source_path": (src or {}).get("path"),
-        "llm_hypotheses": parsed.get("hypotheses") or [],
+        "history_used": len(history),
+        "critic_enabled": not args.no_critic,
+        "min_confidence": args.min_confidence,
+        "llm_hypotheses_kept": kept,
+        "llm_hypotheses_rejected": rejected,
         "llm_honest_finding": parsed.get("honest_finding", ""),
         "directed_fuzz_cfgs": cfgs,
         "_raw": raw[:4000],
@@ -234,14 +365,23 @@ def main(argv=None) -> int:
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(out, indent=2))
     print(f"iter=2  bucket={args.bucket.name[:8]}  fn={bucket['lockup_fn']}  "
-          f"source_located={bool(src)}  hypotheses={len(out['llm_hypotheses'])}  "
+          f"source_located={bool(src)}  history={len(history)}  "
+          f"proposed={len(hyps)}  kept={len(kept)}  rejected={len(rejected)}  "
           f"cfgs={len(cfgs)}")
-    for h in out["llm_hypotheses"]:
-        print(f"  [{h.get('bug_class','?')}] {h.get('site',{}).get('fn','?')} "
+    for h in kept:
+        conf = h.get("confidence")
+        print(f"  KEEP [{h.get('bug_class','?')} conf={conf}] "
+              f"{h.get('site',{}).get('fn','?')} "
               f"({h.get('site',{}).get('file','?')}:"
-              f"{h.get('site',{}).get('line','?')})  "
-              f"falsifier: {(h.get('falsifier') or '')[:80]}")
-    if not out["llm_hypotheses"]:
+              f"{h.get('site',{}).get('line','?')})")
+        if h.get("counter_argument"):
+            print(f"       counter: {h['counter_argument'][:100]}")
+    for h in rejected:
+        conf = h.get("confidence")
+        print(f"  REJECT [{h.get('bug_class','?')} conf={conf}] "
+              f"{h.get('site',{}).get('fn','?')}  "
+              f"counter: {h.get('counter_argument','')[:80]}")
+    if not hyps:
         print(f"  HONEST FINDING: {out['llm_honest_finding']}")
     print(f"record -> {args.out}")
     return 0

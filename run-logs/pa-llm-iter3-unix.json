@@ -1,0 +1,43 @@
+{
+  "iter": 2,
+  "bucket": "eval/kernelctf-latest/syzkaller/workdir-overnight/crashes/a21e71f73f22603b74abc8929a2c1077db9b3f37",
+  "lockup_fn": "unix_stream_recvmsg",
+  "source_located": true,
+  "source_path": "net/unix/af_unix.c",
+  "history_used": 2,
+  "critic_enabled": true,
+  "min_confidence": 0.4,
+  "llm_hypotheses_kept": [
+    {
+      "bug_class": "refcount-underflow",
+      "site": {
+        "file": "net/unix/af_unix.c",
+        "line": 2995,
+        "fn": "unix_stream_recvmsg"
+      },
+      "falsifier": "KASAN use-after-free at unix_stream_read_generic when socket is closed during recvmsg",
+      "evidence": [
+        {
+          "file": "net/unix/af_unix.c",
+          "line": 2995,
+          "note": "The function calls unix_stream_read_generic which may not properly handle socket refcounts"
+        }
+      ],
+      "trigger_sketch": [
+        "socketpair(AF_UNIX, SOCK_STREAM, 0)",
+        "sendmsg(fd, ...)",
+        "close(fd)",
+        "recvmsg(fd, ...)"
+      ],
+      "hid": "h0",
+      "confidence": 0.5,
+      "counter_argument": "No obvious guard against socket closure during read operation found in the provided code snippet."
+    }
+  ],
+  "llm_hypotheses_rejected": [],
+  "llm_honest_finding": "No memory-corruption leads found in this bucket",
+  "directed_fuzz_cfgs": [
+    "run-logs/iter-cfg-a21e71f7-h0.json"
+  ],
+  "_raw": "Okay, so I'm trying to figure out whether the soft lockup in the `unix_stream_recvmsg` function is hiding a memory corruption bug. The user provided some source code and previous iterations where they tested for UAF and double-free but didn't find anything. \n\nLooking at the source, the `unix_stream_recvmsg` function calls `unix_stream_read_generic` with a state that includes a `recv_actor`. The `recv_actor` is set to `unix_stream_read_actor`, which I don't see in the provided code, but I can assume it's responsible for reading data from the socket.\n\nIn the `unix_shutdown` function, there's a part where it accesses `other->sk_prot` and calls `prot->unhash(other)`. If `other` is null or if `prot` is null, this could cause issues. But wait, in the code, `other` is set to `unix_peer(sk)`, which should return a valid socket or null. So maybe if `other` is null, accessing `other->sk_prot` would cause a problem. But in the code, there's a check `if (other)` before accessing `other->sk_prot`, so that might not be the issue.\n\nAnother area to look at is the `unix_stream_read_generic` function. Since it's called by both `unix_stream_recvmsg` and `unix_stream_splice_read`, maybe there's a bug in how it handles the state. If the state isn't properly initialized or if there's a race condition when accessing the socket's receive queue, that could cause a lockup. \n\nLooking at the `unix_inq_len` function, it uses `skb_queue_walk` to iterate over the receive queue and sum the lengths of the skbs. If one of these skbs is null or corrupted, it could cause unexpected behavior. But the function does have a check for `sk->sk_type` before using `skb_queue_walk`, so that might not be the issue.\n\nI also notice that in `unix_stream_splice_actor`, it uses `skb_splice_bits` which could potentially cause issues if the `skb` is not properly handled. But without seeing the implementation of `skb_splice_bits`, it's hard to say.\n\nSince previous tests for UAF and double-free didn't find anything, maybe the issue is elsewhere. Perhaps a refcount underflow in the socket structure. If the socket's reference count isn't properly managed, it could lead to a use-after-free scenario when the socket is closed while being accessed.\n\nSo, I'll propose a hypothesis that there's a refcount underflow in `unix_stream_read_generic` when handling the socket. The falsifier would be KASAN detecting a use-after-free when the socket is accessed after being freed. The trigger would involve opening a socket, sending data, then closing and recvmsg to see if the refcount is mishandled.\n</think>\n\n{\"hypotheses\":[{\"bug_class\":\"refcount-underflow\",\"site\":{\"file\":\"net/unix/af_unix.c\",\"line\":2995,\"fn\":\"unix_stream_recvmsg\"},\"falsifier\":\"KASAN use-after-free fires at unix_stream_read_generic after socket is closed and accessed\",\"evidence\":[{\"file\":\"net/unix/af_unix.c\",\"line\":2995,\"note\":\"The function calls unix_stream_read_generic which may not properly handle socket refcounts\"}],\"trigger_sketch\":[\"socketpair(AF_UNIX, SOCK_STREAM, 0)\",\"sendmsg(fd, ...)\",\"close(fd)\",\"recvmsg(fd, ...)\"]}],\"honest_finding\":\"No memory-corruption leads found in this bucket\"}"
+}

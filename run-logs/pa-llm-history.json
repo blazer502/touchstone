@@ -1,0 +1,26 @@
+{
+  "history": [
+    {
+      "iter": 2,
+      "bug_class": "uaf",
+      "site": {
+        "file": "net/unix/af_unix.c",
+        "line": 3000,
+        "fn": "unix_stream_recvmsg"
+      },
+      "outcome": "falsified",
+      "reason": "12 min directed fuzz on socketpair+sendmsg+close+recvmsg trigger \u2014 only reproduced soft-lockup, KASAN never fired"
+    },
+    {
+      "iter": 2,
+      "bug_class": "double-free",
+      "site": {
+        "file": "net/unix/af_unix.c",
+        "line": 3020,
+        "fn": "unix_stream_splice_actor"
+      },
+      "outcome": "untested",
+      "reason": "cfg generated (h1) but not run; v2 critic also rejected proposals at conf=0.2"
+    }
+  ]
+}
