@@ -1,0 +1,178 @@
+{
+  "total_buckets": 3,
+  "n_clusters": 2,
+  "clusters": [
+    {
+      "cluster_fn": "unix_stream_recvmsg",
+      "cluster_size": 2,
+      "source_located": true,
+      "source_path": "net/unix/af_unix.c",
+      "unique_descriptions": [
+        "BUG: soft lockup in unix_stream_recvmsg"
+      ],
+      "unique_top_rips": [
+        "lock_acquire+0x1ee/0x520 home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/kernel/locking/lockdep.c:5793",
+        "rcu_is_watching_curr_cpu home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/include/linux/context_tracking.h:128 [inline]"
+      ],
+      "syscalls_union": [
+        "accept",
+        "add_key",
+        "add_key$fscrypt_v1",
+        "add_key$keyring",
+        "add_key$user",
+        "bind$alg",
+        "close",
+        "connect$vsock_dgram",
+        "dup",
+        "dup2",
+        "dup3",
+        "eventfd2",
+        "fallocate",
+        "fchdir",
+        "gcm",
+        "io_setup",
+        "io_submit",
+        "ioctl$F2FS_IOC_COMPRESS_FILE",
+        "ioctl$PERF_EVENT_IOC_ENABLE",
+        "ioctl$PERF_EVENT_IOC_ID",
+        "ioctl$PERF_EVENT_IOC_PAUSE_OUTPUT",
+        "ioctl$PERF_EVENT_IOC_SET_OUTPUT",
+        "ioctl$sock_SIOCETHTOOL",
+        "ioctl$sock_SIOCGIFINDEX_80211",
+        "keyctl$KEYCTL_MOVE",
+        "keyctl$clear",
+        "keyctl$search",
+        "keyctl$set_reqkey_keyring",
+        "lremovexattr",
+        "madvise",
+        "mmap",
+        "openat",
+        "openat$sysfs",
+        "perf_event_open",
+        "prctl$PR_SET_NO_NEW_PRIVS",
+        "prctl$PR_SET_SYSCALL_USER_DISPATCH_ON",
+        "recvmsg$unix",
+        "rfc4543",
+        "rseq",
+        "seccomp$SECCOMP_SET_MODE_FILTER_LISTENER",
+        "select",
+        "sendmmsg",
+        "sendmsg",
+        "sendmsg$IPCTNL_MSG_EXP_NEW",
+        "sendmsg$IPCTNL_MSG_TIMEOUT_NEW",
+        "sendmsg$NL80211_CMD_NEW_KEY",
+        "sendmsg$inet",
+        "sendmsg$sock",
+        "signalfd4",
+        "socket$alg",
+        "socket$netlink",
+        "socket$nl_generic",
+        "socket$vsock_dgram",
+        "socketpair",
+        "socketpair$nbd",
+        "socketpair$unix",
+        "syz_clone",
+        "syz_genetlink_get_family_id$gtp",
+        "syz_genetlink_get_family_id$tipc",
+        "write$cgroup_pid"
+      ],
+      "bucket_dirs": [
+        "eval/kernelctf-latest/syzkaller/workdir-overnight/crashes/a21e71f73f22603b74abc8929a2c1077db9b3f37",
+        "eval/kernelctf-latest/syzkaller/workdir-iter-a21e71f7-h0/crashes/a21e71f73f22603b74abc8929a2c1077db9b3f37"
+      ],
+      "hypotheses_kept": [
+        {
+          "bug_class": "lock-order-inversion",
+          "site": {
+            "file": "net/unix/af_unix.c",
+            "line": 3061,
+            "fn": "unix_shutdown"
+          },
+          "falsifier": "lockdep would detect a circular lock dependency between sk and other",
+          "evidence": [
+            {
+              "file": "net/unix/af_unix.c",
+              "line": 3061,
+              "note": "unix_state_lock(sk) could lead to deadlock when both ends shut down"
+            }
+          ],
+          "trigger_sketch": [
+            "socketpair",
+            "shutdown",
+            "connect",
+            "shutdown"
+          ],
+          "hid": "h0",
+          "confidence": 0.5,
+          "counter_argument": "The code acquires locks for both the current socket (sk) and the peer socket (other), which could lead to a deadlock if both ends shut down simultaneously."
+        }
+      ],
+      "hypotheses_rejected": [],
+      "honest_finding": "dos-only cluster \u2014 soft lockup due to deadlock in shutdown handling",
+      "directed_fuzz_cfgs": [
+        "run-logs/cluster-cfg-cluster-unix_strea-h0.json"
+      ]
+    },
+    {
+      "cluster_fn": "corrupted",
+      "cluster_size": 1,
+      "source_located": false,
+      "source_path": null,
+      "unique_descriptions": [
+        "BUG: soft lockup in corrupted"
+      ],
+      "unique_top_rips": [
+        "__preempt_count_sub home/chanyoung/veri-agent/eval/kernelctf-latest/linux/source/arch/x86/include/asm/preempt.h:84 [inline]"
+      ],
+      "syscalls_union": [
+        "add_key$fscrypt_v1",
+        "clock_gettime",
+        "copy_file_range",
+        "creat",
+        "execveat$binfmt",
+        "fallocate",
+        "futex",
+        "getsockopt$inet6_mreq",
+        "ioctl$AUTOFS_DEV_IOCTL_REQUESTER",
+        "ioctl$OCFS2_IOC_RESVSP64",
+        "ioctl$sock_ipv4_tunnel_SIOCDELTUNNEL",
+        "ioctl$sock_ipv6_tunnel_SIOCCHGTUNNEL",
+        "ioprio_set$pid",
+        "linkat",
+        "lsetxattr$system_posix_acl",
+        "migrate_pages",
+        "mkdirat",
+        "modify_ldt$read_default",
+        "mremap",
+        "openat",
+        "openat$binfmt",
+        "openat$rdma_cm",
+        "prctl$PR_SET_NO_NEW_PRIVS",
+        "preadv2",
+        "process_vm_readv",
+        "ptrace",
+        "ptrace$peek",
+        "read$FUSE",
+        "renameat2",
+        "seccomp$SECCOMP_SET_MODE_FILTER_LISTENER",
+        "sendmsg$ETHTOOL_MSG_FEATURES_SET",
+        "setsockopt$SO_TIMESTAMP",
+        "shmat",
+        "socket$nl_generic",
+        "syz_clone",
+        "syz_clone3",
+        "syz_create_resource$binfmt",
+        "syz_genetlink_get_family_id$ethtool",
+        "syz_open_procfs",
+        "write$FUSE_INTERRUPT"
+      ],
+      "bucket_dirs": [
+        "eval/kernelctf-latest/syzkaller/workdir-overnight/crashes/ee7850872969c3bfab510b6d62cf191d2945c599"
+      ],
+      "hypotheses_kept": [],
+      "hypotheses_rejected": [],
+      "honest_finding": "dos-only cluster \u2014 soft lockup likely due to deadlock or infinite loop in kernel preemption or synchronization",
+      "directed_fuzz_cfgs": []
+    }
+  ]
+}
