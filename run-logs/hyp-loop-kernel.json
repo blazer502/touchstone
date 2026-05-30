@@ -1,0 +1,533 @@
+{
+  "ts": "2026-05-30T00:31:24Z",
+  "scope": "kernel/",
+  "warnings": 689,
+  "mem_corruption_candidates": 84,
+  "reachable_unprivileged": 0,
+  "hypotheses": [
+    {
+      "hid": "dc80693118",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "kernel/trace/fgraph.c",
+        "line": 648,
+        "fn": "function_graph_enter"
+      },
+      "falsifier": "KASAN oob-write fires at function_graph_enter, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/trace/fgraph.c",
+          "line": 648,
+          "msg": "buffer overflow 'fgraph_array' 16 <= 63"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "An attacker could manipulate the fgraph_array index, leading to function pointer corruption and arbitrary code execution."
+      ],
+      "spray_hint": {
+        "object": "fgraph_array"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 1.0,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "e4ce42a42f",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "kernel/trace/fgraph.c",
+        "line": 1228,
+        "fn": "ftrace_graph_enable_direct"
+      },
+      "falsifier": "KASAN oob-write fires at ftrace_graph_enable_direct, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/trace/fgraph.c",
+          "line": 1228,
+          "msg": "buffer overflow 'fgraph_array' 16 <= 63"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Similar to dc80693118, exploiting fgraph_array could allow function pointer overwrite."
+      ],
+      "spray_hint": {
+        "object": "fgraph_array"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 1.0,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "10e832bda4",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "kernel/bpf/verifier.c",
+        "line": 2617,
+        "fn": "find_containing_subprog"
+      },
+      "falsifier": "KASAN oob-write fires at find_containing_subprog, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/bpf/verifier.c",
+          "line": 2617,
+          "msg": "buffer overflow 'vals' 258 <= s32max"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Exploiting the buffer overflow in BPF's subprog_info could allow arbitrary code execution in the kernel."
+      ],
+      "spray_hint": {
+        "object": "vals array"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 1.0,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "c6628bfec4",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "kernel/bpf/verifier.c",
+        "line": 4449,
+        "fn": "__mark_chain_precision"
+      },
+      "falsifier": "KASAN oob-write fires at __mark_chain_precision, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/bpf/verifier.c",
+          "line": 4449,
+          "msg": "buffer overflow 'st->frame[0]->regs' 11 <= 31"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Corrupting regs array in BPF could lead to register state manipulation and code execution."
+      ],
+      "spray_hint": {
+        "object": "regs array"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 1.0,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "8a5666b765",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "kernel/bpf/verifier.c",
+        "line": 4508,
+        "fn": "__mark_chain_precision"
+      },
+      "falsifier": "KASAN oob-write fires at __mark_chain_precision, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/bpf/verifier.c",
+          "line": 4508,
+          "msg": "buffer overflow 'func->regs' 11 <= 31"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Similar to c6628bfec4, regs array corruption in BPF verifier."
+      ],
+      "spray_hint": {
+        "object": "regs array"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 1.0,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "a885c4c210",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "kernel/bpf/verifier.c",
+        "line": 4689,
+        "fn": "save_register_state"
+      },
+      "falsifier": "KASAN oob-write fires at save_register_state, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/bpf/verifier.c",
+          "line": 4689,
+          "msg": "buffer overflow 'state->stack[spi]->slot_type' 8 <= s32max subtract"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Stack slot corruption could lead to memory corruption, but may require specific conditions."
+      ],
+      "spray_hint": {
+        "object": "slot_type array"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.8,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "c3e77a56fc",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "kernel/locking/lockdep.c",
+        "line": 3778,
+        "fn": "add_chain_cache"
+      },
+      "falsifier": "KASAN oob-write fires at add_chain_cache, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/locking/lockdep.c",
+          "line": 3778,
+          "msg": "buffer overflow 'chain_hlocks' 327680 <= 16777215"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Corrupting chain_hlocks could cause system instability or privilege escalation."
+      ],
+      "spray_hint": {
+        "object": "chain_hlocks array"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.8,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "dc80693118",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "kernel/trace/fgraph.c",
+        "line": 648,
+        "fn": "function_graph_enter"
+      },
+      "falsifier": "KASAN oob-write fires at function_graph_enter, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/trace/fgraph.c",
+          "line": 648,
+          "msg": "buffer overflow 'fgraph_array' 16 <= 63"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "dc80693118",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "kernel/trace/fgraph.c",
+        "line": 648,
+        "fn": "function_graph_enter"
+      },
+      "falsifier": "KASAN oob-write fires at function_graph_enter, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/trace/fgraph.c",
+          "line": 648,
+          "msg": "buffer overflow 'fgraph_array' 16 <= 63"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "3304a8afe5",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "kernel/trace/fgraph.c",
+        "line": 806,
+        "fn": "__ftrace_return_to_handler"
+      },
+      "falsifier": "KASAN oob-write fires at __ftrace_return_to_handler, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/trace/fgraph.c",
+          "line": 806,
+          "msg": "buffer overflow 'fgraph_array' 16 <= 63"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "3304a8afe5",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "kernel/trace/fgraph.c",
+        "line": 806,
+        "fn": "__ftrace_return_to_handler"
+      },
+      "falsifier": "KASAN oob-write fires at __ftrace_return_to_handler, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/trace/fgraph.c",
+          "line": 806,
+          "msg": "buffer overflow 'fgraph_array' 16 <= 63"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "3304a8afe5",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "kernel/trace/fgraph.c",
+        "line": 806,
+        "fn": "__ftrace_return_to_handler"
+      },
+      "falsifier": "KASAN oob-write fires at __ftrace_return_to_handler, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/trace/fgraph.c",
+          "line": 806,
+          "msg": "buffer overflow 'fgraph_array' 16 <= 63"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "53cc9c5ec6",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "kernel/trace/fgraph.c",
+        "line": 1229,
+        "fn": "ftrace_graph_enable_direct"
+      },
+      "falsifier": "KASAN oob-write fires at ftrace_graph_enable_direct, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/trace/fgraph.c",
+          "line": 1229,
+          "msg": "buffer overflow 'fgraph_array' 16 <= 63"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "05b7b51db3",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "kernel/trace/fgraph.c",
+        "line": 1230,
+        "fn": "ftrace_graph_enable_direct"
+      },
+      "falsifier": "KASAN oob-write fires at ftrace_graph_enable_direct, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/trace/fgraph.c",
+          "line": 1230,
+          "msg": "buffer overflow 'fgraph_array' 16 <= 63"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "9f8df56b67",
+      "bug_class": "oob-read",
+      "site": {
+        "file": "kernel/bpf/helpers.c",
+        "line": 2836,
+        "fn": "bpf_throw"
+      },
+      "falsifier": "KASAN oob-read fires at bpf_throw, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "kernel/bpf/helpers.c",
+          "line": 2836,
+          "msg": "we previously assumed 'ctx.aux' could be null (see line 2827)"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 1.01,
+      "status": "proposed",
+      "refutation": ""
+    }
+  ],
+  "wall_s": 103.0
+}

@@ -1,0 +1,10 @@
+{
+  "iter": 2,
+  "hypothesis_bug_class": "uaf",
+  "site": {
+    "file": "net/unix/af_unix.c",
+    "line": 3000,
+    "fn": "unix_stream_recvmsg"
+  },
+  "verdict_signal": "KASAN uaf"
+}

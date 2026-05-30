@@ -1,0 +1,521 @@
+{
+  "ts": "2026-05-30T00:29:41Z",
+  "scope": "mm/",
+  "warnings": 689,
+  "mem_corruption_candidates": 54,
+  "reachable_unprivileged": 0,
+  "hypotheses": [
+    {
+      "hid": "95a40a57fd",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 686,
+        "fn": "__mod_memcg_state"
+      },
+      "falsifier": "KASAN oob-write fires at __mod_memcg_state, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 686,
+          "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "An attacker could exploit this by manipulating the `idx` parameter to cause an out-of-bounds write in `memcg->vmstats_percpu->state`, potentially leading to memory corruption."
+      ],
+      "spray_hint": {
+        "object": "memcg->vmstats_percpu->state array"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 1.0,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "a7eb06cb0b",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 384,
+        "fn": "lruvec_page_state"
+      },
+      "falsifier": "KASAN oob-write fires at lruvec_page_state, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 384,
+          "msg": "buffer overflow 'pn->lruvec_stats->state' 30 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "An attacker could manipulate the `idx` parameter to cause an out-of-bounds read in `pn->lruvec_stats->state`, potentially exposing sensitive memory contents."
+      ],
+      "spray_hint": {
+        "object": "pn->lruvec_stats->state array"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.8,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "1abfbf4202",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 407,
+        "fn": "lruvec_page_state_local"
+      },
+      "falsifier": "KASAN oob-write fires at lruvec_page_state_local, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 407,
+          "msg": "buffer overflow 'pn->lruvec_stats->state_local' 30 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "An attacker could manipulate the `idx` parameter to cause an out-of-bounds read in `pn->lruvec_stats->state_local`, potentially exposing sensitive memory contents."
+      ],
+      "spray_hint": {
+        "object": "pn->lruvec_stats->state_local array"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.8,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "da6f28d563",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 645,
+        "fn": "memcg_page_state"
+      },
+      "falsifier": "KASAN oob-write fires at memcg_page_state, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 645,
+          "msg": "buffer overflow 'memcg->vmstats->state' 37 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "An attacker could manipulate the `idx` parameter to cause an out-of-bounds read in `memcg->vmstats->state`, potentially exposing sensitive memory contents."
+      ],
+      "spray_hint": {
+        "object": "memcg->vmstats->state array"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.8,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "a7eb06cb0b",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 384,
+        "fn": "lruvec_page_state"
+      },
+      "falsifier": "KASAN oob-write fires at lruvec_page_state, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 384,
+          "msg": "buffer overflow 'pn->lruvec_stats->state' 30 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "a7eb06cb0b",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 384,
+        "fn": "lruvec_page_state"
+      },
+      "falsifier": "KASAN oob-write fires at lruvec_page_state, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 384,
+          "msg": "buffer overflow 'pn->lruvec_stats->state' 30 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "1abfbf4202",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 407,
+        "fn": "lruvec_page_state_local"
+      },
+      "falsifier": "KASAN oob-write fires at lruvec_page_state_local, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 407,
+          "msg": "buffer overflow 'pn->lruvec_stats->state_local' 30 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "1abfbf4202",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 407,
+        "fn": "lruvec_page_state_local"
+      },
+      "falsifier": "KASAN oob-write fires at lruvec_page_state_local, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 407,
+          "msg": "buffer overflow 'pn->lruvec_stats->state_local' 30 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "da6f28d563",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 645,
+        "fn": "memcg_page_state"
+      },
+      "falsifier": "KASAN oob-write fires at memcg_page_state, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 645,
+          "msg": "buffer overflow 'memcg->vmstats->state' 37 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "da6f28d563",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 645,
+        "fn": "memcg_page_state"
+      },
+      "falsifier": "KASAN oob-write fires at memcg_page_state, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 645,
+          "msg": "buffer overflow 'memcg->vmstats->state' 37 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "95a40a57fd",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 686,
+        "fn": "__mod_memcg_state"
+      },
+      "falsifier": "KASAN oob-write fires at __mod_memcg_state, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 686,
+          "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "95a40a57fd",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 686,
+        "fn": "__mod_memcg_state"
+      },
+      "falsifier": "KASAN oob-write fires at __mod_memcg_state, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 686,
+          "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "95a40a57fd",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 686,
+        "fn": "__mod_memcg_state"
+      },
+      "falsifier": "KASAN oob-write fires at __mod_memcg_state, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 686,
+          "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "95a40a57fd",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 686,
+        "fn": "__mod_memcg_state"
+      },
+      "falsifier": "KASAN oob-write fires at __mod_memcg_state, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 686,
+          "msg": "buffer overflow 'memcg->vmstats_percpu->state' 37 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "58d7188938",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "mm/memcontrol.c",
+        "line": 699,
+        "fn": "memcg_page_state_local"
+      },
+      "falsifier": "KASAN oob-write fires at memcg_page_state_local, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "mm/memcontrol.c",
+          "line": 699,
+          "msg": "buffer overflow 'memcg->vmstats->state_local' 37 <= 254"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    }
+  ],
+  "wall_s": 87.8
+}

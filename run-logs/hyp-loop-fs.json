@@ -1,0 +1,549 @@
+{
+  "ts": "2026-05-30T00:35:32Z",
+  "scope": "fs/",
+  "warnings": 689,
+  "mem_corruption_candidates": 109,
+  "reachable_unprivileged": 0,
+  "hypotheses": [
+    {
+      "hid": "f40c4fddab",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "fs/nfsd/nfs4xdr.c",
+        "line": 2493,
+        "fn": "nfsd4_decode_compound"
+      },
+      "falsifier": "KASAN oob-write fires at nfsd4_decode_compound, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/nfsd/nfs4xdr.c",
+          "line": 2493,
+          "msg": "buffer overflow 'nfsd4_dec_ops' 76 <= u32max user_rl='3-u32max'"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Remote attacker sends crafted NFSv4 compound request with excessive opcnt, causing out-of-bounds write in nfsd4_dec_ops."
+      ],
+      "spray_hint": {
+        "object": "nfsd4_dec_ops"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.9,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "b90dd1e768",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "fs/btrfs/scrub.c",
+        "line": 1842,
+        "fn": "submit_initial_group_read"
+      },
+      "falsifier": "KASAN oob-write fires at submit_initial_group_read, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/btrfs/scrub.c",
+          "line": 1842,
+          "msg": "buffer overflow 'sctx->stripes' 128 <= u32max"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Attacker crafts scrub operation with excessive stripes, causing out-of-bounds access in sctx->stripes."
+      ],
+      "spray_hint": {
+        "object": "sctx->stripes"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.8,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "fda1a0c97c",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "fs/btrfs/ctree.c",
+        "line": 2113,
+        "fn": "btrfs_search_slot"
+      },
+      "falsifier": "KASAN oob-write fires at btrfs_search_slot, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/btrfs/ctree.c",
+          "line": 2113,
+          "msg": "buffer overflow 'p->nodes' 8 <= 9"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Attacker mounts crafted Btrfs filesystem, triggering out-of-bounds access in p->nodes."
+      ],
+      "spray_hint": {
+        "object": "p->nodes"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.7,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "0aab6ef3dd",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "fs/btrfs/ctree.c",
+        "line": 2125,
+        "fn": "btrfs_search_slot"
+      },
+      "falsifier": "KASAN oob-write fires at btrfs_search_slot, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/btrfs/ctree.c",
+          "line": 2125,
+          "msg": "buffer overflow 'p->nodes' 8 <= 9"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Same as above, different line in same function."
+      ],
+      "spray_hint": {
+        "object": "p->nodes"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.7,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "8619afad00",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "fs/btrfs/ctree.c",
+        "line": 2126,
+        "fn": "btrfs_search_slot"
+      },
+      "falsifier": "KASAN oob-write fires at btrfs_search_slot, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/btrfs/ctree.c",
+          "line": 2126,
+          "msg": "buffer overflow 'p->slots' 8 <= 9"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Attacker mounts crafted Btrfs filesystem, triggering out-of-bounds access in p->slots."
+      ],
+      "spray_hint": {
+        "object": "p->slots"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.7,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "773aa31734",
+      "bug_class": "double-free",
+      "site": {
+        "file": "fs/jbd2/journal.c",
+        "line": 392,
+        "fn": "jbd2_journal_write_metadata_buffer"
+      },
+      "falsifier": "KASAN double-free fires at jbd2_journal_write_metadata_buffer, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/jbd2/journal.c",
+          "line": 392,
+          "msg": "double free of 'new_bh' (line 391)"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Double-free of new_bh in journal write path, potentially exploitable via crafted journal operations."
+      ],
+      "spray_hint": {
+        "object": "new_bh"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.6,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "54d1372d97",
+      "bug_class": "double-free",
+      "site": {
+        "file": "fs/squashfs/block.c",
+        "line": 348,
+        "fn": "squashfs_read_data"
+      },
+      "falsifier": "KASAN double-free fires at squashfs_read_data, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/squashfs/block.c",
+          "line": 348,
+          "msg": "double free of 'bio' (line 315)"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Double-free of bio in Squashfs read path, potentially via crafted filesystem operations."
+      ],
+      "spray_hint": {
+        "object": "bio"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.6,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "a5da530221",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "fs/xfs/libxfs/xfs_btree.c",
+        "line": 1997,
+        "fn": "xfs_btree_lookup"
+      },
+      "falsifier": "KASAN oob-write fires at xfs_btree_lookup, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/xfs/libxfs/xfs_btree.c",
+          "line": 1997,
+          "msg": "buffer overflow '(null)' 217 <= u32max"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Integer overflow in XFS btree stats, potentially causing denial of service."
+      ],
+      "spray_hint": {
+        "object": "XFS_BTREE_STATS_INC"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.5,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "ac2368d509",
+      "bug_class": "oob-read",
+      "site": {
+        "file": "fs/btrfs/backref.c",
+        "line": 3208,
+        "fn": "btrfs_backref_link_edge"
+      },
+      "falsifier": "KASAN oob-read fires at btrfs_backref_link_edge, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/btrfs/backref.c",
+          "line": 3208,
+          "msg": "we previously assumed 'lower' could be null (see line 3204)"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Null pointer dereference in Btrfs backref, potentially via crafted filesystem."
+      ],
+      "spray_hint": {
+        "object": "lower"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.4,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "41ced68170",
+      "bug_class": "oob-read",
+      "site": {
+        "file": "fs/btrfs/backref.c",
+        "line": 3210,
+        "fn": "btrfs_backref_link_edge"
+      },
+      "falsifier": "KASAN oob-read fires at btrfs_backref_link_edge, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/btrfs/backref.c",
+          "line": 3210,
+          "msg": "we previously assumed 'upper' could be null (see line 3204)"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Null pointer dereference in Btrfs backref, same as above."
+      ],
+      "spray_hint": {
+        "object": "upper"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.4,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "3669771246",
+      "bug_class": "uninit",
+      "site": {
+        "file": "fs/btrfs/bio.c",
+        "line": 855,
+        "fn": "btrfs_repair_io_failure"
+      },
+      "falsifier": "KASAN uninit fires at btrfs_repair_io_failure, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/btrfs/bio.c",
+          "line": 855,
+          "msg": "func_call () bio_uninit"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [
+        "Uninitialized bio in Btrfs repair path, potentially causing instability."
+      ],
+      "spray_hint": {
+        "object": "bio"
+      },
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "llm-refined"
+      },
+      "score": 0.3,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "a5da530221",
+      "bug_class": "oob-write",
+      "site": {
+        "file": "fs/xfs/libxfs/xfs_btree.c",
+        "line": 1997,
+        "fn": "xfs_btree_lookup"
+      },
+      "falsifier": "KASAN oob-write fires at xfs_btree_lookup, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/xfs/libxfs/xfs_btree.c",
+          "line": 1997,
+          "msg": "buffer overflow '(null)' 217 <= u32max"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 2.02,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "2bb732b45b",
+      "bug_class": "oob-read",
+      "site": {
+        "file": "fs/btrfs/block-group.c",
+        "line": 1326,
+        "fn": "btrfs_start_trans_remove_block_group"
+      },
+      "falsifier": "KASAN oob-read fires at btrfs_start_trans_remove_block_group, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/btrfs/block-group.c",
+          "line": 1326,
+          "msg": "we previously assumed 'map' could be null (see line 1325)"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 1.01,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "6f0d7c67a1",
+      "bug_class": "oob-read",
+      "site": {
+        "file": "fs/btrfs/ctree.c",
+        "line": 638,
+        "fn": "btrfs_force_cow_block"
+      },
+      "falsifier": "KASAN oob-read fires at btrfs_force_cow_block, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/btrfs/ctree.c",
+          "line": 638,
+          "msg": "we previously assumed 'parent' could be null (see line 576)"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 1.01,
+      "status": "proposed",
+      "refutation": ""
+    },
+    {
+      "hid": "2dc156c391",
+      "bug_class": "oob-read",
+      "site": {
+        "file": "fs/btrfs/delayed-inode.c",
+        "line": 860,
+        "fn": "btrfs_batch_delete_items"
+      },
+      "falsifier": "KASAN oob-read fires at btrfs_batch_delete_items, reached from an unprivileged syscall (else refuted)",
+      "evidence": [
+        {
+          "tool": "smatch",
+          "path": "fs/btrfs/delayed-inode.c",
+          "line": 860,
+          "msg": "we previously assumed 'leaf' could be null (see line 857)"
+        }
+      ],
+      "object": {},
+      "trigger_sketch": [],
+      "spray_hint": {},
+      "reachability": {
+        "in_scope": true,
+        "unprivileged": false,
+        "entry_surfaces": 0,
+        "closest": []
+      },
+      "provenance": {
+        "proposer": "heuristic"
+      },
+      "score": 1.01,
+      "status": "proposed",
+      "refutation": ""
+    }
+  ],
+  "wall_s": 247.5
+}

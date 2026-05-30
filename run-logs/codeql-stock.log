@@ -1,0 +1,303 @@
+Running queries.
+Resolving data extensions.
+Finished resolving data extensions.
+Loading data extensions.
+Finished loading data extensions.
+[1/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Underspecified Functions/TooFewArguments.qlx.
+[2/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Arithmetic/BadAdditionOverflowCheck.qlx.
+[3/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Format/WrongNumberOfFormatArguments.qlx.
+[4/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Format/WrongTypeFormatArguments.qlx.
+[5/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-416/UseOfStringAfterLifetimeEnds.qlx.
+[6/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-416/UseOfUniquePointerAfterLifetimeEnds.qlx.
+[7/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Arithmetic/IntMultToLong.qlx.
+[8/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-190/ComparisonWithWiderType.qlx.
+[9/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Format/SnprintfOverflow.qlx.
+[10/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Memory Management/UsingExpiredStackAddress.qlx.
+[11/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Memory Management/SuspiciousCallToStrncat.qlx.
+[12/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/RedundantNullCheckSimple.qlx.
+[13/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Memory Management/PointerOverflow.qlx.
+[14/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/OO/UnsafeUseOfThis.qlx.
+[15/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Memory Management/ReturnStackAllocatedMemory.qlx.
+[16/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Arithmetic/SignedOverflowCheck.qlx.
+[17/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-732/OpenCallMissingModeArgument.qlx.
+[18/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-253/HResultBooleanConversion.qlx.
+[19/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-468/SuspiciousAddWithSizeof.qlx.
+[20/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-676/DangerousFunctionOverflow.qlx.
+[21/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-676/DangerousUseOfCin.qlx.
+[22/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-326/InsufficientKeySize.qlx.
+[23/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-014/MemsetMayBeDeleted.qlx.
+[24/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-134/UncontrolledFormatString.qlx.
+[25/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-327/BrokenCryptoAlgorithm.qlx.
+[26/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-327/OpenSslHeartbleed.qlx.
+[27/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Memory Management/AllocaInLoop.qlx.
+[28/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Conversion/CastArrayPointerArithmetic.qlx.
+[29/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-416/IteratorToExpiredContainer.qlx.
+[30/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-311/CleartextFileWrite.qlx.
+[31/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Format/NonConstantFormat.qlx.
+[32/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-319/UseOfHttp.qlx.
+[33/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-131/NoSpaceForZeroTerminator.qlx.
+[34/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-120/BadlyBoundedWrite.qlx.
+[35/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Critical/IncorrectCheckScanf.qlx.
+[36/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-611/XXE.qlx.
+[37/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-191/UnsignedDifferenceExpressionComparedZero.qlx.
+[38/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Critical/NewFreeMismatch.qlx.
+[39/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-497/ExposedSystemData.qlx.
+[40/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-120/VeryLikelyOverrunWrite.qlx.
+[41/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-367/TOCTOUFilesystemRace.qlx.
+[42/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Likely Typos/IncorrectNotOperatorUsage.qlx.
+[43/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-089/SqlTainted.qlx.
+[44/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-704/WcharCharConversion.qlx.
+[45/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-311/CleartextTransmission.qlx.
+[46/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Critical/OverflowStatic.qlx.
+[47/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-732/UnsafeDaclSecurityDescriptor.qlx.
+[48/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-079/CgiXss.qlx.
+[49/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Memory Management/UnsafeUseOfStrcat.qlx.
+[50/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Memory Management/UninitializedLocal.qlx.
+[51/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Memory Management/SuspiciousSizeof.qlx.
+[52/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-190/ArithmeticUncontrolled.qlx.
+[53/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Memory Management/StrncpyFlippedArgs.qlx.
+[54/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Critical/DoubleFree.qlx.
+[55/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-078/ExecTainted.qlx.
+[56/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-119/OverflowBuffer.qlx.
+[57/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Critical/UseAfterFree.qlx.
+[58/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-295/SSLResultNotChecked.qlx.
+[59/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-120/OverrunWriteFloat.qlx.
+[60/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-676/PotentiallyDangerousFunction.qlx.
+[61/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-120/OverrunWrite.qlx.
+[62/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Protocols/UseOfDeprecatedHardcodedProtocol.qlx.
+[63/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Likely Bugs/Protocols/TlsSettingsMisconfiguration.qlx.
+[64/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-295/SSLResultConflation.qlx.
+[65/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-190/TaintedAllocationSize.qlx.
+[66/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-732/DoNotCreateWorldWritable.qlx.
+[67/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-468/IncorrectPointerScalingVoid.qlx.
+[68/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-121/UnterminatedVarargsCall.qlx.
+[69/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-428/UnsafeCreateProcessCall.qlx.
+[70/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-468/IncorrectPointerScaling.qlx.
+[71/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-570/IncorrectAllocationErrorHandling.qlx.
+[72/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-807/TaintedCondition.qlx.
+[73/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Critical/SizeCheck2.qlx.
+[74/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Best Practices/Likely Errors/CommaBeforeMisleadingIndentation.qlx.
+[75/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Diagnostics/FailedExtractorInvocations.qlx.
+[76/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Best Practices/Likely Errors/OffsetUseBeforeRangeCheck.qlx.
+[77/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-120/UnboundedWrite.qlx.
+[78/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Diagnostics/ExtractedFiles.qlx.
+[79/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Critical/SizeCheck.qlx.
+[80/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Summary/LinesOfCode.qlx.
+[81/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-114/UncontrolledProcessOperation.qlx.
+[82/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Diagnostics/ExtractionWarnings.qlx.
+[83/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-022/TaintedPath.qlx.
+[84/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-497/PotentiallyExposedSystemData.qlx.
+[85/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Telemetry/MissingIncludes.qlx.
+[86/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Telemetry/SucceededIncludes.qlx.
+[87/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Telemetry/ExtractorInformation.qlx.
+[88/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Telemetry/CompilerErrors.qlx.
+[89/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Summary/LinesOfUserCode.qlx.
+[90/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Telemetry/DatabaseQuality.qlx.
+[91/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Telemetry/ExtractionMetrics.qlx.
+[92/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-843/TypeConfusion.qlx.
+[93/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-290/AuthenticationBypass.qlx.
+[94/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-313/CleartextSqliteDatabase.qlx.
+[95/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-311/CleartextBufferWrite.qlx.
+[96/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Critical/MissingCheckScanf.qlx.
+[97/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-119/OverrunWriteProductFlow.qlx.
+[98/98] Loaded /home/chanyoung/veri-agent/tools/codeql/qlpacks/codeql/cpp-queries/1.6.3/Security/CWE/CWE-193/InvalidPointerDeref.qlx.
+Starting evaluation of codeql/cpp-queries/Best Practices/Likely Errors/CommaBeforeMisleadingIndentation.ql.
+Starting evaluation of codeql/cpp-queries/Critical/MissingCheckScanf.ql.
+Starting evaluation of codeql/cpp-queries/Critical/UseAfterFree.ql.
+Starting evaluation of codeql/cpp-queries/Best Practices/Likely Errors/OffsetUseBeforeRangeCheck.ql.
+Starting evaluation of codeql/cpp-queries/Critical/DoubleFree.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Arithmetic/SignedOverflowCheck.ql.
+Starting evaluation of codeql/cpp-queries/Critical/IncorrectCheckScanf.ql.
+Starting evaluation of codeql/cpp-queries/Critical/OverflowStatic.ql.
+Starting evaluation of codeql/cpp-queries/Critical/NewFreeMismatch.ql.
+Starting evaluation of codeql/cpp-queries/Critical/SizeCheck.ql.
+Starting evaluation of codeql/cpp-queries/Critical/SizeCheck2.ql.
+Starting evaluation of codeql/cpp-queries/Diagnostics/ExtractionWarnings.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Arithmetic/BadAdditionOverflowCheck.ql.
+Starting evaluation of codeql/cpp-queries/Diagnostics/FailedExtractorInvocations.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Arithmetic/IntMultToLong.ql.
+Starting evaluation of codeql/cpp-queries/Diagnostics/ExtractedFiles.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Conversion/CastArrayPointerArithmetic.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Format/NonConstantFormat.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Format/WrongNumberOfFormatArguments.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Likely Typos/IncorrectNotOperatorUsage.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Format/SnprintfOverflow.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Memory Management/AllocaInLoop.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Memory Management/PointerOverflow.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Format/WrongTypeFormatArguments.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Memory Management/ReturnStackAllocatedMemory.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Memory Management/StrncpyFlippedArgs.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Memory Management/SuspiciousCallToStrncat.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Memory Management/SuspiciousSizeof.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Memory Management/UninitializedLocal.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Memory Management/UnsafeUseOfStrcat.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Memory Management/UsingExpiredStackAddress.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/OO/UnsafeUseOfThis.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Protocols/TlsSettingsMisconfiguration.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Protocols/UseOfDeprecatedHardcodedProtocol.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/RedundantNullCheckSimple.ql.
+Starting evaluation of codeql/cpp-queries/Likely Bugs/Underspecified Functions/TooFewArguments.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-014/MemsetMayBeDeleted.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-022/TaintedPath.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-078/ExecTainted.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-079/CgiXss.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-089/SqlTainted.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-114/UncontrolledProcessOperation.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-119/OverrunWriteProductFlow.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-119/OverflowBuffer.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-120/BadlyBoundedWrite.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-120/OverrunWrite.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-120/OverrunWriteFloat.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-120/UnboundedWrite.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-120/VeryLikelyOverrunWrite.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-121/UnterminatedVarargsCall.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-134/UncontrolledFormatString.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-131/NoSpaceForZeroTerminator.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-190/ComparisonWithWiderType.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-190/ArithmeticUncontrolled.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-190/TaintedAllocationSize.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-191/UnsignedDifferenceExpressionComparedZero.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-193/InvalidPointerDeref.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-253/HResultBooleanConversion.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-295/SSLResultConflation.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-290/AuthenticationBypass.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-295/SSLResultNotChecked.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-311/CleartextBufferWrite.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-311/CleartextFileWrite.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-311/CleartextTransmission.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-313/CleartextSqliteDatabase.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-319/UseOfHttp.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-326/InsufficientKeySize.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-327/BrokenCryptoAlgorithm.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-327/OpenSslHeartbleed.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-367/TOCTOUFilesystemRace.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-416/IteratorToExpiredContainer.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-416/UseOfStringAfterLifetimeEnds.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-416/UseOfUniquePointerAfterLifetimeEnds.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-428/UnsafeCreateProcessCall.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-468/IncorrectPointerScaling.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-468/SuspiciousAddWithSizeof.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-468/IncorrectPointerScalingVoid.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-497/ExposedSystemData.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-497/PotentiallyExposedSystemData.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-570/IncorrectAllocationErrorHandling.ql.
+[1/98 eval 2.9s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-416/UseOfStringAfterLifetimeEnds.bqrs.
+[2/98 eval 3.6s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Likely Typos/IncorrectNotOperatorUsage.bqrs.
+[3/98 eval 4.2s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-253/HResultBooleanConversion.bqrs.
+[4/98 eval 4.9s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Conversion/CastArrayPointerArithmetic.bqrs.
+[5/98 eval 5.9s] Evaluation done; writing results to codeql/cpp-queries/Critical/SizeCheck2.bqrs.
+[6/98 eval 5.9s] Evaluation done; writing results to codeql/cpp-queries/Critical/SizeCheck.bqrs.
+[7/98 eval 6.5s] Evaluation done; writing results to codeql/cpp-queries/Critical/IncorrectCheckScanf.bqrs.
+[8/98 eval 6.6s] Evaluation done; writing results to codeql/cpp-queries/Diagnostics/ExtractedFiles.bqrs.
+[9/98 eval 7.3s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Arithmetic/BadAdditionOverflowCheck.bqrs.
+[10/98 eval 7.5s] Evaluation done; writing results to codeql/cpp-queries/Best Practices/Likely Errors/OffsetUseBeforeRangeCheck.bqrs.
+[11/98 eval 7.9s] Evaluation done; writing results to codeql/cpp-queries/Diagnostics/ExtractionWarnings.bqrs.
+[12/98 eval 8.7s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Memory Management/PointerOverflow.bqrs.
+[13/98 eval 9.1s] Evaluation done; writing results to codeql/cpp-queries/Best Practices/Likely Errors/CommaBeforeMisleadingIndentation.bqrs.
+[14/98 eval 9.3s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Memory Management/SuspiciousSizeof.bqrs.
+[15/98 eval 9.5s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Memory Management/SuspiciousCallToStrncat.bqrs.
+[16/98 eval 9.5s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Memory Management/UnsafeUseOfStrcat.bqrs.
+[17/98 eval 9.7s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Protocols/TlsSettingsMisconfiguration.bqrs.
+[18/98 eval 9.9s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/OO/UnsafeUseOfThis.bqrs.
+[19/98 eval 10s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Protocols/UseOfDeprecatedHardcodedProtocol.bqrs.
+[20/98 eval 10.2s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Underspecified Functions/TooFewArguments.bqrs.
+[21/98 eval 10.6s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Memory Management/ReturnStackAllocatedMemory.bqrs.
+[22/98 eval 10.6s] Evaluation done; writing results to codeql/cpp-queries/Diagnostics/FailedExtractorInvocations.bqrs.
+[23/98 eval 10.8s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Memory Management/UninitializedLocal.bqrs.
+[24/98 eval 11.1s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-079/CgiXss.bqrs.
+[25/98 eval 11.3s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Memory Management/UsingExpiredStackAddress.bqrs.
+[26/98 eval 11.3s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/RedundantNullCheckSimple.bqrs.
+[27/98 eval 11.4s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Format/WrongTypeFormatArguments.bqrs.
+[28/98 eval 11.7s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-089/SqlTainted.bqrs.
+[29/98 eval 11.8s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Format/WrongNumberOfFormatArguments.bqrs.
+[30/98 eval 13.7s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-120/BadlyBoundedWrite.bqrs.
+[31/98 eval 14.2s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-121/UnterminatedVarargsCall.bqrs.
+[32/98 eval 14.5s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-131/NoSpaceForZeroTerminator.bqrs.
+[33/98 eval 14.8s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-295/SSLResultConflation.bqrs.
+[34/98 eval 15.2s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-134/UncontrolledFormatString.bqrs.
+[35/98 eval 15.3s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-313/CleartextSqliteDatabase.bqrs.
+[36/98 eval 15.5s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-319/UseOfHttp.bqrs.
+[37/98 eval 15.6s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-326/InsufficientKeySize.bqrs.
+[38/98 eval 15.6s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-327/OpenSslHeartbleed.bqrs.
+[39/98 eval 15.9s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-311/CleartextBufferWrite.bqrs.
+[40/98 eval 16s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Memory Management/AllocaInLoop.bqrs.
+[41/98 eval 15.9s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-014/MemsetMayBeDeleted.bqrs.
+[42/98 eval 16.6s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-295/SSLResultNotChecked.bqrs.
+[43/98 eval 17.8s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-311/CleartextFileWrite.bqrs.
+[44/98 eval 18s] Evaluation done; writing results to codeql/cpp-queries/Critical/DoubleFree.bqrs.
+[45/98 eval 18.2s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-416/UseOfUniquePointerAfterLifetimeEnds.bqrs.
+[46/98 eval 18.2s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-416/IteratorToExpiredContainer.bqrs.
+[47/98 eval 18.2s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-119/OverflowBuffer.bqrs.
+[48/98 eval 18.3s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-468/SuspiciousAddWithSizeof.bqrs.
+[49/98 eval 18.4s] Evaluation done; writing results to codeql/cpp-queries/Critical/UseAfterFree.bqrs.
+[50/98 eval 18.4s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-570/IncorrectAllocationErrorHandling.bqrs.
+[51/98 eval 18.4s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-078/ExecTainted.bqrs.
+[52/98 eval 18.5s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-428/UnsafeCreateProcessCall.bqrs.
+[53/98 eval 19s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Format/NonConstantFormat.bqrs.
+[54/98 eval 19s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-114/UncontrolledProcessOperation.bqrs.
+[55/98 eval 19.1s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-022/TaintedPath.bqrs.
+[56/98 eval 19.1s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-311/CleartextTransmission.bqrs.
+[57/98 eval 19.8s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-327/BrokenCryptoAlgorithm.bqrs.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-611/XXE.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-676/DangerousFunctionOverflow.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-676/DangerousUseOfCin.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-676/PotentiallyDangerousFunction.ql.
+[58/98 eval 21ms] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-676/DangerousUseOfCin.bqrs.
+[59/98 eval 19.9s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-497/ExposedSystemData.bqrs.
+[60/98 eval 66ms] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-676/DangerousFunctionOverflow.bqrs.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-704/WcharCharConversion.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-732/OpenCallMissingModeArgument.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-732/DoNotCreateWorldWritable.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-732/UnsafeDaclSecurityDescriptor.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-807/TaintedCondition.ql.
+Starting evaluation of codeql/cpp-queries/Security/CWE/CWE-843/TypeConfusion.ql.
+Starting evaluation of codeql/cpp-queries/Summary/LinesOfCode.ql.
+Starting evaluation of codeql/cpp-queries/Summary/LinesOfUserCode.ql.
+Starting evaluation of codeql/cpp-queries/Telemetry/CompilerErrors.ql.
+Starting evaluation of codeql/cpp-queries/Telemetry/ExtractionMetrics.ql.
+Starting evaluation of codeql/cpp-queries/Telemetry/DatabaseQuality.ql.
+Starting evaluation of codeql/cpp-queries/Telemetry/ExtractorInformation.ql.
+Starting evaluation of codeql/cpp-queries/Telemetry/MissingIncludes.ql.
+Starting evaluation of codeql/cpp-queries/Telemetry/SucceededIncludes.ql.
+[61/98 eval 106ms] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-676/PotentiallyDangerousFunction.bqrs.
+[62/98 eval 26ms] Evaluation done; writing results to codeql/cpp-queries/Telemetry/MissingIncludes.bqrs.
+[63/98 eval 29ms] Evaluation done; writing results to codeql/cpp-queries/Summary/LinesOfCode.bqrs.
+[64/98 eval 34ms] Evaluation done; writing results to codeql/cpp-queries/Telemetry/CompilerErrors.bqrs.
+[65/98 eval 281ms] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-611/XXE.bqrs.
+[66/98 eval 254ms] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-732/UnsafeDaclSecurityDescriptor.bqrs.
+[67/98 eval 256ms] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-732/OpenCallMissingModeArgument.bqrs.
+[68/98 eval 337ms] Evaluation done; writing results to codeql/cpp-queries/Telemetry/SucceededIncludes.bqrs.
+[69/98 eval 367ms] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-807/TaintedCondition.bqrs.
+[70/98 eval 424ms] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-704/WcharCharConversion.bqrs.
+[71/98 eval 438ms] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-732/DoNotCreateWorldWritable.bqrs.
+[72/98 eval 650ms] Evaluation done; writing results to codeql/cpp-queries/Telemetry/ExtractorInformation.bqrs.
+[73/98 eval 20.7s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Memory Management/StrncpyFlippedArgs.bqrs.
+[74/98 eval 20.8s] Evaluation done; writing results to codeql/cpp-queries/Critical/NewFreeMismatch.bqrs.
+[75/98 eval 860ms] Evaluation done; writing results to codeql/cpp-queries/Telemetry/DatabaseQuality.bqrs.
+[76/98 eval 862ms] Evaluation done; writing results to codeql/cpp-queries/Telemetry/ExtractionMetrics.bqrs.
+[77/98 eval 961ms] Evaluation done; writing results to codeql/cpp-queries/Summary/LinesOfUserCode.bqrs.
+[78/98 eval 21.1s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-290/AuthenticationBypass.bqrs.
+[79/98 eval 21.3s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-497/PotentiallyExposedSystemData.bqrs.
+[80/98 eval 25.6s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-468/IncorrectPointerScaling.bqrs.
+[81/98 eval 25.7s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-468/IncorrectPointerScalingVoid.bqrs.
+[82/98 eval 26.5s] Evaluation done; writing results to codeql/cpp-queries/Critical/MissingCheckScanf.bqrs.
+[83/98 eval 26.6s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-367/TOCTOUFilesystemRace.bqrs.
+[84/98 eval 7.2s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-843/TypeConfusion.bqrs.
+[85/98 eval 35.5s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-193/InvalidPointerDeref.bqrs.
+[86/98 eval 36.2s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-119/OverrunWriteProductFlow.bqrs.
+[87/98 eval 40.3s] Evaluation done; writing results to codeql/cpp-queries/Critical/OverflowStatic.bqrs.
+[88/98 eval 40.3s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-191/UnsignedDifferenceExpressionComparedZero.bqrs.
+[89/98 eval 40.3s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Arithmetic/SignedOverflowCheck.bqrs.
+[90/98 eval 40.3s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Format/SnprintfOverflow.bqrs.
+[91/98 eval 40.3s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-120/OverrunWrite.bqrs.
+[92/98 eval 40.3s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-120/OverrunWriteFloat.bqrs.
+[93/98 eval 40.3s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-120/VeryLikelyOverrunWrite.bqrs.
+[94/98 eval 40.4s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-190/ArithmeticUncontrolled.bqrs.
+[95/98 eval 41s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-190/TaintedAllocationSize.bqrs.
+[96/98 eval 41s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-190/ComparisonWithWiderType.bqrs.
+[97/98 eval 41.3s] Evaluation done; writing results to codeql/cpp-queries/Likely Bugs/Arithmetic/IntMultToLong.bqrs.
+[98/98 eval 45.9s] Evaluation done; writing results to codeql/cpp-queries/Security/CWE/CWE-120/UnboundedWrite.bqrs.
+Shutting down query evaluator.
+Interpreting results.
+Will not interpret file coverage baseline information, since the total number of baseline files is 60172, which is greater than the limit of 50000.
+CodeQL scanned 1817 out of 59813 C/C++ files in this invocation. Typically CodeQL is configured to analyze a single CodeQL language per invocation, so check other invocations to determine overall coverage information.

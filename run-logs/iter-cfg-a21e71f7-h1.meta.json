@@ -1,0 +1,10 @@
+{
+  "iter": 2,
+  "hypothesis_bug_class": "double-free",
+  "site": {
+    "file": "net/unix/af_unix.c",
+    "line": 3020,
+    "fn": "unix_stream_splice_actor"
+  },
+  "verdict_signal": "KASAN double-free"
+}
