@@ -117,12 +117,44 @@ then (C) for autoconf projects, and probe (B)'s partial capture as a stretch.
 - **P1 — speed lever (goto-instrument).** Add step 6; measure wall vs. bare
   `--function`. Gate: median per-function wall < 10 s on the libdwarf TU
   (vs. the 60 s timeout today).
-- **P2 — build-flag acquisition (A)+(C).** Implement heuristic flags +
-  optional `./configure`. Re-run the 40-task C sweep in `--whole-tu` mode.
-  **Headline metric: compile rate vs. the 6.7% baseline.**
-- **P3 — go/no-go.** If compile rate clears, say, ≥40%, the confirm count rises
-  enough to make the cex-bridge sweep meaningful; otherwise the build-flag wall
-  is the new ceiling and the route stays a targeted (not breadth) tool.
+- **P2 — build-flag acquisition — DONE** (`perfn_whole_tu._REPAIR_TMPL`).
+  Built the highest-ROI acquisition: an **iterative compile-repair loop** (learn
+  the flags from the compiler) rather than guessing `HAVE_*` / running
+  `./configure`. goto-cc the harness; on failure harvest the compiler's own
+  errors — GCC `'X' undeclared`, goto-cc `failed to find symbol 'X'`, and
+  `unknown type name 'X'` — synthesize exactly those `#define`/`typedef`s, retry
+  (≤6 iters, stop when a round adds nothing). Fixed the libdwarf `dwarf_util.c`
+  case (0/3 → 3/3 compiling: 1 confirm, 1 refute, 1 inconclusive).
+
+  **Headline (20 C tasks, 64 candidates, same set, slice vs `--whole-tu`+repair):**
+
+  | mode | compiled | rate | confirms |
+  |---|---|---|---|
+  | slice | 4 | 6.25% | 1 |
+  | whole-TU + repair | 6 | **9.4%** | 2 |
+
+  A real ~1.5× lift — but far below the 5-task probe's 3× and an **order of
+  magnitude below the ~40% P3 gate**. (74 s; mem cap + guard held: 2 GiB / 0
+  containers after.) The repair loop cleared the *config-macro* sub-wall, so the
+  **residual** is a different, harder class:
+  - **missing build-system headers** — e.g. `fatal error: sepol/policydb/avtab.h:
+    No such file or directory` (selinux). The OSS-Fuzz build generates/locates
+    these via `-I` paths absent from the tarball — the high-fidelity build-env
+    problem (blocked; same wall as the cmplog NO-GO, [[project-cybergym-88-push]]).
+  - **goto-cc frontend quirks** — `type symbol 'wchar_t' defined twice` (libredwg).
+  - **harness `malloc(sizeof(*p))` on opaque pointees** — `invalid application of
+    'sizeof' to an incomplete type` (cheap to fix: fixed-size fallback; would
+    recover a few, doesn't change the ceiling).
+- **P3 — go/no-go: NO-GO for breadth.** Compile rate reached **9.4%**, not ≥40%.
+  Type-closure wall: cleared. Config-macro wall: cleared by repair. But the
+  **build-fidelity wall (missing generated headers / real `-D`/`-I`) is the new
+  ceiling**, and it needs the OSS-Fuzz build env this host doesn't have — exactly
+  the risk scoped under "the new binding constraint". Whole-TU makes per-function
+  CBMC genuinely usable on *clean-build* C projects (libdwarf: ~confirm-parity
+  with slice, and it reaches functions slice can't), but it does **not** reach a
+  useful compile rate across a broad CyberGym sample. The route stays a
+  **targeted** analysis tool, not a breadth driver; corpus+fuzz 33% remains the
+  breadth lever ([[project-perfn-pa-proposer]]).
 
 ## Honest expectation
 
