@@ -34,6 +34,32 @@ from oracle.tier3_bmc.cbmc_driver import (_extract_pov,                 # noqa: 
 from tools.perfn_lower import extract_function_body, _clean_body, parse_params  # noqa: E402
 from tools.perfn_cbmc_proposer import buffer_model                     # noqa: E402
 
+# Iterative compile-repair (P2 build-flag acquisition): goto-cc the harness;
+# on failure, harvest the compiler's own "undeclared identifier" / "unknown type
+# name" errors and synthesize exactly those defines/typedefs (the dominant
+# whole-TU failure is undefined config.h macros like PACKAGE_VERSION), then
+# retry. Bounded iterations; stops early when a round adds nothing (the error
+# isn't define-fixable). This learns the build flags from the compiler instead
+# of guessing HAVE_*/running ./configure. CAVEAT: a config macro that's really a
+# size/value gets `0`, which can skew a verdict — repaired-TU verdicts are
+# lower-confidence until a real config.h is used; the bridge oracle is still the
+# final word, so a wrong confirm just fails to reproduce.
+_REPAIR_TMPL = r''': > /work/auto_defs.h
+ok=0
+for i in 1 2 3 4 5 6; do
+  if goto-cc @IDIRS@ -include /work/auto_defs.h -w -c /work/harness.c -o /work/h.gb 2>/work/gcc.err; then ok=1; break; fi
+  before=$(wc -l < /work/auto_defs.h)
+  grep -oE "'[A-Za-z_][A-Za-z0-9_]*' undeclared" /work/gcc.err | tr -d "'" | awk '{print $1}' | sort -u | while read n; do echo "#define $n 0" >> /work/auto_defs.h; done
+  grep -oE "failed to find symbol '[A-Za-z_][A-Za-z0-9_]*'" /work/gcc.err | sed "s/.*'\(.*\)'/\1/" | sort -u | while read n; do echo "#define $n 0" >> /work/auto_defs.h; done
+  grep -oE "unknown type name '[A-Za-z_][A-Za-z0-9_]*'" /work/gcc.err | sed "s/.*'\(.*\)'/\1/" | sort -u | while read n; do echo "typedef long $n;" >> /work/auto_defs.h; done
+  after=$(wc -l < /work/auto_defs.h)
+  [ "$before" = "$after" ] && break
+done
+if [ "$ok" != 1 ]; then echo PF_COMPILE_FAIL; head -c 1500 /work/gcc.err; exit 0; fi
+timeout -s KILL @TIMEOUT@ cbmc /work/h.gb --function __pf_harness_main --unwind @UNWIND@ --unwinding-assertions --trace @FLAGS@
+'''
+
+
 # property family -> CBMC flags (mirrors cbmc_driver.flag_map; leak/cleanup
 # deliberately omitted — they false-confirm on allocators).
 _FLAGS = {
@@ -121,15 +147,11 @@ def run_whole_tu(source_root: Path, tu_rel: str, func: str, *,
 
     idirs = [f"-I/src/{d}" for d in _include_dirs(root)] + ["-I/src", "-I/work"]
     flags = _FLAGS.get(property, _FLAGS["no-oob"]) + list(extra_flags or [])
-    inner = (
-        "goto-cc " + " ".join(idirs) + " -w -c /work/harness.c -o /work/h.gb "
-        "2>/work/gcc.err; "
-        "if [ ! -f /work/h.gb ]; then echo PF_COMPILE_FAIL; "
-        "head -c 1500 /work/gcc.err; exit 0; fi; "
-        f"timeout -s KILL {timeout_s} cbmc /work/h.gb "
-        f"--function __pf_harness_main --unwind {unwind} --unwinding-assertions "
-        "--trace " + " ".join(flags)
-    )
+    inner = (_REPAIR_TMPL
+             .replace("@IDIRS@", " ".join(idirs))
+             .replace("@TIMEOUT@", str(timeout_s))
+             .replace("@UNWIND@", str(unwind))
+             .replace("@FLAGS@", " ".join(flags)))
     container = f"cbmcwt-{func[:20]}-{int(time.monotonic()*1e6)}"
     cmd = (shlex.split(_stage_b.DOCKER)
            + ["run", "--rm", "--name", container,
