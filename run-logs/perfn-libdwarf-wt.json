@@ -1,0 +1,120 @@
+{
+  "ts": "2026-05-31T02:35:45Z",
+  "source_root": "/tmp/pf_ws/src-vul/libdwarf/src/lib/libdwarf",
+  "n": 8,
+  "llm": false,
+  "tally": {
+    "confirmed-local": 1,
+    "refuted": 3,
+    "inconclusive": 4
+  },
+  "wall_s": 6.3,
+  "results": [
+    {
+      "path": "dwarf_leb.c",
+      "func": "_dwarf_skip_leb128",
+      "bug_class": "oob-read",
+      "buffer_modeled": [
+        "endptr",
+        "leb128",
+        "leb128_length"
+      ],
+      "cbmc_verdict": "unsafe",
+      "wall_ms": 817,
+      "verdict": "confirmed-local",
+      "pov": "run-logs/perfn-libdwarf-wt/_dwarf_skip_leb128.cbmc-pov.json",
+      "target_location": "line 97 [_dwarf_skip_leb128.pointer_dereference.5]"
+    },
+    {
+      "path": "dwarf_leb.c",
+      "func": "dwarf_decode_leb128",
+      "bug_class": "oob-read",
+      "buffer_modeled": [
+        "endptr",
+        "leb128",
+        "leb128_length",
+        "outval"
+      ],
+      "cbmc_verdict": "safe",
+      "wall_ms": 790,
+      "verdict": "refuted"
+    },
+    {
+      "path": "dwarf_leb.c",
+      "func": "dwarf_decode_signed_leb128",
+      "bug_class": "oob-read",
+      "buffer_modeled": [
+        "endptr",
+        "leb128",
+        "leb128_length",
+        "outval"
+      ],
+      "cbmc_verdict": "safe",
+      "wall_ms": 794,
+      "verdict": "refuted"
+    },
+    {
+      "path": "dwarf_leb.c",
+      "func": "dwarf_encode_leb128",
+      "bug_class": "oob-write",
+      "buffer_modeled": [
+        "nbytes",
+        "space",
+        "splen"
+      ],
+      "cbmc_verdict": "safe",
+      "wall_ms": 774,
+      "verdict": "refuted"
+    },
+    {
+      "path": "dwarf_arange.c",
+      "func": "free_aranges_chain",
+      "bug_class": "uaf",
+      "buffer_modeled": [],
+      "cbmc_verdict": "inconclusive",
+      "wall_ms": 873,
+      "verdict": "inconclusive",
+      "note": "OBJECT(cur) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))\nViolated property:\n  file /src/dwarf_arange.c function free_aranges_chain line 66 thread 0\n  dereference failure: dead object in cur->ch_itemtype\n  !(__CPROVER_POINTER_OBJECT(cur) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))\nViolated property:\n  file /src/dwarf_arange.c function free_aranges_chain line 66 thread 0\n  dereference"
+    },
+    {
+      "path": "dwarf_util.c",
+      "func": "_dwarf_valid_form_we_know",
+      "bug_class": "oob-read",
+      "buffer_modeled": [],
+      "cbmc_verdict": "inconclusive",
+      "wall_ms": 690,
+      "verdict": "inconclusive",
+      "note": "compile-failed: /src/dwarf_util.c: In function 'dwarf_package_version':\n/src/dwarf_util.c:101:1: error: failed to find symbol 'PACKAGE_VERSION'\n     return PACKAGE_VERSION;\nCONVERSION ERROR"
+    },
+    {
+      "path": "dwarf_util.c",
+      "func": "_dwarf_check_string_valid",
+      "bug_class": "oob-read",
+      "buffer_modeled": [
+        "areaendptr",
+        "areaptr",
+        "error",
+        "strptr"
+      ],
+      "cbmc_verdict": "inconclusive",
+      "wall_ms": 683,
+      "verdict": "inconclusive",
+      "note": "compile-failed: /src/dwarf_util.c: In function 'dwarf_package_version':\n/src/dwarf_util.c:101:1: error: failed to find symbol 'PACKAGE_VERSION'\n     return PACKAGE_VERSION;\nCONVERSION ERROR"
+    },
+    {
+      "path": "dwarf_util.c",
+      "func": "_dwarf_get_size_of_val",
+      "bug_class": "oob-read",
+      "buffer_modeled": [
+        "error",
+        "section_end_ptr",
+        "size_out",
+        "val_ptr"
+      ],
+      "cbmc_verdict": "inconclusive",
+      "wall_ms": 669,
+      "verdict": "inconclusive",
+      "note": "compile-failed: /src/dwarf_util.c: In function 'dwarf_package_version':\n/src/dwarf_util.c:101:1: error: failed to find symbol 'PACKAGE_VERSION'\n     return PACKAGE_VERSION;\nCONVERSION ERROR"
+    }
+  ]
+}

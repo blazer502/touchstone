@@ -213,48 +213,66 @@ def _cex_has_trigger(pov_path, param_names: set) -> bool:
 
 
 def run_one(source_root: Path, cand: dict, model, *, unwind: int,
-            timeout_s: int, out_dir: Path) -> dict:
+            timeout_s: int, out_dir: Path, whole_tu: bool = False) -> dict:
     rel, func = cand["path"], cand["func"]
     bug_class = cand.get("bug_class", "oob-write")
-    lr = lower_function(source_root, rel, func)
     rec = {"path": rel, "func": func, "bug_class": bug_class}
-    if not lr.ok:
-        rec.update(verdict="wont-lower", reason=lr.reason)
-        return rec
-    rec["resolved_types"] = len(lr.resolved_types)
-    rec["invented_macros"] = lr.invented_macros
-    preconds = propose_preconditions(lr, bug_class, model)
-    rec["preconditions"] = preconds
-    # pointee map: typedef param-type -> expanded tag (best-effort via lr decls)
-    expanded = {m.group(1) for m in re.finditer(r"^struct (\w+) \{", lr.type_decls, re.M)}
-    pointee: dict[str, str] = {}
-    for ty, nm in lr.params:
-        tm = re.search(rf"typedef\s+struct\s+(\w+)\s*\*+\s*{re.escape(ty)}\s*;",
-                       lr.type_decls)
-        if tm:
-            pointee[nm] = tm.group(1)
-    # scalar typedefs (RHS not a pointer / struct / union) → safe to allocate
-    scalar_typedefs = {
-        m.group(2) for m in re.finditer(
-            r"typedef\s+([^;]*?)\b(\w+)\s*;", lr.type_decls)
-        if "*" not in m.group(1) and not re.search(r"\b(struct|union)\b", m.group(1))
-    }
-    bufset, modeled = buffer_model(lr.params)
-    obj_setup = _alloc_for([(t, n) for t, n in lr.params if n not in modeled],
-                           expanded, pointee, scalar_typedefs)
-    setup = bufset + obj_setup
-    rec["buffer_modeled"] = sorted(modeled)
-    harness = build_harness(lr, preconds, setup)
-    hpath = out_dir / f"{func}.c"
-    hpath.write_text(harness)
     prop, extra = _PROP.get(bug_class, ("no-oob", _MEMSAFE_NOLEAK))
-    try:
-        v = run_cbmc_oracle(hpath, function="main", property=prop,
-                            extra_flags=extra, unwind=unwind,
-                            timeout_s=timeout_s, out_dir=out_dir)
-    except Exception as e:
-        rec.update(verdict="cbmc-error", reason=str(e)[:200])
-        return rec
+
+    if whole_tu:
+        # Whole-TU path (docs/whole-tu-compile-scope.md P0): compile the real TU
+        # via goto-cc instead of harvesting a type closure. No lowering / no LLM
+        # precondition step — the real headers supply the types.
+        from tools.perfn_whole_tu import (signature as _wt_sig,
+                                          _setup as _wt_setup, run_whole_tu)
+        sigp = _wt_sig(source_root, rel, func)
+        if not sigp:
+            rec.update(verdict="wont-lower", reason="signature-parse-failed")
+            return rec
+        _sig, params = sigp
+        _, modeled = _wt_setup(params)
+        rec["buffer_modeled"] = sorted(modeled)
+        v = run_whole_tu(source_root, rel, func, property=prop, extra_flags=extra,
+                         unwind=unwind, timeout_s=timeout_s, out_dir=out_dir)
+    else:
+        lr = lower_function(source_root, rel, func)
+        if not lr.ok:
+            rec.update(verdict="wont-lower", reason=lr.reason)
+            return rec
+        rec["resolved_types"] = len(lr.resolved_types)
+        rec["invented_macros"] = lr.invented_macros
+        preconds = propose_preconditions(lr, bug_class, model)
+        rec["preconditions"] = preconds
+        params = lr.params
+        # pointee map: typedef param-type -> expanded tag (best-effort via lr decls)
+        expanded = {m.group(1) for m in re.finditer(r"^struct (\w+) \{", lr.type_decls, re.M)}
+        pointee: dict[str, str] = {}
+        for ty, nm in lr.params:
+            tm = re.search(rf"typedef\s+struct\s+(\w+)\s*\*+\s*{re.escape(ty)}\s*;",
+                           lr.type_decls)
+            if tm:
+                pointee[nm] = tm.group(1)
+        # scalar typedefs (RHS not a pointer / struct / union) → safe to allocate
+        scalar_typedefs = {
+            m.group(2) for m in re.finditer(
+                r"typedef\s+([^;]*?)\b(\w+)\s*;", lr.type_decls)
+            if "*" not in m.group(1) and not re.search(r"\b(struct|union)\b", m.group(1))
+        }
+        bufset, modeled = buffer_model(lr.params)
+        obj_setup = _alloc_for([(t, n) for t, n in lr.params if n not in modeled],
+                               expanded, pointee, scalar_typedefs)
+        setup = bufset + obj_setup
+        rec["buffer_modeled"] = sorted(modeled)
+        harness = build_harness(lr, preconds, setup)
+        hpath = out_dir / f"{func}.c"
+        hpath.write_text(harness)
+        try:
+            v = run_cbmc_oracle(hpath, function="main", property=prop,
+                                extra_flags=extra, unwind=unwind,
+                                timeout_s=timeout_s, out_dir=out_dir)
+        except Exception as e:
+            rec.update(verdict="cbmc-error", reason=str(e)[:200])
+            return rec
     rec["cbmc_verdict"] = v.verdict
     rec["wall_ms"] = v.wall_ms
     if v.verdict == "unsafe":
@@ -263,7 +281,7 @@ def run_one(source_root: Path, cand: dict, model, *, unwind: int,
         # caller passes a valid object), NOT a bug. Never count it as a confirm
         # — the project's no-false-confirmation rule. Such functions need an
         # explicit buffer/object model before per-function CBMC can decide them.
-        param_names = {nm for _, nm in lr.params}
+        param_names = {nm for _, nm in params}
         spurious = False
         try:
             pov = json.loads(Path(v.pov_path).read_text()).get("assignment", {})
@@ -309,6 +327,8 @@ def main(argv=None) -> int:
     ap.add_argument("--unwind", type=int, default=6)
     ap.add_argument("--timeout-s", type=int, default=90)
     ap.add_argument("--no-llm", action="store_true")
+    ap.add_argument("--whole-tu", action="store_true",
+                    help="compile the real TU via goto-cc (P0) instead of slice-lowering")
     ap.add_argument("--kernel", action="store_true",
                     help="inject the kernel-idiom prelude (u32/__le/atomic_t/__user...)")
     ap.add_argument("--out", default="run-logs/perfn-cbmc.json")
@@ -344,7 +364,8 @@ def main(argv=None) -> int:
     tally: dict[str, int] = {}
     for i, c in enumerate(uniq):
         r = run_one(Path(args.source_root), c, model,
-                    unwind=args.unwind, timeout_s=args.timeout_s, out_dir=out_dir)
+                    unwind=args.unwind, timeout_s=args.timeout_s, out_dir=out_dir,
+                    whole_tu=args.whole_tu)
         results.append(r)
         tally[r["verdict"]] = tally.get(r["verdict"], 0) + 1
         print(f"[{i+1}/{len(uniq)}] {r['verdict']:16s} {c['func'][:34]:34s} "

@@ -84,12 +84,21 @@ then (C) for autoconf projects, and probe (B)'s partial capture as a stretch.
 
 ## Phased plan
 
-- **P0 — harness-link MVP (1 sitting).** Wire steps 2–5 + 7 into a
-  `--whole-tu` mode of `tools/perfn_cbmc_proposer`: gen a header-including
-  harness, goto-cc both, link (fix the symbol-drop via link order or
-  `--export-file-local-symbols`), run cbmc. Verify on `free_aranges_chain` and
-  the libdwarf set that it reproduces the slice driver's *sound* verdicts
-  (skip_leb128 still confirms, etc.). Gate: ≥1 real confirm preserved.
+- **P0 — harness MVP — DONE** (`tools/perfn_whole_tu.py`, `--whole-tu` on
+  `perfn_cbmc_proposer`). Built it as **include-the-`.c`** rather than goto-cc
+  *linking* (steps 4–5): linking can't call a `static` target, and the probe
+  showed goto-cc drops the unreferenced harness symbol. The harness
+  `#include`s the target `.c` (brings every real type/macro + makes statics
+  visible) and models params with `malloc(sizeof(*p))` + the buffer/endptr/
+  length contract — no struct tags needed (compiler knows the size). One safe
+  `docker run` does `goto-cc … ; cbmc …` with the mem cap + in-container timeout.
+  **Gate met:** on the libdwarf set, whole-TU mode reproduces the slice driver's
+  sound verdicts — `_dwarf_skip_leb128` still **confirms** (off-by-one, concrete
+  8×0x80 cex), decode/encode **refute**; slice mode unchanged (no regression).
+  Notable: `dwarf_util.c` functions now reach the *compiler* (slice mode died at
+  type-harvest) but fail on a sibling fn (`dwarf_package_version`) needing real
+  `config.h` values the empty stub lacks — i.e. the wall moved from type-closure
+  to **build-flag fidelity (P2)**, exactly as scoped.
 - **P1 — speed lever (goto-instrument).** Add step 6; measure wall vs. bare
   `--function`. Gate: median per-function wall < 10 s on the libdwarf TU
   (vs. the 60 s timeout today).
