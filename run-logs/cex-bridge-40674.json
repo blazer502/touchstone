@@ -1,0 +1,21 @@
+{
+  "ts": "2026-05-31T00:47:42Z",
+  "task": "arvo:40674",
+  "povs": 1,
+  "cex_seeds": 1,
+  "dict_tokens": 10,
+  "cex_result": {
+    "task": "arvo:40674",
+    "n_seeds": 1,
+    "n_tokens": 10,
+    "harness": "/mnt/data/chanyoung/cybergym/cybergym-server-data/arvo/40674/vul/out/fuzz_init_path",
+    "mutants_tried": 2603,
+    "repro": false
+  },
+  "baseline_result": {
+    "repro": false,
+    "tried": 2687
+  },
+  "cex_lift": false,
+  "wall_s": 80.0
+}

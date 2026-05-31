@@ -116,6 +116,45 @@ that kills hallucinations. The binding constraints are, in order:
    (`exploit/reach.py`) seeded with the cex constraints. The sound oracle
    (KASAN / `test_poc`) remains the only end-to-end verdict.
 
-Next highest-value step: wire the `confirmed-local` cex into the CyberGym
-userspace flow (the cex bytes become a seed for `local_oracle`), measuring
-whether per-function CBMC adds reproductions the corpus+fuzz baseline misses.
+## Local→global cex bridge (`tools/cex_bridge.py`)
+
+Turns a `confirmed-local` cex into CyberGym scoring input. A cex is an assignment
+to an *internal function's* parameters, not entry bytes — so the bridge is
+**cex → byte-pattern the vulnerable code is sensitive to → libFuzzer-style
+seed + dictionary → place it → score** via `local_oracle.score_native`
+(byte-identical to the CyberGym scorer; vul=crash ∧ fix=no_crash). The sound
+oracle is the only verdict; the bridge only de-randomizes the search.
+
+`cex_to_seeds()` parses CBMC array assignments (`{ -128, ... }` → bytes) and
+scalar magic constants (→ little-endian dict tokens). The fuzz leg is an
+**oracle-scored byte mutator over the replay interface**, NOT libFuzzer:
+discovered at build time that the CyberGym native harnesses are AFL++ persistent
+drivers (`aflpp_driver.c`) — libFuzzer in-process mutation reports 0 execs on
+them and host `afl-fuzz` is policy-blocked (core_pattern), but the driver's
+`./h file` replay works and is exactly what the oracle uses.
+
+**Positive control (thin harness) — the lift is real, no fuzzing.** A thin
+harness `LLVMFuzzerTestOneInput(data,size) → vuln(data,size)` where `vuln` does
+`memcpy(buf[16], data, data[0])`: per-function CBMC confirmed it (`data[0]=17`),
+`cex_to_seeds` extracted the 8-byte seed, and the ASan build run on those exact
+cex bytes **crashed with stack-buffer-overflow at the memcpy** (write size 17 >
+16). The CBMC cex was directly a crashing PoC because the entry bytes map onto
+the function's buffer.
+
+**Negative (deep parser) — the honest limit.** On `arvo:40674` (libdwarf, the
+`_dwarf_skip_leb128` off-by-one cex), bridge + 2.7k oracle-scored mutants in
+40 s → **no repro**, same as the no-cex baseline. Byte-level mutation cannot
+synthesize a valid object file that carries the `0x80`-run pattern down to the
+buried LEB128 path. `run-logs/cex-bridge-40674.json`.
+
+**Where the bridge pays:** thin/shallow harnesses where entry bytes are (or
+quickly become) the confirmed function's buffer — there the cex is a near-direct
+PoC. For deep-format parsers it needs the inter-procedural path solved (the cex
+pattern embedded in a structured input), which byte fuzzing won't do — that's
+the unbuilt directed-reaching step (`exploit/reach.py` seeded with the cex
+constraints).
+
+Next step: a CyberGym-wide pass — run the per-function proposer on each task's
+shallow harness functions, bridge every `confirmed-local`, and report how many
+tasks the cex lifts over the corpus+fuzz 33% baseline (expected: gains
+concentrated in thin-harness tasks).

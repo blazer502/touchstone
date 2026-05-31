@@ -1,0 +1,31 @@
+{
+  "ts": "2026-05-31T00:49:13Z",
+  "source_root": "/tmp/thin",
+  "n": 1,
+  "llm": false,
+  "tally": {
+    "confirmed-local": 1
+  },
+  "wall_s": 0.7,
+  "results": [
+    {
+      "path": "harness.c",
+      "func": "vuln",
+      "bug_class": "oob-write",
+      "resolved_types": 0,
+      "invented_macros": [
+        "OOB"
+      ],
+      "preconditions": [],
+      "buffer_modeled": [
+        "data",
+        "size"
+      ],
+      "cbmc_verdict": "unsafe",
+      "wall_ms": 628,
+      "verdict": "confirmed-local",
+      "pov": "run-logs/perfn-thin/vuln.cbmc-pov.json",
+      "target_location": "line 12 [vuln.precondition_instance.2]"
+    }
+  ]
+}
