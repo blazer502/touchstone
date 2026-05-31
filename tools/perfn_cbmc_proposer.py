@@ -56,11 +56,19 @@ typedef struct { long counter; } atomic64_t;
 """
 _USE_KERNEL_PRELUDE = False
 
+# bug_class -> (cbmc_driver property family, extra CBMC flags).
+# We deliberately AVOID the "memory-safety" family for OOB classes: it bundles
+# --memory-leak-check/--memory-cleanup-check, which fire on any function that
+# allocates and returns (e.g. an `emalloc` wrapper) — an env-modeling artifact,
+# not a corruption bug. Instead we run bounds + pointer + pointer-overflow only
+# (memory-safety MINUS leak/cleanup), via the "no-oob" base (--bounds-check)
+# plus these extras.
+_MEMSAFE_NOLEAK = ["--pointer-check", "--pointer-overflow-check"]
 _PROP = {
-    "oob-write": "memory-safety", "oob-read": "memory-safety",
-    "uaf": "no-uaf", "double-free": "no-uaf",
-    "uninit": "memory-safety", "type-confusion": "memory-safety",
-    "refcount-underflow": "no-overflow", "off-by-one": "no-oob",
+    "oob-write": ("no-oob", _MEMSAFE_NOLEAK), "oob-read": ("no-oob", _MEMSAFE_NOLEAK),
+    "uaf": ("no-uaf", []), "double-free": ("no-uaf", []),
+    "uninit": ("no-oob", _MEMSAFE_NOLEAK), "type-confusion": ("no-oob", _MEMSAFE_NOLEAK),
+    "refcount-underflow": ("no-overflow", []), "off-by-one": ("no-oob", _MEMSAFE_NOLEAK),
 }
 
 
@@ -239,10 +247,11 @@ def run_one(source_root: Path, cand: dict, model, *, unwind: int,
     harness = build_harness(lr, preconds, setup)
     hpath = out_dir / f"{func}.c"
     hpath.write_text(harness)
-    prop = _PROP.get(bug_class, "memory-safety")
+    prop, extra = _PROP.get(bug_class, ("no-oob", _MEMSAFE_NOLEAK))
     try:
         v = run_cbmc_oracle(hpath, function="main", property=prop,
-                            unwind=unwind, timeout_s=timeout_s, out_dir=out_dir)
+                            extra_flags=extra, unwind=unwind,
+                            timeout_s=timeout_s, out_dir=out_dir)
     except Exception as e:
         rec.update(verdict="cbmc-error", reason=str(e)[:200])
         return rec

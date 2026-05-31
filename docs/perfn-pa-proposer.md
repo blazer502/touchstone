@@ -186,14 +186,34 @@ callees, resolved via `ctags -R`) → per-function CBMC → bridge every confirm
    `malloc` wrappers (`size=0`, no location). None carried an extractable byte
    seed, so **0 bridged**.
 
-This sweep also **hardened the soundness gate**: the first run reported 9
-"confirms"; inspection showed they were abstract pointer-deref artifacts with no
-concrete trigger, so `confirmed-local` now requires the cex to assign a concrete
-value (byte array or scalar) to a parameter — which is exactly what the bridge
-needs. That cut it to 4, and inspection shows those 4 are allocator-leak
-artifacts → the *usable* confirm count on a random sample is ≈ 0. (Known
-follow-up: drop `--memory-leak/cleanup-check` from the per-function property so
-allocator wrappers can't false-confirm at all.)
+This sweep also **hardened the soundness gate** twice:
+
+1. The first run reported 9 "confirms"; inspection showed abstract pointer-deref
+   artifacts with no concrete trigger, so `confirmed-local` now requires the cex
+   to assign a concrete value (byte array or scalar) to a parameter — exactly
+   what the bridge needs. Cut it to 4.
+2. Dropped `--memory-leak-check`/`--memory-cleanup-check` from the per-function
+   property (now bounds + pointer + pointer-overflow only, i.e. memory-safety
+   MINUS leak/cleanup), so an `emalloc`-style wrapper can't confirm just because
+   the harness "leaks" its return value. Real confirms (libdwarf `skip_leb128`,
+   the thin control) preserved.
+
+**The artifact tail is the finding.** Each guard removed one artifact class and
+revealed the next — exactly the env-modeling wall this design flagged up front:
+- nondet pointer param → invalid deref (guard 1: valid-object alloc)
+- abstract deref / empty cex (guard 2: concrete-trigger requirement)
+- `--memory-leak-check` on allocators (guard 3: drop leak/cleanup)
+- **malloc-may-fail + `noreturn` error handler** — after the leak drop, `emalloc`
+  *still* confirms: `size=2.3e18` → CBMC's malloc returns NULL → spurious
+  NULL-deref, because the function's `xalloc_die()` (noreturn) is nondet-stubbed
+  as *returning*, so CBMC walks past the null-check. (Next guard, untaken:
+  disable malloc-may-fail / model noreturn handlers.)
+
+The point: shallow harness-callees in real C projects are allocators, error
+handlers, and destructors — each a fresh env-modeling artifact, none a
+bridgeable byte OOB. The **0/40 lift is structural**, not a tuning gap; more
+guards clean the confirm count but won't surface a thin-harness bug that isn't
+there.
 
 **Verdict.** Per-function CBMC + the cex bridge is **sound and proven on thin
 harnesses** (the positive control produces a real ASan PoC, no fuzzing), but it
