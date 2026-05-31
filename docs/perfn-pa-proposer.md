@@ -154,7 +154,53 @@ pattern embedded in a structured input), which byte fuzzing won't do — that's
 the unbuilt directed-reaching step (`exploit/reach.py` seeded with the cex
 constraints).
 
-Next step: a CyberGym-wide pass — run the per-function proposer on each task's
-shallow harness functions, bridge every `confirmed-local`, and report how many
-tasks the cex lifts over the corpus+fuzz 33% baseline (expected: gains
-concentrated in thin-harness tasks).
+## CyberGym-wide sweep (`tools/cybergym_perfn_sweep.py`)
+
+Ran the full loop on **40 random CyberGym C tasks** (CBMC can't touch the 86%
+C++ majority; 228 of 1507 are C). Per task: extract vul source → target the
+SHALLOW functions (defined in the fuzz harness file + the harness's direct
+callees, resolved via `ctags -R`) → per-function CBMC → bridge every confirm.
+`run-logs/cybergym-perfn-sweep.json`, 191 s.
+
+**Funnel (the honest answer):**
+
+| stage | count |
+|---|---|
+| candidate shallow functions | 193 |
+| **compiled** (CBMC parsed + reached symex) | **13 (6.7%)** |
+| refuted | 3 |
+| confirmed-local (after soundness tightening) | 4 |
+| **bridged → lifted over baseline** | **0 / 40** |
+
+**Two structural walls, both confirmed:**
+
+1. **The compile wall dominates.** Only 6.7% of shallow functions lower +
+   compile on diverse real-project headers (vs ~60% on the single, clean
+   libdwarf tree) — `config.h`, project-specific typedefs, and deep header
+   graphs sink the rest into parse/conversion `inconclusive`.
+2. **Shallow ≠ thin-arithmetic.** The harness-callees in real projects are
+   library *entry points*, *allocators*, and *destructors* — not self-contained
+   buffer arithmetic. Every "confirm" the sweep produced was an env-modeling
+   artifact, not a thin-harness byte OOB: spurious `pointer_dereference` on
+   destructors/walkers (empty cex), and `--memory-leak-check` firing on
+   `malloc` wrappers (`size=0`, no location). None carried an extractable byte
+   seed, so **0 bridged**.
+
+This sweep also **hardened the soundness gate**: the first run reported 9
+"confirms"; inspection showed they were abstract pointer-deref artifacts with no
+concrete trigger, so `confirmed-local` now requires the cex to assign a concrete
+value (byte array or scalar) to a parameter — which is exactly what the bridge
+needs. That cut it to 4, and inspection shows those 4 are allocator-leak
+artifacts → the *usable* confirm count on a random sample is ≈ 0. (Known
+follow-up: drop `--memory-leak/cleanup-check` from the per-function property so
+allocator wrappers can't false-confirm at all.)
+
+**Verdict.** Per-function CBMC + the cex bridge is **sound and proven on thin
+harnesses** (the positive control produces a real ASan PoC, no fuzzing), but it
+**does not move the CyberGym needle on a random sample (0/40 lift)** — the
+corpus+fuzz 33% remains the better breadth lever. The per-function route is a
+*precision* instrument for the rare self-contained-arithmetic target, not a
+breadth driver. To make it pay at scale you'd need to clear the compile wall
+(whole-TU compile with the build's real generated headers — slow, needs the
+build env) AND solve the inter-procedural lift (directed reaching from the
+harness entry to the confirmed site, seeded with the cex constraints).

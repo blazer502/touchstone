@@ -186,6 +186,24 @@ def propose_preconditions(lr: LowerResult, bug_class: str, model) -> list[str]:
         return []
 
 
+def _cex_has_trigger(pov_path, param_names: set) -> bool:
+    """True iff the cex assigns a concrete value (byte array or plain integer)
+    to at least one parameter — i.e. it yields an extractable, bridgeable
+    trigger rather than an abstract pointer expression."""
+    try:
+        assign = json.loads(Path(pov_path).read_text()).get("assignment", {})
+    except Exception:
+        return False
+    for k, val in assign.items():
+        if k not in param_names or not isinstance(val, str):
+            continue
+        if "{" in val:                                  # byte array
+            return True
+        if re.fullmatch(r"\s*-?\d+[ul]*\s*", val, re.I):  # plain integer
+            return True
+    return False
+
+
 def run_one(source_root: Path, cand: dict, model, *, unwind: int,
             timeout_s: int, out_dir: Path) -> dict:
     rel, func = cand["path"], cand["func"]
@@ -249,6 +267,17 @@ def run_one(source_root: Path, cand: dict, model, *, unwind: int,
         if spurious:
             rec["verdict"] = "needs-buffer-model"
             rec["note"] = "cex relies on unconstrained pointer param (spurious)"
+            rec["pov"] = v.pov_path
+            return rec
+        # A trustworthy confirm must yield a CONCRETE trigger — a modeled buffer,
+        # an extractable byte array, or a concrete scalar param value. A cex with
+        # an empty/abstract assignment (e.g. a pointer_dereference on an internal
+        # nondet pointer of a destructor/walker) is an env-modeling artifact, not
+        # a usable bug: it can't be bridged and must not count as a confirm.
+        if not rec.get("buffer_modeled") and \
+                not _cex_has_trigger(v.pov_path, param_names):
+            rec["verdict"] = "needs-buffer-model"
+            rec["note"] = "cex has no concrete/extractable trigger (abstract deref)"
             rec["pov"] = v.pov_path
             return rec
         rec["verdict"] = "confirmed-local"
