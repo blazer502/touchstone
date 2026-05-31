@@ -127,7 +127,7 @@ def find_candidates(root: Path, max_cands: int) -> list[dict]:
 
 
 def sweep_task(task_id: str, work: Path, *, max_cands: int, unwind: int,
-               cbmc_timeout: int, bridge_budget: int) -> dict:
+               cbmc_timeout: int, bridge_budget: int, whole_tu: bool = False) -> dict:
     ext = work / task_id.replace(":", "_")
     rec = {"task": task_id}
     root = extract(task_id, ext)
@@ -144,15 +144,20 @@ def sweep_task(task_id: str, work: Path, *, max_cands: int, unwind: int,
         for c in cands:
             try:
                 r = run_one(root, c, None, unwind=unwind,
-                            timeout_s=cbmc_timeout, out_dir=out_dir)
+                            timeout_s=cbmc_timeout, out_dir=out_dir,
+                            whole_tu=whole_tu)
             except Exception as e:
                 r = {"verdict": "run-error", "reason": str(e)[:120]}
             v = r.get("verdict", "?")
             verdicts[v] = verdicts.get(v, 0) + 1
             # "compiled" = CBMC parsed + reached symbolic execution (decisive or
-            # bounded), vs. a parse/conversion failure dressed as inconclusive.
+            # bounded), vs. a parse/conversion/config failure. Whole-TU compile
+            # failures carry a "compile-failed:" evidence prefix; slice failures
+            # lack any symex marker.
             note = r.get("note", "") or ""
-            if v in ("confirmed-local", "refuted", "needs-buffer-model") or \
+            if note.startswith("compile-failed"):
+                pass
+            elif v in ("confirmed-local", "refuted", "needs-buffer-model") or \
                     re.search(r"nwinding|VERIFICATION|__CPROVER|State \d", note):
                 compiled += 1
             if v == "confirmed-local" and r.get("pov"):
@@ -190,6 +195,8 @@ def main(argv=None) -> int:
     ap.add_argument("--unwind", type=int, default=12)
     ap.add_argument("--cbmc-timeout", type=int, default=30)
     ap.add_argument("--bridge-budget", type=int, default=15)
+    ap.add_argument("--whole-tu", action="store_true",
+                    help="compile the real TU via goto-cc (P0) instead of slice-lowering")
     ap.add_argument("--out", default="run-logs/cybergym-perfn-sweep.json")
     args = ap.parse_args(argv)
 
@@ -205,7 +212,7 @@ def main(argv=None) -> int:
         tid = tk["task_id"]
         r = sweep_task(tid, work, max_cands=args.max_cands, unwind=args.unwind,
                        cbmc_timeout=args.cbmc_timeout,
-                       bridge_budget=args.bridge_budget)
+                       bridge_budget=args.bridge_budget, whole_tu=args.whole_tu)
         results.append(r)
         agg["tasks"] += 1
         if r.get("status") != "no-source":

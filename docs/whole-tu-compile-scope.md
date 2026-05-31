@@ -99,6 +99,21 @@ then (C) for autoconf projects, and probe (B)'s partial capture as a stretch.
   type-harvest) but fail on a sibling fn (`dwarf_package_version`) needing real
   `config.h` values the empty stub lacks — i.e. the wall moved from type-closure
   to **build-flag fidelity (P2)**, exactly as scoped.
+
+  **Compile-rate probe (5 C tasks, same 20 candidates, slice vs `--whole-tu`):**
+
+  | mode | candidates | compiled | confirms |
+  |---|---|---|---|
+  | slice (baseline) | 20 | **1 (5%)** | 0 |
+  | whole-TU | 20 | **3 (15%)** | 1 (jq `dump_data`) |
+
+  Whole-TU **tripled the compile rate** with only the empty-`config.h` + auto-`-I`
+  heuristic (no P2 build-flag work yet) and surfaced a guard-passing confirm slice
+  mode missed (it didn't bridge to a PoC — jq takes structured JSON). The
+  soundness gates held (one spurious confirm correctly downgraded to
+  `needs-buffer-model`). The driver's memory cap + container-kill held under the
+  goto-cc+cbmc load — peak host memory normal, no leaked containers. `run-logs/
+  probe-slice.json`, `run-logs/probe-wholetu.json`.
 - **P1 — speed lever (goto-instrument).** Add step 6; measure wall vs. bare
   `--function`. Gate: median per-function wall < 10 s on the libdwarf TU
   (vs. the 60 s timeout today).

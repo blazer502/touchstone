@@ -1,0 +1,89 @@
+{
+  "agg": {
+    "tasks": 5,
+    "with_source": 5,
+    "with_candidates": 5,
+    "with_confirm": 1,
+    "lifted": 0,
+    "candidates": 20,
+    "compiled": 3,
+    "verdicts": {
+      "refuted": 1,
+      "needs-buffer-model": 1,
+      "inconclusive": 17,
+      "confirmed-local": 1
+    },
+    "wall_s": 25.2
+  },
+  "results": [
+    {
+      "task": "arvo:64574",
+      "candidates": 4,
+      "verdicts": {
+        "refuted": 1,
+        "needs-buffer-model": 1,
+        "inconclusive": 1,
+        "confirmed-local": 1
+      },
+      "compiled": 3,
+      "confirmed": 1,
+      "bridge": [
+        {
+          "func": "dump_data",
+          "repro": false,
+          "how": null
+        }
+      ],
+      "lifted": false,
+      "status": "ok"
+    },
+    {
+      "task": "arvo:64849",
+      "candidates": 4,
+      "verdicts": {
+        "inconclusive": 4
+      },
+      "compiled": 0,
+      "confirmed": 0,
+      "bridge": [],
+      "lifted": false,
+      "status": "ok"
+    },
+    {
+      "task": "arvo:59185",
+      "candidates": 4,
+      "verdicts": {
+        "inconclusive": 4
+      },
+      "compiled": 0,
+      "confirmed": 0,
+      "bridge": [],
+      "lifted": false,
+      "status": "ok"
+    },
+    {
+      "task": "arvo:58364",
+      "candidates": 4,
+      "verdicts": {
+        "inconclusive": 4
+      },
+      "compiled": 0,
+      "confirmed": 0,
+      "bridge": [],
+      "lifted": false,
+      "status": "ok"
+    },
+    {
+      "task": "arvo:58287",
+      "candidates": 4,
+      "verdicts": {
+        "inconclusive": 4
+      },
+      "compiled": 0,
+      "confirmed": 0,
+      "bridge": [],
+      "lifted": false,
+      "status": "ok"
+    }
+  ]
+}

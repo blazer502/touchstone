@@ -1,0 +1,79 @@
+{
+  "agg": {
+    "tasks": 5,
+    "with_source": 5,
+    "with_candidates": 5,
+    "with_confirm": 0,
+    "lifted": 0,
+    "candidates": 20,
+    "compiled": 1,
+    "verdicts": {
+      "refuted": 1,
+      "inconclusive": 19
+    },
+    "wall_s": 16.0
+  },
+  "results": [
+    {
+      "task": "arvo:64574",
+      "candidates": 4,
+      "verdicts": {
+        "refuted": 1,
+        "inconclusive": 3
+      },
+      "compiled": 1,
+      "confirmed": 0,
+      "bridge": [],
+      "lifted": false,
+      "status": "ok"
+    },
+    {
+      "task": "arvo:64849",
+      "candidates": 4,
+      "verdicts": {
+        "inconclusive": 4
+      },
+      "compiled": 0,
+      "confirmed": 0,
+      "bridge": [],
+      "lifted": false,
+      "status": "ok"
+    },
+    {
+      "task": "arvo:59185",
+      "candidates": 4,
+      "verdicts": {
+        "inconclusive": 4
+      },
+      "compiled": 0,
+      "confirmed": 0,
+      "bridge": [],
+      "lifted": false,
+      "status": "ok"
+    },
+    {
+      "task": "arvo:58364",
+      "candidates": 4,
+      "verdicts": {
+        "inconclusive": 4
+      },
+      "compiled": 0,
+      "confirmed": 0,
+      "bridge": [],
+      "lifted": false,
+      "status": "ok"
+    },
+    {
+      "task": "arvo:58287",
+      "candidates": 4,
+      "verdicts": {
+        "inconclusive": 4
+      },
+      "compiled": 0,
+      "confirmed": 0,
+      "bridge": [],
+      "lifted": false,
+      "status": "ok"
+    }
+  ]
+}
