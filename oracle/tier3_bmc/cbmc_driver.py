@@ -34,6 +34,11 @@ from surface import stage_b as _stage_b  # noqa: E402
 
 from .verdict import Tier3Verdict  # noqa: E402
 
+# Hard memory ceiling for a single CBMC container (RAM == swap, so no host swap
+# spill). One pathological symex can otherwise reach tens of GB; this bounds the
+# blast radius. Override via env for big-iron runs.
+CBMC_MEM_LIMIT = os.environ.get("CBMC_MEM_LIMIT", "8g")
+
 
 # CBMC 6.x prints one or more "Trace for <prop-id>:" blocks under --trace.
 # (CBMC 5.x used "Counterexample:" — we accept both.)
@@ -144,10 +149,21 @@ def run_cbmc_oracle(
 
     src_abs = source.resolve()
     src_dir = src_abs.parent
+    # A pathological instance (deep recursion / unconstrained nondet) can make
+    # CBMC's symex balloon to tens of GB. Two guards keep one bad run from taking
+    # down the host (see [[feedback-cbmc-docker-timeout]]):
+    #   1. a hard container memory cap — CBMC OOM-dies instead of eating RAM/swap;
+    #   2. an IN-CONTAINER `timeout` (+ a named container we can `docker kill`) —
+    #      a bare `subprocess.run(timeout=)` only kills the docker *client*, NOT
+    #      the cbmc process inside `--rm`, which then runs on detached forever.
+    container = f"cbmc-{os.getpid()}-{int(time.monotonic() * 1e6)}"
     cmd = (
         shlex.split(_stage_b.DOCKER)
-        + ["run", "--rm", "-v", f"{src_dir}:/work:ro", "-w", "/work",
-           _stage_b.CBMC_IMG, "cbmc",
+        + ["run", "--rm", "--name", container,
+           "--memory", CBMC_MEM_LIMIT, "--memory-swap", CBMC_MEM_LIMIT,
+           "-v", f"{src_dir}:/work:ro", "-w", "/work",
+           _stage_b.CBMC_IMG,
+           "timeout", "-s", "KILL", str(timeout_s), "cbmc",
            src_abs.name, "--function", function,
            "--unwind", str(unwind), "--unwinding-assertions",
            "--trace", "-DCBMC_HARNESS=1"]
@@ -156,9 +172,18 @@ def run_cbmc_oracle(
 
     t0 = time.monotonic()
     try:
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout_s)
-        timed_out = False
+        # Outer budget = inner timeout + grace; the inner `timeout` should fire
+        # first and let CBMC exit cleanly with partial output.
+        r = subprocess.run(cmd, capture_output=True, text=True,
+                           timeout=timeout_s + 15)
+        # In-container timeout (137 = SIGKILL) or docker OOM-kill (137) → treat as
+        # undecided-within-resources, same as a wall timeout.
+        timed_out = r.returncode in (124, 137)
     except subprocess.TimeoutExpired as e:
+        # Outer budget blew: the docker client is dead but the container may not
+        # be — kill it by name so it can't leak and keep allocating.
+        subprocess.run(shlex.split(_stage_b.DOCKER) + ["kill", container],
+                       capture_output=True)
         timed_out = True
         class _R:
             returncode = -1
@@ -171,8 +196,9 @@ def run_cbmc_oracle(
 
     if timed_out:
         verdict = "inconclusive"
-        note = ("CBMC wall budget exhausted; bounded BMC didn't decide within "
-                f"timeout={timeout_s}s. Re-run with larger budget or higher unwind.")
+        note = (f"CBMC didn't decide within timeout={timeout_s}s or hit the "
+                f"{CBMC_MEM_LIMIT} memory cap (exit={r.returncode}; 137=killed/OOM). "
+                "Re-run with a larger budget/cap or higher unwind.")
         target_loc = None
         pov_path: Optional[str] = None
     elif _stage_b._CBMC_OK.search(out):
