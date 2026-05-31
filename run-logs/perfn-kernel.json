@@ -1,0 +1,135 @@
+{
+  "ts": "2026-05-31T00:37:41Z",
+  "source_root": "eval/kernelctf-latest/linux/source",
+  "n": 6,
+  "llm": false,
+  "tally": {
+    "inconclusive": 6
+  },
+  "wall_s": 5.4,
+  "results": [
+    {
+      "path": "fs/nfsd/nfs4xdr.c",
+      "func": "nfsd4_decode_compound",
+      "bug_class": "oob-write",
+      "resolved_types": 66,
+      "invented_macros": [
+        "ARRAY_SIZE",
+        "NFS4_OPAQUE_LIMIT",
+        "OPDESC",
+        "OP_ILLEGAL",
+        "OP_LOCK",
+        "OP_LOCKT",
+        "OP_READ",
+        "OP_READ_PLUS",
+        "RC_NOCACHE",
+        "RC_REPLBUFF",
+        "XDR_UNIT"
+      ],
+      "preconditions": [],
+      "buffer_modeled": [],
+      "cbmc_verdict": "inconclusive",
+      "wall_ms": 593,
+      "verdict": "inconclusive",
+      "note": "CBMC version 6.4.0 (cbmc-6.4.0) 64-bit x86_64 linux\nfile nfsd4_decode_compound.c line 82: syntax error before 'clientid_t'\nPARSING ERROR"
+    },
+    {
+      "path": "fs/squashfs/block.c",
+      "func": "squashfs_read_data",
+      "bug_class": "double-free",
+      "resolved_types": 3,
+      "invented_macros": [
+        "EIO",
+        "ERROR",
+        "SQUASHFS_COMPRESSED",
+        "SQUASHFS_COMPRESSED_BLOCK",
+        "SQUASHFS_COMPRESSED_SIZE",
+        "SQUASHFS_COMPRESSED_SIZE_BLOCK",
+        "TRACE",
+        "WARN_ON_ONCE"
+      ],
+      "preconditions": [],
+      "buffer_modeled": [],
+      "cbmc_verdict": "inconclusive",
+      "wall_ms": 608,
+      "verdict": "inconclusive",
+      "note": "CBMC version 6.4.0 (cbmc-6.4.0) 64-bit x86_64 linux\nfile squashfs_read_data.c line 45: syntax error before 'pgoff_t'\nPARSING ERROR"
+    },
+    {
+      "path": "fs/jbd2/journal.c",
+      "func": "jbd2_journal_write_metadata_buffer",
+      "bug_class": "double-free",
+      "resolved_types": 0,
+      "invented_macros": [
+        "ENOMEM",
+        "GFP_NOFS",
+        "JBUFFER_TRACE",
+        "J_ASSERT_BH",
+        "__GFP_NOFAIL"
+      ],
+      "preconditions": [],
+      "buffer_modeled": [],
+      "cbmc_verdict": "inconclusive",
+      "wall_ms": 608,
+      "verdict": "inconclusive",
+      "note": "CBMC version 6.4.0 (cbmc-6.4.0) 64-bit x86_64 linux\nfile jbd2_journal_write_metadata_buffer.c line 32: syntax error before '*'\nPARSING ERROR"
+    },
+    {
+      "path": "fs/btrfs/scrub.c",
+      "func": "submit_initial_group_read",
+      "bug_class": "oob-write",
+      "resolved_types": 5,
+      "invented_macros": [
+        "ASSERT"
+      ],
+      "preconditions": [],
+      "buffer_modeled": [],
+      "cbmc_verdict": "inconclusive",
+      "wall_ms": 565,
+      "verdict": "inconclusive",
+      "note": "CBMC version 6.4.0 (cbmc-6.4.0) 64-bit x86_64 linux\nfile submit_initial_group_read.c line 44: syntax error before 'ktime_t'\nPARSING ERROR"
+    },
+    {
+      "path": "fs/btrfs/ctree.c",
+      "func": "btrfs_search_slot",
+      "bug_class": "oob-write",
+      "resolved_types": 32,
+      "invented_macros": [
+        "ASSERT",
+        "BUG_ON",
+        "EAGAIN",
+        "EINVAL",
+        "IS_ERR",
+        "PTR_ERR",
+        "WARN_ON"
+      ],
+      "preconditions": [],
+      "buffer_modeled": [],
+      "cbmc_verdict": "inconclusive",
+      "wall_ms": 579,
+      "verdict": "inconclusive",
+      "note": "CBMC version 6.4.0 (cbmc-6.4.0) 64-bit x86_64 linux\nfile btrfs_search_slot.c line 74: syntax error before 'spinlock_t'\nPARSING ERROR"
+    },
+    {
+      "path": "fs/xfs/libxfs/xfs_btree.c",
+      "func": "xfs_btree_lookup",
+      "bug_class": "oob-write",
+      "resolved_types": 0,
+      "invented_macros": [
+        "XFS_BB_RIGHTSIB",
+        "XFS_BTREE_STATS_INC",
+        "XFS_CORRUPTION_ERROR",
+        "XFS_IS_CORRUPT",
+        "XFS_LOOKUP_EQ",
+        "XFS_LOOKUP_GE",
+        "XFS_LOOKUP_LE"
+      ],
+      "preconditions": [],
+      "buffer_modeled": [],
+      "cbmc_verdict": "inconclusive",
+      "wall_ms": 568,
+      "verdict": "inconclusive",
+      "note": "CBMC version 6.4.0 (cbmc-6.4.0) 64-bit x86_64 linux\nfile xfs_btree_lookup.c line 40 function xfs_btree_lookup: syntax error before 'xfs_lookup_t'\nPARSING ERROR"
+    }
+  ]
+}

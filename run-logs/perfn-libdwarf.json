@@ -1,0 +1,135 @@
+{
+  "ts": "2026-05-31T00:36:02Z",
+  "source_root": "/tmp/pf_ws/src-vul/libdwarf/src/lib/libdwarf",
+  "n": 8,
+  "llm": false,
+  "tally": {
+    "confirmed-local": 1,
+    "refuted": 4,
+    "inconclusive": 3
+  },
+  "wall_s": 7.3,
+  "results": [
+    {
+      "path": "dwarf_leb.c",
+      "func": "_dwarf_skip_leb128",
+      "bug_class": "oob-read",
+      "resolved_types": 1,
+      "invented_macros": [],
+      "preconditions": [],
+      "buffer_modeled": [
+        "endptr",
+        "leb128"
+      ],
+      "cbmc_verdict": "unsafe",
+      "wall_ms": 606,
+      "verdict": "confirmed-local",
+      "pov": "run-logs/perfn-libdwarf/_dwarf_skip_leb128.cbmc-pov.json",
+      "target_location": "line 22 [_dwarf_skip_leb128.pointer_dereference.5]"
+    },
+    {
+      "path": "dwarf_leb.c",
+      "func": "dwarf_decode_leb128",
+      "bug_class": "oob-read",
+      "resolved_types": 1,
+      "invented_macros": [],
+      "preconditions": [],
+      "buffer_modeled": [
+        "endptr",
+        "leb128"
+      ],
+      "cbmc_verdict": "safe",
+      "wall_ms": 630,
+      "verdict": "refuted"
+    },
+    {
+      "path": "dwarf_leb.c",
+      "func": "dwarf_decode_signed_leb128",
+      "bug_class": "oob-read",
+      "resolved_types": 2,
+      "invented_macros": [],
+      "preconditions": [],
+      "buffer_modeled": [
+        "endptr",
+        "leb128"
+      ],
+      "cbmc_verdict": "safe",
+      "wall_ms": 664,
+      "verdict": "refuted"
+    },
+    {
+      "path": "dwarf_leb.c",
+      "func": "dwarf_encode_leb128",
+      "bug_class": "oob-write",
+      "resolved_types": 1,
+      "invented_macros": [],
+      "preconditions": [],
+      "buffer_modeled": [
+        "space",
+        "splen"
+      ],
+      "cbmc_verdict": "safe",
+      "wall_ms": 593,
+      "verdict": "refuted"
+    },
+    {
+      "path": "dwarf_arange.c",
+      "func": "free_aranges_chain",
+      "bug_class": "uaf",
+      "resolved_types": 3,
+      "invented_macros": [],
+      "preconditions": [],
+      "buffer_modeled": [],
+      "cbmc_verdict": "inconclusive",
+      "wall_ms": 676,
+      "verdict": "inconclusive",
+      "note": "  (unsigned __CPROVER_bitvector[65])__CPROVER_OBJECT_SIZE(cur) >= (unsigned __CPROVER_bitvector[65])__CPROVER_POINTER_OFFSET(cur) + 8\nViolated property:\n  file free_aranges_chain.c function free_aranges_chain line 25 thread 0\n  dereference failure: invalid integer address in cur->ch_item\n  !(__CPROVER_POINTER_OBJECT(((Dwarf_Chain)NULL)) == __CPROVER_POINTER_OBJECT(cur)) || cur == ((Dwarf_Chain)NUL"
+    },
+    {
+      "path": "dwarf_util.c",
+      "func": "_dwarf_valid_form_we_know",
+      "bug_class": "oob-read",
+      "resolved_types": 1,
+      "invented_macros": [],
+      "preconditions": [],
+      "buffer_modeled": [],
+      "cbmc_verdict": "safe",
+      "wall_ms": 628,
+      "verdict": "refuted"
+    },
+    {
+      "path": "dwarf_util.c",
+      "func": "_dwarf_check_string_valid",
+      "bug_class": "oob-read",
+      "resolved_types": 29,
+      "invented_macros": [
+        "NOT"
+      ],
+      "preconditions": [],
+      "buffer_modeled": [],
+      "cbmc_verdict": "inconclusive",
+      "wall_ms": 645,
+      "verdict": "inconclusive",
+      "note": "CBMC version 6.4.0 (cbmc-6.4.0) 64-bit x86_64 linux\nType-checking _dwarf_check_string_valid\nfile _dwarf_check_string_valid.c line 69: incomplete type not permitted here\nCONVERSION ERROR"
+    },
+    {
+      "path": "dwarf_util.c",
+      "func": "_dwarf_get_size_of_val",
+      "bug_class": "oob-read",
+      "resolved_types": 29,
+      "invented_macros": [
+        "DECODE_LEB128_UWORD_LEN_CK",
+        "DIE",
+        "FORM",
+        "READ_UNALIGNED_CK",
+        "SKIP_LEB128_LEN_CK"
+      ],
+      "preconditions": [],
+      "buffer_modeled": [],
+      "cbmc_verdict": "inconclusive",
+      "wall_ms": 567,
+      "verdict": "inconclusive",
+      "note": "CBMC version 6.4.0 (cbmc-6.4.0) 64-bit x86_64 linux\nfile _dwarf_get_size_of_val.c line 644 function _dwarf_get_size_of_val: syntax error before 'Dwarf_Unsigned'\nPARSING ERROR"
+    }
+  ]
+}
